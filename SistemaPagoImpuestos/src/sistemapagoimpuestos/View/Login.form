@@ -73,9 +73,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="input_user">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="input_userActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="input_password">
     </Component>
@@ -106,6 +103,9 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="actionCommand" type="java.lang.String" value="button_salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_outputActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

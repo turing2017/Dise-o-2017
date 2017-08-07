@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.View;
 
 import sistemapagoimpuestos.Controller.LoginController;
+import sistemapagoimpuestos.View.Admin.AdminMenu;
 
 /**
  *
@@ -39,12 +40,6 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        input_user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                input_userActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ingresar");
@@ -60,6 +55,11 @@ public class Login extends javax.swing.JFrame {
         button_output.setText("Salir");
         button_output.setToolTipText("");
         button_output.setActionCommand("button_salir");
+        button_output.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_outputActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Usuario:");
 
@@ -116,11 +116,13 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginController loginController = new LoginController();
         loginController.validateLogin(input_user.getText(), input_password.getText());
+        new AdminMenu().setVisible(true);  
     }//GEN-LAST:event_login
 
-    private void input_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_userActionPerformed
+    private void button_outputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_outputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_input_userActionPerformed
+      System.exit(0);  
+    }//GEN-LAST:event_button_outputActionPerformed
 
     /**
      * @param args the command line arguments

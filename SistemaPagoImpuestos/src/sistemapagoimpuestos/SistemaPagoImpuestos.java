@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;  
 import org.hibernate.Transaction;  
 import org.hibernate.cfg.Configuration; 
+import sistemapagoimpuestos.Entity.Role;
 /**
  *
  * @author Markz
@@ -21,8 +22,8 @@ public class SistemaPagoImpuestos {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-    Configuration cfg=new Configuration();  
+  
+ Configuration cfg=new Configuration();  
     cfg.configure("hibernate.cfg.xml");//populates the data of the configuration file  
       
     //creating seession factory object  
@@ -30,8 +31,20 @@ public class SistemaPagoImpuestos {
       
     //creating session object  
     Session session=factory.openSession();  
+   /*         
+    //creating transaction object  
+    Transaction t=session.beginTransaction();  
+          
+    Role role=new Role();  
+    role.setRolename("Test");  
+    role.setDescription("Test descro");  
       
-
+    session.persist(role);//persisting the object  
+      
+    t.commit();//transaction is commited  
+    session.close();  
+     */ 
+    System.out.println("successfully saved");  
         
         
         

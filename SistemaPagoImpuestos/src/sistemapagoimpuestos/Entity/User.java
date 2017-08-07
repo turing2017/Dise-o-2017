@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Entity;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -43,8 +44,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String password, Set<Role> roles) {
-        this.id = id;
+    public User( String username, String password, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;
@@ -81,6 +81,17 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+    
+    public void addRole(Role role){
+        Set<Role> tempRole = new HashSet<Role>();
+        tempRole.add(role);
+        setRoles(tempRole);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", roles=" + roles + '}';
     }
     
     

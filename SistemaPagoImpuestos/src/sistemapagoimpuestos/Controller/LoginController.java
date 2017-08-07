@@ -5,8 +5,11 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import javax.swing.JTextField;
 import sistemapagoimpuestos.Dto.DtoRole;
+import sistemapagoimpuestos.Entity.Role;
 import sistemapagoimpuestos.Expert.LoginExpert;
+import sistemapagoimpuestos.Repository.RoleRepository;
 
 
 /**
@@ -14,9 +17,16 @@ import sistemapagoimpuestos.Expert.LoginExpert;
  * @author Markz
  */
 public class LoginController {
-    
+    private LoginExpert loginExpert;
     public DtoRole validateLogin(String username, String password){
-       return new LoginExpert().validateLogin(username, password);
+        //loginExpert.validateLogin(username, password);
+        RoleRepository roleRepository = new RoleRepository();
+        roleRepository.addRole(new Role(username, password));
+        System.out.println("guardado");
+        System.out.println(roleRepository.findRole(2));
+        System.out.println(username+ " " + password);
+        return null;
+//       return new LoginExpert().validateLogin(username, password);
     }
     
 }

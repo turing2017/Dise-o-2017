@@ -21,10 +21,6 @@ public class LoginExpert {
         
         //codigo de validacion BD
         
-        Role role = new Role("Admin", "Administrador");
-        Set<Role> roleList = null;
-        roleList.add(role);
-        User user = new User( "Marcos", "123456", roleList);
         
             
         

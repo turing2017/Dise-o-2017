@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="sistemapagoimpuestos.Entity.Role" table="role"/>
+        <id name="OID" type="string">
+            <column name="OIDRole "></column>
+            <generator class="uuid2"/>
+        </id>
+        <property name="rolename" type="string">
+            <column name="rolename"/>
+        </property>
+        <property name="description" type="tring">
+            <column name="description"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -5,32 +5,52 @@
  */
 package sistemapagoimpuestos.Utils;
 
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
+import org.hibernate.boot.registry.*;
+import org.hibernate.cfg.*;
+import org.hibernate.service.*;
 
-/**
- * Hibernate Utility class with a convenient method to get Session Factory
- * object.
- *
- * @author Markz
- */
-public class HibernateUtil {
+public class HibernateUtil
+{
 
-    private static final SessionFactory sessionFactory;
-    
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+    private static SessionFactory sessionFactory;
+
+    public HibernateUtil ()
+    {
     }
-    
-    public static SessionFactory getSessionFactory() {
+
+    private static SessionFactory buildSessionFactory ()
+    {
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         return sessionFactory;
     }
+
+    public static SessionFactory getSessionFactory ()
+    {
+        if (sessionFactory == null || sessionFactory.isClosed())
+        {
+            sessionFactory = buildSessionFactory();
+        }
+        return sessionFactory;
+    }
+
+    public static Session getSession ()
+    {
+        if (sessionFactory == null || sessionFactory.isClosed())
+        {
+            sessionFactory = getSessionFactory();
+        }
+        try
+        {
+            return sessionFactory.getCurrentSession();
+        }
+        catch (NullPointerException e)
+        {
+            return sessionFactory.openSession();
+        }
+    }
+
 }

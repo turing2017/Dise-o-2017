@@ -7,49 +7,33 @@ package sistemapagoimpuestos.Entity;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
+import sistemapagoimpuestos.Entity.Entity;
 
 
 /**
  *
  * @author Markz
  */
-@Entity
-@Table(name="Usuario")
-public class User {
+public class User extends Entity{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+   
     private int id;
-    @Column(name = "username", nullable = false)
+   
     private String username;    
-    @Column(name = "password", nullable = false)
     private String password;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Role role;
 
     public User() {
     }
 
-    public User( String username, String password, Set<Role> roles) {
+    public User(int id, String username, String password, Role role) {
+        this.id = id;
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 
+   
     
     public int getId() {
         return id;
@@ -75,14 +59,16 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
-    
+
+
+    /*
     public void addRole(Role role){
         Set<Role> tempRole = new HashSet<Role>();
         tempRole.add(role);
@@ -93,7 +79,7 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", roles=" + roles + '}';
     }
-    
+    */
     
     
     

@@ -5,28 +5,16 @@
  */
 package sistemapagoimpuestos.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import sistemapagoimpuestos.Entity.Entity;
 /**
  *
  * @author Markz
  */
-@Entity
-@Table(name="Role")
-public class Role {
+public class Role extends Entity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int id;
-    @Column(name = "rolename", nullable = false)
     private String rolename;    
-    @Column(name = "description", nullable = false)
     private String description;
 
     public Role() {
@@ -61,10 +49,6 @@ public class Role {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Role{" + "id=" + id + ", rolename=" + rolename + ", description=" + description + '}';
-    }
     
     
     

@@ -48,7 +48,7 @@ Contributor(s):
     <property name="hibernate.connection.password">root</property>
     <property name="hibernate.connection.autocommit">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="sistemapagoimpuestos.Entity.Role"/>
-    <mapping class="sistemapagoimpuestos.Entity.User"/>
+    <property name="hibernate.show_sql">true</property>
+    <mapping resource="role.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

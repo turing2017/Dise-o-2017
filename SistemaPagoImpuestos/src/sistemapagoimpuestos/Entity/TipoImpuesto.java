@@ -3,7 +3,7 @@ package sistemapagoimpuestos.Entity;
 import java.util.Date;
 
 
-public class TipoImpuesto {
+public class TipoImpuesto extends Entity {
     
     // Atributos propios de la clase
     private int codigoTipoImpuesto;

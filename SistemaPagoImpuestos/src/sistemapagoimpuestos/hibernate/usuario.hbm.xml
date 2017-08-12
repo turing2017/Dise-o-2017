@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.Usuario" table="usuario">
+        private String nombreUsuario;
+    private String password;
+    private Date fechaHoraInhabilitacionUsuario;
+    private Date fechaHoraUltimoIngresoSistemaUsuario;
+    
+    private TipoUsuario tipoUsuario;
+    </class>
+</hibernate-mapping>

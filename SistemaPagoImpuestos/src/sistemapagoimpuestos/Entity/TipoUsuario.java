@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author lunamarcos
  */
-public class TipoUsuario {
+public class TipoUsuario extends Entity {
     
     // Atributos propios de la clase
     private int codigoTipoUsuario;

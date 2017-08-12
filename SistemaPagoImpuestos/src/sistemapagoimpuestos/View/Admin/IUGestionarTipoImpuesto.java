@@ -1,5 +1,6 @@
 package sistemapagoimpuestos.View.Admin;
 
+import javax.swing.JFrame;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 
 /**
@@ -22,21 +23,74 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        label_codigo = new javax.swing.JLabel();
+        textfield_codigo = new javax.swing.JTextField();
+        button_consultar = new javax.swing.JButton();
+        button_continuar = new javax.swing.JButton();
+        button_nuevo = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        label_codigo.setText("Código Tipo de Impuesto");
+
+        button_consultar.setText("Consultar");
+        button_consultar.setActionCommand("Consultar");
+
+        button_continuar.setText("Continuar");
+
+        button_nuevo.setText("Nuevo");
+        button_nuevo.setActionCommand("Nuevo");
+        button_nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_nuevoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label_codigo)
+                        .addGap(28, 28, 28)
+                        .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(button_consultar)
+                        .addGap(35, 35, 35)
+                        .addComponent(button_continuar)
+                        .addGap(33, 33, 33)
+                        .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_codigo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_nuevo)
+                    .addComponent(button_continuar)
+                    .addComponent(button_consultar))
+                .addGap(56, 56, 56))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
+        // TODO add your handling code here:
+        // Creo objeto para la pantalla de alta
+        IUGestionarTipoImpuestoAlta pantallaAlta = new IUGestionarTipoImpuestoAlta();
+        pantallaAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        pantallaAlta.setVisible(true); // La hago visible
+        
+    }//GEN-LAST:event_button_nuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,15 +127,24 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         });
     }
     
+    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+    
     // Metodo iniciar
     public void iniciar(){
-        ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+        //ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
         controlador.iniciar();
     }
     
-    // Metodo ingresarCodigo (crea un tipoImpuesto)
-    
+    // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
+    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_consultar;
+    private javax.swing.JButton button_continuar;
+    private javax.swing.JButton button_nuevo;
+    private javax.swing.JLabel label_codigo;
+    private javax.swing.JTextField textfield_codigo;
     // End of variables declaration//GEN-END:variables
 }

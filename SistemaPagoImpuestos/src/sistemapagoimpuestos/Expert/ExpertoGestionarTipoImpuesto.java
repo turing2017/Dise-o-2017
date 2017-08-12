@@ -15,4 +15,9 @@ public class ExpertoGestionarTipoImpuesto {
             System.out.println("Debe ser Cliente para realizar esta acción");
         }
     }
+    
+    // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
+    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
+        
+    }
 }

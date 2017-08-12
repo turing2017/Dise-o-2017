@@ -1,0 +1,50 @@
+package sistemapagoimpuestos.Entity;
+
+import java.util.Date;
+
+/**
+ *
+ * @author lunamarcos
+ */
+public class Empresa {
+    
+    // Atributos propios de la clase
+    private String cuitEmpresa;
+    private String nombreEmpresa;
+    private String direccionEmpresa;
+    private Date fechaHoraInhabilitacionEmpresa;
+    
+    // Setters
+    public void setCuitEmpresa(String cuitEmpresa) {
+        this.cuitEmpresa = cuitEmpresa;
+    }
+
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
+    }
+
+    public void setDireccionEmpresa(String direccionEmpresa) {
+        this.direccionEmpresa = direccionEmpresa;
+    }
+
+    public void setFechaHoraInhabilitacionEmpresa(Date fechaHoraInhabilitacionEmpresa) {
+        this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
+    }
+    
+    // Getters
+    public String getCuitEmpresa() {
+        return cuitEmpresa;
+    }
+
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
+
+    public String getDireccionEmpresa() {
+        return direccionEmpresa;
+    }
+
+    public Date getFechaHoraInhabilitacionEmpresa() {
+        return fechaHoraInhabilitacionEmpresa;
+    }
+}

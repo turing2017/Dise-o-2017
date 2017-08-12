@@ -34,12 +34,20 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         label_codigo.setText("Código Tipo de Impuesto");
 
         button_consultar.setText("Consultar");
-        button_consultar.setActionCommand("Consultar");
+        button_consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_consultarActionPerformed(evt);
+            }
+        });
 
         button_continuar.setText("Continuar");
+        button_continuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_continuarActionPerformed(evt);
+            }
+        });
 
         button_nuevo.setText("Nuevo");
-        button_nuevo.setActionCommand("Nuevo");
         button_nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_nuevoActionPerformed(evt);
@@ -85,12 +93,22 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         // TODO add your handling code here:
-        // Creo objeto para la pantalla de alta
-        IUGestionarTipoImpuestoAlta pantallaAlta = new IUGestionarTipoImpuestoAlta();
-        pantallaAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        pantallaAlta.setVisible(true); // La hago visible
+        // Le paso al controlador la opción seleccionada
+        controlador.opcionSeleccionada("Alta");
         
     }//GEN-LAST:event_button_nuevoActionPerformed
+
+    private void button_continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_continuarActionPerformed
+        // TODO add your handling code here:
+        // Le paso al controlador la opción seleccionada
+        controlador.opcionSeleccionada("Modificar");
+    }//GEN-LAST:event_button_continuarActionPerformed
+
+    private void button_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_consultarActionPerformed
+        // TODO add your handling code here:
+        // Le paso al controlador la opción seleccionada
+        controlador.opcionSeleccionada("Consultar");
+    }//GEN-LAST:event_button_consultarActionPerformed
 
     /**
      * @param args the command line arguments

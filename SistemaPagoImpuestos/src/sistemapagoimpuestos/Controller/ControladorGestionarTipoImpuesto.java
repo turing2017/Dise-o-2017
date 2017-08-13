@@ -1,6 +1,9 @@
 package sistemapagoimpuestos.Controller;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.IUGestionarTipoImpuestoAlta;
 import sistemapagoimpuestos.View.Admin.IUGestionarTipoImpuestoConsultar;
@@ -15,11 +18,7 @@ public class ControladorGestionarTipoImpuesto {
         experto.iniciar();
     }
     
-    // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
-    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
-        
-    }
-    
+    // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
     public void opcionSeleccionada(String opcion){
         switch(opcion) {
         case "Alta" :
@@ -48,5 +47,20 @@ public class ControladorGestionarTipoImpuesto {
         default : // Optional
         // Statements
         }
+    }
+    
+    // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
+    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
+        experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres);
+    }
+    
+    // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
+    public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
+        return  experto.obtenerTipoImpuestos();
+    }
+    
+    // Metodo para recuperar el TipoImpuesto a modificar
+    public DTOTipoImpuesto obtenerTipoImpuesto(){
+        return experto.obtenerTipoImpuesto();
     }
 }

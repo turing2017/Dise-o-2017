@@ -1,5 +1,9 @@
 package sistemapagoimpuestos.View.Admin;
 
+import java.util.ArrayList;
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+
 /**
  *
  * @author lunamarcos
@@ -64,6 +68,7 @@ public class IUGestionarTipoImpuestoConsultar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -96,10 +101,18 @@ public class IUGestionarTipoImpuestoConsultar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                // Relacion con el controlador
+                ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+                // Creo la pantalla
                 new IUGestionarTipoImpuestoConsultar().setVisible(true);
+                // Al crear el JFrame debo obtener todos los TipoImpuestos
+                ArrayList<DTOTipoImpuesto> list = new ArrayList<DTOTipoImpuesto>();
+                list = controlador.obtenerTipoImpuestos();
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

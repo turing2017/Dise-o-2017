@@ -28,6 +28,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         button_consultar = new javax.swing.JButton();
         button_continuar = new javax.swing.JButton();
         button_nuevo = new javax.swing.JButton();
+        separator_horizontal = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,36 +60,46 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(75, 75, 75)
+                .addComponent(button_consultar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(127, 127, 127)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(button_continuar)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(label_codigo)
-                        .addGap(28, 28, 28)
-                        .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(button_consultar)
-                        .addGap(35, 35, 35)
-                        .addComponent(button_continuar)
-                        .addGap(33, 33, 33)
-                        .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGap(58, 58, 58)
+                        .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(126, Short.MAX_VALUE))
+            .addComponent(separator_horizontal)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(133, 133, 133)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_codigo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_nuevo)
-                    .addComponent(button_continuar)
-                    .addComponent(button_consultar))
-                .addGap(56, 56, 56))
+                    .addComponent(label_codigo)
+                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(button_continuar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(separator_horizontal, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(button_consultar)
+                            .addComponent(button_nuevo))
+                        .addGap(41, 41, 41))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
@@ -140,7 +151,8 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUGestionarTipoImpuesto().setVisible(true);
+                IUGestionarTipoImpuesto pantallaPrincipal = new IUGestionarTipoImpuesto();
+                pantallaPrincipal.setVisible(true);
             }
         });
     }
@@ -163,6 +175,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     private javax.swing.JButton button_continuar;
     private javax.swing.JButton button_nuevo;
     private javax.swing.JLabel label_codigo;
+    private javax.swing.JSeparator separator_horizontal;
     private javax.swing.JTextField textfield_codigo;
     // End of variables declaration//GEN-END:variables
 }

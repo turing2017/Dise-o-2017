@@ -1,5 +1,8 @@
 package sistemapagoimpuestos.View.Admin;
 
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+
 /**
  *
  * @author lunamarcos
@@ -38,8 +41,18 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         label_esEditable.setText("Es editable");
 
         textfield_nombre.setToolTipText("");
+        textfield_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfield_nombreActionPerformed(evt);
+            }
+        });
 
         button_modificar.setText("Modificar");
+        button_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_modificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,7 +95,16 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_modificarActionPerformed
+
+    private void textfield_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textfield_nombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,9 +136,26 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUGestionarTipoImpuestoModificar().setVisible(true);
+                // Asociacion con el controlador
+                ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+                IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
+                // Obtengo el DTOTipoImpuesto
+                DTOTipoImpuesto dto = new DTOTipoImpuesto();
+                dto = controlador.obtenerTipoImpuesto();
+               // setear(dto, );
+                
             }
         });
+    }
+    
+    // Seteo lo que viene del DTO
+    public static void setear(DTOTipoImpuesto dto, javax.swing.JTextField textfieldNombre){  
+        textfieldNombre.setText("Test");
+    }
+    
+    // Getters
+    public javax.swing.JTextField getTextfield_nombre() {
+        return this.textfield_nombre;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

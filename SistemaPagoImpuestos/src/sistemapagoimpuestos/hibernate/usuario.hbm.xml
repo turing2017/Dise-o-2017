@@ -3,11 +3,26 @@
 
 <hibernate-mapping>
     <class name="sistemapagoimpuestos.Entity.Usuario" table="usuario">
-        private String nombreUsuario;
-    private String password;
-    private Date fechaHoraInhabilitacionUsuario;
-    private Date fechaHoraUltimoIngresoSistemaUsuario;
+       <id name="OID" type="string">
+           <column name="OIDUsuario"/>
+        <generator class="uuid2"/>
+       </id>
+       
+       <property name="nombreUsuario" type="string">
+           <column name="nombreUsuario"/>
+       </property>
+        <property name="password" type="string">
+           <column name="password"/>
+       </property>
+       <property name="fechaHoraInhabilitacionUsuario" type="date">
+           <column name="fechaHoraInhabilitacionUsuario"/>
+       </property>
+       <property name="fechaHoraUltimoIngresoSistemaUsuario" type="date">
+           <column name="fechaHoraUltimoIngresoSistemaUsuario"/>
+       </property>
+        
+        <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoUsuario" not-null="true"/>
     
-    private TipoUsuario tipoUsuario;
+   
     </class>
 </hibernate-mapping>

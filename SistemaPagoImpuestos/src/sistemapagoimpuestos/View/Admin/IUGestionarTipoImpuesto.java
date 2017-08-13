@@ -105,20 +105,22 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         // TODO add your handling code here:
         // Le paso al controlador la opción seleccionada
-        controlador.opcionSeleccionada("Alta");
+        ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Alta", null);
         
     }//GEN-LAST:event_button_nuevoActionPerformed
 
     private void button_continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_continuarActionPerformed
         // TODO add your handling code here:
-        // Le paso al controlador la opción seleccionada
-        controlador.opcionSeleccionada("Modificar");
+        // Le paso al controlador la opción seleccionada.
+
+        ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Modificar", Integer.parseInt(textfield_codigo.getText()));
+      
     }//GEN-LAST:event_button_continuarActionPerformed
 
     private void button_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_consultarActionPerformed
         // TODO add your handling code here:
         // Le paso al controlador la opción seleccionada
-        controlador.opcionSeleccionada("Consultar");
+        ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Consultar", null);
     }//GEN-LAST:event_button_consultarActionPerformed
 
     /**
@@ -156,13 +158,12 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
     }
-    
-    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+
     
     // Metodo iniciar
     public void iniciar(){
         //ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
-        controlador.iniciar();
+        ControladorGestionarTipoImpuesto.getInstance().iniciar();
     }
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)

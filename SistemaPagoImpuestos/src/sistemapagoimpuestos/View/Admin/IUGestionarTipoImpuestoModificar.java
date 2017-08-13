@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.View.Admin;
 
+import javax.swing.JCheckBox;
+import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
@@ -27,7 +29,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         label_deshabilitar = new javax.swing.JLabel();
         label_esEditable = new javax.swing.JLabel();
         textfield_nombre = new javax.swing.JTextField();
-        checkbox_deshabilitar = new javax.swing.JCheckBox();
+        checkbox_habilitado = new javax.swing.JCheckBox();
         checkbox_esEditable = new javax.swing.JCheckBox();
         button_modificar = new javax.swing.JButton();
 
@@ -36,7 +38,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         label_nombre.setText("Nuevo nombre");
         label_nombre.setToolTipText("");
 
-        label_deshabilitar.setText("Deshabilitar");
+        label_deshabilitar.setText("Habilitado");
 
         label_esEditable.setText("Es editable");
 
@@ -70,7 +72,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkbox_esEditable)
-                            .addComponent(checkbox_deshabilitar)
+                            .addComponent(checkbox_habilitado)
                             .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
@@ -84,7 +86,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_deshabilitar)
-                    .addComponent(checkbox_deshabilitar))
+                    .addComponent(checkbox_habilitado))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_esEditable)
@@ -100,6 +102,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
 
     private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
         // TODO add your handling code here:
+        ControladorGestionarTipoImpuesto.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected());
     }//GEN-LAST:event_button_modificarActionPerformed
 
     private void textfield_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_nombreActionPerformed
@@ -141,27 +144,44 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                 IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
                 // Obtengo el DTOTipoImpuesto
                 DTOTipoImpuesto dto = new DTOTipoImpuesto();
-                dto = controlador.obtenerTipoImpuesto();
+                dto = controlador.obtenerTipoImpuesto(1);
                // setear(dto, );
                 
             }
         });
     }
-    
-    // Seteo lo que viene del DTO
-    public static void setear(DTOTipoImpuesto dto, javax.swing.JTextField textfieldNombre){  
-        textfieldNombre.setText("Test");
-    }
-    
     // Getters
-    public javax.swing.JTextField getTextfield_nombre() {
-        return this.textfield_nombre;
+
+    public String getTextfield_nombre() {
+        return textfield_nombre.getText();
     }
+
+    public void setTextfield_nombre(String text) {
+        this.textfield_nombre.setText(text);
+    }
+    
+
+    public boolean getCheckbox_deshabilitar() {
+        return checkbox_habilitado.isSelected();
+    }
+
+    public void setCheckbox_Habilitar(boolean habilitado) {
+        this.checkbox_habilitado.setSelected(habilitado);
+    }
+
+    public boolean getCheckbox_esEditable() {
+        return checkbox_esEditable.isSelected();
+    }
+
+    public void setCheckbox_esEditable(boolean editable) {
+        this.checkbox_esEditable.setSelected(editable);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_modificar;
-    private javax.swing.JCheckBox checkbox_deshabilitar;
     private javax.swing.JCheckBox checkbox_esEditable;
+    private javax.swing.JCheckBox checkbox_habilitado;
     private javax.swing.JLabel label_deshabilitar;
     private javax.swing.JLabel label_esEditable;
     private javax.swing.JLabel label_nombre;

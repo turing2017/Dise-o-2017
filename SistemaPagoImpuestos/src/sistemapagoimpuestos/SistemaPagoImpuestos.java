@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos;
 
+import datosPrueba.DatosPrueba;
 import org.hibernate.cfg.Configuration;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Utils.HibernateUtil;
@@ -18,8 +19,9 @@ public class SistemaPagoImpuestos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-      new ControladorGestionarTipoImpuesto().iniciar();
+     //  DatosPrueba dp = new DatosPrueba();
+     // dp.generarDatosPrueba();
+     new ControladorGestionarTipoImpuesto().iniciar();
     }
     
 }

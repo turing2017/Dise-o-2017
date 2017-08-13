@@ -28,7 +28,7 @@ public class FachadaInterna
         Criteria cr = null;
         try
         {
-            cr = HibernateUtil.getSession().createCriteria(Class.forName("entidades." + claseABuscar), claseABuscar.toLowerCase());
+            cr = HibernateUtil.getSession().createCriteria(Class.forName("sistemapagoimpuestos.Entity." + claseABuscar), claseABuscar.toLowerCase());
         }
         catch (ClassNotFoundException e)
         {

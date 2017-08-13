@@ -36,7 +36,7 @@
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="checkbox_esEditable" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkbox_deshabilitar" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkbox_habilitado" min="-2" max="-2" attributes="0"/>
                           <Component id="textfield_nombre" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -56,7 +56,7 @@
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="label_deshabilitar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="checkbox_deshabilitar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkbox_habilitado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -79,7 +79,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="label_deshabilitar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Deshabilitar"/>
+        <Property name="text" type="java.lang.String" value="Habilitado"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_esEditable">
@@ -95,7 +95,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_nombreActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="checkbox_deshabilitar">
+    <Component class="javax.swing.JCheckBox" name="checkbox_habilitado">
     </Component>
     <Component class="javax.swing.JCheckBox" name="checkbox_esEditable">
     </Component>

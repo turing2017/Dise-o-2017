@@ -58,6 +58,7 @@ public class ControladorGestionarTipoImpuesto {
                 pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
                 pantallaModificar.setVisible(true); // La hago visible
                 pantallaModificar.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
+                pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
                 pantallaModificar.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
                 if(dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto()==null){
                     pantallaModificar.setCheckbox_Habilitar(true);
@@ -87,8 +88,9 @@ public class ControladorGestionarTipoImpuesto {
         experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres);
     }
     //Metodo para modificar TipoImpuesto
-    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, boolean habilitado){
-        experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, esMontoEditableIngres, habilitado);
+    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){
+        experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
+        
     }
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  

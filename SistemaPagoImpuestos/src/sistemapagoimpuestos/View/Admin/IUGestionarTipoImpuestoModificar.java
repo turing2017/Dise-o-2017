@@ -1,6 +1,9 @@
 package sistemapagoimpuestos.View.Admin;
 
+import exceptions.Excepciones;
+import java.util.Arrays;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -32,6 +35,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         checkbox_habilitado = new javax.swing.JCheckBox();
         checkbox_esEditable = new javax.swing.JCheckBox();
         button_modificar = new javax.swing.JButton();
+        nombre_actual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +60,9 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             }
         });
 
+        nombre_actual.setForeground(new java.awt.Color(240, 240, 240));
+        nombre_actual.setText("nombreActual");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,7 +81,9 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                             .addComponent(checkbox_esEditable)
                             .addComponent(checkbox_habilitado)
                             .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombre_actual)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +91,9 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                 .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_nombre)
-                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombre_actual)))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_deshabilitar)
@@ -102,7 +113,16 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
 
     private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
         // TODO add your handling code here:
-        ControladorGestionarTipoImpuesto.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected());
+        try{
+            if(textfield_nombre.getText().equals("")){
+                textfield_nombre.setText(null);
+                throw new java.lang.NumberFormatException();
+            }
+            ControladorGestionarTipoImpuesto.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected());    
+            this.dispose();
+        }catch(java.lang.NumberFormatException e){
+            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
+        }
     }//GEN-LAST:event_button_modificarActionPerformed
 
     private void textfield_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_nombreActionPerformed
@@ -176,6 +196,14 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
     public void setCheckbox_esEditable(boolean editable) {
         this.checkbox_esEditable.setSelected(editable);
     }
+
+    public String getNombre_actual() {
+        return nombre_actual.getText();
+    }
+
+    public void setNombre_actual(String nombreActual) {
+        this.nombre_actual.setText(nombreActual);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,6 +213,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
     private javax.swing.JLabel label_deshabilitar;
     private javax.swing.JLabel label_esEditable;
     private javax.swing.JLabel label_nombre;
+    private javax.swing.JLabel nombre_actual;
     private javax.swing.JTextField textfield_nombre;
     // End of variables declaration//GEN-END:variables
 }

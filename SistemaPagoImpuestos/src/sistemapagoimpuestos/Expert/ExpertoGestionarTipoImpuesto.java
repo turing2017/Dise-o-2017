@@ -87,13 +87,13 @@ public class ExpertoGestionarTipoImpuesto {
 
     }
     
-    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, boolean habilitado){
+    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){
 
         List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();
         criterio1.setAtributo("nombreTipoImpuesto");
         criterio1.setOperacion("=");
-        criterio1.setValor(nombreTipoImpuestoIngres);
+        criterio1.setValor(nombreActualTipoImpuesto);
         criterios.add(criterio1);
         TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
         

@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import java.util.ArrayList;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -39,12 +40,22 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
     }
 
     @Override
-    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, boolean habilitado) {
+    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarTipoImpuesto(nombreTipoImpuestoIngres, esMontoEditableIngres, habilitado); //To change body of generated methods, choose Tools | Templates.
+        super.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
+    @Override
+    public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos() {
+        
+        FachadaInterna.getInstance().iniciarTransaccion();
+        ArrayList<DTOTipoImpuesto> listadoDtoTipoImpuesto= super.obtenerTipoImpuestos(); 
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listadoDtoTipoImpuesto;//To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     
     
     

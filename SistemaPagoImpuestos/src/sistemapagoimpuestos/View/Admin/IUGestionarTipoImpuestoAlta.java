@@ -103,7 +103,6 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable);
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
-
         }
     }//GEN-LAST:event_button_crearActionPerformed
 

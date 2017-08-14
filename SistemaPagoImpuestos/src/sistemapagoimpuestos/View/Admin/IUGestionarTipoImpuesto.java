@@ -1,5 +1,9 @@
 package sistemapagoimpuestos.View.Admin;
 
+import exceptions.Excepciones;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JFrame;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 
@@ -112,8 +116,11 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     private void button_continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_continuarActionPerformed
         // TODO add your handling code here:
         // Le paso al controlador la opción seleccionada.
-
-        ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Modificar", Integer.parseInt(textfield_codigo.getText()));
+        try{
+            ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Modificar", Integer.parseInt(textfield_codigo.getText()));
+        }catch(NumberFormatException e){
+            Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+        }
       
     }//GEN-LAST:event_button_continuarActionPerformed
 

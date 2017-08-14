@@ -1,5 +1,6 @@
 package sistemapagoimpuestos.Expert;
 
+import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,25 +30,27 @@ public class ExpertoGestionarTipoImpuesto {
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
     public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
+        try{
+
         List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();
         criterio1.setAtributo("codigoTipoImpuesto");
         criterio1.setOperacion("!=");
         criterio1.setValor(nombreTipoImpuestoIngres);
         criterios.add(criterio1);
-        try{
         TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
             
-        }catch(NullPointerException e){
-            
+        }catch(IndexOutOfBoundsException exception){
+            System.out.println("Codigo Ingresado No Encontrado");
+            TipoImpuesto tipoImpuesto = new TipoImpuesto();
+            tipoImpuesto.setNombreTipoImpuesto(nombreTipoImpuestoIngres);
+            tipoImpuesto.setCodigoTipoImpuesto(codigoTipoImpuestoIngres);
+            tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
+
+            FachadaPersistencia.getInstance().guardar(tipoImpuesto);        
         }
         
-        TipoImpuesto tipoImpuesto = new TipoImpuesto();
-        tipoImpuesto.setNombreTipoImpuesto(nombreTipoImpuestoIngres);
-        tipoImpuesto.setCodigoTipoImpuesto(codigoTipoImpuestoIngres);
-        tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
-        
-        FachadaPersistencia.getInstance().guardar(tipoImpuesto);
+
     }
     
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
@@ -60,7 +63,10 @@ public class ExpertoGestionarTipoImpuesto {
     // Metodo para recuperar el TipoImpuesto a modificar
     public DTOTipoImpuesto obtenerTipoImpuesto(int codigo){
         // De alguna forma devuelvo el TipoImpuesto de la DB
+        DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto();
+        try{
         List<DTOCriterio> criterios = new ArrayList<>();
+
         DTOCriterio criterio1 = new DTOCriterio();
         criterio1.setAtributo("codigoTipoImpuesto");
         criterio1.setOperacion("=");
@@ -69,11 +75,16 @@ public class ExpertoGestionarTipoImpuesto {
         TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
         
         // Para probar seteo uno nuevo
-        DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto();
         dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
         dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
         dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
-        return dtoTipoImpuesto;
+        return dtoTipoImpuesto;        
+        }catch(IndexOutOfBoundsException exception){
+            System.out.println("Codigo Ingresado No Encontrado");
+            new Excepciones().datoNoEncontrado("Tipo Impuesto");
+            return null;
+        }
+
     }
     
     public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, boolean habilitado){

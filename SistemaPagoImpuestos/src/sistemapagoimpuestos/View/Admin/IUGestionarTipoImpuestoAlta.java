@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.View.Admin;
 
+import exceptions.Excepciones;
+import java.util.Arrays;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 
 /**
@@ -93,11 +95,16 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
     private void button_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_crearActionPerformed
         // Obtengo los valores
-        int codigoTipoImpuesto = Integer.parseInt(textfield_codigo.getText());
-        String nombreTipoImpuesto = textField_nombre.getText();
-        boolean esMontoEditable = checkbox_esEditable.isSelected();
-        
-        ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable);
+        try{
+            int codigoTipoImpuesto = Integer.parseInt(textfield_codigo.getText());
+            String nombreTipoImpuesto = textField_nombre.getText();
+            boolean esMontoEditable = checkbox_esEditable.isSelected();
+
+            ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable);
+        }catch(java.lang.NumberFormatException e){
+            Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
+
+        }
     }//GEN-LAST:event_button_crearActionPerformed
 
     /**

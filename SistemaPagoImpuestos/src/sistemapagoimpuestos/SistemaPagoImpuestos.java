@@ -6,8 +6,13 @@
 package sistemapagoimpuestos;
 
 import datosPrueba.DatosPrueba;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.cfg.Configuration;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
+import sistemapagoimpuestos.Utils.FachadaInterna;
+import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.Utils.HibernateUtil;
 /**
  *
@@ -21,7 +26,10 @@ public class SistemaPagoImpuestos {
     public static void main(String[] args) {
      //  DatosPrueba dp = new DatosPrueba();
      // dp.generarDatosPrueba();
-     new ControladorGestionarTipoImpuesto().iniciar();
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<Object> tiposImpuestos =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
+        FachadaInterna.getInstance().finalizarTransaccion();
+     //new ControladorGestionarTipoImpuesto().iniciar();
     }
     
 }

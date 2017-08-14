@@ -56,8 +56,18 @@ public class ExpertoGestionarTipoImpuesto {
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
         // Como vuelven de la DB?
-        ArrayList<DTOTipoImpuesto> list = new ArrayList<DTOTipoImpuesto>();
-        return list;
+        List<Object> listObject =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
+        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = new ArrayList<DTOTipoImpuesto>();
+        for(Object obj : listObject){
+            TipoImpuesto tipoImpuesto = (TipoImpuesto) obj;
+            DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto();
+            dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
+            dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
+            dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
+            dtoTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
+            listDtoTipoImpuesto.add(dtoTipoImpuesto);
+        }
+        return listDtoTipoImpuesto;
     }
     
     // Metodo para recuperar el TipoImpuesto a modificar

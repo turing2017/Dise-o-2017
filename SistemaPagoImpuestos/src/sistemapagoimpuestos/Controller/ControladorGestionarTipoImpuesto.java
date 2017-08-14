@@ -71,6 +71,7 @@ public class ControladorGestionarTipoImpuesto {
         
         case "Consultar" :
         // Muestro pantalla de Consultar
+            ArrayList<DTOTipoImpuesto> dtoTipoImpuesto = obtenerTipoImpuestos();
             IUGestionarTipoImpuestoConsultar pantallaConsultar= new IUGestionarTipoImpuestoConsultar();
             pantallaConsultar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaConsultar.setVisible(true); // La hago visible

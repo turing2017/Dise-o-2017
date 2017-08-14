@@ -20,7 +20,7 @@ public class SistemaPagoImpuestos {
         
         
         Configuration cfg=new Configuration();  
-        cfg.configure("hibernate.cfg.xml");//populates the data of the configuration file  
+        cfg.configure("hibernate.cfg.xml"); //populates the data of the configuration file  
 
         
         HibernateUtil.getSession().beginTransaction();

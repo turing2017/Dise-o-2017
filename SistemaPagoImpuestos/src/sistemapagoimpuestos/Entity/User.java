@@ -18,7 +18,6 @@ public class User extends Entity{
     
    
     private int id;
-   
     private String username;    
     private String password;
     private Role role;

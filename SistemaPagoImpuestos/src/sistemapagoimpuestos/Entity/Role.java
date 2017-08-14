@@ -4,15 +4,13 @@
  * and open the template in the editor.
  */
 package sistemapagoimpuestos.Entity;
-
-
-import sistemapagoimpuestos.Entity.Entity;
 /**
  *
  * @author Markz
  */
 public class Role extends Entity{
 
+    
     private int id;
     private String rolename;    
     private String description;
@@ -20,7 +18,7 @@ public class Role extends Entity{
     public Role() {
     }
 
-    public Role( String rolename, String description) {
+    public Role(String rolename, String description) {
         this.rolename = rolename;
         this.description = description;
     }

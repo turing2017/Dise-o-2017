@@ -2,16 +2,24 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="sistemapagoimpuestos.Entity.Role" table="role"/>
-        <id name="OID" type="string">
-            <column name="OIDRole "></column>
+  <class name="sistemapagoimpuestos.Entity.Role" table="role">
+      
+        <id name="OIDRole" type="string">
+            <column name="OIDRole"/>
             <generator class="uuid2"/>
         </id>
+        
+        <property name="id" type="string">
+            <column name="id"/>
+        </property>
+        
         <property name="rolename" type="string">
             <column name="rolename"/>
         </property>
-        <property name="description" type="tring">
+        
+        <property name="description" type="string">
             <column name="description"/>
         </property>
+        
     </class>
 </hibernate-mapping>

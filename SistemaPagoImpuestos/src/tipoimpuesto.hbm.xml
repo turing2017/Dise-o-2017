@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="sistemapagoimpuestos.Entity.TipoImpuesto" table="tipo_impuestos">
+  
+      <id name = "OIDTipoImpuesto" type = "string">
+          <column name = "OIDTipoImpuesto"/>
+          <generator class="uuid2"/>
+      </id>
+      
+      <property name = "codigoTipoImpuesto" type = "integer">
+          <column name = "codigoTipoImpuesto"/>
+      </property>
+      
+      <property name = "nombreTipoImpuesto" type = "string">
+          <column name = "nombreTipoImpuesto"/>
+      </property>
+      
+      <property name = "esMontoEditableTipoImpuesto" type = "boolean">
+          <column name = "esMontoEditableTipoImpuesto"/>
+      </property>
+      
+      <property name = "fechaHoraInhabilitacionTipoImpuesto" type = "date">
+          <column name = "fechaHoraInhabilitacionTipoImpuesto"/>
+      </property>
+  </class>
+</hibernate-mapping>

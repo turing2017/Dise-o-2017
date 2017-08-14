@@ -1,9 +1,8 @@
 package sistemapagoimpuestos.View.Admin;
 
-/**
- *
- * @author lunamarcos
- */
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+
+
 public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
     /**
@@ -37,6 +36,16 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         label_esEditable.setText("Es editable");
 
         button_crear.setText("Crear");
+        button_crear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button_crearMouseClicked(evt);
+            }
+        });
+        button_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_crearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,6 +93,18 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void button_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_crearActionPerformed
+        
+    }//GEN-LAST:event_button_crearActionPerformed
+
+    private void button_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_crearMouseClicked
+        String nombreTipoImpuesto = textField_nombre.getText();
+        int codigoTipoImpuesto = Integer.parseInt(textfield_codigo.getText());
+        boolean esMontoEditableTipoImpuesto = checkbox_esEditable.isSelected();
+        controlador.nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditableTipoImpuesto);
+        
+    }//GEN-LAST:event_button_crearMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -119,6 +140,8 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         });
     }
 
+    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_crear;
     private javax.swing.JCheckBox checkbox_esEditable;

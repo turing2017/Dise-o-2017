@@ -40,6 +40,12 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
         label_esEditable.setText("Es editable");
 
+        textField_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField_nombreActionPerformed(evt);
+            }
+        });
+
         button_crear.setText("Crear");
         button_crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +111,10 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
         }
     }//GEN-LAST:event_button_crearActionPerformed
+
+    private void textField_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField_nombreActionPerformed
 
     /**
      * @param args the command line arguments

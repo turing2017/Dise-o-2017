@@ -1,8 +1,10 @@
 package sistemapagoimpuestos.Controller;
 
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
@@ -71,8 +73,20 @@ public class ControladorGestionarTipoImpuesto {
         
         case "Consultar" :
         // Muestro pantalla de Consultar
-            ArrayList<DTOTipoImpuesto> dtoTipoImpuesto = obtenerTipoImpuestos();
+            ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = obtenerTipoImpuestos();
+            
+            String [] columnas = {"Codigo", "Nombre","Estado", "Fecha Inhabilitación"};
+            DefaultTableModel dtm = new DefaultTableModel(null, columnas);
+            for(DTOTipoImpuesto dtoTipoImpuesto :listDtoTipoImpuesto){
+                Vector<Object> vect = new Vector<>();
+                vect.add(dtoTipoImpuesto.getCodigoDTOTipoImpuesto());
+                vect.add(dtoTipoImpuesto.getNombreDTOTipoImpuesto());
+                vect.add(dtoTipoImpuesto.isEsMontoEditableDTOTipoImpuesto());
+                vect.add(dtoTipoImpuesto.getFechaHoraInhabilitacionDTOTipoImpuesto());
+                dtm.addRow(vect);
+            }          
             IUGestionarTipoImpuestoConsultar pantallaConsultar= new IUGestionarTipoImpuestoConsultar();
+            pantallaConsultar.getTabla_tipo_impuesto().setModel(dtm);
             pantallaConsultar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaConsultar.setVisible(true); // La hago visible
             

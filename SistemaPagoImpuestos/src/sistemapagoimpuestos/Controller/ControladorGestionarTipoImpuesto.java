@@ -1,9 +1,15 @@
 package sistemapagoimpuestos.Controller;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
@@ -75,18 +81,53 @@ public class ControladorGestionarTipoImpuesto {
         // Muestro pantalla de Consultar
             ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = obtenerTipoImpuestos();
             
-            String [] columnas = {"Codigo", "Nombre","Estado", "Fecha Inhabilitación"};
-            DefaultTableModel dtm = new DefaultTableModel(null, columnas);
+            String [] columnas = {"Codigo", "Nombre","Monto Editable", "Estado"};
+            DefaultTableModel dtm = new DefaultTableModel(null, columnas){
+                 public Class<?> getColumnClass(int column) {
+                      switch (column) {
+                        case 0:
+                            return Integer.class;
+                        case 1:
+                            return String.class;
+                        case 2:
+                            return Boolean.class;
+                        case 3:
+                            return Boolean.class;
+                        default:
+                            return null;
+                    }
+                 }
+                 
+            };
+                
+            
             for(DTOTipoImpuesto dtoTipoImpuesto :listDtoTipoImpuesto){
                 Vector<Object> vect = new Vector<>();
                 vect.add(dtoTipoImpuesto.getCodigoDTOTipoImpuesto());
                 vect.add(dtoTipoImpuesto.getNombreDTOTipoImpuesto());
                 vect.add(dtoTipoImpuesto.isEsMontoEditableDTOTipoImpuesto());
-                vect.add(dtoTipoImpuesto.getFechaHoraInhabilitacionDTOTipoImpuesto());
+
+                if(dtoTipoImpuesto.getFechaHoraInhabilitacionDTOTipoImpuesto()!=null){
+                    vect.add(false);
+                }else{
+                    vect.add(true);                   
+                }                
                 dtm.addRow(vect);
             }          
+            
+            DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object
+                value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                    table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
             IUGestionarTipoImpuestoConsultar pantallaConsultar= new IUGestionarTipoImpuestoConsultar();
             pantallaConsultar.getTabla_tipo_impuesto().setModel(dtm);
+            pantallaConsultar.getTabla_tipo_impuesto().getColumnModel().getColumn(0).setCellRenderer(r);
+            pantallaConsultar.getTabla_tipo_impuesto().getColumnModel().getColumn(1).setCellRenderer(r);
             pantallaConsultar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaConsultar.setVisible(true); // La hago visible
             

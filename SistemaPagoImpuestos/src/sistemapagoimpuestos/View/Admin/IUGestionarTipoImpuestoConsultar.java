@@ -35,12 +35,6 @@ public class IUGestionarTipoImpuestoConsultar extends javax.swing.JFrame {
         tabla_tipo_impuesto.setModel(tabla_tipo_impuesto.getModel());
         tabla_tipo_impuesto.setEnabled(false);
         jScrollPane1.setViewportView(tabla_tipo_impuesto);
-        if (tabla_tipo_impuesto.getColumnModel().getColumnCount() > 0) {
-            tabla_tipo_impuesto.getColumnModel().getColumn(0).setHeaderValue("Nombre");
-            tabla_tipo_impuesto.getColumnModel().getColumn(1).setHeaderValue("Código");
-            tabla_tipo_impuesto.getColumnModel().getColumn(2).setHeaderValue("Fecha Inhabilitacion");
-            tabla_tipo_impuesto.getColumnModel().getColumn(3).setHeaderValue("Es editable");
-        }
 
         button_cerrar.setText("Cerrar");
         button_cerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -128,16 +122,7 @@ public class IUGestionarTipoImpuestoConsultar extends javax.swing.JFrame {
         return tabla_tipo_impuesto;
     }
 
-    public void setTabla_tipo_impuesto(JTable tabla_tipo_impuesto) {
-        /*for(DTOTipoImpuesto dtoTipoImpuesto: listDtoTipoImpuesto){
-            DefaultTableModel model = new DefaultTableModel(); 
-            model.addColumn(dtoTipoImpuesto.getCodigoDTOTipoImpuesto());
-            model.addColumn(dtoTipoImpuesto.getNombreDTOTipoImpuesto());
-            model.addColumn(dtoTipoImpuesto.isEsMontoEditableDTOTipoImpuesto());
-            model.addColumn(dtoTipoImpuesto.getFechaHoraInhabilitacionDTOTipoImpuesto());
-            
-        }*/
-        
+    public void setTabla_tipo_impuesto(JTable tabla_tipo_impuesto) {       
         this.tabla_tipo_impuesto = tabla_tipo_impuesto;
 
     }

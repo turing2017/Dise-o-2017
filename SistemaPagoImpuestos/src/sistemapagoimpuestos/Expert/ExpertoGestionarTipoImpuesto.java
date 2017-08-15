@@ -10,6 +10,7 @@ import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
+import static sistemapagoimpuestos.Utils.Utils.existeDato;
 
 public class ExpertoGestionarTipoImpuesto {
     
@@ -30,17 +31,15 @@ public class ExpertoGestionarTipoImpuesto {
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
     public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
-        try{
+       
+        List<DTOCriterio> criteriosNombre = new ArrayList<>();
+        List<DTOCriterio> criteriosCodigo = new ArrayList<>();
 
-        List<DTOCriterio> criterios = new ArrayList<>();
-        DTOCriterio criterio1 = new DTOCriterio();
-        criterio1.setAtributo("codigoTipoImpuesto");
-        criterio1.setOperacion("!=");
-        criterio1.setValor(nombreTipoImpuestoIngres);
-        criterios.add(criterio1);
-        TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
-            
-        }catch(IndexOutOfBoundsException exception){
+        DTOCriterio criterioNombre = new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuestoIngres);
+        DTOCriterio criterioCodigo = new DTOCriterio("codigoTipoImpuesto", "=", codigoTipoImpuestoIngres);
+        criteriosNombre.add(criterioNombre);
+        criteriosCodigo.add(criterioCodigo);
+        if(!existeDato("TipoImpuesto", criteriosNombre)&&!existeDato("TipoImpuesto", criteriosCodigo)){
             System.out.println("Codigo Ingresado No Encontrado");
             TipoImpuesto tipoImpuesto = new TipoImpuesto();
             tipoImpuesto.setNombreTipoImpuesto(nombreTipoImpuestoIngres);
@@ -48,10 +47,14 @@ public class ExpertoGestionarTipoImpuesto {
             tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
 
             FachadaPersistencia.getInstance().guardar(tipoImpuesto);        
+        }else{
+            Excepciones.getInstance().objetoExistente("Tipo Impuesto - Codigo o Nombre ");
+
         }
-        
 
     }
+ 
+    
     
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){

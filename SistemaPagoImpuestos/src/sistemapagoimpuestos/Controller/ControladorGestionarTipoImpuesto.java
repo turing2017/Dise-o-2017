@@ -87,6 +87,7 @@ public class ControladorGestionarTipoImpuesto {
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
     public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
         experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres);
+        
     }
     //Metodo para modificar TipoImpuesto
     public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){

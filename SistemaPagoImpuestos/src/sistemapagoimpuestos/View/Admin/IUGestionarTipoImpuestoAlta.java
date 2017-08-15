@@ -101,6 +101,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             boolean esMontoEditable = checkbox_esEditable.isSelected();
 
             ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable);
+            this.dispose();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
         }

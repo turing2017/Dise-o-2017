@@ -8,7 +8,7 @@
             <generator class="uuid2"/>
         </id>
         
-        <property name="codigoTipoUsuario" type="int">
+        <property name="codigoTipoUsuario" type="int" unique="true" not-null="true">
             <column name="codigoTipoUsuario"/>
         </property>
 

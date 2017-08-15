@@ -7,6 +7,18 @@ public class DTOCriterio
     private String operacion;
     private Object valor;
 
+    public DTOCriterio() {
+    }
+    
+    
+
+    public DTOCriterio(String atributo, String operacion, Object valor) {
+        this.atributo = atributo;
+        this.operacion = operacion;
+        this.valor = valor;
+    }
+
+    
     public String getAtributo ()
     {
         return atributo;

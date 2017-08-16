@@ -5,20 +5,16 @@
  */
 package sistemapagoimpuestos.View.Admin;
 
-import exceptions.Excepciones;
-import java.util.Arrays;
-import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
-
 /**
  *
  * @author Tongas
  */
-public class IUGestionarEmpresaAdheridaNueva extends javax.swing.JFrame {
+public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
     /**
-     * Creates new form IUGestionarEmpresaAdheridaNueva
+     * Creates new form IUGestionarEmpresaAdheridaModificacion
      */
-    public IUGestionarEmpresaAdheridaNueva() {
+    public IUGestionarEmpresaAdheridaModificacion() {
         initComponents();
     }
 
@@ -37,7 +33,8 @@ public class IUGestionarEmpresaAdheridaNueva extends javax.swing.JFrame {
         TextField_Cuit = new javax.swing.JTextField();
         TextField_Nombre = new javax.swing.JTextField();
         TextField_Direccion = new javax.swing.JTextField();
-        Button_Crear = new javax.swing.JButton();
+        Button_EliminarEmpresa = new javax.swing.JButton();
+        Button_ModificarEmpresa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,10 +50,12 @@ public class IUGestionarEmpresaAdheridaNueva extends javax.swing.JFrame {
             }
         });
 
-        Button_Crear.setText("Crear");
-        Button_Crear.addActionListener(new java.awt.event.ActionListener() {
+        Button_EliminarEmpresa.setText("Eliminar");
+
+        Button_ModificarEmpresa.setText("Modificar");
+        Button_ModificarEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Button_CrearActionPerformed(evt);
+                Button_ModificarEmpresaActionPerformed(evt);
             }
         });
 
@@ -65,26 +64,30 @@ public class IUGestionarEmpresaAdheridaNueva extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TextField_Cuit)
-                    .addComponent(TextField_Nombre)
-                    .addComponent(TextField_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                .addGap(40, 40, 40))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Button_Crear)
-                .addContainerGap())
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(67, 67, 67)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(Button_ModificarEmpresa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(Button_EliminarEmpresa)
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TextField_Cuit)
+                            .addComponent(TextField_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(TextField_Direccion))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -92,37 +95,38 @@ public class IUGestionarEmpresaAdheridaNueva extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(Button_Crear)
-                .addContainerGap())
+                    .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Button_EliminarEmpresa)
+                    .addComponent(Button_ModificarEmpresa))
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Button_CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CrearActionPerformed
-        // TODO add your handling code here:
-        try{
-            String cuitEmpresa = TextField_Cuit.getText();
-            String nombreEmpresa = TextField_Nombre.getText();
-            String direccionEmpresa = TextField_Direccion.getText();
-
-            ControladorGestionarEmpresaAdherida.getInstance().ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa);
-        }catch(java.lang.NumberFormatException e){
-            Excepciones.getInstance().camposRequerido(Arrays.asList("Cuit", "Nombre","Direccion"));
-            }
-        
-    }//GEN-LAST:event_Button_CrearActionPerformed
-
     private void TextField_CuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_CuitActionPerformed
         // TODO add your handling code here:
-        
-   
+            
     }//GEN-LAST:event_TextField_CuitActionPerformed
+
+    private void Button_ModificarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ModificarEmpresaActionPerformed
+        // TODO add your handling code here:
+        try{
+            if(TextField_Nombre.getText().equals("") OR TextField_Direccion.getText().equals("")){
+                TextField_Nombre.setText(null);
+                throw new java.lang.NumberFormatException();
+            }
+            ControladorGestionarEmpresaAdherida.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected());    
+            this.dispose();
+        }catch(java.lang.NumberFormatException e){
+            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
+        }
+    }//GEN-LAST:event_Button_ModificarEmpresaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,26 +145,27 @@ public class IUGestionarEmpresaAdheridaNueva extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaModificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaModificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaModificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaNueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaAdheridaModificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUGestionarEmpresaAdheridaNueva().setVisible(true);
+                new IUGestionarEmpresaAdheridaModificacion().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Button_Crear;
+    private javax.swing.JButton Button_EliminarEmpresa;
+    private javax.swing.JButton Button_ModificarEmpresa;
     private javax.swing.JTextField TextField_Cuit;
     private javax.swing.JTextField TextField_Direccion;
     private javax.swing.JTextField TextField_Nombre;

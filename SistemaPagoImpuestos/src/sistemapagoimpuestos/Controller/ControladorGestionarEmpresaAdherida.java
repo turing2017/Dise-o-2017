@@ -11,6 +11,7 @@ import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaNueva;
 import java.lang.String;
+import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaModificacion;
 /**
  *
  * @author Tongas
@@ -50,11 +51,32 @@ public class ControladorGestionarEmpresaAdherida {
             pantallaNuevaEmpresa.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaNuevaEmpresa.setVisible(true); // La hago visible
         break; // optional
+        
+        case "Modificar" :
+        // Muestro pantalla de Modificación
+            DTOEmpresa DTOEmpresaExistente = obtenerEmpresa ((int) object);
+            if(DTOEmpresaExistente != null){
+                IUGestionarEmpresaAdheridaModificacion pantallaModificar= new IUGestionarEmpresaAdheridaModificacion();
+                pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                pantallaModificar.setVisible(true); // La hago visible
+                pantallaModificar.setTextField_Nombre(DTOEmpresaExistente.getNombreDTOEmpresaExistente());
+                pantallaModificar.setTextField_Direccion(DTOEmpresaExistente.getDireccionDTOEmpresaExiste());
+                pantallaModificar.setTextField_Cuit(DTOEmpresaExistente.getCuitDTOEmpresaExistente());
+                TextField_Cuit.setEditable(false);//hay que ver como se bloquea una vez que lo trae de la bd
+                
+                
+            
+        break; // optional
         }
     }
     //crea una empresa
     public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
         experto.ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa);
+    }
+    
+    public void seleccionarEliminaroModificar (String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){
+        experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
+        
     }
 }
 

@@ -18,6 +18,19 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoGestionarEmpresaAdherida {
     
+    
+        public String iniciar(){
+        
+        
+        /*TipoUsuario tipoUsuario = usuario.getTipoUsuario();
+        String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
+        System.out.println("1");
+        if (nombreTipoUsuario != "Adminstrador") {
+            System.out.println("Debe ser Cliente para realizar esta acción");
+        }*/
+        return "Administrador";        
+    }
+    
     public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
     try{
 

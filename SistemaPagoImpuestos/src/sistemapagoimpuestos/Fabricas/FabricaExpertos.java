@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Fabricas;
 
+import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoImpuesto;
 
 /**
@@ -33,6 +34,8 @@ public class FabricaExpertos {
         {
             case "CU14":
                 return new DecoradorGestionarTipoImpuesto();
+            case "CU10":
+                return new DecoradorGestionarEmpresaAdherida();
             default:
                 return null;
         }

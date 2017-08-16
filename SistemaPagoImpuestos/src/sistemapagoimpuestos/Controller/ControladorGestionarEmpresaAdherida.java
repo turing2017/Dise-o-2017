@@ -11,6 +11,7 @@ import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaNueva;
 import java.lang.String;
+import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdherida;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaModificacion;
 /**
  *
@@ -42,9 +43,9 @@ public class ControladorGestionarEmpresaAdherida {
         }   
 // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
     }
-    
+   
     public void opcionSeleccionada(String opcion, Object object){
-        switch(opcion) {
+        /*switch(opcion) {
         case "NuevaEmpresa" :
         // Muestro pantalla de Nueva Empresa
             IUGestionarEmpresaAdheridaNueva pantallaNuevaEmpresa = new IUGestionarEmpresaAdheridaNueva();
@@ -67,15 +68,15 @@ public class ControladorGestionarEmpresaAdherida {
                 
             
         break; // optional
-        }
+        }*/
     }
     //crea una empresa
-    public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
+    /*public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
         experto.ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa);
-    }
+    }*/
     
     public void seleccionarEliminaroModificar (String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){
-        experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
+//        experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
         
     }
 }

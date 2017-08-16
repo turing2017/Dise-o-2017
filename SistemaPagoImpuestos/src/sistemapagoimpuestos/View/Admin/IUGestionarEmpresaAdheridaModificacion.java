@@ -116,7 +116,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
     private void Button_ModificarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ModificarEmpresaActionPerformed
         // TODO add your handling code here:
-        try{
+        /*try{
             if(TextField_Nombre.getText().equals("") OR TextField_Direccion.getText().equals("")){
                 TextField_Nombre.setText(null);
                 throw new java.lang.NumberFormatException();
@@ -125,7 +125,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
             this.dispose();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
-        }
+        }*/
     }//GEN-LAST:event_Button_ModificarEmpresaActionPerformed
 
     /**

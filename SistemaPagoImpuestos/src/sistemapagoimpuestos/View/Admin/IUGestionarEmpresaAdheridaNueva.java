@@ -111,7 +111,7 @@ public class IUGestionarEmpresaAdheridaNueva extends javax.swing.JFrame {
             String nombreEmpresa = TextField_Nombre.getText();
             String direccionEmpresa = TextField_Direccion.getText();
 
-            ControladorGestionarEmpresaAdherida.getInstance().ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa);
+           // ControladorGestionarEmpresaAdherida.getInstance().ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa);
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Cuit", "Nombre","Direccion"));
             }

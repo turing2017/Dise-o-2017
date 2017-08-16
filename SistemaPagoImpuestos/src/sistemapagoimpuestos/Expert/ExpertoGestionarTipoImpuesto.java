@@ -91,6 +91,7 @@ public class ExpertoGestionarTipoImpuesto {
         dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
         dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
         dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
+        dtoTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
         return dtoTipoImpuesto;        
         }catch(IndexOutOfBoundsException exception){
             System.out.println("Codigo Ingresado No Encontrado");

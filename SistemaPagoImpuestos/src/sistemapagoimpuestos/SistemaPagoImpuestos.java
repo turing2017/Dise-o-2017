@@ -24,11 +24,6 @@ public class SistemaPagoImpuestos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     // DatosPrueba dp = new DatosPrueba();
-     // dp.generarDatosPrueba();
-      // FachadaInterna.getInstance().iniciarTransaccion();
-      // List<Object> tiposImpuestos =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
-      // FachadaInterna.getInstance().finalizarTransaccion();
        new ControladorGestionarTipoImpuesto().iniciar();
     }
     

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+  <class dynamic-insert="false" dynamic-update="false" mutable="true" name="TipoEmpresa" optimistic-lock="version" polymorphism="implicit" select-before-update="false"/>
+  <class name="sistemapagoimpuestos.Entity.TipoEmpresa"   table="TipoEmpresa">
+      <id name="OID" type="string"> 
+          <column name="OIDTipoEmpresa"/>    
+          <generator class="uuid2"/>
+      </id> 
+          
+      <property name="nombreTipoEmpresa"    type="string"> 
+      <column name="nombreTipoEmpresa"/>
+      </property>
+          
+      <property name="fechaHoraInhabilitacionTipoEmpresa"   type="date">    
+      <column name="fechaHoraInhabilitacionTipoEmpresa"/>        
+      </property>
+  </class>            
+             
+</hibernate-mapping>

@@ -15,10 +15,10 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.View.Admin.IUGestionarTipoImpuesto;
-import sistemapagoimpuestos.View.Admin.IUGestionarTipoImpuestoAlta;
-import sistemapagoimpuestos.View.Admin.IUGestionarTipoImpuestoConsultar;
-import sistemapagoimpuestos.View.Admin.IUGestionarTipoImpuestoModificar;
+import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuesto;
+import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuestoAlta;
+import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuestoConsultar;
+import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuestoModificar;
 
 
 public class ControladorGestionarTipoImpuesto {

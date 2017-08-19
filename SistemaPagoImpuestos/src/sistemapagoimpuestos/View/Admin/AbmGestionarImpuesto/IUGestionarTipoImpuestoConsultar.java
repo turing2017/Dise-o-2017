@@ -1,4 +1,4 @@
-package sistemapagoimpuestos.View.Admin;
+package sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto;
 
 import java.util.ArrayList;
 import javax.swing.JTable;

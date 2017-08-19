@@ -10,7 +10,7 @@ public class Usuario extends Entity{
     
     // Atriburos propios de la clase
     private String nombreUsuario;
-    private String password;
+    private String passwordUsuario;
     private Date fechaHoraInhabilitacionUsuario;
     private Date fechaHoraUltimoIngresoSistemaUsuario;
 
@@ -19,7 +19,7 @@ public class Usuario extends Entity{
 
     public Usuario(String nombreUsuario, String password) {
         this.nombreUsuario = nombreUsuario;
-        this.password = password;
+        this.passwordUsuario = password;
     }
     
     
@@ -34,7 +34,7 @@ public class Usuario extends Entity{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.passwordUsuario = password;
     }
 
     public void setFechaHoraInhabilitacionUsuario(Date fechaHoraInhabilitacionUsuario) {
@@ -63,7 +63,7 @@ public class Usuario extends Entity{
     }
 
     public String getPassword() {
-        return password;
+        return passwordUsuario;
     }
 
     public Date getFechaHoraInhabilitacionUsuario() {

@@ -9,6 +9,8 @@ import datosPrueba.DatosPrueba;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.cfg.Configuration;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoDeCuenta;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -24,7 +26,10 @@ public class SistemaPagoImpuestos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       new ControladorGestionarTipoImpuesto().iniciar();
+        ControladorGestionarTipoDeCuenta.getInstance().iniciar();
+        //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
+        //ControladorGestionarTipoImpuesto.getInstance().iniciar();
+       
     }
     
 }

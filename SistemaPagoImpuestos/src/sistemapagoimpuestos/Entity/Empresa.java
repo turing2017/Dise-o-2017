@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author lunamarcos
  */
-public class Empresa {
+public class Empresa extends Entity {
     
     // Atributos propios de la clase
     private String cuitEmpresa;

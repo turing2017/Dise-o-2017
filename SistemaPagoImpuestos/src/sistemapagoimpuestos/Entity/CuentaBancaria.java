@@ -3,7 +3,7 @@ package sistemapagoimpuestos.Entity;
 import java.util.Date;
 
 
-public class CuentaBancaria {
+public class CuentaBancaria extends Entity {
     
     // Atributos propios de la clase
     private String nroCuentaBancaria;

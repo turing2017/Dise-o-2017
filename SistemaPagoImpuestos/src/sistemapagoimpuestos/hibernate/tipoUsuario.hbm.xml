@@ -12,7 +12,7 @@
             <column name="codigoTipoUsuario"/>
         </property>
 
-        <property name="nombreTipoUsuario" type="string">
+        <property name="nombreTipoUsuario" type="string" unique="true" not-null="true">
             <column name="nombreTipoUsuario"/>
         </property>
         

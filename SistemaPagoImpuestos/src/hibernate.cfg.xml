@@ -54,5 +54,6 @@ Contributor(s):
     <mapping resource="sistemapagoimpuestos/hibernate/tipoImpuesto.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/usuario.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/tipoCuenta.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/empresa.hbm.xml"/>  
   </session-factory>
 </hibernate-configuration>

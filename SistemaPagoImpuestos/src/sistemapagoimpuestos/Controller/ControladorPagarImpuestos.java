@@ -10,5 +10,21 @@ package sistemapagoimpuestos.Controller;
  * @author mvissio
  */
 public class ControladorPagarImpuestos {
+        
+    private static ControladorPagarImpuestos controladorPagarImpuesto;
+
+    public ControladorPagarImpuestos() {
+    }
+    
+    public static ControladorPagarImpuestos getInstance()
+    {
+        if (controladorPagarImpuesto == null)
+        {
+            controladorPagarImpuesto = new ControladorPagarImpuestos();
+        }
+        return controladorPagarImpuesto;
+    }
+    
+    
     
 }

@@ -12,6 +12,7 @@ public class TipoUsuario extends Entity {
     private int codigoTipoUsuario;
     private String nombreTipoUsuario;
     private Date fechaHoraInhabilitacionTipoUsuario;
+    
 
     public TipoUsuario() {
     }

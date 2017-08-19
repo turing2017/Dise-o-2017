@@ -2,7 +2,7 @@ package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-public class Cliente {
+public class Cliente extends Entity{
     
     // Atributos propios de la clase
     private String cuil_cuitCliente;
@@ -10,6 +10,18 @@ public class Cliente {
     private String nombreCliente;
     private String dniCliente;
     private Date fechaHoraInhabilitacionCliente;
+
+    public Cliente() {
+    }
+
+    public Cliente(String cuil_cuitCliente, String apellidoCliente, String nombreCliente, String dniCliente, Date fechaHoraInhabilitacionCliente) {
+        this.cuil_cuitCliente = cuil_cuitCliente;
+        this.apellidoCliente = apellidoCliente;
+        this.nombreCliente = nombreCliente;
+        this.dniCliente = dniCliente;
+        this.fechaHoraInhabilitacionCliente = fechaHoraInhabilitacionCliente;
+    }
+    
     
     
     // Setters

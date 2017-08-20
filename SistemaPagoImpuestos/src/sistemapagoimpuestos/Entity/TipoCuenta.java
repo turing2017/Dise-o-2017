@@ -14,6 +14,18 @@ public class TipoCuenta extends Entity {
     private boolean habilitadaTipoCuenta;
     private Date fechaHoraInhabilitacionTipoCuenta;
 
+    public TipoCuenta() {
+    }
+
+    public TipoCuenta(int codigoTipoCuenta, String nombreTipoCuenta, boolean habilitadaTipoCuenta, Date fechaHoraInhabilitacionTipoCuenta) {
+        this.codigoTipoCuenta = codigoTipoCuenta;
+        this.nombreTipoCuenta = nombreTipoCuenta;
+        this.habilitadaTipoCuenta = habilitadaTipoCuenta;
+        this.fechaHoraInhabilitacionTipoCuenta = fechaHoraInhabilitacionTipoCuenta;
+    }
+
+    
+    
     // Setters
     public void setCodigoTipoCuenta(int codigoTipoCuenta) {
         this.codigoTipoCuenta = codigoTipoCuenta;

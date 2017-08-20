@@ -13,6 +13,18 @@ public class Empresa extends Entity {
     private String nombreEmpresa;
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
+
+    public Empresa() {
+    }
+
+    public Empresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, Date fechaHoraInhabilitacionEmpresa) {
+        this.cuitEmpresa = cuitEmpresa;
+        this.nombreEmpresa = nombreEmpresa;
+        this.direccionEmpresa = direccionEmpresa;
+        this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
+    }
+    
+    
     
     // Setters
     public void setCuitEmpresa(String cuitEmpresa) {

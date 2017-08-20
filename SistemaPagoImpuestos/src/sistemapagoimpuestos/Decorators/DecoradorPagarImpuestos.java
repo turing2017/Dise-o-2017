@@ -5,10 +5,12 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
+
 /**
  *
  * @author mvissio
  */
-public class DecoradorPagarImpuestos {
+public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     
 }

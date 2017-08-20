@@ -3,6 +3,7 @@ package sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto;
 import exceptions.Excepciones;
 import java.util.Arrays;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 
 /**
  *
@@ -102,6 +103,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
             ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable);
             this.dispose();
+            ControladorGestionarTipoImpuesto.getInstance().iniciar();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
         }

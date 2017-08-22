@@ -5,7 +5,15 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOCriterio;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Utils.FachadaInterna;
+import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
  *
@@ -15,15 +23,28 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         Usuario usuario = new Usuario();
     
     // Metodo iniciar
-    public String iniciar(){
+    public List<DTOTipoImpuesto> iniciar(){
+        List<DTOCriterio> criterioFecha = new ArrayList();
+        DTOCriterio criteriosFecha = new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "=", null);
+        criterioFecha.add(criteriosFecha);
         
+        List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioFecha);
+    
+        DTOTipoImpuesto dTOTipoImpuesto = new DTOTipoImpuesto();
         
-        /*TipoUsuario tipoUsuario = usuario.getTipoUsuario();
-        String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
-        System.out.println("1");
-        if (nombreTipoUsuario != "Adminstrador") {
-            System.out.println("Debe ser Cliente para realizar esta acción");
-        }*/
-        return "Administrador";        
+        List <DTOTipoImpuesto> lista = new ArrayList<>();
+        
+        for (int i = 0; i < tipoImpuestos.size(); i++) {
+            TipoImpuesto tipoImpuesto = (TipoImpuesto)tipoImpuestos.get(i);
+            String nombreTipoImpuesto = tipoImpuesto.getNombreTipoImpuesto();
+            dTOTipoImpuesto.setNombreDTOTipoImpuesto(nombreTipoImpuesto);
+            lista.add(dTOTipoImpuesto);
+        }
+        
+        return lista;
+    }
+    
+    public String validar(){
+        return "Administrador";
     }
 }

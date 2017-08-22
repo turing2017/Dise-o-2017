@@ -26,8 +26,8 @@ public class SistemaPagoImpuestos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ControladorGestionarTipoDeCuenta.getInstance().iniciar();
-        //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
+        //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
+        ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
         //ControladorGestionarTipoImpuesto.getInstance().iniciar();
        
     }

@@ -1,85 +1,16 @@
 package sistemapagoimpuestos.View.Admin;
 
-import java.sql.*;
+import java.util.List;
 import javax.swing.JOptionPane;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 public class AdminMenu extends javax.swing.JFrame {
-    
-    Connection conexion;
-    Statement st;    
-    ResultSet rs;
 
     public AdminMenu() {
-        
         initComponents();
-        LlenarComboTipoImpuesto();
-        String seleccionTipoImpuesto = combo_TipoImpuesto.getSelectedItem().toString();
-        LlenarComboEmpresa();
-        String seleccionEmpresa = combo_Empresa.getSelectedItem().toString();
-        VerificarConexion(seleccionTipoImpuesto, seleccionEmpresa);
-        
     }
     
-    private void LlenarComboEmpresa(){
-        //Realizar conexion con la base de datos y recuperar las empresas adheridas
-        String query = "SELECT nombreEmpresa FROM empresas";
-        
-        try{
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pago_impuestos", "root", "root");
-            st = conexion.createStatement();
-            rs = st.executeQuery(query);
-            while (rs.next())
-                combo_Empresa.addItem(rs.getString("nombreEmpresa"));
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error en la conexion a base de datos");
-        }
-        finally{
-            try{
-            rs.close();
-            st.close();
-            conexion.close();
-            
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error en el cierre de conexion");
-        }
-        }
-            
-    }
-    
-    private void LlenarComboTipoImpuesto(){
-        String query = "SELECT nombreTipoImpuesto FROM tipo_impuestos";
-        
-        try{
-        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pago_impuestos", "root", "root");
-        st = conexion.createStatement();
-        rs = st.executeQuery(query);
-        while (rs.next())
-            combo_TipoImpuesto.addItem(rs.getString("nombreTipoImpuesto"));
-        
-        }catch(Exception e){
-            System.out.println("Error en la conexion");
-        }
-        finally{
-            try{
-                rs.close();
-                st.close();
-                rs.close();
-            }
-            catch (Exception e){
-                JOptionPane.showMessageDialog(null, "Error de cierre");
-            }
-        }
-    }
-    
-    private void VerificarConexion(String seleccionTI, String seleccionE){
-        String query = "SELECT urlConexionEmpresaTipoImpuesto FROM empresatipoimpuesto WHERE ";
-    }
-    /*    try{
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/pago_impuestos", "root", "root");
-            st = conexion.createStatement();
-            rs = st.executeQuery(query);
-    }
-*/
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -214,12 +145,15 @@ public class AdminMenu extends javax.swing.JFrame {
 
     private void button_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_SalirActionPerformed
         // Cierra la ventana
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_button_SalirActionPerformed
 
     private void combo_TipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_TipoImpuestoActionPerformed
-
-        
+        List<DTOTipoImpuesto> listado = ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
+        for (int i = 0; i < listado.size(); i++) {
+            DTOTipoImpuesto algo = listado.get(i);
+            combo_TipoImpuesto.addItem(algo.getNombreDTOTipoImpuesto());
+        }
     }//GEN-LAST:event_combo_TipoImpuestoActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -264,6 +198,10 @@ public class AdminMenu extends javax.swing.JFrame {
                 new AdminMenu().setVisible(true);
             }
         });
+    }
+    
+    public void iniciar(){
+        ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

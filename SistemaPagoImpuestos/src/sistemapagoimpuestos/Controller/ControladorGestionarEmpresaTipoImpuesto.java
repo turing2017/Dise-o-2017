@@ -1,7 +1,11 @@
 package sistemapagoimpuestos.Controller;
 
+import java.util.List;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuesto;
+import sistemapagoimpuestos.View.Admin.AdminMenu;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,7 +33,11 @@ public class ControladorGestionarEmpresaTipoImpuesto {
     }
     
     
-    public void iniciar(){
-        System.out.println(experto.iniciar());
+    public List<DTOTipoImpuesto> iniciar(){
+        if(experto.validar().equals("Administrador")){
+            AdminMenu pantallaPrincipal = new AdminMenu();
+            pantallaPrincipal.setVisible(true); 
+        }
+        return experto.iniciar();
     }
 }

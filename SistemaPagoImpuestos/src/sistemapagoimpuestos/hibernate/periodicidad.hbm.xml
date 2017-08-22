@@ -15,7 +15,7 @@
             <column name="tipoPeriodicidad"/>
         </property>
         
-         <property name="fechaInhabilitacionPeriodicidad" type="date">
+         <property name="fechaInhabilitacionPeriodicidad" type="timestamp">
             <column name="fechaInhabilitacionPeriodicidad"/>
         </property>
     </class>

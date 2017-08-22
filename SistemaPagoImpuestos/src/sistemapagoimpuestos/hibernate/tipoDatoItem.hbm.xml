@@ -8,12 +8,12 @@
             <generator class="uuid2"/>
         </id>
         
-        <property name="codigoTipoDato" type="int" unique="true" not-null="true">
-            <column name="codigoTipoDato"/>
+        <property name="codigoTipoDatoItem" type="int" unique="true" not-null="true">
+            <column name="codigoTipoDatoItem"/>
         </property>
         
-        <property name="nombreTipoDato" type="string" not-null="true">
-            <column name="nombreTipoDato"/>
+        <property name="nombreTipoDatoItem" type="string" not-null="true">
+            <column name="nombreTipoDatoItem"/>
         </property>
         
     </class>

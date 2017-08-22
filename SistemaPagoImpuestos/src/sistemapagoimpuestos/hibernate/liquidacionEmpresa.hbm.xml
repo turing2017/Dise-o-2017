@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.LiquidacionEmpresa" table="liquidacion_empresa" >
+         <id name="OID" type="string">
+           <column name="OIDLiquidacionEmpresa"/>
+        <generator class="uuid2"/>
+         </id>
+        <property name="numeroLiquidacionEmpresa" type="int" unique="true" not-null="true">
+            <column name="numeroLiquidacionEmpresa"/>
+        </property>
+        <property name="fechaHoraLiquidacionEmpresa" type="timestamp" >
+            <column name="fechaHoraLiquidacionEmpresa"/>
+        </property>
+        <property name="periodoLiquidacionEmpresa" type="string">
+            <column name="periodoLiquidacionEmpresa"/>
+        </property>
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
+        <set name="listOperacion" table="list_operacion" inverse="true" lazy="true" fetch="select">             
+            <key column="OIDOperacion" not-null="true" />             
+            <one-to-many class="sistemapagoimpuestos.Entity.Operacion"/>         
+        </set>
+        
+    </class>
+</hibernate-mapping>

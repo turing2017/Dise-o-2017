@@ -20,7 +20,7 @@
         <property name="dniCliente" type="string" unique="true" not-null="true">
             <column name="dniCliente"/>
         </property>
-        <property name="fechaHoraInhabilitacionCliente" type="date">
+        <property name="fechaHoraInhabilitacionCliente" type="timestamp">
             <column name="fechaHoraInhabilitacionCliente"/>
         </property>
         <one-to-one name="usuario" class="sistemapagoimpuestos.Entity.Usuario" constrained="true" ></one-to-one>

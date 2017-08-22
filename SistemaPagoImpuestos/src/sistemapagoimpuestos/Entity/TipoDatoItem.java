@@ -11,33 +11,31 @@ package sistemapagoimpuestos.Entity;
  */
 public class TipoDatoItem extends Entity{
     
-    private int codigoTipoDato;
-    private String nombreTipoDato;
+    private int codigoTipoDatoItem;
+    private String nombreTipoDatoItem;
 
     public TipoDatoItem() {
     }
 
-    public TipoDatoItem(int codigoTipoDato, String nombreTipoDato) {
-        this.codigoTipoDato = codigoTipoDato;
-        this.nombreTipoDato = nombreTipoDato;
+    public TipoDatoItem(int codigoTipoDatoItem, String nombreTipoDatoItem) {
+        this.codigoTipoDatoItem = codigoTipoDatoItem;
+        this.nombreTipoDatoItem = nombreTipoDatoItem;
     }
 
-    public int getCodigoTipoDato() {
-        return codigoTipoDato;
+    public int getCodigoTipoDatoItem() {
+        return codigoTipoDatoItem;
     }
 
-    public void setCodigoTipoDato(int codigoTipoDato) {
-        this.codigoTipoDato = codigoTipoDato;
+    public void setCodigoTipoDatoItem(int codigoTipoDatoItem) {
+        this.codigoTipoDatoItem = codigoTipoDatoItem;
     }
 
-    public String getNombreTipoDato() {
-        return nombreTipoDato;
+    public String getNombreTipoDatoItem() {
+        return nombreTipoDatoItem;
     }
 
-    public void setNombreTipoDato(String nombreTipoDato) {
-        this.nombreTipoDato = nombreTipoDato;
+    public void setNombreTipoDatoItem(String nombreTipoDatoItem) {
+        this.nombreTipoDatoItem = nombreTipoDatoItem;
     }
-    
-    
     
 }

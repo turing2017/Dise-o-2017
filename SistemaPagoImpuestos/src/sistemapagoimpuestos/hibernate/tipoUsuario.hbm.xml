@@ -16,7 +16,7 @@
             <column name="nombreTipoUsuario"/>
         </property>
         
-        <property name="fechaHoraInhabilitacionTipoUsuario" type="date">
+        <property name="fechaHoraInhabilitacionTipoUsuario" type="timestamp">
             <column name="fechaHoraInhabilitacionTipoUsuario"/>
         </property>
     </class>

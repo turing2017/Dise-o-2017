@@ -13,7 +13,12 @@ public class Usuario extends Entity{
     private String passwordUsuario;
     private Date fechaHoraInhabilitacionUsuario;
     private Date fechaHoraUltimoIngresoSistemaUsuario;
-
+    
+    // Atributos por relación
+    private TipoUsuario tipoUsuario;
+    private Cliente cliente;
+    private Empresa empresa;
+    
     public Usuario() {
     }
 
@@ -28,12 +33,7 @@ public class Usuario extends Entity{
     }
 
     
-    
-    // Atributos por relación
-    private TipoUsuario tipoUsuario;
-    private Cliente cliente;
-    private Empresa empresa;
-    
+
     // Setters
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;

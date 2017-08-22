@@ -10,6 +10,7 @@ public class Cliente extends Entity{
     private String nombreCliente;
     private String dniCliente;
     private Date fechaHoraInhabilitacionCliente;
+    private Usuario usuario;
 
     public Cliente() {
     }
@@ -21,9 +22,6 @@ public class Cliente extends Entity{
         this.dniCliente = dniCliente;
         this.fechaHoraInhabilitacionCliente = fechaHoraInhabilitacionCliente;
     }
-
-    
-    
     
     // Setters
     public void setCuilCuitCliente(String cuilCuitCliente) {
@@ -66,6 +64,14 @@ public class Cliente extends Entity{
 
     public Date getFechaHoraInhabilitacionCliente() {
         return fechaHoraInhabilitacionCliente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
 }

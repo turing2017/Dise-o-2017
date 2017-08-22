@@ -17,7 +17,7 @@
        <property name="fechaHoraInhabilitacionUsuario" type="date">
            <column name="fechaHoraInhabilitacionUsuario"/>
        </property>
-       <property name="fechaHoraUltimoIngresoSistemaUsuario" type="date">
+       <property name="fechaHoraUltimoIngresoSistemaUsuario" type="timestamp">
            <column name="fechaHoraUltimoIngresoSistemaUsuario"/>
        </property>
         

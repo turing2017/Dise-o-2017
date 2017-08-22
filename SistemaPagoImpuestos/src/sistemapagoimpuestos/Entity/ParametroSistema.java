@@ -5,28 +5,35 @@
  */
 package sistemapagoimpuestos.Entity;
 
+import java.util.Date;
+
 /**
  *
  * @author mvissio
  */
 public class ParametroSistema extends Entity{
     
+    private int codigoParametroSistema;
     private int cantIntentosSincronizacionParametroSistema;
     private String cuitBancoParametroSistema;
     private int frecuenciaSincronizacionParametroSistema;
     private String nombreBancoParametroSistema;
     private String urlConexionBancoParametroSistema;
+    private Date fechaInhabilitacionParametroSistema;
 
     public ParametroSistema() {
     }
 
-    public ParametroSistema(int cantIntentosSincronizacionParametroSistema, String cuitBancoParametroSistema, int frecuenciaSincronizacionParametroSistema, String nombreBancoParametroSistema, String urlConexionBancoParametroSistema) {
+    public ParametroSistema(int codigoParametroSistema, int cantIntentosSincronizacionParametroSistema, String cuitBancoParametroSistema, int frecuenciaSincronizacionParametroSistema, String nombreBancoParametroSistema, String urlConexionBancoParametroSistema, Date fechaInhabilitacionParametroSistema) {
+        this.codigoParametroSistema = codigoParametroSistema;
         this.cantIntentosSincronizacionParametroSistema = cantIntentosSincronizacionParametroSistema;
         this.cuitBancoParametroSistema = cuitBancoParametroSistema;
         this.frecuenciaSincronizacionParametroSistema = frecuenciaSincronizacionParametroSistema;
         this.nombreBancoParametroSistema = nombreBancoParametroSistema;
         this.urlConexionBancoParametroSistema = urlConexionBancoParametroSistema;
+        this.fechaInhabilitacionParametroSistema = fechaInhabilitacionParametroSistema;
     }
+
 
     public int getCantIntentosSincronizacionParametroSistema() {
         return cantIntentosSincronizacionParametroSistema;
@@ -68,7 +75,19 @@ public class ParametroSistema extends Entity{
         this.urlConexionBancoParametroSistema = urlConexionBancoParametroSistema;
     }
 
-    
-    
-    
+    public int getCodigoParametroSistema() {
+        return codigoParametroSistema;
+    }
+
+    public void setCodigoParametroSistema(int codigoParametroSistema) {
+        this.codigoParametroSistema = codigoParametroSistema;
+    }
+
+    public Date getFechaInhabilitacionParametroSistema() {
+        return fechaInhabilitacionParametroSistema;
+    }
+
+    public void setFechaInhabilitacionParametroSistema(Date fechaInhabilitacionParametroSistema) {
+        this.fechaInhabilitacionParametroSistema = fechaInhabilitacionParametroSistema;
+    }    
 }

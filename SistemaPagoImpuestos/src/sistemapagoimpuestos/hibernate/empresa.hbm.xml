@@ -20,9 +20,10 @@
             <column name="direccionEmpresa"/>
         </property>
         
-        <property name="fechaHoraInhabilitacionEmpresa" type="date">
+        <property name="fechaHoraInhabilitacionEmpresa" type="timestamp">
             <column name="fechaHoraInhabilitacionEmpresa"/>
         </property>
         
+        <many-to-one name="tipoEmpresa" class="sistemapagoimpuestos.Entity.TipoEmpresa" column="OIDTipoEmpresa" not-null="true"/> 
     </class>
 </hibernate-mapping>

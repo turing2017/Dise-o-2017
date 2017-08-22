@@ -9,6 +9,10 @@
             <generator class="uuid2"/>
         </id>
         
+        <property name="codigoParametroSistema" type="int" unique="true" not-null="true">
+            <column name="codigoParametroSistema"/>
+        </property>
+        
         <property name="cantIntentosSincronizacionParametroSistema" type="int" >
             <column name="cantIntentosSincronizacionParametroSistema"/>
         </property>
@@ -28,6 +32,10 @@
         <property name="urlConexionBancoParametroSistema" type="string" unique="true" not-null="true">
             <column name="urlConexionBancoParametroSistema"/>
         </property>
-        
+
+        <property name="fechaInhabilitacionParametroSistema" type="timestamp" >
+            <column name="fechaInhabilitacionParametroSistema"/>
+        </property>
+                
     </class>
 </hibernate-mapping>

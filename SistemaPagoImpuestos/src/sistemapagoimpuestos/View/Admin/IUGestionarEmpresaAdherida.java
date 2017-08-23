@@ -108,7 +108,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
     private void Button_ConsultarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ConsultarEmpresaActionPerformed
         // TODO add your handling code here:
-        ControladorGestionarEmpresaAdherida.getInstance().opcionSeleccionada("Consultar", null);
+        ControladorGestionarEmpresaAdherida.getInstance().opcionSeleccionada("ConsultarEmpresa", null);
     }//GEN-LAST:event_Button_ConsultarEmpresaActionPerformed
 
     private void Button_NuevaEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_NuevaEmpresaActionPerformed

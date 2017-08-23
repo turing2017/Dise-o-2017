@@ -51,6 +51,11 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         });
 
         Button_EliminarEmpresa.setText("Eliminar");
+        Button_EliminarEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_EliminarEmpresaActionPerformed(evt);
+            }
+        });
 
         Button_ModificarEmpresa.setText("Modificar");
         Button_ModificarEmpresa.addActionListener(new java.awt.event.ActionListener() {
@@ -116,17 +121,31 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
     private void Button_ModificarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ModificarEmpresaActionPerformed
         // TODO add your handling code here:
-        /*try{
+        try{
             if(TextField_Nombre.getText().equals("") OR TextField_Direccion.getText().equals("")){
                 TextField_Nombre.setText(null);
                 throw new java.lang.NumberFormatException();
             }
-            ControladorGestionarEmpresaAdherida.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected());    
+            ControladorGestionarEmpresaAdherida.getInstance().modificarDatosEmpresa(TextField_Nombre.getText(), TextField_Cuit.getText(), TextField_Direccion.getText());    
             this.dispose();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
-        }*/
+        }
     }//GEN-LAST:event_Button_ModificarEmpresaActionPerformed
+
+    private void Button_EliminarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EliminarEmpresaActionPerformed
+        // TODO add your handling code here:
+         try{
+            if(TextField_Nombre.getText().equals("") OR TextField_Direccion.getText().equals("")){
+                TextField_Nombre.setText(null);
+                throw new java.lang.NumberFormatException();
+            }
+            ControladorGestionarEmpresaAdherida.getInstance().seleccionarEliminar(TextField_Cuit.getText());    
+            this.dispose();
+        }catch(java.lang.NumberFormatException e){
+            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
+        }
+    }//GEN-LAST:event_Button_EliminarEmpresaActionPerformed
 
     /**
      * @param args the command line arguments

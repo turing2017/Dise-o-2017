@@ -1,11 +1,18 @@
 package sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto;
 
 import exceptions.Excepciones;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 /**
  *
@@ -18,6 +25,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
      */
     public IUGestionarTipoImpuesto() {
         initComponents();
+        obtenerTipoImpuestos();
     }
 
     /**
@@ -29,26 +37,20 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
         label_codigo = new javax.swing.JLabel();
         textfield_codigo = new javax.swing.JTextField();
-        button_consultar = new javax.swing.JButton();
-        button_continuar = new javax.swing.JButton();
+        button_modificar = new javax.swing.JButton();
         button_nuevo = new javax.swing.JButton();
-        separator_horizontal = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla_tipo_impuesto = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        label_codigo.setText("Código Tipo de Impuesto");
+        label_codigo.setText("Modificar TipoImpuesto (código):");
 
-        button_consultar.setText("Consultar");
-        button_consultar.addActionListener(new java.awt.event.ActionListener() {
+        button_modificar.setText("Modificar");
+        button_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_consultarActionPerformed(evt);
-            }
-        });
-
-        button_continuar.setText("Continuar");
-        button_continuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_continuarActionPerformed(evt);
+                button_modificarActionPerformed(evt);
             }
         });
 
@@ -59,47 +61,48 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
 
+        tabla_tipo_impuesto.setEnabled(false);
+        jScrollPane1.setViewportView(tabla_tipo_impuesto);
+
+        jLabel1.setText("TIPOS DE IMPUESTOS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(229, 229, 229))
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(button_consultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(button_continuar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_codigo)
-                        .addGap(58, 58, 58)
-                        .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(126, Short.MAX_VALUE))
-            .addComponent(separator_horizontal)
+                    .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(label_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_codigo)
-                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(button_continuar)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(separator_horizontal, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(button_consultar)
-                            .addComponent(button_nuevo))
-                        .addGap(41, 41, 41))))
+                    .addComponent(button_modificar)
+                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_codigo))
+                .addGap(29, 29, 29)
+                .addComponent(button_nuevo)
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -107,28 +110,23 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
-        // TODO add your handling code here:
+          // TODO add your handling code here:
         // Le paso al controlador la opción seleccionada
-        ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Alta", null);
-        
+        opcionSeleccionada("Alta", null);
+        this.dispose();
     }//GEN-LAST:event_button_nuevoActionPerformed
 
-    private void button_continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_continuarActionPerformed
+    private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
         // TODO add your handling code here:
         // Le paso al controlador la opción seleccionada.
         try{
-            ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Modificar", Integer.parseInt(textfield_codigo.getText()));
+            opcionSeleccionada("Modificar", Integer.parseInt(textfield_codigo.getText()));
+            this.dispose();
         }catch(NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
         }
       
-    }//GEN-LAST:event_button_continuarActionPerformed
-
-    private void button_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_consultarActionPerformed
-        // TODO add your handling code here:
-        // Le paso al controlador la opción seleccionada
-        ControladorGestionarTipoImpuesto.getInstance().opcionSeleccionada("Consultar", null);
-    }//GEN-LAST:event_button_consultarActionPerformed
+    }//GEN-LAST:event_button_modificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +163,41 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
     }
+    
+    // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
+    public void opcionSeleccionada(String opcion, Object object){
+        switch(opcion) {
+        case "Alta" :
+        // Muestro pantalla de Alta
+            IUGestionarTipoImpuestoAlta pantallaAlta = new IUGestionarTipoImpuestoAlta();
+            pantallaAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+            pantallaAlta.setVisible(true); // La hago visible
+        break; // optional
+   
+        case "Modificar" :
+        // Muestro pantalla de Modificación
+            DTOTipoImpuesto dtoTi = ControladorGestionarTipoImpuesto.getInstance().obtenerTipoImpuesto((int) object);
+            if(dtoTi != null){
+                IUGestionarTipoImpuestoModificar pantallaModificar= new IUGestionarTipoImpuestoModificar();
+                pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                pantallaModificar.setVisible(true); // La hago visible
+                pantallaModificar.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
+                pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
+                pantallaModificar.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
+                if(dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto()==null){
+                    pantallaModificar.setCheckbox_Habilitar(true);
+                }else{
+                    pantallaModificar.setCheckbox_Habilitar(false);
+                }
+            }
+            
+        break; // optional
+   
+        // You can have any number of case statements.
+        default : // Optional
+        // Statements
+        }
+    }
 
     
     // Metodo iniciar
@@ -173,17 +206,65 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         ControladorGestionarTipoImpuesto.getInstance().iniciar();
     }
     
-    // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
-    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
-        
+    public void obtenerTipoImpuestos(){
+                // Muestro pantalla de Consultar
+            ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarTipoImpuesto.getInstance().obtenerTipoImpuestos();
+            
+            String [] columnas = {"Codigo", "Nombre","Monto Editable", "Estado"};
+            DefaultTableModel dtm = new DefaultTableModel(null, columnas){
+                 public Class<?> getColumnClass(int column) {
+                      switch (column) {
+                        case 0:
+                            return Integer.class;
+                        case 1:
+                            return String.class;
+                        case 2:
+                            return Boolean.class;
+                        case 3:
+                            return Boolean.class;
+                        default:
+                            return null;
+                    }
+                 }
+                 
+            };
+                
+            
+            for(DTOTipoImpuesto dtoTipoImpuesto :listDtoTipoImpuesto){
+                Vector<Object> vect = new Vector<>();
+                vect.add(dtoTipoImpuesto.getCodigoDTOTipoImpuesto());
+                vect.add(dtoTipoImpuesto.getNombreDTOTipoImpuesto());
+                vect.add(dtoTipoImpuesto.isEsMontoEditableDTOTipoImpuesto());
+
+                if(dtoTipoImpuesto.getFechaHoraInhabilitacionDTOTipoImpuesto()!=null){
+                    vect.add(false);
+                }else{
+                    vect.add(true);                   
+                }                
+                dtm.addRow(vect);
+            }          
+            
+            DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object
+                value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                    table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
+              tabla_tipo_impuesto.setModel(dtm);
+              tabla_tipo_impuesto.getColumnModel().getColumn(0).setCellRenderer(r);
+              tabla_tipo_impuesto.getColumnModel().getColumn(1).setCellRenderer(r);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button_consultar;
-    private javax.swing.JButton button_continuar;
+    private javax.swing.JButton button_modificar;
     private javax.swing.JButton button_nuevo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_codigo;
-    private javax.swing.JSeparator separator_horizontal;
+    private javax.swing.JTable tabla_tipo_impuesto;
     private javax.swing.JTextField textfield_codigo;
     // End of variables declaration//GEN-END:variables
 }

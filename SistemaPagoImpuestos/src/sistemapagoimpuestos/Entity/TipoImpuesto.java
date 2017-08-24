@@ -10,6 +10,18 @@ public class TipoImpuesto extends Entity {
     private boolean esMontoEditableTipoImpuesto;
     private Date fechaHoraInhabilitacionTipoImpuesto;
     private String nombreTipoImpuesto;
+
+    public TipoImpuesto() {
+    }
+
+    public TipoImpuesto(int codigoTipoImpuesto, boolean esMontoEditableTipoImpuesto, Date fechaHoraInhabilitacionTipoImpuesto, String nombreTipoImpuesto) {
+        this.codigoTipoImpuesto = codigoTipoImpuesto;
+        this.esMontoEditableTipoImpuesto = esMontoEditableTipoImpuesto;
+        this.fechaHoraInhabilitacionTipoImpuesto = fechaHoraInhabilitacionTipoImpuesto;
+        this.nombreTipoImpuesto = nombreTipoImpuesto;
+    }
+    
+    
     
     // Setters
     public void setCodigoTipoImpuesto(int codigoTipoImpuesto) {

@@ -10,5 +10,5 @@ package sistemapagoimpuestos.Expert;
  * @author mvissio
  */
 public class ExpertoPagarImpuestos {
-    
+    //public 
 }

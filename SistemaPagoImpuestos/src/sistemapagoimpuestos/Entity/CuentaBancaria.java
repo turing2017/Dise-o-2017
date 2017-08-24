@@ -13,6 +13,20 @@ public class CuentaBancaria extends Entity {
     // Atributos dados por relación
     private TipoCuenta tipoCuenta;
     private Cliente cliente;
+
+    public CuentaBancaria() {
+    }
+
+    public CuentaBancaria(String nroCuentaBancaria, String cbuCuentaBancaria, Date fechaInhabilitacionCuentaBancaria, TipoCuenta tipoCuenta, Cliente cliente) {
+        this.nroCuentaBancaria = nroCuentaBancaria;
+        this.cbuCuentaBancaria = cbuCuentaBancaria;
+        this.fechaInhabilitacionCuentaBancaria = fechaInhabilitacionCuentaBancaria;
+        this.tipoCuenta = tipoCuenta;
+        this.cliente = cliente;
+    }
+    
+    
+    
     
     // Setters
     public void setNroCuentaBancaria(String nroCuentaBancaria) {

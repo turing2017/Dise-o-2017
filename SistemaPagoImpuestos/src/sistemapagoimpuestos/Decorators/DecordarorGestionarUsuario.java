@@ -12,4 +12,13 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 
 public class DecordarorGestionarUsuario extends ExpertoGestionarUsuario {
     
+//        @Override
+//    public String iniciar() {
+//        FachadaInterna.getInstance().iniciarTransaccion();
+//        String role = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
+//        FachadaInterna.getInstance().finalizarTransaccion();
+//        return role;
+//    
+//    
+    
 }

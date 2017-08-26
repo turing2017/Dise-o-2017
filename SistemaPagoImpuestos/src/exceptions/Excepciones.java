@@ -75,4 +75,11 @@ public class Excepciones extends Exception{
         edne.setLabel_mensaje("El "+objeto+" ingresado ya existe");
         edne.setVisible(true);
     }
+    
+    public void objetoNoSeleccionado(){
+        ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("No ha efectuado selección");
+        edne.setLabel_mensaje("Debe realizar una selección");
+        edne.setVisible(true);
+    }
 }

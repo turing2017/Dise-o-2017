@@ -20,10 +20,14 @@ public class EmpresaTipoImpuesto extends Entity{
     public EmpresaTipoImpuesto() {
     }
 
-    public EmpresaTipoImpuesto(String urlConexionEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto) {
+    public EmpresaTipoImpuesto(String urlConexionEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa) {
         this.urlConexionEmpresaTipoImpuesto = urlConexionEmpresaTipoImpuesto;
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
+        this.tipoImpuesto = tipoImpuesto;
+        this.empresa = empresa;
     }
+
+  
 
     public String getUrlConexionEmpresaTipoImpuesto() {
         return urlConexionEmpresaTipoImpuesto;

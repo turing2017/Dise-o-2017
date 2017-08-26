@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
@@ -58,6 +59,10 @@ public class ControladorGestionarTipoImpuesto {
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
         return  experto.obtenerTipoImpuestos();
+    }
+    
+    public ArrayList<DTOEmpresaItem> obtenerEmpresaItem(){
+        return experto.obtenerEmpresaItem();
     }
     
     // Metodo para recuperar el TipoImpuesto a modificar

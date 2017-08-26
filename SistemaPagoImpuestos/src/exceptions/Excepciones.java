@@ -69,7 +69,7 @@ public class Excepciones extends Exception{
         edne.setVisible(true); 
     }
     
-    public static void objetoExistente(String objeto){
+    public void objetoExistente(String objeto){
         ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
         edne.setLabel_title("Error: Registro Existente");            
         edne.setLabel_mensaje("El "+objeto+" ingresado ya existe");

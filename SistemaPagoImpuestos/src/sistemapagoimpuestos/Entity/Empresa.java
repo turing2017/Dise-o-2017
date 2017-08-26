@@ -17,12 +17,15 @@ public class Empresa extends Entity {
     public Empresa() {
     }
 
-    public Empresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, Date fechaHoraInhabilitacionEmpresa) {
+    public Empresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, Date fechaHoraInhabilitacionEmpresa, TipoEmpresa tipoEmpresa) {
         this.cuitEmpresa = cuitEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.direccionEmpresa = direccionEmpresa;
         this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
+        this.tipoEmpresa = tipoEmpresa;
     }
+
+
     
     
     

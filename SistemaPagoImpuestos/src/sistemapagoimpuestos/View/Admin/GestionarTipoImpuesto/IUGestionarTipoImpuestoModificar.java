@@ -1,10 +1,16 @@
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import exceptions.Excepciones;
+import java.awt.Component;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
@@ -36,6 +42,8 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         checkbox_esEditable = new javax.swing.JCheckBox();
         button_modificar = new javax.swing.JButton();
         nombre_actual = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla_empresa_item = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,46 +71,66 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         nombre_actual.setForeground(new java.awt.Color(240, 240, 240));
         nombre_actual.setText("nombreActual");
 
+        tabla_empresa_item.setEnabled(false);
+        jScrollPane1.setViewportView(tabla_empresa_item);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(218, 218, 218)
+                                .addComponent(button_modificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nombre_actual)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkbox_esEditable))
+                            .addComponent(checkbox_habilitado))
+                        .addGap(138, 138, 138))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(button_modificar)
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_nombre)
-                            .addComponent(label_deshabilitar)
-                            .addComponent(label_esEditable))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkbox_esEditable)
-                            .addComponent(checkbox_habilitado)
-                            .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nombre_actual)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(label_esEditable)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label_deshabilitar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label_nombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_nombre)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nombre_actual)))
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_deshabilitar)
-                    .addComponent(checkbox_habilitado))
-                .addGap(25, 25, 25)
+                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_nombre))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_esEditable)
+                    .addComponent(checkbox_habilitado)
+                    .addComponent(label_deshabilitar))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nombre_actual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label_esEditable))
                     .addComponent(checkbox_esEditable))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addComponent(button_modificar)
                 .addGap(52, 52, 52))
         );
@@ -171,6 +199,57 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             }
         });
     }
+    
+        public void obtenerTipoImpuestos() {
+        // Muestro pantalla de Consultar
+        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarTipoImpuesto.getInstance().obtenerTipoImpuestos();
+
+        String[] columnas = {"Empresa", "Items", "Acciones"};
+        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return String.class;
+                    case 2:
+                        return Boolean.class;
+                    case 3:
+                        return Boolean.class;
+                    default:
+                        return null;
+                }
+            }
+
+        };
+
+        for (DTOTipoImpuesto dtoTipoImpuesto : listDtoTipoImpuesto) {
+            Vector<Object> vect = new Vector<>();
+            vect.add(dtoTipoImpuesto.getCodigoDTOTipoImpuesto());
+            vect.add(dtoTipoImpuesto.getNombreDTOTipoImpuesto());
+            vect.add(dtoTipoImpuesto.isEsMontoEditableDTOTipoImpuesto());
+
+            if (dtoTipoImpuesto.getFechaHoraInhabilitacionDTOTipoImpuesto() != null) {
+                vect.add(false);
+            } else {
+                vect.add(true);
+            }
+            dtm.addRow(vect);
+        }
+
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
+        tabla_empresa_item.setModel(dtm);
+        tabla_empresa_item.getColumnModel().getColumn(0).setCellRenderer(r);
+        tabla_empresa_item.getColumnModel().getColumn(1).setCellRenderer(r);
+    }
+    
     // Getters
 
     public String getTextfield_nombre() {
@@ -210,10 +289,12 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
     private javax.swing.JButton button_modificar;
     private javax.swing.JCheckBox checkbox_esEditable;
     private javax.swing.JCheckBox checkbox_habilitado;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_deshabilitar;
     private javax.swing.JLabel label_esEditable;
     private javax.swing.JLabel label_nombre;
     private javax.swing.JLabel nombre_actual;
+    private javax.swing.JTable tabla_empresa_item;
     private javax.swing.JTextField textfield_nombre;
     // End of variables declaration//GEN-END:variables
 }

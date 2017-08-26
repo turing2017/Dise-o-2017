@@ -15,9 +15,6 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuesto;
-import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuestoAlta;
-import sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto.IUGestionarTipoImpuestoModificar;
 
 
 public class ControladorGestionarTipoImpuesto {

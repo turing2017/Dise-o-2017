@@ -12,8 +12,8 @@ import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import java.util.Date;
-import sistemapagoimpuestos.Dto.DTOConsultarEmpresasExistentes;
-import sistemapagoimpuestos.Dto.DTOConsultarEmpresasInhabilitadas;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
 import sistemapagoimpuestos.Dto.DTOEmpresaHabilitada;
 import sistemapagoimpuestos.Dto.DTOEmpresaInhabilitada;
 
@@ -22,6 +22,8 @@ import sistemapagoimpuestos.Dto.DTOEmpresaInhabilitada;
  * @author Tongas
  */
 public class ExpertoGestionarEmpresaAdherida {
+    
+    private Empresa empresa;
 
     public String iniciar() {
 
@@ -41,7 +43,7 @@ public class ExpertoGestionarEmpresaAdherida {
             DTOCriterio criterio1 = new DTOCriterio();
             criterio1.setAtributo("fechaHoraInhabilitacionEmpresa");
             criterio1.setOperacion("=");
-            criterio1.setValor(null);
+            criterio1.setValor("");
             criterios.add(criterio1);
             //Se arma el criterio de busqueda para la condicion fechaHoraInhabilitacionEmpresa = null
             DTOCriterio criterio2 = new DTOCriterio();
@@ -60,6 +62,8 @@ public class ExpertoGestionarEmpresaAdherida {
             empresa.setDireccionEmpresa(direccionEmpresa);
             empresa.setFechaHoraInhabilitacionEmpresa(null);
             FachadaPersistencia.getInstance().guardar(empresa);
+            System.out.println("La empresa fue creada con éxito");
+           
         }
 
     }
@@ -95,7 +99,7 @@ public class ExpertoGestionarEmpresaAdherida {
         return listDTOEmpresaExistente;
     }
 
-    public void modificarDatosEmpresa(String nombreEmpresa, String cuitEmpresa, String direccionEmpresa) {
+    public void modificarDatosEmpresa(String cuitEmpresa) {
 
         List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();
@@ -103,32 +107,35 @@ public class ExpertoGestionarEmpresaAdherida {
         criterio1.setOperacion("=");
         criterio1.setValor(cuitEmpresa);
         criterios.add(criterio1);
-        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+        empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
 
+        String cuit = empresa.getCuitEmpresa();
+        String nombre = empresa.getNombreEmpresa();
+        String direccion = empresa.getDireccionEmpresa();
+        
+        ControladorGestionarEmpresaAdherida.getInstance().modificarDatosEmpresa(cuit, nombre, direccion);
+    
+    }
+    
+    public void seleccionarModificar (String nombreEmpresa, String direccionEmpresa){
         empresa.setNombreEmpresa(nombreEmpresa);
         empresa.setDireccionEmpresa(direccionEmpresa);
         FachadaPersistencia.getInstance().guardar(empresa);
-
-        //¿como seria para que el experto recuerde la empresa y asi evitar esta busqueda?
+        System.out.print("La modificación se realizó con éxito");
+        
     }
 
     public void seleccionarEliminar(String cuitEmpresa) {
 
-        List<DTOCriterio> criterios = new ArrayList<>();
-        DTOCriterio criterio1 = new DTOCriterio();
-        criterio1.setAtributo("cuitEmpresa");
-        criterio1.setOperacion("=");
-        criterio1.setValor(cuitEmpresa);
-        criterios.add(criterio1);
-        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
         java.util.Date fechaActual = new Date();
         empresa.setFechaHoraInhabilitacionEmpresa(fechaActual);
         FachadaPersistencia.getInstance().guardar(empresa);
+        System.out.print("La empresa fue eliminada con exito");
 
     }
 
-    public void ingresarOpcion(String opcion) {
-        if (opcion == "EmpresasExistentes") {
+    public DTOConsultarEmpresas ingresarOpcion(String opcion) {
+        if ("EmpresasExistentes".equals(opcion)) {
 
             List<DTOCriterio> criterios = new ArrayList<>();
             DTOCriterio criterio1 = new DTOCriterio();
@@ -138,7 +145,7 @@ public class ExpertoGestionarEmpresaAdherida {
             criterios.add(criterio1);
             List<Empresa> listaEmpresa = (List<Empresa>) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
 
-            DTOConsultarEmpresasExistentes dtoConsultarEmp = new DTOConsultarEmpresasExistentes();
+            DTOConsultarEmpresas dtoConsultarEmp = new DTOConsultarEmpresas();
 
             for (int i = 0; i < listaEmpresa.size(); i++) {
                 DTOEmpresaHabilitada dtoEmp = new DTOEmpresaHabilitada();
@@ -147,6 +154,7 @@ public class ExpertoGestionarEmpresaAdherida {
                 dtoEmp.setDireccionEmpresa(listaEmpresa.get(i).getDireccionEmpresa());
                 dtoConsultarEmp.add(dtoEmp);
             }
+            return dtoConsultarEmp;
 
         } else {
             List<DTOCriterio> criterios = new ArrayList<>();
@@ -157,7 +165,7 @@ public class ExpertoGestionarEmpresaAdherida {
             criterios.add(criterio1);
             List<Empresa> listaEmpresa = (List<Empresa>) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
 
-            DTOConsultarEmpresasInhabilitadas dtoConsultarEmpIn = new DTOConsultarEmpresasInhabilitadas();
+           DTOConsultarEmpresas dtoConsultarEmp = new DTOConsultarEmpresas();
 
             for (int i = 0; i < listaEmpresa.size(); i++) {
                 DTOEmpresaInhabilitada dtoEmpIn = new DTOEmpresaInhabilitada();
@@ -165,8 +173,9 @@ public class ExpertoGestionarEmpresaAdherida {
                 dtoEmpIn.setNombreEmpresa(listaEmpresa.get(i).getNombreEmpresa());
                 dtoEmpIn.setDireccionEmpresa(listaEmpresa.get(i).getDireccionEmpresa());
                 dtoEmpIn.setFechaHoraInhabilitacionEmpresa(listaEmpresa.get(i).getFechaHoraInhabilitacionEmpresa());
-                dtoConsultarEmpIn.add(dtoEmpIn);
+                dtoConsultarEmp.add(dtoEmpIn);
             }
+            return dtoConsultarEmp;
         }
     }
 }

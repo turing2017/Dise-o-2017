@@ -12,13 +12,28 @@ import java.util.List;
  *
  * @author Tongas
  */
-public class DTOConsultarEmpresasExistentes {
+public class DTOConsultarEmpresas {
     
     private List<DTOEmpresaHabilitada> listaDTOEmpresaHabilitada;
+    private List<DTOEmpresaInhabilitada> listaDTOEmpresaInhabilitada;
 
     public boolean add(DTOEmpresaHabilitada e) {
         return listaDTOEmpresaHabilitada.add(e);
     }
+
+    public boolean add(DTOEmpresaInhabilitada e) {
+        return listaDTOEmpresaInhabilitada.add(e);
+    }
+
+    public List<DTOEmpresaHabilitada> getListaDTOEmpresaHabilitada() {
+        return listaDTOEmpresaHabilitada;
+    }
+
+    public List<DTOEmpresaInhabilitada> getListaDTOEmpresaInhabilitada() {
+        return listaDTOEmpresaInhabilitada;
+    }
+    
+    
 
     
     

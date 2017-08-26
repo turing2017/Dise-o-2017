@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.View.Admin;
 
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
 
 /**
  *
@@ -87,7 +88,10 @@ public class IUGestionarEmpresaAdheridaConsultarEmpresa extends javax.swing.JFra
 
     private void Button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_AceptarActionPerformed
         // TODO add your handling code here:
-        ControladorGestionarEmpresaAdherida.getInstance().ingresarOpcion(ComboBox_OpcionEmpresa.getSelectedItem().toString());
+        Object o;
+        o = ControladorGestionarEmpresaAdherida.getInstance().ingresarOpcion(ComboBox_OpcionEmpresa.getSelectedItem().toString());
+        ControladorGestionarEmpresaAdherida.getInstance().mostrarConsulta((DTOConsultarEmpresas) o);
+        
     }//GEN-LAST:event_Button_AceptarActionPerformed
 
     /**

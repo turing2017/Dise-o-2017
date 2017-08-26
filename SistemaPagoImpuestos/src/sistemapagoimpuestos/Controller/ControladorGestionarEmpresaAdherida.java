@@ -12,9 +12,13 @@ import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaNueva;
 import java.lang.String;
+import java.util.Vector;
+import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdherida;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaConsultarEmpresa;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaModificacion;
+import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaMuestra;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Tongas
@@ -57,27 +61,11 @@ public class ControladorGestionarEmpresaAdherida {
         
         case "Modificar" :
         // Muestro pantalla de Modificación
-            DTOEmpresaExistente dtoEmpresaExistente = obtenerEmpresa ((int) object);
-            if(dtoEmpresaExistente != null){
-                IUGestionarEmpresaAdheridaModificacion pantallaModificar= new IUGestionarEmpresaAdheridaModificacion();
-                pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-                pantallaModificar.setVisible(true); // La hago visible
-                pantallaModificar.setTextField_Nombre(dtoEmpresaExistente.getNombreEmpresa());
-                pantallaModificar.setTextField_Direccion(dtoEmpresaExistente.getDireccionEmpresa();
-                pantallaModificar.setTextField_Cuit(dtoEmpresaExistente.getCuitEmpresa();
-             //   TextField_Cuit.setEditable(false);//hay que ver como se bloquea una vez que lo trae de la bd
-            //    TextField_Cuit.setEnabled(false);
-                
-           
+            experto.modificarDatosEmpresa(object.toString());
+  
         break; // optional
         
-       
-    //crea una empresa
-    /*public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
-        experto.ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa);
-    }*/
-    
-            }
+            
         case "ConsultarEmpresa" :
         IUGestionarEmpresaAdheridaConsultarEmpresa pantallaConsultarEmpresa = new IUGestionarEmpresaAdheridaConsultarEmpresa();
         pantallaConsultarEmpresa.setVisible(true);
@@ -86,18 +74,43 @@ public class ControladorGestionarEmpresaAdherida {
     }
     public void modificarDatosEmpresa (String nombreEmpresa, String cuitEmpresa, String direccionEmpresa){
         
-    experto.modificarDatosEmpresa(nombreEmpresa, cuitEmpresa, direccionEmpresa);
+        IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion();
+            
         
+    }
+    
+    public void seleccionarModificar (String nombreEmpresa, String direccionEmpresa) {
+    
+        experto.seleccionarModificar(nombreEmpresa, direccionEmpresa);
     }
     
     public void seleccionarEliminar (String cuitEmpresa){
         experto.seleccionarEliminar(cuitEmpresa);
     }
     
-    public void ingresarOpcion (String opcion){
+    public DTOConsultarEmpresas ingresarOpcion (String opcion){
         
-        experto.ingresarOpcion(opcion);
+        return experto.ingresarOpcion(opcion);
+        
+    }
     
+    public void mostrarConsulta (DTOConsultarEmpresas dto){
+        
+        IUGestionarEmpresaAdheridaMuestra pantallaMuestra = new IUGestionarEmpresaAdheridaMuestra();
+        dto.getListaDTOEmpresaHabilitada();
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        for (int i=0; i <= dto.getListaDTOEmpresaHabilitada().size(); i++){
+            
+            //modelo.addRow((Vector) dto.getListaDTOEmpresaHabilitada().get(i)); 
+            
+        }
+     
+    
+    }
+    
+    public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
+        experto.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa);
     }
     
 }

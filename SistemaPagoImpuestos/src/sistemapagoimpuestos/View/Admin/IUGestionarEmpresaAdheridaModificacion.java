@@ -5,6 +5,13 @@
  */
 package sistemapagoimpuestos.View.Admin;
 
+import static antlr.ANTLRTokenTypes.OR;
+import exceptions.Excepciones;
+import java.util.Arrays;
+import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
+import static org.hibernate.criterion.Junction.Nature.OR;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+
 /**
  *
  * @author Tongas
@@ -122,11 +129,11 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private void Button_ModificarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ModificarEmpresaActionPerformed
         // TODO add your handling code here:
         try{
-            if(TextField_Nombre.getText().equals("") OR TextField_Direccion.getText().equals("")){
+            if(TextField_Nombre.getText().equals("") || TextField_Direccion.getText().equals("")){
                 TextField_Nombre.setText(null);
                 throw new java.lang.NumberFormatException();
             }
-            ControladorGestionarEmpresaAdherida.getInstance().modificarDatosEmpresa(TextField_Nombre.getText(), TextField_Cuit.getText(), TextField_Direccion.getText());    
+            ControladorGestionarEmpresaAdherida.getInstance().seleccionarModificar(TextField_Nombre.getText(), TextField_Direccion.getText());
             this.dispose();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
@@ -136,7 +143,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private void Button_EliminarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EliminarEmpresaActionPerformed
         // TODO add your handling code here:
          try{
-            if(TextField_Nombre.getText().equals("") OR TextField_Direccion.getText().equals("")){
+            if(TextField_Nombre.getText().equals("") || TextField_Direccion.getText().equals("")){
                 TextField_Nombre.setText(null);
                 throw new java.lang.NumberFormatException();
             }
@@ -145,6 +152,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
+         this.dispose();
     }//GEN-LAST:event_Button_EliminarEmpresaActionPerformed
 
     /**

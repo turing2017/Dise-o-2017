@@ -6,13 +6,15 @@ import java.util.Date;
  *
  * @author lunamarcos
  */
-public class Empresa {
+public class Empresa extends Entity{
     
     // Atributos propios de la clase
     private String cuitEmpresa;
     private String nombreEmpresa;
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
+    
+    
     
     // Setters
     public void setCuitEmpresa(String cuitEmpresa) {

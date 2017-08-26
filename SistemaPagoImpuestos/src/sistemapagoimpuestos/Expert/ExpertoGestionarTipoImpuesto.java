@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
+import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
@@ -120,5 +121,22 @@ public class ExpertoGestionarTipoImpuesto {
         }
         FachadaPersistencia.getInstance().guardar(tipoImpuesto);
         System.out.println("Guardando en la DB: " + tipoImpuesto.getNombreTipoImpuesto());
+    }
+    
+    public ArrayList<DTOEmpresaItem> obtenerEmpresaItem(){
+        List<Object> listEmpresa =  FachadaPersistencia.getInstance().buscar("Empresa", null);
+        List<Object> listItem =  FachadaPersistencia.getInstance().buscar("Empresa", null);
+
+        ArrayList<DTOEmpresaItem> listDtoTipoImpuesto = new ArrayList<DTOEmpresaItem>();
+        for(Object obj : listEmpresa){
+            TipoImpuesto tipoImpuesto = (TipoImpuesto) obj;
+            DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto();
+            dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
+            dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
+            dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
+            dtoTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
+            //listDtoTipoImpuesto.add(dtoTipoImpuesto);
+        }
+        return listDtoTipoImpuesto;
     }
 }

@@ -20,10 +20,13 @@ public class ItemEmpresaTipoImpuesto extends Entity{
     public ItemEmpresaTipoImpuesto() {
     }
 
-    public ItemEmpresaTipoImpuesto(int ordenItemEmpresaTipoImpuesto, Date fechaInhabilitacionItemEmpresaTipoImpuesto) {
+    public ItemEmpresaTipoImpuesto(int ordenItemEmpresaTipoImpuesto, Date fechaInhabilitacionItemEmpresaTipoImpuesto, Item item, EmpresaTipoImpuesto empresaTipoImpuesto) {
         this.ordenItemEmpresaTipoImpuesto = ordenItemEmpresaTipoImpuesto;
         this.fechaInhabilitacionItemEmpresaTipoImpuesto = fechaInhabilitacionItemEmpresaTipoImpuesto;
+        this.item = item;
+        this.empresaTipoImpuesto = empresaTipoImpuesto;
     }
+ 
 
     public int getOrdenItemEmpresaTipoImpuesto() {
         return ordenItemEmpresaTipoImpuesto;

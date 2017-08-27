@@ -27,8 +27,9 @@ public class Item extends Entity{
         this.fechaHoraInhabilitacionItem = fechaHoraInhabilitacionItem;
         this.tipoDatoItem = tipoDatoItem;
     }
-    
 
+    public Item() {
+    }
 
     public String getCodigoItem() {
         return codigoItem;

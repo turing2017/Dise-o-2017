@@ -5,47 +5,59 @@
  */
 package sistemapagoimpuestos.Dto;
 
+import java.time.Instant;
+import java.util.Date;
+import sistemapagoimpuestos.Entity.Item;
+import sistemapagoimpuestos.Entity.TipoDatoItem;
+
 /**
  *
- * @author Markz
+ * @author Maximiliano
  */
-public class DTOEmpresa {
-    private String cuitEmpresa;
-    private String nombreEmpresa;
-    private String direccionEmpresa;
+public class DTOEmpresa { 
 
-    public DTOEmpresa() {
-    }
-
-    public DTOEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa) {
-        this.cuitEmpresa = cuitEmpresa;
-        this.nombreEmpresa = nombreEmpresa;
-        this.direccionEmpresa = direccionEmpresa;
-    }
-
-    public String getCuitEmpresa() {
-        return cuitEmpresa;
-    }
-
-    public void setCuitEmpresa(String cuitEmpresa) {
-        this.cuitEmpresa = cuitEmpresa;
-    }
-
-    public String getNombreEmpresa() {
-        return nombreEmpresa;
-    }
-
-    public void setNombreEmpresa(String nombreEmpresa) {
-        this.nombreEmpresa = nombreEmpresa;
-    }
-
-    public String getDireccionEmpresa() {
-        return direccionEmpresa;
-    }
-
-    public void setDireccionEmpresa(String direccionEmpresa) {
-        this.direccionEmpresa = direccionEmpresa;
+    public DTOEmpresa(String cuitDTOEmpresa, String direccionDTOEmpresa, Date fechaHoraInhabilitacionDTOEmpresa, String nombreDTOEmpresa) {
+        this.cuitDTOEmpresa = cuitDTOEmpresa;
+        this.direccionDTOEmpresa = direccionDTOEmpresa;
+        this.fechaHoraInhabilitacionDTOEmpresa = fechaHoraInhabilitacionDTOEmpresa;
+        this.nombreDTOEmpresa = nombreDTOEmpresa;
     }
     
+    private String cuitDTOEmpresa;
+    private String direccionDTOEmpresa;
+    private Date fechaHoraInhabilitacionDTOEmpresa;
+    private String nombreDTOEmpresa;
+
+    public String getCuitDTOEmpresa() {
+        return cuitDTOEmpresa;
+    }
+
+    public void setCuitDTOEmpresa(String cuitDTOEmpresa) {
+        this.cuitDTOEmpresa = cuitDTOEmpresa;
+    }
+
+    public String getDireccionDTOEmpresa() {
+        return direccionDTOEmpresa;
+    }
+
+    public void setDireccionDTOEmpresa(String direccionDTOEmpresa) {
+        this.direccionDTOEmpresa = direccionDTOEmpresa;
+    }
+
+    public Date getFechaHoraInhabilitacionDTOEmpresa() {
+        return fechaHoraInhabilitacionDTOEmpresa;
+    }
+
+    public void setFechaHoraInhabilitacionDTOEmpresa(Date fechaHoraInhabilitacionDTOEmpresa) {
+        this.fechaHoraInhabilitacionDTOEmpresa = fechaHoraInhabilitacionDTOEmpresa;
+    }
+
+    public String getNombreDTOEmpresa() {
+        return nombreDTOEmpresa;
+    }
+
+    public void setNombreDTOEmpresa(String nombreDTOEmpresa) {
+        this.nombreDTOEmpresa = nombreDTOEmpresa;
+    }  
     
 }

@@ -2,17 +2,8 @@ package sistemapagoimpuestos.Controller;
 
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaTipoImpuesto.AdminMenu;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author mvissio
- */
 public class ControladorGestionarEmpresaTipoImpuesto {
     private static ControladorGestionarEmpresaTipoImpuesto controladorGestionarEmpresaTipoImpuesto;
     private ExpertoGestionarEmpresaTipoImpuesto experto = (ExpertoGestionarEmpresaTipoImpuesto) FabricaExpertos.getInstancia().crearExperto("CU15");
@@ -31,5 +22,10 @@ public class ControladorGestionarEmpresaTipoImpuesto {
     
     public void iniciar(){
         System.out.println(experto.iniciar());
+        if ("Administrador".equals(experto.iniciar())){
+            AdminMenu pantallaPrincipal = new AdminMenu();
+            pantallaPrincipal.setVisible(true);
+        }
     }
+    
 }

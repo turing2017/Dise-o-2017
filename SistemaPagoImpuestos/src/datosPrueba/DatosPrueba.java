@@ -5,6 +5,7 @@
  */
 package datosPrueba;
 
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
@@ -50,19 +51,21 @@ public class DatosPrueba {
     public static void generarEmpresaTipoImpuesto(){
         List<Object> listEmpresaObject =  FachadaPersistencia.getInstance().buscar("Empresa", null);
         Object tipoImpuestoObject =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null).get(0);
+        Object tipoEmpresaObject =  FachadaPersistencia.getInstance().buscar("TipoEmpresa", null).get(0);
 
         int couter = 0;
 
-        for(Object tipoEmpresaObject : listEmpresaObject){
-            Empresa empresa = (Empresa)tipoEmpresaObject;
+        for(Object empresaObject : listEmpresaObject){
+            Empresa empresa = (Empresa)empresaObject;
+            TipoEmpresa tipoEmpresa = (TipoEmpresa) tipoEmpresaObject;
             TipoImpuesto tipoImpuesto = (TipoImpuesto) tipoImpuestoObject;
             if(couter > 0){
-                EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto("url 2", null, tipoImpuesto , empresa);
+                EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto(new Date(), null, 2, tipoImpuesto, empresa, tipoEmpresa);
                 FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
                 break;
             }
             
-            EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto("url 1", null, tipoImpuesto , empresa);
+            EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto(new Date(), null, 2, tipoImpuesto, empresa, tipoEmpresa);
             FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
             couter++ ;
         }
@@ -81,13 +84,13 @@ public class DatosPrueba {
         for(Object tipoEmpresaObject : listTipoEmpresa){
             TipoEmpresa tipoEmpresa = (TipoEmpresa)tipoEmpresaObject;
             if(couter > 0){
-                Empresa  empresa3 =new Empresa("23-85562343-3", "Empresa 3", "Direccion Empresa 3", null, tipoEmpresa);
+                Empresa  empresa3 =new Empresa("23-85562343-3", "Empresa 3", "Direccion Empresa 3", null);
                 FachadaPersistencia.getInstance().guardar(empresa3);
                 break;
             }
 
-            Empresa  empresa1 =new Empresa("23-85562365-3", "Empresa 1", "Direccion Empresa 1", null, tipoEmpresa);
-            Empresa  empresa2 =new Empresa("23-85562323-3", "Empresa 2", "Direccion Empresa 2", null, tipoEmpresa);
+            Empresa  empresa1 =new Empresa("23-85562365-3", "Empresa 1", "Direccion Empresa 1", null);
+            Empresa  empresa2 =new Empresa("23-85562323-3", "Empresa 2", "Direccion Empresa 2", null);
             FachadaPersistencia.getInstance().guardar(empresa1);
             FachadaPersistencia.getInstance().guardar(empresa2);
             couter++ ;

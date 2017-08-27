@@ -78,5 +78,6 @@ public class EmpresaTipoImpuesto extends Entity{
     public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
         this.tipoEmpresa = tipoEmpresa;
     }
+
     
 }

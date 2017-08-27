@@ -14,7 +14,6 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpresaTipoImpuesto{
 
-    @Override
     public String iniciar() {
         FachadaInterna.getInstance().iniciarTransaccion();
         String tempString = super.iniciar(); //To change body of generated methods, choose Tools | Templates.

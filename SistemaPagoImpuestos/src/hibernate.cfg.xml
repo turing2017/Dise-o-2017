@@ -15,7 +15,6 @@
     <mapping resource="sistemapagoimpuestos/hibernate/tipoImpuesto.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/usuario.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/tipoCuenta.hbm.xml"/>
-    <mapping resource="sistemapagoimpuestos/hibernate/Periodicidad.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/tipoDatoItem.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/parametroSistema.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/empresa.hbm.xml"/>
@@ -28,7 +27,9 @@
     <mapping resource="sistemapagoimpuestos/hibernate/EstadoSincronizacionCuentaCliente.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/sincronizacionCuentaCliente.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/empresaTipoImpuesto.hbm.xml"/>
-    <mapping resource="sistemapagoimpuestos/hibernate/liquidacionEmpresa.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/liquidacion.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/operacion.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/estadoLiquidacion.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/liquidacionEstado.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -23,7 +23,6 @@
         <property name="fechaHoraInhabilitacionCliente" type="timestamp">
             <column name="fechaHoraInhabilitacionCliente"/>
         </property>
-        <one-to-one name="usuario" class="sistemapagoimpuestos.Entity.Usuario" constrained="true" ></one-to-one>
 
     </class>
 </hibernate-mapping>

@@ -13,7 +13,6 @@ public class Empresa extends Entity {
     private String nombreEmpresa;
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
-    private TipoEmpresa tipoEmpresa;
     public Empresa() {
     }
 
@@ -23,8 +22,7 @@ public class Empresa extends Entity {
         this.direccionEmpresa = direccionEmpresa;
         this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
     }
-    
-    
+
     
     // Setters
     public void setCuitEmpresa(String cuitEmpresa) {
@@ -58,14 +56,6 @@ public class Empresa extends Entity {
 
     public Date getFechaHoraInhabilitacionEmpresa() {
         return fechaHoraInhabilitacionEmpresa;
-    }
-
-    public TipoEmpresa getTipoEmpresa() {
-        return tipoEmpresa;
-    }
-
-    public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
-        this.tipoEmpresa = tipoEmpresa;
     }
     
 }

@@ -31,6 +31,7 @@
         <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
         <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto" not-null="true"/>
         <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true"/>
+        <many-to-one name="detalleOperacion" class="sistemapagoimpuestos.Entity.DetalleOperacion" column="OIDDetalleOperacion" not-null="true"/>
         <set name="listDetalleOperacion" table="list_detalle_operacion" inverse="true" lazy="true" fetch="select" >             
             <key column="OIDDetalleOperacion" not-null="true" />             
             <one-to-many class="sistemapagoimpuestos.Entity.DetalleOperacion"/>         

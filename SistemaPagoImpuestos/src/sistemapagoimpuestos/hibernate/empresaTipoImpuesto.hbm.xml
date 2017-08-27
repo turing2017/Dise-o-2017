@@ -6,13 +6,17 @@
             <column name="OIDEmpresaTipoImpuesto"/>
             <generator class="uuid2"/>
         </id>
-        <property name="urlConexionEmpresaTipoImpuesto" type="string" unique="true" not-null="true">
-           <column name="urlConexionEmpresaTipoImpuesto"/>
-        </property>    
+        <property name="fechaHoraAltaEmpresaTipoImpuesto" type="timestamp">
+           <column name="fechaHoraAltaEmpresaTipoImpuesto"/>
+        </property>
         <property name="fechaHoraInhabilitacionEmpresaTipoImpuesto" type="timestamp">
            <column name="fechaHoraInhabilitacionEmpresaTipoImpuesto"/>
-        </property>    
+        </property>
+        <property name="frecuenciaLiquidacionEmpresaTipoImpuesto" type="int">
+           <column name="frecuenciaLiquidacionEmpresaTipoImpuesto"/>
+        </property>
         <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true"/>
         <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
+        <many-to-one name="tipoEmpresa" class="sistemapagoimpuestos.Entity.TipoEmpresa" column="OIDTipoEmpresa" not-null="true"/>
     </class>
 </hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="sistemapagoimpuestos.Entity.Liquidacion" table="liquidacion">
+    <id name="OID" type="string">
+      <column name="OIDLiquidacion"/>
+      <generator class="uuid2"/>
+    </id>
+    <property name="numeroLiquidacion" not-null="true" type="int" unique="true">
+      <column name="numeroLiquidacion"/>
+    </property>
+    
+    <property name="fechaHoraLiquidacion" type="timestamp">
+      <column name="fechaHoraLiquidacion"/>
+    </property>
+    
+    <property name="fechaHoraDesdeLiquidacion" type="timestamp">
+      <column name="fechaHoraDesdeLiquidacion"/>
+    </property>
+    
+    <property name="fechaHoraHastaLiquidacion" type="timestamp">
+      <column name="fechaHoraHastaLiquidacion"/>
+    </property>
+    
+    <many-to-one name="operacion" class="sistemapagoimpuestos.Entity.Operacion" column="OIDOperacion" not-null="true"/>
+    <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto"/>
+    <many-to-one name="liquidacionEstado" class="sistemapagoimpuestos.Entity.LiquidacionEstado" column="OIDLiquidacionEstado" not-null="true"/>
+  </class>
+</hibernate-mapping>

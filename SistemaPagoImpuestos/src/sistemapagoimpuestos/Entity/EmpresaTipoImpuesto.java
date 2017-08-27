@@ -12,25 +12,31 @@ import java.util.Date;
  * @author mvissio
  */
 public class EmpresaTipoImpuesto extends Entity{
-    private String urlConexionEmpresaTipoImpuesto;
+    private Date fechaHoraAltaEmpresaTipoImpuesto;
     private Date fechaHoraInhabilitacionEmpresaTipoImpuesto;
+    private int frecuenciaLiquidacionEmpresaTipoImpuesto;
     private TipoImpuesto tipoImpuesto;
     private Empresa empresa;
+    private TipoEmpresa tipoEmpresa;
 
     public EmpresaTipoImpuesto() {
     }
 
-    public EmpresaTipoImpuesto(String urlConexionEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto) {
-        this.urlConexionEmpresaTipoImpuesto = urlConexionEmpresaTipoImpuesto;
+    public EmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, int frecuenciaLiquidacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa, TipoEmpresa tipoEmpresa) {
+        this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
+        this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
+        this.tipoImpuesto = tipoImpuesto;
+        this.empresa = empresa;
+        this.tipoEmpresa = tipoEmpresa;
     }
 
-    public String getUrlConexionEmpresaTipoImpuesto() {
-        return urlConexionEmpresaTipoImpuesto;
+    public Date getFechaHoraAltaEmpresaTipoImpuesto() {
+        return fechaHoraAltaEmpresaTipoImpuesto;
     }
 
-    public void setUrlConexionEmpresaTipoImpuesto(String urlConexionEmpresaTipoImpuesto) {
-        this.urlConexionEmpresaTipoImpuesto = urlConexionEmpresaTipoImpuesto;
+    public void setFechaHoraAltaEmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto) {
+        this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
     }
 
     public Date getFechaHoraInhabilitacionEmpresaTipoImpuesto() {
@@ -39,6 +45,14 @@ public class EmpresaTipoImpuesto extends Entity{
 
     public void setFechaHoraInhabilitacionEmpresaTipoImpuesto(Date fechaHoraInhabilitacionEmpresaTipoImpuesto) {
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
+    }
+
+    public int getFrecuenciaLiquidacionEmpresaTipoImpuesto() {
+        return frecuenciaLiquidacionEmpresaTipoImpuesto;
+    }
+
+    public void setFrecuenciaLiquidacionEmpresaTipoImpuesto(int frecuenciaLiquidacionEmpresaTipoImpuesto) {
+        this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
     }
 
     public TipoImpuesto getTipoImpuesto() {
@@ -56,6 +70,13 @@ public class EmpresaTipoImpuesto extends Entity{
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
+
+    public TipoEmpresa getTipoEmpresa() {
+        return tipoEmpresa;
+    }
+
+    public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
+        this.tipoEmpresa = tipoEmpresa;
+    }
     
 }

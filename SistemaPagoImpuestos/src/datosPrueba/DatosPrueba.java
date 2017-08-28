@@ -16,7 +16,7 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class DatosPrueba {
     public void generarDatosPrueba(){
-        FachadaInterna.getInstance().iniciarTransaccion();
+       /* FachadaInterna.getInstance().iniciarTransaccion();
         TipoUsuario tipoUsuario =new TipoUsuario(1, "Administrador");
         Usuario usuario = new Usuario("mvissio", "123456");
         usuario.setTipoUsuario(tipoUsuario);
@@ -25,5 +25,6 @@ public class DatosPrueba {
         FachadaPersistencia.getInstance().guardar(usuario);
         System.out.println("Guardado");
         FachadaInterna.getInstance().finalizarTransaccion();
+*/
     }
 }

@@ -2,21 +2,33 @@ package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-public class EmpresaTipoImpuesto {
-    
+public class EmpresaTipoImpuesto extends Entity{
+    private Date fechaHoraAltaEmpresaTipoImpuesto;
     private Date fechaHoraInhabilitacionEmpresaTipoImpuesto;
-    private Date fechaProximaLiquidacionEmpresaTipoImpuesto;
     private int frecuenciaLiquidacionEmpresaTipoImpuesto;
-    private String urlConexionEmpresaTipoImpuesto;
+    private TipoImpuesto tipoImpuesto;
+    private Empresa empresa;
+    private TipoEmpresa tipoEmpresa;
+    private Date fechaProximaLiquidacionEmpresaTipoImpuesto;
 
     public EmpresaTipoImpuesto() {
     }
-
-    public EmpresaTipoImpuesto(Date fechaHoraInhabilitacionEmpresaTipoImpuesto, Date fechaProximaLiquidacionEmpresaTipoImpuesto, int frecuenciaLiquidacionEmpresaTipoImpuesto, String urlConexionEmpresaTipoImpuesto, Empresa empresa, TipoEmpresa tipoEmpresa, TipoImpuesto tipoImpuesto) {
+    
+    public EmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, int frecuenciaLiquidacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa, TipoEmpresa tipoEmpresa) {
+        this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
-        this.fechaProximaLiquidacionEmpresaTipoImpuesto = fechaProximaLiquidacionEmpresaTipoImpuesto;
         this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
-        this.urlConexionEmpresaTipoImpuesto = urlConexionEmpresaTipoImpuesto;
+        this.tipoImpuesto = tipoImpuesto;
+        this.empresa = empresa;
+        this.tipoEmpresa = tipoEmpresa;
+    }
+
+    public Date getFechaHoraAltaEmpresaTipoImpuesto() {
+        return fechaHoraAltaEmpresaTipoImpuesto;
+    }
+
+    public void setFechaHoraAltaEmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto) {
+        this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
     }
 
     public Date getFechaHoraInhabilitacionEmpresaTipoImpuesto() {
@@ -27,14 +39,6 @@ public class EmpresaTipoImpuesto {
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
     }
 
-    public Date getFechaProximaLiquidacionEmpresaTipoImpuesto() {
-        return fechaProximaLiquidacionEmpresaTipoImpuesto;
-    }
-
-    public void setFechaProximaLiquidacionEmpresaTipoImpuesto(Date fechaProximaLiquidacionEmpresaTipoImpuesto) {
-        this.fechaProximaLiquidacionEmpresaTipoImpuesto = fechaProximaLiquidacionEmpresaTipoImpuesto;
-    }
-
     public int getFrecuenciaLiquidacionEmpresaTipoImpuesto() {
         return frecuenciaLiquidacionEmpresaTipoImpuesto;
     }
@@ -42,15 +46,29 @@ public class EmpresaTipoImpuesto {
     public void setFrecuenciaLiquidacionEmpresaTipoImpuesto(int frecuenciaLiquidacionEmpresaTipoImpuesto) {
         this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
     }
-
-    public String getUrlConexionEmpresaTipoImpuesto() {
-        return urlConexionEmpresaTipoImpuesto;
+    
+    public TipoImpuesto getTipoImpuesto() {
+        return tipoImpuesto;
     }
 
-    public void setUrlConexionEmpresaTipoImpuesto(String urlConexionEmpresaTipoImpuesto) {
-        this.urlConexionEmpresaTipoImpuesto = urlConexionEmpresaTipoImpuesto;
+    public void setTipoImpuesto(TipoImpuesto tipoImpuesto) {
+        this.tipoImpuesto = tipoImpuesto;
     }
-    
-    
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public TipoEmpresa getTipoEmpresa() {
+        return tipoEmpresa;
+    }
+
+    public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
+        this.tipoEmpresa = tipoEmpresa;
+    }
     
 }

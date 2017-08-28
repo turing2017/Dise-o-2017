@@ -13,7 +13,6 @@ public class Empresa extends Entity {
     private String nombreEmpresa;
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
-
     public Empresa() {
     }
 
@@ -23,8 +22,7 @@ public class Empresa extends Entity {
         this.direccionEmpresa = direccionEmpresa;
         this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
     }
-    
-    
+
     
     // Setters
     public void setCuitEmpresa(String cuitEmpresa) {
@@ -59,4 +57,5 @@ public class Empresa extends Entity {
     public Date getFechaHoraInhabilitacionEmpresa() {
         return fechaHoraInhabilitacionEmpresa;
     }
+    
 }

@@ -15,7 +15,7 @@
             <column name="esMontoEditableTipoImpuesto"/>
         </property>
         
-        <property name="fechaHoraInhabilitacionTipoImpuesto" type="date">
+        <property name="fechaHoraInhabilitacionTipoImpuesto" type="timestamp">
             <column name="fechaHoraInhabilitacionTipoImpuesto"/>
         </property>
         

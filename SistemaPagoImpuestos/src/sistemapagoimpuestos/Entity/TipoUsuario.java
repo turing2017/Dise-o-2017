@@ -12,15 +12,18 @@ public class TipoUsuario extends Entity {
     private int codigoTipoUsuario;
     private String nombreTipoUsuario;
     private Date fechaHoraInhabilitacionTipoUsuario;
-    
 
     public TipoUsuario() {
     }
 
-    public TipoUsuario(int codigoTipoUsuario, String nombreTipoUsuario) {
+    public TipoUsuario(int codigoTipoUsuario, String nombreTipoUsuario, Date fechaHoraInhabilitacionTipoUsuario) {
         this.codigoTipoUsuario = codigoTipoUsuario;
         this.nombreTipoUsuario = nombreTipoUsuario;
-    }    
+        this.fechaHoraInhabilitacionTipoUsuario = fechaHoraInhabilitacionTipoUsuario;
+    }
+
+
+
     // Setters
     public void setCodigoTipoUsuario(int codigoTipoUsuario) {
         this.codigoTipoUsuario = codigoTipoUsuario;
@@ -45,7 +48,5 @@ public class TipoUsuario extends Entity {
 
     public Date getFechaHoraInhabilitacionTipoUsuario() {
         return fechaHoraInhabilitacionTipoUsuario;
-    }
-    
-    
+    }    
 }

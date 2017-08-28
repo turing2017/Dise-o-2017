@@ -28,8 +28,7 @@ public class SistemaPagoImpuestos {
     public static void main(String[] args) {
         //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
         ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
-        //ControladorGestionarTipoImpuesto.getInstance().iniciar();
-       
+        //ControladorGestionarTipoImpuesto.getInstance().iniciar();       
     }
     
 }

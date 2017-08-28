@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.Operacion" table="operacion">
+        <id name="OID" type="string">
+           <column name="OIDOperacion"/>
+        <generator class="uuid2"/>
+        </id>
+        <property name="numeroOperacion" type="int" unique="true" not-null="true">
+            <column name="numeroOperacion"/>
+        </property>
+        <property name="codigoPagoElectrionicoOperacion" type="string" unique="true" not-null="true">
+            <column name="codigoPagoElectrionicoOperacion"/>
+        </property>
+        <property name="fechaHoraOperacion" type="timestamp" >
+            <column name="fechaHoraOperacion"/>
+        </property>
+        <property name="importePagadoOperacion" type="double">
+            <column name="importePagadoOperacion"/>
+        </property>
+        <property name="nroComprobanteFacturaOperacion" type="int" >
+            <column name="nroComprobanteFacturaOperacion"/>
+        </property>
+        <property name="calculadaOperacion" type="boolean">
+            <column name="calculadaOperacion"/>
+        </property>
+        <property name="valorComisionOperacion" type="double">
+            <column name="valorComisionOperacion"/>
+        </property>
+        <many-to-one name="cuentaBancaria" class="sistemapagoimpuestos.Entity.CuentaBancaria" column="OIDCuentaBancaria" not-null="true"/>
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
+        <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto" not-null="true"/>
+        <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true"/>
+        <many-to-one name="detalleOperacion" class="sistemapagoimpuestos.Entity.DetalleOperacion" column="OIDDetalleOperacion" not-null="true"/>
+        <set name="listDetalleOperacion" table="list_detalle_operacion" inverse="true" lazy="true" fetch="select" >             
+            <key column="OIDDetalleOperacion" not-null="true" />             
+            <one-to-many class="sistemapagoimpuestos.Entity.DetalleOperacion"/>         
+        </set>
+    </class>
+</hibernate-mapping>

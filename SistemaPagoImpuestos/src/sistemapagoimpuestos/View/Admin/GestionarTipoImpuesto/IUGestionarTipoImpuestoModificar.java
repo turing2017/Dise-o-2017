@@ -1,4 +1,4 @@
-package sistemapagoimpuestos.View.Admin.AbmGestionarImpuesto;
+package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import exceptions.Excepciones;
 import java.util.Arrays;
@@ -118,8 +118,9 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                 textfield_nombre.setText(null);
                 throw new java.lang.NumberFormatException();
             }
-            ControladorGestionarTipoImpuesto.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected());    
+            ControladorGestionarTipoImpuesto.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected());
             this.dispose();
+            ControladorGestionarTipoImpuesto.getInstance().iniciar();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
@@ -136,7 +137,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -166,7 +167,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                 DTOTipoImpuesto dto = new DTOTipoImpuesto();
                 dto = controlador.obtenerTipoImpuesto(1);
                // setear(dto, );
-                
+
             }
         });
     }
@@ -179,7 +180,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
     public void setTextfield_nombre(String text) {
         this.textfield_nombre.setText(text);
     }
-    
+
 
     public boolean getCheckbox_deshabilitar() {
         return checkbox_habilitado.isSelected();
@@ -204,7 +205,6 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
     public void setNombre_actual(String nombreActual) {
         this.nombre_actual.setText(nombreActual);
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_modificar;

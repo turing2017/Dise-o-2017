@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
+import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
@@ -47,4 +48,6 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
     public String validar(){
         return "Administrador";
     }
+    
+    
 }

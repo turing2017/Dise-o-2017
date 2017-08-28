@@ -17,12 +17,13 @@
        <property name="fechaHoraInhabilitacionUsuario" type="date">
            <column name="fechaHoraInhabilitacionUsuario"/>
        </property>
-       <property name="fechaHoraUltimoIngresoSistemaUsuario" type="date">
+       <property name="fechaHoraUltimoIngresoSistemaUsuario" type="timestamp">
            <column name="fechaHoraUltimoIngresoSistemaUsuario"/>
        </property>
         
         <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoUsuario" not-null="true"/>
-    
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
+        <one-to-one name="cliente" class="sistemapagoimpuestos.Entity.Cliente" cascade="save-update"></one-to-one>
    
     </class>
 </hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.Item" table="item">
+       <id name="OID" type="string">
+           <column name="OIDItem"/>
+        <generator class="uuid2"/>
+       </id>
+       
+       <property name="codigoItem" type="string" unique="true" not-null="true">
+           <column name="codigoItem"/>
+       </property>
+       <property name="nombreItem" type="string" unique="true" not-null="true">
+           <column name="nombreItem"/>
+       </property>
+        <property name="longitudItem" type="int">
+           <column name="longitudItem"/>
+       </property>
+       <property name="requeridoItem" type="boolean">
+           <column name="requeridoItem"/>
+       </property>
+       <property name="fechaHoraInhabilitacionItem" type="timestamp">
+           <column name="fechaHoraInhabilitacionItem"/>
+       </property>
+       
+        <many-to-one name="tipoDatoItem" class="sistemapagoimpuestos.Entity.TipoDatoItem" column="OIDTipoDatoItem" not-null="true"/>
+    </class>
+</hibernate-mapping>

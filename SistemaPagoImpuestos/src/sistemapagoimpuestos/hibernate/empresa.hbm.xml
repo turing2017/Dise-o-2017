@@ -12,17 +12,17 @@
             <column name="cuitEmpresa"/>
         </property>
         
-        <property name="direccionEmpresa" type="string" not-null="true">
-            <column name="direccionEmpresa"/>
-        </property>
-        
-        <property name="fechaHoraInhabilitacionEmpresa" type="date">
-            <column name="fechaHoraInhabilitacionEmpresa"/>
-        </property>
-        
         <property name="nombreEmpresa" type="string" unique="true" not-null="true">
             <column name="nombreEmpresa"/>
         </property>
         
+        <property name="direccionEmpresa" type="string" not-null="true">
+            <column name="direccionEmpresa"/>
+        </property>
+        
+        <property name="fechaHoraInhabilitacionEmpresa" type="timestamp">
+            <column name="fechaHoraInhabilitacionEmpresa"/>
+        </property>
+         
     </class>
 </hibernate-mapping>

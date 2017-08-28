@@ -5,6 +5,7 @@
  */
 package datosPrueba;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Entity.Empresa;
@@ -27,11 +28,23 @@ public class DatosPrueba {
     public static void generarDatosPrueba(){
         FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoEmpresa();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarEmpresa();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoDatoItem();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoImpuesto();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarEmpresaTipoImpuesto();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarItem();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarItemEmpresaTipoImpuesto();
         FachadaInterna.getInstance().finalizarTransaccion();
     }
@@ -49,7 +62,7 @@ public class DatosPrueba {
     }
     
     public static void generarEmpresaTipoImpuesto(){
-        List<Object> listEmpresaObject =  FachadaPersistencia.getInstance().buscar("Empresa", null);
+        List<Object> listEmpresaObject = FachadaPersistencia.getInstance().buscar("Empresa", null);
         Object tipoImpuestoObject =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null).get(0);
         Object tipoEmpresaObject =  FachadaPersistencia.getInstance().buscar("TipoEmpresa", null).get(0);
 
@@ -66,7 +79,7 @@ public class DatosPrueba {
             }
             
             EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto(new Date(), null, 2, tipoImpuesto, empresa, tipoEmpresa);
-            FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
+                FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
             couter++ ;
         }
 
@@ -105,8 +118,8 @@ public class DatosPrueba {
     
     public static void generarTipoEmpresa(){
         TipoEmpresa  tipoEmpresa1 =new TipoEmpresa("Tipo Empresa 1", null);
-        TipoEmpresa  tipoEmpresa2 =new TipoEmpresa("Tipo Empresa 1", null);
-        TipoEmpresa  tipoEmpresa3 =new TipoEmpresa("Tipo Empresa 1", null);
+        TipoEmpresa  tipoEmpresa2 =new TipoEmpresa("Tipo Empresa 2", null);
+        TipoEmpresa  tipoEmpresa3 =new TipoEmpresa("Tipo Empresa 3", null);
         FachadaPersistencia.getInstance().guardar(tipoEmpresa1);
         FachadaPersistencia.getInstance().guardar(tipoEmpresa2);
         FachadaPersistencia.getInstance().guardar(tipoEmpresa3);

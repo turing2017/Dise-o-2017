@@ -10,9 +10,20 @@ public class DTOTipoImpuesto {
     
     // Atributos propios de la clase
     private int codigoDTOTipoImpuesto;
+    private String nombreDTOTipoImpuesto;
     private boolean esMontoEditableDTOTipoImpuesto;
     private Date fechaHoraInhabilitacionDTOTipoImpuesto;
-    private String nombreDTOTipoImpuesto;
+
+    public DTOTipoImpuesto() {
+    }
+
+    public DTOTipoImpuesto(int codigoDTOTipoImpuesto, String nombreDTOTipoImpuesto, boolean esMontoEditableDTOTipoImpuesto, Date fechaHoraInhabilitacionDTOTipoImpuesto) {
+        this.codigoDTOTipoImpuesto = codigoDTOTipoImpuesto;
+        this.nombreDTOTipoImpuesto = nombreDTOTipoImpuesto;
+        this.esMontoEditableDTOTipoImpuesto = esMontoEditableDTOTipoImpuesto;
+        this.fechaHoraInhabilitacionDTOTipoImpuesto = fechaHoraInhabilitacionDTOTipoImpuesto;
+    }
+
     
     // Setters
     public void setCodigoDTOTipoImpuesto(int codigoDTOTipoImpuesto) {

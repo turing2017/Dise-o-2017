@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.ParametroCalculoPeriodicidad" table="parametro_calculo_periodicidad">
+         <id name="OID" type="string">
+        <column name="OIDParametroCalculoPeriodicidad"/>
+        <generator class="uuid2"/>
+        </id>
+       
+        <property name="anual" type="double" unique="true" not-null="true">
+        <column name="anual"/>
+        </property>
+        
+         <property name="bimestral" type="double" unique="true" not-null="true">
+        <column name="bimestral"/>
+         </property>
+        
+         <property name="cuatrimestral" type="double" unique="true" not-null="true">
+        <column name="cuatrimestral"/>
+         </property>
+        
+        <property name="mensual" type="double" unique="true" not-null="true">
+        <column name="mensual"/>
+        </property>
+        
+        <property name="quincenal" type="double" unique="true" not-null="true">
+        <column name="quincenal"/>
+        </property>
+        
+        <property name="semestral" type="double" unique="true" not-null="true">
+        <column name="semestral"/>
+        </property>
+        
+        <property name="trimestral" type="double" unique="true" not-null="true">
+        <column name="trimestral"/>
+        </property>
+    </class>
+</hibernate-mapping>

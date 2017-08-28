@@ -7,6 +7,7 @@ package exceptions;
 
 import java.util.List;
 import sistemapagoimpuestos.View.Errors.ErrorDatoNoEncontrado;
+import sistemapagoimpuestos.View.Errors.UsuarioNoValido;
 
 /**
  *
@@ -31,6 +32,13 @@ public class Excepciones extends Exception{
     
     
     public Excepciones() {
+    }
+    
+    public void usuarioNoValido(){
+        UsuarioNoValido unv = new UsuarioNoValido();
+        unv.setLabel_Titulo("Usuario Incorrecto");
+        unv.setField_Error("No tiene la autorizacion para realizar esta operación");
+        unv.setVisible(true);
     }
     
     public void datoNoEncontrado(String dato){

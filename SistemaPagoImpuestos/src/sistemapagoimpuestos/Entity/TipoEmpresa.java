@@ -26,11 +26,11 @@ public class TipoEmpresa extends Entity{
         this.nombreTipoEmpresa = nombreTipoEmpresa;
     }
 
-    public Date fechaInhabilitacionTipoEmpresa() {
+    public Date getfechaInhabilitacionTipoEmpresa() {
         return fechaInhabilitacionTipoEmpresa;
     }
 
-    public void fechaInhabilitacionTipoEmpresa(Date fechaInhabilitacionTipoEmpresa) {
+    public void setfechaInhabilitacionTipoEmpresa(Date fechaInhabilitacionTipoEmpresa) {
         this.fechaInhabilitacionTipoEmpresa = fechaInhabilitacionTipoEmpresa;
     }
     

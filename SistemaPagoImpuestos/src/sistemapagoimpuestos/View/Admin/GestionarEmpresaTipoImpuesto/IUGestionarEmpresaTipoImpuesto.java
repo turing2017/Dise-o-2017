@@ -6,10 +6,17 @@ import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 
-public class AdminMenu extends javax.swing.JFrame {
+public class IUGestionarEmpresaTipoImpuesto extends javax.swing.JFrame {
 
-    public AdminMenu() {
+    public IUGestionarEmpresaTipoImpuesto() {
         initComponents();
+    }
+    
+    public void llenarComboTipoImpuesto(List<DTOTipoImpuesto> listado){
+        for (int i = 0; i < listado.size(); i++) {
+            DTOTipoImpuesto elemento = (DTOTipoImpuesto) listado.get(i);
+            combo_TipoImpuesto.addItem(elemento.getNombreDTOTipoImpuesto());
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -154,20 +161,21 @@ public class AdminMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaTipoImpuesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaTipoImpuesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaTipoImpuesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUGestionarEmpresaTipoImpuesto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminMenu().setVisible(true);
+                new IUGestionarEmpresaTipoImpuesto().setVisible(true);
             }
         });
     }

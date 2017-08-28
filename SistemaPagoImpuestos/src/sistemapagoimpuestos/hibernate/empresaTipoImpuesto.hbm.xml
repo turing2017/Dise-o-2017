@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<<<<<<< HEAD
 
-<hibernate-mapping>
-    <class name="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" table = "empresa_tipo_impuesto">
-        <id name="OID" type="string">
-            <column name = "OIDEmpresaTipoImpuesto"/>
-            <generator class="uuid2"/>
-        </id>
-        
-        <property name = "fechaHoraInhabilitacionEmpresaTipoImpuesto" type = "date">
-            <column name = "fechaHoraInhabilitacionEmpresaTipoImpuesto"/>
-        </property>
-        
-        <property name = "fechaProximaLiquidacionEmpresaTipoImpuesto" type = "date">
-            <column name = "fechaProximaLiquidacionEmpresaTipoImpuesto"/>
-        </property>
-        
-        <property name = "frecuenciaLiquidacionEmpresaTipoImpuesto" type = "int">
-            <column name = "frecuenciaLiquidacionEmpresaTipoImpuesto"/>
-        </property>
-        
-        <property name = "urlConexionEmpresaTipoImpuesto" unique = "true" not-null="true" type = "string">
-            <column name = "urlConexionEmpresaTipoImpuesto"/>
-        </property>
-        
-=======
 <hibernate-mapping>
     <class name="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" table="empresa_tipo_impuesto">
         <id name="OID" type="string">
@@ -44,6 +19,5 @@
         <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true"/>
         <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
         <many-to-one name="tipoEmpresa" class="sistemapagoimpuestos.Entity.TipoEmpresa" column="OIDTipoEmpresa" not-null="true"/>
->>>>>>> cambios_develop
     </class>
 </hibernate-mapping>

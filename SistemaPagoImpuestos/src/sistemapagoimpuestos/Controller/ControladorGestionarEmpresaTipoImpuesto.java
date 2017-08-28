@@ -4,7 +4,7 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.View.Admin.GestionarEmpresaTipoImpuesto.AdminMenu;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaTipoImpuesto.IUGestionarEmpresaTipoImpuesto;
 
 public class ControladorGestionarEmpresaTipoImpuesto {
     private static ControladorGestionarEmpresaTipoImpuesto controladorGestionarEmpresaTipoImpuesto;
@@ -22,12 +22,12 @@ public class ControladorGestionarEmpresaTipoImpuesto {
     }
     
     public List<DTOTipoImpuesto> iniciar(){
-        if(experto.validar().equals("Administrador")){
-            AdminMenu pantallaPrincipal = new AdminMenu();
-            pantallaPrincipal.setVisible(true); 
-        }
-        return experto.iniciar();
-
+        List<DTOTipoImpuesto> listado = experto.iniciar();
+        IUGestionarEmpresaTipoImpuesto pantallaPrincipal = new IUGestionarEmpresaTipoImpuesto();
+        pantallaPrincipal.setVisible(true);
+        pantallaPrincipal.llenarComboTipoImpuesto(listado);
+        
+        return listado;
     }
     
 }

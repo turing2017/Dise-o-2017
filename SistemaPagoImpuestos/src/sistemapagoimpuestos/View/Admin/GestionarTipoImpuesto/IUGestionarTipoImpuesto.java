@@ -65,6 +65,14 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
 
+        tabla_tipo_impuesto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane1.setViewportView(tabla_tipo_impuesto);
 
         jLabel1.setText("TIPOS DE IMPUESTOS");
@@ -250,7 +258,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         // Muestro pantalla de Consultar
         ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarTipoImpuesto.getInstance().obtenerTipoImpuestos();
 
-        String[] columnas = {"Codigo", "Nombre", "Monto Editable", "Estado"};
+        String[] columnas = {"Codigo", "Nombre", "Monto Editable", "Habilitado"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
             
             // Sobreescribo el método para no permitir editar la 

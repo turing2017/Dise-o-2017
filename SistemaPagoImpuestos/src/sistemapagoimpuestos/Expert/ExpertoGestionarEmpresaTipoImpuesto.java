@@ -12,10 +12,12 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
-import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
+import sistemapagoimpuestos.Utils.Utils;
 
 
 
@@ -53,5 +55,42 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         
         return lista;
     }    
+
+    public List<DTOEmpresa> buscarEmpresas() {
+        
+        //Busqueda de Empresas habilitadas
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
+        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        
+        List <DTOEmpresa> lista = new ArrayList<>();
+        DTOEmpresa dtoEmpresa;
+        
+        for (int i = 0; i < empresas.size(); i++) {
+            dtoEmpresa = new DTOEmpresa();
+            Empresa empresa = (Empresa) empresas.get(i);
+            String nombreEmpresa = empresa.getNombreEmpresa();
+            dtoEmpresa.setNombreDTOEmpresa(nombreEmpresa);
+            lista.add(dtoEmpresa);
+        }
+        return lista;
+    }
+    
+    public List altaDatos(String nombreTipoImpuesto, String nombreEmpresa){
+        List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
+        criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
+        List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
+        
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresa));
+        List e = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        
+        List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("empresa", "=", ti.toString()));
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", e.toString()));
+        List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", e);
+        
+        return eti;
+    }
     
 }

@@ -14,7 +14,15 @@ import sistemapagoimpuestos.Entity.TipoDatoItem;
  *
  * @author Maximiliano
  */
-public class DTOEmpresa { 
+public class DTOEmpresa {
+    
+    private String cuitDTOEmpresa;
+    private String direccionDTOEmpresa;
+    private Date fechaHoraInhabilitacionDTOEmpresa;
+    private String nombreDTOEmpresa;
+    
+    public DTOEmpresa() {
+    }
 
     public DTOEmpresa(String cuitDTOEmpresa, String direccionDTOEmpresa, Date fechaHoraInhabilitacionDTOEmpresa, String nombreDTOEmpresa) {
         this.cuitDTOEmpresa = cuitDTOEmpresa;
@@ -22,11 +30,6 @@ public class DTOEmpresa {
         this.fechaHoraInhabilitacionDTOEmpresa = fechaHoraInhabilitacionDTOEmpresa;
         this.nombreDTOEmpresa = nombreDTOEmpresa;
     }
-    
-    private String cuitDTOEmpresa;
-    private String direccionDTOEmpresa;
-    private Date fechaHoraInhabilitacionDTOEmpresa;
-    private String nombreDTOEmpresa;
 
     public String getCuitDTOEmpresa() {
         return cuitDTOEmpresa;

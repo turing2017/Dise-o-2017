@@ -1,6 +1,7 @@
 package sistemapagoimpuestos.Controller;
 
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -23,11 +24,17 @@ public class ControladorGestionarEmpresaTipoImpuesto {
     
     public List<DTOTipoImpuesto> iniciar(){
         List<DTOTipoImpuesto> listado = experto.iniciar();
-        IUGestionarEmpresaTipoImpuesto pantallaPrincipal = new IUGestionarEmpresaTipoImpuesto();
-        pantallaPrincipal.setVisible(true);
-        pantallaPrincipal.llenarComboTipoImpuesto(listado);
-        
         return listado;
+    }
+    
+    public List<DTOEmpresa> buscarEmpresas(){
+        List<DTOEmpresa> listado = experto.buscarEmpresas();
+        return listado;
+    }
+    
+    public List altaDatos(String nombreTipoImpuesto, String nombreEmpresa){
+        List resultado = experto.altaDatos(nombreTipoImpuesto, nombreEmpresa);
+        return resultado;
     }
     
 }

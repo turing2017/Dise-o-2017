@@ -22,6 +22,18 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
         FachadaInterna.getInstance().finalizarTransaccion();
         return tempString;
     }
-    
-    
+    @Override
+    public List buscarEmpresas() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List tempString = super.buscarEmpresas(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return tempString;
+    }
+    @Override
+    public List altaDatos(String nombreTipoImpuesto, String nombreEmpresa) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List tempString = super.altaDatos(nombreTipoImpuesto, nombreEmpresa); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return tempString;
+}
 }

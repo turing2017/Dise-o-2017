@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
@@ -63,5 +65,9 @@ public class ControladorGestionarTipoImpuesto {
     // Metodo para recuperar el TipoImpuesto a modificar
     public DTOTipoImpuesto obtenerTipoImpuesto(int codigo){
         return experto.obtenerTipoImpuesto(codigo);
+    }
+    
+    public List<DTOEmpresa> obtenerEmpresas(){
+        return experto.obtenerEmpresas();
     }
 }

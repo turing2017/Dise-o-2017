@@ -22,6 +22,7 @@ public class Operacion extends Entity{
     private int nroComprobanteFacturaOperacion;
     private boolean calculadaOperacion;
     private double valorComisionOperacion;
+    private DetalleOperacion detalleOperacion;
     private CuentaBancaria cuentaBancaria;
     private Empresa empresa;
     private EmpresaTipoImpuesto empresaTipoImpuesto;
@@ -31,7 +32,7 @@ public class Operacion extends Entity{
     public Operacion() {
     }
 
-    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion) {
+    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion, DetalleOperacion detalleOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectrionicoOperacion = codigoPagoElectrionicoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
@@ -39,6 +40,11 @@ public class Operacion extends Entity{
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
         this.calculadaOperacion = calculadaOperacion;
         this.valorComisionOperacion = valorComisionOperacion;
+        this.detalleOperacion = detalleOperacion;
+        this.cuentaBancaria = cuentaBancaria;
+        this.empresa = empresa;
+        this.empresaTipoImpuesto = empresaTipoImpuesto;
+        this.tipoImpuesto = tipoImpuesto;
     }
 
     public int getNumeroOperacion() {
@@ -97,6 +103,14 @@ public class Operacion extends Entity{
         this.valorComisionOperacion = valorComisionOperacion;
     }
 
+    public DetalleOperacion getDetalleOperacion() {
+        return detalleOperacion;
+    }
+
+    public void setDetalleOperacion(DetalleOperacion detalleOperacion) {
+        this.detalleOperacion = detalleOperacion;
+    }
+
     public CuentaBancaria getCuentaBancaria() {
         return cuentaBancaria;
     }
@@ -136,6 +150,5 @@ public class Operacion extends Entity{
     public void setListDetalleOperacion(Set<DetalleOperacion> listDetalleOperacion) {
         this.listDetalleOperacion = listDetalleOperacion;
     }
-
     
 }

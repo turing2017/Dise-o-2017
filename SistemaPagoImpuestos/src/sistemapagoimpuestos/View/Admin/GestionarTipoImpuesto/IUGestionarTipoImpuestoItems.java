@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.scene.control.ComboBox;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 
 /**
@@ -13,15 +15,11 @@ import sistemapagoimpuestos.Dto.DTOEmpresa;
  */
 public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     
-    DTOEmpresa e1 = new DTOEmpresa("123", "GAEFG", null, "321");
-    DTOEmpresa e2 = new DTOEmpresa("41", "tuhermana", Date.from(Instant.now()), "gsfñgk");
-    
-    ArrayList<DTOEmpresa> list = new ArrayList<>();
+    List<DTOEmpresa> list = new ArrayList<>();
     
     public IUGestionarTipoImpuestoItems() {
         initComponents();
-        list.add(e1);
-        list.add(e2);
+        list = ControladorGestionarTipoImpuesto.getInstance().obtenerEmpresas();
         llenarCombo(comboBox_Empresa);
     }
     private void llenarCombo(javax.swing.JComboBox<String> combo){

@@ -27,6 +27,7 @@
         <property name="valorComisionOperacion" type="double">
             <column name="valorComisionOperacion"/>
         </property>
+        <many-to-one name="detalleOperacion" class="sistemapagoimpuestos.Entity.DetalleOperacion" column="OIDDetalleOperacion" not-null="true"/>
         <many-to-one name="cuentaBancaria" class="sistemapagoimpuestos.Entity.CuentaBancaria" column="OIDCuentaBancaria" not-null="true"/>
         <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
         <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto" not-null="true"/>

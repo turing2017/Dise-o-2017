@@ -19,21 +19,19 @@ public class IUGestionarEmpresaTipoImpuesto extends javax.swing.JFrame {
         List<DTOEmpresa> listadoEmpresas = ControladorGestionarEmpresaTipoImpuesto.getInstance().buscarEmpresas();
         llenarComboEmpresa(listadoEmpresas); 
     }
-    
+
     private void llenarComboEmpresa(List<DTOEmpresa> listado){
         for (int i = 0; i < listado.size(); i++) {
             DTOEmpresa elemento = (DTOEmpresa) listado.get(i);
             combo_Empresa.addItem(elemento.getNombreDTOEmpresa());
         }
     }
-    
     private void llenarComboTipoImpuesto(List<DTOTipoImpuesto> listado){
         for (int i = 0; i < listado.size(); i++) {
             DTOTipoImpuesto elemento = (DTOTipoImpuesto) listado.get(i);
             combo_TipoImpuesto.addItem(elemento.getNombreDTOTipoImpuesto());
         }
     }
-
     public JComboBox<String> getCombo_Empresa() {
         return combo_Empresa;
     }
@@ -148,8 +146,9 @@ public class IUGestionarEmpresaTipoImpuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_TipoImpuestoActionPerformed
 
     private void button_ContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ContinuarActionPerformed
-        pantallaTrifurcacion = new IUGestionarEmpresaTipoImpuestoTrifurcacion();
-        pantallaTrifurcacion.setVisible(true);
+        String nombreTipoImpuesto = (String) combo_TipoImpuesto.getSelectedItem();
+        String nombreEmpresa = (String) combo_Empresa.getSelectedItem();
+        ControladorGestionarEmpresaTipoImpuesto.getInstance().ingresarDatosETI(nombreTipoImpuesto, nombreEmpresa);
     }//GEN-LAST:event_button_ContinuarActionPerformed
 
     public static void main(String args[]) {

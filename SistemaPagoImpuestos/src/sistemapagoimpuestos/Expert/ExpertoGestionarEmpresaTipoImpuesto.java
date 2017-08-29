@@ -76,19 +76,24 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         return lista;
     }
     
-    public List altaDatos(String nombreTipoImpuesto, String nombreEmpresa){
+    public List ingresarDatosETI(String nombreTipoImpuesto, String nombreEmpresa){
+        //Busca instancia de TipoImpuesto
         List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
         criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
         List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
+        TipoImpuesto tipoImpuesto = (TipoImpuesto) ti.get(0);
         
+        //Busca instancia de Empresa
         List<DTOCriterio> criterioEmpresa = new ArrayList();
         criterioEmpresa.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresa));
         List e = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        Empresa empresa = (Empresa) e.get(0);
         
+        //Busca instancia de EmpresaTipoImpuesto, aplicando la empresa y tipoImpuesto como criterio
         List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
-        criterioEmpresaTipoImpuesto.add(new DTOCriterio("empresa", "=", ti.toString()));
-        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", e.toString()));
-        List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", e);
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("empresa", "=", empresa));
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
+        List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto);
         
         return eti;
     }

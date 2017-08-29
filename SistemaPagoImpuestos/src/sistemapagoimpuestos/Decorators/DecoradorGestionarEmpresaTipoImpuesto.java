@@ -30,9 +30,9 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
         return tempString;
     }
     @Override
-    public List altaDatos(String nombreTipoImpuesto, String nombreEmpresa) {
+    public List ingresarDatosETI(String nombreTipoImpuesto, String nombreEmpresa) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        List tempString = super.altaDatos(nombreTipoImpuesto, nombreEmpresa); //To change body of generated methods, choose Tools | Templates.
+        List tempString = super.ingresarDatosETI(nombreTipoImpuesto, nombreEmpresa); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return tempString;
 }

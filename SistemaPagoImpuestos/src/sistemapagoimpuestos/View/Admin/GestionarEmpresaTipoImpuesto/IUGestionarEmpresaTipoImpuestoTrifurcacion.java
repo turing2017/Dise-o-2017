@@ -1,18 +1,26 @@
 package sistemapagoimpuestos.View.Admin.GestionarEmpresaTipoImpuesto;
 
+import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 
 public class IUGestionarEmpresaTipoImpuestoTrifurcacion extends javax.swing.JFrame {
-
-    IUGestionarEmpresaTipoImpuesto pantallaPrincipal;
-    IUGestionarEmpresaTipoImpuestoAlta pantallaAlta;
-    String nombreTipoImpuesto = pantallaPrincipal.getCombo_TipoImpuesto().getSelectedItem().toString();
-    String nombreEmpresa = pantallaPrincipal.getCombo_Empresa().getSelectedItem().toString();
     
-    public IUGestionarEmpresaTipoImpuestoTrifurcacion() {
-        initComponents();
+    public List resultado;
+    
+    private IUGestionarEmpresaTipoImpuestoTrifurcacion() {
+        
     }
-    
+    public IUGestionarEmpresaTipoImpuestoTrifurcacion(List resultado) {
+        //this.resultado = resultado;
+        initComponents();
+        if (resultado.isEmpty()){
+            button_baja.setEnabled(false);
+            button_modificar.setEnabled(false);
+        }
+        else{
+            button_Alta.setEnabled(false);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,10 +102,7 @@ public class IUGestionarEmpresaTipoImpuestoTrifurcacion extends javax.swing.JFra
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AltaActionPerformed
-        if (ControladorGestionarEmpresaTipoImpuesto.getInstance().altaDatos(nombreTipoImpuesto, nombreEmpresa) == null){
-            pantallaAlta = new IUGestionarEmpresaTipoImpuestoAlta();
-            pantallaAlta.setVisible(true);
-        }
+        
     }//GEN-LAST:event_button_AltaActionPerformed
 
     private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed

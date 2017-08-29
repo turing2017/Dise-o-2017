@@ -2,10 +2,6 @@ package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-/**
- *
- * @author lunamarcos
- */
 public class Empresa extends Entity {
     
     // Atributos propios de la clase
@@ -13,6 +9,7 @@ public class Empresa extends Entity {
     private String nombreEmpresa;
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
+    
     public Empresa() {
     }
 

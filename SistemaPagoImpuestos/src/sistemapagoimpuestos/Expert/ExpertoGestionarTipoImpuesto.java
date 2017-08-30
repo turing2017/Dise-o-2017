@@ -209,4 +209,42 @@ public class ExpertoGestionarTipoImpuesto {
         }
         return listItem;
     }
+        
+    public List<DTOEmpresa> buscarEmpresas() {
+        
+        //Busqueda de Empresas habilitadas
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
+        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        
+        List <DTOEmpresa> lista = new ArrayList<>();
+        DTOEmpresa dtoEmpresa;
+        
+        for (int i = 0; i < empresas.size(); i++) {
+            dtoEmpresa = new DTOEmpresa();
+            Empresa empresa = (Empresa) empresas.get(i);
+            String nombreEmpresa = empresa.getNombreEmpresa();
+            dtoEmpresa.setNombreEmpresa(nombreEmpresa);
+            lista.add(dtoEmpresa);
+        }
+        return lista;
+    }
+    
+    public List<DTOItem> buscarItems(){
+        List<DTOCriterio> criterioItem = new ArrayList();
+        criterioItem.add(new DTOCriterio("fechaHoraInhabilitacionItem", "IS", null));
+        List items = FachadaPersistencia.getInstance().buscar("Item", criterioItem);
+        
+        List <DTOItem> lista = new ArrayList<>();
+        DTOItem dtoItem;
+        
+        for (int i = 0; i < items.size(); i++) {
+            dtoItem = new DTOItem();
+            Item item = (Item) items.get(i);
+            String nombreItem = item.getNombreItem();
+            dtoItem.setNombreItem(nombreItem);
+            lista.add(dtoItem);
+        }
+        return lista;
+    }
 }

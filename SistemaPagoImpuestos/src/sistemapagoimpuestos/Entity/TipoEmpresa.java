@@ -1,26 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
 /**
  *
- * @author mvissio
+ * @author Maximiliano
  */
 public class TipoEmpresa extends Entity{
     private String nombreTipoEmpresa;
-    private Date fechaInhabilitacion;
+    private Date fechaInhabilitacionTipoEmpresa;
 
     public TipoEmpresa() {
     }
 
-    public TipoEmpresa(String nombreTipoEmpresa, Date fechaInhabilitacion) {
+    public TipoEmpresa(String nombreTipoEmpresa, Date fechaInhabilitacionTipoEmpresa) {
         this.nombreTipoEmpresa = nombreTipoEmpresa;
-        this.fechaInhabilitacion = fechaInhabilitacion;
+        this.fechaInhabilitacionTipoEmpresa = fechaInhabilitacionTipoEmpresa;
     }
 
     public String getNombreTipoEmpresa() {
@@ -31,13 +26,12 @@ public class TipoEmpresa extends Entity{
         this.nombreTipoEmpresa = nombreTipoEmpresa;
     }
 
-    public Date getFechaInhabilitacion() {
-        return fechaInhabilitacion;
+    public Date getfechaInhabilitacionTipoEmpresa() {
+        return fechaInhabilitacionTipoEmpresa;
     }
 
-    public void setFechaInhabilitacion(Date fechaInhabilitacion) {
-        this.fechaInhabilitacion = fechaInhabilitacion;
+    public void setfechaInhabilitacionTipoEmpresa(Date fechaInhabilitacionTipoEmpresa) {
+        this.fechaInhabilitacionTipoEmpresa = fechaInhabilitacionTipoEmpresa;
     }
-    
     
 }

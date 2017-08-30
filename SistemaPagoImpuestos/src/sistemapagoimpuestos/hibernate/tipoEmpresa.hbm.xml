@@ -11,8 +11,8 @@
         <property name="nombreTipoEmpresa" type="string" unique="true" not-null="true">
             <column name="nombreTipoEmpresa"/>
         </property>
-        <property name="fechaInhabilitacion" type="date">
-            <column name="fechaInhabilitacion"/>
+        <property name="fechaInhabilitacionTipoEmpresa" type="date">
+            <column name="fechaInhabilitacionTipoEmpresa"/>
         </property>
     </class>
 </hibernate-mapping>

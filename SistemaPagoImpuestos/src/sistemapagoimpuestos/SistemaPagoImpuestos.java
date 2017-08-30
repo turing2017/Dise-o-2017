@@ -30,8 +30,8 @@ public class SistemaPagoImpuestos {
         //generarDatosPrueba();
         //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
         //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
+        
         ControladorGestionarTipoImpuesto.getInstance().iniciar();
        
     }
-    
 }

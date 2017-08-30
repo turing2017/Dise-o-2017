@@ -9,6 +9,7 @@ import java.util.Date;
 
 /**
  *
+<<<<<<< HEAD
  * @author Markz
  */
 public class DTOItem {
@@ -20,7 +21,7 @@ public class DTOItem {
 
     public DTOItem() {
     }
-
+    
     public DTOItem(String codigoItem, String nombreItem, int longitudItem, boolean requeridoItem, Date fechaHoraInhabilitacionItem) {
         this.codigoItem = codigoItem;
         this.nombreItem = nombreItem;

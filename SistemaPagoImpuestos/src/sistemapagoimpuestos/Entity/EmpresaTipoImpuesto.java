@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-/**
- *
- * @author mvissio
- */
 public class EmpresaTipoImpuesto extends Entity{
     private Date fechaHoraAltaEmpresaTipoImpuesto;
     private Date fechaHoraInhabilitacionEmpresaTipoImpuesto;
@@ -18,10 +9,11 @@ public class EmpresaTipoImpuesto extends Entity{
     private TipoImpuesto tipoImpuesto;
     private Empresa empresa;
     private TipoEmpresa tipoEmpresa;
+    private Date fechaProximaLiquidacionEmpresaTipoImpuesto;
 
     public EmpresaTipoImpuesto() {
     }
-
+    
     public EmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, int frecuenciaLiquidacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa, TipoEmpresa tipoEmpresa) {
         this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
@@ -54,7 +46,7 @@ public class EmpresaTipoImpuesto extends Entity{
     public void setFrecuenciaLiquidacionEmpresaTipoImpuesto(int frecuenciaLiquidacionEmpresaTipoImpuesto) {
         this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
     }
-
+    
     public TipoImpuesto getTipoImpuesto() {
         return tipoImpuesto;
     }

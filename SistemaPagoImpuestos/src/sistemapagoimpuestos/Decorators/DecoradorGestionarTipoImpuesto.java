@@ -6,7 +6,10 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.ArrayList;
+import java.util.List;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaItem;
+import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -64,9 +67,20 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
         return empresaItems;
     }
 
-    
-    
-    
-    
+    @Override
+    public List<DTOEmpresa> buscarEmpresas() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOEmpresa> tempString = super.buscarEmpresas(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return tempString;
+    }
+     
+    @Override
+    public List<DTOItem> buscarItems() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOItem> tempString = super.buscarItems(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return tempString;
+    }
 }
     

@@ -17,6 +17,8 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.Utils.HibernateUtil;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaTipoImpuesto.IUGestionarEmpresaTipoImpuesto;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaTipoImpuesto.IUGestionarEmpresaTipoImpuestoAlta;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
 /**
  *
  * @author Markz
@@ -28,9 +30,12 @@ public class SistemaPagoImpuestos {
      */
     public static void main(String[] args) {
         //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
-        IUGestionarEmpresaTipoImpuesto pantallaGestionarETI = new IUGestionarEmpresaTipoImpuesto();
-        pantallaGestionarETI.setVisible(true);
-        //ControladorGestionarTipoImpuesto.getInstance().iniciar();       
+        //IUGestionarEmpresaTipoImpuesto pantallaGestionarETI = new IUGestionarEmpresaTipoImpuesto();
+        IUGestionarTipoImpuestoItems pantallaGestionarTIItems = new IUGestionarTipoImpuestoItems();
+        pantallaGestionarTIItems.setVisible(true);
+        //pantallaGestionarETI.setVisible(true);
+        //ControladorGestionarTipoImpuesto.getInstance().iniciar();
+        
     }
     
 }

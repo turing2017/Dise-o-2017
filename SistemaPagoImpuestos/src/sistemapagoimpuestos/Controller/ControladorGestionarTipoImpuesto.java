@@ -13,7 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -67,7 +69,13 @@ public class ControladorGestionarTipoImpuesto {
         return experto.obtenerTipoImpuesto(codigo);
     }
     
-    public List<DTOEmpresa> obtenerEmpresas(){
-        return experto.obtenerEmpresas();
+    public List<DTOEmpresa> buscarEmpresas(){
+        List<DTOEmpresa> listado = experto.buscarEmpresas();
+        return listado;
+    }
+    
+    public List<DTOItem> buscarItems(){
+        List<DTOItem> items = experto.buscarItems();
+        return items;
     }
 }

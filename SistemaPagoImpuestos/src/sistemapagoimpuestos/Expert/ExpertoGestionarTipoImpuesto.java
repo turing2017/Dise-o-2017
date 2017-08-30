@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Empresa;
+import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
@@ -124,21 +126,41 @@ public class ExpertoGestionarTipoImpuesto {
         System.out.println("Guardando en la DB: " + tipoImpuesto.getNombreTipoImpuesto());
     }
     
-    public List<DTOEmpresa> obtenerEmpresas(){
-        List<DTOCriterio> criterios = new ArrayList<>();
-        criterios.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
-        List list = FachadaPersistencia.getInstance().buscar("Empresa", criterios);
+    public List<DTOEmpresa> buscarEmpresas() {
         
+        //Busqueda de Empresas habilitadas
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
+        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        
+        List <DTOEmpresa> lista = new ArrayList<>();
         DTOEmpresa dtoEmpresa;
-        List<DTOEmpresa> listado = new ArrayList<>();
         
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < empresas.size(); i++) {
             dtoEmpresa = new DTOEmpresa();
-            Empresa empresa = (Empresa) list.get(i);
+            Empresa empresa = (Empresa) empresas.get(i);
             String nombreEmpresa = empresa.getNombreEmpresa();
             dtoEmpresa.setNombreDTOEmpresa(nombreEmpresa);
-            listado.add(dtoEmpresa);
+            lista.add(dtoEmpresa);
         }
-        return listado;
+        return lista;
+    }
+    
+    public List<DTOItem> buscarItems(){
+        List<DTOCriterio> criterioItem = new ArrayList();
+        criterioItem.add(new DTOCriterio("fechaHoraInhabilitacionItem", "IS", null));
+        List items = FachadaPersistencia.getInstance().buscar("Item", criterioItem);
+        
+        List <DTOItem> lista = new ArrayList<>();
+        DTOItem dtoItem;
+        
+        for (int i = 0; i < items.size(); i++) {
+            dtoItem = new DTOItem();
+            Item item = (Item) items.get(i);
+            String nombreItem = item.getNombreItem();
+            dtoItem.setNombreDTOItem(nombreItem);
+            lista.add(dtoItem);
+        }
+        return lista;
     }
 }

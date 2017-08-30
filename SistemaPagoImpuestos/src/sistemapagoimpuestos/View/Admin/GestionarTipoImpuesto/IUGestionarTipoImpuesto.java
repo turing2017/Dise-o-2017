@@ -198,6 +198,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 pantallaAlta.setVisible(true); // La hago visible
                 // Modifico la operación de cierre para volver a la pantalla principal
                 pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pantallaAlta.generarEmpresaItems();
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
                         pantallaAlta.dispose();
@@ -225,6 +226,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                     pantallaModificar.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
                     pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
                     pantallaModificar.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
+                    pantallaModificar.obtenerEmpresaItems(dtoTi.getdTOEmpresaTipoImpuestoItemList());
                     if (dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto() == null) {
                         pantallaModificar.setCheckbox_Habilitar(true);
                     } else {

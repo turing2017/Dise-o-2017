@@ -23,6 +23,5 @@
         <property name="fechaHoraInhabilitacionEmpresa" type="timestamp">
             <column name="fechaHoraInhabilitacionEmpresa"/>
         </property>
-         
     </class>
 </hibernate-mapping>

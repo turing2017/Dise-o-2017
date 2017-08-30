@@ -1,8 +1,15 @@
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import exceptions.Excepciones;
+import java.awt.Component;
 import java.util.Arrays;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 
 /**
@@ -32,6 +39,11 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         textfield_codigo = new javax.swing.JTextField();
         checkbox_esEditable = new javax.swing.JCheckBox();
         button_crear = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla_empresa_item = new javax.swing.JTable();
+        button_add_EA = new javax.swing.JButton();
+        button_delete_EA = new javax.swing.JButton();
+        cancel_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,46 +60,98 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(tabla_empresa_item);
+
+        button_add_EA.setText("Añadir");
+        button_add_EA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_add_EAActionPerformed(evt);
+            }
+        });
+
+        button_delete_EA.setText("Eleminar");
+        button_delete_EA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_delete_EAActionPerformed(evt);
+            }
+        });
+
+        cancel_button.setText("Cancelar");
+        cancel_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label_codigo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_nombre)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_esEditable)
-                        .addGap(72, 72, 72)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkbox_esEditable)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_codigo)
+                            .addComponent(label_nombre)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(label_esEditable)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(checkbox_esEditable)
+                        .addGap(78, 78, 78))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(cancel_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(button_crear)
+                        .addGap(49, 49, 49))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textfield_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                            .addComponent(textField_nombre))))
-                .addGap(54, 54, 54))
+                            .addComponent(button_delete_EA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button_add_EA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_nombre)
                     .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_codigo)
                     .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label_esEditable)
                     .addComponent(checkbox_esEditable))
-                .addGap(63, 63, 63)
-                .addComponent(button_crear)
-                .addGap(58, 58, 58))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(button_add_EA)
+                        .addGap(67, 67, 67)
+                        .addComponent(button_delete_EA)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(button_crear)
+                    .addComponent(cancel_button))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -108,6 +172,27 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
         }
     }//GEN-LAST:event_button_crearActionPerformed
+
+    private void button_add_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_add_EAActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tabla_empresa_item.getModel();
+        model.addRow(new Object[]{"Column 1", "Column 2"});
+    }//GEN-LAST:event_button_add_EAActionPerformed
+
+    private void button_delete_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_delete_EAActionPerformed
+        try {
+            DefaultTableModel model = (DefaultTableModel) tabla_empresa_item.getModel();
+            int rowSelected = tabla_empresa_item.getSelectedRow();
+            model.removeRow(rowSelected);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+            Excepciones.getInstance().objetoNoSeleccionado();
+        }
+    }//GEN-LAST:event_button_delete_EAActionPerformed
+
+    private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
+        this.dispose();
+        ControladorGestionarTipoImpuesto.getInstance().iniciar();
+    }//GEN-LAST:event_cancel_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,16 +228,61 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             }
         });
     }
+    public void generarEmpresaItems() {
+            
+            
+            
+        // Muestro pantalla de Consultar
+        String[] columnas = {"Empresa", "Items"};
+        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
+            
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+            
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return String.class;
+                    case 2:
+                        return String.class;
+                    default:
+                        return null;
+                }
+            }
+
+        };
+
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
+        tabla_empresa_item.setModel(dtm);
+        tabla_empresa_item.getColumnModel().getColumn(0).setCellRenderer(r);
+        tabla_empresa_item.getColumnModel().getColumn(1).setCellRenderer(r);
+    }
     
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_add_EA;
     private javax.swing.JButton button_crear;
+    private javax.swing.JButton button_delete_EA;
+    private javax.swing.JButton cancel_button;
     private javax.swing.JCheckBox checkbox_esEditable;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_codigo;
     private javax.swing.JLabel label_esEditable;
     private javax.swing.JLabel label_nombre;
+    private javax.swing.JTable tabla_empresa_item;
     private javax.swing.JTextField textField_nombre;
     private javax.swing.JTextField textfield_codigo;
     // End of variables declaration//GEN-END:variables

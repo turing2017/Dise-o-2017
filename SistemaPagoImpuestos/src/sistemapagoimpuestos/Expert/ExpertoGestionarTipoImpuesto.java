@@ -13,6 +13,8 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
+import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.TipoEmpresa;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
@@ -98,9 +100,16 @@ public class ExpertoGestionarTipoImpuesto {
                                                                 tipoImpuesto.isEsMontoEditableTipoImpuesto(),
                                                                 tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
         ArrayList<Empresa> empresaList = optenerEmpresaConTipoImpuesto(tipoImpuesto);
+        List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipoImpuestoItemList = new ArrayList<>();
         for(Empresa tempEmp : empresaList){
-            ArrayList<Item> dTOItemList = optenerItemsEmpresaConTipoImpuesto(tipoImpuesto, tempEmp);
-
+            DTOEmpresaTipoImpuestoItems dTOEmpresaTipoImpuestoItems = new DTOEmpresaTipoImpuestoItems();
+            dTOEmpresaTipoImpuestoItems.setdTOEmpresa(ConvertDTO.getInstance().convertEmpresa(tempEmp));
+            ArrayList<Item> itemList = optenerItemsEmpresaConTipoImpuesto(tipoImpuesto, tempEmp);
+            dTOEmpresaTipoImpuestoItems.setdTOItems(new ArrayList<>());
+            for(Item item : itemList){
+                dTOEmpresaTipoImpuestoItems.addItem(ConvertDTO.getInstance().convertItem(item));
+            }            
+            dTOEmpresaTipoImpuestoItemList.add(dTOEmpresaTipoImpuestoItems);
         }
         
         // Para probar seteo uno nuevo
@@ -108,6 +117,7 @@ public class ExpertoGestionarTipoImpuesto {
         dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
         dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
         dtoTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
+        dtoTipoImpuesto.setdTOEmpresaTipoImpuestoItemList(dTOEmpresaTipoImpuestoItemList);
         return dtoTipoImpuesto;        
         }catch(IndexOutOfBoundsException exception){
             System.out.println("Codigo Ingresado No Encontrado");
@@ -155,18 +165,23 @@ public class ExpertoGestionarTipoImpuesto {
     }
     
     public ArrayList<Empresa> optenerEmpresaConTipoImpuesto(TipoImpuesto tipoImpuesto){
-         List<DTOCriterio> criterios = new ArrayList<>();
+        List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();
         criterio1.setAtributo("tipoImpuesto");
         criterio1.setOperacion("=");
         criterio1.setValor(tipoImpuesto);
         criterios.add(criterio1);
-        List<Object> tipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
+        
+        List<Object> empresaObjectList = FachadaPersistencia.getInstance().buscar("Empresa", null);
+        List<Object> tipoEmpresaObjectList = FachadaPersistencia.getInstance().buscar("TipoEmpresa", null);
+        List<Object> tipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
+        
+        List<Object> empresaTipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
         ArrayList<Empresa> listEmpresa = new ArrayList<>();
-        for(Object tipoImpuestoObject: tipoImpuestoObjectList){
-            EmpresaTipoImpuesto empresaTipoImpuestoTemp = (EmpresaTipoImpuesto) tipoImpuestoObject;
+        for(Object empresaTipoImpuestoObject: empresaTipoImpuestoObjectList){
+            EmpresaTipoImpuesto empresaTipoImpuestoTemp = (EmpresaTipoImpuesto) empresaTipoImpuestoObject;
             Empresa empresaTemp = (Empresa) empresaTipoImpuestoTemp.getEmpresa();
-            listEmpresa.add(empresaTipoImpuestoTemp.getEmpresa());
+            listEmpresa.add(empresaTemp);
         }
         return listEmpresa;
     }
@@ -178,13 +193,20 @@ public class ExpertoGestionarTipoImpuesto {
         criterios.add(criterio1);
         criterios.add(criterio2);
         List<Object> tipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
-        ArrayList<DTOEmpresa> listDTOEmpresa = new ArrayList<>();
+        ArrayList<Item> listItem = new ArrayList<>();
         for(Object tipoImpuestoObject: tipoImpuestoObjectList){
             EmpresaTipoImpuesto empresaTipoImpuestoTemp = (EmpresaTipoImpuesto) tipoImpuestoObject;
-            
+            criterios.clear();
+            DTOCriterio criterio3 = new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuestoTemp);
+            criterios.add(criterio3);
+            List<Object> itemObjectList = FachadaPersistencia.getInstance().buscar("Item", null);
             List<Object> itemEmpresaTipoImpuestoObjectLis = FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterios);
-    
+
+            for(Object itemEmpresaTipoImpuestoObject : itemEmpresaTipoImpuestoObjectLis){
+                ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto = (ItemEmpresaTipoImpuesto) itemEmpresaTipoImpuestoObject;
+                listItem.add(itemEmpresaTipoImpuesto.getItem());
+            }            
         }
-        return null;
+        return listItem;
     }
 }

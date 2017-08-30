@@ -49,5 +49,23 @@ public class DTOEmpresaTipoImpuestoItems {
         this.dTOItems = dTOItems;
     }
     
+    public void addItem(DTOItem dTOItem){
+        this.dTOItems.add(dTOItem);
+    }
+
+    public String concatItems() {
+        String itemsConcat = null;
+        int couter = 0; 
+        for(DTOItem dTOItem : dTOItems){
+            if(couter >0){
+                itemsConcat = " - " +dTOItem.getNombreItem();
+            }else{
+                itemsConcat = dTOItem.getNombreItem();
+            }
+        }
+        return itemsConcat;
+    }
+    
+    
     
 }

@@ -1,6 +1,7 @@
     package sistemapagoimpuestos.Dto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -13,7 +14,7 @@ public class DTOTipoImpuesto {
     private String nombreDTOTipoImpuesto;
     private boolean esMontoEditableDTOTipoImpuesto;
     private Date fechaHoraInhabilitacionDTOTipoImpuesto;
-
+    private List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipoImpuestoItemList;
     public DTOTipoImpuesto() {
     }
 
@@ -57,6 +58,14 @@ public class DTOTipoImpuesto {
 
     public String getNombreDTOTipoImpuesto() {
         return nombreDTOTipoImpuesto;
+    }
+
+    public List<DTOEmpresaTipoImpuestoItems> getdTOEmpresaTipoImpuestoItemList() {
+        return dTOEmpresaTipoImpuestoItemList;
+    }
+
+    public void setdTOEmpresaTipoImpuestoItemList(List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipoImpuestoItemList) {
+        this.dTOEmpresaTipoImpuestoItemList = dTOEmpresaTipoImpuestoItemList;
     }
     
 }

@@ -13,6 +13,7 @@ public class Empresa extends Entity {
     private String nombreEmpresa;
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
+    
     public Empresa() {
     }
 
@@ -59,5 +60,6 @@ public class Empresa extends Entity {
     public Date getFechaHoraInhabilitacionEmpresa() {
         return fechaHoraInhabilitacionEmpresa;
     }
+    
     
 }

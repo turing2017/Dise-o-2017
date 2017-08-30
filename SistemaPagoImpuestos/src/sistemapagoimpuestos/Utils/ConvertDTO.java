@@ -34,7 +34,7 @@ public class ConvertDTO {
         
     }
     
-    public DTOItem convertEmpresa(Item  item){
+    public DTOItem convertItem(Item  item){
         DTOItem dTOItem = new DTOItem();
         dTOItem.setCodigoItem(item.getCodigoItem());
         dTOItem.setNombreItem(item.getNombreItem());

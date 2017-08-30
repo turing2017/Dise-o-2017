@@ -5,28 +5,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.scene.control.ComboBox;
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 
-/**
- *
- * @author Maximiliano
- */
 public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
-    
-    DTOEmpresa e1 = new DTOEmpresa("123", "GAEFG", null, "321");
-    DTOEmpresa e2 = new DTOEmpresa("41", "tuhermana", Date.from(Instant.now()), "gsfñgk");
-    
-    ArrayList<DTOEmpresa> list = new ArrayList<>();
     
     public IUGestionarTipoImpuestoItems() {
         initComponents();
-        list.add(e1);
-        list.add(e2);
-        llenarCombo(comboBox_Empresa);
+        List<DTOEmpresa> list = ControladorGestionarTipoImpuesto.getInstance().obtenerEmpresas();
+        llenarCombo(list);
     }
-    private void llenarCombo(javax.swing.JComboBox<String> combo){
+    private void llenarCombo(List<DTOEmpresa> list){
         for (int i = 0; i < list.size(); i++) {
-            combo.addItem(list.get(i).getNombreDTOEmpresa());
+            DTOEmpresa dtoEmpresa = (DTOEmpresa) list.get(i);
+            comboBox_Empresa.addItem(dtoEmpresa.getNombreDTOEmpresa());
         }
     }
         @SuppressWarnings("unchecked")

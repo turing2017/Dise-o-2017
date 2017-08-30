@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
@@ -120,5 +122,23 @@ public class ExpertoGestionarTipoImpuesto {
         }
         FachadaPersistencia.getInstance().guardar(tipoImpuesto);
         System.out.println("Guardando en la DB: " + tipoImpuesto.getNombreTipoImpuesto());
+    }
+    
+    public List<DTOEmpresa> obtenerEmpresas(){
+        List<DTOCriterio> criterios = new ArrayList<>();
+        criterios.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
+        List list = FachadaPersistencia.getInstance().buscar("Empresa", criterios);
+        
+        DTOEmpresa dtoEmpresa;
+        List<DTOEmpresa> listado = new ArrayList<>();
+        
+        for (int i = 0; i < list.size(); i++) {
+            dtoEmpresa = new DTOEmpresa();
+            Empresa empresa = (Empresa) list.get(i);
+            String nombreEmpresa = empresa.getNombreEmpresa();
+            dtoEmpresa.setNombreDTOEmpresa(nombreEmpresa);
+            listado.add(dtoEmpresa);
+        }
+        return listado;
     }
 }

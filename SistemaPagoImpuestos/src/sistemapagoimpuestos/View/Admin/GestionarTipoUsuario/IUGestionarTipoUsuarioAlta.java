@@ -99,8 +99,8 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
         
         }
         catch(java.lang.NumberFormatException e) {
-            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
-        }
+          Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
+       }
 
     }//GEN-LAST:event_button_crearActionPerformed
 

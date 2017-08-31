@@ -46,18 +46,20 @@ public class ExpertoGestionarTipoUsuario {
 
     public void nuevoTipoUsuario(String nombreTipoUsuarioIngres) {
     
-        List<DTOCriterio> criteriosNombre = new ArrayList<>();
+       List<DTOCriterio> criteriosNombre = new ArrayList<>();
         
         DTOCriterio criterioNombre = new DTOCriterio("nombreTipoUsuario", "=", nombreTipoUsuarioIngres);
         criteriosNombre.add(criterioNombre);
-               if(!existeDato("NombreTipoUsuario", criteriosNombre)){
-            System.out.println("Nombre Ingresado No Encontrado");
+        
+        if(!existeDato("TipoUsuario", criteriosNombre)){
+           System.out.println("Nombre Ingresado No Encontrado");
             TipoUsuario tipoUsuario = new TipoUsuario();
             tipoUsuario.setNombreTipoUsuario(nombreTipoUsuarioIngres);
-                     
+        
+            
             FachadaPersistencia.getInstance().guardar(tipoUsuario);        
         }else{
-            Excepciones.getInstance().objetoExistente("XXX CODIGO ");
+          Excepciones.getInstance().objetoExistente("Nombre");
 
         }
     

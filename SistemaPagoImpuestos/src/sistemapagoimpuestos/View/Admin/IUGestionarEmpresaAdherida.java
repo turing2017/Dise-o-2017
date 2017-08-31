@@ -7,6 +7,7 @@ package sistemapagoimpuestos.View.Admin;
 
 import exceptions.Excepciones;
 import java.util.Arrays;
+import javax.swing.JFrame;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 
 /**
@@ -108,18 +109,18 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
     private void Button_ConsultarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ConsultarEmpresaActionPerformed
         // TODO add your handling code here:
-        ControladorGestionarEmpresaAdherida.getInstance().opcionSeleccionada("ConsultarEmpresa", null);
+        opcionSeleccionada("ConsultarEmpresa", null);
     }//GEN-LAST:event_Button_ConsultarEmpresaActionPerformed
 
     private void Button_NuevaEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_NuevaEmpresaActionPerformed
         // TODO add your handling code here:
-        ControladorGestionarEmpresaAdherida.getInstance().opcionSeleccionada("NuevaEmpresa", null);
+        opcionSeleccionada("NuevaEmpresa", null);
     }//GEN-LAST:event_Button_NuevaEmpresaActionPerformed
 
     private void Button_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_BuscarActionPerformed
         // TODO add your handling code here:
         try{
-            ControladorGestionarEmpresaAdherida.getInstance().opcionSeleccionada("Modificar", Integer.parseInt(TextField_CUIT.getText()));
+            opcionSeleccionada("Modificar", Integer.parseInt(TextField_CUIT.getText()));
         }catch(NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
         }
@@ -152,6 +153,31 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                 new IUGestionarEmpresaAdherida().setVisible(true);
             }
         });
+    }
+    
+     public void opcionSeleccionada(String opcion, Object object){
+        switch(opcion) {
+        case "NuevaEmpresa" :
+        // Muestro pantalla de Nueva Empresa
+            IUGestionarEmpresaAdheridaNueva pantallaNuevaEmpresa = new IUGestionarEmpresaAdheridaNueva();
+            pantallaNuevaEmpresa.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+            pantallaNuevaEmpresa.setVisible(true); // La hago visible
+        break; // optional
+        
+        case "Modificar" :
+        // Muestro pantalla de Modificación
+            ControladorGestionarEmpresaAdherida.getInstance().conseguirEmpresa(object.toString());
+            IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion();
+            pantallaModificacion.setVisible(true);
+  
+        break; // optional
+        
+            
+        case "ConsultarEmpresa" :
+        IUGestionarEmpresaAdheridaConsultarEmpresa pantallaConsultarEmpresa = new IUGestionarEmpresaAdheridaConsultarEmpresa();
+        pantallaConsultarEmpresa.setVisible(true);
+        break;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

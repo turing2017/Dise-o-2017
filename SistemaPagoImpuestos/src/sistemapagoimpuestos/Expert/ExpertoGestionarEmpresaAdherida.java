@@ -23,7 +23,7 @@ import sistemapagoimpuestos.Dto.DTOEmpresaInhabilitada;
  */
 public class ExpertoGestionarEmpresaAdherida {
     
-    private Empresa empresa;
+    protected Empresa empresa;
 
     public String iniciar() {
 
@@ -43,7 +43,7 @@ public class ExpertoGestionarEmpresaAdherida {
             DTOCriterio criterio1 = new DTOCriterio();
             criterio1.setAtributo("fechaHoraInhabilitacionEmpresa");
             criterio1.setOperacion("=");
-            criterio1.setValor("");
+            criterio1.setValor(null);
             criterios.add(criterio1);
             //Se arma el criterio de busqueda para la condicion fechaHoraInhabilitacionEmpresa = null
             DTOCriterio criterio2 = new DTOCriterio();
@@ -99,7 +99,7 @@ public class ExpertoGestionarEmpresaAdherida {
         return listDTOEmpresaExistente;
     }
 
-    public void modificarDatosEmpresa(String cuitEmpresa) {
+    public Empresa conseguirEmpresa(String cuitEmpresa) {
 
         List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();
@@ -113,7 +113,7 @@ public class ExpertoGestionarEmpresaAdherida {
         String nombre = empresa.getNombreEmpresa();
         String direccion = empresa.getDireccionEmpresa();
         
-        ControladorGestionarEmpresaAdherida.getInstance().modificarDatosEmpresa(cuit, nombre, direccion);
+        return empresa;
     
     }
     

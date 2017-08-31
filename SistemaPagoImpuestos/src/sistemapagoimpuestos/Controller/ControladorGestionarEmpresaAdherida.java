@@ -19,6 +19,7 @@ import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaConsultarEmpres
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaModificacion;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaMuestra;
 import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Entity.Empresa;
 /**
  *
  * @author Tongas
@@ -50,34 +51,6 @@ public class ControladorGestionarEmpresaAdherida {
 // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
     }
    
-    public void opcionSeleccionada(String opcion, Object object){
-        switch(opcion) {
-        case "NuevaEmpresa" :
-        // Muestro pantalla de Nueva Empresa
-            IUGestionarEmpresaAdheridaNueva pantallaNuevaEmpresa = new IUGestionarEmpresaAdheridaNueva();
-            pantallaNuevaEmpresa.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-            pantallaNuevaEmpresa.setVisible(true); // La hago visible
-        break; // optional
-        
-        case "Modificar" :
-        // Muestro pantalla de Modificación
-            experto.modificarDatosEmpresa(object.toString());
-  
-        break; // optional
-        
-            
-        case "ConsultarEmpresa" :
-        IUGestionarEmpresaAdheridaConsultarEmpresa pantallaConsultarEmpresa = new IUGestionarEmpresaAdheridaConsultarEmpresa();
-        pantallaConsultarEmpresa.setVisible(true);
-        break;
-        }
-    }
-    public void modificarDatosEmpresa (String nombreEmpresa, String cuitEmpresa, String direccionEmpresa){
-        
-        IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion();
-            
-        
-    }
     
     public void seleccionarModificar (String nombreEmpresa, String direccionEmpresa) {
     
@@ -111,6 +84,11 @@ public class ControladorGestionarEmpresaAdherida {
     
     public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
         experto.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa);
+    }
+    
+    public Empresa conseguirEmpresa (String cuitEmpresa){
+        return experto.conseguirEmpresa(cuitEmpresa);
+ 
     }
     
 }

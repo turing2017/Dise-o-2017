@@ -42,7 +42,7 @@ public class FachadaInterna
                 String operacion = criterio.getOperacion();
                 Object valor = criterio.getValor();
 
-                switch (operacion)
+                    switch (operacion)
                 {
                     case "=":
                         cr.add(Restrictions.conjunction(Restrictions.eq(atributo, valor)));

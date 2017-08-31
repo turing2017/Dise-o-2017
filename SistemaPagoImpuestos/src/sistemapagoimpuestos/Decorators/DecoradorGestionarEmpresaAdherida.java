@@ -8,6 +8,7 @@ package sistemapagoimpuestos.Decorators;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -65,15 +66,13 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
+
     @Override
-    public void modificarDatosEmpresa(String cuitEmpresa) {
+    public Empresa conseguirEmpresa(String cuitEmpresa) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarDatosEmpresa(cuitEmpresa); //To change body of generated methods, choose Tools | Templates.
+        super.conseguirEmpresa(cuitEmpresa); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
+        return empresa;
     }
-    
-    
-    
-    
-    
+
 }

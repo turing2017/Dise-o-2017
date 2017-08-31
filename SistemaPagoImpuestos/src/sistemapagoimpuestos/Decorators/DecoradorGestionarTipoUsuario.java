@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import java.util.ArrayList;
+import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -18,4 +20,21 @@ public class DecoradorGestionarTipoUsuario extends ExpertoGestionarTipoUsuario {
         FachadaInterna.getInstance().finalizarTransaccion();
         return role;
 }
+    
+    @Override
+    public ArrayList<DTOTipoUsuario> obtenerTipoUsuario(){
+    
+            FachadaInterna.getInstance().iniciarTransaccion();
+            ArrayList<DTOTipoUsuario> listadoDtoTipoUsuario = super.obtenerTipoUsuario();
+            FachadaInterna.getInstance().finalizarTransaccion();
+            return listadoDtoTipoUsuario;
     }
+    
+    public void nuevoTipoUsuario(String nombreTipoUsuarioIngres){
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.nuevoTipoUsuario(nombreTipoUsuarioIngres);
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+    
+    }
+

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoUsuario;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoUsuario.IUGestionarTipoUsuario;
 
 
@@ -34,10 +33,14 @@ private static ControladorGestionarTipoUsuario controladorGestionarTipoUsuario;
         pantallaPrincipal.setVisible(true); 
         }  
     } 
-    
-        
+           
     public ArrayList<DTOTipoUsuario> obtenerTipoUsuario(){
         return experto.obtenerTipoUsuario();
+    
+    }
+    
+    public void nuevoTipoUsuario(String nombreTipoUsuario){
+        experto.nuevoTipoUsuario(nombreTipoUsuario);           
     
     }
     

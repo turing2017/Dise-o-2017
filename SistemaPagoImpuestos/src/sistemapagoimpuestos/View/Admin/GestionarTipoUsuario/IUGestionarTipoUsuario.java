@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 
 
@@ -26,7 +25,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_tipo_usuario = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        button_nuevo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -47,10 +46,10 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla_tipo_usuario);
 
-        jButton1.setText("Nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        button_nuevo.setText("Nuevo");
+        button_nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                button_nuevoActionPerformed(evt);
             }
         });
 
@@ -70,7 +69,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1))
+                                .addComponent(button_nuevo))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
@@ -80,7 +79,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addComponent(jLabel1)))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,17 +94,20 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(button_nuevo)
                     .addComponent(jButton2))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        //Le paso al controlador la operacion seleccionada
+        opcionSeleccionada("Alta", null);
+        this.dispose();
+    }//GEN-LAST:event_button_nuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,7 +150,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 ControladorGestionarTipoUsuario.getInstance().iniciar();
         }
         
-         public void obtenerTipoUsuario() {
+        public void obtenerTipoUsuario() {
             
              ArrayList<DTOTipoUsuario> listDtoTipoUsuario = ControladorGestionarTipoUsuario.getInstance().obtenerTipoUsuario();
              
@@ -194,11 +196,23 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
            tabla_tipo_usuario.setModel(dtm);
            
         }
+        
+        public void opcionSeleccionada(String opcion,Object object){
+        
+            switch (opcion){
+                case "Alta":
+                    //Muestro pantalla alta
+                    IUGestionarTipoUsuarioAlta pantallaAlta = new IUGestionarTipoUsuarioAlta();
+                    pantallaAlta.setVisible(true);
+            
+            }
+        
+        }
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton button_nuevo;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

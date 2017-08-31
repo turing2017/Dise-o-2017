@@ -9,16 +9,11 @@ import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
-import sistemapagoimpuestos.Entity.Empresa;
-import sistemapagoimpuestos.Entity.Item;
-import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
-import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
+import static sistemapagoimpuestos.Utils.Utils.existeDato;
 
 /**
  *
@@ -38,7 +33,7 @@ public class ExpertoGestionarTipoUsuario {
       
         List<Object> listObject =  FachadaPersistencia.getInstance().buscar("TipoUsuario", null);
         ArrayList<DTOTipoUsuario> listDtoTipoUsuario = new ArrayList<DTOTipoUsuario>();
-        for(Object obj : listObject){
+      for(Object obj : listObject){
             TipoUsuario tipoUsuario = (TipoUsuario) obj;
             DTOTipoUsuario dtoTipoUsuario = new DTOTipoUsuario();
             dtoTipoUsuario.setNombreDTOTipoUsuario(tipoUsuario.getNombreTipoUsuario());
@@ -47,51 +42,26 @@ public class ExpertoGestionarTipoUsuario {
         }
         return listDtoTipoUsuario;
         
-    }
-    
-    public DTOTipoUsuario obtenerTipoUsuario(String nombre){
-        // De alguna forma devuelvo el TipoImpuesto de la DB
-        try{
-        List<DTOCriterio> criterios = new ArrayList<>();
+    }   
 
-        DTOCriterio criterio1 = new DTOCriterio();
-        criterio1.setAtributo("nombreTipoUsuario");
-        criterio1.setOperacion("=");
-        criterio1.setValor(nombre);
-        criterios.add(criterio1);
-        TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios).get(0);
-        DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto(),
-                                                                tipoImpuesto.getNombreTipoImpuesto(),  
-                                                                tipoImpuesto.isEsMontoEditableTipoImpuesto(),
-                                                                tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
-        ArrayList<Empresa> empresaList = optenerEmpresaConTipoImpuesto(tipoImpuesto);
-        List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipoImpuestoItemList = new ArrayList<>();
-        for(Empresa tempEmp : empresaList){
-            DTOEmpresaTipoImpuestoItems dTOEmpresaTipoImpuestoItems = new DTOEmpresaTipoImpuestoItems();
-            dTOEmpresaTipoImpuestoItems.setdTOEmpresa(ConvertDTO.getInstance().convertEmpresa(tempEmp));
-            ArrayList<Item> itemList = optenerItemsEmpresaConTipoImpuesto(tipoImpuesto, tempEmp);
-            dTOEmpresaTipoImpuestoItems.setdTOItems(new ArrayList<>());
-            for(Item item : itemList){
-                dTOEmpresaTipoImpuestoItems.addItem(ConvertDTO.getInstance().convertItem(item));
-            }            
-            dTOEmpresaTipoImpuestoItemList.add(dTOEmpresaTipoImpuestoItems);
-        }
+    public void nuevoTipoUsuario(String nombreTipoUsuarioIngres) {
+    
+        List<DTOCriterio> criteriosNombre = new ArrayList<>();
         
-        // Para probar seteo uno nuevo
-        dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
-        dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
-        dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
-        dtoTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
-        dtoTipoImpuesto.setdTOEmpresaTipoImpuestoItemList(dTOEmpresaTipoImpuestoItemList);
-        return dtoTipoImpuesto;        
-        }catch(IndexOutOfBoundsException exception){
-            System.out.println("Codigo Ingresado No Encontrado");
-            new Excepciones().datoNoEncontrado("Tipo Impuesto");
-            return null;
-        }
+        DTOCriterio criterioNombre = new DTOCriterio("nombreTipoUsuario", "=", nombreTipoUsuarioIngres);
+        criteriosNombre.add(criterioNombre);
+               if(!existeDato("NombreTipoUsuario", criteriosNombre)){
+            System.out.println("Nombre Ingresado No Encontrado");
+            TipoUsuario tipoUsuario = new TipoUsuario();
+            tipoUsuario.setNombreTipoUsuario(nombreTipoUsuarioIngres);
+                     
+            FachadaPersistencia.getInstance().guardar(tipoUsuario);        
+        }else{
+            Excepciones.getInstance().objetoExistente("XXX CODIGO ");
 
+        }
+    
     }
-    
-    
+        
     
 }

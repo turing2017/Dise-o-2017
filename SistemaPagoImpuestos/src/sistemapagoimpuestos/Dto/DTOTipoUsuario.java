@@ -9,6 +9,7 @@ public class DTOTipoUsuario {
     //private int codigoDTOTipoUsuario;
     private String nombreDTOTipoUsuario;
     private Date fechaHoraInhabilitacionDTOTipoUsuario;
+   
     
     public DTOTipoUsuario() {       
 }

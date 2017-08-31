@@ -200,6 +200,11 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             int codigoTipoImpuesto = Integer.parseInt(textfield_codigo.getText());
             String nombreTipoImpuesto = textField_nombre.getText();
             boolean esMontoEditable = checkbox_esEditable.isSelected();
+            for (int i = 0; i < tabla_empresa_item.getRowCount(); i++) {
+                if((Boolean)(tabla_empresa_item.getValueAt(i, 1)) == true){
+                    String dtoItem = tabla_empresa_item.getValueAt(i, 0).toString();
+                }
+        }
 
             ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable);
             this.dispose();

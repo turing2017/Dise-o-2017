@@ -5,19 +5,7 @@
  */
 package sistemapagoimpuestos;
 
-import datosPrueba.DatosPrueba;
-import static datosPrueba.DatosPrueba.generarDatosPrueba;
-import java.util.ArrayList;
-import java.util.List;
-import org.hibernate.cfg.Configuration;
-import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Controller.ControladorGestionarTipoDeCuenta;
-import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
-import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
-import sistemapagoimpuestos.Entity.TipoImpuesto;
-import sistemapagoimpuestos.Utils.FachadaInterna;
-import sistemapagoimpuestos.Utils.FachadaPersistencia;
-import sistemapagoimpuestos.Utils.HibernateUtil;
+import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 /**
  *
  * @author Markz
@@ -33,7 +21,12 @@ public class SistemaPagoImpuestos {
         //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
         
         //ControladorGestionarTipoImpuesto.getInstance().iniciar();
-        ControladorGestionarTipoUsuario.getInstance().iniciar();
+        //ControladorGestionarTipoUsuario.getInstance().iniciar();
+        IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
+        pp.setVisible(true);
+        
+        
+        
        
     }
 }

@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.ArrayList;
+import java.util.Date;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -32,7 +33,13 @@ public class DecoradorGestionarTipoUsuario extends ExpertoGestionarTipoUsuario {
     
     public void nuevoTipoUsuario(String nombreTipoUsuarioIngres){
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.nuevoTipoUsuario(nombreTipoUsuarioIngres);
+        super.nuevoTipoUsuario(nombreTipoUsuarioIngres );
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+    
+        public void modificarTipoUsuario(String nombreTipoUsuarioIngres, Date fechaHoraInhabilitacionTipoUsuario){
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.modificarTipoUsuario(nombreTipoUsuarioIngres,fechaHoraInhabilitacionTipoUsuario);
         FachadaInterna.getInstance().finalizarTransaccion();
     }
     

@@ -2,6 +2,7 @@
 package sistemapagoimpuestos.Controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoUsuario;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -38,10 +39,23 @@ private static ControladorGestionarTipoUsuario controladorGestionarTipoUsuario;
         return experto.obtenerTipoUsuario();
     
     }
+        
+    public DTOTipoUsuario obtenerTipoUsuario(int codigo){
+      return experto.obtenerTipoUsuario(codigo);
+    }
+    
+    
     
     public void nuevoTipoUsuario(String nombreTipoUsuario){
-        experto.nuevoTipoUsuario(nombreTipoUsuario);           
+        experto.nuevoTipoUsuario(nombreTipoUsuario);
+        
+      
+    }
     
+     public void modificarTipoUsuario(String nombreTipoUsuario,Date fechaHoraInhabilitacionTipoUsuario){
+        experto.modificarTipoUsuario(nombreTipoUsuario,fechaHoraInhabilitacionTipoUsuario);
+        
+      
     }
     
 }

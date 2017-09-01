@@ -7,6 +7,7 @@ package sistemapagoimpuestos.Expert;
 
 import exceptions.Excepciones;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
@@ -45,15 +46,16 @@ public class ExpertoGestionarTipoUsuario {
     public void nuevoTipoUsuario(String nombreTipoUsuarioIngres) {
     
        List<DTOCriterio> criteriosNombre = new ArrayList<>();
+               
+        DTOCriterio criterioNombre = new DTOCriterio("nombreTipoUsuario", "=", nombreTipoUsuarioIngres);        
+        criteriosNombre.add(criterioNombre);        
         
-        DTOCriterio criterioNombre = new DTOCriterio("nombreTipoUsuario", "=", nombreTipoUsuarioIngres);
-        criteriosNombre.add(criterioNombre);
         
         if(!existeDato("TipoUsuario", criteriosNombre)){
            System.out.println("Nombre Ingresado No Encontrado");
             TipoUsuario tipoUsuario = new TipoUsuario();
             tipoUsuario.setNombreTipoUsuario(nombreTipoUsuarioIngres);
-        
+            tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(null);       
             
             FachadaPersistencia.getInstance().guardar(tipoUsuario);        
         }else{
@@ -62,6 +64,50 @@ public class ExpertoGestionarTipoUsuario {
         }
     
     }
+
+    public DTOTipoUsuario obtenerTipoUsuario(int codigo) {
+        // De alguna forma devuelvo el TipoImpuesto de la DB
+        try{
+        List<DTOCriterio> criterios = new ArrayList<>();
+
+        DTOCriterio criterio1 = new DTOCriterio();
+        criterio1.setAtributo("nombreTipoUsuario");
+        criterio1.setOperacion("=");
+        criterio1.setValor(codigo);
+        criterios.add(criterio1);
+        TipoUsuario tipoUsuario = (TipoUsuario)FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios).get(0);
+        DTOTipoUsuario dtoTipoUsuario = new DTOTipoUsuario(tipoUsuario.getNombreTipoUsuario(),tipoUsuario.getFechaHoraInhabilitacionTipoUsuario());
+        
+              
+        // Para probar seteo uno nuevo
+        dtoTipoUsuario.setFechaHoraInhabilitacionDTOTipoUsuario(null);
+        return dtoTipoUsuario; 
+        
+        }catch(IndexOutOfBoundsException exception){
+            System.out.println("Codigo Ingresado No Encontrado");
+            new Excepciones().datoNoEncontrado("Tipo Usuario");
+            return null;
+        } 
+    
+    }
+
+         public void modificarTipoUsuario(String nombreActualTipoImpuesto, Date fechaHoraInhabilitacionTipoUsuario){
+
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio1 = new DTOCriterio();
+        criterio1.setAtributo("fechaHoraInhabilitacionTipoUsuario");
+        criterio1.setOperacion("=");
+        criterio1.setValor(null);
+        criterios.add(criterio1);
+        
+        TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios).get(0);
+        tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(fechaHoraInhabilitacionTipoUsuario = new Date());
+        
+        FachadaPersistencia.getInstance().guardar(tipoUsuario);
+        System.out.println("Guardando en la DB: " + tipoUsuario.getNombreTipoUsuario());
+    }
+    }
+    
         
     
-}
+

@@ -12,6 +12,7 @@ import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import static sistemapagoimpuestos.Utils.Utils.existeDato;
 
@@ -35,10 +36,7 @@ public class ExpertoGestionarTipoUsuario {
         ArrayList<DTOTipoUsuario> listDtoTipoUsuario = new ArrayList<DTOTipoUsuario>();
       for(Object obj : listObject){
             TipoUsuario tipoUsuario = (TipoUsuario) obj;
-            DTOTipoUsuario dtoTipoUsuario = new DTOTipoUsuario();
-            dtoTipoUsuario.setNombreDTOTipoUsuario(tipoUsuario.getNombreTipoUsuario());
-            dtoTipoUsuario.setFechaHoraInhabilitacionDTOTipoUsuario(tipoUsuario.getFechaHoraInhabilitacionTipoUsuario());
-            listDtoTipoUsuario.add(dtoTipoUsuario);
+            listDtoTipoUsuario.add(ConvertDTO.getInstance().convertTipoUsuario(tipoUsuario));
         }
         return listDtoTipoUsuario;
         

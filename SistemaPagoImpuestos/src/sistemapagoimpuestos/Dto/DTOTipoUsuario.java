@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class DTOTipoUsuario {
 
-    //private int codigoDTOTipoUsuario;
     private String nombreDTOTipoUsuario;
     private Date fechaHoraInhabilitacionDTOTipoUsuario;
    

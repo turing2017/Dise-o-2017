@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.event.WindowAdapter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 import javafx.stage.WindowEvent;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
+import sistemapagoimpuestos.Entity.TipoUsuario;
 
 public class IUGestionarTipoUsuario extends javax.swing.JFrame {
 
@@ -32,7 +34,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         tabla_tipo_usuario = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         button_nuevo = new javax.swing.JButton();
-        button_deshabilitar = new javax.swing.JButton();
+        button_habilitar_deshabilitar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,10 +61,10 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             }
         });
 
-        button_deshabilitar.setText("Deshabilitar");
-        button_deshabilitar.addActionListener(new java.awt.event.ActionListener() {
+        button_habilitar_deshabilitar.setText("Habilitar/Deshabilitar");
+        button_habilitar_deshabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_deshabilitarActionPerformed(evt);
+                button_habilitar_deshabilitarActionPerformed(evt);
             }
         });
 
@@ -83,7 +85,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(button_deshabilitar)
+                                .addComponent(button_habilitar_deshabilitar)
                                 .addGap(18, 18, 18)
                                 .addComponent(button_nuevo))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +113,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_nuevo)
-                    .addComponent(button_deshabilitar))
+                    .addComponent(button_habilitar_deshabilitar))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -129,7 +131,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void button_deshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deshabilitarActionPerformed
+    private void button_habilitar_deshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_habilitar_deshabilitarActionPerformed
         // TODO add your handling code here:
         // Le paso al controlador la opción seleccionada.
         try {
@@ -138,13 +140,13 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             int rowSelected = tabla_tipo_usuario.getSelectedRow();
             String codigo = tabla_tipo_usuario.getModel().getValueAt(rowSelected, columnCode).toString();
 
-            opcionSeleccionada("Baja", Integer.parseInt(codigo));
+            opcionSeleccionada("Habilitar_Deshabilitar", codigo);
             this.dispose();
         } catch (ArrayIndexOutOfBoundsException e) {
             //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
             Excepciones.getInstance().objetoNoSeleccionado();
         }
-    }//GEN-LAST:event_button_deshabilitarActionPerformed
+    }//GEN-LAST:event_button_habilitar_deshabilitarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,7 +198,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
 
         ArrayList<DTOTipoUsuario> listDtoTipoUsuario = ControladorGestionarTipoUsuario.getInstance().obtenerTipoUsuario();
 
-        String[] columnas = {"Nombre Tipo Usuario", "Inhabilitacion"};
+        String[] columnas = {"Nombre Tipo Usuario", "Estado"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
 
             @Override
@@ -225,11 +227,11 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             vect.add(dtoTipoUsuario.getNombreDTOTipoUsuario());
             vect.add(dtoTipoUsuario.getFechaHoraInhabilitacionDTOTipoUsuario());
 
-            if (dtoTipoUsuario.getFechaHoraInhabilitacionDTOTipoUsuario() != null) {
-                vect.add(false);
-            } else {
-                vect.add(true);
-            }
+//            if (dtoTipoUsuario.getFechaHoraInhabilitacionDTOTipoUsuario() != null) {
+//                vect.add(false);
+//            } else {
+//                vect.add(true);
+//            }
             dtm.addRow(vect);
         }
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
@@ -253,9 +255,15 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 //Muestro pantalla alta
                 IUGestionarTipoUsuarioAlta pantallaAlta = new IUGestionarTipoUsuarioAlta();
                 pantallaAlta.setVisible(true);
-            case "Baja":
-                DTOTipoUsuario dtoTu = ControladorGestionarTipoUsuario.getInstance().obtenerTipoUsuario((int) object);
+            case "Habilitar_Deshabilitar":
+                
+                List<DTOTipoUsuario> dtoTu = ControladorGestionarTipoUsuario.getInstance().obtenerTipoUsuario(object.toString());
+              
                 if (dtoTu != null) {
+
+                    ControladorGestionarTipoUsuario.getInstance().modificarTipoUsuario(dtoTu.get(0).getNombreDTOTipoUsuario(), dtoTu.get(0).getFechaHoraInhabilitacionDTOTipoUsuario());
+                   // ControladorGestionarTipoUsuario.getInstance().modificarTipoUsuario(object.toString());
+
                     IUGestionarTipoUsuario pantallaBaja = new IUGestionarTipoUsuario();
                     pantallaBaja.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                     pantallaBaja.setVisible(true);
@@ -266,34 +274,14 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                             ControladorGestionarTipoUsuario.getInstance().iniciar();
                         }
                     });
-                  
 
-//                         pantallaBaja;
-//             es el de filtrar       pantallaBaja.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto()); 
-//                    pantallaBaja.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
-//                    pantallaBaja.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
-//                    pantallaModificar.obtenerEmpresaItems(dtoTi.getdTOEmpresaTipoImpuestoItemList());
-//                    if (dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto() == null) {
-//                        pantallaModificar.setCheckbox_Habilitar(true);
-//                    } else {
-//                        pantallaModificar.setCheckbox_Habilitar(false);
-//                    }
-//                }
-//
-//                break; // optional
-//
-//            // You can have any number of case statements.
-//            default: // Optional
-//            // Statements
-//        }
-//    }
                 }
 
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button_deshabilitar;
+    private javax.swing.JButton button_habilitar_deshabilitar;
     private javax.swing.JButton button_nuevo;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

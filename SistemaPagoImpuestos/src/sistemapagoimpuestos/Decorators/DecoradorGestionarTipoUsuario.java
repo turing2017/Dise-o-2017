@@ -7,41 +7,50 @@ package sistemapagoimpuestos.Decorators;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
-
 public class DecoradorGestionarTipoUsuario extends ExpertoGestionarTipoUsuario {
-    
+
     @Override
-    public String iniciar(){
+    public String iniciar() {
         FachadaInterna.getInstance().iniciarTransaccion();
         String role = super.iniciar();
         FachadaInterna.getInstance().finalizarTransaccion();
         return role;
-}
-    
-    @Override
-    public ArrayList<DTOTipoUsuario> obtenerTipoUsuario(){
-    
-            FachadaInterna.getInstance().iniciarTransaccion();
-            ArrayList<DTOTipoUsuario> listadoDtoTipoUsuario = super.obtenerTipoUsuario();
-            FachadaInterna.getInstance().finalizarTransaccion();
-            return listadoDtoTipoUsuario;
-    }
-    
-    public void nuevoTipoUsuario(String nombreTipoUsuarioIngres){
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.nuevoTipoUsuario(nombreTipoUsuarioIngres );
-        FachadaInterna.getInstance().finalizarTransaccion();
-    }
-    
-        public void modificarTipoUsuario(String nombreTipoUsuarioIngres, Date fechaHoraInhabilitacionTipoUsuario){
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarTipoUsuario(nombreTipoUsuarioIngres,fechaHoraInhabilitacionTipoUsuario);
-        FachadaInterna.getInstance().finalizarTransaccion();
-    }
-    
     }
 
+    @Override
+       public ArrayList<DTOTipoUsuario> obtenerTipoUsuario() {
+
+        FachadaInterna.getInstance().iniciarTransaccion();
+        ArrayList<DTOTipoUsuario> listadoDtoTipoUsuario = super.obtenerTipoUsuario();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        
+        return listadoDtoTipoUsuario;
+    }
+
+    @Override
+    public ArrayList<DTOTipoUsuario> obtenerTipoUsuario(String codigo) {
+
+        FachadaInterna.getInstance().iniciarTransaccion();
+        ArrayList<DTOTipoUsuario> listadoDtoTipoUsuario = super.obtenerTipoUsuario();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listadoDtoTipoUsuario;
+    }
+
+    public void nuevoTipoUsuario(String nombreTipoUsuarioIngres) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.nuevoTipoUsuario(nombreTipoUsuarioIngres);
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+
+    public void modificarTipoUsuario(String nombreActualTipoUsuario, Date fechaActualTipoUsuario) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.modificarTipoUsuario(nombreActualTipoUsuario, fechaActualTipoUsuario);
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+
+}

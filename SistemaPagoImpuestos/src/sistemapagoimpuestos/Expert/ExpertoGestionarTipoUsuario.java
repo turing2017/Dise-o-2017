@@ -89,7 +89,7 @@ public class ExpertoGestionarTipoUsuario {
 
     }
 
-    public void modificarTipoUsuario(String nombreActualTipoUsuario, Date fechaActualTipoUsuario) {
+    public void modificarTipoUsuario(String nombreActualTipoUsuario) {
 
               
         List<DTOCriterio> criterios = new ArrayList<>();
@@ -101,10 +101,10 @@ public class ExpertoGestionarTipoUsuario {
        
         
         TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios).get(0);
-        if(fechaActualTipoUsuario == null){
-        tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(new Date());
+        if(tipoUsuario.getFechaHoraInhabilitacionTipoUsuario() == null){
+            tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(new Date());
         }else{
-        tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(null);
+            tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(null);
         }
         FachadaPersistencia.getInstance().guardar(tipoUsuario);
         System.out.println("Guardando en la DB: " + tipoUsuario.getNombreTipoUsuario());

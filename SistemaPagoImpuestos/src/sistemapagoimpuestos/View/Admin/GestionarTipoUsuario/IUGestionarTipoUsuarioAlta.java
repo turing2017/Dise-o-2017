@@ -76,17 +76,15 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_crearActionPerformed
-        try{
-            String nombreTipoUsuario = textField_nombre.getText();
-            
+
+        String nombreTipoUsuario = textField_nombre.getText();
+        if (!nombreTipoUsuario.equals("")) {
             ControladorGestionarTipoUsuario.getInstance().nuevoTipoUsuario(nombreTipoUsuario);
             this.dispose();
             ControladorGestionarTipoUsuario.getInstance().iniciar();
-        
+        } else {
+            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
-        catch(java.lang.NumberFormatException e) {
-          Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
-       }
 
     }//GEN-LAST:event_button_crearActionPerformed
 

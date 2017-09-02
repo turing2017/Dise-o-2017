@@ -53,8 +53,8 @@ private static ControladorGestionarTipoUsuario controladorGestionarTipoUsuario;
       
     }
     
-     public void modificarTipoUsuario(String nombreActualTipoUsuario, Date fechaActualTipoUsuario){
-        experto.modificarTipoUsuario(nombreActualTipoUsuario,fechaActualTipoUsuario);
+     public void modificarTipoUsuario(String nombreActualTipoUsuario){
+        experto.modificarTipoUsuario(nombreActualTipoUsuario);
         
       
     }

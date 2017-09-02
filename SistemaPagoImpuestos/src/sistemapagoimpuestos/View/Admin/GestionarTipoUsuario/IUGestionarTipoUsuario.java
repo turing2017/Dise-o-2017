@@ -3,6 +3,7 @@ package sistemapagoimpuestos.View.Admin.GestionarTipoUsuario;
 import exceptions.Excepciones;
 import java.awt.Component;
 import java.awt.event.WindowAdapter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         button_nuevo = new javax.swing.JButton();
         button_habilitar_deshabilitar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        button_filtrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,10 +69,10 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Filtrar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        button_filtrar.setText("Filtrar");
+        button_filtrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                button_filtrarActionPerformed(evt);
             }
         });
 
@@ -93,7 +94,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton3)))))
+                                    .addComponent(button_filtrar)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addComponent(jLabel1)))
@@ -107,7 +108,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(button_filtrar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
@@ -127,9 +128,9 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_button_nuevoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void button_filtrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_filtrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_button_filtrarActionPerformed
 
     private void button_habilitar_deshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_habilitar_deshabilitarActionPerformed
         // TODO add your handling code here:
@@ -190,15 +191,11 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         ControladorGestionarTipoUsuario.getInstance().iniciar();
     }
 
-    public void deshabilitarTipoUsuario() {
-
-    }
-
     public void obtenerTipoUsuario() {
 
         ArrayList<DTOTipoUsuario> listDtoTipoUsuario = ControladorGestionarTipoUsuario.getInstance().obtenerTipoUsuario();
 
-        String[] columnas = {"Nombre Tipo Usuario", "Estado"};
+        String[] columnas = {"Nombre Tipo Usuario", "Fecha Inhabilitación"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
 
             @Override
@@ -212,7 +209,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                     case 0:
                         return String.class;
                     case 1:
-                        return Date.class;
+                        return String.class;
                     default:
                         return null;
 
@@ -221,17 +218,16 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             }
 
         };
-
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (DTOTipoUsuario dtoTipoUsuario : listDtoTipoUsuario) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoTipoUsuario.getNombreDTOTipoUsuario());
-            vect.add(dtoTipoUsuario.getFechaHoraInhabilitacionDTOTipoUsuario());
+            String fecha = "";
+            if (dtoTipoUsuario.getFechaHoraInhabilitacionDTOTipoUsuario() != null) {
+                fecha = sdf.format(dtoTipoUsuario.getFechaHoraInhabilitacionDTOTipoUsuario()).toString();
+            }
 
-//            if (dtoTipoUsuario.getFechaHoraInhabilitacionDTOTipoUsuario() != null) {
-//                vect.add(false);
-//            } else {
-//                vect.add(true);
-//            }
+            vect.add(fecha);
             dtm.addRow(vect);
         }
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
@@ -255,35 +251,20 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 //Muestro pantalla alta
                 IUGestionarTipoUsuarioAlta pantallaAlta = new IUGestionarTipoUsuarioAlta();
                 pantallaAlta.setVisible(true);
+                break;
             case "Habilitar_Deshabilitar":
-                
-                List<DTOTipoUsuario> dtoTu = ControladorGestionarTipoUsuario.getInstance().obtenerTipoUsuario(object.toString());
-              
-                if (dtoTu != null) {
-
-                    ControladorGestionarTipoUsuario.getInstance().modificarTipoUsuario(dtoTu.get(0).getNombreDTOTipoUsuario(), dtoTu.get(0).getFechaHoraInhabilitacionDTOTipoUsuario());
-                   // ControladorGestionarTipoUsuario.getInstance().modificarTipoUsuario(object.toString());
-
-                    IUGestionarTipoUsuario pantallaBaja = new IUGestionarTipoUsuario();
-                    pantallaBaja.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-                    pantallaBaja.setVisible(true);
-                    pantallaBaja.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    pantallaBaja.addWindowListener(new WindowAdapter() {
-                        public void windowClosing(WindowEvent ev) {
-                            pantallaBaja.dispose();
-                            ControladorGestionarTipoUsuario.getInstance().iniciar();
-                        }
-                    });
-
-                }
-
+                ControladorGestionarTipoUsuario.getInstance().modificarTipoUsuario((String) object);
+                this.dispose();
+                IUGestionarTipoUsuario pantallaPrincipal = new IUGestionarTipoUsuario();
+                pantallaPrincipal.setVisible(true);
+                break;
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_habilitar_deshabilitar;
     private javax.swing.JButton button_nuevo;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

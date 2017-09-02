@@ -23,12 +23,12 @@ public class DecoradorGestionarTipoUsuario extends ExpertoGestionarTipoUsuario {
     }
 
     @Override
-       public ArrayList<DTOTipoUsuario> obtenerTipoUsuario() {
+    public ArrayList<DTOTipoUsuario> obtenerTipoUsuario() {
 
         FachadaInterna.getInstance().iniciarTransaccion();
         ArrayList<DTOTipoUsuario> listadoDtoTipoUsuario = super.obtenerTipoUsuario();
         FachadaInterna.getInstance().finalizarTransaccion();
-        
+
         return listadoDtoTipoUsuario;
     }
 
@@ -41,15 +41,17 @@ public class DecoradorGestionarTipoUsuario extends ExpertoGestionarTipoUsuario {
         return listadoDtoTipoUsuario;
     }
 
+    @Override
     public void nuevoTipoUsuario(String nombreTipoUsuarioIngres) {
         FachadaInterna.getInstance().iniciarTransaccion();
         super.nuevoTipoUsuario(nombreTipoUsuarioIngres);
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
-    public void modificarTipoUsuario(String nombreActualTipoUsuario, Date fechaActualTipoUsuario) {
+    @Override
+    public void modificarTipoUsuario(String nombreActualTipoUsuario) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarTipoUsuario(nombreActualTipoUsuario, fechaActualTipoUsuario);
+        super.modificarTipoUsuario(nombreActualTipoUsuario);
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 

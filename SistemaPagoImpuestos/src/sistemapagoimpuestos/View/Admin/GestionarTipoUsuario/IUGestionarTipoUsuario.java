@@ -121,6 +121,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         //Le paso al controlador la operacion seleccionada
         opcionSeleccionada("Alta", null);
+        this.dispose();
 
     }//GEN-LAST:event_button_nuevoActionPerformed
 

@@ -2,22 +2,19 @@ package sistemapagoimpuestos.View.Admin.GestionarTipoUsuario;
 
 import exceptions.Excepciones;
 import java.awt.Component;
-import java.awt.event.WindowAdapter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Vector;
-import javafx.stage.WindowEvent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
-import sistemapagoimpuestos.Entity.TipoUsuario;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUGestionarTipoUsuario extends javax.swing.JFrame {
 
@@ -122,14 +119,15 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
-        // TODO add your handling code here:
         //Le paso al controlador la operacion seleccionada
         opcionSeleccionada("Alta", null);
-        this.dispose();
+
     }//GEN-LAST:event_button_nuevoActionPerformed
 
     private void button_filtrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_filtrarActionPerformed
-        // TODO add your handling code here:
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tabla_tipo_usuario.getModel()));
+        sorter.setRowFilter(RowFilter.regexFilter(jTextField1.getText()));
+        tabla_tipo_usuario.setRowSorter(sorter);
     }//GEN-LAST:event_button_filtrarActionPerformed
 
     private void button_habilitar_deshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_habilitar_deshabilitarActionPerformed
@@ -250,13 +248,14 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             case "Alta":
                 //Muestro pantalla alta
                 IUGestionarTipoUsuarioAlta pantallaAlta = new IUGestionarTipoUsuarioAlta();
-                pantallaAlta.setVisible(true);
+                MetodosPantalla.getInstance().setearPantalla(pantallaAlta);
                 break;
             case "Habilitar_Deshabilitar":
                 ControladorGestionarTipoUsuario.getInstance().modificarTipoUsuario((String) object);
                 this.dispose();
                 IUGestionarTipoUsuario pantallaPrincipal = new IUGestionarTipoUsuario();
-                pantallaPrincipal.setVisible(true);
+                MetodosPantalla.getInstance().setearPantalla(pantallaPrincipal);
+
                 break;
         }
     }

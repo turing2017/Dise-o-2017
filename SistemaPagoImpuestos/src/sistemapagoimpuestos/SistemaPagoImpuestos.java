@@ -23,6 +23,7 @@ public class SistemaPagoImpuestos {
         //ControladorGestionarTipoImpuesto.getInstance().iniciar();
         //ControladorGestionarTipoUsuario.getInstance().iniciar();
         IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
+        pp.setLocationRelativeTo(null);
         pp.setVisible(true);
         
         

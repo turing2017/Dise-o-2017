@@ -54,7 +54,6 @@ public class ExpertoGestionarTipoUsuario {
             TipoUsuario tipoUsuario = new TipoUsuario();
             tipoUsuario.setNombreTipoUsuario(nombreTipoUsuarioIngres);
             tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(null);
-
             FachadaPersistencia.getInstance().guardar(tipoUsuario);
         } else {
             Excepciones.getInstance().objetoExistente("Nombre");
@@ -77,8 +76,6 @@ public class ExpertoGestionarTipoUsuario {
             List<DTOTipoUsuario> listdtoTipoUsuario = new ArrayList();
             listdtoTipoUsuario.add(new DTOTipoUsuario(tipoUsuario.getNombreTipoUsuario(), tipoUsuario.getFechaHoraInhabilitacionTipoUsuario()));
 
-            // Para probar seteo uno nuevo
-            // no iria.....dtoTipoUsuario.setFechaHoraInhabilitacionDTOTipoUsuario(null);
             return listdtoTipoUsuario;
 
         } catch (IndexOutOfBoundsException exception) {

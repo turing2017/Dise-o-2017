@@ -16,9 +16,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
 
     @Override
-    public List iniciar() {
+    public String iniciar() {
         FachadaInterna.getInstance().iniciarTransaccion();
-        List tempString = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
+        String tempString = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return tempString;
     }

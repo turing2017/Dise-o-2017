@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import java.util.ArrayList;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUGestionarLiquidacion;
@@ -31,9 +33,13 @@ public class ControladorGestionarLiquidacion {
     }
       // Metodo iniciar
     public void iniciar(){
-        if(experto.iniciar().equals("Administrador")){
+       // if(experto.iniciar().equals("Administrador"))
+        {
         IUGestionarLiquidacion pantallaPrincipal = new IUGestionarLiquidacion();
         pantallaPrincipal.setVisible(true); 
         }        
+    }
+public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
+        return  experto.obtenerTipoImpuestos();
     }
 }

@@ -40,10 +40,10 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
         
     }
 @Override
-    public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(){
+    public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nomreTipoImpuesto){
         ArrayList<DTOEmpresa> listObject;
         FachadaInterna.getInstance().iniciarTransaccion();
-        listObject= super.obtenerEmpresarelacionadaATipoImpuesto(); //To change body of generated methods, choose Tools | Templates.
+        listObject= super.obtenerEmpresarelacionadaATipoImpuesto(nomreTipoImpuesto); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return listObject;
         

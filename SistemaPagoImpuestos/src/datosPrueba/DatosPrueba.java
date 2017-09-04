@@ -26,7 +26,7 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class DatosPrueba {
     public static void generarDatosPrueba(){
-        /*
+        
         FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoEmpresa();
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -48,7 +48,7 @@ public class DatosPrueba {
         FachadaInterna.getInstance().iniciarTransaccion();
         generarItemEmpresaTipoImpuesto();
         FachadaInterna.getInstance().finalizarTransaccion();
-*/
+
         
          FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoImpuesto();

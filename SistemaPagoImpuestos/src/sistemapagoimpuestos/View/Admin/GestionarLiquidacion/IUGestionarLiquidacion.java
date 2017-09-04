@@ -148,7 +148,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                     .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(255, 255, 255))
+                        .addGap(278, 278, 278))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -210,10 +210,14 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxEmpresaActionPerformed
 
     private void jComboBoxTipoImpuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoItemStateChanged
-        System.out.print("pikachuuu");
-  /*      ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto();
+        jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.addItem("Todos");
+         ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+       for(DTOEmpresa obj : listDtoDTOEmpresa){
+             jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}
+    /*   ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto();
          for(DTOEmpresa obj : listDtoDTOEmpresa){
-             jComboBoxTipoImpuesto.addItem(obj.getNombreEmpresa());    */ 
+             jComboBoxTipoImpuesto.addItem(obj.getNombreEmpresa()); }   */
     }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
     
     /**

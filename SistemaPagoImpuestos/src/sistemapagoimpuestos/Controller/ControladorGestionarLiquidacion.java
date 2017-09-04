@@ -50,8 +50,8 @@ public class ControladorGestionarLiquidacion {
 public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
         return  experto.obtenerTipoImpuestos();
     }
-public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(){  
-        return  experto.obtenerEmpresarelacionadaATipoImpuesto();
+public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto){  
+        return  experto.obtenerEmpresarelacionadaATipoImpuesto( nombreTipoImpuesto);
     }
 
 }

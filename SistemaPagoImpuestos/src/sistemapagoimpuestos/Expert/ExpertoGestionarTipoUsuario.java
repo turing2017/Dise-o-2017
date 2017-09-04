@@ -73,10 +73,10 @@ public class ExpertoGestionarTipoUsuario {
             criterio1.setValor(codigo);
             criterios.add(criterio1);
             TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios).get(0);
-            List<DTOTipoUsuario> listdtoTipoUsuario = new ArrayList();
-            listdtoTipoUsuario.add(new DTOTipoUsuario(tipoUsuario.getNombreTipoUsuario(), tipoUsuario.getFechaHoraInhabilitacionTipoUsuario()));
+            List<DTOTipoUsuario> listadoTipoUsuario = new ArrayList();
+            listadoTipoUsuario.add(new DTOTipoUsuario(tipoUsuario.getNombreTipoUsuario(), tipoUsuario.getFechaHoraInhabilitacionTipoUsuario()));
 
-            return listdtoTipoUsuario;
+            return listadoTipoUsuario;
 
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("Codigo Ingresado No Encontrado");

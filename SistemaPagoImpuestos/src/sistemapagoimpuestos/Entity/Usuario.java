@@ -2,10 +2,7 @@ package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-/**
- *
- * @author lunamarcos
- */
+
 public class Usuario extends Entity{
     
     // Atriburos propios de la clase
@@ -15,7 +12,7 @@ public class Usuario extends Entity{
     private Date fechaHoraUltimoIngresoSistemaUsuario;
     
     // Atributos por relación
-    private TipoUsuario tipoUsuario;
+    public TipoUsuario tipoUsuario;
     private Cliente cliente;
     private Empresa empresa;
     
@@ -32,6 +29,21 @@ public class Usuario extends Entity{
         this.empresa = empresa;
     }
 
+    public Usuario(String nombreUsuario, String passwordUsuario) {
+        this.nombreUsuario = nombreUsuario;
+        this.passwordUsuario = passwordUsuario;
+    }
+
+    public Usuario(TipoUsuario tipoUsuario, String OID) {
+        super(OID);
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Usuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    
     
 
     // Setters
@@ -39,7 +51,7 @@ public class Usuario extends Entity{
         this.nombreUsuario = nombreUsuario;
     }
 
-    public void setPassword(String password) {
+    public void setPasswordUsuario(String password) {
         this.passwordUsuario = password;
     }
 
@@ -68,7 +80,7 @@ public class Usuario extends Entity{
         return nombreUsuario;
     }
 
-    public String getPassword() {
+    public String getPasswordUsuario() {
         return passwordUsuario;
     }
 

@@ -6,8 +6,6 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;

@@ -6,12 +6,9 @@ import java.util.List;
 import java.util.Date;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Dto.DTOCriterio;
-import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
-import sistemapagoimpuestos.Utils.ConvertDTO;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.Cliente.IUPantallaCliente;
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 
@@ -22,6 +19,7 @@ import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 public class ExpertoLoguearUsuario {
 
     Usuario usuario = new Usuario();
+    public String fechaHoraInhabilitacionUsuarioEncontrada;
 
     public String iniciar() {
 
@@ -55,7 +53,13 @@ public class ExpertoLoguearUsuario {
 
             Usuario usuario = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criteriosUsuario).get(0);
             String tipoUsuarioEncontrado = usuario.tipoUsuario.getNombreTipoUsuario();
-            String fechaUltimoAcceso = usuario.getFechaHoraUltimoIngresoSistemaUsuario().toString();
+            Date dateFechaUltimoAcceso = (Date) usuario.getFechaHoraUltimoIngresoSistemaUsuario();
+
+            if (dateFechaUltimoAcceso == null) {
+                fechaHoraInhabilitacionUsuarioEncontrada = "Sin último acceso";              
+            } else {
+                fechaHoraInhabilitacionUsuarioEncontrada = dateFechaUltimoAcceso.toString();
+            }
 
             //Criterio para buscar el tipo de usuario del usuario encontrado
             DTOCriterio criterio4 = new DTOCriterio();
@@ -78,12 +82,12 @@ public class ExpertoLoguearUsuario {
                 IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
                 pp.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pp.setLocationRelativeTo(null);
-                pp.mostrarPantallaPrincipal(nombreUsuarioIngres, fechaUltimoAcceso);
+                pp.mostrarPantallaPrincipal(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada);
             } else {
                 IUPantallaCliente pc = new IUPantallaCliente();
                 pc.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pc.setLocationRelativeTo(null);
-                pc.mostrarPantallaCliente(nombreUsuarioIngres, fechaUltimoAcceso);
+                pc.mostrarPantallaCliente(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada);
             }
 
         } catch (IndexOutOfBoundsException exception) {

@@ -24,7 +24,7 @@ public class IUPantallaCliente extends javax.swing.JFrame {
        
         IUPantallaCliente pc = new IUPantallaCliente();
         pc.label_nombre.setText("Nombre Usuario: " + nombreClienteLogeado );
-        pc.label_fecha.setText("Ultimo acceso " + fechaUltimoAcceso );
+        pc.label_fecha.setText("Ultimo acceso: " + fechaUltimoAcceso );
         MetodosPantalla.getInstance().setearPantalla(pc);
     }
 

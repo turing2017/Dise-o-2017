@@ -53,6 +53,7 @@ public class DatosPrueba {
          FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoImpuesto();
         FachadaInterna.getInstance().finalizarTransaccion();
+        
     }
     
     public static void generarTipoDatoItem(){

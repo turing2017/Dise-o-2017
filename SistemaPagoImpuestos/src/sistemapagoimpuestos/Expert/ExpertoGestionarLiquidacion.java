@@ -7,8 +7,10 @@ package sistemapagoimpuestos.Expert;
 
 import java.util.ArrayList;
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
@@ -51,6 +53,23 @@ public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
         }
         return listDtoTipoImpuesto;
     }
+public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(){
+    
+   List<Object> listObject =  FachadaPersistencia.getInstance().buscar("Empresa", null);
+        ArrayList<DTOEmpresa> listDTOEmpresa = new ArrayList<DTOEmpresa>();
+        for(Object obj : listObject){
+            Empresa empresa = (Empresa) obj;
+            DTOEmpresa dtoEmpresa = new DTOEmpresa();
+            dtoEmpresa.setNombreEmpresa(empresa.getNombreEmpresa());
+            dtoEmpresa.setCuitEmpresa(empresa.getCuitEmpresa());
+            dtoEmpresa.setDireccionEmpresa(empresa.getDireccionEmpresa());
+            dtoEmpresa.setFechaHoraInhabilitacionEmpresa(empresa.getFechaHoraInhabilitacionEmpresa());
+            listDTOEmpresa.add(dtoEmpresa);
+   
+
+                                    }
+        return listDTOEmpresa;
+               }
 }
 
 

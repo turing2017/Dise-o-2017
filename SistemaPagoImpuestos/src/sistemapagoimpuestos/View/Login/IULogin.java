@@ -20,8 +20,8 @@ public class IULogin extends javax.swing.JFrame {
         label_usuario = new javax.swing.JLabel();
         label_constraseña = new javax.swing.JLabel();
         textfield_usuario = new javax.swing.JTextField();
-        textfield_contraseña = new javax.swing.JTextField();
         button_entrar = new javax.swing.JButton();
+        textfield_contraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,10 +59,10 @@ public class IULogin extends javax.swing.JFrame {
                             .addComponent(label_constraseña)
                             .addComponent(label_usuario))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textfield_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textfield_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(81, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textfield_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(textfield_contraseña))))
+                .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(button_entrar)
@@ -73,15 +73,15 @@ public class IULogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_usuario)
                     .addComponent(textfield_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_constraseña)
                     .addComponent(textfield_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(button_entrar)
                 .addGap(24, 24, 24))
         );
@@ -89,9 +89,20 @@ public class IULogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String nombreUsuarioIngres;
+    private static String nombreUsuarioIngres;
     private String passwordUsuarioIngres;
 
+    public String getNombreUsuarioIngres() {
+        return nombreUsuarioIngres;
+    }
+
+    public static void setNombreUsuarioIngres(String nombreUsuarioIngres) {
+        IULogin.nombreUsuarioIngres = nombreUsuarioIngres;
+    }
+    
+    public IULogin(String nombreUsuarioIngres){
+        IULogin.nombreUsuarioIngres = nombreUsuarioIngres;
+    } 
 
     private void button_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_entrarActionPerformed
 
@@ -144,7 +155,7 @@ public class IULogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel label_constraseña;
     private javax.swing.JLabel label_usuario;
-    private javax.swing.JTextField textfield_contraseña;
+    private javax.swing.JPasswordField textfield_contraseña;
     private javax.swing.JTextField textfield_usuario;
     // End of variables declaration//GEN-END:variables
 }

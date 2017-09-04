@@ -4,6 +4,7 @@ import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Entity.TipoUsuario;
@@ -54,6 +55,7 @@ public class ExpertoLoguearUsuario {
 
             Usuario usuario = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criteriosUsuario).get(0);
             String tipoUsuarioEncontrado = usuario.tipoUsuario.getNombreTipoUsuario();
+            String fechaUltimoAcceso = usuario.getFechaHoraUltimoIngresoSistemaUsuario().toString();
 
             //Criterio para buscar el tipo de usuario del usuario encontrado
             DTOCriterio criterio4 = new DTOCriterio();
@@ -74,10 +76,14 @@ public class ExpertoLoguearUsuario {
 
             if (nombreTipoUsuario.equals("Administrador")) {
                 IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
-                MetodosPantalla.getInstance().setearPantalla(pp);
+                pp.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pp.setLocationRelativeTo(null);
+                pp.mostrarPantallaPrincipal(nombreUsuarioIngres, fechaUltimoAcceso);
             } else {
                 IUPantallaCliente pc = new IUPantallaCliente();
-                MetodosPantalla.getInstance().setearPantalla(pc);                
+                pc.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pc.setLocationRelativeTo(null);
+                pc.mostrarPantallaCliente(nombreUsuarioIngres, fechaUltimoAcceso);
             }
 
         } catch (IndexOutOfBoundsException exception) {

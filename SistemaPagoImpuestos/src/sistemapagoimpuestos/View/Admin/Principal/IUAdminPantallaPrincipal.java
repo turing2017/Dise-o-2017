@@ -2,11 +2,19 @@ package sistemapagoimpuestos.View.Admin.Principal;
 
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
 
     public IUAdminPantallaPrincipal() {
         initComponents();
+    }
+    
+    public void mostrarPantallaPrincipal(String nombreUsuarioLogeado, String ultimoAccesoUsuario){
+        IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
+        pp.label_nombre.setText("Nombre Usuario: " + nombreUsuarioLogeado );
+        pp.label_fecha.setText("Ultimo acceso " + ultimoAccesoUsuario );
+        MetodosPantalla.getInstance().setearPantalla(pp);
     }
 
     @SuppressWarnings("unchecked")
@@ -15,8 +23,9 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
 
         button_gestionarTipoUsuario = new javax.swing.JButton();
         button_gestionarTipoImpuesto = new javax.swing.JButton();
-        button_gestionarEmpresaTipoImpuesto = new javax.swing.JButton();
         button_gestionarUsuario = new javax.swing.JButton();
+        label_nombre = new javax.swing.JLabel();
+        label_fecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -34,9 +43,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        button_gestionarEmpresaTipoImpuesto.setText("Gestionar Empresa Tipo Impuesto");
-
         button_gestionarUsuario.setText("Gestionar Usuario");
+
+        label_nombre.setText("jLabel1");
+
+        label_fecha.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -47,22 +58,29 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(button_gestionarTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionarEmpresaTipoImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_gestionarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(330, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_fecha)
+                    .addComponent(label_nombre))
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(23, 23, 23)
+                .addComponent(label_nombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(label_fecha)
+                .addGap(14, 14, 14)
                 .addComponent(button_gestionarTipoUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_gestionarUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button_gestionarEmpresaTipoImpuesto)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,9 +135,10 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button_gestionarEmpresaTipoImpuesto;
     private javax.swing.JButton button_gestionarTipoImpuesto;
     private javax.swing.JButton button_gestionarTipoUsuario;
     private javax.swing.JButton button_gestionarUsuario;
+    private javax.swing.JLabel label_fecha;
+    private javax.swing.JLabel label_nombre;
     // End of variables declaration//GEN-END:variables
 }

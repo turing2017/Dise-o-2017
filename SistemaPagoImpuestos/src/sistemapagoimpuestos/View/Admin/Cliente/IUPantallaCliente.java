@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos.View.Admin.Cliente;
 
+import sistemapagoimpuestos.Utils.MetodosPantalla;
+
 /**
  *
  * @author Rodri
@@ -17,6 +19,15 @@ public class IUPantallaCliente extends javax.swing.JFrame {
     public IUPantallaCliente() {
         initComponents();
     }
+    
+    public void mostrarPantallaCliente(String nombreClienteLogeado, String fechaUltimoAcceso){
+       
+        IUPantallaCliente pc = new IUPantallaCliente();
+        pc.label_nombre.setText("Nombre Usuario: " + nombreClienteLogeado );
+        pc.label_fecha.setText("Ultimo acceso " + fechaUltimoAcceso );
+        MetodosPantalla.getInstance().setearPantalla(pc);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,26 +39,45 @@ public class IUPantallaCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        label_nombre = new javax.swing.JLabel();
+        label_fecha = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("PANTALLA CLIENTE");
+        jLabel1.setText("Bienvenido a Sistema de Pago de Impuestos");
+
+        label_nombre.setText("jLabel2");
+
+        label_fecha.setText("jLabel3");
+
+        jToggleButton1.setText("Pagar Impuestos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addComponent(jLabel1)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton1)
+                    .addComponent(label_fecha)
+                    .addComponent(label_nombre)
+                    .addComponent(jLabel1))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(label_nombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label_fecha)
+                .addGap(35, 35, 35)
+                .addComponent(jToggleButton1)
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,5 +120,8 @@ public class IUPantallaCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel label_fecha;
+    private javax.swing.JLabel label_nombre;
     // End of variables declaration//GEN-END:variables
 }

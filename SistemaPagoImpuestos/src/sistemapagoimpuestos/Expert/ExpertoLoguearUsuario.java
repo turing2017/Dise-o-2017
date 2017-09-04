@@ -19,7 +19,7 @@ import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 public class ExpertoLoguearUsuario {
 
     Usuario usuario = new Usuario();
-    public String fechaHoraInhabilitacionUsuarioEncontrada;
+    private String fechaHoraInhabilitacionUsuarioEncontrada;
 
     public String iniciar() {
 
@@ -59,8 +59,8 @@ public class ExpertoLoguearUsuario {
                 fechaHoraInhabilitacionUsuarioEncontrada = "Sin último acceso";              
             } else {
                 fechaHoraInhabilitacionUsuarioEncontrada = dateFechaUltimoAcceso.toString();
-            }
-
+            }            
+                                  
             //Criterio para buscar el tipo de usuario del usuario encontrado
             DTOCriterio criterio4 = new DTOCriterio();
             criterio4.setAtributo("nombreTipoUsuario");
@@ -77,6 +77,10 @@ public class ExpertoLoguearUsuario {
 
             TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criteriosTipoUsuario).get(0);
             String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
+            
+            //Setear la fecha de nuevo ingreso en la BD, obviamente no se ve reflejada hasta el proximo inicio.
+            usuario.setFechaHoraUltimoIngresoSistemaUsuario(new Date());
+            FachadaPersistencia.getInstance().guardar(usuario);
 
             if (nombreTipoUsuario.equals("Administrador")) {
                 IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();

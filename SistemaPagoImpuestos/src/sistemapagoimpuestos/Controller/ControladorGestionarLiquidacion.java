@@ -33,7 +33,7 @@ public class ControladorGestionarLiquidacion {
     }
       // Metodo iniciar
     public void iniciar(){
-       // if(experto.iniciar().equals("Administrador"))
+        if(experto.iniciar().equals("Administrador"))
         {
         IUGestionarLiquidacion pantallaPrincipal = new IUGestionarLiquidacion();
         pantallaPrincipal.setVisible(true); 

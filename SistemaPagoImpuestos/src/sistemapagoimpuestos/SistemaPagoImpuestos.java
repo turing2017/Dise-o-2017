@@ -28,11 +28,11 @@ public class SistemaPagoImpuestos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //generarDatosPrueba();
+        
         //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
         //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
+        generarDatosPrueba();
         ControladorGestionarLiquidacion.getInstance().iniciar();
-        //ControladorGestionarTipoImpuesto.getInstance().iniciar();
        
     }
 }

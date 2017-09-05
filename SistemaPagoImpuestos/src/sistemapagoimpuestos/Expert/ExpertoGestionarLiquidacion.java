@@ -16,6 +16,7 @@ import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -55,25 +56,31 @@ public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
         }
         return listDtoTipoImpuesto;
     }
-public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(){
-public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto){
-    
-   List<Object> listObject =  FachadaPersistencia.getInstance().buscar("Empresa", null);
-        ArrayList<DTOEmpresa> listDTOEmpresa = new ArrayList<DTOEmpresa>();
-        for(Object obj : listObject){
-            Empresa empresa = (Empresa) obj;
-            DTOEmpresa dtoEmpresa = new DTOEmpresa();
-            dtoEmpresa.setNombreEmpresa(empresa.getNombreEmpresa());
-            dtoEmpresa.setCuitEmpresa(empresa.getCuitEmpresa());
-            dtoEmpresa.setDireccionEmpresa(empresa.getDireccionEmpresa());
-            dtoEmpresa.setFechaHoraInhabilitacionEmpresa(empresa.getFechaHoraInhabilitacionEmpresa());
-            listDTOEmpresa.add(dtoEmpresa);
-   
 
-                                    }
-        return listDTOEmpresa;
-               }
-}
+    public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto) {
+        
+        ArrayList<DTOEmpresa> listEmpresas = null;
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio1 = new DTOCriterio();
 
+        criterio1.setAtributo("nombreTipoImpuesto");
+        criterio1.setOperacion("=");
+        criterio1.setValor(nombreTipoImpuesto);
+        criterios.add(criterio1);
+        TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
+        String oid = tipoImpuesto.getOID();
+        List<Object> listObject = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
+        for (Object obj : listObject) {
+            EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) obj;
+
+            if (empresaTipoImpuesto.getTipoImpuesto().getOID().equals(oid)) {
+                Empresa empresa1 = empresaTipoImpuesto.getEmpresa();
+                listEmpresas.add(ConvertDTO.getInstance().convertEmpresa(empresa1));
+            }
+
+        }
+        return listEmpresas;
+    }
+}  
 
 

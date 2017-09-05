@@ -14,7 +14,7 @@ public class Usuario extends Entity{
     // Atributos por relación
     public TipoUsuario tipoUsuario;
     private Cliente cliente;
-    private Empresa empresa;
+    public Empresa empresa;
     
     public Usuario() {
     }
@@ -42,6 +42,12 @@ public class Usuario extends Entity{
     public Usuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+
+    public Usuario(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    
+    
 
     
     

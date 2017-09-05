@@ -2,6 +2,7 @@ package sistemapagoimpuestos.View.Admin.Principal;
 
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
+import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
@@ -44,6 +45,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         });
 
         button_gestionarUsuario.setText("Gestionar Usuario");
+        button_gestionarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_gestionarUsuarioActionPerformed(evt);
+            }
+        });
 
         label_nombre.setText("jLabel1");
 
@@ -97,6 +103,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         ControladorGestionarTipoImpuesto.getInstance().iniciar();
         this.dispose();
     }//GEN-LAST:event_button_gestionarTipoImpuestoActionPerformed
+
+    private void button_gestionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarUsuarioActionPerformed
+        ControladorGestionarUsuario.getInstance().iniciar();
+        this.dispose();
+    }//GEN-LAST:event_button_gestionarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

@@ -38,8 +38,8 @@ public class FabricaExpertos {
                 return new DecoradorGestionarEmpresaTipoImpuesto();
             case "CU06":
                 return new DecoradorGestionarTipoUsuario();
-//            case "CU07":
-//                return new DecoradorGestionarUsuario();
+            case "CU07":
+                return new DecoradorGestionarUsuario();
             case "CU08":
                 return new DecoradorLoguearUsuario();
             default:

@@ -5,7 +5,9 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import datosPrueba.IUdatosPrueba;
 import java.util.ArrayList;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -39,7 +41,17 @@ public class ControladorGestionarLiquidacion {
         pantallaPrincipal.setVisible(true); 
         }        
     }
+    
+    public void cuack(){
+    IUdatosPrueba pantallaNoPrincipal = new IUdatosPrueba();
+        pantallaNoPrincipal.setVisible(true); }
+    
+    
 public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
         return  experto.obtenerTipoImpuestos();
     }
+public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto){  
+        return  experto.obtenerEmpresarelacionadaATipoImpuesto( nombreTipoImpuesto);
+    }
+
 }

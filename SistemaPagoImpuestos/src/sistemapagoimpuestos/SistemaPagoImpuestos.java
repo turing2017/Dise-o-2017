@@ -31,8 +31,9 @@ public class SistemaPagoImpuestos {
         
         //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
         //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
-        generarDatosPrueba();
-        ControladorGestionarLiquidacion.getInstance().iniciar();
+       // generarDatosPrueba();
+     //   ControladorGestionarLiquidacion.getInstance().iniciar();
+     ControladorGestionarLiquidacion.getInstance().cuack();
        
     }
 }

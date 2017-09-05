@@ -5,8 +5,10 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
 
+import static datosPrueba.DatosPrueba.generarDatosPrueba;
 import java.util.ArrayList;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 /**
  *
@@ -20,7 +22,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     public IUGestionarLiquidacion() {
         initComponents();
         jComboBoxEmpresa.setEditable(false);
-        jComboBoxTipoImpuesto.addItem("");
+        jComboBoxTipoImpuesto.addItem("Todos");
         ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarLiquidacion.getInstance().obtenerTipoImpuestos();  
          for(DTOTipoImpuesto obj : listDtoTipoImpuesto){
              jComboBoxTipoImpuesto.addItem(obj.getNombreDTOTipoImpuesto());
@@ -77,6 +79,12 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
 
         jLabel1.setText("Tipo Impuesto");
 
+        jComboBoxEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEmpresaActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Empresa");
 
         jLabel3.setText("Fecha desde Liquidacion");
@@ -107,6 +115,11 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        jComboBoxTipoImpuesto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoImpuestoItemStateChanged(evt);
+            }
+        });
         jComboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoImpuestoActionPerformed(evt);
@@ -135,7 +148,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                     .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(193, 193, 193))
+                        .addGap(278, 278, 278))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -167,6 +180,9 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 .addContainerGap(209, Short.MAX_VALUE))
         );
 
+        jComboBoxTipoImpuesto.getAccessibleContext().setAccessibleName("");
+        jComboBoxTipoImpuesto.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,7 +191,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jComboBoxTipoImpuestoActionPerformed
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
@@ -189,6 +205,21 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_formWindowActivated
 
+    private void jComboBoxEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEmpresaActionPerformed
+
+    private void jComboBoxTipoImpuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoItemStateChanged
+        jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.addItem("Todos");
+         ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+       for(DTOEmpresa obj : listDtoDTOEmpresa){
+             jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}
+    /*   ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto();
+         for(DTOEmpresa obj : listDtoDTOEmpresa){
+             jComboBoxTipoImpuesto.addItem(obj.getNombreEmpresa()); }   */
+    }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
+    
     /**
      * @param args the command line arguments
      */
@@ -220,7 +251,9 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUGestionarLiquidacion().setVisible(true);
+                IUGestionarLiquidacion pantallaPrincipal = new IUGestionarLiquidacion();
+                pantallaPrincipal.setVisible(true);
+               // new IUGestionarLiquidacion().setVisible(true);
              
             }
         });

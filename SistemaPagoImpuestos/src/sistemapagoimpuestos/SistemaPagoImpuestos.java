@@ -10,6 +10,7 @@ import static datosPrueba.DatosPrueba.generarDatosPrueba;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.cfg.Configuration;
+import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoDeCuenta;
@@ -34,6 +35,6 @@ public class SistemaPagoImpuestos {
        // generarDatosPrueba();
      //   ControladorGestionarLiquidacion.getInstance().iniciar();
      ControladorGestionarLiquidacion.getInstance().cuack();
-       
+     ControladorConsultarLiquidacion.getInstance().iniciar();
     }
 }

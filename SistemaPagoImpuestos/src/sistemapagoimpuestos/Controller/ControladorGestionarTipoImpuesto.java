@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
@@ -51,8 +52,8 @@ public class ControladorGestionarTipoImpuesto {
     }
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
-    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
-        experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres);
+    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItems){
+        experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres, dTOEmpresaTipImpItems);
         
     }
     //Metodo para modificar TipoImpuesto
@@ -75,12 +76,10 @@ public class ControladorGestionarTipoImpuesto {
     }
     
     public List<DTOEmpresa> buscarEmpresas(){
-        List<DTOEmpresa> listado = experto.buscarEmpresas();
-        return listado;
+        return experto.buscarEmpresas();
     }
     
     public List<DTOItem> buscarItems(){
-        List<DTOItem> items = experto.buscarItems();
-        return items;
+        return experto.buscarItems();
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.Empresa" table = "empresa">
+        <id name="OID" type="string">
+            <column name="OIDEmpresa"/>
+            <generator class="uuid2"/>
+        </id>
+        
+        <property name="cuitEmpresa" type="string" unique="true" not-null="true">
+            <column name="cuitEmpresa"/>
+        </property>
+        
+        <property name="nombreEmpresa" type="string" unique="true" not-null="true">
+            <column name="nombreEmpresa"/>
+        </property>
+        
+        <property name="direccionEmpresa" type="string" not-null="true">
+            <column name="direccionEmpresa"/>
+        </property>
+        
+        <property name="fechaHoraInhabilitacionEmpresa" type="timestamp">
+            <column name="fechaHoraInhabilitacionEmpresa"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -17,7 +17,6 @@ import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import static sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems.setNuevoTipoImpuesto;
-import static sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificar.dTOEmpresaTipImpItemList;
 
 /**
  *
@@ -41,23 +40,22 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         initComponents();
     }
     public static List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemAltaList;
-
     public static List<DTOEmpresaTipImpItem> getDtoetiisModfAlta() {
         return dTOEmpresaTipImpItemAltaList;
     }
 
-    public static void setDtoetiisModfAlta(List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipImpItem) {
+    public static void setDtoetiisModfAlta(List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItem) {
         dTOEmpresaTipImpItem = dTOEmpresaTipImpItem;
     }
     
     public static void addDtoetiisModfAlta(DTOEmpresaTipImpItem dTOEmpresaTipImpItem){
-         if(dTOEmpresaTipImpItemList==null){
-            dTOEmpresaTipImpItemList = new ArrayList<>();
+         if(dTOEmpresaTipImpItemAltaList==null){
+            dTOEmpresaTipImpItemAltaList = new ArrayList<>();
         }
-        dTOEmpresaTipImpItemList.add(dTOEmpresaTipImpItem);
+        dTOEmpresaTipImpItemAltaList.add(dTOEmpresaTipImpItem);
     }
     public static void removeDtoetiisModfAlta(int index){
-       dTOEmpresaTipImpItemList.remove(index);
+       dTOEmpresaTipImpItemAltaList.remove(index);
     }    
     
     
@@ -88,6 +86,12 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         label_codigo.setText("Código Tipo Impuesto");
 
         label_esEditable.setText("Es editable");
+
+        textField_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField_nombreActionPerformed(evt);
+            }
+        });
 
         button_crear.setText("Crear");
         button_crear.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +137,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addComponent(label_esEditable)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -142,7 +146,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
                         .addGap(34, 34, 34))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(checkbox_esEditable)
-                        .addGap(78, 78, 78))))
+                        .addGap(85, 85, 85))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,17 +204,17 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             int codigoTipoImpuesto = Integer.parseInt(textfield_codigo.getText());
             String nombreTipoImpuesto = textField_nombre.getText();
             boolean esMontoEditable = checkbox_esEditable.isSelected();
-            for (int i = 0; i < tabla_empresa_item.getRowCount(); i++) {
-                if((Boolean)(tabla_empresa_item.getValueAt(i, 1)) == true){
-                    String dtoItem = tabla_empresa_item.getValueAt(i, 0).toString();
-                }
-        }
+            if(codigoTipoImpuesto<0||!nombreTipoImpuesto.equals("")){
+                ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable,getDtoetiisModfAlta());
+                this.dispose();
+                ControladorGestionarTipoImpuesto.getInstance().iniciar();
+            }else{
+                Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
+            }
 
-            ControladorGestionarTipoImpuesto.getInstance().nuevoTipoImpuesto(codigoTipoImpuesto, nombreTipoImpuesto, esMontoEditable);
-            this.dispose();
-            ControladorGestionarTipoImpuesto.getInstance().iniciar();
         }catch(java.lang.NumberFormatException e){
-            Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
+            List<String> campos = Arrays.asList("Codigo del tipo entero");
+            Excepciones.getInstance().tipoDatoInvalid(campos);
         }
     }//GEN-LAST:event_button_crearActionPerformed
 
@@ -241,6 +245,10 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         this.dispose();
         ControladorGestionarTipoImpuesto.getInstance().iniciar();
     }//GEN-LAST:event_cancel_buttonActionPerformed
+
+    private void textField_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField_nombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,9 +327,9 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
     
 public void RecuperarEmpresaItems() {
 
-            
-            
-            
+
+
+
         // Muestro pantalla de Consultar
         String[] columnas = {"Empresa", "Items"};
 
@@ -339,7 +347,7 @@ public void RecuperarEmpresaItems() {
                     case 0:
                         return String.class;
                     case 1:
-                        return String.class;
+                        return int.class;
                     default:
                         return null;
                 }
@@ -347,7 +355,7 @@ public void RecuperarEmpresaItems() {
 
         };
                 
-        for(DTOEmpresaTipImpItem dTOEmpresaTipImpItem :dTOEmpresaTipImpItemList ){
+        for(DTOEmpresaTipImpItem dTOEmpresaTipImpItem :dTOEmpresaTipImpItemAltaList ){
             Vector<Object> vect = new Vector<>();
             vect.add(dTOEmpresaTipImpItem.getNombreEmpresa());
             vect.add(dTOEmpresaTipImpItem.concatItems());

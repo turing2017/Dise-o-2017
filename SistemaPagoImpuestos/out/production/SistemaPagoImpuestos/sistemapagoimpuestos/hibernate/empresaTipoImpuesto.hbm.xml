@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" table="empresa_tipo_impuesto">
+        <id name="OID" type="string">
+            <column name="OIDEmpresaTipoImpuesto"/>
+            <generator class="uuid2"/>
+        </id>
+        <property name="fechaHoraAltaEmpresaTipoImpuesto" type="timestamp">
+           <column name="fechaHoraAltaEmpresaTipoImpuesto"/>
+        </property>
+        <property name="fechaHoraInhabilitacionEmpresaTipoImpuesto" type="timestamp">
+           <column name="fechaHoraInhabilitacionEmpresaTipoImpuesto"/>
+        </property>
+        <property name="frecuenciaLiquidacionEmpresaTipoImpuesto" type="int">
+           <column name="frecuenciaLiquidacionEmpresaTipoImpuesto"/>
+        </property>
+        <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true" cascade="all"/>
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true" cascade="all"/>
+        <many-to-one name="tipoEmpresa" class="sistemapagoimpuestos.Entity.TipoEmpresa" column="OIDTipoEmpresa" not-null="true" cascade="all"/>
+    </class>
+</hibernate-mapping>

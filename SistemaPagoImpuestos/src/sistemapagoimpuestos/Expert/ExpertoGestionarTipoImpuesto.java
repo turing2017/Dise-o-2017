@@ -7,6 +7,7 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaItem;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -40,10 +41,14 @@ public class ExpertoGestionarTipoImpuesto {
     }
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
-    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
-       
+    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItem){
+    //Contiunar aca   
         List<DTOCriterio> criteriosNombre = new ArrayList<>();
         List<DTOCriterio> criteriosCodigo = new ArrayList<>();
+        List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
+        for(DTOEmpresaTipImpItem  dTOEmpresaTipImpItem1 :dTOEmpresaTipImpItem){
+            DTOCriterio criterioNombre = new DTOCriterio("nombreEmpresa", "=", nombreTipoImpuestoIngres);
+        }
 
         DTOCriterio criterioNombre = new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuestoIngres);
         DTOCriterio criterioCodigo = new DTOCriterio("codigoTipoImpuesto", "=", codigoTipoImpuestoIngres);
@@ -218,14 +223,11 @@ public class ExpertoGestionarTipoImpuesto {
         List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
         
         List <DTOEmpresa> lista = new ArrayList<>();
-        DTOEmpresa dtoEmpresa;
+        
         
         for (int i = 0; i < empresas.size(); i++) {
-            dtoEmpresa = new DTOEmpresa();
             Empresa empresa = (Empresa) empresas.get(i);
-            String nombreEmpresa = empresa.getNombreEmpresa();
-            dtoEmpresa.setNombreEmpresa(nombreEmpresa);
-            lista.add(dtoEmpresa);
+            lista.add(ConvertDTO.getInstance().convertEmpresa(empresa));
         }
         return lista;
     }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+
+import exceptions.Excepciones;
 import javafx.scene.control.ComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +25,30 @@ import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Entity.Item;
 
 public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
+    
+    private List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemList;
+
+    public List<DTOEmpresaTipImpItem> getdTOEmpresaTipImpItemList() {
+        return dTOEmpresaTipImpItemList;
+    }
+
+    public void setdTOEmpresaTipImpItemList(List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemList) {
+        this.dTOEmpresaTipImpItemList = dTOEmpresaTipImpItemList;
+    }
+
+   
+    public  void addDtoetiisModf(DTOEmpresaTipImpItem dTOEmpresaTipImpItem){
+         if(dTOEmpresaTipImpItemList==null){
+            dTOEmpresaTipImpItemList = new ArrayList<>();
+        }
+        dTOEmpresaTipImpItemList.add(dTOEmpresaTipImpItem);
+    }
+    public  void removeDtoetiisModf(int index){
+       dTOEmpresaTipImpItemList.remove(index);
+    }    
+    
+    
+    
     
     public IUGestionarTipoImpuestoItems() {
         initComponents();
@@ -165,56 +191,69 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     }//GEN-LAST:event_button_CancelarActionPerformed
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
-        
-        DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
-        List<String> dTOItemList = new ArrayList<>();
-        
-        dTOEmpresaTipImpItem.setNombreEmpresa((String) comboBox_Empresa.getSelectedItem());
-        for (int i = 0; i < table_Item.getRowCount(); i++) {
-            if((Boolean)(table_Item.getValueAt(i, 1)) == true){
-                String dtoItem = table_Item.getValueAt(i, 0).toString();
-                dTOItemList.add(dtoItem);
+
+        try {
+            DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
+            List<String> dTOItemList = new ArrayList<>();
+
+            dTOEmpresaTipImpItem.setNombreEmpresa((String) comboBox_Empresa.getSelectedItem());
+            for (int i = 0; i < table_Item.getRowCount(); i++) {
+                if((Boolean)(table_Item.getValueAt(i, 1)) == true){
+                    String dtoItem = table_Item.getValueAt(i, 0).toString();
+                    dTOItemList.add(dtoItem);
+                }
             }
-        }
-        dTOEmpresaTipImpItem.setNombreItemList(dTOItemList);
-        if(getNuevoTipoImpuesto()){
-            IUGestionarTipoImpuestoAlta.addDtoetiisModfAlta(dTOEmpresaTipImpItem);
-            IUGestionarTipoImpuestoAlta IUGestionarTipoImpuestoAlta = new IUGestionarTipoImpuestoAlta();
-            IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-            IUGestionarTipoImpuestoAlta.setVisible(true); // La hago visible
-            // Modifico la operación de cierre para volver a la pantalla principal
-            IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            IUGestionarTipoImpuestoAlta.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent ev) {
-                    IUGestionarTipoImpuestoAlta.dispose();
-                    ControladorGestionarTipoImpuesto.getInstance().iniciar();
+            dTOEmpresaTipImpItem.setNombreItemList(dTOItemList);
+            if(!(dTOEmpresaTipImpItem.getNombreEmpresa().equals("-Seleccionar Empresa-")||dTOEmpresaTipImpItem.getNombreItemList().size()<1)){
+
+                if(getNuevoTipoImpuesto()){
+                    IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(getdTOEmpresaTipImpItemList());
+                    IUGestionarTipoImpuestoAlta.addDtoetiisModfAlta(dTOEmpresaTipImpItem);
+                    IUGestionarTipoImpuestoAlta IUGestionarTipoImpuestoAlta = new IUGestionarTipoImpuestoAlta();
+                    IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                    IUGestionarTipoImpuestoAlta.setVisible(true); // La hago visible
+                    // Modifico la operación de cierre para volver a la pantalla principal
+                    IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    IUGestionarTipoImpuestoAlta.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent ev) {
+                            IUGestionarTipoImpuestoAlta.dispose();
+                            ControladorGestionarTipoImpuesto.getInstance().iniciar();
+                        }
+                    });
+                    IUGestionarTipoImpuestoAlta.RecuperarEmpresaItems();
+                    IUGestionarTipoImpuestoAlta.setTextfield_codigo(getCodigoTemp());
+                    IUGestionarTipoImpuestoAlta.setTextField_nombre(getNombreTemp());
+                    IUGestionarTipoImpuestoAlta.setCheckbox_esEditable(isEditTemp());
+                }else{
+                    IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
+                    pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                    pantallaModificar.setVisible(true); // La hago visible
+                    // Modifico la operación de cierre para volver a la pantalla principal
+                    pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    pantallaModificar.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent ev) {
+                            pantallaModificar.dispose();
+                            ControladorGestionarTipoImpuesto.getInstance().iniciar();
+                        }
+                    });
+                    pantallaModificar.RecuperarEmpresaItems();
+                    pantallaModificar.setNombre_actual(getCodigoTemp());
+                    pantallaModificar.setTextfield_nombre(getNombreTemp());
+                    pantallaModificar.setCheckbox_Habilitar(isEditTemp());
+                    pantallaModificar.setCheckbox_esEditable(isStatusTemp());
                 }
-            });  
-            IUGestionarTipoImpuestoAlta.RecuperarEmpresaItems();
-            IUGestionarTipoImpuestoAlta.setTextfield_codigo(getCodigoTemp());
-            IUGestionarTipoImpuestoAlta.setTextField_nombre(getNombreTemp());
-            IUGestionarTipoImpuestoAlta.setCheckbox_esEditable(isEditTemp());
-        }else{
-            IUGestionarTipoImpuestoModificar.addDtoetiisModf(dTOEmpresaTipImpItem);
-            IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
-            pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-            pantallaModificar.setVisible(true); // La hago visible
-            // Modifico la operación de cierre para volver a la pantalla principal
-            pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            pantallaModificar.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent ev) {
-                    pantallaModificar.dispose();
-                    ControladorGestionarTipoImpuesto.getInstance().iniciar();
-                }
-            });  
-            pantallaModificar.RecuperarEmpresaItems();
-            pantallaModificar.setNombre_actual(getCodigoTemp());
-            pantallaModificar.setTextfield_nombre(getNombreTemp());
-            pantallaModificar.setCheckbox_Habilitar(isEditTemp());
-            pantallaModificar.setCheckbox_esEditable(isStatusTemp());
+
+                this.dispose();
+            }else{
+                List<String> stringList = new ArrayList<>();
+                stringList.add("Empresa");
+                stringList.add("Item");
+                Excepciones.getInstance().camposRequerido(stringList);
+            }
+        }catch (Exception e){
+
         }
-        
-        this.dispose();
+
     }//GEN-LAST:event_button_AceptarActionPerformed
 
     public static boolean nuevoTipoImpuesto;

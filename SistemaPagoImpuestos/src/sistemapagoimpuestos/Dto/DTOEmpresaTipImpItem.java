@@ -76,9 +76,10 @@ public class DTOEmpresaTipImpItem {
         int couter = 0; 
         for(String item : nombreItemList){
             if(couter >0){
-                itemsConcat = " - " +item;
+                itemsConcat += " - " +item;
             }else{
                 itemsConcat = item;
+                couter++;
             }
         }
         return itemsConcat;

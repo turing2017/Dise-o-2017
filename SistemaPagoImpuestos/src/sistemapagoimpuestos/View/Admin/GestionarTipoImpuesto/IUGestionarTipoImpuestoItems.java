@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+
+import exceptions.Excepciones;
 import javafx.scene.control.ComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,34 +22,85 @@ import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DtoItemOrden;
 import sistemapagoimpuestos.Entity.Item;
 
 public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     
+    private List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemList;
+
+    public List<DTOEmpresaTipImpItem> getdTOEmpresaTipImpItemList() {
+        return dTOEmpresaTipImpItemList;
+    }
+
+    public void setdTOEmpresaTipImpItemList(List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemList) {
+        this.dTOEmpresaTipImpItemList = dTOEmpresaTipImpItemList;
+    }
+
+   
+    public  void addDtoetiisModf(DTOEmpresaTipImpItem dTOEmpresaTipImpItem){
+         if(dTOEmpresaTipImpItemList==null){
+            dTOEmpresaTipImpItemList = new ArrayList<>();
+        }
+        dTOEmpresaTipImpItemList.add(dTOEmpresaTipImpItem);
+    }
+    public  void removeDtoetiisModf(int index){
+       dTOEmpresaTipImpItemList.remove(index);
+    }    
+    
+    
+    
+    
     public IUGestionarTipoImpuestoItems() {
         initComponents();
-        List<DTOEmpresa> list = ControladorGestionarTipoImpuesto.getInstance().buscarEmpresas();
-        llenarCombo(list);
+        List<DTOEmpresa> listEmpresa = ControladorGestionarTipoImpuesto.getInstance().buscarEmpresas();
+        llenarComboEmpresa(listEmpresa);
+        List<DTOTipoEmpresa> listTipoEmpresa = ControladorGestionarTipoImpuesto.getInstance().buscarTipoEmpresa();
+        llenarComboTipoEmpresa(listTipoEmpresa);
+        
         List<DTOItem> items = ControladorGestionarTipoImpuesto.getInstance().buscarItems();
         llenarTabla(items);
     }
-    private void llenarCombo(List<DTOEmpresa> list){
+    private void llenarComboEmpresa(List<DTOEmpresa> list){
         for (int i = 0; i < list.size(); i++) {
             DTOEmpresa dtoEmpresa = (DTOEmpresa) list.get(i);
             comboBox_Empresa.addItem(dtoEmpresa.getNombreEmpresa());
         }
     }
+    private void llenarComboTipoEmpresa(List<DTOTipoEmpresa> list){
+        for (int i = 0; i < list.size(); i++) {
+            DTOTipoEmpresa dTOTipoEmpresa = (DTOTipoEmpresa) list.get(i);
+            comboBox_Tipo_Empresa.addItem(dTOTipoEmpresa.getNombreTipoEmpresa());
+        }
+    }
     private void llenarTabla(List<DTOItem> list){
-        String[] columnas = {"Item","Seleccion"};
+        String[] columnas = {"Item", "Orden","Seleccion"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
             public Class<?> getColumnClass(int column) {
                 switch (column) {
                     case 0:
                         return String.class;
                     case 1:
+                        return Integer.class;
+                    case 2:
                         return Boolean.class;
                     default:
                         return null;
+                }
+            }
+            
+            public boolean isCellEditable(int row,int column) 
+            {
+               switch (column) {
+                    case 0:
+                        return false;
+                    case 1:
+                        return true;
+                    case 2:
+                        return true;
+                    default:
+                        return false;
                 }
             }
         };
@@ -55,6 +108,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
             Vector<Object> agregarFila = new Vector<Object>();
             DTOItem item = (DTOItem) list.get(i);
             agregarFila.add(item.getNombreItem());
+            agregarFila.add(0);
             agregarFila.add(false);
             
             dtm.addRow(agregarFila);
@@ -76,6 +130,10 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         table_Item = new javax.swing.JTable();
         button_Aceptar = new javax.swing.JButton();
         button_Cancelar = new javax.swing.JToggleButton();
+        label_tipo_empresa = new javax.swing.JLabel();
+        comboBox_Tipo_Empresa = new javax.swing.JComboBox<>();
+        label_frecuencia = new javax.swing.JLabel();
+        text_frecuencia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,16 +172,27 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
             }
         });
 
+        label_tipo_empresa.setText("Tipo de Empresa:");
+
+        comboBox_Tipo_Empresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccionar Tipo Empresa-" }));
+        comboBox_Tipo_Empresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBox_Tipo_EmpresaActionPerformed(evt);
+            }
+        });
+
+        label_frecuencia.setText("Frecuencia de Sincronizacion:");
+
+        text_frecuencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_frecuenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(comboBox_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -133,19 +202,41 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                         .addComponent(button_Cancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_frecuencia)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(label_tipo_empresa))
+                                        .addGap(54, 54, 54)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comboBox_Tipo_Empresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboBox_Empresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(text_frecuencia)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_tipo_empresa)
+                    .addComponent(comboBox_Tipo_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_frecuencia)
+                    .addComponent(text_frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_Aceptar)
                     .addComponent(button_Cancelar))
@@ -165,57 +256,84 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     }//GEN-LAST:event_button_CancelarActionPerformed
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
-        
-        DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
-        List<String> dTOItemList = new ArrayList<>();
-        
-        dTOEmpresaTipImpItem.setNombreEmpresa((String) comboBox_Empresa.getSelectedItem());
-        for (int i = 0; i < table_Item.getRowCount(); i++) {
-            if((Boolean)(table_Item.getValueAt(i, 1)) == true){
-                String dtoItem = table_Item.getValueAt(i, 0).toString();
-                dTOItemList.add(dtoItem);
+
+        try {
+            DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
+            List<DtoItemOrden> dtoItemOrdenList = new ArrayList<>();
+
+            dTOEmpresaTipImpItem.setNombreEmpresa((String) comboBox_Empresa.getSelectedItem());
+            dTOEmpresaTipImpItem.setNombreTipoEmpresa((String) comboBox_Tipo_Empresa.getSelectedItem());
+            dTOEmpresaTipImpItem.setFrecuenciaSincronizacion(Integer.parseInt(text_frecuencia.getText()));
+            for (int i = 0; i < table_Item.getRowCount(); i++) {
+                if((Boolean)(table_Item.getValueAt(i, 2))){
+                    DtoItemOrden dtoItemOrden = new DtoItemOrden();
+                    dtoItemOrden.setNombreItem(table_Item.getValueAt(i, 0).toString()); 
+                    dtoItemOrden.setOrden(Integer.parseInt(table_Item.getValueAt(i, 1).toString())); 
+                    dtoItemOrdenList.add(dtoItemOrden);
+                }
             }
-        }
-        dTOEmpresaTipImpItem.setNombreItemList(dTOItemList);
-        if(getNuevoTipoImpuesto()){
-            IUGestionarTipoImpuestoAlta.addDtoetiisModfAlta(dTOEmpresaTipImpItem);
-            IUGestionarTipoImpuestoAlta IUGestionarTipoImpuestoAlta = new IUGestionarTipoImpuestoAlta();
-            IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-            IUGestionarTipoImpuestoAlta.setVisible(true); // La hago visible
-            // Modifico la operación de cierre para volver a la pantalla principal
-            IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            IUGestionarTipoImpuestoAlta.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent ev) {
-                    IUGestionarTipoImpuestoAlta.dispose();
-                    ControladorGestionarTipoImpuesto.getInstance().iniciar();
+            dTOEmpresaTipImpItem.setDtoItemOrdenList(dtoItemOrdenList);
+            if(!(dTOEmpresaTipImpItem.getNombreEmpresa().equals("-Seleccionar Empresa-")
+                    &&dTOEmpresaTipImpItem.getDtoItemOrdenList().size()<1)
+                    &&dTOEmpresaTipImpItem.getFrecuenciaSincronizacion()>0
+                    &&!dTOEmpresaTipImpItem.getNombreTipoEmpresa().equals("-Seleccionar Tipo Empresa-")){
+
+                if(getNuevoTipoImpuesto()){
+                    IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(getdTOEmpresaTipImpItemList());
+                    IUGestionarTipoImpuestoAlta.addDtoetiisModfAlta(dTOEmpresaTipImpItem);
+                    IUGestionarTipoImpuestoAlta IUGestionarTipoImpuestoAlta = new IUGestionarTipoImpuestoAlta();
+                    IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                    IUGestionarTipoImpuestoAlta.setVisible(true); // La hago visible
+                    // Modifico la operación de cierre para volver a la pantalla principal
+                    IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    IUGestionarTipoImpuestoAlta.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent ev) {
+                            IUGestionarTipoImpuestoAlta.dispose();
+                            ControladorGestionarTipoImpuesto.getInstance().iniciar();
+                        }
+                    });
+                    IUGestionarTipoImpuestoAlta.RecuperarEmpresaItems();
+                    IUGestionarTipoImpuestoAlta.setTextfield_codigo(getCodigoTemp());
+                    IUGestionarTipoImpuestoAlta.setTextField_nombre(getNombreTemp());
+                    IUGestionarTipoImpuestoAlta.setCheckbox_esEditable(isEditTemp());
+                }else{
+                    IUGestionarTipoImpuestoModificar.setdTOEmpresaTipImpItemList(getdTOEmpresaTipImpItemList());
+                    IUGestionarTipoImpuestoModificar.adddTOEmpresaTipImpItemList(dTOEmpresaTipImpItem);
+                    IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
+                    pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                    pantallaModificar.setVisible(true); // La hago visible
+                    // Modifico la operación de cierre para volver a la pantalla principal
+                    pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+                    pantallaModificar.RecuperarEmpresaItems();
+                    pantallaModificar.setLabel_nombre(getCodigoTemp());
+                    pantallaModificar.setTextfield_nombre(getNombreTemp());
+                    pantallaModificar.setCheckbox_Habilitar(isEditTemp());
+                    pantallaModificar.setCheckbox_esEditable(isStatusTemp());
                 }
-            });  
-            IUGestionarTipoImpuestoAlta.RecuperarEmpresaItems();
-            IUGestionarTipoImpuestoAlta.setTextfield_codigo(getCodigoTemp());
-            IUGestionarTipoImpuestoAlta.setTextField_nombre(getNombreTemp());
-            IUGestionarTipoImpuestoAlta.setCheckbox_esEditable(isEditTemp());
-        }else{
-            IUGestionarTipoImpuestoModificar.addDtoetiisModf(dTOEmpresaTipImpItem);
-            IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
-            pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-            pantallaModificar.setVisible(true); // La hago visible
-            // Modifico la operación de cierre para volver a la pantalla principal
-            pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            pantallaModificar.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent ev) {
-                    pantallaModificar.dispose();
-                    ControladorGestionarTipoImpuesto.getInstance().iniciar();
-                }
-            });  
-            pantallaModificar.RecuperarEmpresaItems();
-            pantallaModificar.setNombre_actual(getCodigoTemp());
-            pantallaModificar.setTextfield_nombre(getNombreTemp());
-            pantallaModificar.setCheckbox_Habilitar(isEditTemp());
-            pantallaModificar.setCheckbox_esEditable(isStatusTemp());
+
+                this.dispose();
+            }else{
+                List<String> stringList = new ArrayList<>();
+                stringList.add("Empresa");
+                stringList.add("Tipo Empresa");
+                stringList.add("Frec. Liquidación");
+                stringList.add("Item");
+                Excepciones.getInstance().camposRequerido(stringList);
+            }
+        }catch (Exception e){
+
         }
-        
-        this.dispose();
+
     }//GEN-LAST:event_button_AceptarActionPerformed
+
+    private void comboBox_Tipo_EmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_Tipo_EmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBox_Tipo_EmpresaActionPerformed
+
+    private void text_frecuenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_frecuenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_frecuenciaActionPerformed
 
     public static boolean nuevoTipoImpuesto;
     
@@ -306,8 +424,12 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     private javax.swing.JButton button_Aceptar;
     private javax.swing.JToggleButton button_Cancelar;
     private javax.swing.JComboBox<String> comboBox_Empresa;
+    private javax.swing.JComboBox<String> comboBox_Tipo_Empresa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_frecuencia;
+    private javax.swing.JLabel label_tipo_empresa;
     private javax.swing.JTable table_Item;
+    private javax.swing.JTextField text_frecuencia;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,17 +16,23 @@ public class DTOEmpresaTipImpItem {
     private int id;
     private int codigoTI;
     private String nombreEmpresa;
-    private List<String> nombreItemList;
+    private String nombreTipoEmpresa;
+    private int frecuenciaSincronizacion;
+    private List<DtoItemOrden> dtoItemOrdenList;
 
     public DTOEmpresaTipImpItem() {
     }
 
-    public DTOEmpresaTipImpItem(int id, int codigoTI, String nombreEmpresa, List<String> nombreItemList) {
+    public DTOEmpresaTipImpItem(int id, int codigoTI, String nombreEmpresa, String nombreTipoEmpresa, int frecuenciaSincronizacion, List<DtoItemOrden> dtoItemOrdenList) {
         this.id = id;
         this.codigoTI = codigoTI;
         this.nombreEmpresa = nombreEmpresa;
-        this.nombreItemList = nombreItemList;
+        this.nombreTipoEmpresa = nombreTipoEmpresa;
+        this.frecuenciaSincronizacion = frecuenciaSincronizacion;
+        this.dtoItemOrdenList = dtoItemOrdenList;
     }
+
+
 
     public int getId() {
         return id;
@@ -52,33 +58,55 @@ public class DTOEmpresaTipImpItem {
         this.nombreEmpresa = nombreEmpresa;
     }
 
-    public List<String> getNombreItemList() {
-        return nombreItemList;
+    public String getNombreTipoEmpresa() {
+        return nombreTipoEmpresa;
     }
 
-    public void setNombreItemList(List<String> nombreItemList) {
-        this.nombreItemList = nombreItemList;
+    public void setNombreTipoEmpresa(String nombreTipoEmpresa) {
+        this.nombreTipoEmpresa = nombreTipoEmpresa;
+    }
+
+    public int getFrecuenciaSincronizacion() {
+        return frecuenciaSincronizacion;
+    }
+
+    public void setFrecuenciaSincronizacion(int frecuenciaSincronizacion) {
+        this.frecuenciaSincronizacion = frecuenciaSincronizacion;
+    }
+
+    public List<DtoItemOrden> getDtoItemOrdenList() {
+        return dtoItemOrdenList;
+    }
+
+    public void setDtoItemOrdenList(List<DtoItemOrden> dtoItemOrdenList) {
+        this.dtoItemOrdenList = dtoItemOrdenList;
     }
     
-    public void addItem(String nombreItem){
-        if(nombreItemList ==null){
-            nombreItemList = new ArrayList<>();
+    public void addItem(DtoItemOrden dtoItemOrden){
+        if(dtoItemOrdenList ==null){
+            dtoItemOrdenList = new ArrayList<>();
         }
-        nombreItemList.add(nombreItem);
+        dtoItemOrdenList.add(dtoItemOrden);
     }
     public void removeItem(String nombreItem){
-        nombreItemList.remove(nombreItem);
+        for(DtoItemOrden dtoItemOrden: dtoItemOrdenList){
+                if(dtoItemOrden.getNombreItem().equals(nombreItem)){
+                dtoItemOrdenList.remove(nombreItem);
+                break;
+            }
+        }
     }
     
     
     public String concatItems() {
         String itemsConcat = null;
         int couter = 0; 
-        for(String item : nombreItemList){
+        for(DtoItemOrden dtoItemOrden : dtoItemOrdenList){
             if(couter >0){
-                itemsConcat = " - " +item;
+                itemsConcat += " - " +dtoItemOrden.getNombreItem();
             }else{
-                itemsConcat = item;
+                itemsConcat = dtoItemOrden.getNombreItem();
+                couter++;
             }
         }
         return itemsConcat;

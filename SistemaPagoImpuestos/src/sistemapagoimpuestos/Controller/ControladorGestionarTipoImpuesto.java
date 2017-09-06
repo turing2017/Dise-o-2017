@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.Item;
+import sistemapagoimpuestos.Entity.TipoEmpresa;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
@@ -39,13 +44,16 @@ public class ControladorGestionarTipoImpuesto {
     }
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
-    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
+    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItems){
         experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres);
-        
+        experto.nuevaEmpresaTipoImpuesto(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems);
+        experto.nuevaEmpresaTipoImpuestoItem(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems);
     }
     //Metodo para modificar TipoImpuesto
-    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){
+    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado,List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItems){
         experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
+        experto.nuevaEmpresaTipoImpuesto(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems);
+        experto.nuevaEmpresaTipoImpuestoItem(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems);
         
     }
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
@@ -63,12 +71,14 @@ public class ControladorGestionarTipoImpuesto {
     }
     
     public List<DTOEmpresa> buscarEmpresas(){
-        List<DTOEmpresa> listado = experto.buscarEmpresas();
-        return listado;
+        return experto.buscarEmpresas();
     }
     
     public List<DTOItem> buscarItems(){
-        List<DTOItem> items = experto.buscarItems();
-        return items;
+        return experto.buscarItems();
+    }
+    
+    public List<DTOTipoEmpresa> buscarTipoEmpresa(){
+        return experto.buscarTipoEmpresa();
     }
 }

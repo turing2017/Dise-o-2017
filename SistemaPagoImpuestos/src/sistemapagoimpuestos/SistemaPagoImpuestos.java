@@ -6,6 +6,8 @@
 package sistemapagoimpuestos;
 
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+
 /**
  *
  * @author Markz

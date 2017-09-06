@@ -8,9 +8,11 @@ package sistemapagoimpuestos.Utils;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
+import sistemapagoimpuestos.Entity.TipoUsuario;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.Item;
-import sistemapagoimpuestos.Entity.TipoUsuario;
+import sistemapagoimpuestos.Entity.TipoEmpresa;
 
 /**
  *
@@ -50,5 +52,9 @@ public class ConvertDTO {
         dtoTipoUsuario.setNombreDTOTipoUsuario(tipoUsuario.getNombreTipoUsuario());
         dtoTipoUsuario.setFechaHoraInhabilitacionDTOTipoUsuario(tipoUsuario.getFechaHoraInhabilitacionTipoUsuario());
         return dtoTipoUsuario;
+    }
+    
+    public DTOTipoEmpresa convertTipoEmpresa(TipoEmpresa tipoEmpresa){
+        return new DTOTipoEmpresa(tipoEmpresa.getNombreTipoEmpresa(), tipoEmpresa.getfechaInhabilitacionTipoEmpresa());    
     }
 }

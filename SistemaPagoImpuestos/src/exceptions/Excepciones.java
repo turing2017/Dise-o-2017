@@ -90,4 +90,32 @@ public class Excepciones extends Exception{
         edne.setLabel_mensaje("Debe realizar una selección");
         edne.setVisible(true);
     }
+    
+    public void tipoDatoInvalid(List<String> campos){
+        ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("Error: Campo Invalido");
+         String salidacampo = "";
+       if(campos.size()>1){
+           int count = 0;
+           String tempoCamp = "";
+           for(String campo : campos){
+               switch(count){
+                   case 0:
+                        tempoCamp = campo;
+                        break;
+                   case 1:
+                       salidacampo = campo;
+                       break;
+                   default:
+                       salidacampo = salidacampo + ", " +campo;
+               }
+               count ++;
+           }
+           salidacampo = salidacampo + " y "+ tempoCamp;
+           edne.setLabel_mensaje("Campos: "+salidacampo);  
+       }else{
+           edne.setLabel_mensaje("Campo: "+campos.get(0));  
+       }
+        edne.setVisible(true);
+    }
 }

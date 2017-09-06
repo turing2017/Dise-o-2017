@@ -13,6 +13,14 @@ public class EmpresaTipoImpuesto extends Entity{
 
     public EmpresaTipoImpuesto() {
     }
+
+    public Date getFechaProximaLiquidacionEmpresaTipoImpuesto() {
+        return fechaProximaLiquidacionEmpresaTipoImpuesto;
+    }
+
+    public void setFechaProximaLiquidacionEmpresaTipoImpuesto(Date fechaProximaLiquidacionEmpresaTipoImpuesto) {
+        this.fechaProximaLiquidacionEmpresaTipoImpuesto = fechaProximaLiquidacionEmpresaTipoImpuesto;
+    }
     
     public EmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, int frecuenciaLiquidacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa, TipoEmpresa tipoEmpresa) {
         this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;

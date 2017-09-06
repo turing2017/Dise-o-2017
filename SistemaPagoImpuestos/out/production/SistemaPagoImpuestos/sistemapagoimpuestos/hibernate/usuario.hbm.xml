@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.Usuario" table="usuario">
+       <id name="OID" type="string">
+           <column name="OIDUsuario"/>
+        <generator class="uuid2"/>
+       </id>
+       
+       <property name="nombreUsuario" type="string" unique="true" not-null="true">
+           <column name="nombreUsuario"/>
+       </property>
+        <property name="password" type="string">
+           <column name="password"/>
+       </property>
+       <property name="fechaHoraInhabilitacionUsuario" type="date">
+           <column name="fechaHoraInhabilitacionUsuario"/>
+       </property>
+       <property name="fechaHoraUltimoIngresoSistemaUsuario" type="timestamp">
+           <column name="fechaHoraUltimoIngresoSistemaUsuario"/>
+       </property>
+        
+        <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoUsuario" not-null="true"/>
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
+        <one-to-one name="cliente" class="sistemapagoimpuestos.Entity.Cliente" cascade="save-update"></one-to-one>
+   
+    </class>
+</hibernate-mapping>

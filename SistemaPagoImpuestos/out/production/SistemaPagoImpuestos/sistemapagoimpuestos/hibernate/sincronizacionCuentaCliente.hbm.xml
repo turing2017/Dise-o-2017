@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.SincronizacionCuentaCliente" table="sincronizacion_cuenta_cliente">
+        <id name="OID" type="string">
+            <column name="OIDSincronizacionCuentaCliente"/>
+            <generator class="uuid2"/>
+        </id>
+        <property name="fechaHoraSincronizacionClienteEntidad" type="timestamp" unique="true" not-null="true">
+           <column name="fechaHoraSincronizacionClienteEntidad"/>
+        </property>    
+        <many-to-one name="estadoSincronizacionCuentaCliente" class="sistemapagoimpuestos.Entity.EstadoSincronizacionCuentaCliente" column="OIDEstadoSincronizacionCuentaCliente" not-null="true"/>
+    </class>
+</hibernate-mapping>

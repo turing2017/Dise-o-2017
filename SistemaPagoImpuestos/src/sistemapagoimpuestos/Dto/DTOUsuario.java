@@ -13,8 +13,6 @@ public class DTOUsuario {
     private String passwordDTOUsuario;
     private Date fechaHoraInhabilitacionDTOUsuario;
     private Date fechaHoraUltimoIngresoSistemaDTOUsuario;
-//    private DTOTipoUsuario tipoUsuarioDTOTipoUsuario;
-//    private DTOEmpresa empresaDTOTipoUsuario;
     private String tipoUsuarioDTOUsuario;
     private String empresaDTOUsuario;
 
@@ -33,25 +31,19 @@ public class DTOUsuario {
     public void setEmpresaDTOUsuario(String empresaDTOUsuario) {
         this.empresaDTOUsuario = empresaDTOUsuario;
     }
+    
+    public DTOUsuario() {
+    }
 
-//    public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario, Date fechaHoraInhabilitacionDTOUsuario, Date fechaHoraUltimoIngresoSistemaDTOUsuario, DTOTipoUsuario tipoUsuarioDTOTipoUsuario, DTOEmpresa empresaDTOTipoUsuario) {
-//        this.nombreDTOUsuario = nombreDTOUsuario;
-//        this.passwordDTOUsuario = passwordDTOUsuario;
-//        this.fechaHoraInhabilitacionDTOUsuario = fechaHoraInhabilitacionDTOUsuario;
-//        this.fechaHoraUltimoIngresoSistemaDTOUsuario = fechaHoraUltimoIngresoSistemaDTOUsuario;
-//        this.tipoUsuarioDTOTipoUsuario = tipoUsuarioDTOTipoUsuario;
-//        this.empresaDTOTipoUsuario = empresaDTOTipoUsuario;
-//    }
-
-    public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario, Date fechaHoraInhabilitacionDTOUsuario, Date fechaHoraUltimoIngresoSistemaDTOUsuario) {
+    public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario, Date fechaHoraInhabilitacionDTOUsuario, Date fechaHoraUltimoIngresoSistemaDTOUsuario, String tipoUsuarioDTOUsuario, String empresaDTOUsuario) {
         this.nombreDTOUsuario = nombreDTOUsuario;
         this.passwordDTOUsuario = passwordDTOUsuario;
         this.fechaHoraInhabilitacionDTOUsuario = fechaHoraInhabilitacionDTOUsuario;
         this.fechaHoraUltimoIngresoSistemaDTOUsuario = fechaHoraUltimoIngresoSistemaDTOUsuario;
+        this.tipoUsuarioDTOUsuario = tipoUsuarioDTOUsuario;
+        this.empresaDTOUsuario = empresaDTOUsuario;
     }    
-    public DTOUsuario() {
-    }
-
+    
     public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario) {
         this.nombreDTOUsuario = nombreDTOUsuario;
         this.passwordDTOUsuario = passwordDTOUsuario;
@@ -93,21 +85,5 @@ public class DTOUsuario {
         this.fechaHoraUltimoIngresoSistemaDTOUsuario = fechaHoraUltimoIngresoSistemaDTOUsuario;
     }
 
-//    public DTOTipoUsuario getTipoUsuarioDTOTipoUsuario() {
-//        return tipoUsuarioDTOTipoUsuario;
-//    }
-//
-//    public void setTipoUsuarioDTOTipoUsuario(DTOTipoUsuario tipoUsuarioDTOTipoUsuario) {
-//        this.tipoUsuarioDTOTipoUsuario = tipoUsuarioDTOTipoUsuario;
-//    }
-//
-//    public DTOEmpresa getEmpresaDTOTipoUsuario() {
-//        return empresaDTOTipoUsuario;
-//    }
-//
-//    public void setEmpresaDTOTipoUsuario(DTOEmpresa empresaDTOTipoUsuario) {
-//        this.empresaDTOTipoUsuario = empresaDTOTipoUsuario;
-//    }
-    
 
 }

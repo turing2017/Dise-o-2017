@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.Decorators;
 
+import java.util.ArrayList;
+import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -15,6 +17,16 @@ public class DecoradorGestionarUsuario extends ExpertoGestionarUsuario {
         String role = super.iniciar();
         FachadaInterna.getInstance().finalizarTransaccion();
         return role;
+    }
+    
+    @Override
+    public ArrayList<DTOUsuario> obtenerUsuario() {
+
+        FachadaInterna.getInstance().iniciarTransaccion();
+        ArrayList<DTOUsuario> listadoDtoUsuario = super.obtenerUsuario();
+        FachadaInterna.getInstance().finalizarTransaccion();
+
+        return listadoDtoUsuario;
     }
 
 }

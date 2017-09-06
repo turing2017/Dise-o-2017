@@ -53,9 +53,9 @@ public class ExpertoGestionarUsuario {
             listadoUsuario.add(new DTOUsuario(u.getNombreUsuario(),
                     u.getPasswordUsuario(),
                     u.getFechaHoraInhabilitacionUsuario(),
-                    u.getFechaHoraUltimoIngresoSistemaUsuario()));
-//                    u.tipoUsuario.getNombreTipoUsuario(),
-//                    u.empresa.getNombreEmpresa()));
+                    u.getFechaHoraUltimoIngresoSistemaUsuario(),
+                    u.tipoUsuario.getNombreTipoUsuario(),
+                    u.empresa.getNombreEmpresa()));
             return listadoUsuario;
 
         } catch (IndexOutOfBoundsException exception) {

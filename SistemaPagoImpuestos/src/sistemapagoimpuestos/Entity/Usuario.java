@@ -10,14 +10,23 @@ public class Usuario extends Entity{
     private String passwordUsuario;
     private Date fechaHoraInhabilitacionUsuario;
     private Date fechaHoraUltimoIngresoSistemaUsuario;
-    
-    // Atributos por relación
     public TipoUsuario tipoUsuario;
-    private Cliente cliente;
+    public Cliente cliente;
     public Empresa empresa;
     
     public Usuario() {
     }
+
+    public Usuario(String nombreUsuario, String passwordUsuario, Date fechaHoraInhabilitacionUsuario, Date fechaHoraUltimoIngresoSistemaUsuario, TipoUsuario tipoUsuario, Empresa empresa) {
+        this.nombreUsuario = nombreUsuario;
+        this.passwordUsuario = passwordUsuario;
+        this.fechaHoraInhabilitacionUsuario = fechaHoraInhabilitacionUsuario;
+        this.fechaHoraUltimoIngresoSistemaUsuario = fechaHoraUltimoIngresoSistemaUsuario;
+        this.tipoUsuario = tipoUsuario;
+        this.empresa = empresa;
+    }
+    
+    
 
     public Usuario(String nombreUsuario, String passwordUsuario, Date fechaHoraInhabilitacionUsuario, Date fechaHoraUltimoIngresoSistemaUsuario, TipoUsuario tipoUsuario, Cliente cliente, Empresa empresa) {
         this.nombreUsuario = nombreUsuario;

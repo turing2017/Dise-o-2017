@@ -61,11 +61,10 @@ public class ConvertDTO {
         dtoUsuario.setPasswordDTOUsuario(usuario.getPasswordUsuario());
         dtoUsuario.setFechaHoraInhabilitacionDTOUsuario(usuario.getFechaHoraInhabilitacionUsuario());
         dtoUsuario.setFechaHoraUltimoIngresoSistemaDTOUsuario(usuario.getFechaHoraUltimoIngresoSistemaUsuario());
-        dtoUsuario.setTipoUsuarioDTOUsuario(usuario.getTipoUsuario().toString());
-        dtoUsuario.setEmpresaDTOUsuario(usuario.getEmpresa().toString());
-//        dtoUsuario.setTipoUsuarioDTOTipoUsuario(DTOUsuario(usuario.tipoUsuario.getNombreTipoUsuario()));
-//        dtoUsuario.setEmpresaDTOTipoUsuario(DTOEmpresa(usuario.empresa.getNombreEmpresa()));       
-        
+        dtoUsuario.setTipoUsuarioDTOUsuario(usuario.tipoUsuario.getNombreTipoUsuario());
+        dtoUsuario.setEmpresaDTOUsuario(usuario.empresa.getNombreEmpresa());
+
+                       
         return dtoUsuario;
     }
 

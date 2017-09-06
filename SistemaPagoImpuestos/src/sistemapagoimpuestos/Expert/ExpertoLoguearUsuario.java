@@ -1,16 +1,21 @@
 package sistemapagoimpuestos.Expert;
 
 import exceptions.Excepciones;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import javax.swing.WindowConstants;
+import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.Cliente.IUPantallaCliente;
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
+import sistemapagoimpuestos.View.Login.IULogin;
 
 /**
  *
@@ -87,13 +92,27 @@ public class ExpertoLoguearUsuario {
                 pp.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pp.setLocationRelativeTo(null);
                 pp.mostrarPantallaPrincipal(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada);
+                pp.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent ev) {
+                        pp.dispose();
+                        ControladorLoguearUsuario.getInstance().iniciar();
+
+                    }
+                });
             } else {
                 IUPantallaCliente pc = new IUPantallaCliente();
                 pc.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pc.setLocationRelativeTo(null);
                 pc.mostrarPantallaCliente(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada);
+                pc.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent ev) {
+                        pc.dispose();
+                        ControladorLoguearUsuario.getInstance().iniciar();
+                    }
+                });
             }
-
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("Codigo Ingresado No Encontrado");
             new Excepciones().datoNoEncontrado("Usuario");

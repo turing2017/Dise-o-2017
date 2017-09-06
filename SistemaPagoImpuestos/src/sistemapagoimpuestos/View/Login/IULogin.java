@@ -11,6 +11,17 @@ public class IULogin extends javax.swing.JFrame {
     public IULogin() {
         initComponents();
     }
+    
+    private static  IULogin iULogin;
+    
+    public static IULogin getInstance(){
+        if(iULogin == null){
+            iULogin = new IULogin();
+        }
+        return iULogin;
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -109,7 +120,7 @@ public class IULogin extends javax.swing.JFrame {
         nombreUsuarioIngres = textfield_usuario.getText();
         passwordUsuarioIngres = textfield_contraseña.getText();
         ControladorLoguearUsuario.getInstance().buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
-
+        this.dispose();
 
     }//GEN-LAST:event_button_entrarActionPerformed
 

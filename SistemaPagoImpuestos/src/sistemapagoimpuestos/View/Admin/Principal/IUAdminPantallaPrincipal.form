@@ -28,25 +28,34 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="button_gestionarTipoUsuario" max="32767" attributes="0"/>
                   <Component id="button_gestionarTipoImpuesto" max="32767" attributes="0"/>
-                  <Component id="button_gestionarEmpresaTipoImpuesto" max="32767" attributes="0"/>
                   <Component id="button_gestionarUsuario" min="-2" pref="222" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="330" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="label_fecha" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_nombre" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Component id="label_nombre" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="label_fecha" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="button_gestionarTipoUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="button_gestionarUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="button_gestionarTipoImpuesto" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="button_gestionarEmpresaTipoImpuesto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="308" max="32767" attributes="0"/>
+              <EmptySpace pref="331" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,14 +77,22 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionarTipoImpuestoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="button_gestionarEmpresaTipoImpuesto">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Gestionar Empresa Tipo Impuesto"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="button_gestionarUsuario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gestionar Usuario"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionarUsuarioActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="label_nombre">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="label_fecha">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
     </Component>
   </SubComponents>

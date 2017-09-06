@@ -2,10 +2,7 @@ package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-/**
- *
- * @author lunamarcos
- */
+
 public class Usuario extends Entity{
     
     // Atriburos propios de la clase
@@ -13,14 +10,23 @@ public class Usuario extends Entity{
     private String passwordUsuario;
     private Date fechaHoraInhabilitacionUsuario;
     private Date fechaHoraUltimoIngresoSistemaUsuario;
-    
-    // Atributos por relación
-    private TipoUsuario tipoUsuario;
-    private Cliente cliente;
-    private Empresa empresa;
+    public TipoUsuario tipoUsuario;
+    public Cliente cliente;
+    public Empresa empresa;
     
     public Usuario() {
     }
+
+    public Usuario(String nombreUsuario, String passwordUsuario, Date fechaHoraInhabilitacionUsuario, Date fechaHoraUltimoIngresoSistemaUsuario, TipoUsuario tipoUsuario, Empresa empresa) {
+        this.nombreUsuario = nombreUsuario;
+        this.passwordUsuario = passwordUsuario;
+        this.fechaHoraInhabilitacionUsuario = fechaHoraInhabilitacionUsuario;
+        this.fechaHoraUltimoIngresoSistemaUsuario = fechaHoraUltimoIngresoSistemaUsuario;
+        this.tipoUsuario = tipoUsuario;
+        this.empresa = empresa;
+    }
+    
+    
 
     public Usuario(String nombreUsuario, String passwordUsuario, Date fechaHoraInhabilitacionUsuario, Date fechaHoraUltimoIngresoSistemaUsuario, TipoUsuario tipoUsuario, Cliente cliente, Empresa empresa) {
         this.nombreUsuario = nombreUsuario;
@@ -32,6 +38,27 @@ public class Usuario extends Entity{
         this.empresa = empresa;
     }
 
+    public Usuario(String nombreUsuario, String passwordUsuario) {
+        this.nombreUsuario = nombreUsuario;
+        this.passwordUsuario = passwordUsuario;
+    }
+
+    public Usuario(TipoUsuario tipoUsuario, String OID) {
+        super(OID);
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Usuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Usuario(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    
+    
+
+    
     
 
     // Setters
@@ -39,7 +66,7 @@ public class Usuario extends Entity{
         this.nombreUsuario = nombreUsuario;
     }
 
-    public void setPassword(String password) {
+    public void setPasswordUsuario(String password) {
         this.passwordUsuario = password;
     }
 
@@ -68,7 +95,7 @@ public class Usuario extends Entity{
         return nombreUsuario;
     }
 
-    public String getPassword() {
+    public String getPasswordUsuario() {
         return passwordUsuario;
     }
 

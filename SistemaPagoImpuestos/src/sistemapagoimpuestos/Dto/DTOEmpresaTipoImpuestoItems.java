@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Dto;
 
 import java.util.List;
+import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 
 /**
  *
@@ -15,6 +16,8 @@ public class DTOEmpresaTipoImpuestoItems {
     private DTOTipoImpuesto dTOTipoImpuesto;
     private DTOEmpresa dTOEmpresa;
     private List<DTOItem> dTOItems;
+    private int frecuenciaSincro;
+    private DTOTipoEmpresa dTOTipoEmpresa;
 
     public DTOEmpresaTipoImpuestoItems() {
     }
@@ -45,6 +48,23 @@ public class DTOEmpresaTipoImpuestoItems {
         return dTOItems;
     }
 
+    public DTOTipoEmpresa getdTOTipoEmpresa() {
+        return dTOTipoEmpresa;
+    }
+
+    public void setdTOTipoEmpresa(DTOTipoEmpresa dTOTipoEmpresa) {
+        this.dTOTipoEmpresa = dTOTipoEmpresa;
+    }
+
+    public int getFrecuenciaSincro() {
+        return frecuenciaSincro;
+    }
+
+    public void setFrecuenciaSincro(int frecuenciaSincro) {
+        this.frecuenciaSincro = frecuenciaSincro;
+    }
+
+    
     public void setdTOItems(List<DTOItem> dTOItems) {
         this.dTOItems = dTOItems;
     }

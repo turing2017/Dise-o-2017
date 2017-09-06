@@ -228,11 +228,18 @@ public class ExpertoGestionarTipoImpuesto {
                                                                 tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
         ArrayList<Empresa> empresaList = optenerEmpresaConTipoImpuesto(tipoImpuesto);
         List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipoImpuestoItemList = new ArrayList<>();
+        
         for(Empresa tempEmp : empresaList){
             DTOEmpresaTipoImpuestoItems dTOEmpresaTipoImpuestoItems = new DTOEmpresaTipoImpuestoItems();
             dTOEmpresaTipoImpuestoItems.setdTOEmpresa(ConvertDTO.getInstance().convertEmpresa(tempEmp));
             ArrayList<Item> itemList = optenerItemsEmpresaConTipoImpuesto(tipoImpuesto, tempEmp);
+            TipoEmpresa tipoEmpresa = optenerTipoEmpresaConTipoImpuesto(tipoImpuesto, tempEmp).get(0);
+            dTOEmpresaTipoImpuestoItems.setFrecuenciaSincro(obtenerEmpresaTipoImpuesto(tipoImpuesto, tempEmp).getFrecuenciaLiquidacionEmpresaTipoImpuesto());
+            
             dTOEmpresaTipoImpuestoItems.setdTOItems(new ArrayList<>());
+            
+            dTOEmpresaTipoImpuestoItems.setdTOTipoEmpresa(ConvertDTO.getInstance().convertTipoEmpresa(tipoEmpresa));
+            
             for(Item item : itemList){
                 dTOEmpresaTipoImpuestoItems.addItem(ConvertDTO.getInstance().convertItem(item));
             }            
@@ -299,10 +306,6 @@ public class ExpertoGestionarTipoImpuesto {
         criterio1.setValor(tipoImpuesto);
         criterios.add(criterio1);
         
-        List<Object> empresaObjectList = FachadaPersistencia.getInstance().buscar("Empresa", null);
-        List<Object> tipoEmpresaObjectList = FachadaPersistencia.getInstance().buscar("TipoEmpresa", null);
-        List<Object> tipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
-        
         List<Object> empresaTipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
         ArrayList<Empresa> listEmpresa = new ArrayList<>();
         for(Object empresaTipoImpuestoObject: empresaTipoImpuestoObjectList){
@@ -313,8 +316,28 @@ public class ExpertoGestionarTipoImpuesto {
         return listEmpresa;
     }
     
+    public ArrayList<TipoEmpresa> optenerTipoEmpresaConTipoImpuesto(TipoImpuesto tipoImpuesto, Empresa empresa){
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio1 = new DTOCriterio();
+        criterio1.setAtributo("tipoImpuesto");
+        criterio1.setOperacion("=");
+        criterio1.setValor(tipoImpuesto);
+        criterios.add(criterio1);
+        criterios.add(new DTOCriterio("empresa", "=", empresa));
+        
+        List<Object> empresaTipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
+        ArrayList<TipoEmpresa> listTipoEmpresa = new ArrayList<>();
+        for(Object empresaTipoImpuestoObject: empresaTipoImpuestoObjectList){
+            EmpresaTipoImpuesto empresaTipoImpuestoTemp = (EmpresaTipoImpuesto) empresaTipoImpuestoObject;
+            TipoEmpresa empresaTemp = (TipoEmpresa) empresaTipoImpuestoTemp.getTipoEmpresa();
+            listTipoEmpresa.add(empresaTemp);
+        }
+        return listTipoEmpresa;
+    }
+    
+    
     public ArrayList<Item> optenerItemsEmpresaConTipoImpuesto(TipoImpuesto tipoImpuesto, Empresa empresa){
-         List<DTOCriterio> criterios = new ArrayList<>();
+        List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio("tipoImpuesto", "=", tipoImpuesto);
         DTOCriterio criterio2 = new DTOCriterio("empresa", "=", empresa);
         criterios.add(criterio1);
@@ -335,6 +358,15 @@ public class ExpertoGestionarTipoImpuesto {
             }            
         }
         return listItem;
+    }
+    
+    public EmpresaTipoImpuesto obtenerEmpresaTipoImpuesto( TipoImpuesto tipoImpuesto, Empresa empresa){
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio1 = new DTOCriterio("tipoImpuesto", "=", tipoImpuesto);
+        DTOCriterio criterio2 = new DTOCriterio("empresa", "=", empresa);
+        criterios.add(criterio1);
+        criterios.add(criterio2);
+        return (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios).get(0);
     }
         
     public List<DTOEmpresa> buscarEmpresas() {

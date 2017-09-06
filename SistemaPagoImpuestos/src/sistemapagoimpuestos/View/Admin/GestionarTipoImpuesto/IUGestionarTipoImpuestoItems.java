@@ -297,19 +297,16 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                     IUGestionarTipoImpuestoAlta.setTextField_nombre(getNombreTemp());
                     IUGestionarTipoImpuestoAlta.setCheckbox_esEditable(isEditTemp());
                 }else{
+                    IUGestionarTipoImpuestoModificar.setdTOEmpresaTipImpItemList(getdTOEmpresaTipImpItemList());
+                    IUGestionarTipoImpuestoModificar.adddTOEmpresaTipImpItemList(dTOEmpresaTipImpItem);
                     IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
                     pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
                     pantallaModificar.setVisible(true); // La hago visible
                     // Modifico la operación de cierre para volver a la pantalla principal
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    pantallaModificar.addWindowListener(new WindowAdapter() {
-                        public void windowClosing(WindowEvent ev) {
-                            pantallaModificar.dispose();
-                            ControladorGestionarTipoImpuesto.getInstance().iniciar();
-                        }
-                    });
+
                     pantallaModificar.RecuperarEmpresaItems();
-                    pantallaModificar.setNombre_actual(getCodigoTemp());
+                    pantallaModificar.setLabel_nombre(getCodigoTemp());
                     pantallaModificar.setTextfield_nombre(getNombreTemp());
                     pantallaModificar.setCheckbox_Habilitar(isEditTemp());
                     pantallaModificar.setCheckbox_esEditable(isStatusTemp());

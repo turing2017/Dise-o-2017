@@ -60,8 +60,10 @@ public class ControladorGestionarTipoImpuesto {
         experto.nuevaEmpresaTipoImpuestoItem(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems);
     }
     //Metodo para modificar TipoImpuesto
-    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){
+    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado,List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItems){
         experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
+        experto.nuevaEmpresaTipoImpuesto(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems);
+        experto.nuevaEmpresaTipoImpuestoItem(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems);
         
     }
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????

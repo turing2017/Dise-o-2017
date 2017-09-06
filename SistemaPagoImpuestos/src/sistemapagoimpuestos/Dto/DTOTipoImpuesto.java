@@ -15,6 +15,7 @@ public class DTOTipoImpuesto {
     private boolean esMontoEditableDTOTipoImpuesto;
     private Date fechaHoraInhabilitacionDTOTipoImpuesto;
     private List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipoImpuestoItemList;
+    private int frecuenciaSincro;
     public DTOTipoImpuesto() {
     }
 
@@ -24,6 +25,16 @@ public class DTOTipoImpuesto {
         this.esMontoEditableDTOTipoImpuesto = esMontoEditableDTOTipoImpuesto;
         this.fechaHoraInhabilitacionDTOTipoImpuesto = fechaHoraInhabilitacionDTOTipoImpuesto;
     }
+
+    public DTOTipoImpuesto(int codigoDTOTipoImpuesto, String nombreDTOTipoImpuesto, boolean esMontoEditableDTOTipoImpuesto, Date fechaHoraInhabilitacionDTOTipoImpuesto, List<DTOEmpresaTipoImpuestoItems> dTOEmpresaTipoImpuestoItemList, int frecuenciaSincro) {
+        this.codigoDTOTipoImpuesto = codigoDTOTipoImpuesto;
+        this.nombreDTOTipoImpuesto = nombreDTOTipoImpuesto;
+        this.esMontoEditableDTOTipoImpuesto = esMontoEditableDTOTipoImpuesto;
+        this.fechaHoraInhabilitacionDTOTipoImpuesto = fechaHoraInhabilitacionDTOTipoImpuesto;
+        this.dTOEmpresaTipoImpuestoItemList = dTOEmpresaTipoImpuestoItemList;
+        this.frecuenciaSincro = frecuenciaSincro;
+    }
+
 
     
     // Setters
@@ -42,6 +53,15 @@ public class DTOTipoImpuesto {
     public void setNombreDTOTipoImpuesto(String nombreDTOTipoImpuesto) {
         this.nombreDTOTipoImpuesto = nombreDTOTipoImpuesto;
     }
+
+    public int getFrecuenciaSincro() {
+        return frecuenciaSincro;
+    }
+
+    public void setFrecuenciaSincro(int frecuenciaSincro) {
+        this.frecuenciaSincro = frecuenciaSincro;
+    }
+    
     
     // Getters
     public int getCodigoDTOTipoImpuesto() {

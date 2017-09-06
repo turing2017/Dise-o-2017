@@ -199,6 +199,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 // Modifico la operación de cierre para volver a la pantalla principal
                 pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pantallaAlta.generarEmpresaItems();
+                IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<>());
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
                         pantallaAlta.dispose();

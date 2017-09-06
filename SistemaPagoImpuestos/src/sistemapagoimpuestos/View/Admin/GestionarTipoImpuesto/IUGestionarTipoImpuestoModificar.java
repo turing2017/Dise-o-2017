@@ -343,7 +343,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
             dTOEmpresaTipImpItem.setNombreEmpresa(dTOEmpresaTipoImpuestoItems.getdTOEmpresa().getNombreEmpresa());
             for(DTOItem dTOItem : dTOEmpresaTipoImpuestoItems.getdTOItems()){
-                dTOEmpresaTipImpItem.addItem(dTOItem.getNombreItem());
+                //dTOEmpresaTipImpItem.addItem(dTOItem.getNombreItem());
             }
             addDtoetiisModf(dTOEmpresaTipImpItem);
         }
@@ -373,7 +373,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             
             
         // Muestro pantalla de Consultar
-        String[] columnas = {"Empresa", "Items"};
+        String[] columnas = {"Empresa", "Tipo Empresa", "Frec. Liquidacion", "Items"};
 
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
             
@@ -390,6 +390,10 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                         return String.class;
                     case 1:
                         return String.class;
+                    case 3:
+                        return int.class;
+                    case 4:
+                        return String.class;
                     default:
                         return null;
                 }
@@ -400,6 +404,8 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         for(DTOEmpresaTipImpItem dTOEmpresaTipImpItem :dTOEmpresaTipImpItemList ){
             Vector<Object> vect = new Vector<>();
             vect.add(dTOEmpresaTipImpItem.getNombreEmpresa());
+            vect.add(dTOEmpresaTipImpItem.getNombreTipoEmpresa());
+            vect.add(dTOEmpresaTipImpItem.getFrecuenciaSincronizacion());
             vect.add(dTOEmpresaTipImpItem.concatItems());
             dtm.addRow(vect);
         }

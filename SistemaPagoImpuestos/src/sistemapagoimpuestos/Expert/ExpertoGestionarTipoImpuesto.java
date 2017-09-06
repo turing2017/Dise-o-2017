@@ -10,7 +10,9 @@ import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DtoItemOrden;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
@@ -41,35 +43,155 @@ public class ExpertoGestionarTipoImpuesto {
     }
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
-    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItem){
-    //Contiunar aca   
+    public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
         List<DTOCriterio> criteriosNombre = new ArrayList<>();
-        List<DTOCriterio> criteriosCodigo = new ArrayList<>();
-        List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
-        for(DTOEmpresaTipImpItem  dTOEmpresaTipImpItem1 :dTOEmpresaTipImpItem){
-            DTOCriterio criterioNombre = new DTOCriterio("nombreEmpresa", "=", nombreTipoImpuestoIngres);
-        }
-
-        DTOCriterio criterioNombre = new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuestoIngres);
-        DTOCriterio criterioCodigo = new DTOCriterio("codigoTipoImpuesto", "=", codigoTipoImpuestoIngres);
-        criteriosNombre.add(criterioNombre);
-        criteriosCodigo.add(criterioCodigo);
-        if(!existeDato("TipoImpuesto", criteriosNombre)&&!existeDato("TipoImpuesto", criteriosCodigo)){
+        criteriosNombre.add(new DTOCriterio(
+                                            "nombreTipoImpuesto", 
+                                            "=",
+                                            nombreTipoImpuestoIngres));
+        if(!existeDato("TipoImpuesto", criteriosNombre)&&!existeDato("TipoImpuesto", criteriosNombre)){
             System.out.println("Codigo Ingresado No Encontrado");
             TipoImpuesto tipoImpuesto = new TipoImpuesto();
             tipoImpuesto.setNombreTipoImpuesto(nombreTipoImpuestoIngres);
             tipoImpuesto.setCodigoTipoImpuesto(codigoTipoImpuestoIngres);
             tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
-
-            FachadaPersistencia.getInstance().guardar(tipoImpuesto);        
+            FachadaPersistencia.getInstance().guardar(tipoImpuesto);
         }else{
             Excepciones.getInstance().objetoExistente("Tipo Impuesto - Codigo o Nombre ");
-
         }
-
     }
- 
     
+    public void nuevaEmpresaTipoImpuesto(String nombreTipoImpuestoIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItem){
+        List<DTOCriterio> criteriosNombreTipoImpuesto = new ArrayList<>();
+
+
+        criteriosNombreTipoImpuesto.add(new DTOCriterio(
+                                            "nombreTipoImpuesto", 
+                                            "=",
+                                            nombreTipoImpuestoIngres));
+        TipoImpuesto tipoImpuesto = 
+                (TipoImpuesto) 
+                FachadaPersistencia.
+                getInstance().
+                buscar("TipoImpuesto",
+                        criteriosNombreTipoImpuesto).get(0);
+        List<EmpresaTipoImpuesto> empresaTipoImpuestoList= new ArrayList<>();
+        for(DTOEmpresaTipImpItem  dTOEmpresaTipImpItem1 :dTOEmpresaTipImpItem){
+
+            List<DTOCriterio> criteriosNombreTipoEmpresa = new ArrayList<>();
+            List<DTOCriterio> criteriosNombreEmpresa = new ArrayList<>();     
+        
+            criteriosNombreEmpresa.add(new DTOCriterio(
+                                                "nombreEmpresa", 
+                                                "=", 
+                                                dTOEmpresaTipImpItem1.getNombreEmpresa()));
+             criteriosNombreTipoEmpresa.add(new DTOCriterio(
+                                                "nombreTipoEmpresa", 
+                                                "=", 
+                                                dTOEmpresaTipImpItem1.getNombreTipoEmpresa()));
+             if(existeDato("Empresa", criteriosNombreEmpresa)&&existeDato("TipoEmpresa", criteriosNombreTipoEmpresa)){
+                Empresa empresa = 
+                    (Empresa) 
+                    FachadaPersistencia.
+                    getInstance().
+                    buscar("Empresa",
+                            criteriosNombreEmpresa).get(0);
+                TipoEmpresa tipoEmpresa = 
+                    (TipoEmpresa) 
+                    FachadaPersistencia.
+                    getInstance().
+                    buscar("TipoEmpresa",
+                            criteriosNombreTipoEmpresa).get(0);
+                
+                    empresaTipoImpuestoList.add(new EmpresaTipoImpuesto(
+                                                new Date(),
+                                                null,
+                                                dTOEmpresaTipImpItem1.getFrecuenciaSincronizacion(),
+                                                tipoImpuesto,
+                                                empresa,
+                                                tipoEmpresa));
+             }
+        }
+        
+        for(EmpresaTipoImpuesto empresaTipoImpuesto: empresaTipoImpuestoList){
+            FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
+        }        
+    }
+
+        public void nuevaEmpresaTipoImpuestoItem(String nombreTipoImpuestoIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItem){
+            List<DTOCriterio> criteriosNombreTipoImpuesto = new ArrayList<>();
+            criteriosNombreTipoImpuesto.add(new DTOCriterio(
+                                                "nombreTipoImpuesto", 
+                                                "=",
+                                                nombreTipoImpuestoIngres));
+            TipoImpuesto tipoImpuesto = 
+                    (TipoImpuesto) 
+                    FachadaPersistencia.
+                    getInstance().
+                    buscar("TipoImpuesto",
+                            criteriosNombreTipoImpuesto).get(0);
+            List<ItemEmpresaTipoImpuesto> empresaTipoImpuestoItemList= new ArrayList<>();
+            for(DTOEmpresaTipImpItem  dTOEmpresaTipImpItem1 :dTOEmpresaTipImpItem){
+
+                List<DTOCriterio> criteriosNombreTipoEmpresa = new ArrayList<>();
+                List<DTOCriterio> criteriosNombreEmpresa = new ArrayList<>();     
+
+                criteriosNombreEmpresa.add(new DTOCriterio(
+                                                    "nombreEmpresa", 
+                                                    "=", 
+                                                    dTOEmpresaTipImpItem1.getNombreEmpresa()));
+                 criteriosNombreTipoEmpresa.add(new DTOCriterio(
+                                                    "nombreTipoEmpresa", 
+                                                    "=", 
+                                                    dTOEmpresaTipImpItem1.getNombreTipoEmpresa()));
+                if(existeDato("Empresa", criteriosNombreEmpresa)&&existeDato("TipoEmpresa", criteriosNombreTipoEmpresa)){
+                    List<DTOCriterio> criteriosEmpresaTipoImpuestoItem = new ArrayList<>();
+                    Empresa empresa = 
+                        (Empresa) 
+                        FachadaPersistencia.
+                        getInstance().
+                        buscar("Empresa",
+                                criteriosNombreEmpresa).get(0);
+                    TipoEmpresa tipoEmpresa = 
+                        (TipoEmpresa) 
+                        FachadaPersistencia.
+                        getInstance().
+                        buscar("TipoEmpresa",
+                                criteriosNombreTipoEmpresa).get(0);
+                    criteriosEmpresaTipoImpuestoItem.add(new DTOCriterio("empresa", "=", empresa));
+                    criteriosEmpresaTipoImpuestoItem.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
+                    criteriosEmpresaTipoImpuestoItem.add(new DTOCriterio("tipoEmpresa", "=", tipoEmpresa));
+                    if(existeDato("EmpresaTipoImpuesto", criteriosEmpresaTipoImpuestoItem)){
+                        EmpresaTipoImpuesto empresaTipoImpuesto = 
+                                (EmpresaTipoImpuesto) 
+                                FachadaPersistencia.
+                                        getInstance().
+                                        buscar("EmpresaTipoImpuesto", criteriosEmpresaTipoImpuestoItem).
+                                        get(0);
+                        for(DtoItemOrden dtoItemOrden :dTOEmpresaTipImpItem1.getDtoItemOrdenList()){
+                            List<DTOCriterio> criteriosItems = new ArrayList<>();
+                            criteriosItems.add(new DTOCriterio("nombreItem", "=", dtoItemOrden.getNombreItem()));
+                            Item item = 
+                                (Item) 
+                                FachadaPersistencia.
+                                        getInstance().
+                                        buscar("Item", criteriosItems).
+                                        get(0);
+                            empresaTipoImpuestoItemList.add(new ItemEmpresaTipoImpuesto(
+                                    dtoItemOrden.getOrden(), 
+                                    null, 
+                                    item, 
+                                    empresaTipoImpuesto));
+
+                        }
+                    }
+                 }
+            }
+            for(ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto :empresaTipoImpuestoItemList){
+                FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
+            }
+        
+        }
     
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
@@ -248,5 +370,22 @@ public class ExpertoGestionarTipoImpuesto {
             lista.add(dtoItem);
         }
         return lista;
+    }
+    
+    public List<DTOTipoEmpresa> buscarTipoEmpresa(){
+        List<DTOCriterio> criterioItem = new ArrayList();
+        criterioItem.add(new DTOCriterio("fechaInhabilitacionTipoEmpresa", "IS", null));
+        List<Object> tipoEmpresaObjectList = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterioItem);
+        
+        List <DTOTipoEmpresa> dTOTipoEmpresaList = new ArrayList<>();
+        DTOTipoEmpresa dTOTipoEmpresa;
+        
+        for (Object tipoEmpresaObject :tipoEmpresaObjectList) {
+            dTOTipoEmpresa = new DTOTipoEmpresa();
+            TipoEmpresa tipoEmpresa = (TipoEmpresa) tipoEmpresaObject;
+            dTOTipoEmpresa.setNombreTipoEmpresa(tipoEmpresa.getNombreTipoEmpresa());
+            dTOTipoEmpresaList.add(dTOTipoEmpresa);
+        }
+        return dTOTipoEmpresaList;
     }
 }

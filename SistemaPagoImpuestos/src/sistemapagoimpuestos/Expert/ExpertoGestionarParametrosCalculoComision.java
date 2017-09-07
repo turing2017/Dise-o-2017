@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Expert;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.ParametroCalculoEditable;
@@ -85,7 +86,7 @@ public class ExpertoGestionarParametrosCalculoComision {
     }
      */
 //    }
-    public void modificarParametrosPeriodicidad(double anual, double bimestral, double cuatrimestral, double mensual, double quincenal, double semestral, double trimestral) {
+    public void modificarParametrosPeriodicidad(Date fechaDesde,double anual, double bimestral, double cuatrimestral, double mensual, double quincenal, double semestral, double trimestral) {
 
         List<DTOCriterio> criterios = new ArrayList<>();
 
@@ -95,6 +96,7 @@ public class ExpertoGestionarParametrosCalculoComision {
         criterio1.setValor("999999");
         FachadaInterna.getInstance().iniciarTransaccion();
         ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad)FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", criterios).get(0);
+        parametrosCalculoPeriodicidad.setFechaDesde(fechaDesde);
         parametrosCalculoPeriodicidad.setAnual(anual);
         parametrosCalculoPeriodicidad.setBimestral(bimestral);
         parametrosCalculoPeriodicidad.setCuatrimestral(cuatrimestral);

@@ -8,11 +8,15 @@
             <generator class="uuid2"/>
         </id>
        
-        <property name="noEditable" type="double" unique="true" not-null="true">
+         <property name="fechaDesde" type="date" not-null="true">
+        <column name="fechaDesde"/>
+        </property>
+        
+        <property name="noEditable" type="double" not-null="true">
             <column name="noEditable"/>
         </property>
         
-        <property name="siEditable" type="double" unique="true" not-null="true">
+        <property name="siEditable" type="double" not-null="true">
             <column name="siEditable"/>
         </property>
    

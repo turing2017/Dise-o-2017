@@ -1,6 +1,8 @@
 
 package sistemapagoimpuestos.Entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Gabriel
@@ -8,9 +10,18 @@ package sistemapagoimpuestos.Entity;
 public class ParametroCalculoEditable extends Entity{
     
     private static ParametroCalculoEditable instancia;
+    private Date fechaDesde = new Date();
     private double noEditable;
     private double siEditable;
 
+    public Date getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public void setFechaDesde(Date fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
+    
     public double getNoEditable() {
         return noEditable;
     }

@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import java.util.Date;
 import sistemapagoimpuestos.Expert.ExpertoGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -20,7 +21,9 @@ public class DecoradorGestionarParametrosCalculoComision extends ExpertoGestiona
         String role = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return role;
-    }private double anual;
+    }
+     private Date fechaDesde;
+    private double anual;
     private double bimestral;
     private double cuatrimestral;
     private double mensual;
@@ -30,9 +33,9 @@ public class DecoradorGestionarParametrosCalculoComision extends ExpertoGestiona
     
 
     //@Override
-    public void modificarParametroCalculoPeriodicidad(double anual, double bimestral, double cuatrimestral, double mensual , double quincenal, double semestral , double trimestral ) {
+    public void modificarParametroCalculoPeriodicidad(Date fechaDesde ,double anual, double bimestral, double cuatrimestral, double mensual , double quincenal, double semestral , double trimestral ) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarParametrosPeriodicidad(anual, bimestral, cuatrimestral, mensual,quincenal,semestral,trimestral); //To change body of generated methods, choose Tools | Templates.
+        super.modificarParametrosPeriodicidad(fechaDesde,anual, bimestral, cuatrimestral, mensual,quincenal,semestral,trimestral); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
     

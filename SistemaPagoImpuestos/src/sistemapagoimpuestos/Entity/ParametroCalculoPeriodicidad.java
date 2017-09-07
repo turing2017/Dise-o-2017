@@ -1,15 +1,27 @@
 package sistemapagoimpuestos.Entity;
+
+import java.util.Date;
+
 /**
  *
  * @author Gabriel
  */
 public class ParametroCalculoPeriodicidad extends Entity{
     private static ParametroCalculoPeriodicidad instancia;
+    private Date fechaDesde = new Date();
     private double anual = 0.0;
     private double bimestral = 0.0;
     private double cuatrimestral= 0.0;
     private double mensual= 0.0;
     private double quincenal= 0.0;
+
+    public Date getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public void setFechaDesde(Date fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
     private double semestral= 0.0;
     private double trimestral= 0.0;
     

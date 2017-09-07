@@ -6,9 +6,10 @@
 package sistemapagoimpuestos.Controller;
 
 
+import java.util.Date;
 import sistemapagoimpuestos.Expert.ExpertoGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.View.Admin.IUGestionarParametrosComision;
+import sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad.IUGestionarParametrosComision;
 
 /**
  *
@@ -46,8 +47,8 @@ public class ControladorGestionarParametrosCalculoComision {
         return experto.consultarParametrosCalculoEditable();
     }
     */
-    public void modificarParametrosPeriodicidad(double anual, double bimestral, double cuatrimestral, double mensual, double quincenal, double semestral, double trimestral) {
-        experto.modificarParametrosPeriodicidad(anual, bimestral, cuatrimestral, mensual, quincenal, semestral, trimestral);
+    public void modificarParametrosPeriodicidad(Date fechaDesde,double anual, double bimestral, double cuatrimestral, double mensual, double quincenal, double semestral, double trimestral) {
+        experto.modificarParametrosPeriodicidad(fechaDesde, anual, bimestral, cuatrimestral, mensual, quincenal, semestral, trimestral);
     }
     
 }

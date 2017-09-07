@@ -7,32 +7,38 @@
         <generator class="uuid2"/>
         </id>
        
-        <property name="anual" type="double" unique="true" not-null="true">
+        <property name="fechaDesde" type="date" not-null="true">
+        <column name="fechaDesde"/>
+        </property>
+        
+        <property name="anual" type="double" not-null="true">
         <column name="anual"/>
         </property>
         
-         <property name="bimestral" type="double" unique="true" not-null="true">
+         <property name="bimestral" type="double" not-null="true">
         <column name="bimestral"/>
          </property>
         
-         <property name="cuatrimestral" type="double" unique="true" not-null="true">
+         <property name="cuatrimestral" type="double" not-null="true">
         <column name="cuatrimestral"/>
          </property>
         
-        <property name="mensual" type="double" unique="true" not-null="true">
+        <property name="mensual" type="double" not-null="true">
         <column name="mensual"/>
         </property>
         
-        <property name="quincenal" type="double" unique="true" not-null="true">
+        <property name="quincenal" type="double" not-null="true">
         <column name="quincenal"/>
         </property>
         
-        <property name="semestral" type="double" unique="true" not-null="true">
+        <property name="semestral" type="double" not-null="true">
         <column name="semestral"/>
         </property>
         
-        <property name="trimestral" type="double" unique="true" not-null="true">
+        <property name="trimestral" type="double" not-null="true">
         <column name="trimestral"/>
         </property>
+        
+       
     </class>
 </hibernate-mapping>

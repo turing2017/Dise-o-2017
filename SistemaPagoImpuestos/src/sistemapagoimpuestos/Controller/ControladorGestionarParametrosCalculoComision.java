@@ -8,7 +8,7 @@ package sistemapagoimpuestos.Controller;
 
 import sistemapagoimpuestos.Expert.ExpertoGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.View.Admin.IUGestionarParametrosCalculoComision;
+import sistemapagoimpuestos.View.Admin.IUGestionarParametrosComision;
 
 /**
  *
@@ -36,7 +36,7 @@ public class ControladorGestionarParametrosCalculoComision {
     // Metodo iniciar
     public void iniciar(){
         if(experto.iniciar().equals("Administrador")){
-        IUGestionarParametrosCalculoComision pantallaPrincipal = new IUGestionarParametrosCalculoComision();
+        IUGestionarParametrosComision pantallaPrincipal = new IUGestionarParametrosComision();
         pantallaPrincipal.setVisible(true); 
         }        
     }

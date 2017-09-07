@@ -50,12 +50,12 @@ public class ExpertoGestionarUsuario {
             criterios.add(criterio1);
             Usuario u = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criterios).get(0);
             List<DTOUsuario> listadoUsuario = new ArrayList();
-            listadoUsuario.add(new DTOUsuario(u.getNombreUsuario(),
+            /*listadoUsuario.add(new DTOUsuario(u.getNombreUsuario(),
                     u.getPasswordUsuario(),
                     u.getFechaHoraInhabilitacionUsuario(),
                     u.getFechaHoraUltimoIngresoSistemaUsuario(),
                     u.tipoUsuario.getNombreTipoUsuario(),
-                    u.empresa.getNombreEmpresa()));
+                    u.empresa.getNombreEmpresa()));*/
             return listadoUsuario;
 
         } catch (IndexOutOfBoundsException exception) {

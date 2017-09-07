@@ -13,45 +13,24 @@ public class DTOUsuario {
     private String passwordDTOUsuario;
     private Date fechaHoraInhabilitacionDTOUsuario;
     private Date fechaHoraUltimoIngresoSistemaDTOUsuario;
-    private String tipoUsuarioDTOUsuario;
-    private String empresaDTOUsuario;
+    private DTOTipoUsuario dTOTipoUsuario;
+    public DTOCliente dTOCliente;
+    public DTOEmpresa dTOEmpresa;
 
-    public String getTipoUsuarioDTOUsuario() {
-        return tipoUsuarioDTOUsuario;
-    }
-
-    public void setTipoUsuarioDTOUsuario(String tipoUsuarioDTOUsuario) {
-        this.tipoUsuarioDTOUsuario = tipoUsuarioDTOUsuario;
-    }
-
-    public String getEmpresaDTOUsuario() {
-        return empresaDTOUsuario;
-    }
-
-    public void setEmpresaDTOUsuario(String empresaDTOUsuario) {
-        this.empresaDTOUsuario = empresaDTOUsuario;
-    }
-    
     public DTOUsuario() {
     }
 
-    public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario, Date fechaHoraInhabilitacionDTOUsuario, Date fechaHoraUltimoIngresoSistemaDTOUsuario, String tipoUsuarioDTOUsuario, String empresaDTOUsuario) {
+    public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario, Date fechaHoraInhabilitacionDTOUsuario, Date fechaHoraUltimoIngresoSistemaDTOUsuario, DTOTipoUsuario dTOTipoUsuario, DTOCliente dTOCliente, DTOEmpresa dTOEmpresa) {
         this.nombreDTOUsuario = nombreDTOUsuario;
         this.passwordDTOUsuario = passwordDTOUsuario;
         this.fechaHoraInhabilitacionDTOUsuario = fechaHoraInhabilitacionDTOUsuario;
         this.fechaHoraUltimoIngresoSistemaDTOUsuario = fechaHoraUltimoIngresoSistemaDTOUsuario;
-        this.tipoUsuarioDTOUsuario = tipoUsuarioDTOUsuario;
-        this.empresaDTOUsuario = empresaDTOUsuario;
-    }    
-    
-    public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario) {
-        this.nombreDTOUsuario = nombreDTOUsuario;
-        this.passwordDTOUsuario = passwordDTOUsuario;
+        this.dTOTipoUsuario = dTOTipoUsuario;
+        this.dTOCliente = dTOCliente;
+        this.dTOEmpresa = dTOEmpresa;
     }
 
-    public DTOUsuario(String nombreUsuario, Date fechaHoraInhabilitacionUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     public String getNombreDTOUsuario() {
         return nombreDTOUsuario;
@@ -85,5 +64,30 @@ public class DTOUsuario {
         this.fechaHoraUltimoIngresoSistemaDTOUsuario = fechaHoraUltimoIngresoSistemaDTOUsuario;
     }
 
+    public DTOTipoUsuario getdTOTipoUsuario() {
+        return dTOTipoUsuario;
+    }
 
+    public void setdTOTipoUsuario(DTOTipoUsuario dTOTipoUsuario) {
+        this.dTOTipoUsuario = dTOTipoUsuario;
+    }
+
+    public DTOCliente getdTOCliente() {
+        return dTOCliente;
+    }
+
+    public void setdTOCliente(DTOCliente dTOCliente) {
+        this.dTOCliente = dTOCliente;
+    }
+
+
+    public DTOEmpresa getdTOEmpresa() {
+        return dTOEmpresa;
+    }
+
+    public void setdTOEmpresa(DTOEmpresa dTOEmpresa) {
+        this.dTOEmpresa = dTOEmpresa;
+    }
+
+    
 }

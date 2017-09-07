@@ -5,12 +5,14 @@
  */
 package sistemapagoimpuestos.Utils;
 
+import sistemapagoimpuestos.Dto.DTOCliente;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOUsuario;
+import sistemapagoimpuestos.Entity.Cliente;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.TipoUsuario;
@@ -49,13 +51,6 @@ public class ConvertDTO {
         dTOItem.setFechaHoraInhabilitacionItem(item.getFechaHoraInhabilitacionItem());
         return dTOItem;
     }
-
-    public DTOTipoUsuario convertTipoUsuario(TipoUsuario tipoUsuario) {
-        DTOTipoUsuario dtoTipoUsuario = new DTOTipoUsuario();
-        dtoTipoUsuario.setNombreDTOTipoUsuario(tipoUsuario.getNombreTipoUsuario());
-        dtoTipoUsuario.setFechaHoraInhabilitacionDTOTipoUsuario(tipoUsuario.getFechaHoraInhabilitacionTipoUsuario());
-        return dtoTipoUsuario;
-    }
     
     public DTOTipoEmpresa convertTipoEmpresa(TipoEmpresa tipoEmpresa){
         return new DTOTipoEmpresa(tipoEmpresa.getNombreTipoEmpresa(), tipoEmpresa.getfechaInhabilitacionTipoEmpresa());    
@@ -67,10 +62,19 @@ public class ConvertDTO {
         dtoUsuario.setPasswordDTOUsuario(usuario.getPasswordUsuario());
         dtoUsuario.setFechaHoraInhabilitacionDTOUsuario(usuario.getFechaHoraInhabilitacionUsuario());
         dtoUsuario.setFechaHoraUltimoIngresoSistemaDTOUsuario(usuario.getFechaHoraUltimoIngresoSistemaUsuario());
-        dtoUsuario.setTipoUsuarioDTOUsuario(usuario.tipoUsuario.getNombreTipoUsuario());
-        dtoUsuario.setEmpresaDTOUsuario(usuario.empresa.getNombreEmpresa());
+        //dtoUsuario.setTipoUsuarioDTOUsuario(usuario.tipoUsuario.getNombreTipoUsuario());
+        //dtoUsuario.setEmpresaDTOUsuario(usuario.empresa.getNombreEmpresa());
 
                        
         return dtoUsuario;
+    }
+    
+    public DTOTipoUsuario convertTipoUsuario(TipoUsuario tipoUsuario){
+        return new DTOTipoUsuario(tipoUsuario.getNombreTipoUsuario(), tipoUsuario.getFechaHoraInhabilitacionTipoUsuario());
+    }
+    public DTOCliente convertCliente(Cliente cliente){
+        return new DTOCliente(cliente.getCuilCuitCliente(), cliente.getApellidoCliente(),
+                cliente.getNombreCliente(), cliente.getDniCliente(),
+                cliente.getFechaHoraInhabilitacionCliente());
     }
 }

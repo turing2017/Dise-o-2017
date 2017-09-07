@@ -221,8 +221,8 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
             vect.add(dtoUsuario.getPasswordDTOUsuario());
             vect.add(dtoUsuario.getFechaHoraInhabilitacionDTOUsuario());
             vect.add(dtoUsuario.getFechaHoraUltimoIngresoSistemaDTOUsuario());
-            vect.add(dtoUsuario.getTipoUsuarioDTOUsuario());
-            vect.add(dtoUsuario.getEmpresaDTOUsuario());          
+            //vect.add(dtoUsuario.getTipoUsuarioDTOUsuario());
+            //vect.add(dtoUsuario.getEmpresaDTOUsuario());          
             
             
             String fecha = "";

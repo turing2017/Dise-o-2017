@@ -1,0 +1,56 @@
+package sistemapagoimpuestos.Controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
+import sistemapagoimpuestos.Expert.ExpertoGestionarItem;
+import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.Admin.GestionarItem.IUGestionarItem;
+
+/**
+ *
+ * @author lunamarcos
+ */
+public class ControladorGestionarItem {
+    
+    // Debemos utilizarlo como singletone
+    private static ControladorGestionarItem controladorGestionarItem;
+    public ControladorGestionarItem() {      
+    } 
+    public static ControladorGestionarItem getInstance()
+    {
+        if (controladorGestionarItem == null)
+        {
+            controladorGestionarItem = new ControladorGestionarItem();
+        }
+        return controladorGestionarItem;
+    }
+    
+    // Experto GestionarItem
+    private ExpertoGestionarItem experto = (ExpertoGestionarItem) FabricaExpertos.getInstancia().crearExperto("CU13");
+    
+    // Metodo iniciar
+    public void iniciar(){
+        if(experto.iniciar().equals("Administrador")){
+        IUGestionarItem pantallaPrincipal = new IUGestionarItem();
+        pantallaPrincipal.setVisible(true); 
+        }        
+    }
+    
+    // Método para recuperar los TipoDatoItem
+    public List<DTOTipoDatoItem> buscarTipoDatoItems(){
+        List<DTOTipoDatoItem> listado = experto.buscarTipoDatoItems();
+        return listado;
+    }
+    
+    // Método para crear un Item
+    public void nuevoItem(String codigoItemIngres, String nombreItemIngres, int longitudItemIngres, boolean esMontoEditableIngres, String tipoIngres){
+        experto.nuevoTipoImpuesto(codigoItemIngres, nombreItemIngres, longitudItemIngres, esMontoEditableIngres, tipoIngres);   
+    }
+    
+    // Método para obtener todos los Items
+    public ArrayList<DTOItem> obtenerItems(){
+        return experto.obtenerItems();
+    }
+}

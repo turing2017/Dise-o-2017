@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.cfg.Configuration;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Controller.ControladorGestionarItem;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoDeCuenta;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
@@ -31,7 +32,7 @@ public class SistemaPagoImpuestos {
         //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
         //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
         
-        ControladorGestionarTipoImpuesto.getInstance().iniciar();
-       
+        //ControladorGestionarTipoImpuesto.getInstance().iniciar();
+        ControladorGestionarItem.getInstance().iniciar();
     }
 }

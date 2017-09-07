@@ -68,9 +68,12 @@ public class ConvertDTO {
         dtoUsuario.setFechaHoraInhabilitacionDTOUsuario(usuario.getFechaHoraInhabilitacionUsuario());
         dtoUsuario.setFechaHoraUltimoIngresoSistemaDTOUsuario(usuario.getFechaHoraUltimoIngresoSistemaUsuario());
         dtoUsuario.setTipoUsuarioDTOUsuario(usuario.tipoUsuario.getNombreTipoUsuario());
-        dtoUsuario.setEmpresaDTOUsuario(usuario.empresa.getNombreEmpresa());
-
-                       
+        if (usuario.getEmpresa() == null) {
+            dtoUsuario.setEmpresaDTOUsuario("");
+        } else {
+            dtoUsuario.setEmpresaDTOUsuario(usuario.getEmpresa().getNombreEmpresa());
+        }
+        
         return dtoUsuario;
     }
 }

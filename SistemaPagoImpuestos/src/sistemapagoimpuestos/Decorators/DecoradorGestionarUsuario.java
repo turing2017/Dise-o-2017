@@ -1,6 +1,8 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.ArrayList;
+import java.util.List;
+import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -29,4 +31,13 @@ public class DecoradorGestionarUsuario extends ExpertoGestionarUsuario {
         return listadoDtoUsuario;
     }
 
+    @Override
+    public List<DTOTipoUsuario> setearComboTipoUsuario() {
+        
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOTipoUsuario> listado = super.setearComboTipoUsuario(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        
+        return listado;
+    }
 }

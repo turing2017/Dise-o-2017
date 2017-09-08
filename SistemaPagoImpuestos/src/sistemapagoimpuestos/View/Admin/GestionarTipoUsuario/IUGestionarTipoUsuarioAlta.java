@@ -26,6 +26,12 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre Tipo Usuario");
 
+        textField_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField_nombreActionPerformed(evt);
+            }
+        });
+
         button_crear.setText("Crear");
         button_crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +80,10 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_button_crearActionPerformed
+
+    private void textField_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField_nombreActionPerformed
 
     /**
      * @param args the command line arguments

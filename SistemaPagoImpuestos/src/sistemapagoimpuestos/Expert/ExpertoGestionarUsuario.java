@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Expert;
 
 import exceptions.Excepciones;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
@@ -36,9 +37,11 @@ public class ExpertoGestionarUsuario {
         for (Object obj : listObject) {
             Usuario user = (Usuario) obj;
             listDtoUsuario.add(ConvertDTO.getInstance().convertUsuario(user));
-        }return listDtoUsuario;
+        }
+        return listDtoUsuario;
     }
-        public List<DTOUsuario> obtenerUsuario(String codigo) {
+
+    public List<DTOUsuario> obtenerUsuario(String codigo) {
         // De alguna forma devuelvo el TipoImpuesto de la DB
         try {
             List<DTOCriterio> criterios = new ArrayList<>();
@@ -66,4 +69,26 @@ public class ExpertoGestionarUsuario {
 
     }
 
+    public void nuevoUsuario(String nombreIngres,String passwordIngres,String tipoUsuarioSelec ) {
+        
+        
+
+    }
+
+    public List<DTOTipoUsuario> setearComboTipoUsuario() {
+        List<DTOCriterio> criterios = new ArrayList<>();
+
+        DTOCriterio criterio = new DTOCriterio("fechaHoraInhabilitacionTipoUsuario", "IS", null);
+        criterios.add(criterio);
+        List tipoUsuarioHabilitado = FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios);
+
+        List<DTOTipoUsuario> listado = new ArrayList<>();
+        for (int i = 0; i < tipoUsuarioHabilitado.size(); i++) {
+            TipoUsuario tipoUsuario = (TipoUsuario) tipoUsuarioHabilitado.get(i);
+            listado.add(ConvertDTO.getInstance().convertTipoUsuario(tipoUsuario));
+
+        }
+
+        return listado;
+    }
 }

@@ -2,11 +2,13 @@ package sistemapagoimpuestos.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarUsuario;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuario;
+import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuarioAlta;
 
 /**
  *
@@ -43,6 +45,19 @@ public class ControladorGestionarUsuario {
 
     public List<DTOUsuario> obtenerUsuario(String codigo) {
         return experto.obtenerUsuario(codigo);
+    }
+
+    public void mostrarPantallaAlta() {
+        IUGestionarUsuarioAlta pantallaAlta = new IUGestionarUsuarioAlta();
+        MetodosPantalla.getInstance().setearPantalla(pantallaAlta);
+    }
+
+    public List<DTOTipoUsuario> setearComboTipoUsuario() {
+        return experto.setearComboTipoUsuario();
+    }
+
+    public void nuevoUsuario(String nombreIngres,String passwordIngres,String tipoUsuarioSelec) {
+        experto.nuevoUsuario(nombreIngres, passwordIngres, tipoUsuarioSelec);
     }
 
 }

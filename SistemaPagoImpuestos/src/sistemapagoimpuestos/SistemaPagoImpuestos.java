@@ -21,18 +21,8 @@ public class SistemaPagoImpuestos {
   
     public static void main(String[] args) {
        
-     /*   ArrayList<DTOAccionesSistema> dtoAcciones =new ArrayList();
-        ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
-        dtoAcciones = controlador.iniciar(dtoAcciones);
-        
-        for ( DTOAccionesSistema dtoAccion : dtoAcciones){
-            dtoAccion.imprimirSTD();
-        }
-    */
-       
-      
-       ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-       controlador.iniciar();
+       BorrarDespues b = new BorrarDespues();
+       b.setVisible(true);
        
     }
 }

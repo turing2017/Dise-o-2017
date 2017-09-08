@@ -362,6 +362,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 controlador.AprobarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
                 jButtonConsultarLiquidaciones.doClick();
                 JOptionPane.showMessageDialog(rootPane, "Liquidacion Aprobada");
+                
                 break;
             default:
                 throw new AssertionError();

@@ -120,6 +120,7 @@ public class ExpertoCalcularLiquidaciones {
                     FachadaPersistencia.getInstance().guardar(comision);
                     
                 }
+                
                 liquidacionEstado.setFechaHoraHastaLiquidacionEstado(new Date());
                 FachadaPersistencia.getInstance().guardar(liquidacionEstado);
                 // Busco el estado recalculada
@@ -136,6 +137,7 @@ public class ExpertoCalcularLiquidaciones {
                 //Agrego el nuevo estado
                 listLiqEstados.add(liqEstado);
                 liquidacionAnulada.setLiquidacionEstadoList(listLiqEstados);
+                liquidacionAnulada.setFechaHoraLiquidacion(new Date());
                 //Guardo la liquidacion
                 FachadaPersistencia.getInstance().guardar(liquidacionAnulada);
             }
@@ -178,8 +180,8 @@ public class ExpertoCalcularLiquidaciones {
                 for (Object liquidacion : liquidaciones) {
                     //Buscar la ultima liquidacion con la fechaHoraHasta mas reciente
                     Liquidacion liq = (Liquidacion) liquidacion;
-                    liq.getFechaHoraHastaLiquidacion();
-                    if (liq.getFechaHoraLiquidacion().after(ultimaLiquidacion.getFechaHoraLiquidacion())) {
+                 
+                    if (liq.getFechaHoraHastaLiquidacion().after(ultimaLiquidacion.getFechaHoraHastaLiquidacion())) {
                         ultimaLiquidacion = liq;
                     }
                     
@@ -189,7 +191,7 @@ public class ExpertoCalcularLiquidaciones {
                 int frecuencia = empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto();
                 Calendar calfechaLiquidacion = Calendar.getInstance();
                  //fecha de la condicion
-                calfechaLiquidacion.setTime(ultimaLiquidacion.getFechaHoraLiquidacion());
+                calfechaLiquidacion.setTime(ultimaLiquidacion.getFechaHoraHastaLiquidacion());
                  //sumo dias + frecuencia y eso lo asigno a fechaALiquidar
                 calfechaLiquidacion.set(calfechaLiquidacion.get(Calendar.YEAR), calfechaLiquidacion.get(Calendar.MONTH), calfechaLiquidacion.get(Calendar.DAY_OF_MONTH)+frecuencia);
                  fechaALiquidar = calfechaLiquidacion.getTime();
@@ -198,7 +200,7 @@ public class ExpertoCalcularLiquidaciones {
                 if (fechaALiquidar.before(new Date())) {
                     //  buscar  "Operacion", "fechaHoraOperacion >= fechaHoraLiquidacion AND fechaHoraOperacion <= fechaActual " ysea del empresaTipoImpuesto
                     
-                  //  DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", ultimaLiquidacion.getFechaHoraLiquidacion());
+                  //  DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", ultimaLiquidacion.getFechaHoraHastaLiquidacion());
                   //  DTOCriterio criterio4 = new DTOCriterio("fechaHoraOperacion", "<=", new Date());
                     DTOCriterio criterio5 = new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto);
                     criterios.clear();
@@ -217,8 +219,8 @@ public class ExpertoCalcularLiquidaciones {
                        System.out.println(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
                        System.out.println(empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
                        System.out.println(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
-                       System.out.println(operacion.getFechaHoraOperacion()+">"+ ultimaLiquidacion.getFechaHoraLiquidacion()+" y "+operacion.getFechaHoraOperacion()+"<"+new Date());
-                  if (operacion.getFechaHoraOperacion().after(ultimaLiquidacion.getFechaHoraLiquidacion()) 
+                       System.out.println(operacion.getFechaHoraOperacion()+">"+ ultimaLiquidacion.getFechaHoraHastaLiquidacion()+" y "+operacion.getFechaHoraOperacion()+"<"+new Date());
+                  if (operacion.getFechaHoraOperacion().after(ultimaLiquidacion.getFechaHoraHastaLiquidacion()) 
                           && operacion.getFechaHoraOperacion().before(new Date())) {
                       operacionesEnRangoDeFechas.add(operacion);
                     }
@@ -333,6 +335,7 @@ public class ExpertoCalcularLiquidaciones {
             nuevaLiquidacion.setFechaHoraHastaLiquidacion(new Date());
             //setEmpresaTipoImpuesto
             nuevaLiquidacion.setEmpresaTipoImpuesto(empresaTipoImpuesto);
+            nuevaLiquidacion.setFechaHoraLiquidacion(new Date());
 
             
             //Guardo nuevo LiquidacionEstado

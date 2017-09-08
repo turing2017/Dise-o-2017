@@ -209,6 +209,7 @@ public class ExpertoGestionarLiquidacion {
             //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
             FachadaPersistencia.getInstance().guardar(liquidacionEstado);
             liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
+            liquidacion.setFechaHoraLiquidacion(new Date());
             FachadaPersistencia.getInstance().guardar(liquidacion);
 
         } else {
@@ -579,6 +580,7 @@ public class ExpertoGestionarLiquidacion {
             //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
             FachadaPersistencia.getInstance().guardar(liquidacionEstado);
             liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
+            liquidacion.setFechaHoraLiquidacion(new Date());
             FachadaPersistencia.getInstance().guardar(liquidacion);
 
         } else {

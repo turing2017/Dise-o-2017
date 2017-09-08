@@ -21,6 +21,9 @@ public class DTOLiquidacion {
     private String nombreTipoImpuesto;
     private String nombreEstadoLiquidacion;
 
+    public DTOLiquidacion() {
+    }
+
     public DTOLiquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion, String nombreEmpresa, String nombreTipoImpuesto, String nombreEstadoLiquidacion) {
         this.numeroLiquidacion = numeroLiquidacion;
         this.fechaHoraLiquidacion = fechaHoraLiquidacion;

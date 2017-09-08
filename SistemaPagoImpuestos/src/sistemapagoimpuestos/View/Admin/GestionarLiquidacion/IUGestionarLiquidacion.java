@@ -6,10 +6,14 @@
 package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
 
 import static datosPrueba.DatosPrueba.generarDatosPrueba;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Entity.Liquidacion;
 /**
  *
  * @author vande
@@ -51,6 +55,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,6 +132,20 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Boton de prueba que trae Empresas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Boton de prueba Liquidacion");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,26 +165,33 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(131, 131, 131)
+                                        .addComponent(jButton2))
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(278, 278, 278))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(115, 115, 115)
+                                        .addComponent(jButton1))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -175,9 +202,9 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jButtonConsultarLiquidaciones)
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         jComboBoxTipoImpuesto.getAccessibleContext().setAccessibleName("");
@@ -210,15 +237,61 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxEmpresaActionPerformed
 
     private void jComboBoxTipoImpuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoItemStateChanged
-        jComboBoxEmpresa.removeAllItems();
-        jComboBoxEmpresa.addItem("Todos");
-         ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
-       for(DTOEmpresa obj : listDtoDTOEmpresa){
-             jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}
+        
     /*   ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto();
          for(DTOEmpresa obj : listDtoDTOEmpresa){
              jComboBoxTipoImpuesto.addItem(obj.getNombreEmpresa()); }   */
     }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.addItem("Todos");
+         List<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+       for(DTOEmpresa obj : listDtoDTOEmpresa){
+            jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}      
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+   //ESTE VA CUANDO ESTEN CARGADAS LAS LIQUIDACIONES EN LA BD
+        //   List<DTOLiquidacion> listDtoLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacion();
+    
+
+//CREO 2 DTO PARRA PROBAR SI ANDA  
+   List<DTOLiquidacion> listDtoLiquidacion = new ArrayList<DTOLiquidacion>();
+      Liquidacion liquidacion;
+        DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+        
+        dtoLiquidacion.setNombreEmpresa("cuacl");
+        dtoLiquidacion.setNumeroLiquidacion(23);
+        dtoLiquidacion.setFechaHoraLiquidacion(null);
+        dtoLiquidacion.setFechaHoraDesdeLiquidacion(null);
+        dtoLiquidacion.setFechaHoraHastaLiquidacion(null);
+        dtoLiquidacion.setNombreTipoImpuesto("tipoimpuesto");
+        dtoLiquidacion.setNombreEstadoLiquidacion("durmiendo");
+      listDtoLiquidacion.add(dtoLiquidacion);
+      DTOLiquidacion dtoLiquidacion1 = new DTOLiquidacion();
+      dtoLiquidacion1.setNombreEmpresa("cuac123l");
+        dtoLiquidacion1.setNumeroLiquidacion(4123);
+        dtoLiquidacion1.setFechaHoraLiquidacion(null);
+        dtoLiquidacion1.setFechaHoraDesdeLiquidacion(null);
+        dtoLiquidacion1.setFechaHoraHastaLiquidacion(null);
+        dtoLiquidacion1.setNombreTipoImpuesto("tipoim1231puesto");
+        dtoLiquidacion1.setNombreEstadoLiquidacion("durmi1231endo");
+      listDtoLiquidacion.add(dtoLiquidacion1);
+      
+      //LLENA LA TABLA DE MANDERA RUSTICA
+      for (int i=0; i< listDtoLiquidacion.size(); i++){
+       jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
+       jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i,1);
+        jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
+         jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 3);
+          jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
+           jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
+      }
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -262,6 +335,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombodesde;
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonConsultarLiquidaciones;
     private javax.swing.JComboBox<String> jComboBoxEmpresa;
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;

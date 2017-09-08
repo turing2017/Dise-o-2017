@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.Liquidacion;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
@@ -58,29 +60,83 @@ public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
     }
 
     public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto) {
+         //BUSCA EMPRESA al p2
+         List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio = new DTOCriterio("nombreEmpresa","=","Empresa 3"); 
+        criterios.add(criterio);
+        List<Object> listEmpresa =  FachadaPersistencia.getInstance().buscar("Empresa", criterios);
+        //BUSCA EMPRESA hasta aca
         
-        ArrayList<DTOEmpresa> listEmpresas = null;
-        List<DTOCriterio> criterios = new ArrayList<>();
-        DTOCriterio criterio1 = new DTOCriterio();
-
-        criterio1.setAtributo("nombreTipoImpuesto");
-        criterio1.setOperacion("=");
-        criterio1.setValor(nombreTipoImpuesto);
-        criterios.add(criterio1);
-        TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
-        String oid = tipoImpuesto.getOID();
-        List<Object> listObject = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
-        for (Object obj : listObject) {
-            EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) obj;
-
-            if (empresaTipoImpuesto.getTipoImpuesto().getOID().equals(oid)) {
-                Empresa empresa1 = empresaTipoImpuesto.getEmpresa();
-                listEmpresas.add(ConvertDTO.getInstance().convertEmpresa(empresa1));
-            }
-
+        //BUSCA TIPOIMPUESTO SELECCIONADO EN EL OTRO COMBOBOX y muestra nombre
+       DTOCriterio criterio2 = new DTOCriterio("nombreTipoImpuesto","=",nombreTipoImpuesto); 
+       criterios.clear();
+       criterios.add(criterio2);
+    TipoImpuesto listTipoImpuesto =  (TipoImpuesto)FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
+    /*ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = new ArrayList<DTOTipoImpuesto>();
+        for(Object obj1 : listTipoImpuesto){
+        TipoImpuesto tipoImpuesto = (TipoImpuesto) obj1;
+       System.out.print(tipoImpuesto.getNombreTipoImpuesto()); }
+      System.out.print("puto");
+     //TipoImpuesto nuevoTipoImpuesto = (TipoImpuesto)listTipoImpuesto.get(0);*/
+    System.out.print("A---------");
+   System.out.print(listTipoImpuesto.getNombreTipoImpuesto()); 
+        System.out.print("---------A");
+        
+    DTOCriterio criterio1 = new DTOCriterio("tipoImpuesto","=",listTipoImpuesto); 
+    criterios.clear();
+    criterios.add(criterio1);
+    List<Object> listEmpresaTipoImpuesto =  FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
+        
+        ArrayList<DTOEmpresa> listDtoEmpresa = new ArrayList<DTOEmpresa>();
+        for(Object obj : listEmpresaTipoImpuesto){
+        EmpresaTipoImpuesto tipoImpuesto = (EmpresaTipoImpuesto)obj;
+        DTOEmpresa dtoEmpresa = new DTOEmpresa();
+        dtoEmpresa.setNombreEmpresa(tipoImpuesto.getEmpresa().getNombreEmpresa());
+        listDtoEmpresa.add(dtoEmpresa);
         }
-        return listEmpresas;
+        
+     return listDtoEmpresa;
+     
     }
-}  
+    public List<DTOEmpresa> buscarEmpresas() {
+        
+        //Busqueda de Empresas habilitadas
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
+        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        
+        List <DTOEmpresa> lista = new ArrayList<>();
+        DTOEmpresa dtoEmpresa;
+        
+        for (int i = 0; i < empresas.size(); i++) {
+            dtoEmpresa = new DTOEmpresa();
+            Empresa empresa = (Empresa) empresas.get(i);
+            String nombreEmpresa = empresa.getNombreEmpresa();
+            dtoEmpresa.setNombreEmpresa(nombreEmpresa);
+            lista.add(dtoEmpresa);
+        }
+        return lista;
+    }
 
+    public ArrayList<DTOLiquidacion> obtenerLiquidacion() {
+        List<Object> listLiquidacion =  FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+        
+        ArrayList<DTOLiquidacion> listDtoLiquidacion = new ArrayList<DTOLiquidacion>();
+        for(Object obj : listLiquidacion){
+        Liquidacion liquidacion = (Liquidacion)obj;
+        DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+        
+        dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
+        dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
+        dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
+        dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
+        dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
+        dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+        dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+     
+        listDtoLiquidacion.add(dtoLiquidacion);
+    }
+        return listDtoLiquidacion;
+}
 
+}

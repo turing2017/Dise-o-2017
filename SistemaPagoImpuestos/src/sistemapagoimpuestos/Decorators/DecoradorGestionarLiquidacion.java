@@ -8,6 +8,7 @@ package sistemapagoimpuestos.Decorators;
 import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -49,5 +50,21 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
         
     }
 
-
+@Override
+    public List<DTOEmpresa> buscarEmpresas() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOEmpresa> tempString = super.buscarEmpresas(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return tempString;
+    }
+    
+    @Override
+    public ArrayList<DTOLiquidacion> obtenerLiquidacion(){
+        ArrayList<DTOLiquidacion> listObject;
+        FachadaInterna.getInstance().iniciarTransaccion();
+        listObject= super.obtenerLiquidacion(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listObject;
+    
+    }
 }

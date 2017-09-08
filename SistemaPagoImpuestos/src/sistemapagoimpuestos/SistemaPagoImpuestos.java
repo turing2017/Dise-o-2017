@@ -35,6 +35,6 @@ public class SistemaPagoImpuestos {
        // generarDatosPrueba();
      //   ControladorGestionarLiquidacion.getInstance().iniciar();
      ControladorGestionarLiquidacion.getInstance().cuack();
-     ControladorConsultarLiquidacion.getInstance().iniciar();
+    // ControladorConsultarLiquidacion.getInstance().iniciar();
     }
 }

@@ -7,7 +7,9 @@ package sistemapagoimpuestos.Controller;
 
 import datosPrueba.IUdatosPrueba;
 import java.util.ArrayList;
+import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -53,5 +55,17 @@ public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
 public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto){  
         return  experto.obtenerEmpresarelacionadaATipoImpuesto( nombreTipoImpuesto);
     }
+
+public List<DTOEmpresa> buscarEmpresas(){
+        List<DTOEmpresa> listado = experto.buscarEmpresas();
+        return listado;
+    }
+
+
+public ArrayList<DTOLiquidacion> buscarLiquidacion(){
+        return experto.obtenerLiquidacion();
+}
+        
+
 
 }

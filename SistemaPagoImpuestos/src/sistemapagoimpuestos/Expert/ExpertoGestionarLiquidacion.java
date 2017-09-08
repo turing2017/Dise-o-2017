@@ -7,6 +7,7 @@ package sistemapagoimpuestos.Expert;
 
 import java.util.ArrayList;
 import java.util.List;
+import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaItem;
@@ -60,34 +61,52 @@ public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
     }
 
     public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto) {
-         //BUSCA EMPRESA al p2
+         
+        
+        //CREA LO QUE VA A DEVOLVER
+         ArrayList<DTOEmpresa> listDtoEmpresa = new ArrayList<DTOEmpresa>();
+         
+         //SI ES TODOS , BUSCA TODAS LAS EMPRESAS(otra vez xq no me andubo el this.buscarEmpresa, posiblemente por problemas de list/arraylist)
+  if ("Todos".equals(nombreTipoImpuesto)){ 
+  
+      
+   List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
+        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        
+       
+        DTOEmpresa dtoEmpresa;
+        
+        for (int i = 0; i < empresas.size(); i++) {
+            dtoEmpresa = new DTOEmpresa();
+            Empresa empresa = (Empresa) empresas.get(i);
+            String nombreEmpresa = empresa.getNombreEmpresa();
+            dtoEmpresa.setNombreEmpresa(nombreEmpresa);
+            listDtoEmpresa.add(dtoEmpresa);
+        }
+ 
+  }
+    
+
+//SI SELECCIONO UNO BUSCA LAS EMPRESAS DE ESE TIPO IMPUESTO
+else{
+
          List<DTOCriterio> criterios = new ArrayList<>();
-        DTOCriterio criterio = new DTOCriterio("nombreEmpresa","=","Empresa 3"); 
-        criterios.add(criterio);
-        List<Object> listEmpresa =  FachadaPersistencia.getInstance().buscar("Empresa", criterios);
-        //BUSCA EMPRESA hasta aca
+       
         
         //BUSCA TIPOIMPUESTO SELECCIONADO EN EL OTRO COMBOBOX y muestra nombre
        DTOCriterio criterio2 = new DTOCriterio("nombreTipoImpuesto","=",nombreTipoImpuesto); 
        criterios.clear();
        criterios.add(criterio2);
     TipoImpuesto listTipoImpuesto =  (TipoImpuesto)FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
-    /*ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = new ArrayList<DTOTipoImpuesto>();
-        for(Object obj1 : listTipoImpuesto){
-        TipoImpuesto tipoImpuesto = (TipoImpuesto) obj1;
-       System.out.print(tipoImpuesto.getNombreTipoImpuesto()); }
-      System.out.print("puto");
-     //TipoImpuesto nuevoTipoImpuesto = (TipoImpuesto)listTipoImpuesto.get(0);*/
-    System.out.print("A---------");
-   System.out.print(listTipoImpuesto.getNombreTipoImpuesto()); 
-        System.out.print("---------A");
+   
         
     DTOCriterio criterio1 = new DTOCriterio("tipoImpuesto","=",listTipoImpuesto); 
     criterios.clear();
     criterios.add(criterio1);
     List<Object> listEmpresaTipoImpuesto =  FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
         
-        ArrayList<DTOEmpresa> listDtoEmpresa = new ArrayList<DTOEmpresa>();
+       
         for(Object obj : listEmpresaTipoImpuesto){
         EmpresaTipoImpuesto tipoImpuesto = (EmpresaTipoImpuesto)obj;
         DTOEmpresa dtoEmpresa = new DTOEmpresa();
@@ -95,8 +114,10 @@ public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
         listDtoEmpresa.add(dtoEmpresa);
         }
         
-     return listDtoEmpresa;
      
+     };
+     
+     return listDtoEmpresa;
     }
     public List<DTOEmpresa> buscarEmpresas() {
         

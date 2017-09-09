@@ -22,26 +22,26 @@ public class DecoradorGestionarParametrosCalculoComision extends ExpertoGestiona
         FachadaInterna.getInstance().finalizarTransaccion();
         return role;
     }
-     private Date fechaDesde;
-    private double anual;
-    private double bimestral;
-    private double cuatrimestral;
+    private Date fechaDesde;
     private double mensual;
-    private double quincenal;
-    private double semestral;
+    private double bimestral;
     private double trimestral;
+    private double cuatrimestral;
+    private double semestral;
+    private double anual;
+    private double quincenal;
     
 
     //@Override
-    public void modificarParametroCalculoPeriodicidad(Date fechaDesde ,double anual, double bimestral, double cuatrimestral, double mensual , double quincenal, double semestral , double trimestral ) {
+    public void modificarParametroCalculoPeriodicidad(Date fechaDesde ,double mensual, double bimestral, double trimestral, double cuatrimestral , double semestral, double anual , double quincenal ) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarParametrosPeriodicidad(fechaDesde,anual, bimestral, cuatrimestral, mensual,quincenal,semestral,trimestral); //To change body of generated methods, choose Tools | Templates.
+        super.modificarParametrosPeriodicidad(fechaDesde, mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
     
-    public void modificarParametroCalculoEditable() {
+    public void modificarParametroCalculoEditable(Date fechaDesde, double siEditable, double noEditable) {
         FachadaInterna.getInstance().iniciarTransaccion();
-       // super.consultarParametrosCalculoEditable();
+        super.modificarParametrosEditable(fechaDesde, siEditable, noEditable); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 /*

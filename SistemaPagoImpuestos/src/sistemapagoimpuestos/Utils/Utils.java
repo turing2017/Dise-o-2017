@@ -14,8 +14,18 @@ import sistemapagoimpuestos.Dto.DTOCriterio;
  */
 public class Utils {
     
-       
-    public static Boolean existeDato(String entidad, List<DTOCriterio> criterios){
+     //no usar  
+//    public static Boolean existeDato(String entidad, List<DTOCriterio> criterios){
+//        try{
+//            FachadaPersistencia.getInstance().buscar(entidad, criterios).get(0);
+//            return true;
+//        }catch(IndexOutOfBoundsException exception){
+//            return false;
+//        }
+//    }
+    
+    //usar este existeDato
+      public static Boolean existeDato(Class entidad, List<DTOCriterio> criterios){
         try{
             FachadaPersistencia.getInstance().buscar(entidad, criterios).get(0);
             return true;
@@ -23,5 +33,4 @@ public class Utils {
             return false;
         }
     }
-    
 }

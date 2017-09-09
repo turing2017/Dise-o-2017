@@ -8,23 +8,17 @@ import java.util.Date;
  */
 public class ParametroCalculoPeriodicidad extends Entity{
     private static ParametroCalculoPeriodicidad instancia;
-    private Date fechaDesde = new Date();
-    private double anual = 0.0;
-    private double bimestral = 0.0;
-    private double cuatrimestral= 0.0;
-    private double mensual= 0.0;
-    private double quincenal= 0.0;
+    private Date fechaDesdePCPeriodicidad = new Date();
+    private double mensualPCPeriodicidad= 0.0;
+    private double bimestralPCPeriodicidad = 0.0;
+    private double trimestralPCPeriodicidad= 0.0;
+    private double cuatrimestralPCPeriodicidad= 0.0;
+    private double semestralPCPeriodicidad= 0.0;
+    private double anualPCPeriodicidad = 0.0;
+    private double quincenalPCPeriodicidad= 0.0;
+    private Date fechaInhabilitacionPCPeriodicidad = new Date();
 
-    public Date getFechaDesde() {
-        return fechaDesde;
-    }
-
-    public void setFechaDesde(Date fechaDesde) {
-        this.fechaDesde = fechaDesde;
-    }
-    private double semestral= 0.0;
-    private double trimestral= 0.0;
-    
+    //constructor
     public ParametroCalculoPeriodicidad(){
         
     }
@@ -33,67 +27,89 @@ public class ParametroCalculoPeriodicidad extends Entity{
     {
         if (instancia == null)
         {
-            instancia = new ParametroCalculoPeriodicidad();
+            setInstancia(new ParametroCalculoPeriodicidad());
         }
         return instancia;
     }
      
-    public double getAnual() {
-        return anual;
+   //getter
+
+    public Date getFechaDesdePCPeriodicidad() {
+        return fechaDesdePCPeriodicidad;
     }
 
-    public void setAnual(double anual) {
-        this.anual = anual;
+    public double getMensualPCPeriodicidad() {
+        return mensualPCPeriodicidad;
     }
 
-    public double getBimestral() {
-        return bimestral;
+    public double getBimestralPCPeriodicidad() {
+        return bimestralPCPeriodicidad;
     }
 
-    public void setBimestral(double bimestral) {
-        this.bimestral = bimestral;
+    public double getTrimestralPCPeriodicidad() {
+        return trimestralPCPeriodicidad;
     }
 
-    public double getCuatrimestral() {
-        return cuatrimestral;
+    public double getCuatrimestralPCPeriodicidad() {
+        return cuatrimestralPCPeriodicidad;
     }
 
-    public void setCuatrimestral(double cuatrimestral) {
-        this.cuatrimestral = cuatrimestral;
+    public double getSemestralPCPeriodicidad() {
+        return semestralPCPeriodicidad;
     }
 
-    public double getMensual() {
-        return mensual;
+    public double getAnualPCPeriodicidad() {
+        return anualPCPeriodicidad;
     }
 
-    public void setMensual(double mensual) {
-        this.mensual = mensual;
-    }
-
-    public double getQuincenal() {
-        return quincenal;
-    }
-
-    public void setQuincenal(double quincenal) {
-        this.quincenal = quincenal;
-    }
-
-    public double getSemestral() {
-        return semestral;
-    }
-
-    public void setSemestral(double semestral) {
-        this.semestral = semestral;
-    }
-
-    public double getTrimestral() {
-        return trimestral;
-    }
-
-    public void setTrimestral(double trimestral) {
-        this.trimestral = trimestral;
+    public double getQuincenalPCPeriodicidad() {
+        return quincenalPCPeriodicidad;
     }
     
+    public Date getFechaInhabilitacionPCPeriodicidad() {
+        return fechaInhabilitacionPCPeriodicidad;
+    }
+         
+    //setter
+
+    public void setFechaDesdePCPeriodicidad(Date fechaDesdePCPeriodicidad) {
+        this.fechaDesdePCPeriodicidad = fechaDesdePCPeriodicidad;
+    }
+
+    public void setMensualPCPeriodicidad(double mensualPCPeriodicidad) {
+        this.mensualPCPeriodicidad = mensualPCPeriodicidad;
+    }
+
+    public void setBimestralPCPeriodicidad(double bimestralPCPeriodicidad) {
+        this.bimestralPCPeriodicidad = bimestralPCPeriodicidad;
+    }
+
+    public void setTrimestralPCPeriodicidad(double trimestralPCPeriodicidad) {
+        this.trimestralPCPeriodicidad = trimestralPCPeriodicidad;
+    }
+
+    public void setCuatrimestralPCPeriodicidad(double cuatrimestralPCPeriodicidad) {
+        this.cuatrimestralPCPeriodicidad = cuatrimestralPCPeriodicidad;
+    }
+
+    public void setSemestralPCPeriodicidad(double semestralPCPeriodicidad) {
+        this.semestralPCPeriodicidad = semestralPCPeriodicidad;
+    }
+
+    public void setAnualPCPeriodicidad(double anualPCPeriodicidad) {
+        this.anualPCPeriodicidad = anualPCPeriodicidad;
+    }
+
+    public void setQuincenalPCPeriodicidad(double quincenalPCPeriodicidad) {
+        this.quincenalPCPeriodicidad = quincenalPCPeriodicidad;
+    }
     
+ public void setFechaInhabilitacionPCPeriodicidad(Date fechaInhabilitacionPCPeriodicidad) {
+        this.fechaInhabilitacionPCPeriodicidad = fechaInhabilitacionPCPeriodicidad;
+    }
+    
+       public static void setInstancia(ParametroCalculoPeriodicidad aInstancia) {
+        instancia = aInstancia;
+    }
     
 }

@@ -48,8 +48,8 @@ public class DatosPrueba {
     }
     
     public static void generarEmpresaTipoImpuesto(){
-        List<Object> listEmpresaObject =  FachadaPersistencia.getInstance().buscar("Empresa", null);
-        Object tipoImpuestoObject =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null).get(0);
+        List<Object> listEmpresaObject =  FachadaPersistencia.getInstance().buscar(Empresa.class, null);
+        Object tipoImpuestoObject =  FachadaPersistencia.getInstance().buscar(TipoImpuesto.class, null).get(0);
 
         int couter = 0;
 
@@ -74,7 +74,7 @@ public class DatosPrueba {
     
     public static void generarEmpresa(){
        
-        List<Object> listTipoEmpresa =  FachadaPersistencia.getInstance().buscar("TipoEmpresa", null);
+        List<Object> listTipoEmpresa =  FachadaPersistencia.getInstance().buscar(TipoEmpresa.class, null);
         
         int couter = 0;
         
@@ -125,7 +125,7 @@ public class DatosPrueba {
     
     public static void generarItem(){
 
-        List<Object> listTipoDatoItem =  FachadaPersistencia.getInstance().buscar("TipoDatoItem", null);
+        List<Object> listTipoDatoItem =  FachadaPersistencia.getInstance().buscar(TipoDatoItem.class, null);
         
            
         int couter = 0;
@@ -147,8 +147,8 @@ public class DatosPrueba {
     
     public static void generarItemEmpresaTipoImpuesto(){
 
-        List<Object> listEmpresaTipoImpuesto =  FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
-        List<Object> listItem =  FachadaPersistencia.getInstance().buscar("Item", null);
+        List<Object> listEmpresaTipoImpuesto =  FachadaPersistencia.getInstance().buscar(EmpresaTipoImpuesto.class, null);
+        List<Object> listItem =  FachadaPersistencia.getInstance().buscar(Item.class, null);
         EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) listEmpresaTipoImpuesto.get(0);
 
         Item item = (Item) listItem.get(0);

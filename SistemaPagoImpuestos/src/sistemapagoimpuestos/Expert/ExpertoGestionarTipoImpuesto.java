@@ -7,6 +7,7 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
@@ -40,7 +41,7 @@ public class ExpertoGestionarTipoImpuesto {
         DTOCriterio criterioCodigo = new DTOCriterio("codigoTipoImpuesto", "=", codigoTipoImpuestoIngres);
         criteriosNombre.add(criterioNombre);
         criteriosCodigo.add(criterioCodigo);
-        if(!existeDato("TipoImpuesto", criteriosNombre)&&!existeDato("TipoImpuesto", criteriosCodigo)){
+        if(!existeDato(TipoImpuesto.class, criteriosNombre)&&!existeDato(TipoImpuesto.class, criteriosCodigo)){
             System.out.println("Codigo Ingresado No Encontrado");
             TipoImpuesto tipoImpuesto = new TipoImpuesto();
             tipoImpuesto.setNombreTipoImpuesto(nombreTipoImpuestoIngres);
@@ -60,7 +61,7 @@ public class ExpertoGestionarTipoImpuesto {
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
         // Como vuelven de la DB?
-        List<Object> listObject =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
+        List<Object> listObject =  FachadaPersistencia.getInstance().buscar(TipoImpuesto.class, null);
         ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = new ArrayList<DTOTipoImpuesto>();
         for(Object obj : listObject){
             TipoImpuesto tipoImpuesto = (TipoImpuesto) obj;
@@ -86,7 +87,7 @@ public class ExpertoGestionarTipoImpuesto {
         criterio1.setOperacion("=");
         criterio1.setValor(codigo);
         criterios.add(criterio1);
-        TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
+        TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar(TipoImpuesto.class, criterios).get(0);
         
         // Para probar seteo uno nuevo
         dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
@@ -110,7 +111,7 @@ public class ExpertoGestionarTipoImpuesto {
         criterio1.setOperacion("=");
         criterio1.setValor(nombreActualTipoImpuesto);
         criterios.add(criterio1);
-        TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
+        TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar(TipoImpuesto.class, criterios).get(0);
         
         tipoImpuesto.setNombreTipoImpuesto(nombreTipoImpuestoIngres);
         tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
@@ -124,8 +125,8 @@ public class ExpertoGestionarTipoImpuesto {
     }
     
     public ArrayList<DTOEmpresaItem> obtenerEmpresaItem(){
-        List<Object> listEmpresa =  FachadaPersistencia.getInstance().buscar("Empresa", null);
-        List<Object> listItem =  FachadaPersistencia.getInstance().buscar("Empresa", null);
+        List<Object> listEmpresa =  FachadaPersistencia.getInstance().buscar(Empresa.class, null);
+        List<Object> listItem =  FachadaPersistencia.getInstance().buscar(Empresa.class, null);
 
         ArrayList<DTOEmpresaItem> listDtoTipoImpuesto = new ArrayList<DTOEmpresaItem>();
         for(Object obj : listEmpresa){

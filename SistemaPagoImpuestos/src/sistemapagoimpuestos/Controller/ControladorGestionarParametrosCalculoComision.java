@@ -39,6 +39,8 @@ public class ControladorGestionarParametrosCalculoComision {
         if(experto.iniciar().equals("Administrador")){
         IUGestionarParametrosComision pantallaPrincipal = new IUGestionarParametrosComision();
         pantallaPrincipal.setVisible(true); 
+        pantallaPrincipal.setLocationRelativeTo(null);
+        pantallaPrincipal.setTitle("Gestionar Parámetros de Cálculo de Comisión");
         }        
     }
     
@@ -47,8 +49,12 @@ public class ControladorGestionarParametrosCalculoComision {
         return experto.consultarParametrosCalculoEditable();
     }
     */
-    public void modificarParametrosPeriodicidad(Date fechaDesde,double anual, double bimestral, double cuatrimestral, double mensual, double quincenal, double semestral, double trimestral) {
-        experto.modificarParametrosPeriodicidad(fechaDesde, anual, bimestral, cuatrimestral, mensual, quincenal, semestral, trimestral);
+    public void modificarParametrosPeriodicidad(Date fechaDesde, double mensual, double bimestral, double trimestral, double cuatrimestral, double semestral, double anual, double quincenal) {
+        experto.modificarParametrosPeriodicidad(fechaDesde, mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
+    }
+    
+    public void modificarParametrosEditable(Date fechaDesde, double montoSiEditable, double montoNoEditable) {
+        experto.modificarParametrosEditable(fechaDesde, montoSiEditable, montoNoEditable);
     }
     
 }

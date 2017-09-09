@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="sistemapagoimpuestos.Entity.ParametroCalculoEditable" table="parametro_calculo_editable">
+    <class name="sistemapagoimpuestos.Entity.ParametroCalculoEditable" table="parametro_calculo_editable">
         
-      <id name="OID" type="string">
+        <id name="OID" type="string">
             <column name="OIDParametroCalculoEditable"/>
             <generator class="uuid2"/>
         </id>
        
-         <property name="fechaDesde" type="date" not-null="true">
-        <column name="fechaDesde"/>
+        <property name="fechaDesdePCEditable" type="date" not-null="true">
+            <column name="fechaDesdePCEditable"/>
         </property>
         
-        <property name="noEditable" type="double" not-null="true">
-            <column name="noEditable"/>
-        </property>
-        
-        <property name="siEditable" type="double" not-null="true">
-            <column name="siEditable"/>
+        <property name="siEditablePCEditable" type="double" not-null="true">
+            <column name="siEditablePCEditable"/>
         </property>
    
+        <property name="noEditablePCEditable" type="double" not-null="true">
+            <column name="noEditablePCEditable"/>
+        </property>
+        
+        <property name="fechaInhabilitacionPCEditable" type="date" not-null="true">
+            <column name="fechaInhabilitacionPCEditable"/>
+        </property>
+        
     </class>
 </hibernate-mapping>

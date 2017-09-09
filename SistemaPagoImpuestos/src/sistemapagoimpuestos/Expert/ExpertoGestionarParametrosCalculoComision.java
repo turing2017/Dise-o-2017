@@ -7,6 +7,7 @@ package sistemapagoimpuestos.Expert;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.ParametroCalculoEditable;
@@ -86,28 +87,85 @@ public class ExpertoGestionarParametrosCalculoComision {
     }
      */
 //    }
-    public void modificarParametrosPeriodicidad(Date fechaDesde,double anual, double bimestral, double cuatrimestral, double mensual, double quincenal, double semestral, double trimestral) {
+    public void modificarParametrosPeriodicidad(Date fechaDesde, double mensual, double bimestral, double trimestral, double cuatrimestral,  double semestral, double anual, double quincenal) {
 
         List<DTOCriterio> criterios = new ArrayList<>();
-
         DTOCriterio criterio1 = new DTOCriterio();
-        criterio1.setAtributo("anual");
+        
+        criterio1.setAtributo("fechaInhabilitacionPCPeriodicidad");
         criterio1.setOperacion("<>");
-        criterio1.setValor("999999");
+        criterio1.setValor(null);
+        criterios.add(criterio1);
+        
+        criterio1.setAtributo("fechaDesdePCPeriodicidad");
+        criterio1.setOperacion("=");
+        criterio1.setValor(fechaDesde);
+        criterios.add(criterio1);
+        
         FachadaInterna.getInstance().iniciarTransaccion();
-        ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad)FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", criterios).get(0);
-        parametrosCalculoPeriodicidad.setFechaDesde(fechaDesde);
-        parametrosCalculoPeriodicidad.setAnual(anual);
-        parametrosCalculoPeriodicidad.setBimestral(bimestral);
-        parametrosCalculoPeriodicidad.setCuatrimestral(cuatrimestral);
-        parametrosCalculoPeriodicidad.setMensual(mensual);
-        parametrosCalculoPeriodicidad.setQuincenal(quincenal);
-        parametrosCalculoPeriodicidad.setSemestral(semestral);
-        parametrosCalculoPeriodicidad.setTrimestral(trimestral);
+        
+        List<Object> parametros = FachadaPersistencia.getInstance().buscar(ParametroCalculoPeriodicidad.class, criterios);
+        ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad;
+        
+        if (parametros.isEmpty()){
+            parametrosCalculoPeriodicidad = new ParametroCalculoPeriodicidad();
+        }
+        else{
+            parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad) parametros.get(0);
+        }                                                                      
+       
+        parametrosCalculoPeriodicidad.setFechaDesdePCPeriodicidad(fechaDesde);
+        parametrosCalculoPeriodicidad.setMensualPCPeriodicidad(mensual);
+        parametrosCalculoPeriodicidad.setBimestralPCPeriodicidad(bimestral);
+        parametrosCalculoPeriodicidad.setTrimestralPCPeriodicidad(trimestral);
+        parametrosCalculoPeriodicidad.setCuatrimestralPCPeriodicidad(cuatrimestral);
+        parametrosCalculoPeriodicidad.setQuincenalPCPeriodicidad(quincenal);
+        parametrosCalculoPeriodicidad.setSemestralPCPeriodicidad(semestral);
+        parametrosCalculoPeriodicidad.setAnualPCPeriodicidad(anual);
+        parametrosCalculoPeriodicidad.setFechaInhabilitacionPCPeriodicidad(null);
+        
         FachadaPersistencia.getInstance().guardar(parametrosCalculoPeriodicidad);
               FachadaInterna.getInstance().finalizarTransaccion();
     }
 
+    
+     public void modificarParametrosEditable(Date fechaDesde, double montoSiEditable, double montoNoEditable) {
+
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio1 = new DTOCriterio();
+        
+        criterio1.setAtributo("fechaInhabilitacionPCEditable");
+        criterio1.setOperacion("<>");
+        criterio1.setValor(null);
+        criterios.add(criterio1);
+        
+        criterio1.setAtributo("fechaDesdePCEditable");
+        criterio1.setOperacion("=");
+        criterio1.setValor(fechaDesde);
+        criterios.add(criterio1);
+        
+        FachadaInterna.getInstance().iniciarTransaccion();
+        
+        List<Object> parametros = FachadaPersistencia.getInstance().buscar(ParametroCalculoEditable.class, criterios);
+        ParametroCalculoEditable parametrosCalculoEditable;
+        
+        if (parametros.isEmpty()){
+            parametrosCalculoEditable = new ParametroCalculoEditable();
+        }
+        else{
+            parametrosCalculoEditable = (ParametroCalculoEditable) parametros.get(0);
+        }   
+                
+        parametrosCalculoEditable.setFechaDesdePCEditable(fechaDesde);
+        parametrosCalculoEditable.setSiEditablePCEditable(montoSiEditable);
+        parametrosCalculoEditable.setNoEditablePCEditable(montoNoEditable);
+        parametrosCalculoEditable.setFechaInhabilitacionPCEditable(null);
+         
+        
+        FachadaPersistencia.getInstance().guardar(parametrosCalculoEditable);
+              FachadaInterna.getInstance().finalizarTransaccion();
+    }
+     
     /*
         List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();

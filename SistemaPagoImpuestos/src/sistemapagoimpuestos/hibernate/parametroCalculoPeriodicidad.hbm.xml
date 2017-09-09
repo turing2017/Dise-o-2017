@@ -2,43 +2,46 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="sistemapagoimpuestos.Entity.ParametroCalculoPeriodicidad" table="parametro_calculo_periodicidad">
-         <id name="OID" type="string">
-        <column name="OIDParametroCalculoPeriodicidad"/>
-        <generator class="uuid2"/>
+        <id name="OID" type="string">
+            <column name="OIDParametroCalculoPeriodicidad"/>
+            <generator class="uuid2"/>
         </id>
        
-        <property name="fechaDesde" type="date" not-null="true">
-        <column name="fechaDesde"/>
+        <property name="fechaDesdePCPeriodicidad" type="date" not-null="true">
+            <column name="fechaDesdePCPeriodicidad"/>
         </property>
         
-        <property name="anual" type="double" not-null="true">
-        <column name="anual"/>
+        <property name="mensualPCPeriodicidad" type="double" not-null="true">
+            <column name="mensualPCPeriodicidad"/>
         </property>
         
-         <property name="bimestral" type="double" not-null="true">
-        <column name="bimestral"/>
-         </property>
+        <property name="bimestralPCPeriodicidad" type="double" not-null="true">
+            <column name="bimestralPCPeriodicidad"/>
+        </property>
+         
+        <property name="trimestralPCPeriodicidad" type="double" not-null="true">
+            <column name="trimestralPCPeriodicidad"/>
+        </property>  
         
-         <property name="cuatrimestral" type="double" not-null="true">
-        <column name="cuatrimestral"/>
-         </property>
-        
-        <property name="mensual" type="double" not-null="true">
-        <column name="mensual"/>
+        <property name="cuatrimestralPCPeriodicidad" type="double" not-null="true">
+            <column name="cuatrimestralPCPeriodicidad"/>
         </property>
         
-        <property name="quincenal" type="double" not-null="true">
-        <column name="quincenal"/>
+        <property name="semestralPCPeriodicidad" type="double" not-null="true">
+            <column name="semestralPCPeriodicidad"/>
         </property>
-        
-        <property name="semestral" type="double" not-null="true">
-        <column name="semestral"/>
-        </property>
-        
-        <property name="trimestral" type="double" not-null="true">
-        <column name="trimestral"/>
-        </property>
-        
        
+        <property name="anualPCPeriodicidad" type="double" not-null="true">
+            <column name="anualPCPeriodicidad"/>
+        </property>
+        
+        <property name="quincenalPCPeriodicidad" type="double" not-null="true">
+            <column name="quincenalPCPeriodicidad"/>
+        </property>
+       
+        <property name="fechaInhabilitacionPCPeriodicidad" type="date" not-null="true">
+            <column name="fechaInhabilitacionPCPeriodicidad"/>
+        </property>
+        
     </class>
 </hibernate-mapping>

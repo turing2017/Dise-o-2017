@@ -15,6 +15,10 @@ import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
+import sistemapagoimpuestos.Entity.Empresa;
+import sistemapagoimpuestos.Entity.Item;
+import sistemapagoimpuestos.Entity.TipoDatoItem;
 
 /**
  *
@@ -47,6 +51,7 @@ public class ConvertDTO {
         dTOItem.setLongitudItem(item.getLongitudItem());
         dTOItem.setRequeridoItem(item.isRequeridoItem());
         dTOItem.setFechaHoraInhabilitacionItem(item.getFechaHoraInhabilitacionItem());
+        dTOItem.setDtoTipoDatoItem(convertTipoDatoItem(item.getTipoDatoItem()));
         return dTOItem;
     }
 
@@ -75,5 +80,9 @@ public class ConvertDTO {
         }
         
         return dtoUsuario;
+    }
+    
+    public DTOTipoDatoItem convertTipoDatoItem(TipoDatoItem tipoDatoItem){
+        return new DTOTipoDatoItem(tipoDatoItem.getCodigoTipoDatoItem(), tipoDatoItem.getNombreTipoDatoItem());
     }
 }

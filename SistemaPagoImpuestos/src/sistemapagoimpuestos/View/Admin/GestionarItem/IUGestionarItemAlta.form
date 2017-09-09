@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="label_nombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_codigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_longitud" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_requerido" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="checkbox_requerido" min="-2" max="-2" attributes="0"/>
+                  <Component id="textfield_longitud" pref="125" max="32767" attributes="0"/>
+                  <Component id="textfield_nombre" max="32767" attributes="0"/>
+                  <Component id="textfield_codigo" pref="125" max="32767" attributes="0"/>
+                  <Component id="comboBox_tipoDato" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace pref="204" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="button_crear" min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="label_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textfield_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="label_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textfield_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="label_longitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textfield_longitud" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="label_requerido" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkbox_requerido" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBox_tipoDato" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Component id="button_crear" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="74" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="label_nombre">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombre Item"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="label_codigo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo Item"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="label_longitud">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Longitud Item"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="label_requerido">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Requrido"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo Dato Item"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textfield_nombre">
+    </Component>
+    <Component class="javax.swing.JTextField" name="textfield_longitud">
+    </Component>
+    <Component class="javax.swing.JTextField" name="textfield_codigo">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkbox_requerido">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboBox_tipoDato">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBox_tipoDatoActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="button_crear">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Crear"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_crearActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

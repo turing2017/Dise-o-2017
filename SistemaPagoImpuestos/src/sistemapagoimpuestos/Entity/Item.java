@@ -78,5 +78,4 @@ public class Item extends Entity{
     public void setTipoDatoItem(TipoDatoItem tipoDatoItem) {
         this.tipoDatoItem = tipoDatoItem;
     }
-    
 }

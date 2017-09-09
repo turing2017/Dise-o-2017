@@ -15,8 +15,6 @@ public class SistemaPagoImpuestos {
 
    
     public static void main(String[] args) {
-
         ControladorLoguearUsuario.getInstance().iniciar();
-
     }
 }

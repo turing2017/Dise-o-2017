@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.cfg.Configuration;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
-import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
@@ -27,8 +26,9 @@ public class SistemaPagoImpuestos {
     public static void main(String[] args) {
      //  DatosPrueba dp = new DatosPrueba();
      // dp.generarDatosPrueba();
-     //new ControladorGestionarTipoImpuesto().iniciar();
      new ControladorGestionarEmpresaAdherida().iniciar();
+
+    
     }
     
 }

@@ -5,17 +5,19 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.Excepciones;
+import java.awt.Window;
 import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
-import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import java.util.Date;
-import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
-import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
-import sistemapagoimpuestos.Dto.DTOEmpresaHabilitada;
-import sistemapagoimpuestos.Dto.DTOEmpresaInhabilitada;
+import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Entity.TipoEmpresa;
 
 /**
  *
@@ -35,147 +37,160 @@ public class ExpertoGestionarEmpresaAdherida {
         }*/
         return "Administrador";
     }
-
-    public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa) {
+    public ArrayList<DTOEmpresa > consultarEmpresas (){
+    List<Object> listObject = FachadaPersistencia.getInstance().buscar("Empresa", null);
+    ArrayList<DTOEmpresa> listDTOEmpresa = new ArrayList<DTOEmpresa>();
+    for(Object obj : listObject){
+      Empresa empresa = (Empresa) obj ;
+      DTOEmpresa DTOe = new DTOEmpresa();
+      DTOe.setCuitDTOEmpresa(empresa.getCuitEmpresa());
+      DTOe.setDireccionDTOEmpresa(empresa.getDireccionEmpresa());
+      DTOe.setNombreDTOEmpresa(empresa.getNombreEmpresa());
+      DTOe.setFechaHoraInhabilitacionDTOEmpresa(empresa.getFechaHoraInhabilitacionEmpresa());
+      DTOe.setNombreTipoEmpresaDTOEmpresa(empresa.getTipoEmpresa().getNombreTipoEmpresa());
+      
+      listDTOEmpresa.add(DTOe);
+    
+      }
+    return listDTOEmpresa ;
+}
+    
+    
+  
+    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, String tipoEmpresa, boolean habilitada) {
+       boolean camposVacios= camposNulos(cuit, nombre, direccion);
+       if (camposVacios==true){
+       Excepciones.getInstance().camposVacios();
+       return;
+       }
+        
         try {
-
+            
             List<DTOCriterio> criterios = new ArrayList<>();
             DTOCriterio criterio1 = new DTOCriterio();
-            criterio1.setAtributo("fechaHoraInhabilitacionEmpresa");
-            criterio1.setOperacion("=");
-            criterio1.setValor(null);
-            criterios.add(criterio1);
-            //Se arma el criterio de busqueda para la condicion fechaHoraInhabilitacionEmpresa = null
-            DTOCriterio criterio2 = new DTOCriterio();
             criterio1.setAtributo("cuitEmpresa");
             criterio1.setOperacion("=");
-            criterio1.setValor(cuitEmpresa);
-            criterios.add(criterio2);
-            //Se arma el criterio de busqueda para la condicion cuitEmpresa = cuitEmpresa ingresado
+            criterio1.setValor(cuit);
+            criterios.add(criterio1);
             Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-            System.out.println("El cuit ya existe");//En el caso de que exista, tira mensaje   
+            Excepciones.getInstance().cuitExistente();//En el caso de que exista, tira mensaje 
+
 
         } catch (IndexOutOfBoundsException exception) {//Si no encuentra Empresa con ese cuit, la crea
             Empresa empresa = new Empresa();
-            empresa.setNombreEmpresa(nombreEmpresa);
-            empresa.setCuitEmpresa(cuitEmpresa);
-            empresa.setDireccionEmpresa(direccionEmpresa);
+            empresa.setNombreEmpresa(nombre);
+            empresa.setCuitEmpresa(cuit);
+            empresa.setDireccionEmpresa(direccion);
+            empresa.setTipoEmpresa(buscarTipoEmpresa(tipoEmpresa));
+            if (habilitada == true){
             empresa.setFechaHoraInhabilitacionEmpresa(null);
+            }
+            else {
+            empresa.setFechaHoraInhabilitacionEmpresa(new Date());
+                }
             FachadaPersistencia.getInstance().guardar(empresa);
-            System.out.println("La empresa fue creada con éxito");
-           
+            Excepciones.getInstance().empresaCreada();
+        
         }
 
     }
 
-    public List<DTOEmpresaExistente> ingresarNroCuit(String cuitEmpresa) {
-        ArrayList<DTOEmpresaExistente> listDTOEmpresaExistente = new ArrayList<DTOEmpresaExistente>();
-        try {
-
-            List<DTOCriterio> criterios = new ArrayList<>();
-            DTOCriterio criterio1 = new DTOCriterio();
-            criterio1.setAtributo("cuit");
-            criterio1.setOperacion("=");
-            criterio1.setValor(cuitEmpresa);
-            criterios.add(criterio1);
-            //Se arma el criterio de busqueda para la condicion fechaHoraInhabilitacionEmpresa = null
-            DTOCriterio criterio2 = new DTOCriterio();
-            criterio1.setAtributo("fechaHoraInhabilitacionEmpresa");
-            criterio1.setOperacion("=");
-            criterio1.setValor(null);
-            criterios.add(criterio2);
-            //Se arma el criterio de busqueda para la condicion cuitEmpresa = cuitEmpresa ingresado
-            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-            DTOEmpresaExistente dtoEmpresaExistente = new DTOEmpresaExistente();
-            dtoEmpresaExistente.setNombreEmpresa(empresa.getNombreEmpresa());
-            dtoEmpresaExistente.setCuitEmpresa(cuitEmpresa);
-            dtoEmpresaExistente.setDireccionEmpresa(empresa.getDireccionEmpresa());
-            listDTOEmpresaExistente.add(dtoEmpresaExistente);
-
-        } catch (IndexOutOfBoundsException exception) {//Si no encuentra Empresa con ese cuit, la crea
-            System.out.println("El cuit no existe");
-
-        }
-        return listDTOEmpresaExistente;
-    }
-
-    public Empresa conseguirEmpresa(String cuitEmpresa) {
-
+   
+    
+    public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada, String tipoEmpresa){
+       
+        
+        try{
         List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();
         criterio1.setAtributo("cuitEmpresa");
         criterio1.setOperacion("=");
-        criterio1.setValor(cuitEmpresa);
+        criterio1.setValor(cuit);
         criterios.add(criterio1);
-        empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-
-        String cuit = empresa.getCuitEmpresa();
-        String nombre = empresa.getNombreEmpresa();
-        String direccion = empresa.getDireccionEmpresa();
-        
-        return empresa;
-    
-    }
-    
-    public void seleccionarModificar (String nombreEmpresa, String direccionEmpresa){
-        empresa.setNombreEmpresa(nombreEmpresa);
-        empresa.setDireccionEmpresa(direccionEmpresa);
-        FachadaPersistencia.getInstance().guardar(empresa);
-        System.out.print("La modificación se realizó con éxito");
-        
-    }
-
-    public void seleccionarEliminar(String cuitEmpresa) {
-
-        java.util.Date fechaActual = new Date();
-        empresa.setFechaHoraInhabilitacionEmpresa(fechaActual);
-        FachadaPersistencia.getInstance().guardar(empresa);
-        System.out.print("La empresa fue eliminada con exito");
-
-    }
-
-    public DTOConsultarEmpresas ingresarOpcion(String opcion) {
-        if ("EmpresasExistentes".equals(opcion)) {
-
-            List<DTOCriterio> criterios = new ArrayList<>();
-            DTOCriterio criterio1 = new DTOCriterio();
-            criterio1.setAtributo("fechaHoraInhabilitacionEmpresaAdherida");
-            criterio1.setOperacion("==");
-            criterio1.setValor(null);
-            criterios.add(criterio1);
-            List<Empresa> listaEmpresa = (List<Empresa>) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-
-            DTOConsultarEmpresas dtoConsultarEmp = new DTOConsultarEmpresas();
-
-            for (int i = 0; i < listaEmpresa.size(); i++) {
-                DTOEmpresaHabilitada dtoEmp = new DTOEmpresaHabilitada();
-                dtoEmp.setCuitEmpresa(listaEmpresa.get(i).getCuitEmpresa());
-                dtoEmp.setNombreEmpresa(listaEmpresa.get(i).getNombreEmpresa());
-                dtoEmp.setDireccionEmpresa(listaEmpresa.get(i).getDireccionEmpresa());
-                dtoConsultarEmp.add(dtoEmp);
-            }
-            return dtoConsultarEmp;
-
-        } else {
-            List<DTOCriterio> criterios = new ArrayList<>();
-            DTOCriterio criterio1 = new DTOCriterio();
-            criterio1.setAtributo("fechaHoraInhabilitacionEmpresaAdherida");
-            criterio1.setOperacion("!=");
-            criterio1.setValor(null);
-            criterios.add(criterio1);
-            List<Empresa> listaEmpresa = (List<Empresa>) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-
-           DTOConsultarEmpresas dtoConsultarEmp = new DTOConsultarEmpresas();
-
-            for (int i = 0; i < listaEmpresa.size(); i++) {
-                DTOEmpresaInhabilitada dtoEmpIn = new DTOEmpresaInhabilitada();
-                dtoEmpIn.setCuitEmpresa(listaEmpresa.get(i).getCuitEmpresa());
-                dtoEmpIn.setNombreEmpresa(listaEmpresa.get(i).getNombreEmpresa());
-                dtoEmpIn.setDireccionEmpresa(listaEmpresa.get(i).getDireccionEmpresa());
-                dtoEmpIn.setFechaHoraInhabilitacionEmpresa(listaEmpresa.get(i).getFechaHoraInhabilitacionEmpresa());
-                dtoConsultarEmp.add(dtoEmpIn);
-            }
-            return dtoConsultarEmp;
+        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+       //En el caso de que exista, tira mensaje 
+        empresa.setNombreEmpresa(nombre);
+        empresa.setDireccionEmpresa(direccion);
+        empresa.setCuitEmpresa(cuit);
+        if (habilitada==true){
+            empresa.setFechaHoraInhabilitacionEmpresa(null);
+        }else{
+            empresa.setFechaHoraInhabilitacionEmpresa(new Date());
         }
+        
+        empresa.setTipoEmpresa(buscarTipoEmpresa(tipoEmpresa));
+        
+        
+        FachadaPersistencia.getInstance().guardar(empresa);
+        
+        Excepciones.getInstance().modificacionExito();
     }
-}
+        catch (IndexOutOfBoundsException exception) {
+         Excepciones.getInstance().cuitNoExistente();
+        
+     }
+        
+    }
+    
+    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada, String tipoEmpresa){
+        DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
+        dtoEe.setCuitDTOEmpresaExistente(cuitEmpresa);
+        dtoEe.setNombreDTOEmpresaExistente(nombreEmpresa);
+        dtoEe.setDireccionDTOEmpresaExistente(direccionEmpresa);
+        dtoEe.setHabilitadaDTOEmpresaExistente(habilitada);
+        dtoEe.setNombreTipoEmpresaDTOEmpresaExistente(tipoEmpresa);
+        
+        return dtoEe;
+    }
+    
+    public TipoEmpresa buscarTipoEmpresa (String nombre){
+        List<DTOCriterio> criterios = new ArrayList<>();
+            DTOCriterio criterio1 = new DTOCriterio();
+            criterio1.setAtributo("nombreTipoEmpresa");
+            criterio1.setOperacion("=");
+            criterio1.setValor(nombre);
+            criterios.add(criterio1);
+            TipoEmpresa tipo = (TipoEmpresa) FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterios).get(0);
+            return tipo;
+    }
+    public boolean camposNulos(String cuit, String nombre, String direccion ){
+        boolean error=false;
+        if (cuit.isEmpty()){
+        error=true;
+        } 
+        if(nombre.isEmpty()){
+        error=true;
+        }
+        if(direccion.isEmpty()){
+        error=true;
+        }
+       
+        return error;
+    }
+    public List<DTOTipoEmpresa> buscarTiposDeEmpresa(){
+     List<DTOCriterio> criterios = new ArrayList();
+      DTOCriterio criterio1 = new DTOCriterio();
+        criterio1.setAtributo("fechaHoraInhabilitacionTipoEmpresa");
+        criterio1.setOperacion("IS");
+        criterio1.setValor(null);
+        criterios.add(criterio1);   
+        List tipo = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterios);
+       
+        List<DTOTipoEmpresa> lista = new ArrayList<>();
+        DTOTipoEmpresa dtoTipoEmpresa;
+
+        for (int i = 0; i < tipo.size(); i++) {
+            dtoTipoEmpresa = new DTOTipoEmpresa();
+            TipoEmpresa tipoEmpresa = (TipoEmpresa) tipo.get(i);
+            String nombreTipoEmpresa = tipoEmpresa.getNombreTipoEmpresa();
+            dtoTipoEmpresa.setNombreDTOTipoEmpresa(nombreTipoEmpresa);
+            lista.add(dtoTipoEmpresa);
+        }
+        return lista;
+    }
+
+     
+    }
+ 
+   
+ 

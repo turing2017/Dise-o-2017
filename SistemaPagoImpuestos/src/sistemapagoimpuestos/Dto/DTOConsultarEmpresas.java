@@ -14,24 +14,54 @@ import java.util.List;
  */
 public class DTOConsultarEmpresas {
     
-    private List<DTOEmpresaHabilitada> listaDTOEmpresaHabilitada;
-    private List<DTOEmpresaInhabilitada> listaDTOEmpresaInhabilitada;
+String cuitDTOConsultarEmpresas;
+String nombreDTOConsultarEmpresas;
+String direccionDTOConsultarEmpresas;
+String tipoImpuestoDTOConsultarEmpresas;
+String habilitadaDTOConsultarEmpresas;
 
-    public boolean add(DTOEmpresaHabilitada e) {
-        return listaDTOEmpresaHabilitada.add(e);
+    public String getCuitDTOConsultarEmpresas() {
+        return cuitDTOConsultarEmpresas;
     }
 
-    public boolean add(DTOEmpresaInhabilitada e) {
-        return listaDTOEmpresaInhabilitada.add(e);
+    public void setCuitDTOConsultarEmpresas(String cuitDTOConsultarEmpresas) {
+        this.cuitDTOConsultarEmpresas = cuitDTOConsultarEmpresas;
     }
 
-    public List<DTOEmpresaHabilitada> getListaDTOEmpresaHabilitada() {
-        return listaDTOEmpresaHabilitada;
+    public String getNombreDTOConsultarEmpresas() {
+        return nombreDTOConsultarEmpresas;
     }
 
-    public List<DTOEmpresaInhabilitada> getListaDTOEmpresaInhabilitada() {
-        return listaDTOEmpresaInhabilitada;
+    public void setNombreDTOConsultarEmpresas(String nombreDTOConsultarEmpresas) {
+        this.nombreDTOConsultarEmpresas = nombreDTOConsultarEmpresas;
     }
+
+    public String getDireccionDTOConsultarEmpresas() {
+        return direccionDTOConsultarEmpresas;
+    }
+
+    public void setDireccionDTOConsultarEmpresas(String direccionDTOConsultarEmpresas) {
+        this.direccionDTOConsultarEmpresas = direccionDTOConsultarEmpresas;
+    }
+
+    public String getTipoImpuestoDTOConsultarEmpresas() {
+        return tipoImpuestoDTOConsultarEmpresas;
+    }
+
+    public void setTipoImpuestoDTOConsultarEmpresas(String tipoImpuestoDTOConsultarEmpresas) {
+        this.tipoImpuestoDTOConsultarEmpresas = tipoImpuestoDTOConsultarEmpresas;
+    }
+
+    public String getHabilitadaDTOConsultarEmpresas() {
+        return habilitadaDTOConsultarEmpresas;
+    }
+
+    public void setHabilitadaDTOConsultarEmpresas(String habilitadaDTOConsultarEmpresas) {
+        this.habilitadaDTOConsultarEmpresas = habilitadaDTOConsultarEmpresas;
+    }
+
+    
+
     
     
 

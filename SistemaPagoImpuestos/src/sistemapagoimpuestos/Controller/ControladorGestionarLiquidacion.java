@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -71,6 +72,14 @@ public ArrayList<DTOLiquidacion> buscarLiquidacion(){
 public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto,String nombreEmpresa,Date fechaDesde,Date fechaHasta){
         return experto.buscarLiquidacionConFiltro( nombreTipoImpuesto, nombreEmpresa, fechaDesde, fechaHasta);
 }
+
+public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
+        return experto.buscarOperaciones(numeroLiquidacion);
+}
+
+
+
+
 
 
 }

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -73,6 +74,16 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
         ArrayList<DTOLiquidacion> listObject;
         FachadaInterna.getInstance().iniciarTransaccion();
         listObject = super.buscarLiquidacionConFiltro( nombreTipoImpuesto, nombreEmpresa, fechaDesde, fechaHasta); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listObject;
+}
+    
+    
+     @Override
+    public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
+        ArrayList<DTOOperacion> listObject;
+        FachadaInterna.getInstance().iniciarTransaccion();
+        listObject = super.buscarOperaciones(numeroLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return listObject;
 }

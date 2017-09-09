@@ -65,6 +65,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         jButtonMostrar = new javax.swing.JButton();
         jButtonAprobar = new javax.swing.JButton();
         jButtonAnular = new javax.swing.JButton();
+        jPrueba = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,6 +149,11 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         });
 
         jButtonMostrar.setText("Mostrar");
+        jButtonMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMostrarActionPerformed(evt);
+            }
+        });
 
         jButtonAprobar.setText("Aprobar");
 
@@ -195,6 +201,10 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                         .addGap(222, 222, 222)
                         .addComponent(jButtonAnular)))
                 .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +226,9 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(5, 5, 5)
+                .addComponent(jPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(jButtonConsultarLiquidaciones)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,7 +333,7 @@ jComboBoxEmpresa.removeAllItems();
       
        DTOLiquidacion dtoLiquidacion2 = new DTOLiquidacion();
       dtoLiquidacion2.setNombreEmpresa("empresa3");
-        dtoLiquidacion2.setNumeroLiquidacion(4123);
+        dtoLiquidacion2.setNumeroLiquidacion(713);
         dtoLiquidacion2.setFechaHoraLiquidacion(fechaliquidacion3);
         dtoLiquidacion2.setFechaHoraDesdeLiquidacion(null);
         dtoLiquidacion2.setFechaHoraHastaLiquidacion(null);
@@ -347,6 +359,12 @@ jComboBoxEmpresa.removeAllItems();
     private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAnularActionPerformed
+
+    private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
+
+       
+        jPrueba.setText(""+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+    }//GEN-LAST:event_jButtonMostrarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -401,6 +419,7 @@ jComboBoxEmpresa.removeAllItems();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jPrueba;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

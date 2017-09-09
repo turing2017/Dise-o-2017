@@ -13,6 +13,7 @@ import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
@@ -156,8 +157,8 @@ else{
         dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-        dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
-     
+       // dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+             dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
         listDtoLiquidacion.add(dtoLiquidacion);
     }
         return listDtoLiquidacion;
@@ -181,7 +182,8 @@ else{
         dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-        dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+        //dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+        dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
         listDtoLiquidacion.add(dtoLiquidacion);
          }
             //SI SOLO NOMBRE TIPOIMPUESTO ES TODOS
@@ -213,7 +215,8 @@ else{
                     dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                     dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
                     dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
-                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                  //  dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                            dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
                     dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
                     dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
                    
@@ -255,7 +258,8 @@ else{
                     dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                     dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
                     dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
-                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                //  dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
                     dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
                     dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
                 
@@ -309,15 +313,33 @@ else{
         dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-        dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+        //dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+         dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
         listDtoLiquidacion.add(dtoLiquidacion);
             }
         }  
     }
         return listDtoLiquidacion;
 }
-            }
+    
+    
+    
+    public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
+    
+        ArrayList<DTOOperacion> listDTOOperacion = new ArrayList<DTOOperacion>();
+         List<DTOCriterio> criterios = new ArrayList<>();
+         
+         //BUSCA LA LIQUIDACION SELECCIONADA
+        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", numeroLiquidacion);
+        criterios.add(criterio);
+       Liquidacion liquidacion  = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+       //HACE UN GET A  LA LISTA DE OPERACIONES DE ESA LIQUIDACION Y DEJO ACA ME FUI A DORMIR
+       liquidacion.getOperacion();
+       
+        return listDTOOperacion;
+    }
     
     
     
 
+}

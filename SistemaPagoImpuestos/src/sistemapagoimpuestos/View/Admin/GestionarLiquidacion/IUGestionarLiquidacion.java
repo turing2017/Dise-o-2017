@@ -61,7 +61,6 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButtonMostrar = new javax.swing.JButton();
         jButtonAprobar = new javax.swing.JButton();
@@ -141,13 +140,6 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Boton de prueba que trae Empresas");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Boton de prueba Liquidacion");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,10 +182,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                         .addGap(131, 131, 131)
                                         .addComponent(jButton2))
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(115, 115, 115)
-                                        .addComponent(jButton1))))))
+                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,12 +199,11 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(26, 26, 26)
+                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -282,15 +271,6 @@ jComboBoxEmpresa.removeAllItems();
          for(DTOEmpresa obj : listDtoDTOEmpresa){
              jComboBoxTipoImpuesto.addItem(obj.getNombreEmpresa()); }   */
     }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-jComboBoxEmpresa.removeAllItems();
-        jComboBoxEmpresa.addItem("Todos");
-         List<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
-       for(DTOEmpresa obj : listDtoDTOEmpresa){
-            jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}      
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
@@ -410,7 +390,6 @@ jComboBoxEmpresa.removeAllItems();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombodesde;
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAnular;
     private javax.swing.JButton jButtonAprobar;

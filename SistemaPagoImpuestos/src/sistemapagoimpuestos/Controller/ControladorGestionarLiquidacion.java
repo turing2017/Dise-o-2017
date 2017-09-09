@@ -7,6 +7,7 @@ package sistemapagoimpuestos.Controller;
 
 import datosPrueba.IUdatosPrueba;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
@@ -66,6 +67,10 @@ public ArrayList<DTOLiquidacion> buscarLiquidacion(){
         return experto.obtenerLiquidacion();
 }
         
+    
+public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto,String nombreEmpresa,Date fechaDesde,Date fechaHasta){
+        return experto.buscarLiquidacionConFiltro( nombreTipoImpuesto, nombreEmpresa, fechaDesde, fechaHasta);
+}
 
 
 }

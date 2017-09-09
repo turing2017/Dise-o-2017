@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Expert;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOCriterio;
@@ -63,11 +64,11 @@ public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
     public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto) {
          
         
-        //CREA LO QUE VA A DEVOLVER
+//CREA LO QUE VA A DEVOLVER
          ArrayList<DTOEmpresa> listDtoEmpresa = new ArrayList<DTOEmpresa>();
          
-         //SI ES TODOS , BUSCA TODAS LAS EMPRESAS(otra vez xq no me andubo el this.buscarEmpresa, posiblemente por problemas de list/arraylist)
-  if ("Todos".equals(nombreTipoImpuesto)){ 
+ //SI ES TODOS , BUSCA TODAS LAS EMPRESAS(otra vez xq no me andubo el this.buscarEmpresa, posiblemente por problemas de list/arraylist)
+        if ("Todos".equals(nombreTipoImpuesto)){ 
   
       
    List<DTOCriterio> criterioEmpresa = new ArrayList();
@@ -95,12 +96,14 @@ else{
        
         
         //BUSCA TIPOIMPUESTO SELECCIONADO EN EL OTRO COMBOBOX y muestra nombre
+        
+        //BUSCA EL OBJETO TIMPO IMPUESTO
        DTOCriterio criterio2 = new DTOCriterio("nombreTipoImpuesto","=",nombreTipoImpuesto); 
        criterios.clear();
        criterios.add(criterio2);
     TipoImpuesto listTipoImpuesto =  (TipoImpuesto)FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
    
-        
+      //BUSCA LA EMPRESA QUE TENGGA EL TIMPO IMPUESTO  
     DTOCriterio criterio1 = new DTOCriterio("tipoImpuesto","=",listTipoImpuesto); 
     criterios.clear();
     criterios.add(criterio1);
@@ -160,4 +163,54 @@ else{
         return listDtoLiquidacion;
 }
 
+    public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto,String nombreEmpresa,Date fechaDesde,Date fechaHasta) {
+      
+        ArrayList<DTOLiquidacion> listDtoLiquidacion = new ArrayList<DTOLiquidacion>();
+        List<DTOCriterio> criterios = new ArrayList();
+
+        
+//BUSCO TIPO IMPUESTO SELECCIONADO       
+        DTOCriterio criterio = new DTOCriterio("nombreTipoImpuesto","=",nombreTipoImpuesto);
+        criterios.add(criterio);
+         TipoImpuesto tipoImpuesto =  (TipoImpuesto)FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
+        
+ //BUSCO EMPRESA SELECCIONADA
+         DTOCriterio criterio1 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
+         criterios.clear();
+         criterios.add(criterio1);
+         Empresa empresa =  (Empresa)FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+         
+ // BUSCO EMPRESATIPOIMPUESTO QUE CONTEGNA TIPO IMPUESTO Y EMPRESA
+        DTOCriterio criterio2 = new DTOCriterio("tipoImpuesto", "=", tipoImpuesto);
+        DTOCriterio criterio3 = new DTOCriterio("empresa", "=", empresa);
+        criterios.clear();
+        criterios.add(criterio2);
+        criterios.add(criterio3);        
+        EmpresaTipoImpuesto empresaTipoImpuesto =(EmpresaTipoImpuesto)  FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios).get(0);
+        
+ //BUSCO TODAS LAS LIQUIDACIONES QUE TENGA ESA EMPRESA TIPO IMPUESTO ENTRE LAS FECHAS       
+        
+        DTOCriterio criterio4 = new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto);
+        DTOCriterio criterio5 = new DTOCriterio("fechaHoraLiquidacion", ">", fechaDesde);
+        DTOCriterio criterio6 = new DTOCriterio("fechaHoraLiquidacion", "<", fechaHasta);
+        List<Object> listLiquidacion =  FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+        
+ //LLENO EL DTOLIQUIDACION
+     
+        for(Object obj : listLiquidacion){
+        Liquidacion liquidacion = (Liquidacion)obj;
+        DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+        
+        dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
+        dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
+        dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
+        dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
+        dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
+        dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+        dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+        listDtoLiquidacion.add(dtoLiquidacion);
+        
+        
 }
+        return listDtoLiquidacion;
+}}

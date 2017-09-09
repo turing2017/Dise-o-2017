@@ -9,11 +9,15 @@ import static datosPrueba.DatosPrueba.generarDatosPrueba;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.util.converter.LocalDateStringConverter;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Entity.Liquidacion;
+import java.util.Date;
+import java.util.Calendar;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author vande
@@ -24,9 +28,11 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
      * Creates new form IUGestionarLiquidacion
      */
     public IUGestionarLiquidacion() {
+        //LLENA EL COMBO BOX TIPO EMPRESA, Y INICIALIZA EL DE EMRPESA CON "TODOS"
         initComponents();
         jComboBoxEmpresa.setEditable(false);
         jComboBoxTipoImpuesto.addItem("Todos");
+        jComboBoxEmpresa.addItem("Todos");
         ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarLiquidacion.getInstance().obtenerTipoImpuestos();  
          for(DTOTipoImpuesto obj : listDtoTipoImpuesto){
              jComboBoxTipoImpuesto.addItem(obj.getNombreDTOTipoImpuesto());
@@ -57,6 +63,9 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButtonMostrar = new javax.swing.JButton();
+        jButtonAprobar = new javax.swing.JButton();
+        jButtonAnular = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,6 +155,17 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             }
         });
 
+        jButtonMostrar.setText("Mostrar");
+
+        jButtonAprobar.setText("Aprobar");
+
+        jButtonAnular.setText("Anular");
+        jButtonAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,7 +196,14 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                         .addComponent(jButton1))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jButtonMostrar)
+                        .addGap(168, 168, 168)
+                        .addComponent(jButtonAprobar)
+                        .addGap(222, 222, 222)
+                        .addComponent(jButtonAnular)))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -204,7 +231,12 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 .addComponent(jButtonConsultarLiquidaciones)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonMostrar)
+                    .addComponent(jButtonAprobar)
+                    .addComponent(jButtonAnular))
+                .addGap(77, 77, 77))
         );
 
         jComboBoxTipoImpuesto.getAccessibleContext().setAccessibleName("");
@@ -214,11 +246,19 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConsultarLiquidacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarLiquidacionesActionPerformed
-        // TODO add your handling code here:
+
+        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
+       Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
+        ArrayList <DTOLiquidacion> listLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
+        System.out.print(listLiquidacion.isEmpty());
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
-
+jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.addItem("Todos");
+         List<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+       for(DTOEmpresa obj : listDtoDTOEmpresa){
+            jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}     
     }//GEN-LAST:event_jComboBoxTipoImpuestoActionPerformed
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
@@ -263,26 +303,57 @@ jComboBoxEmpresa.removeAllItems();
       Liquidacion liquidacion;
         DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
         
-        dtoLiquidacion.setNombreEmpresa("cuacl");
+      Date hoy ;
+      Date fechaliquidacion1;
+      Date fechaliquidacion2;
+      Date fechaliquidacion3;
+      Calendar calendario =  Calendar.getInstance() ;
+     calendario.getTimeZone();
+    
+       hoy = dateChooserCombodesde.getCurrent().getTime();
+       hoy.setHours(8);
+       
+       fechaliquidacion1 = dateChooserCombodesde.getCurrent().getTime();
+       fechaliquidacion1.setMonth(0);
+       fechaliquidacion2 = dateChooserCombodesde.getCurrent().getTime();
+       fechaliquidacion2.setMonth(5);
+       fechaliquidacion3 = dateChooserCombodesde.getCurrent().getTime();
+        
+        
+        dtoLiquidacion.setNombreEmpresa("empreswa1");
         dtoLiquidacion.setNumeroLiquidacion(23);
-        dtoLiquidacion.setFechaHoraLiquidacion(null);
-        dtoLiquidacion.setFechaHoraDesdeLiquidacion(null);
+        dtoLiquidacion.setFechaHoraLiquidacion(fechaliquidacion1);
+        dtoLiquidacion.setFechaHoraDesdeLiquidacion(hoy);
         dtoLiquidacion.setFechaHoraHastaLiquidacion(null);
-        dtoLiquidacion.setNombreTipoImpuesto("tipoimpuesto");
-        dtoLiquidacion.setNombreEstadoLiquidacion("durmiendo");
+        dtoLiquidacion.setNombreTipoImpuesto("tipoimpuesto1");
+        dtoLiquidacion.setNombreEstadoLiquidacion("Estado1");
       listDtoLiquidacion.add(dtoLiquidacion);
+      
       DTOLiquidacion dtoLiquidacion1 = new DTOLiquidacion();
-      dtoLiquidacion1.setNombreEmpresa("cuac123l");
+      dtoLiquidacion1.setNombreEmpresa("empresa2");
         dtoLiquidacion1.setNumeroLiquidacion(4123);
-        dtoLiquidacion1.setFechaHoraLiquidacion(null);
+        dtoLiquidacion1.setFechaHoraLiquidacion(fechaliquidacion2);
         dtoLiquidacion1.setFechaHoraDesdeLiquidacion(null);
         dtoLiquidacion1.setFechaHoraHastaLiquidacion(null);
-        dtoLiquidacion1.setNombreTipoImpuesto("tipoim1231puesto");
-        dtoLiquidacion1.setNombreEstadoLiquidacion("durmi1231endo");
+        dtoLiquidacion1.setNombreTipoImpuesto("tipoimpuesto2");
+        dtoLiquidacion1.setNombreEstadoLiquidacion("estado3");
       listDtoLiquidacion.add(dtoLiquidacion1);
       
+       DTOLiquidacion dtoLiquidacion2 = new DTOLiquidacion();
+      dtoLiquidacion2.setNombreEmpresa("empresa3");
+        dtoLiquidacion2.setNumeroLiquidacion(4123);
+        dtoLiquidacion2.setFechaHoraLiquidacion(fechaliquidacion3);
+        dtoLiquidacion2.setFechaHoraDesdeLiquidacion(null);
+        dtoLiquidacion2.setFechaHoraHastaLiquidacion(null);
+        dtoLiquidacion2.setNombreTipoImpuesto("tipoimpuesto1");
+        dtoLiquidacion2.setNombreEstadoLiquidacion("estado3");
+      listDtoLiquidacion.add(dtoLiquidacion2);
+      
+    
       //LLENA LA TABLA DE MANDERA RUSTICA
       for (int i=0; i< listDtoLiquidacion.size(); i++){
+           DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+      model.addRow(new Object[]{});
        jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
        jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i,1);
         jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
@@ -292,6 +363,10 @@ jComboBoxEmpresa.removeAllItems();
             jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
       }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAnularActionPerformed
     
     /**
      * @param args the command line arguments
@@ -337,7 +412,10 @@ jComboBoxEmpresa.removeAllItems();
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAnular;
+    private javax.swing.JButton jButtonAprobar;
     private javax.swing.JButton jButtonConsultarLiquidaciones;
+    private javax.swing.JButton jButtonMostrar;
     private javax.swing.JComboBox<String> jComboBoxEmpresa;
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;

@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
@@ -67,4 +68,12 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
         return listObject;
     
     }
+    @Override
+    public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto,String nombreEmpresa,Date fechaDesde,Date fechaHasta){
+        ArrayList<DTOLiquidacion> listObject;
+        FachadaInterna.getInstance().iniciarTransaccion();
+        listObject = super.buscarLiquidacionConFiltro( nombreTipoImpuesto, nombreEmpresa, fechaDesde, fechaHasta); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listObject;
+}
 }

@@ -81,6 +81,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Liquidaciones");
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 formMouseExited(evt);
@@ -188,8 +189,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                         .addGap(131, 131, 131)
                                         .addComponent(jButton2))
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(22, 22, 22))
+                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -364,6 +364,7 @@ jComboBoxEmpresa.removeAllItems();
 
        
         jPrueba.setText(""+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        ControladorGestionarLiquidacion.getInstance().mostrar();
     }//GEN-LAST:event_jButtonMostrarActionPerformed
     
     /**

@@ -23,6 +23,7 @@ import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
+import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrar;
 
 /**
  *
@@ -339,7 +340,11 @@ else{
         return listDTOOperacion;
     }
     
-    
+    public void mostrar(){
+    IUMostrar mostrar = new IUMostrar();
+    mostrar.setVisible(true);
+    mostrar.setLocation(300, 200);
+    }
     
 
 }

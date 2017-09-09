@@ -78,7 +78,9 @@ public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
 }
 
 
-
+public void mostrar(){
+ experto.mostrar();
+}
 
 
 

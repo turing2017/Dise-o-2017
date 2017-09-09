@@ -162,7 +162,7 @@ else{
     }
         return listDtoLiquidacion;
 }
-
+//en caso de que  explote mirar los if else
     public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto,String nombreEmpresa,Date fechaDesde,Date fechaHasta) {
       
         ArrayList<DTOLiquidacion> listDtoLiquidacion = new ArrayList<DTOLiquidacion>();
@@ -187,12 +187,86 @@ else{
             //SI SOLO NOMBRE TIPOIMPUESTO ES TODOS
         }else {
             if ("Todos".equals(nombreTipoImpuesto)){
-                //HACE MANAS BUSQUEDA DE EMPRESA , TODOS LOS EMPRESA TIPO IMPUESTO DE ESA EMPRESA Y TODAS LAS LIQUIDACIONES DE TODAS ESAS EMRPESAS TIPO IMPUESTO COOMING SOON
+   //HACE  BUSQUEDA DE EMPRESA , TODOS LOS EMPRESA TIPO IMPUESTO DE ESA EMPRESA Y TODAS LAS LIQUIDACIONES DE TODAS ESAS EMRPESAS TIPO IMPUESTO COOMING SOON
+                
+   
+        //BUSCA LA EMPRESA SELECCIONADA
+                 DTOCriterio criterio7 = new DTOCriterio("nombreEmpresa","=",nombreEmpresa); 
+                 criterios.clear();
+                 criterios.add(criterio7);
+                Empresa empresa =(Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+                
+        //BUSCA LISTA DE EMPRESA TIPO IMPUESTOS QUE TENGAN ESA EMPRESA(no esta probado puede q falle)
+        DTOCriterio criterio8 = new DTOCriterio("empresa","=",empresa); 
+        List<Object> listEmpresaTipoImpuesto =  FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
+                        
+             List<Object> listLiquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+                for(Object obj : listLiquidacion){
+                Liquidacion liquidacion = (Liquidacion)obj;
+                 for(Object obj1:listEmpresaTipoImpuesto){
+                     EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto)obj1;
+                    if( liquidacion.getEmpresaTipoImpuesto().equals(empresaTipoImpuesto)){
+                    
+                    DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+                    
+                    dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
+                    dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
+                    dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
+                    dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
+                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                    dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+                    dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
+                   
+                    listDtoLiquidacion.add(dtoLiquidacion);
+                    }
+                     
+                 }   
+                }   
             }
+            //HACE BUSQUEDA DE TODAS LAS EMPRESAS TIPO IMPUESTO QUE TENGAN EL TIMPO IMPUESTO SELECCIONADO Y BUSCA TODAS LAS LIQUIDACIONES DE ESAS EMPRESAS TIMPO IMPUESTO
+        else  if ("Todos".equals(nombreEmpresa)) {
+                //BUSCASR TIPO IMPUESTO SELECCIONADO
+               
+                DTOCriterio criterio10 = new DTOCriterio("nombreTipoImpuesto","=",nombreTipoImpuesto); 
+                criterios.add(criterio10);
+                TipoImpuesto tipoImpuesto =  (TipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios).get(0);
+                
+                
+              //BUSCAR EMPRESA TIMPO IMPUESTO DE ESE IMPUESTO
+               DTOCriterio criterio11 = new DTOCriterio("tipoImpuesto","=",tipoImpuesto); 
+               criterios.add(criterio11);
+              List<Object>listEmpresaTipoImpuesto = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterios);
+              
+              
+              //BUSCAR LIQUIDACIONES
+              List<Object>listLiquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+                
+                
+                
+                for(Object obj : listLiquidacion){
+                Liquidacion liquidacion = (Liquidacion)obj;
+                 for(Object obj1:listEmpresaTipoImpuesto){
+                     EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto)obj1;
+                    if( liquidacion.getEmpresaTipoImpuesto().equals(empresaTipoImpuesto)){
+                    
+                    DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+                    
+                    dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
+                    dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
+                    dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
+                    dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
+                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                    dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+                    dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
+                
+                    
+                listDtoLiquidacion.add(dtoLiquidacion);
+                                                                                      }
+                                                        }
+                                                }
+                                             }
+      else {  
         
-        
-        
-        }    
 //BUSCO TIPO IMPUESTO SELECCIONADO       
         DTOCriterio criterio = new DTOCriterio("nombreTipoImpuesto","=",nombreTipoImpuesto);
         criterios.add(criterio);
@@ -237,8 +311,13 @@ else{
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
         dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
         listDtoLiquidacion.add(dtoLiquidacion);
-        
-        
-}
+            }
+        }  
+    }
         return listDtoLiquidacion;
-}}
+}
+            }
+    
+    
+    
+

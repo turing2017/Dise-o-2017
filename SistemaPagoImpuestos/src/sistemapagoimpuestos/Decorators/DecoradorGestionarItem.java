@@ -56,6 +56,23 @@ public class DecoradorGestionarItem extends ExpertoGestionarItem{
         ArrayList<DTOItem> dtoItems = super.obtenerItems();
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoItems;
-    } 
+    }
+
+    @Override
+    public DTOItem obtenerItem(String codigo) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        DTOItem dtoItem = super.obtenerItem(codigo);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return dtoItem;
+    }
+
+    @Override
+    public void modificarItem(String nombreActual, String nombreItem, int longitud, boolean isRequerido, boolean habilitado, String tipoIngres) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.modificarItem(nombreActual, nombreItem, longitud, isRequerido, habilitado, tipoIngres);
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+    
+    
     
 }

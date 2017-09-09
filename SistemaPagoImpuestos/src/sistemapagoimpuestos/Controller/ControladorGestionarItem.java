@@ -53,4 +53,19 @@ public class ControladorGestionarItem {
     public ArrayList<DTOItem> obtenerItems(){
         return experto.obtenerItems();
     }
+    
+    // Método para obtener un Item
+    public DTOItem obtenerItem(String codigo){
+        DTOItem dtoItem = experto.obtenerItem(codigo);
+        System.out.println(dtoItem.getCodigoItem());
+        DTOTipoDatoItem tipoDato = dtoItem.getDtoTipoDatoItem();
+        System.out.println(tipoDato.getNombreTipoDatoItem());
+        return dtoItem;
+        //return experto.obtenerItem(codigo);
+    }
+    
+    // Método para modificar un item
+    public void modificarItem(String nombreActual,String nombreItem, int longitud, boolean isRequerido, boolean habilitado, String tipoIngres){
+        experto.modificarItem(nombreActual, nombreItem, longitud, isRequerido, habilitado, tipoIngres);
+    }
 }

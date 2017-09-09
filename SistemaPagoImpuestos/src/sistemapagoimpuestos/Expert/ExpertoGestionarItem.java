@@ -2,6 +2,7 @@ package sistemapagoimpuestos.Expert;
 
 import exceptions.Excepciones;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
@@ -9,6 +10,7 @@ import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.TipoDatoItem;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import static sistemapagoimpuestos.Utils.Utils.existeDato;
 
@@ -112,5 +114,59 @@ public class ExpertoGestionarItem {
             listDTOItem.add(dtoItem);
         }
         return listDTOItem;
+    }
+    // Método para recuperar el Item a modificar
+    public DTOItem obtenerItem(String codigo){
+        try{
+        // Armo criterios para la búsqueda
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio1 = new DTOCriterio();
+        criterio1.setAtributo("codigoItem");
+        criterio1.setOperacion("=");
+        criterio1.setValor(codigo);
+        criterios.add(criterio1);
+        // Busco el Item
+        Item item = (Item) FachadaPersistencia.getInstance().buscar("Item", criterios).get(0);
+        DTOItem dtoItem = ConvertDTO.getInstance().convertItem(item);
+        return dtoItem;        
+        }catch(IndexOutOfBoundsException exception){
+            System.out.println("Codigo Ingresado No Encontrado");
+            new Excepciones().datoNoEncontrado("Tipo Impuesto");
+            return null;
+        }
+    }
+    
+        // Método para modificar un item
+    public void modificarItem(String nombreActual, String nombreItem, int longitud, boolean isRequerido, boolean habilitado, String tipoIngres){
+        
+        // Obtengo el codigo por el nombre
+        List<DTOCriterio> criteriosItem = new ArrayList<>();
+        DTOCriterio criterio1 = new DTOCriterio();
+        criterio1.setAtributo("nombreItem");
+        criterio1.setOperacion("=");
+        criterio1.setValor(nombreActual);
+        criteriosItem.add(criterio1);
+        Item item = (Item) FachadaPersistencia.getInstance().buscar("Item", criteriosItem).get(0);
+        item.setNombreItem(nombreItem);
+        item.setLongitudItem(longitud);
+        item.setRequeridoItem(isRequerido);
+        if(habilitado){
+            item.setFechaHoraInhabilitacionItem(null);
+        }else{
+            item.setFechaHoraInhabilitacionItem(new Date());
+        }
+        
+        // Busco el tipoDato correspondiente
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterioNombreTipoDatoItem = new DTOCriterio("nombreTipoDatoItem", "=", tipoIngres);
+        criterios.add(criterioNombreTipoDatoItem);
+        TipoDatoItem tipoDatoItem = (TipoDatoItem)FachadaPersistencia.getInstance().buscar("TipoDatoItem", criterios).get(0);
+            
+        // Le seteo al Item el TipoDato
+        TipoDatoItem datoItem = item.getTipoDatoItem();
+        item.setTipoDatoItem(tipoDatoItem);
+        
+        // Guardo el item
+        FachadaPersistencia.getInstance().guardar(item);
     }
 }

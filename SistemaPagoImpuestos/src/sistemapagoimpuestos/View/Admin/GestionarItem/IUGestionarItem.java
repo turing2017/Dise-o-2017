@@ -1,10 +1,13 @@
 package sistemapagoimpuestos.View.Admin.GestionarItem;
 
+import exceptions.Excepciones;
 import java.awt.Component;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -15,6 +18,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarItem;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 
 
 /**
@@ -56,6 +60,11 @@ public class IUGestionarItem extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla_item);
 
         button_modificar.setText("Modificar");
+        button_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_modificarActionPerformed(evt);
+            }
+        });
 
         button_nuevo.setText("Nuevo");
         button_nuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +139,23 @@ public class IUGestionarItem extends javax.swing.JFrame {
             sorter.setRowFilter(RowFilter.regexFilter(textfield_filtro.getText()));
             tabla_item.setRowSorter(sorter);
     }//GEN-LAST:event_button_filtrarActionPerformed
+
+    private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
+        // TODO add your handling code here:
+        // Le paso al controlador la opción seleccionada.
+        try {
+            // Obtento el código del elemento seleccionado
+            int columnCode = 0;
+            int rowSelected = tabla_item.getSelectedRow();
+            String codigo = tabla_item.getModel().getValueAt(rowSelected, columnCode).toString();
+            
+            seleccionarOpcion("Modificar", codigo);
+            this.dispose();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+            Excepciones.getInstance().objetoNoSeleccionado();
+        }
+    }//GEN-LAST:event_button_modificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,29 +284,35 @@ public class IUGestionarItem extends javax.swing.JFrame {
             // Si se presiona el botón de modificar
             case "Modificar":
                 // Muestro pantalla de Modificación
-//                DTOTipoImpuesto dtoTi = ControladorGestionarTipoImpuesto.getInstance().obtenerTipoImpuesto((int) object);
-//                if (dtoTi != null) {
-//                    IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
-//                    pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-//                    pantallaModificar.setVisible(true); // La hago visible
-//                    // Modifico la operación de cierre para volver a la pantalla principal
-//                    pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//                    pantallaModificar.addWindowListener(new WindowAdapter() {
-//                        public void windowClosing(WindowEvent ev) {
-//                            pantallaModificar.dispose();
-//                            ControladorGestionarTipoImpuesto.getInstance().iniciar();
-//                        }
-//                    });
-//                    pantallaModificar.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
-//                    pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
-//                    pantallaModificar.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
-//                    pantallaModificar.obtenerEmpresaItems(dtoTi.getdTOEmpresaTipoImpuestoItemList());
-//                    if (dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto() == null) {
-//                        pantallaModificar.setCheckbox_Habilitar(true);
-//                    } else {
-//                        pantallaModificar.setCheckbox_Habilitar(false);
-//                    }
-//                }
+                DTOItem dtoItem = ControladorGestionarItem.getInstance().obtenerItem((String) object);
+                
+                if (dtoItem != null){
+                    // Creo la pantalla
+                    IUGestionarItemModificar pantallaModificar = new IUGestionarItemModificar();
+                    pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                    pantallaModificar.setVisible(true); // La hago visible
+                    pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    pantallaModificar.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent ev) {
+                            pantallaModificar.dispose();
+                            ControladorGestionarItem.getInstance().iniciar();
+                        }
+                    });
+                    pantallaModificar.setTextfield_nombre(dtoItem.getNombreItem());
+                    pantallaModificar.setTextfield_longitud(Integer.parseInt(dtoItem.getCodigoItem()));
+                    pantallaModificar.setCheckbox_requerido(dtoItem.isRequeridoItem());
+                    if (dtoItem.getFechaHoraInhabilitacionItem() == null) {
+                        pantallaModificar.setCheckbox_habilitado(true);
+                    } else {
+                        pantallaModificar.setCheckbox_habilitado(false);
+                    }
+                    // Completo el comboBox
+                    DTOTipoDatoItem dtoTipoDatoItem = dtoItem.getDtoTipoDatoItem();
+                    pantallaModificar.setComboBoxTipoDato(dtoTipoDatoItem.getNombreTipoDatoItem());
+                    List<DTOTipoDatoItem> list = ControladorGestionarItem.getInstance().buscarTipoDatoItems();
+                    pantallaModificar.llenarCombo(list);
+                    pantallaModificar.setNombreActual(dtoItem.getNombreItem());
+                }
 
                 break; // optional
 

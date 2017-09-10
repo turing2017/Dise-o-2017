@@ -8,6 +8,7 @@ package sistemapagoimpuestos.Expert;
 import exceptions.Excepciones;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
@@ -125,5 +126,42 @@ public class ExpertoGestionarUsuario {
         }
 
         return listado;
+    }
+
+    public void modificarDatosUsuario(String nombreUsuario, String contraseñaNueva, boolean esHabilitado, String tipoUsuarioSelec, String empresaSelec) {
+        List<DTOCriterio> criterio = new ArrayList<>();
+        criterio.add(new DTOCriterio("nombreUsuario", "=", nombreUsuario));
+        List resultado = FachadaPersistencia.getInstance().buscar("Usuario", criterio);
+        
+        List<DTOCriterio> criteriosTipoUsuario = new ArrayList<>();
+        criteriosTipoUsuario.add(new DTOCriterio("nombreTipoUsuario", "=", tipoUsuarioSelec));
+        List resultadoTipoUsuario = FachadaPersistencia.getInstance().buscar("TipoUsuario", criteriosTipoUsuario);
+        
+        Usuario usuarioSelec = (Usuario) resultado.get(0);
+        
+        if(contraseñaNueva != null){
+            usuarioSelec.setPasswordUsuario(contraseñaNueva);
+        }
+        
+        if (esHabilitado == false){
+            usuarioSelec.setFechaHoraInhabilitacionUsuario(new Date());
+        }
+        else{
+            usuarioSelec.setFechaHoraInhabilitacionUsuario(null);
+        }
+        
+        usuarioSelec.setTipoUsuario((TipoUsuario) resultadoTipoUsuario.get(0));
+        
+        if (tipoUsuarioSelec.equals("Administrador")){
+            List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
+            criteriosEmpresa.add(new DTOCriterio("nombreEmpresa", "=", empresaSelec));
+            List resultadoEmpresa = FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa);
+            
+            usuarioSelec.setEmpresa((Empresa) resultadoEmpresa.get(0));
+        } else {
+            usuarioSelec.setEmpresa(null);
+        }
+        
+        FachadaPersistencia.getInstance().guardar(usuarioSelec);
     }
 }

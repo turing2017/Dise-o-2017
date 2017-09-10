@@ -10,6 +10,7 @@ import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuario;
 import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuarioAlta;
+import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuarioModificar;
 
 /**
  *
@@ -63,6 +64,16 @@ public class ControladorGestionarUsuario {
 
     public List<DTOEmpresa> setearComboEmpresa() {
         return experto.setearComboEmpresa();
+    }
+    
+    public void modificarUsuario(String nombreUsuario){
+        IUGestionarUsuarioModificar pantallaModificar = new IUGestionarUsuarioModificar();
+        MetodosPantalla.getInstance().setearPantalla(pantallaModificar);
+        pantallaModificar.setearNombreUsuario(nombreUsuario);
+    }
+    
+    public void modificarDatosUsuario(String nombreUsuario, String contraseñaNueva, boolean esHabilitado, String tipoUsuarioSelec, String empresaSelec){
+        experto.modificarDatosUsuario(nombreUsuario, contraseñaNueva, esHabilitado, tipoUsuarioSelec, empresaSelec);
     }
 
 }

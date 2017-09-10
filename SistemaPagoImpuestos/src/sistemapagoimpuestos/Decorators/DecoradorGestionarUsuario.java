@@ -57,6 +57,11 @@ public class DecoradorGestionarUsuario extends ExpertoGestionarUsuario {
         
         return listado;
     }
-    
-    
+
+    @Override
+    public void modificarDatosUsuario(String nombreUsuario, String contraseñaNueva, boolean esHabilitado, String tipoUsuarioSelec, String empresaSelec) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.modificarDatosUsuario(nombreUsuario, contraseñaNueva, esHabilitado, tipoUsuarioSelec, empresaSelec); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
 }

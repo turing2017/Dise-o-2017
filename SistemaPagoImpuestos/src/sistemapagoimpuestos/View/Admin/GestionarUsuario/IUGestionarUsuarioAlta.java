@@ -75,6 +75,12 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Seleccionar Tipo Usuario");
 
+        combo_TipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_TipoUsuarioActionPerformed(evt);
+            }
+        });
+
         text_Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text_PasswordActionPerformed(evt);
@@ -202,6 +208,10 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
     private void combo_EmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_EmpresaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_EmpresaActionPerformed
+
+    private void combo_TipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_TipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_TipoUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

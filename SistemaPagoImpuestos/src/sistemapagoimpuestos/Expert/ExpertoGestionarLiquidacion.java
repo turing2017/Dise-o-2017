@@ -328,14 +328,21 @@ else{
     
     
     public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
-    
+        
         ArrayList<DTOOperacion> listDTOOperacion = new ArrayList<DTOOperacion>();
          List<DTOCriterio> criterios = new ArrayList<>();
          
          //BUSCA LA LIQUIDACION SELECCIONADA
-        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", numeroLiquidacion);
+       
+        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.parseInt(numeroLiquidacion));
         criterios.add(criterio);
+        
+        
+        //ACA FALLA CREO QUE PORQUE VUELVE VACIA<------------------------------------
        Liquidacion liquidacion  = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+       
+       
+       
        //HACE UN GET A  LA LISTA DE OPERACIONES DE ESA LIQUIDACION Y POR CADA OEPRACION LLENA UN DTOOPERACION
         for (int i = 0; i>liquidacion.getOperacion().size();i++ ) {
             
@@ -347,7 +354,6 @@ else{
         listDTOOperacion.add(dtoOperacion);
         
                 }
-        
         return listDTOOperacion;
     }
     
@@ -374,8 +380,12 @@ else{
             double montoTotla = 0;
             
         for (int i = 0; i> listDTOOperacion.size();i++ ) {
-           //--------------->FALTA AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION<-----------------
-        IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getNumeroOperacion(), i, 0);
+           
+            // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
+           DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
+      model.addRow(new Object[]{});
+           
+       IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getNumeroOperacion(), i, 0);
         IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getNroComprobanteFactura(), i, 1);
         IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getValorComisionOperacion(), i, 2);
         IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getImportePagadoOperacion(), i, 3);

@@ -33,10 +33,10 @@ public class ConvertDTO {
 
     public DTOEmpresa convertEmpresa(Empresa empresa) {
         DTOEmpresa dTOEmpresa = new DTOEmpresa();
-        dTOEmpresa.setCuitEmpresa(empresa.getCuitEmpresa());
-        dTOEmpresa.setNombreEmpresa(empresa.getNombreEmpresa());
-        dTOEmpresa.setDireccionEmpresa(empresa.getDireccionEmpresa());
-        dTOEmpresa.setFechaHoraInhabilitacionEmpresa(empresa.getFechaHoraInhabilitacionEmpresa());
+        dTOEmpresa.setCuitDTOEmpresa(empresa.getCuitEmpresa());
+        dTOEmpresa.setNombreDTOEmpresa(empresa.getNombreEmpresa());
+        dTOEmpresa.setDireccionDTOEmpresa(empresa.getDireccionEmpresa());
+        dTOEmpresa.setFechaHoraInhabilitacionDTOEmpresa(empresa.getFechaHoraInhabilitacionEmpresa());
         return dTOEmpresa;
     }
 

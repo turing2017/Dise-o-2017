@@ -65,7 +65,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     private void llenarComboEmpresa(List<DTOEmpresa> list){
         for (int i = 0; i < list.size(); i++) {
             DTOEmpresa dtoEmpresa = (DTOEmpresa) list.get(i);
-            comboBox_Empresa.addItem(dtoEmpresa.getNombreEmpresa());
+            comboBox_Empresa.addItem(dtoEmpresa.getNombreDTOEmpresa());
         }
     }
     private void llenarComboTipoEmpresa(List<DTOTipoEmpresa> list){

@@ -70,7 +70,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
             dtoEmpresa = new DTOEmpresa();
             Empresa empresa = (Empresa) empresas.get(i);
             String nombreEmpresa = empresa.getNombreEmpresa();
-            dtoEmpresa.setNombreEmpresa(nombreEmpresa);
+            dtoEmpresa.setNombreDTOEmpresa(nombreEmpresa);
             lista.add(dtoEmpresa);
         }
         return lista;

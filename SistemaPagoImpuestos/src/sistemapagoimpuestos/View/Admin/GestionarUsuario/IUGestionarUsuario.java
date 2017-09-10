@@ -47,6 +47,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
         tabla_usuario = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         button_filtrar = new javax.swing.JButton();
+        button_Actualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +80,13 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
 
         button_filtrar.setText("Filtrar");
 
+        button_Actualizar.setText("Actualizar");
+        button_Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_ActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,15 +101,18 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
                         .addContainerGap(460, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(button_filtrar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(button_Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(59, 59, 59)
-                                .addComponent(button_modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(button_modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(button_filtrar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(button_Actualizar))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -112,7 +123,8 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_filtrar))
+                    .addComponent(button_filtrar)
+                    .addComponent(button_Actualizar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -130,6 +142,10 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
     private void button_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AltaActionPerformed
         ControladorGestionarUsuario.getInstance().mostrarPantallaAlta();
     }//GEN-LAST:event_button_AltaActionPerformed
+
+    private void button_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ActualizarActionPerformed
+        obtenerUsuario();
+    }//GEN-LAST:event_button_ActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +252,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_Actualizar;
     private javax.swing.JButton button_Alta;
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_modificacion;

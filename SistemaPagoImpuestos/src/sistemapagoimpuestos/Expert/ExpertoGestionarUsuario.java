@@ -10,8 +10,10 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOUsuario;
+import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.ConvertDTO;
@@ -23,7 +25,7 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoGestionarUsuario {
 
-    Usuario usuario = new Usuario();
+    //Usuario usuario = new Usuario();
 
     public String iniciar() {
 
@@ -69,10 +71,28 @@ public class ExpertoGestionarUsuario {
 
     }
 
-    public void nuevoUsuario(String nombreIngres,String passwordIngres,String tipoUsuarioSelec ) {
+    public void nuevoUsuario(String nombreIngres,String passwordIngres,String tipoUsuarioSelec, String empresaSelec) {
+        Usuario nuevoUsuario = new Usuario();
         
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio = new DTOCriterio("nombreTipoUsuario", "=", tipoUsuarioSelec);
+        criterios.add(criterio);
+        List resultado = FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios);
         
-
+        nuevoUsuario.setNombreUsuario(nombreIngres);
+        nuevoUsuario.setPasswordUsuario(passwordIngres);
+        nuevoUsuario.setTipoUsuario((TipoUsuario) resultado.get(0));
+        if (tipoUsuarioSelec.equals("Administrador")){
+            List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
+            criteriosEmpresa.add(new DTOCriterio("nombreEmpresa", "=", empresaSelec));
+            List resultadoEmpresa = FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa);
+            
+            nuevoUsuario.setEmpresa((Empresa) resultadoEmpresa.get(0));
+        } else {
+            nuevoUsuario.setEmpresa(null);
+        }
+        
+        FachadaPersistencia.getInstance().guardar(nuevoUsuario);
     }
 
     public List<DTOTipoUsuario> setearComboTipoUsuario() {
@@ -86,7 +106,22 @@ public class ExpertoGestionarUsuario {
         for (int i = 0; i < tipoUsuarioHabilitado.size(); i++) {
             TipoUsuario tipoUsuario = (TipoUsuario) tipoUsuarioHabilitado.get(i);
             listado.add(ConvertDTO.getInstance().convertTipoUsuario(tipoUsuario));
+        }
 
+        return listado;
+    }
+
+    public List<DTOEmpresa> setearComboEmpresa() {
+        List<DTOCriterio> criterios = new ArrayList<>();
+
+        DTOCriterio criterio = new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null);
+        criterios.add(criterio);
+        List empresaHabilitada = FachadaPersistencia.getInstance().buscar("Empresa", criterios);
+
+        List<DTOEmpresa> listado = new ArrayList<>();
+        for (int i = 0; i < empresaHabilitada.size(); i++) {
+            Empresa empresa = (Empresa) empresaHabilitada.get(i);
+            listado.add(ConvertDTO.getInstance().convertEmpresa(empresa));
         }
 
         return listado;

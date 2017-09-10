@@ -2,6 +2,7 @@ package sistemapagoimpuestos.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarUsuario;
@@ -56,8 +57,12 @@ public class ControladorGestionarUsuario {
         return experto.setearComboTipoUsuario();
     }
 
-    public void nuevoUsuario(String nombreIngres,String passwordIngres,String tipoUsuarioSelec) {
-        experto.nuevoUsuario(nombreIngres, passwordIngres, tipoUsuarioSelec);
+    public void nuevoUsuario(String nombreIngres, String passwordIngres, String tipoUsuarioSelec, String empresaSelec) {
+        experto.nuevoUsuario(nombreIngres, passwordIngres, tipoUsuarioSelec, empresaSelec);
+    }
+
+    public List<DTOEmpresa> setearComboEmpresa() {
+        return experto.setearComboEmpresa();
     }
 
 }

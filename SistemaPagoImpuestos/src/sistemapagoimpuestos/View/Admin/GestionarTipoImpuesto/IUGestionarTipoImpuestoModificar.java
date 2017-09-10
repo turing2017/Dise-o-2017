@@ -319,7 +319,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
         
         for (DTOEmpresaTipoImpuestoItems dTOEmpresaTipoImpuestoItems : empresaTipoImpuestoItem) {
             DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
-            dTOEmpresaTipImpItem.setNombreEmpresa(dTOEmpresaTipoImpuestoItems.getdTOEmpresa().getNombreEmpresa());
+            dTOEmpresaTipImpItem.setNombreEmpresa(dTOEmpresaTipoImpuestoItems.getdTOEmpresa().getNombreDTOEmpresa());
             dTOEmpresaTipImpItem.setNombreTipoEmpresa(dTOEmpresaTipoImpuestoItems.getdTOTipoEmpresa().getNombreTipoEmpresa());
             dTOEmpresaTipImpItem.setFrecuenciaSincronizacion(dTOEmpresaTipoImpuestoItems.getFrecuenciaSincro());
             for(DTOItem dTOItem : dTOEmpresaTipoImpuestoItems.getdTOItems()){

@@ -17,6 +17,7 @@ import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Entity.Liquidacion;
 import java.util.Date;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -120,10 +121,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Numero Liquidacion", "Fecha Liquidacion", "fecha desde", "fecha hasta", "Empresa", "Tipo Impuesto", "Estado"
@@ -157,6 +155,11 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         });
 
         jButtonAprobar.setText("Aprobar");
+        jButtonAprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAprobarActionPerformed(evt);
+            }
+        });
 
         jButtonAnular.setText("Anular");
         jButtonAnular.addActionListener(new java.awt.event.ActionListener() {
@@ -357,15 +360,51 @@ jComboBoxEmpresa.removeAllItems();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularActionPerformed
-        // TODO add your handling code here:
+      int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Anular la liquidacion numero "+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        switch (opcion) {
+            case 0:System.out.println("---------------ACEPTO------------");
+                
+                break;
+            default:
+                throw new AssertionError();
+            case 1 : System.out.println("--------------NO------------");
+                    
+            break;
+            case 2 : System.out.println("------------CANCEL----------");
+        }
     }//GEN-LAST:event_jButtonAnularActionPerformed
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
 
        
         jPrueba.setText(""+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
-        ControladorGestionarLiquidacion.getInstance().mostrar();
+        
+        String nliquidacion =  jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
+        String fechaliquidacion =jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
+        String tipoImpuesto =  jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString();
+        String empresa =  jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString();
+        ControladorGestionarLiquidacion.getInstance().mostrar(nliquidacion,fechaliquidacion,tipoImpuesto,empresa);
+        
+       
     }//GEN-LAST:event_jButtonMostrarActionPerformed
+
+    private void jButtonAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAprobarActionPerformed
+      //MOSTRAR CARLEL DE OK
+      //JOptionPane.showMessageDialog(rootPane, "picachu");
+      int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Aprobar la liquidacion numero "+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        switch (opcion) {
+            case 0:System.out.println("---------------ACEPTO------------");
+                
+                break;
+            default:
+                throw new AssertionError();
+            case 1 : System.out.println("--------------NO------------");
+                    
+            break;
+            case 2 : System.out.println("------------CANCEL----------");
+        }
+       
+    }//GEN-LAST:event_jButtonAprobarActionPerformed
     
     /**
      * @param args the command line arguments

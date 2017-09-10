@@ -8,6 +8,7 @@ package sistemapagoimpuestos.Expert;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JLabel;
 import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
@@ -340,10 +341,16 @@ else{
         return listDTOOperacion;
     }
     
-    public void mostrar(){
+    public void mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipoImpuesto,String empresa){
     IUMostrar mostrar = new IUMostrar();
     mostrar.setVisible(true);
     mostrar.setLocation(300, 200);
+    IUMostrar.jLabelEmpresa.setText(empresa);
+    IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
+    IUMostrar.jLabelFechaLiquidacion.setText(fechaLiquidacion);
+    IUMostrar.jLabelNrodeLiquidacion.setText(numeroLiquidacion);
+    
+    
     }
     
 

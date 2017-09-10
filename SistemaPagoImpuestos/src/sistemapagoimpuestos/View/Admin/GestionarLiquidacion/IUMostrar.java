@@ -209,6 +209,7 @@ public class IUMostrar extends javax.swing.JFrame {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
        IUMostrar.this.setVisible(false);
+       
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
@@ -255,15 +256,15 @@ public class IUMostrar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabelEmpresa;
-    private javax.swing.JLabel jLabelFechaLiquidacion;
-    private javax.swing.JLabel jLabelNrodeLiquidacion;
-    private javax.swing.JLabel jLabelPeriodo;
-    private javax.swing.JLabel jLabelTipoImpuesto;
+    public static javax.swing.JLabel jLabelEmpresa;
+    public static javax.swing.JLabel jLabelFechaLiquidacion;
+    public static javax.swing.JLabel jLabelNrodeLiquidacion;
+    public static javax.swing.JLabel jLabelPeriodo;
+    public static javax.swing.JLabel jLabelTipoImpuesto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTable jTable2;
+    public static javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

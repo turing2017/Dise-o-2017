@@ -207,7 +207,7 @@
         <Component class="javax.swing.JTable" name="jTable2">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="4">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="true" title="Numero Liquidacion" type="java.lang.Object"/>
                 <Column editable="true" title="Fecha Liquidacion" type="java.lang.Object"/>
                 <Column editable="true" title="fecha desde" type="java.lang.Object"/>
@@ -301,6 +301,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Aprobar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAprobarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAnular">
       <Properties>

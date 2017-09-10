@@ -36,7 +36,7 @@ public class IUMostrar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableOperacion = new javax.swing.JTable();
         jLabelEmpresa = new javax.swing.JLabel();
         jLabelTipoImpuesto = new javax.swing.JLabel();
         jLabelNrodeLiquidacion = new javax.swing.JLabel();
@@ -45,7 +45,7 @@ public class IUMostrar extends javax.swing.JFrame {
         jButtonDescargar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldMontoTotal = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,7 +72,7 @@ public class IUMostrar extends javax.swing.JFrame {
 
         jLabel5.setText("Periodo");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOperacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -83,7 +83,7 @@ public class IUMostrar extends javax.swing.JFrame {
                 "nroOperacion", "nroComprobante", "montoComision", "importePagado"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableOperacion);
 
         jLabelEmpresa.setText("jLabel6");
 
@@ -106,9 +106,9 @@ public class IUMostrar extends javax.swing.JFrame {
 
         jLabel11.setText("Monto Comision Total");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldMontoTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextFieldMontoTotalActionPerformed(evt);
             }
         });
 
@@ -158,7 +158,7 @@ public class IUMostrar extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102))
         );
         layout.setVerticalGroup(
@@ -192,7 +192,7 @@ public class IUMostrar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDescargar)
@@ -203,9 +203,9 @@ public class IUMostrar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextFieldMontoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMontoTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextFieldMontoTotalActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
        IUMostrar.this.setVisible(false);
@@ -264,7 +264,7 @@ public class IUMostrar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    public static javax.swing.JTable jTable2;
-    public static javax.swing.JTextField jTextField1;
+    public static javax.swing.JTable jTableOperacion;
+    public static javax.swing.JTextField jTextFieldMontoTotal;
     // End of variables declaration//GEN-END:variables
 }

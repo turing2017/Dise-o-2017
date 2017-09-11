@@ -52,6 +52,8 @@ public class FabricaExpertos {
                 return new DecoradorGestionarUsuario();
             case "CU08":
                 return new DecoradorLoguearUsuario();
+            case "CU17":
+                return new DecoradorConsultarOperacionesBancarias();
             default:
                 return null;
         }

@@ -22,6 +22,15 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
      */
     public IUGestionarParametrosCalculoPeriodicidad() {
         initComponents();
+        dateChooserCombo1.setEnabled(false);
+        dateChooserCombo2.setEnabled(false);
+        jTextField4.setEnabled(false);
+        jTextField7.setEnabled(false);
+        jTextField3.setEnabled(false);
+        jTextField6.setEnabled(false);
+        jTextField1.setEnabled(false);
+        jTextField5.setEnabled(false);
+        jTextField2.setEnabled(false);
     }
 
     /**
@@ -185,7 +194,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -252,7 +261,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
     //Guardar 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
+        DateFormat df = new SimpleDateFormat("MM/dd/yy"); 
         Date fechaDesde = new Date();
         try {
             fechaDesde = df.parse(dateChooserCombo1.getText());
@@ -266,7 +275,6 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
         double semestral = Double.parseDouble(jTextField6.getText());
         double anual = Double.parseDouble(jTextField1.getText());
         double quincenal = Double.parseDouble(jTextField5.getText());
-        
         ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(fechaDesde, mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -282,7 +290,15 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        dateChooserCombo1.setEnabled(true);
+        dateChooserCombo2.setEnabled(true);
+        jTextField4.setEnabled(true);
+        jTextField7.setEnabled(true);
+        jTextField3.setEnabled(true);
+        jTextField6.setEnabled(true);
+        jTextField2.setEnabled(true);
+        jTextField5.setEnabled(true);
+        jTextField1.setEnabled(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

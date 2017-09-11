@@ -13,7 +13,8 @@ public class ParametroCalculoEditable extends Entity {
     private double siEditablePCEditable;
     private double noEditablePCEditable;
     private Date fechaInhabilitacionPCEditable = new Date();
-
+    private double y = 2.2;
+    private double x;
     //constructor
     
     public ParametroCalculoEditable() {
@@ -34,6 +35,7 @@ public class ParametroCalculoEditable extends Entity {
     }
 
     public double getSiEditablePCEditable() {
+        x=x+y;
         return siEditablePCEditable;
     }
 

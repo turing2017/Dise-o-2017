@@ -21,13 +21,7 @@ public class FachadaPersistencia
         return instance;
     }
 
-//    public List<Object> buscar (String claseABuscar, List<DTOCriterio> criterioList)
-//    {
-//        return FachadaInterna.getInstance().buscar(claseABuscar, criterioList);
-//    }
-//    
-    
-    public List<Object> buscar (Class claseABuscar, List<DTOCriterio> criterioList)
+    public List<Object> buscar (String claseABuscar, List<DTOCriterio> criterioList)
     {
         return FachadaInterna.getInstance().buscar(claseABuscar, criterioList);
     }

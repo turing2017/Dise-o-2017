@@ -104,7 +104,7 @@ public class ExpertoGestionarParametrosCalculoComision {
         
         FachadaInterna.getInstance().iniciarTransaccion();
         
-        List<Object> parametros = FachadaPersistencia.getInstance().buscar(ParametroCalculoPeriodicidad.class, criterios);
+        List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", criterios);
         ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad;
         
         if (parametros.isEmpty()){
@@ -146,7 +146,7 @@ public class ExpertoGestionarParametrosCalculoComision {
         
         FachadaInterna.getInstance().iniciarTransaccion();
         
-        List<Object> parametros = FachadaPersistencia.getInstance().buscar(ParametroCalculoEditable.class, criterios);
+        List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoEditable", criterios);
         ParametroCalculoEditable parametrosCalculoEditable;
         
         if (parametros.isEmpty()){

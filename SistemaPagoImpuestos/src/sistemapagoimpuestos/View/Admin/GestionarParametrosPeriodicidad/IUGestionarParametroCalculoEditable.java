@@ -21,7 +21,10 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
      * Creates new form IUGestionarParametroCalculoEditable
      */
     public IUGestionarParametroCalculoEditable() {
-        initComponents();
+       initComponents();
+       dateChooserCombo1.setEnabled(false);
+       jTextField2.setEnabled(false);
+       jTextField1.setEnabled(false);
     }
 
     /**
@@ -78,6 +81,11 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
         });
 
         jButton4.setText("Modificar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Vigente desde:");
 
@@ -167,6 +175,12 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       dateChooserCombo1.setEnabled(true);
+       jTextField2.setEnabled(true);
+       jTextField1.setEnabled(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

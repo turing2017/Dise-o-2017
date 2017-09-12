@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
@@ -186,10 +187,10 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 // Modifico la operación de cierre para volver a la pantalla principal
                 pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pantallaAlta.generarEmpresaItems();
-                IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<>());
+                IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<DTOEmpresaTipImpItem>());
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
-                        pantallaAlta.dispose();
+                        //pantallaAlta.dispose();
                         ControladorGestionarTipoImpuesto.getInstance().iniciar();
                     }
                 });
@@ -207,7 +208,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     pantallaModificar.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
-                            pantallaModificar.dispose();
+                            //pantallaModificar.dispose();
                             ControladorGestionarTipoImpuesto.getInstance().iniciar();
                         }
                     });

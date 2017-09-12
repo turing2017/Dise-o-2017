@@ -288,7 +288,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                     IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     IUGestionarTipoImpuestoAlta.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
-                            IUGestionarTipoImpuestoAlta.dispose();
+                            //IUGestionarTipoImpuestoAlta.dispose();
                             ControladorGestionarTipoImpuesto.getInstance().iniciar();
                         }
                     });

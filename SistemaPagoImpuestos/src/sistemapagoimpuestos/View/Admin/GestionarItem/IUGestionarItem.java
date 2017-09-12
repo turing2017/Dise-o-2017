@@ -275,7 +275,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
                 // Modifico el Listener para que al presionar x genere la pantalla ppal.
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
-                        pantallaAlta.dispose();
+                        //pantallaAlta.dispose();
                         ControladorGestionarItem.getInstance().iniciar();
                     }
                 });
@@ -294,7 +294,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     pantallaModificar.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
-                            pantallaModificar.dispose();
+                            //pantallaModificar.dispose();
                             ControladorGestionarItem.getInstance().iniciar();
                         }
                     });

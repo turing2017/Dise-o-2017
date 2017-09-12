@@ -234,7 +234,7 @@ public class ExpertoGestionarTipoImpuesto {
             TipoEmpresa tipoEmpresa = optenerTipoEmpresaConTipoImpuesto(tipoImpuesto, tempEmp).get(0);
             dTOEmpresaTipoImpuestoItems.setFrecuenciaSincro(obtenerEmpresaTipoImpuesto(tipoImpuesto, tempEmp).getFrecuenciaLiquidacionEmpresaTipoImpuesto());
             
-            dTOEmpresaTipoImpuestoItems.setdTOItems(new ArrayList<>());
+            dTOEmpresaTipoImpuestoItems.setdTOItems(new ArrayList<DTOItem>());
             
             dTOEmpresaTipoImpuestoItems.setdTOTipoEmpresa(ConvertDTO.getInstance().convertTipoEmpresa(tipoEmpresa));
             

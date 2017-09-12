@@ -7,11 +7,18 @@ package datosPrueba;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import sistemapagoimpuestos.Entity.Cliente;
+import sistemapagoimpuestos.Entity.CuentaBancaria;
+import sistemapagoimpuestos.Entity.DetalleOperacion;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.Operacion;
+import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoDatoItem;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
@@ -174,5 +181,35 @@ public class DatosPrueba {
         FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
         
         System.out.println("Guardado: Item Empresa Tipo Impuesto");
+    }
+    
+    public static void createOperation(){
+        Operacion operacion = new Operacion();
+        operacion.setCalculadaOperacion(true);
+        operacion.setCodigoPagoElectrionicoOperacion("2331");
+        operacion.setCuentaBancaria(new CuentaBancaria("23",
+                                                    "3124223",
+                                                    null,
+                                                    new TipoCuenta(10,
+                                                            "Tipo test", 
+                                                            false, 
+                                                            null), 
+                                                    new Cliente("321231",
+                                                            "test", 
+                                                            "test", 
+                                                            "32123", 
+                                                            null
+                                                    )));
+        Set<DetalleOperacion> detalleOperacionList = new HashSet<DetalleOperacion>();
+        detalleOperacionList.add(new DetalleOperacion("Test Detalle"));
+        operacion.setEmpresa(new  Empresa("3212123", "test", "test", null));
+        operacion.setEmpresaTipoImpuesto(null);
+        operacion.setFechaHoraOperacion(new Date());
+        operacion.setImportePagadoOperacion(23);
+        operacion.setNumeroOperacion(2);
+        operacion.setListDetalleOperacion(detalleOperacionList);
+        operacion.setValorComisionOperacion(2);
+        
+        FachadaPersistencia.getInstance().guardar(operacion);
     }
 }

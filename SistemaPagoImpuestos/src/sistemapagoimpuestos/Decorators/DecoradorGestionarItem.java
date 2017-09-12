@@ -10,7 +10,6 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 
 /**
  *
-<<<<<<< HEAD
  * @author mvissio
  */
 public class DecoradorGestionarItem extends ExpertoGestionarItem{

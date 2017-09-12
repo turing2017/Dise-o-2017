@@ -95,7 +95,7 @@ public class ExpertoLoguearUsuario {
                 pp.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent ev) {
-                        pp.dispose();
+                        //pp.dispose();
                         ControladorLoguearUsuario.getInstance().iniciar();
 
                     }
@@ -108,7 +108,7 @@ public class ExpertoLoguearUsuario {
                 pc.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent ev) {
-                        pc.dispose();
+                        //pc.dispose();
                         ControladorLoguearUsuario.getInstance().iniciar();
                     }
                 });

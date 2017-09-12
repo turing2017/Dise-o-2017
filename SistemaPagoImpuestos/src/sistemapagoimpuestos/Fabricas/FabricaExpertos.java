@@ -13,7 +13,7 @@ import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorLoguearUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorPagarImpuestos;
-
+import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaAdherida;
 
 /**
  *
@@ -52,6 +52,8 @@ public class FabricaExpertos {
                 return new DecoradorGestionarUsuario();
             case "CU08":
                 return new DecoradorLoguearUsuario();
+            case "CU10":
+                return new DecoradorGestionarEmpresaAdherida();
             default:
                 return null;
         }

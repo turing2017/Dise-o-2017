@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.Date;
+import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Expert.ExpertoGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -25,13 +26,14 @@ public class DecoradorGestionarParametrosCalculoComision extends ExpertoGestiona
         return role;
     }
     
-    public void modificarParametroCalculoPeriodicidad(Date fechaDesde ,double mensual, double bimestral, double trimestral, double cuatrimestral , double semestral, double anual , double quincenal ) {
+    @Override
+    public void modificarParametrosPeriodicidad(double mensual, double bimestral, double trimestral, double cuatrimestral , double semestral, double anual , double quincenal ) {
         FachadaInterna.getInstance().iniciarTransaccion();
         super.modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
-    
-    public void modificarParametroCalculoEditable(Date fechaDesde, double siEditable, double noEditable) {
+    @Override
+    public void modificarParametrosEditable(double siEditable, double noEditable) {
         FachadaInterna.getInstance().iniciarTransaccion();
         super.modificarParametrosEditable(siEditable, noEditable); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -44,5 +46,12 @@ public class DecoradorGestionarParametrosCalculoComision extends ExpertoGestiona
          FachadaInterna.getInstance().finalizarTransaccion();
          return dtoPCP;
     }
-
+    
+    @Override
+    public DTOParametroCalculoEditable obtenerParametrosCalculoEditable(){
+         FachadaInterna.getInstance().iniciarTransaccion();
+         DTOParametroCalculoEditable dtoPCP = super.obtenerParametrosCalculoEditable();
+         FachadaInterna.getInstance().finalizarTransaccion();
+         return dtoPCP;
+    }
 }

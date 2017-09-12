@@ -22,7 +22,7 @@ public class ParametroCalculoEditable extends Entity {
         }
         return instancia;
     }
-    
+
     //getter
 
     public double getSiEditablePCEditable() {

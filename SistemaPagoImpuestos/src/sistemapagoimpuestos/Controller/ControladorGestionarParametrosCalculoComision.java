@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Controller;
 
 
+import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Expert.ExpertoGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -43,12 +44,7 @@ public class ControladorGestionarParametrosCalculoComision {
         pantallaPrincipal.setTitle("Gestionar Parámetros de Cálculo de Comisión");
         }        
     }
-    
-     // Metodo para recuperar el TipoImpuesto a modificar
-    /*public DTOParametroCalculoEditable consultarParametrosCalculoEditable(){
-        return experto.consultarParametrosCalculoEditable();
-    }
-    */
+   
     public void modificarParametrosPeriodicidad(double mensual, double bimestral, double trimestral, double cuatrimestral, double semestral, double anual, double quincenal) {
         experto.modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
     }
@@ -59,6 +55,10 @@ public class ControladorGestionarParametrosCalculoComision {
 
     public DTOParametroCalculoPeriodicidad obtenerParametrosCalculoPeriodicidad() {
       return experto.obtenerParametrosCalculoPeriodicidad();
+    }
+
+    public DTOParametroCalculoEditable obtenerParametrosCalculoEditable() {
+      return experto.obtenerParametrosCalculoEditable();
     }
     
 }

@@ -5,11 +5,8 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
+import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
 
 /**
  *
@@ -21,9 +18,15 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
      * Creates new form IUGestionarParametroCalculoEditable
      */
     public IUGestionarParametroCalculoEditable() {
-       initComponents();
-       jTextField2.setEnabled(false);
-       jTextField1.setEnabled(false);
+     
+        initComponents();
+        DTOParametroCalculoEditable dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoEditable();
+        
+        jTextField2.setText(Double.toString(dtoCP.getSiEditablePCEditable()));
+        jTextField1.setText(Double.toString(dtoCP.getNoEditablePCEditable()));
+
+        jTextField2.setEnabled(false);
+        jTextField1.setEnabled(false);
     }
 
     /**

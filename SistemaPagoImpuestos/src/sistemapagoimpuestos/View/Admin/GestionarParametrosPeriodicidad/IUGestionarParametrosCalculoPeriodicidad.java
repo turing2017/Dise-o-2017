@@ -20,7 +20,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
     public IUGestionarParametrosCalculoPeriodicidad() {
         initComponents();
         DTOParametroCalculoPeriodicidad dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoPeriodicidad();
-        jTextField4.setText(Double.toString(dtoCP.getAnualPCPeriodicidad()));
+        jTextField4.setText(Double.toString(dtoCP.getMensualPCPeriodicidad()));
         jTextField2.setText(Double.toString(dtoCP.getBimestralPCPeriodicidad()));
         jTextField7.setText(Double.toString(dtoCP.getTrimestralPCPeriodicidad()));
         jTextField3.setText(Double.toString(dtoCP.getCuatrimestralPCPeriodicidad()));
@@ -46,7 +46,6 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -333,7 +332,6 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

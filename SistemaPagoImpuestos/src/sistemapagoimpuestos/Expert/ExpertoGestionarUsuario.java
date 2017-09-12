@@ -83,7 +83,7 @@ public class ExpertoGestionarUsuario {
         nuevoUsuario.setNombreUsuario(nombreIngres);
         nuevoUsuario.setPasswordUsuario(passwordIngres);
         nuevoUsuario.setTipoUsuario((TipoUsuario) resultado.get(0));
-        if (tipoUsuarioSelec.equals("Administrador")){
+        if (tipoUsuarioSelec.equals("Responsable")){
             List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
             criteriosEmpresa.add(new DTOCriterio("nombreEmpresa", "=", empresaSelec));
             List resultadoEmpresa = FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa);
@@ -98,9 +98,8 @@ public class ExpertoGestionarUsuario {
 
     public List<DTOTipoUsuario> setearComboTipoUsuario() {
         List<DTOCriterio> criterios = new ArrayList<>();
-
-        DTOCriterio criterio = new DTOCriterio("fechaHoraInhabilitacionTipoUsuario", "IS", null);
-        criterios.add(criterio);
+        criterios.add(new DTOCriterio("fechaHoraInhabilitacionTipoUsuario", "IS", null));
+        criterios.add(new DTOCriterio("nombreTipoUsuario", "<>", "Cliente"));
         List tipoUsuarioHabilitado = FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios);
 
         List<DTOTipoUsuario> listado = new ArrayList<>();
@@ -152,7 +151,7 @@ public class ExpertoGestionarUsuario {
         
         usuarioSelec.setTipoUsuario((TipoUsuario) resultadoTipoUsuario.get(0));
         
-        if (tipoUsuarioSelec.equals("Administrador")){
+        if (tipoUsuarioSelec.equals("Responsable")){
             List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
             criteriosEmpresa.add(new DTOCriterio("nombreEmpresa", "=", empresaSelec));
             List resultadoEmpresa = FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa);

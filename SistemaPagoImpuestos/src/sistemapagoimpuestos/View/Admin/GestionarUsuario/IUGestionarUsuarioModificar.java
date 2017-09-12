@@ -25,13 +25,16 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
         initComponents();
         setearComboTipoUsuario();
         setearComboEmpresa();
+        label_Empresa.setVisible(false);
+        combo_Empresa.setVisible(false);
         combo_TipoUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ("Administrador".equals(combo_TipoUsuario.getSelectedItem().toString())) {
+                if (!combo_TipoUsuario.getSelectedItem().toString().equals("Responsable")) {
                     label_Empresa.setVisible(true);
                     combo_Empresa.setVisible(true);
-                } else {
+                }
+                else{
                     label_Empresa.setVisible(false);
                     combo_Empresa.setVisible(false);
                 }

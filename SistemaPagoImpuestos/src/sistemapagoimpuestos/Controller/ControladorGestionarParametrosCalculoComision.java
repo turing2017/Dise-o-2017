@@ -6,7 +6,7 @@
 package sistemapagoimpuestos.Controller;
 
 
-import java.util.Date;
+import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Expert.ExpertoGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad.IUGestionarParametrosComision;
@@ -49,12 +49,16 @@ public class ControladorGestionarParametrosCalculoComision {
         return experto.consultarParametrosCalculoEditable();
     }
     */
-    public void modificarParametrosPeriodicidad(Date fechaDesde, double mensual, double bimestral, double trimestral, double cuatrimestral, double semestral, double anual, double quincenal) {
-        experto.modificarParametrosPeriodicidad(fechaDesde, mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
+    public void modificarParametrosPeriodicidad(double mensual, double bimestral, double trimestral, double cuatrimestral, double semestral, double anual, double quincenal) {
+        experto.modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
     }
     
-    public void modificarParametrosEditable(Date fechaDesde, double montoSiEditable, double montoNoEditable) {
-        experto.modificarParametrosEditable(fechaDesde, montoSiEditable, montoNoEditable);
+    public void modificarParametrosEditable(double montoSiEditable, double montoNoEditable) {
+        experto.modificarParametrosEditable(montoSiEditable, montoNoEditable);
+    }
+
+    public DTOParametroCalculoPeriodicidad obtenerParametrosCalculoPeriodicidad() {
+      return experto.obtenerParametrosCalculoPeriodicidad();
     }
     
 }

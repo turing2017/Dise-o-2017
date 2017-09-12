@@ -1,28 +1,25 @@
-package sistemapagoimpuestos.Entity;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sistemapagoimpuestos.Dto;
 
 /**
  *
  * @author Gabriel
  */
-public class ParametroCalculoEditable extends Entity {
-
-    private static ParametroCalculoEditable instancia;
+public class DTOParametroCalculoEditable {
+    
     private double siEditablePCEditable;
     private double noEditablePCEditable;
  
     //constructor
     
-    public ParametroCalculoEditable() {
+    public DTOParametroCalculoEditable() {
 
     }
 
-    public static ParametroCalculoEditable getInstancia() {
-        if (instancia == null) {
-            setInstancia(new ParametroCalculoEditable());
-        }
-        return instancia;
-    }
-    
     //getter
 
     public double getSiEditablePCEditable() {
@@ -41,10 +38,5 @@ public class ParametroCalculoEditable extends Entity {
 
     public void setNoEditablePCEditable(double noEditablePCEditable) {
         this.noEditablePCEditable = noEditablePCEditable;
-    }
-
-    public static void setInstancia(ParametroCalculoEditable aInstancia) {
-        instancia = aInstancia;
-    }
-    
+    }  
 }

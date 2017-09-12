@@ -1,14 +1,17 @@
-package sistemapagoimpuestos.Entity;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sistemapagoimpuestos.Dto;
 
-import java.util.Date;
 
 /**
  *
  * @author Gabriel
  */
-public class ParametroCalculoPeriodicidad extends Entity {
-
-    private static ParametroCalculoPeriodicidad instancia;
+public class DTOParametroCalculoPeriodicidad {
+    
     private double mensualPCPeriodicidad = 0.0;
     private double bimestralPCPeriodicidad = 0.0;
     private double trimestralPCPeriodicidad = 0.0;
@@ -18,15 +21,8 @@ public class ParametroCalculoPeriodicidad extends Entity {
     private double quincenalPCPeriodicidad = 0.0;
 
     //constructor
-    public ParametroCalculoPeriodicidad() {
+    public DTOParametroCalculoPeriodicidad() {
 
-    }
-
-    public static ParametroCalculoPeriodicidad getInstancia() {
-        if (instancia == null) {
-            setInstancia(new ParametroCalculoPeriodicidad());
-        }
-        return instancia;
     }
 
     //getter
@@ -86,9 +82,4 @@ public class ParametroCalculoPeriodicidad extends Entity {
     public void setQuincenalPCPeriodicidad(double quincenalPCPeriodicidad) {
         this.quincenalPCPeriodicidad = quincenalPCPeriodicidad;
     }
-
-    public static void setInstancia(ParametroCalculoPeriodicidad aInstancia) {
-        instancia = aInstancia;
-    }
-
 }

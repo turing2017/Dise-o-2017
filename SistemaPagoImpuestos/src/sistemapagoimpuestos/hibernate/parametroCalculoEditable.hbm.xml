@@ -8,20 +8,12 @@
             <generator class="uuid2"/>
         </id>
        
-        <property name="fechaDesdePCEditable" type="date" not-null="true">
-            <column name="fechaDesdePCEditable"/>
-        </property>
-        
         <property name="siEditablePCEditable" type="double" not-null="true">
             <column name="siEditablePCEditable"/>
         </property>
    
         <property name="noEditablePCEditable" type="double" not-null="true">
             <column name="noEditablePCEditable"/>
-        </property>
-        
-        <property name="fechaInhabilitacionPCEditable" type="date" not-null="true">
-            <column name="fechaInhabilitacionPCEditable"/>
         </property>
         
     </class>

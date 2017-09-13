@@ -155,3 +155,11 @@ hs_err_pid*
 /wdsl/wdsl/nbproject/private/
 /wdsl/JavaApplication3/nbproject/private/
 /wdsl/WebServicePagoImpuestos/nbproject/private/
+
+wdsl/ServicePagoImpuestosWS/nbproject/private/
+wdsl/ServicePagoImpuestosWS/build/
+wdsl/ServicePagoImpuestosWS/nbbuild/
+wdsl/ServicePagoImpuestosWS/dist/
+wdsl/ServicePagoImpuestosWS/nbdist/
+.nb-gradle/
+/wdsl/ServicePagoImpuestosWS/nbproject/private/

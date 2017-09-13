@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad;
 
+import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad.IUGestionarParametroCalculoEditable;
 
 /**
@@ -73,17 +74,11 @@ public class IUGestionarParametrosComision extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      IUGestionarParametrosCalculoPeriodicidad gestionarParametrosCalculoPeriodicidad = new  IUGestionarParametrosCalculoPeriodicidad();
-      gestionarParametrosCalculoPeriodicidad.setVisible(true); 
-      gestionarParametrosCalculoPeriodicidad.setLocationRelativeTo(null);
-      gestionarParametrosCalculoPeriodicidad.setTitle("Gestionar Parámetros de Cálculo de Periodicidad");
+      ControladorGestionarParametrosCalculoComision.getInstance().getUI("Periodicidad");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        IUGestionarParametroCalculoEditable gestionarParametrosCalculoEditable = new IUGestionarParametroCalculoEditable();
-        gestionarParametrosCalculoEditable.setVisible(true);
-        gestionarParametrosCalculoEditable.setLocationRelativeTo(null);
-        gestionarParametrosCalculoEditable.setTitle("Gestionar Parámetros de Cálculo Editable");
+        ControladorGestionarParametrosCalculoComision.getInstance().getUI("Editable");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

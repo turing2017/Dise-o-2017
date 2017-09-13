@@ -10,6 +10,7 @@ import exceptions.Excepciones;
 import javax.swing.JOptionPane;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
+import sistemapagoimpuestos.Utils.Utils;
 
 /**
  *
@@ -271,7 +272,6 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
     //Guardar 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-
             double mensual = Double.parseDouble(jTextField4.getText());
             double bimestral = Double.parseDouble(jTextField2.getText());
             double trimestral = Double.parseDouble(jTextField7.getText());
@@ -279,10 +279,25 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
             double semestral = Double.parseDouble(jTextField6.getText());
             double anual = Double.parseDouble(jTextField1.getText());
             double quincenal = Double.parseDouble(jTextField5.getText());
-            ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
-            Excepciones.getInstance().modificacionExito();
-            this.dispose();
-            
+            //Validamos que no se puedan ingresar numeros negativos
+            if (Utils.isNegative(mensual)
+                    || Utils.isNegative(bimestral)
+                    || Utils.isNegative(trimestral)
+                    || Utils.isNegative(cuatrimestral)
+                    || Utils.isNegative(semestral)
+                    || Utils.isNegative(anual)
+                    || Utils.isNegative(quincenal)) {
+                JOptionPane.showMessageDialog(null,
+                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales positivos",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
+                Excepciones.getInstance().modificacionExito();
+                this.dispose();
+            }
+
         } catch (Exception e) {
             if (StringUtils.isEmptyOrWhitespaceOnly(jTextField1.getText())
                     || StringUtils.isEmptyOrWhitespaceOnly(jTextField2.getText())
@@ -291,13 +306,13 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
                     || StringUtils.isEmptyOrWhitespaceOnly(jTextField5.getText())
                     || StringUtils.isEmptyOrWhitespaceOnly(jTextField6.getText())
                     || StringUtils.isEmptyOrWhitespaceOnly(jTextField7.getText())) {
-                 JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(null,
                         "Todos los campos deben estar completos, intente nuevamente",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Algunos de los valores son incorrectos."+ "\n" + "Por favor solo use numeros decimales",
+                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales positivos",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
@@ -365,7 +380,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
             }
         });
     }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

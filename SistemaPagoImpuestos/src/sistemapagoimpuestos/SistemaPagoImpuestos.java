@@ -40,6 +40,6 @@ public class SistemaPagoImpuestos {
        // DatosPrueba.createOperation();
        // FachadaInterna.getInstance().finalizarTransaccion();
        // ControladorLoguearUsuario.getInstance().iniciar();
-       //ControladorGestionarParametrosCalculoComision.getInstance().iniciar();
+       ControladorGestionarParametrosCalculoComision.getInstance().iniciar();
     }
 }

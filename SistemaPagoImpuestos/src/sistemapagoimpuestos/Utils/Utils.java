@@ -22,4 +22,8 @@ public class Utils {
           return false;
        }
     }
+    
+    public static boolean isNegative(double d) {
+        return Double.doubleToRawLongBits(d) < 0;
+    }
 }

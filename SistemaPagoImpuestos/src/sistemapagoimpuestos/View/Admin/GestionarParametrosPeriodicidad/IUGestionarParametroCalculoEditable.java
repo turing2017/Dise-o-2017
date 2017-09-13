@@ -10,6 +10,7 @@ import exceptions.Excepciones;
 import javax.swing.JOptionPane;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
+import sistemapagoimpuestos.Utils.Utils;
 
 /**
  *
@@ -158,13 +159,20 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
         try {
             double montoSiEditable = Double.parseDouble(jTextField2.getText());
             double montoNoEditable = Double.parseDouble(jTextField1.getText());
-
-            ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
-            Excepciones.getInstance().modificacionExito();
-            this.dispose();
+            if (Utils.isNegative(montoSiEditable)|| Utils.isNegative(montoNoEditable)) {
+                JOptionPane.showMessageDialog(null,
+                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales positivos",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
+                Excepciones.getInstance().modificacionExito();
+                this.dispose();
+            }
         } catch (Exception e) {
             if (StringUtils.isEmptyOrWhitespaceOnly(jTextField1.getText())
                     || StringUtils.isEmptyOrWhitespaceOnly(jTextField2.getText())) {
@@ -178,7 +186,6 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
-
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed

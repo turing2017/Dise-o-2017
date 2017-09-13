@@ -26,6 +26,8 @@ import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
  * @author lunamarcos
  */
 public class IUGestionarItem extends javax.swing.JFrame {
+    
+    ControladorGestionarItem controlador = new ControladorGestionarItem();
 
     /**
      * Creates new form IUGestionarItem
@@ -124,11 +126,12 @@ public class IUGestionarItem extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         // TODO add your handling code here:
-        seleccionarOpcion("Alta", null);
+        controlador.seleccionarOpcion("Alta", null);
         this.dispose();
     }//GEN-LAST:event_button_nuevoActionPerformed
 
@@ -149,7 +152,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
             int rowSelected = tabla_item.getSelectedRow();
             String codigo = tabla_item.getModel().getValueAt(rowSelected, columnCode).toString();
             
-            seleccionarOpcion("Modificar", codigo);
+            controlador.seleccionarOpcion("Modificar", codigo);
             this.dispose();
         } catch (ArrayIndexOutOfBoundsException e) {
             //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
@@ -194,16 +197,16 @@ public class IUGestionarItem extends javax.swing.JFrame {
     
     // Metodo iniciar
     public void iniciar() {
-        ControladorGestionarItem.getInstance().iniciar();
+        controlador.iniciar();
     }
     
     // Método para obtener todos los items y llenar en la tabla
     public void obtenerItems(){
-        // Obtengo los 
-        ArrayList<DTOItem> listDtoItem = ControladorGestionarItem.getInstance().obtenerItems();
+        // Obtengo los Items
+        ArrayList<DTOItem> listDtoItem = controlador.obtenerItems();
         
         // Muestro los datos en la tabla
-        String[] columnas = {"Codigo", "Nombre", "Requerido", "Estado"};
+        String[] columnas = {"Codigo", "Nombre", "Requerido", "Estado", "Tipo"};
         
         // Creo el modelo
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -225,6 +228,8 @@ public class IUGestionarItem extends javax.swing.JFrame {
                         return Boolean.class;
                     case 3:
                         return Boolean.class;
+                    case 4:
+                        return String.class;
                     default:
                         return null;
                 }
@@ -237,12 +242,15 @@ public class IUGestionarItem extends javax.swing.JFrame {
             vect.add(dtoItem.getCodigoItem());
             vect.add(dtoItem.getNombreItem());
             vect.add(dtoItem.isRequeridoItem());
+            DTOTipoDatoItem dtoTipo = dtoItem.getDtoTipoDatoItem();
+            
 
             if (dtoItem.getFechaHoraInhabilitacionItem() != null) {
                 vect.add(false);
             } else {
                 vect.add(true);
             }
+            vect.add(dtoTipo.getNombreTipoDatoItem());
             dtm.addRow(vect);
         }
 
@@ -258,68 +266,9 @@ public class IUGestionarItem extends javax.swing.JFrame {
         tabla_item.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_item.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-    
-    // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
-    public void seleccionarOpcion(String opcion, Object object) {
-        switch (opcion) {
-            // Si se presiona el botón de alta
-            case "Alta":
-                // Creo pantalla de alta
-                IUGestionarItemAlta pantallaAlta = new IUGestionarItemAlta();
-                // Hago visible la pantalla de alta
-                pantallaAlta.setVisible(true);
-                // Modifico la operación de cierre para volver a la pantalla principal, al presionar x no stopea
-                pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                
-                //pantallaAlta.generarEmpresaItems();
-                // Modifico el Listener para que al presionar x genere la pantalla ppal.
-                pantallaAlta.addWindowListener(new WindowAdapter() {
-                    public void windowClosing(WindowEvent ev) {
-                        pantallaAlta.dispose();
-                        ControladorGestionarItem.getInstance().iniciar();
-                    }
-                });
 
-                break; // optional
-            // Si se presiona el botón de modificar
-            case "Modificar":
-                // Muestro pantalla de Modificación
-                DTOItem dtoItem = ControladorGestionarItem.getInstance().obtenerItem((String) object);
-                
-                if (dtoItem != null){
-                    // Creo la pantalla
-                    IUGestionarItemModificar pantallaModificar = new IUGestionarItemModificar();
-                    pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-                    pantallaModificar.setVisible(true); // La hago visible
-                    pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    pantallaModificar.addWindowListener(new WindowAdapter() {
-                        public void windowClosing(WindowEvent ev) {
-                            pantallaModificar.dispose();
-                            ControladorGestionarItem.getInstance().iniciar();
-                        }
-                    });
-                    pantallaModificar.setTextfield_nombre(dtoItem.getNombreItem());
-                    pantallaModificar.setTextfield_longitud(Integer.parseInt(dtoItem.getCodigoItem()));
-                    pantallaModificar.setCheckbox_requerido(dtoItem.isRequeridoItem());
-                    if (dtoItem.getFechaHoraInhabilitacionItem() == null) {
-                        pantallaModificar.setCheckbox_habilitado(true);
-                    } else {
-                        pantallaModificar.setCheckbox_habilitado(false);
-                    }
-                    // Completo el comboBox
-                    DTOTipoDatoItem dtoTipoDatoItem = dtoItem.getDtoTipoDatoItem();
-                    pantallaModificar.setComboBoxTipoDato(dtoTipoDatoItem.getNombreTipoDatoItem());
-                    List<DTOTipoDatoItem> list = ControladorGestionarItem.getInstance().buscarTipoDatoItems();
-                    pantallaModificar.llenarCombo(list);
-                    pantallaModificar.setNombreActual(dtoItem.getNombreItem());
-                }
-
-                break; // optional
-
-            // You can have any number of case statements.
-            default: // Optional
-            // Statements
-        }
+    public void setControlador(ControladorGestionarItem controlador) {
+        this.controlador = controlador;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

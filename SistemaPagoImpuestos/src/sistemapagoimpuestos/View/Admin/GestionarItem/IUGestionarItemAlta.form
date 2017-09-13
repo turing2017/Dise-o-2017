@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -43,6 +43,8 @@
               <EmptySpace pref="204" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+              <Component id="button_atras" min="-2" pref="84" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="button_crear" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
@@ -78,7 +80,10 @@
                   <Component id="comboBox_tipoDato" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-              <Component id="button_crear" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="button_crear" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="button_atras" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="74" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -137,6 +142,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_crearActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="button_atras">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atr&#xe1;s"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_atrasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

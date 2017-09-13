@@ -12,7 +12,7 @@ import sistemapagoimpuestos.Entity.TipoDatoItem;
  * @author lunamarcos
  */
 public class IUGestionarItemAlta extends javax.swing.JFrame {
-
+    
     ControladorGestionarItem controlador = new ControladorGestionarItem();
     
     public IUGestionarItemAlta() {
@@ -48,6 +48,7 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
         checkbox_requerido = new javax.swing.JCheckBox();
         comboBox_tipoDato = new javax.swing.JComboBox<>();
         button_crear = new javax.swing.JButton();
+        button_atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +75,13 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
             }
         });
 
+        button_atras.setText("Atrás");
+        button_atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_atrasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,7 +103,9 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
                     .addComponent(comboBox_tipoDato, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(204, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(75, 75, 75)
+                .addComponent(button_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(button_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
         );
@@ -123,11 +133,14 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(comboBox_tipoDato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(button_crear)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_crear)
+                    .addComponent(button_atras))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboBox_tipoDatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipoDatoActionPerformed
@@ -156,6 +169,12 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
         }
     }//GEN-LAST:event_button_crearActionPerformed
+
+    private void button_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_atrasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        controlador.iniciar();
+    }//GEN-LAST:event_button_atrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,8 +210,13 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
             }
         });
     }
+    // Setter para el controlador
+    public void setControlador(ControladorGestionarItem controlador) {
+        this.controlador = controlador;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_atras;
     private javax.swing.JButton button_crear;
     private javax.swing.JCheckBox checkbox_requerido;
     private javax.swing.JComboBox<String> comboBox_tipoDato;

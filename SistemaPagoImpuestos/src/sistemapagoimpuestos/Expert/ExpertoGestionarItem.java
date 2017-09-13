@@ -112,6 +112,7 @@ public class ExpertoGestionarItem {
             dtoItem.setLongitudItem(item.getLongitudItem());
             dtoItem.setRequeridoItem(item.isRequeridoItem());
             dtoItem.setFechaHoraInhabilitacionItem(item.getFechaHoraInhabilitacionItem());
+            dtoItem.setDtoTipoDatoItem(ConvertDTO.getInstance().convertTipoDatoItem(item.getTipoDatoItem()));
             listDTOItem.add(dtoItem);
         }
         return listDTOItem;

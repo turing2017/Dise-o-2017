@@ -1,10 +1,9 @@
 package sistemapagoimpuestos.View.Admin.GestionarItem;
 
 import exceptions.Excepciones;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarItem;
 import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 
@@ -39,6 +38,7 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
         textfield_longitud = new javax.swing.JTextField();
         textfield_nombre = new javax.swing.JTextField();
         button_modificar = new javax.swing.JButton();
+        button_atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +58,13 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
         button_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_modificarActionPerformed(evt);
+            }
+        });
+
+        button_atras.setText("Atrás");
+        button_atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_atrasActionPerformed(evt);
             }
         });
 
@@ -88,7 +95,9 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addContainerGap(204, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(94, 94, 94)
+                .addComponent(button_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
                 .addComponent(button_modificar)
                 .addGap(67, 67, 67))
         );
@@ -118,11 +127,14 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
                     .addComponent(label_tipoDato)
                     .addComponent(comboBox_tipoDato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
-                .addComponent(button_modificar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_modificar)
+                    .addComponent(button_atras))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
@@ -139,6 +151,12 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
     }//GEN-LAST:event_button_modificarActionPerformed
+
+    private void button_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_atrasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        controlador.iniciar();
+    }//GEN-LAST:event_button_atrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,17 +238,30 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
     public String getNombreActual() {
         return nombreActual;
     }
-        // Método para llenar el comboBox
-    public void llenarCombo(List<DTOTipoDatoItem> list){
-        for (int i = 0; i < list.size(); i++) {
-            DTOTipoDatoItem dtoTipoDatoItem = (DTOTipoDatoItem) list.get(i);
-            comboBox_tipoDato.addItem(dtoTipoDatoItem.getNombreTipoDatoItem());
+
+    public void setControlador(ControladorGestionarItem controlador) {
+        this.controlador = controlador;
+    }
+    
+    //Método para llenar el comboBox, evitando repetidos
+    public void llenarCombo(List<DTOTipoDatoItem> list, String nombreActual){
+    // ArrayList donde almaceno los nombres a mostrar
+    ArrayList<String> nombresTipoDato = new ArrayList<String>();
+    nombresTipoDato.add(nombreActual);
+    comboBox_tipoDato.addItem(nombreActual);
+    for (int i = 0; i < list.size(); i++) {
+        DTOTipoDatoItem dtoTipoDatoItem = (DTOTipoDatoItem) list.get(i);
+        String nombreTipoDato = dtoTipoDatoItem.getNombreTipoDatoItem();
+        if (!nombresTipoDato.contains(nombreTipoDato)) {
+            comboBox_tipoDato.addItem(nombreTipoDato);
         }
     }
+}
     
     // Variable para permitir búsqueda por nombre
     private String nombreActual;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_atras;
     private javax.swing.JButton button_modificar;
     private javax.swing.JCheckBox checkbox_habilitado;
     private javax.swing.JCheckBox checkbox_requerido;

@@ -9,7 +9,7 @@ package sistemapagoimpuestos.Entity;
  *
  * @author mvissio
  */
-public class DetalleOperacion extends ItemEmpresaTipoImpuesto{
+public class DetalleOperacion extends Entity{
     
     private String valorDetalleOperacion;
     private ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto;

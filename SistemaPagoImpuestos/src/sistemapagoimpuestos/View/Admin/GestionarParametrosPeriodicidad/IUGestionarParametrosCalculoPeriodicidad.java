@@ -5,6 +5,9 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad;
 
+import com.mysql.jdbc.StringUtils;
+import exceptions.Excepciones;
+import javax.swing.JOptionPane;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 
@@ -267,16 +270,40 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
     }//GEN-LAST:event_jTextField6ActionPerformed
     //Guardar 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
 
-        double mensual = Double.parseDouble(jTextField4.getText());
-        double bimestral = Double.parseDouble(jTextField2.getText());
-        double trimestral = Double.parseDouble(jTextField7.getText());
-        double cuatrimestral = Double.parseDouble(jTextField3.getText());
-        double semestral = Double.parseDouble(jTextField6.getText());
-        double anual = Double.parseDouble(jTextField1.getText());
-        double quincenal = Double.parseDouble(jTextField5.getText());
-        ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
-        
+            double mensual = Double.parseDouble(jTextField4.getText());
+            double bimestral = Double.parseDouble(jTextField2.getText());
+            double trimestral = Double.parseDouble(jTextField7.getText());
+            double cuatrimestral = Double.parseDouble(jTextField3.getText());
+            double semestral = Double.parseDouble(jTextField6.getText());
+            double anual = Double.parseDouble(jTextField1.getText());
+            double quincenal = Double.parseDouble(jTextField5.getText());
+            ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
+            Excepciones.getInstance().modificacionExito();
+            this.dispose();
+            
+        } catch (Exception e) {
+            if (StringUtils.isEmptyOrWhitespaceOnly(jTextField1.getText())
+                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField2.getText())
+                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField3.getText())
+                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField4.getText())
+                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField5.getText())
+                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField6.getText())
+                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField7.getText())) {
+                 JOptionPane.showMessageDialog(null,
+                        "Todos los campos deben estar completos, intente nuevamente",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Algunos de los valores son incorrectos."+ "\n" + "Por favor solo use numeros decimales",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

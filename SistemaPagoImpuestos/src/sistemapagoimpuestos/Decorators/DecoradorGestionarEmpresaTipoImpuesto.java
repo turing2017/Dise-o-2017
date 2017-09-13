@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import java.util.List;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -13,14 +14,26 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  * @author mvissio
  */
 public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpresaTipoImpuesto{
-
+    
     @Override
-    public String iniciar() {
+    public List iniciar() {
         FachadaInterna.getInstance().iniciarTransaccion();
-        String tempString = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
+        List tempString = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return tempString;
     }
-    
-    
+    @Override
+    public List buscarEmpresas() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List tempString = super.buscarEmpresas(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return tempString;
+    }
+    @Override
+    public List ingresarDatosETI(String nombreTipoImpuesto, String nombreEmpresa) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List tempString = super.ingresarDatosETI(nombreTipoImpuesto, nombreEmpresa); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return tempString;
+}
 }

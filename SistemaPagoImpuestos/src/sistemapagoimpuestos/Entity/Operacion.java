@@ -31,7 +31,7 @@ public class Operacion extends Entity{
     public Operacion() {
     }
 
-    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion) {
+    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectrionicoOperacion = codigoPagoElectrionicoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
@@ -39,7 +39,12 @@ public class Operacion extends Entity{
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
         this.calculadaOperacion = calculadaOperacion;
         this.valorComisionOperacion = valorComisionOperacion;
+        this.cuentaBancaria = cuentaBancaria;
+        this.empresa = empresa;
+        this.empresaTipoImpuesto = empresaTipoImpuesto;
+        this.tipoImpuesto = tipoImpuesto;
     }
+
 
     public int getNumeroOperacion() {
         return numeroOperacion;
@@ -128,7 +133,7 @@ public class Operacion extends Entity{
     public void setTipoImpuesto(TipoImpuesto tipoImpuesto) {
         this.tipoImpuesto = tipoImpuesto;
     }
-
+    
     public Set<DetalleOperacion> getListDetalleOperacion() {
         return listDetalleOperacion;
     }
@@ -136,6 +141,5 @@ public class Operacion extends Entity{
     public void setListDetalleOperacion(Set<DetalleOperacion> listDetalleOperacion) {
         this.listDetalleOperacion = listDetalleOperacion;
     }
-
     
 }

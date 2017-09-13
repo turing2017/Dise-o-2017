@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pago_impuestos?createDatabaseIfNotExist=true</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.autocommit">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.show_sql">true</property>
+    <mapping resource="sistemapagoimpuestos/hibernate/tipoUsuario.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/tipoImpuesto.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/usuario.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/tipoCuenta.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/tipoDatoItem.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/parametroSistema.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/empresa.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/empresaTipoImpuesto.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/cliente.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/tipoEmpresa.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/cuentaBancaria.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/item.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/ItemEmpresaTipoImpuesto.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/detalleOperacion.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/EstadoSincronizacionCuentaCliente.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/sincronizacionCuentaCliente.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/liquidacion.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/operacion.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/estadoLiquidacion.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/liquidacionEstado.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

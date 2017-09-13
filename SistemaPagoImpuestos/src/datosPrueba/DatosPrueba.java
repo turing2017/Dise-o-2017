@@ -5,11 +5,20 @@
  */
 package datosPrueba;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import sistemapagoimpuestos.Entity.Cliente;
+import sistemapagoimpuestos.Entity.CuentaBancaria;
+import sistemapagoimpuestos.Entity.DetalleOperacion;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.Operacion;
+import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoDatoItem;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
@@ -26,11 +35,23 @@ public class DatosPrueba {
     public static void generarDatosPrueba(){
         FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoEmpresa();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarEmpresa();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoDatoItem();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarTipoImpuesto();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarEmpresaTipoImpuesto();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarItem();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        FachadaInterna.getInstance().iniciarTransaccion();
         generarItemEmpresaTipoImpuesto();
         FachadaInterna.getInstance().finalizarTransaccion();
     }
@@ -48,22 +69,24 @@ public class DatosPrueba {
     }
     
     public static void generarEmpresaTipoImpuesto(){
-        List<Object> listEmpresaObject =  FachadaPersistencia.getInstance().buscar("Empresa", null);
+        List<Object> listEmpresaObject = FachadaPersistencia.getInstance().buscar("Empresa", null);
         Object tipoImpuestoObject =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null).get(0);
+        Object tipoEmpresaObject =  FachadaPersistencia.getInstance().buscar("TipoEmpresa", null).get(0);
 
         int couter = 0;
 
-        for(Object tipoEmpresaObject : listEmpresaObject){
-            Empresa empresa = (Empresa)tipoEmpresaObject;
+        for(Object empresaObject : listEmpresaObject){
+            Empresa empresa = (Empresa)empresaObject;
+            TipoEmpresa tipoEmpresa = (TipoEmpresa) tipoEmpresaObject;
             TipoImpuesto tipoImpuesto = (TipoImpuesto) tipoImpuestoObject;
             if(couter > 0){
-                EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto("url 2", null, tipoImpuesto , empresa);
+                EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto(new Date(), null, 2, tipoImpuesto, empresa, tipoEmpresa);
                 FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
                 break;
             }
             
-            EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto("url 1", null, tipoImpuesto , empresa);
-            FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
+            EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto(new Date(), null, 2, tipoImpuesto, empresa, tipoEmpresa);
+                FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);
             couter++ ;
         }
 
@@ -81,13 +104,13 @@ public class DatosPrueba {
         for(Object tipoEmpresaObject : listTipoEmpresa){
             TipoEmpresa tipoEmpresa = (TipoEmpresa)tipoEmpresaObject;
             if(couter > 0){
-                Empresa  empresa3 =new Empresa("23-85562343-3", "Empresa 3", "Direccion Empresa 3", null, tipoEmpresa);
+                Empresa  empresa3 =new Empresa("23-85562343-3", "Empresa 3", "Direccion Empresa 3", null);
                 FachadaPersistencia.getInstance().guardar(empresa3);
                 break;
             }
 
-            Empresa  empresa1 =new Empresa("23-85562365-3", "Empresa 1", "Direccion Empresa 1", null, tipoEmpresa);
-            Empresa  empresa2 =new Empresa("23-85562323-3", "Empresa 2", "Direccion Empresa 2", null, tipoEmpresa);
+            Empresa  empresa1 =new Empresa("23-85562365-3", "Empresa 1", "Direccion Empresa 1", null);
+            Empresa  empresa2 =new Empresa("23-85562323-3", "Empresa 2", "Direccion Empresa 2", null);
             FachadaPersistencia.getInstance().guardar(empresa1);
             FachadaPersistencia.getInstance().guardar(empresa2);
             couter++ ;
@@ -102,8 +125,8 @@ public class DatosPrueba {
     
     public static void generarTipoEmpresa(){
         TipoEmpresa  tipoEmpresa1 =new TipoEmpresa("Tipo Empresa 1", null);
-        TipoEmpresa  tipoEmpresa2 =new TipoEmpresa("Tipo Empresa 1", null);
-        TipoEmpresa  tipoEmpresa3 =new TipoEmpresa("Tipo Empresa 1", null);
+        TipoEmpresa  tipoEmpresa2 =new TipoEmpresa("Tipo Empresa 2", null);
+        TipoEmpresa  tipoEmpresa3 =new TipoEmpresa("Tipo Empresa 3", null);
         FachadaPersistencia.getInstance().guardar(tipoEmpresa1);
         FachadaPersistencia.getInstance().guardar(tipoEmpresa2);
         FachadaPersistencia.getInstance().guardar(tipoEmpresa3);
@@ -158,5 +181,35 @@ public class DatosPrueba {
         FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
         
         System.out.println("Guardado: Item Empresa Tipo Impuesto");
+    }
+    
+    public static void createOperation(){
+        Operacion operacion = new Operacion();
+        operacion.setCalculadaOperacion(true);
+        operacion.setCodigoPagoElectrionicoOperacion("2331");
+        operacion.setCuentaBancaria(new CuentaBancaria("23",
+                                                    "3124223",
+                                                    null,
+                                                    new TipoCuenta(10,
+                                                            "Tipo test", 
+                                                            false, 
+                                                            null), 
+                                                    new Cliente("321231",
+                                                            "test", 
+                                                            "test", 
+                                                            "32123", 
+                                                            null
+                                                    )));
+        Set<DetalleOperacion> detalleOperacionList = new HashSet<DetalleOperacion>();
+        detalleOperacionList.add(new DetalleOperacion("Test Detalle"));
+        operacion.setEmpresa(new  Empresa("3212123", "test", "test", null));
+        operacion.setEmpresaTipoImpuesto(null);
+        operacion.setFechaHoraOperacion(new Date());
+        operacion.setImportePagadoOperacion(23);
+        operacion.setNumeroOperacion(2);
+        operacion.setListDetalleOperacion(detalleOperacionList);
+        operacion.setValorComisionOperacion(2);
+        
+        FachadaPersistencia.getInstance().guardar(operacion);
     }
 }

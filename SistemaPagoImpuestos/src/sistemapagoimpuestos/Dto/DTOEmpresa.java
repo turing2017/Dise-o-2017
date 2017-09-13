@@ -5,22 +5,30 @@
  */
 package sistemapagoimpuestos.Dto;
 
+import java.time.Instant;
+import java.util.Date;
+import sistemapagoimpuestos.Entity.Item;
+import sistemapagoimpuestos.Entity.TipoDatoItem;
+
 /**
  *
- * @author Markz
+ * @author Maximiliano
  */
 public class DTOEmpresa {
+    
     private String cuitEmpresa;
-    private String nombreEmpresa;
     private String direccionEmpresa;
-
+    private Date fechaHoraInhabilitacionEmpresa;
+    private String nombreEmpresa;
+    
     public DTOEmpresa() {
     }
 
-    public DTOEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa) {
+    public DTOEmpresa(String cuitEmpresa, String direccionEmpresa, Date fechaHoraInhabilitacionEmpresa, String nombreEmpresa) {
         this.cuitEmpresa = cuitEmpresa;
-        this.nombreEmpresa = nombreEmpresa;
         this.direccionEmpresa = direccionEmpresa;
+        this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
+        this.nombreEmpresa = nombreEmpresa;
     }
 
     public String getCuitEmpresa() {
@@ -31,6 +39,22 @@ public class DTOEmpresa {
         this.cuitEmpresa = cuitEmpresa;
     }
 
+    public String getDireccionEmpresa() {
+        return direccionEmpresa;
+    }
+
+    public void setDireccionEmpresa(String direccionEmpresa) {
+        this.direccionEmpresa = direccionEmpresa;
+    }
+
+    public Date getFechaHoraInhabilitacionEmpresa() {
+        return fechaHoraInhabilitacionEmpresa;
+    }
+
+    public void setFechaHoraInhabilitacionEmpresa(Date fechaHoraInhabilitacionEmpresa) {
+        this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
+    }
+
     public String getNombreEmpresa() {
         return nombreEmpresa;
     }
@@ -39,13 +63,5 @@ public class DTOEmpresa {
         this.nombreEmpresa = nombreEmpresa;
     }
 
-    public String getDireccionEmpresa() {
-        return direccionEmpresa;
-    }
-
-    public void setDireccionEmpresa(String direccionEmpresa) {
-        this.direccionEmpresa = direccionEmpresa;
-    }
-    
     
 }

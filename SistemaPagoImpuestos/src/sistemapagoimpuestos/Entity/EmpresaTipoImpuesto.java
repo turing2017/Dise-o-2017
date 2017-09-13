@@ -1,40 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-/**
- *
- * @author mvissio
- */
 public class EmpresaTipoImpuesto extends Entity{
-    private String urlConexionEmpresaTipoImpuesto;
+    private Date fechaHoraAltaEmpresaTipoImpuesto;
     private Date fechaHoraInhabilitacionEmpresaTipoImpuesto;
+    private int frecuenciaLiquidacionEmpresaTipoImpuesto;
     private TipoImpuesto tipoImpuesto;
     private Empresa empresa;
+    private TipoEmpresa tipoEmpresa;
+    private Date fechaProximaLiquidacionEmpresaTipoImpuesto;
 
     public EmpresaTipoImpuesto() {
     }
 
-    public EmpresaTipoImpuesto(String urlConexionEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa) {
-        this.urlConexionEmpresaTipoImpuesto = urlConexionEmpresaTipoImpuesto;
+    public Date getFechaProximaLiquidacionEmpresaTipoImpuesto() {
+        return fechaProximaLiquidacionEmpresaTipoImpuesto;
+    }
+
+    public void setFechaProximaLiquidacionEmpresaTipoImpuesto(Date fechaProximaLiquidacionEmpresaTipoImpuesto) {
+        this.fechaProximaLiquidacionEmpresaTipoImpuesto = fechaProximaLiquidacionEmpresaTipoImpuesto;
+    }
+    
+    public EmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, int frecuenciaLiquidacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa, TipoEmpresa tipoEmpresa) {
+        this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
+        this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
         this.tipoImpuesto = tipoImpuesto;
         this.empresa = empresa;
+        this.tipoEmpresa = tipoEmpresa;
     }
 
-  
-
-    public String getUrlConexionEmpresaTipoImpuesto() {
-        return urlConexionEmpresaTipoImpuesto;
+    public Date getFechaHoraAltaEmpresaTipoImpuesto() {
+        return fechaHoraAltaEmpresaTipoImpuesto;
     }
 
-    public void setUrlConexionEmpresaTipoImpuesto(String urlConexionEmpresaTipoImpuesto) {
-        this.urlConexionEmpresaTipoImpuesto = urlConexionEmpresaTipoImpuesto;
+    public void setFechaHoraAltaEmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto) {
+        this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
     }
 
     public Date getFechaHoraInhabilitacionEmpresaTipoImpuesto() {
@@ -45,6 +47,14 @@ public class EmpresaTipoImpuesto extends Entity{
         this.fechaHoraInhabilitacionEmpresaTipoImpuesto = fechaHoraInhabilitacionEmpresaTipoImpuesto;
     }
 
+    public int getFrecuenciaLiquidacionEmpresaTipoImpuesto() {
+        return frecuenciaLiquidacionEmpresaTipoImpuesto;
+    }
+
+    public void setFrecuenciaLiquidacionEmpresaTipoImpuesto(int frecuenciaLiquidacionEmpresaTipoImpuesto) {
+        this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
+    }
+    
     public TipoImpuesto getTipoImpuesto() {
         return tipoImpuesto;
     }
@@ -60,6 +70,14 @@ public class EmpresaTipoImpuesto extends Entity{
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
+
+    public TipoEmpresa getTipoEmpresa() {
+        return tipoEmpresa;
+    }
+
+    public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
+        this.tipoEmpresa = tipoEmpresa;
+    }
+
     
 }

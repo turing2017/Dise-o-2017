@@ -5,6 +5,9 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad;
 
+import com.mysql.jdbc.StringUtils;
+import exceptions.Excepciones;
+import javax.swing.JOptionPane;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
 
@@ -155,13 +158,29 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            double montoSiEditable = Double.parseDouble(jTextField2.getText());
+            double montoNoEditable = Double.parseDouble(jTextField1.getText());
 
-        double montoSiEditable = Double.parseDouble(jTextField2.getText());
-        double montoNoEditable = Double.parseDouble(jTextField1.getText());
-                
-        ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
-        
-        
+            ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
+            Excepciones.getInstance().modificacionExito();
+            this.dispose();
+        } catch (Exception e) {
+            if (StringUtils.isEmptyOrWhitespaceOnly(jTextField1.getText())
+                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField2.getText())) {
+                JOptionPane.showMessageDialog(null,
+                        "Todos los campos deben estar completos, intente nuevamente",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

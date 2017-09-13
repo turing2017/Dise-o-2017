@@ -17,10 +17,11 @@ public class DTOItem {
     private int longitudItem;
     private boolean requeridoItem;
     private Date fechaHoraInhabilitacionItem;
+    private DTOTipoDatoItem dtoTipoDatoItem;
 
     public DTOItem() {
     }
-
+    
     public DTOItem(String codigoItem, String nombreItem, int longitudItem, boolean requeridoItem, Date fechaHoraInhabilitacionItem) {
         this.codigoItem = codigoItem;
         this.nombreItem = nombreItem;
@@ -67,6 +68,14 @@ public class DTOItem {
 
     public void setFechaHoraInhabilitacionItem(Date fechaHoraInhabilitacionItem) {
         this.fechaHoraInhabilitacionItem = fechaHoraInhabilitacionItem;
+    }
+
+    public void setDtoTipoDatoItem(DTOTipoDatoItem dtoTipoDatoItem) {
+        this.dtoTipoDatoItem = dtoTipoDatoItem;
+    }
+
+    public DTOTipoDatoItem getDtoTipoDatoItem() {
+        return dtoTipoDatoItem;
     }
     
     

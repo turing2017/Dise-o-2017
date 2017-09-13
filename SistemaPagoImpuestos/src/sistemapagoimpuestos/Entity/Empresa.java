@@ -2,10 +2,6 @@ package sistemapagoimpuestos.Entity;
 
 import java.util.Date;
 
-/**
- *
- * @author lunamarcos
- */
 public class Empresa extends Entity {
     
     // Atributos propios de la clase
@@ -13,21 +9,19 @@ public class Empresa extends Entity {
     private String nombreEmpresa;
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
-    private TipoEmpresa tipoEmpresa;
+    
     public Empresa() {
     }
 
-    public Empresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, Date fechaHoraInhabilitacionEmpresa, TipoEmpresa tipoEmpresa) {
+    public Empresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, Date fechaHoraInhabilitacionEmpresa) {
         this.cuitEmpresa = cuitEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.direccionEmpresa = direccionEmpresa;
         this.fechaHoraInhabilitacionEmpresa = fechaHoraInhabilitacionEmpresa;
-        this.tipoEmpresa = tipoEmpresa;
     }
 
+   
 
-    
-    
     
     // Setters
     public void setCuitEmpresa(String cuitEmpresa) {
@@ -62,13 +56,6 @@ public class Empresa extends Entity {
     public Date getFechaHoraInhabilitacionEmpresa() {
         return fechaHoraInhabilitacionEmpresa;
     }
-
-    public TipoEmpresa getTipoEmpresa() {
-        return tipoEmpresa;
-    }
-
-    public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
-        this.tipoEmpresa = tipoEmpresa;
-    }
+    
     
 }

@@ -11,8 +11,8 @@
        <property name="nombreUsuario" type="string" unique="true" not-null="true">
            <column name="nombreUsuario"/>
        </property>
-        <property name="password" type="string">
-           <column name="password"/>
+        <property name="passwordUsuario" type="string" unique="true" not-null="true">
+           <column name="passwordUsuario"/>
        </property>
        <property name="fechaHoraInhabilitacionUsuario" type="date">
            <column name="fechaHoraInhabilitacionUsuario"/>
@@ -21,8 +21,8 @@
            <column name="fechaHoraUltimoIngresoSistemaUsuario"/>
        </property>
         
-        <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoUsuario" not-null="true"/>
-        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
+        <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoUsuario" column="OIDTipoUsuario" not-null="true"/>
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="false"/>
         <one-to-one name="cliente" class="sistemapagoimpuestos.Entity.Cliente" cascade="save-update"></one-to-one>
    
     </class>

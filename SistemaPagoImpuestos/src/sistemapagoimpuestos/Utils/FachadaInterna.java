@@ -62,6 +62,9 @@ public class FachadaInterna
                     case "<>":
                         cr.add(Restrictions.conjunction(Restrictions.ne(atributo, valor)));
                         break;
+                    case "IS":
+                        cr.add(Restrictions.conjunction(Restrictions.isNull(atributo)));
+                        break;
                     case "contains":
                         //Todos las colecciones deben empezar de la siguiente manera: claseColeccionList
                         //Generamos el nombre de esa colección a partir del atributo

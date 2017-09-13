@@ -27,8 +27,9 @@ public class Item extends Entity{
         this.fechaHoraInhabilitacionItem = fechaHoraInhabilitacionItem;
         this.tipoDatoItem = tipoDatoItem;
     }
-    
 
+    public Item() {
+    }
 
     public String getCodigoItem() {
         return codigoItem;
@@ -77,5 +78,4 @@ public class Item extends Entity{
     public void setTipoDatoItem(TipoDatoItem tipoDatoItem) {
         this.tipoDatoItem = tipoDatoItem;
     }
-    
 }

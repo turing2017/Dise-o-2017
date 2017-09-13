@@ -5,40 +5,68 @@
  */
 package sistemapagoimpuestos.Dto;
 
+import java.util.Date;
+
 /**
  *
  * @author Tongas
  */
 public class DTOEmpresaExistente {
-String cuitEmpresa;
-String nombreEmpresa;
-String direccionEmpresa;
-   public DTOEmpresaExistente() {
+    private String cuitDTOEmpresaExistente;
+    private String nombreDTOEmpresaExistente;
+    private String direccionDTOEmpresaExistente;
+    private String habilitadaDTOEmpresaExistente;
+    private String nombreTipoEmpresaDTOEmpresaExistente;
+
+    public DTOEmpresaExistente() {
     }
 
-    public String getCuitEmpresa() {
-        return cuitEmpresa;
+    public DTOEmpresaExistente(String cuitDTOEmpresaExistente, String nombreDTOEmpresaExistente, String direccionDTOEmpresaExistente, String habilitadaDTOEmpresaExistente, String nombreTipoEmpresaDTOEmpresaExistente) {
+        this.cuitDTOEmpresaExistente = cuitDTOEmpresaExistente;
+        this.nombreDTOEmpresaExistente = nombreDTOEmpresaExistente;
+        this.direccionDTOEmpresaExistente = direccionDTOEmpresaExistente;
+        this.habilitadaDTOEmpresaExistente = habilitadaDTOEmpresaExistente;
+        this.nombreTipoEmpresaDTOEmpresaExistente = nombreTipoEmpresaDTOEmpresaExistente;
     }
 
-    public void setCuitEmpresa(String cuitEmpresa) {
-        this.cuitEmpresa = cuitEmpresa;
+    public String getCuitDTOEmpresaExistente() {
+        return cuitDTOEmpresaExistente;
     }
 
-    public String getNombreEmpresa() {
-        return nombreEmpresa;
+    public void setCuitDTOEmpresaExistente(String cuitDTOEmpresaExistente) {
+        this.cuitDTOEmpresaExistente = cuitDTOEmpresaExistente;
     }
 
-    public void setNombreEmpresa(String nombreEmpresa) {
-        this.nombreEmpresa = nombreEmpresa;
+    public String getNombreDTOEmpresaExistente() {
+        return nombreDTOEmpresaExistente;
     }
 
-    public String getDireccionEmpresa() {
-        return direccionEmpresa;
+    public void setNombreDTOEmpresaExistente(String nombreDTOEmpresaExistente) {
+        this.nombreDTOEmpresaExistente = nombreDTOEmpresaExistente;
     }
 
-    public void setDireccionEmpresa(String direccionEmpresa) {
-        this.direccionEmpresa = direccionEmpresa;
+    public String getDireccionDTOEmpresaExistente() {
+        return direccionDTOEmpresaExistente;
     }
-   
-    
+
+    public void setDireccionDTOEmpresaExistente(String direccionDTOEmpresaExistente) {
+        this.direccionDTOEmpresaExistente = direccionDTOEmpresaExistente;
+    }
+
+    public String getHabilitadaDTOEmpresaExistente() {
+        return habilitadaDTOEmpresaExistente;
+    }
+
+    public void setHabilitadaDTOEmpresaExistente(String habilitadaDTOEmpresaExistente) {
+        this.habilitadaDTOEmpresaExistente = habilitadaDTOEmpresaExistente;
+    }
+
+    public String getNombreTipoEmpresaDTOEmpresaExistente() {
+        return nombreTipoEmpresaDTOEmpresaExistente;
+    }
+
+    public void setNombreTipoEmpresaDTOEmpresaExistente(String nombreTipoEmpresaDTOEmpresaExistente) {
+        this.nombreTipoEmpresaDTOEmpresaExistente = nombreTipoEmpresaDTOEmpresaExistente;
+    }
+
 }

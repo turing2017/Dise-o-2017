@@ -3,6 +3,8 @@
   <persistence-unit name="SistemaPagoImpuestosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>sistemapagoimpuestos.Entity.TipoEmpresa</class>
+    <class>sistemapagoimpuestos.Dto.DTOEmpresa</class>
+    <class>sistemapagoimpuestos.Dto.DTOTipoEmpresa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pago_impuestos?createDatabaseIfNotExist=true"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

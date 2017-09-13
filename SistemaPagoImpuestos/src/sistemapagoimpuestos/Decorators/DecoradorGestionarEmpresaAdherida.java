@@ -5,10 +5,14 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Entity.Empresa;
+import sistemapagoimpuestos.Entity.TipoEmpresa;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -28,51 +32,45 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public List<DTOEmpresaExistente> ingresarNroCuit(String cuitEmpresa) {
+    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOEmpresaExistente dtoEmp = (DTOEmpresaExistente) super.ingresarNroCuit(cuitEmpresa); //To change body of generated methods, choose Tools | Templates.
+        DTOEmpresaExistente dtoEe= super.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
-        return (List<DTOEmpresaExistente>) dtoEmp; //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public DTOConsultarEmpresas ingresarOpcion(String opcion) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        DTOConsultarEmpresas dtoConsultarEmp= (DTOConsultarEmpresas) super.ingresarOpcion(opcion);
-        super.ingresarOpcion(opcion);//To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-    return (DTOConsultarEmpresas) dtoConsultarEmp;
+        return dtoEe;
     }
     
 
     @Override
-    public void seleccionarEliminar(String cuitEmpresa) {
+    public void modificarEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.seleccionarEliminar(cuitEmpresa); //To change body of generated methods, choose Tools | Templates.
+        super.modificarEmpresa(cuit, nombre, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
     @Override
-    public void seleccionarModificar(String nombreEmpresa, String direccionEmpresa) {
+    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.seleccionarModificar(nombreEmpresa, direccionEmpresa); //To change body of generated methods, choose Tools | Templates.
+        super.ingresarDatosEmpresa(cuit, nombre, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
+    
 
+   
+
+   
 
     @Override
-    public Empresa conseguirEmpresa(String cuitEmpresa) {
+    public ArrayList<DTOEmpresa> consultarEmpresas() {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.conseguirEmpresa(cuitEmpresa); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<DTOEmpresa> dtoe=  super.consultarEmpresas(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
-        return empresa;
+        return dtoe;
     }
 
-}
+    
+
+   
+
+    }
+
+   

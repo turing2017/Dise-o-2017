@@ -6,40 +6,25 @@
 package sistemapagoimpuestos.Controller;
 
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
-import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaNueva;
-import java.lang.String;
-import java.util.Vector;
-import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdherida;
-import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaConsultarEmpresa;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaCrear;
 import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaModificacion;
-import sistemapagoimpuestos.View.Admin.IUGestionarEmpresaAdheridaMuestra;
-import javax.swing.table.DefaultTableModel;
-import sistemapagoimpuestos.Entity.Empresa;
 /**
  *
  * @author Tongas
  */
 public class ControladorGestionarEmpresaAdherida {
-    
-    private static ControladorGestionarEmpresaAdherida controladorGestionarEmpresaAdherida;
-
-    public ControladorGestionarEmpresaAdherida() {
-    }
-    
-    public static ControladorGestionarEmpresaAdherida getInstance()
-    {
-        if (controladorGestionarEmpresaAdherida == null)
-        {
-            controladorGestionarEmpresaAdherida = new ControladorGestionarEmpresaAdherida();
-        }
-        return controladorGestionarEmpresaAdherida;
-    }
-    
+   
     private ExpertoGestionarEmpresaAdherida experto = (ExpertoGestionarEmpresaAdherida) FabricaExpertos.getInstancia().crearExperto("CU10");
  
 // Metodo iniciar
@@ -50,46 +35,61 @@ public class ControladorGestionarEmpresaAdherida {
         }   
 // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
     }
-   
     
-    public void seleccionarModificar (String nombreEmpresa, String direccionEmpresa) {
-    
-        experto.seleccionarModificar(nombreEmpresa, direccionEmpresa);
-    }
-    
-    public void seleccionarEliminar (String cuitEmpresa){
-        experto.seleccionarEliminar(cuitEmpresa);
-    }
-    
-    public DTOConsultarEmpresas ingresarOpcion (String opcion){
-        
-        return experto.ingresarOpcion(opcion);
-        
-    }
-    
-    public void mostrarConsulta (DTOConsultarEmpresas dto){
-        
-        IUGestionarEmpresaAdheridaMuestra pantallaMuestra = new IUGestionarEmpresaAdheridaMuestra();
-        dto.getListaDTOEmpresaHabilitada();
-        
-        DefaultTableModel modelo = new DefaultTableModel();
-        for (int i=0; i <= dto.getListaDTOEmpresaHabilitada().size(); i++){
-            
-            //modelo.addRow((Vector) dto.getListaDTOEmpresaHabilitada().get(i)); 
-            
-        }
-     
-    
-    }
-    
-    public void ingresarDatosEmpresa(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa){
-        experto.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa);
-    }
-    
-    public Empresa conseguirEmpresa (String cuitEmpresa){
-        return experto.conseguirEmpresa(cuitEmpresa);
- 
-    }
-    
+    public ArrayList<DTOEmpresa> consultarEmpresas (){
+    return experto.consultarEmpresas();
 }
+    
+    public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada) {
+    
+    experto.modificarEmpresa(cuit, nombre, direccion,  habilitada);
+        
+    }
+   
+    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada){
+       experto.ingresarDatosEmpresa(cuit, nombre, direccion, habilitada);
+    }
+    
+    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
+        return experto.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada);
+    }
+    
+     public void seleccionarOpcion(String opcion, Object evt, Object controlador){
+        switch(opcion) {
+        case "NuevaEmpresa" :
+        // Muestro pantalla de Nueva Empresa
+            IUGestionarEmpresaAdheridaCrear pantallaCrear = new IUGestionarEmpresaAdheridaCrear(controlador);
+            pantallaCrear.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+            pantallaCrear.setVisible(true); // La hago visible
+           
+        break; // optional
+        
+        case "Modificar" :
+        // Muestro pantalla de Modificación
+        Vector vct = new Vector();
+        vct = (Vector) evt;
+        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(),  vct.get(3).toString());
+        if(dtoEe!= null){
+        final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
+        pantallaModificacion.setVisible(true);
+        // Modifico la operación de cierre para volver a la pantalla principal
+                    pantallaModificacion.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    pantallaModificacion.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent ev) {
+                            pantallaModificacion.dispose();
+                            iniciar();
+                        }
+                    });
+          
+        } 
+  
+  
+        break; // optional
+        
+            
+        
+     }
+     }
+  
+  }
 

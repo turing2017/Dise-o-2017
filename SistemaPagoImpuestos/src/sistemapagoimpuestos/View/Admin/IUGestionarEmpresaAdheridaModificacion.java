@@ -5,25 +5,43 @@
  */
 package sistemapagoimpuestos.View.Admin;
 
-import static antlr.ANTLRTokenTypes.OR;
-import exceptions.Excepciones;
-import java.util.Arrays;
-import static javax.persistence.criteria.Predicate.BooleanOperator.OR;
-import static org.hibernate.criterion.Junction.Nature.OR;
+import java.awt.Component;
+import java.util.List;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 
 /**
  *
  * @author Tongas
  */
 public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
-
-    /**
-     * Creates new form IUGestionarEmpresaAdheridaModificacion
-     */
-    public IUGestionarEmpresaAdheridaModificacion() {
+   ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
+    
+    
+   
+    
+    public IUGestionarEmpresaAdheridaModificacion(DTOEmpresaExistente dtoEe) {
         initComponents();
-    }
+        this.setLocationRelativeTo(null);
+        
+        
+   
+        TextField_Cuit.setText(dtoEe.getCuitDTOEmpresaExistente());
+        TextField_Nombre.setText(dtoEe.getNombreDTOEmpresaExistente());
+        TextField_Direccion.setText(dtoEe.getDireccionDTOEmpresaExistente());
+        CheckBox_Habilitada.setText(dtoEe.getHabilitadaDTOEmpresaExistente());
+       
+        
+}
+ 
+        
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,10 +58,14 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         TextField_Cuit = new javax.swing.JTextField();
         TextField_Nombre = new javax.swing.JTextField();
         TextField_Direccion = new javax.swing.JTextField();
-        Button_EliminarEmpresa = new javax.swing.JButton();
-        Button_ModificarEmpresa = new javax.swing.JButton();
+        Button_Guardar = new javax.swing.JButton();
+        Button_Cancelar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        CheckBox_Habilitada = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Modificacion Empresa");
+        setPreferredSize(new java.awt.Dimension(362, 279));
 
         jLabel1.setText("Cuit");
 
@@ -51,71 +73,90 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
         jLabel3.setText("Direccion");
 
+        TextField_Cuit.setEditable(false);
         TextField_Cuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextField_CuitActionPerformed(evt);
             }
         });
 
-        Button_EliminarEmpresa.setText("Eliminar");
-        Button_EliminarEmpresa.addActionListener(new java.awt.event.ActionListener() {
+        Button_Guardar.setText("Guardar");
+        Button_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Button_EliminarEmpresaActionPerformed(evt);
+                Button_GuardarActionPerformed(evt);
             }
         });
 
-        Button_ModificarEmpresa.setText("Modificar");
-        Button_ModificarEmpresa.addActionListener(new java.awt.event.ActionListener() {
+        Button_Cancelar.setText("Cancelar");
+        Button_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Button_ModificarEmpresaActionPerformed(evt);
+                Button_CancelarActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Habilitada ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(67, 67, 67)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(Button_ModificarEmpresa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(Button_EliminarEmpresa)
-                        .addGap(29, 29, 29))
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TextField_Cuit)
-                            .addComponent(TextField_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(TextField_Direccion))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(29, 29, 29)
+                                .addComponent(CheckBox_Habilitada))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TextField_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                    .addComponent(TextField_Cuit)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 106, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Button_Cancelar)
+                .addGap(18, 18, 18)
+                .addComponent(Button_Guardar)
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(TextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(TextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(CheckBox_Habilitada))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Button_EliminarEmpresa)
-                    .addComponent(Button_ModificarEmpresa))
-                .addGap(30, 30, 30))
+                    .addComponent(Button_Cancelar)
+                    .addComponent(Button_Guardar))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -126,34 +167,59 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
             
     }//GEN-LAST:event_TextField_CuitActionPerformed
 
-    private void Button_ModificarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ModificarEmpresaActionPerformed
-        // TODO add your handling code here:
-        try{
-            if(TextField_Nombre.getText().equals("") || TextField_Direccion.getText().equals("")){
-                TextField_Nombre.setText(null);
-                throw new java.lang.NumberFormatException();
-            }
-            ControladorGestionarEmpresaAdherida.getInstance().seleccionarModificar(TextField_Nombre.getText(), TextField_Direccion.getText());
+    private void Button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CancelarActionPerformed
             this.dispose();
-        }catch(java.lang.NumberFormatException e){
-            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
-        }
-    }//GEN-LAST:event_Button_ModificarEmpresaActionPerformed
+        controlador.iniciar();
+    }//GEN-LAST:event_Button_CancelarActionPerformed
 
-    private void Button_EliminarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_EliminarEmpresaActionPerformed
-        // TODO add your handling code here:
-         try{
-            if(TextField_Nombre.getText().equals("") || TextField_Direccion.getText().equals("")){
-                TextField_Nombre.setText(null);
-                throw new java.lang.NumberFormatException();
-            }
-            ControladorGestionarEmpresaAdherida.getInstance().seleccionarEliminar(TextField_Cuit.getText());    
-            this.dispose();
-        }catch(java.lang.NumberFormatException e){
-            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
-        }
-         this.dispose();
-    }//GEN-LAST:event_Button_EliminarEmpresaActionPerformed
+    private void Button_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_GuardarActionPerformed
+      
+         String cuit= TextField_Cuit.getText();
+         String nombre = TextField_Nombre.getText();
+         String direccion = TextField_Direccion.getText();
+         boolean habilitada =  CheckBox_Habilitada.isSelected();
+        
+         
+
+        controlador.modificarEmpresa(cuit, nombre, direccion, habilitada);
+        this.dispose();
+        
+        
+    
+    }//GEN-LAST:event_Button_GuardarActionPerformed
+
+    public JCheckBox getCheckBox_Habilitada() {
+        return CheckBox_Habilitada;
+    }
+
+    public void setCheckBox_Habilitada(JCheckBox CheckBox_Habilitada) {
+        this.CheckBox_Habilitada = CheckBox_Habilitada;
+    }
+
+
+    public JTextField getTextField_Cuit() {
+        return TextField_Cuit;
+    }
+
+    public void setTextField_Cuit(JTextField TextField_Cuit) {
+        this.TextField_Cuit = TextField_Cuit;
+    }
+
+    public JTextField getTextField_Direccion() {
+        return TextField_Direccion;
+    }
+
+    public void setTextField_Direccion(JTextField TextField_Direccion) {
+        this.TextField_Direccion = TextField_Direccion;
+    }
+
+    public JTextField getTextField_Nombre() {
+        return TextField_Nombre;
+    }
+
+    public void setTextField_Nombre(JTextField TextField_Nombre) {
+        this.TextField_Nombre = TextField_Nombre;
+    }
 
     /**
      * @param args the command line arguments
@@ -185,19 +251,23 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUGestionarEmpresaAdheridaModificacion().setVisible(true);
+                //IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Button_EliminarEmpresa;
-    private javax.swing.JButton Button_ModificarEmpresa;
+    private javax.swing.JButton Button_Cancelar;
+    private javax.swing.JButton Button_Guardar;
+    private javax.swing.JCheckBox CheckBox_Habilitada;
     private javax.swing.JTextField TextField_Cuit;
     private javax.swing.JTextField TextField_Direccion;
     private javax.swing.JTextField TextField_Nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
+
+  
 }

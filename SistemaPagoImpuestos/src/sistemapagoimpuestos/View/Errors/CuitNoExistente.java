@@ -9,15 +9,17 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author mvissio
+ * @author Administrador
  */
-public class ErrorDatoNoEncontrado extends javax.swing.JFrame {
+public class CuitNoExistente extends javax.swing.JFrame {
 
     /**
-     * Creates new form ErrorDatoNoEncontrado
+     * Creates new form CuitExistente
      */
-    public ErrorDatoNoEncontrado() {
+    public CuitNoExistente() {
         initComponents();
+        setDefaultCloseOperation(0);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -29,11 +31,19 @@ public class ErrorDatoNoEncontrado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        button_aceptar = new javax.swing.JButton();
-        label_title = new javax.swing.JLabel();
+        Label_Titulo = new javax.swing.JLabel();
         label_mensaje = new javax.swing.JLabel();
+        button_aceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Label_Titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Label_Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Label_Titulo.setText("Titulo");
+
+        label_mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_mensaje.setToolTipText(""); // NOI18N
+        label_mensaje.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         button_aceptar.setText("Aceptar");
         button_aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -41,14 +51,11 @@ public class ErrorDatoNoEncontrado extends javax.swing.JFrame {
                 button_aceptarActionPerformed(evt);
             }
         });
-
-        label_title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        label_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_title.setText("Titulo");
-
-        label_mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_mensaje.setToolTipText(""); // NOI18N
-        label_mensaje.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        button_aceptar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                button_aceptarKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,35 +64,39 @@ public class ErrorDatoNoEncontrado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(label_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
+                        .addComponent(Label_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(label_title, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(button_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addGap(42, 42, 42)
+                        .addComponent(label_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(button_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(147, 147, 147))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label_title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(label_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(Label_Titulo)
                 .addGap(18, 18, 18)
+                .addComponent(label_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(button_aceptar)
-                .addGap(23, 23, 23))
+                .addGap(27, 27, 27))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_aceptarActionPerformed
         this.dispose();
     }//GEN-LAST:event_button_aceptarActionPerformed
+
+    private void button_aceptarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_button_aceptarKeyTyped
+    this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_button_aceptarKeyTyped
 
     /**
      * @param args the command line arguments
@@ -104,47 +115,50 @@ public class ErrorDatoNoEncontrado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ErrorDatoNoEncontrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuitNoExistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ErrorDatoNoEncontrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuitNoExistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ErrorDatoNoEncontrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuitNoExistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ErrorDatoNoEncontrado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuitNoExistente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ErrorDatoNoEncontrado().setVisible(true);
+                new CuitNoExistente().setVisible(true);
             }
         });
+    }
+
+    public String getLabel_Titulo() {
+        return Label_Titulo.getText();
+    }
+
+    public void setLabel_Titulo(String Label_Titulo) {
+        this.Label_Titulo.setText(Label_Titulo);
     }
 
     public String getLabel_mensaje() {
         return label_mensaje.getText();
     }
 
-    public void setLabel_mensaje(String mensaje) {
-        this.label_mensaje.setText(mensaje);
+    public void setLabel_mensaje(String label_mensaje) {
+        this.label_mensaje.setText(label_mensaje);
     }
-
-    public String getLabel_title() {
-        return label_title.getText();
-    }
-
-    public void setLabel_title(String title) {
-        this.label_title.setText(title);
-    }
-    
-    
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Label_Titulo;
     private javax.swing.JButton button_aceptar;
     private javax.swing.JLabel label_mensaje;
-    private javax.swing.JLabel label_title;
     // End of variables declaration//GEN-END:variables
 }

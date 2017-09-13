@@ -13,12 +13,11 @@ import sistemapagoimpuestos.Entity.TipoDatoItem;
  */
 public class IUGestionarItemAlta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IUGestionarItemAlta
-     */
+    ControladorGestionarItem controlador = new ControladorGestionarItem();
+    
     public IUGestionarItemAlta() {
         initComponents();
-        List<DTOTipoDatoItem> list = ControladorGestionarItem.getInstance().buscarTipoDatoItems();
+        List<DTOTipoDatoItem> list = controlador.buscarTipoDatoItems();
         llenarCombo(list);
         
     }
@@ -150,9 +149,9 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
 //                }
 //        }
             String nombreTipoDatoItemSeleccionado = comboBox_tipoDato.getSelectedItem().toString();
-            ControladorGestionarItem.getInstance().nuevoItem(codigoItem, nombreItem, longitudItem, esRequerido, nombreTipoDatoItemSeleccionado);
+            controlador.nuevoItem(codigoItem, nombreItem, longitudItem, esRequerido, nombreTipoDatoItemSeleccionado);
             this.dispose();
-            ControladorGestionarItem.getInstance().iniciar();
+            controlador.iniciar();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
         }

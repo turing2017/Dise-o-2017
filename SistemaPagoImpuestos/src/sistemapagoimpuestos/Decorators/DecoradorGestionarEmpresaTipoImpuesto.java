@@ -14,6 +14,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  * @author mvissio
  */
 public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpresaTipoImpuesto{
+
+    public DecoradorGestionarEmpresaTipoImpuesto() {
+    }
     
     @Override
     public List iniciar() {

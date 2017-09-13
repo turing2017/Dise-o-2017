@@ -12,6 +12,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorLoguearUsuario extends ExpertoLoguearUsuario {
 
+    public DecoradorLoguearUsuario() {
+    }
+    
     @Override
     public void buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
         FachadaInterna.getInstance().iniciarTransaccion();

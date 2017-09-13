@@ -15,12 +15,13 @@ import sistemapagoimpuestos.View.Login.IULogin;
 
 public class SistemaPagoImpuestos {
 
+    static ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
    
     public static void main(String[] args) {
         
-        FachadaInterna.getInstance().iniciarTransaccion();
-        DatosPrueba.createOperation();
-        FachadaInterna.getInstance().finalizarTransaccion();
-        ControladorLoguearUsuario.getInstance().iniciar();
+//        FachadaInterna.getInstance().iniciarTransaccion();
+//        DatosPrueba.createOperation();
+//        FachadaInterna.getInstance().finalizarTransaccion();
+        controlador.iniciar();
     }
 }

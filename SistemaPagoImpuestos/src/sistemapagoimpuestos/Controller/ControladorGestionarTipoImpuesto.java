@@ -17,21 +17,9 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
 
 
 public class ControladorGestionarTipoImpuesto {
-    
-    private static ControladorGestionarTipoImpuesto controladorGestionarTipoImpuesto;
 
     public ControladorGestionarTipoImpuesto() {
-    }
-    
-    public static ControladorGestionarTipoImpuesto getInstance()
-    {
-        if (controladorGestionarTipoImpuesto == null)
-        {
-            controladorGestionarTipoImpuesto = new ControladorGestionarTipoImpuesto();
-        }
-        return controladorGestionarTipoImpuesto;
-    }
-    
+    }    
     
     private ExpertoGestionarTipoImpuesto experto = (ExpertoGestionarTipoImpuesto) FabricaExpertos.getInstancia().crearExperto("CU14");
     

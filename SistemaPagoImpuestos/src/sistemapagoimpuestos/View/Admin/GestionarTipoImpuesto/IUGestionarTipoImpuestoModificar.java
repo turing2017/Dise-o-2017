@@ -26,9 +26,7 @@ import static sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarT
  */
 public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IUGestionarTipoImpuestoModificar
-     */
+    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
     private static List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemList = new ArrayList<>();
 
     public static List<DTOEmpresaTipImpItem> getdTOEmpresaTipImpItemList() {
@@ -233,9 +231,9 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
                 textfield_nombre.setText(null);
                 throw new java.lang.NumberFormatException();
             }
-            ControladorGestionarTipoImpuesto.getInstance().modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected(), dTOEmpresaTipImpItemList);
+            controlador.modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected(), dTOEmpresaTipImpItemList);
             this.dispose();
-            ControladorGestionarTipoImpuesto.getInstance().iniciar();
+            controlador.iniciar();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
@@ -247,7 +245,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
 
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
-        ControladorGestionarTipoImpuesto.getInstance().iniciar();
+        controlador.iniciar();
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void button_add_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_add_EAActionPerformed

@@ -11,16 +11,7 @@ import sistemapagoimpuestos.View.Login.IULogin;
  */
 public class ControladorLoguearUsuario {
 
-    private static ControladorLoguearUsuario controladorLoguearUsuario;
-
     public ControladorLoguearUsuario() {
-    }
-
-    public static ControladorLoguearUsuario getInstance() {
-        if (controladorLoguearUsuario == null) {
-            controladorLoguearUsuario = new ControladorLoguearUsuario();
-        }
-        return controladorLoguearUsuario;
     }
 
     private ExpertoLoguearUsuario experto = (ExpertoLoguearUsuario) FabricaExpertos.getInstancia().crearExperto("CU08");

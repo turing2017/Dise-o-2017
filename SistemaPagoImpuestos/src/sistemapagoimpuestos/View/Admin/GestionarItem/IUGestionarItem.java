@@ -26,10 +26,9 @@ import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
  * @author lunamarcos
  */
 public class IUGestionarItem extends javax.swing.JFrame {
-
-    /**
-     * Creates new form IUGestionarItem
-     */
+    
+    ControladorGestionarItem controlador = new ControladorGestionarItem();
+    
     public IUGestionarItem() {
         initComponents();
         obtenerItems();
@@ -194,13 +193,13 @@ public class IUGestionarItem extends javax.swing.JFrame {
     
     // Metodo iniciar
     public void iniciar() {
-        ControladorGestionarItem.getInstance().iniciar();
+        controlador.iniciar();
     }
     
     // Método para obtener todos los items y llenar en la tabla
     public void obtenerItems(){
         // Obtengo los 
-        ArrayList<DTOItem> listDtoItem = ControladorGestionarItem.getInstance().obtenerItems();
+        ArrayList<DTOItem> listDtoItem = controlador.obtenerItems();
         
         // Muestro los datos en la tabla
         String[] columnas = {"Codigo", "Nombre", "Requerido", "Estado"};
@@ -276,7 +275,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
                         //pantallaAlta.dispose();
-                        ControladorGestionarItem.getInstance().iniciar();
+                        controlador.iniciar();
                     }
                 });
 
@@ -284,7 +283,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
             // Si se presiona el botón de modificar
             case "Modificar":
                 // Muestro pantalla de Modificación
-                DTOItem dtoItem = ControladorGestionarItem.getInstance().obtenerItem((String) object);
+                DTOItem dtoItem = controlador.obtenerItem((String) object);
                 
                 if (dtoItem != null){
                     // Creo la pantalla
@@ -295,7 +294,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
                     pantallaModificar.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
                             //pantallaModificar.dispose();
-                            ControladorGestionarItem.getInstance().iniciar();
+                            controlador.iniciar();
                         }
                     });
                     pantallaModificar.setTextfield_nombre(dtoItem.getNombreItem());
@@ -309,7 +308,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
                     // Completo el comboBox
                     DTOTipoDatoItem dtoTipoDatoItem = dtoItem.getDtoTipoDatoItem();
                     pantallaModificar.setComboBoxTipoDato(dtoTipoDatoItem.getNombreTipoDatoItem());
-                    List<DTOTipoDatoItem> list = ControladorGestionarItem.getInstance().buscarTipoDatoItems();
+                    List<DTOTipoDatoItem> list = controlador.buscarTipoDatoItems();
                     pantallaModificar.llenarCombo(list);
                     pantallaModificar.setNombreActual(dtoItem.getNombreItem());
                 }

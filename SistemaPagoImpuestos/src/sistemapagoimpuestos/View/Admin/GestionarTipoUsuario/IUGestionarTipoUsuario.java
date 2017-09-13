@@ -17,7 +17,9 @@ import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUGestionarTipoUsuario extends javax.swing.JFrame {
-
+    
+    ControladorGestionarTipoUsuario controlador = new ControladorGestionarTipoUsuario();
+    
     public IUGestionarTipoUsuario() {
         initComponents();
         obtenerTipoUsuario();
@@ -187,12 +189,12 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     }
 
     public void inciar() {
-        ControladorGestionarTipoUsuario.getInstance().iniciar();
+        controlador.iniciar();
     }
 
     public void obtenerTipoUsuario() {
 
-        ArrayList<DTOTipoUsuario> listDtoTipoUsuario = ControladorGestionarTipoUsuario.getInstance().obtenerTipoUsuario();
+        ArrayList<DTOTipoUsuario> listDtoTipoUsuario = controlador.obtenerTipoUsuario();
 
         String[] columnas = {"Nombre Tipo Usuario", "Fecha Inhabilitación"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -252,7 +254,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 MetodosPantalla.getInstance().setearPantalla(pantallaAlta);
                 break;
             case "Habilitar_Deshabilitar":
-                ControladorGestionarTipoUsuario.getInstance().modificarTipoUsuario((String) object);
+                controlador.modificarTipoUsuario((String) object);
                 this.dispose();
                 IUGestionarTipoUsuario pantallaPrincipal = new IUGestionarTipoUsuario();
                 MetodosPantalla.getInstance().setearPantalla(pantallaPrincipal);

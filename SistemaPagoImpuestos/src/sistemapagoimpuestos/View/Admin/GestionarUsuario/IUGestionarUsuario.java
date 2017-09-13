@@ -22,9 +22,8 @@ import sistemapagoimpuestos.Dto.DTOUsuario;
  */
 public class IUGestionarUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IUGestionarUsuario
-     */
+    ControladorGestionarUsuario controlador = new ControladorGestionarUsuario();
+    
     public IUGestionarUsuario() {
         initComponents();
         obtenerUsuario();
@@ -184,7 +183,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
     
        public void obtenerUsuario() {
 
-        ArrayList<DTOUsuario> listDtoUsuario = ControladorGestionarUsuario.getInstance().obtenerUsuario();
+        ArrayList<DTOUsuario> listDtoUsuario = controlador.obtenerUsuario();
 
         String[] columnas = {"Nombre", "Password", "Fecha Inhabilitacion", "Fecha Ulitmo Acceso", "Tipo Usuario", "Empresa Asociada"};
 

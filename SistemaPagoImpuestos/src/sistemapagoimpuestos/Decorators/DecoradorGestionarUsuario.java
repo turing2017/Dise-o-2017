@@ -11,6 +11,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorGestionarUsuario extends ExpertoGestionarUsuario {
 
+    public DecoradorGestionarUsuario() {
+    }
+    
     @Override
     public String iniciar() {
         FachadaInterna.getInstance().iniciarTransaccion();

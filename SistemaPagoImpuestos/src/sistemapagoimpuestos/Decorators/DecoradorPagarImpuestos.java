@@ -12,5 +12,8 @@ import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
  * @author mvissio
  */
 public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
+
+    public DecoradorPagarImpuestos() {
+    }
     
 }

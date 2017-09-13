@@ -14,17 +14,7 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorGestionarItem extends ExpertoGestionarItem{
     
-    // Debemos utilizarlo como singletone
-    private static DecoradorGestionarItem decoradorGestionarItem;
     public DecoradorGestionarItem() {      
-    } 
-    public static DecoradorGestionarItem getInstance()
-    {
-        if (decoradorGestionarItem == null)
-        {
-            decoradorGestionarItem = new DecoradorGestionarItem();
-        }
-        return decoradorGestionarItem;
     }
     
     @Override

@@ -22,6 +22,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAdherida{
 
+    public DecoradorGestionarEmpresaAdherida() {
+    }
+    
     @Override
     public String iniciar() {
         

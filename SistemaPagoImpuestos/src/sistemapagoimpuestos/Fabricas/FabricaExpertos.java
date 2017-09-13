@@ -40,9 +40,9 @@ public class FabricaExpertos {
             case "CU02":
                 return new DecoradorPagarImpuestos();
             case "CU05":
-                return new DecoradorGestionarTipoDeCuenta();  
+                return new DecoradorGestionarTipoDeCuenta();
             case "CU13":
-                return DecoradorGestionarItem.getInstance();
+                return new DecoradorGestionarItem();
             case "CU14":
                 return new DecoradorGestionarTipoImpuesto();
             case "CU15":

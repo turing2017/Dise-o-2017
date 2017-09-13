@@ -14,6 +14,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorGestionarTipoDeCuenta extends ExpertoGestionarTipoDeCuenta {
 
+    public DecoradorGestionarTipoDeCuenta() {
+    }
+    
     @Override
     public String iniciar() {
         FachadaInterna.getInstance().iniciarTransaccion();

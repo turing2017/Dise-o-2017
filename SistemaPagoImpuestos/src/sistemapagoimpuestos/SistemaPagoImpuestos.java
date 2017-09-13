@@ -28,6 +28,7 @@ import sistemapagoimpuestos.View.Login.IULogin;
 
 public class SistemaPagoImpuestos {
 
+    static ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
    
     public static void main(String[] args) {
 
@@ -36,10 +37,17 @@ public class SistemaPagoImpuestos {
         //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
 
         
+<<<<<<< HEAD
        // FachadaInterna.getInstance().iniciarTransaccion();
        // DatosPrueba.createOperation();
        // FachadaInterna.getInstance().finalizarTransaccion();
        // ControladorLoguearUsuario.getInstance().iniciar();
        ControladorGestionarParametrosCalculoComision.getInstance().iniciar();
+=======
+//        FachadaInterna.getInstance().iniciarTransaccion();
+//        DatosPrueba.createOperation();
+//        FachadaInterna.getInstance().finalizarTransaccion();
+        controlador.iniciar();
+>>>>>>> develop_sinSingleton
     }
 }

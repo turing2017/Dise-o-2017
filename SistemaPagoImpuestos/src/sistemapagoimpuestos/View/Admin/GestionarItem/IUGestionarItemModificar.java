@@ -14,9 +14,8 @@ import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
  */
 public class IUGestionarItemModificar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IUGestionarItemModificar
-     */
+    ControladorGestionarItem controlador = new ControladorGestionarItem();
+    
     public IUGestionarItemModificar() {
         initComponents();
     }
@@ -133,9 +132,9 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
                 textfield_nombre.setText(null);
                 throw new java.lang.NumberFormatException();
             }
-            ControladorGestionarItem.getInstance().modificarItem(getNombreActual(), textfield_nombre.getText(), Integer.parseInt(textfield_longitud.getText()), checkbox_requerido.isSelected(), checkbox_habilitado.isSelected(), comboBox_tipoDato.getSelectedItem().toString());
+            controlador.modificarItem(getNombreActual(), textfield_nombre.getText(), Integer.parseInt(textfield_longitud.getText()), checkbox_requerido.isSelected(), checkbox_habilitado.isSelected(), comboBox_tipoDato.getSelectedItem().toString());
             this.dispose();
-            ControladorGestionarItem.getInstance().iniciar();
+            controlador.iniciar();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
@@ -221,9 +220,6 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
     public String getNombreActual() {
         return nombreActual;
     }
-    
-    
-    
         // Método para llenar el comboBox
     public void llenarCombo(List<DTOTipoDatoItem> list){
         for (int i = 0; i < list.size(); i++) {

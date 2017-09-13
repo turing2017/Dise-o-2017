@@ -14,17 +14,7 @@ import sistemapagoimpuestos.View.Admin.GestionarItem.IUGestionarItem;
  */
 public class ControladorGestionarItem {
     
-    // Debemos utilizarlo como singletone
-    private static ControladorGestionarItem controladorGestionarItem;
     public ControladorGestionarItem() {      
-    } 
-    public static ControladorGestionarItem getInstance()
-    {
-        if (controladorGestionarItem == null)
-        {
-            controladorGestionarItem = new ControladorGestionarItem();
-        }
-        return controladorGestionarItem;
     }
   
     // Experto GestionarItem

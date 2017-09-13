@@ -10,19 +10,7 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoUsuario.IUGestionarTipoUsuar
 
 public class ControladorGestionarTipoUsuario {
 
-    private static ControladorGestionarTipoUsuario controladorGestionarTipoUsuario;
-
     public ControladorGestionarTipoUsuario() {
-    }
-    //singleton 
-
-    public static ControladorGestionarTipoUsuario getInstance() {
-
-        if (controladorGestionarTipoUsuario == null) {
-            controladorGestionarTipoUsuario = new ControladorGestionarTipoUsuario();
-        }
-        return controladorGestionarTipoUsuario;
-
     }
 
     private ExpertoGestionarTipoUsuario experto = (ExpertoGestionarTipoUsuario) FabricaExpertos.getInstancia().crearExperto("CU06");

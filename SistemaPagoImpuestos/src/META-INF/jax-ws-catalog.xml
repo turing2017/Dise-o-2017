@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS?wsdl" uri="xml-resources/web-service-references/BuscarComprobantesImpPagolWS_1/wsdl/localhost_8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS.wsdl"/>
+    <system systemId="http://localhost:8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS?wsdl=1" uri="xml-resources/web-service-references/BuscarComprobantesImpPagolWS_1/wsdl/localhost_8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS?xsd=1" uri="xml-resources/web-service-references/BuscarComprobantesImpPagolWS_1/wsdl/localhost_8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS.xsd_1.xsd"/>
+</catalog>

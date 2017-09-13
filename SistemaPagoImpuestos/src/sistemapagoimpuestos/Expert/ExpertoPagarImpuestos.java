@@ -5,10 +5,19 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import sistemapagoimpuestos.classws.BuscarComprobantesImpPagolWSService;
+import sistemapagoimpuestos.classws.BuscarComprobantesPago;
+import sistemapagoimpuestos.classws.BuscarComprobantesPagoWS;
+
 /**
  *
  * @author mvissio
  */
 public class ExpertoPagarImpuestos {
     //public 
+    
+    public void buscarComprobantePago(){
+        BuscarComprobantesPagoWS bcp = new BuscarComprobantesImpPagolWSService().getBuscarComprobantesImpPagolWSPort();
+        System.out.println(bcp.buscarComprobantesPago());
+    }
 }

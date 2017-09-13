@@ -12,5 +12,10 @@ import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
  * @author mvissio
  */
 public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
+
+    @Override
+    public void buscarComprobantePago() {
+        super.buscarComprobantePago(); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

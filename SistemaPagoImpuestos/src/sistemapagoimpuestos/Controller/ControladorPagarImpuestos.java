@@ -5,6 +5,9 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
+import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+
 /**
  *
  * @author mvissio
@@ -24,7 +27,10 @@ public class ControladorPagarImpuestos {
         }
         return controladorPagarImpuesto;
     }
-    
-    
+     private ExpertoPagarImpuestos experto = (ExpertoPagarImpuestos) FabricaExpertos.getInstancia().crearExperto("CU14");
+   
+    public void buscarPagoImpuetos(){
+        experto.buscarComprobantePago();
+    }
     
 }

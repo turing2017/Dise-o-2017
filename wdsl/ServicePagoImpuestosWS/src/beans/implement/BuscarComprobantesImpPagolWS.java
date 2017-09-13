@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 import beans.BuscarComprobantesPagoWS;
+import entity.AtributoAdicional;
 
 /**
  *
@@ -23,7 +24,12 @@ public class BuscarComprobantesImpPagolWS implements BuscarComprobantesPagoWS{
     @Override
     public List<ComprobantePago> buscarComprobantesPago() {
         List<ComprobantePago> comprobantePagos = new ArrayList<>();
-        comprobantePagos.add(new ComprobantePago(null, 1, 2.4, null));
+        List<AtributoAdicional> atributoAdicionalList = new ArrayList<>();
+        atributoAdicionalList.add(new AtributoAdicional("atributo 1", 2.5));
+        atributoAdicionalList.add(new AtributoAdicional("atributo 2", 12.5));
+        atributoAdicionalList.add(new AtributoAdicional("iva", 21));
+
+        comprobantePagos.add(new ComprobantePago(null, 1, 2.4, atributoAdicionalList));
         return comprobantePagos;
     }
     

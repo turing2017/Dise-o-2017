@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        --><project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${libs.jaxws21.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-BuscarComprobantesImpPagolWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS"/>
+        <property name="wsdl-BuscarComprobantesImpPagolWS" location="xml-resources/web-service-references/BuscarComprobantesImpPagolWS/wsdl/localhost_8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS" destdir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS" wsdl="${wsdl-BuscarComprobantesImpPagolWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS?wsdl" xnocompile="true" xendorsed="true" package="sistemapagoimpuestos.classws">
+            <depends file="${wsdl-BuscarComprobantesImpPagolWS}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-BuscarComprobantesImpPagolWS" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/sistemapagoimpuestos/classws"/>
+    </target>
+    <target name="wsimport-client-BuscarComprobantesImpPagolWS_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS_1"/>
+        <property name="wsdl-BuscarComprobantesImpPagolWS_1" location="xml-resources/web-service-references/BuscarComprobantesImpPagolWS_1/wsdl/localhost_8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS_1" destdir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS_1" wsdl="${wsdl-BuscarComprobantesImpPagolWS_1}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/BuscarComprobantesImpPagolWSService/BuscarComprobantesImpPagolWS?wsdl" xnocompile="true" xendorsed="true" package="sistemapagoimpuestos.classws">
+            <depends file="${wsdl-BuscarComprobantesImpPagolWS_1}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-BuscarComprobantesImpPagolWS_1" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/BuscarComprobantesImpPagolWS_1"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/sistemapagoimpuestos/classws"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-BuscarComprobantesImpPagolWS, wsimport-client-BuscarComprobantesImpPagolWS_1"/>
+</project>

@@ -27,10 +27,12 @@
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="button_gestionarTipoUsuario" max="32767" attributes="0"/>
-                  <Component id="button_gestionarTipoImpuesto" max="32767" attributes="0"/>
-                  <Component id="button_gestionarUsuario" min="-2" pref="222" max="-2" attributes="0"/>
+                  <Component id="button_gestionarUsuario" alignment="0" max="32767" attributes="0"/>
+                  <Component id="button_gestionarTipoImpuesto" alignment="0" max="32767" attributes="0"/>
+                  <Component id="button_gestionarItem" alignment="0" max="32767" attributes="0"/>
+                  <Component id="button_gestionar_cal_params" alignment="0" pref="266" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="330" max="32767" attributes="0"/>
+              <EmptySpace pref="286" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -55,7 +57,11 @@
               <Component id="button_gestionarUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="button_gestionarTipoImpuesto" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace pref="331" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="button_gestionarItem" min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="button_gestionar_cal_params" min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace pref="251" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,6 +100,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="button_gestionarItem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gestionar Item"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionarItemActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="button_gestionar_cal_params">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gestionar Gestionar Calculo Parametros"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionar_cal_paramsActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

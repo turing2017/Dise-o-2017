@@ -2,6 +2,7 @@
 package sistemapagoimpuestos;
 
 
+import static datosPrueba.DatosPrueba.generarDatosPrueba;
 import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
 
 

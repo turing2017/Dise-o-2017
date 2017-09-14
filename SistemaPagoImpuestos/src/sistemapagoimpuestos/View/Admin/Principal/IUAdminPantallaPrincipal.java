@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.View.Admin.Principal;
 
+import sistemapagoimpuestos.Controller.ControladorGestionarItem;
+import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
 import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
@@ -10,6 +12,8 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     ControladorGestionarTipoImpuesto controladorGestTipoImpu = new ControladorGestionarTipoImpuesto();
     ControladorGestionarTipoUsuario controladorGestTipoUsu = new ControladorGestionarTipoUsuario();
     ControladorGestionarUsuario controladorGestUsu = new ControladorGestionarUsuario();
+    ControladorGestionarItem gestionarItem = new ControladorGestionarItem();
+    ControladorGestionarParametrosCalculoComision calculoComision = new ControladorGestionarParametrosCalculoComision();
     
     public IUAdminPantallaPrincipal() {
         initComponents();
@@ -31,6 +35,8 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         button_gestionarUsuario = new javax.swing.JButton();
         label_nombre = new javax.swing.JLabel();
         label_fecha = new javax.swing.JLabel();
+        button_gestionarItem = new javax.swing.JButton();
+        button_gestionar_cal_params = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +65,20 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
 
         label_fecha.setText("jLabel2");
 
+        button_gestionarItem.setText("Gestionar Item");
+        button_gestionarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_gestionarItemActionPerformed(evt);
+            }
+        });
+
+        button_gestionar_cal_params.setText("Gestionar Gestionar Calculo Parametros");
+        button_gestionar_cal_params.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_gestionar_cal_paramsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,9 +87,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(button_gestionarTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button_gestionarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(330, Short.MAX_VALUE))
+                    .addComponent(button_gestionarItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +112,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(button_gestionarUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_gestionarItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,6 +136,16 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         controladorGestUsu.iniciar();
         this.dispose();
     }//GEN-LAST:event_button_gestionarUsuarioActionPerformed
+
+    private void button_gestionarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarItemActionPerformed
+        gestionarItem.iniciar();
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_button_gestionarItemActionPerformed
+
+    private void button_gestionar_cal_paramsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionar_cal_paramsActionPerformed
+        calculoComision.iniciar();
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_button_gestionar_cal_paramsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,9 +184,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_gestionarItem;
     private javax.swing.JButton button_gestionarTipoImpuesto;
     private javax.swing.JButton button_gestionarTipoUsuario;
     private javax.swing.JButton button_gestionarUsuario;
+    private javax.swing.JButton button_gestionar_cal_params;
     private javax.swing.JLabel label_fecha;
     private javax.swing.JLabel label_nombre;
     // End of variables declaration//GEN-END:variables

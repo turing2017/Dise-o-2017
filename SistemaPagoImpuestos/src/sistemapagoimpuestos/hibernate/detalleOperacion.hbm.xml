@@ -10,6 +10,11 @@
         <property name="valorDetalleOperacion" type="string" unique="true" not-null="true">
            <column name="valorDetalleOperacion"/>
         </property>
+        
+        
        <many-to-one name="itemEmpresaTipoImpuesto" class="sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto" column="OIDItemEmpresaTipoImpuesto" not-null="true"/>
+<many-to-one name="operacion" class="sistemapagoimpuestos.Entity.Operacion" column="OIDOperacion" not-null="true"/>   
+   
+
     </class>
 </hibernate-mapping>

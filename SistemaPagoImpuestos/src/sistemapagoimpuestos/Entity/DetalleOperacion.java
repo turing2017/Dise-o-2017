@@ -13,12 +13,14 @@ public class DetalleOperacion extends Entity{
     
     private String valorDetalleOperacion;
     private ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto;
+private Operacion operacion;
 
     public DetalleOperacion() {
     }
 
-    public DetalleOperacion(String valorDetalleOperacion) {
+    public DetalleOperacion(String valorDetalleOperacion ,Operacion operacion) {
         this.valorDetalleOperacion = valorDetalleOperacion;
+        this.operacion = operacion;
     }
 
     
@@ -36,6 +38,14 @@ public class DetalleOperacion extends Entity{
 
     public void setItemEmpresaTipoImpuesto(ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto) {
         this.itemEmpresaTipoImpuesto = itemEmpresaTipoImpuesto;
+    }
+
+    public Operacion getOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(Operacion operacion) {
+        this.operacion = operacion;
     }
     
     

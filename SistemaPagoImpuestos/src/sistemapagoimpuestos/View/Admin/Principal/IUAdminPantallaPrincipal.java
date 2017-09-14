@@ -1,5 +1,6 @@
 package sistemapagoimpuestos.View.Admin.Principal;
 
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Controller.ControladorGestionarItem;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
@@ -14,6 +15,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     ControladorGestionarUsuario controladorGestUsu = new ControladorGestionarUsuario();
     ControladorGestionarItem gestionarItem = new ControladorGestionarItem();
     ControladorGestionarParametrosCalculoComision calculoComision = new ControladorGestionarParametrosCalculoComision();
+    ControladorGestionarEmpresaAdherida gestionarEmpresaAdherida = new ControladorGestionarEmpresaAdherida();
     
     public IUAdminPantallaPrincipal() {
         initComponents();
@@ -37,6 +39,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         label_fecha = new javax.swing.JLabel();
         button_gestionarItem = new javax.swing.JButton();
         button_gestionar_cal_params = new javax.swing.JButton();
+        button_gestionarEmpresaAdherida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +82,13 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        button_gestionarEmpresaAdherida.setText("Gestionar Empresa Adherida");
+        button_gestionarEmpresaAdherida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_gestionarEmpresaAdheridaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,7 +100,8 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(button_gestionarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_gestionarItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+                    .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                    .addComponent(button_gestionarEmpresaAdherida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(286, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -116,7 +127,9 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(button_gestionarItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_gestionarEmpresaAdherida)
+                .addContainerGap(219, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,6 +159,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         calculoComision.iniciar();
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_button_gestionar_cal_paramsActionPerformed
+
+    private void button_gestionarEmpresaAdheridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarEmpresaAdheridaActionPerformed
+        gestionarEmpresaAdherida.iniciar();
+        this.dispose();
+    }//GEN-LAST:event_button_gestionarEmpresaAdheridaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +202,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_gestionarEmpresaAdherida;
     private javax.swing.JButton button_gestionarItem;
     private javax.swing.JButton button_gestionarTipoImpuesto;
     private javax.swing.JButton button_gestionarTipoUsuario;

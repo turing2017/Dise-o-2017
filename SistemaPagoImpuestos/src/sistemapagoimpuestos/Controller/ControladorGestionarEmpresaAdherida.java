@@ -57,17 +57,14 @@ public class ControladorGestionarEmpresaAdherida {
         return experto.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada);
     }
     
-     public void seleccionarOpcion(String opcion, Object evt, Object controlador){
-        switch(opcion) {
-        case "NuevaEmpresa" :
+    public void crearEmpresa(Object evt, Object controlador){
         // Muestro pantalla de Nueva Empresa
             IUGestionarEmpresaAdheridaCrear pantallaCrear = new IUGestionarEmpresaAdheridaCrear(controlador);
             pantallaCrear.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaCrear.setVisible(true); // La hago visible
-           
-        break; // optional
+     }
         
-        case "Modificar" :
+    public void modificarEmpresa(Object evt, Object controlador){
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
         vct = (Vector) evt;
@@ -84,14 +81,7 @@ public class ControladorGestionarEmpresaAdherida {
                         }
                     });
           
-        } 
-  
-  
-        break; // optional
-        
-            
-        
-     }
+        }
      }
   
   }

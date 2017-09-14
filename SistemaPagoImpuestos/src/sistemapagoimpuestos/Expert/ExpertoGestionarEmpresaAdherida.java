@@ -47,7 +47,7 @@ public class ExpertoGestionarEmpresaAdherida {
       DTOe.setDireccionEmpresa(empresa.getDireccionEmpresa());
       DTOe.setNombreEmpresa(empresa.getNombreEmpresa());
       DTOe.setFechaHoraInhabilitacionEmpresa(empresa.getFechaHoraInhabilitacionEmpresa());
-      //DTOe.setNombreTipoEmpresaDTOEmpresa(empresa.getTipoEmpresa().getNombreTipoEmpresa());
+     
       
       listDTOEmpresa.add(DTOe);
     
@@ -57,7 +57,7 @@ public class ExpertoGestionarEmpresaAdherida {
     
     
   
-    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, String tipoEmpresa, boolean habilitada) {
+    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
        boolean camposVacios= camposNulos(cuit, nombre, direccion);
        if (camposVacios==true){
        Excepciones.getInstance().camposVacios();
@@ -81,7 +81,6 @@ public class ExpertoGestionarEmpresaAdherida {
             empresa.setNombreEmpresa(nombre);
             empresa.setCuitEmpresa(cuit);
             empresa.setDireccionEmpresa(direccion);
-        //    empresa.setTipoEmpresa(buscarTipoEmpresa(tipoEmpresa));
             if (habilitada == true){
             empresa.setFechaHoraInhabilitacionEmpresa(null);
             }
@@ -97,7 +96,7 @@ public class ExpertoGestionarEmpresaAdherida {
 
    
     
-    public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada, String tipoEmpresa){
+    public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada){
        
         
         try{
@@ -117,10 +116,7 @@ public class ExpertoGestionarEmpresaAdherida {
         }else{
             empresa.setFechaHoraInhabilitacionEmpresa(new Date());
         }
-        
-       // empresa.setTipoEmpresa(buscarTipoEmpresa(tipoEmpresa));
-        
-        
+       
         FachadaPersistencia.getInstance().guardar(empresa);
         
         Excepciones.getInstance().modificacionExito();
@@ -132,27 +128,18 @@ public class ExpertoGestionarEmpresaAdherida {
         
     }
     
-    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada, String tipoEmpresa){
+    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
         DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
         dtoEe.setCuitDTOEmpresaExistente(cuitEmpresa);
         dtoEe.setNombreDTOEmpresaExistente(nombreEmpresa);
         dtoEe.setDireccionDTOEmpresaExistente(direccionEmpresa);
         dtoEe.setHabilitadaDTOEmpresaExistente(habilitada);
-        dtoEe.setNombreTipoEmpresaDTOEmpresaExistente(tipoEmpresa);
+
         
         return dtoEe;
     }
     
-    public TipoEmpresa buscarTipoEmpresa (String nombre){
-        List<DTOCriterio> criterios = new ArrayList<>();
-            DTOCriterio criterio1 = new DTOCriterio();
-            criterio1.setAtributo("nombreTipoEmpresa");
-            criterio1.setOperacion("=");
-            criterio1.setValor(nombre);
-            criterios.add(criterio1);
-            TipoEmpresa tipo = (TipoEmpresa) FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterios).get(0);
-            return tipo;
-    }
+  
     public boolean camposNulos(String cuit, String nombre, String direccion ){
         boolean error=false;
         if (cuit.isEmpty()){
@@ -167,30 +154,7 @@ public class ExpertoGestionarEmpresaAdherida {
        
         return error;
     }
-    public List<DTOTipoEmpresa> buscarTiposDeEmpresa(){
-     List<DTOCriterio> criterios = new ArrayList();
-      DTOCriterio criterio1 = new DTOCriterio();
-        criterio1.setAtributo("fechaHoraInhabilitacionTipoEmpresa");
-        criterio1.setOperacion("IS");
-        criterio1.setValor(null);
-        criterios.add(criterio1);   
-        List tipo = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterios);
-       
-        List<DTOTipoEmpresa> lista = new ArrayList<>();
-        DTOTipoEmpresa dtoTipoEmpresa;
-
-        for (int i = 0; i < tipo.size(); i++) {
-            dtoTipoEmpresa = new DTOTipoEmpresa();
-            TipoEmpresa tipoEmpresa = (TipoEmpresa) tipo.get(i);
-            String nombreTipoEmpresa = tipoEmpresa.getNombreTipoEmpresa();
-            dtoTipoEmpresa.setNombreTipoEmpresa(nombreTipoEmpresa);
-            lista.add(dtoTipoEmpresa);
-        }
-        return lista;
-    }
-
-     
-    }
+  }
  
    
  

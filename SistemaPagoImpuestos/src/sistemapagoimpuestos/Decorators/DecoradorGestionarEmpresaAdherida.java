@@ -22,9 +22,6 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAdherida{
 
-    public DecoradorGestionarEmpresaAdherida() {
-    }
-    
     @Override
     public String iniciar() {
         
@@ -35,30 +32,32 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada, String tipoEmpresa) {
+    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOEmpresaExistente dtoEe= super.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada, tipoEmpresa); //To change body of generated methods, choose Tools | Templates.
+        DTOEmpresaExistente dtoEe= super.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoEe;
     }
     
 
     @Override
-    public void modificarEmpresa(String cuit, String nombre, String direccion, boolean habilitada, String tipoEmpresa) {
+    public void modificarEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarEmpresa(cuit, nombre, direccion, habilitada, tipoEmpresa); //To change body of generated methods, choose Tools | Templates.
+        super.modificarEmpresa(cuit, nombre, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+
+    @Override
+    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.ingresarDatosEmpresa(cuit, nombre, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
     
 
    
 
-    @Override
-    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, String tipoEmpresa, boolean habilitada) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.ingresarDatosEmpresa(cuit, nombre, direccion, tipoEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-    }
+   
 
     @Override
     public ArrayList<DTOEmpresa> consultarEmpresas() {
@@ -68,13 +67,7 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
         return dtoe;
     }
 
-    @Override
-    public List<DTOTipoEmpresa> buscarTiposDeEmpresa() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-         List<DTOTipoEmpresa> dtoTipoEmpresa =super.buscarTiposDeEmpresa(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return dtoTipoEmpresa;
-    }
+    
 
    
 

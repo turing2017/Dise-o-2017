@@ -36,6 +36,11 @@
          <one-to-many class="sistemapagoimpuestos.Entity.LiquidacionEstado"/>  
        </bag>
        
+        <bag name="comisionList" table="comision" cascade="none" inverse="false">
+       <key column="OIDLiquidacion" not-null="true" />
+         <one-to-many class="sistemapagoimpuestos.Entity.Comision"/>  
+       </bag>
+       
        
   </class>
 </hibernate-mapping>

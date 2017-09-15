@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.Comision" table="comision">
+        <id name = "OID" type="string">
+        <column name="OIDComision"/>
+        <generator class="uuid2"/>
+        </id>
+   
+    
+    <property name="valorComision" not-null="true" type="double" >
+        <column name="valorComision"/>
+    </property>
+    
+    <property name="fechaCalculoComision" type="timestamp">
+        <column name="fechaCalculoComision"/>
+    </property>
+    
+    <many-to-one name="operacion" class="sistemapagoimpuestos.Entity.Operacion" column="OIDOperacion"/>
+    
+    </class>
+</hibernate-mapping>

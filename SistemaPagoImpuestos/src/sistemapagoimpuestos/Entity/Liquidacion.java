@@ -23,11 +23,13 @@ public class Liquidacion extends Entity{
     private List<Operacion> operacionList = new ArrayList<>();
     private EmpresaTipoImpuesto empresaTipoImpuesto;
     private List<LiquidacionEstado> liquidacionEstadoList = new ArrayList<>();
+    private List<Comision> comisionList = new ArrayList<>();
 
     public Liquidacion() {
     }
 
-    public Liquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion, List<Operacion> operacion, EmpresaTipoImpuesto empresaTipoImpuesto, List<LiquidacionEstado> liquidacionEstado) {
+    public Liquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion,
+            List<Operacion> operacion, EmpresaTipoImpuesto empresaTipoImpuesto, List<LiquidacionEstado> liquidacionEstado, List<Comision> comision) {
         this.numeroLiquidacion = numeroLiquidacion;
         this.fechaHoraLiquidacion = fechaHoraLiquidacion;
         this.fechaHoraDesdeLiquidacion = fechaHoraDesdeLiquidacion;
@@ -35,6 +37,7 @@ public class Liquidacion extends Entity{
         this.operacionList = operacion;
         this.empresaTipoImpuesto = empresaTipoImpuesto;
         this.liquidacionEstadoList = liquidacionEstado;
+        this.comisionList = comision;
     }
 
     public int getNumeroLiquidacion() {
@@ -91,6 +94,14 @@ public class Liquidacion extends Entity{
 
     public void setLiquidacionEstadoList(List<LiquidacionEstado> liquidacionEstadoList) {
         this.liquidacionEstadoList = liquidacionEstadoList;
+    }
+
+    public List<Comision> getComisionList() {
+        return comisionList;
+    }
+
+    public void setComisionList(List<Comision> comisionList) {
+        this.comisionList = comisionList;
     }
 
    

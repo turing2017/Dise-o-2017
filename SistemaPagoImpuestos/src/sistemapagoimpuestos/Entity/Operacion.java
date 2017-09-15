@@ -8,6 +8,7 @@ package sistemapagoimpuestos.Entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,12 +27,13 @@ public class Operacion extends Entity{
     private Empresa empresa;
     private EmpresaTipoImpuesto empresaTipoImpuesto;
     private TipoImpuesto tipoImpuesto;
+    private List<DetalleOperacion> detalleOperacionList = new ArrayList<>();
  
 
     public Operacion() {
     }
 
-    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto) {
+    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto,List<DetalleOperacion> detalleOperacion) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectrionicoOperacion = codigoPagoElectrionicoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
@@ -43,7 +45,7 @@ public class Operacion extends Entity{
         this.empresa = empresa;
         this.empresaTipoImpuesto = empresaTipoImpuesto;
         this.tipoImpuesto = tipoImpuesto;
-        
+        this.detalleOperacionList = detalleOperacion;
     }
 
     public int getNumeroOperacion() {
@@ -132,6 +134,14 @@ public class Operacion extends Entity{
 
     public void setTipoImpuesto(TipoImpuesto tipoImpuesto) {
         this.tipoImpuesto = tipoImpuesto;
+    }
+
+    public List<DetalleOperacion> getDetalleOperacionList() {
+        return detalleOperacionList;
+    }
+
+    public void setDetalleOperacionList(List<DetalleOperacion> detalleOperacion) {
+        this.detalleOperacionList = detalleOperacion;
     }
 
  

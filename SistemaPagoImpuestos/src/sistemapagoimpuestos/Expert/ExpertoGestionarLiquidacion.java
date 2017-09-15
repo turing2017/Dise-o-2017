@@ -161,7 +161,7 @@ else{
         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
        // dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
-             dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+             dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
         listDtoLiquidacion.add(dtoLiquidacion);
     }
         return listDtoLiquidacion;
@@ -185,9 +185,12 @@ else{
         dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+        System.out.println("-------------------------PASA1-----------------");
         //dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
-        dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+        //dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+          dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size()-1).getEstadoLiquidacion().getNombreEstadoLiquidacion());
         listDtoLiquidacion.add(dtoLiquidacion);
+        System.out.println("-------------------------PASA3-----------------");
          }
             //SI SOLO NOMBRE TIPOIMPUESTO ES TODOS
         }else {
@@ -219,7 +222,7 @@ else{
                     dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
                     dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
                   //  dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
-                            dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                            dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
                     dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
                     dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
                    
@@ -262,7 +265,7 @@ else{
                     dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
                     dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
                 //  dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
-                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
                     dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
                     dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
                 
@@ -317,7 +320,7 @@ else{
         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
         //dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().getEstadoLiquidacion().getNombreEstadoLiquidacion());
-         dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstado().get(liquidacion.getLiquidacionEstado().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+         dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().lastIndexOf(obj)).getEstadoLiquidacion().getNombreEstadoLiquidacion());
         listDtoLiquidacion.add(dtoLiquidacion);
             }
         }  
@@ -344,13 +347,13 @@ else{
        
        
        //HACE UN GET A  LA LISTA DE OPERACIONES DE ESA LIQUIDACION Y POR CADA OEPRACION LLENA UN DTOOPERACION
-        for (int i = 0; i>liquidacion.getOperacion().size();i++ ) {
+        for (int i = 0; i>liquidacion.getOperacionList().size();i++ ) {
             
         DTOOperacion dtoOperacion = new DTOOperacion();
-        dtoOperacion.setNumeroOperacion(liquidacion.getOperacion().get(0).getNumeroOperacion());
-        dtoOperacion.setNroComprobanteFactura(   liquidacion.getOperacion().get(0).getNroComprobanteFacturaOperacion());
-        dtoOperacion.setValorComisionOperacion( liquidacion.getOperacion().get(0).getValorComisionOperacion());
-        dtoOperacion.setImportePagadoOperacion( liquidacion.getOperacion().get(0).getImportePagadoOperacion());
+        dtoOperacion.setNumeroOperacion(liquidacion.getOperacionList().get(0).getNumeroOperacion());
+        dtoOperacion.setNroComprobanteFactura(   liquidacion.getOperacionList().get(0).getNroComprobanteFacturaOperacion());
+        dtoOperacion.setValorComisionOperacion( liquidacion.getOperacionList().get(0).getValorComisionOperacion());
+        dtoOperacion.setImportePagadoOperacion( liquidacion.getOperacionList().get(0).getImportePagadoOperacion());
         listDTOOperacion.add(dtoOperacion);
         
                 }

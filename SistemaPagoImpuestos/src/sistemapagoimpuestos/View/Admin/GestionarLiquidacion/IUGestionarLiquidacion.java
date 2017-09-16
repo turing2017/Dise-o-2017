@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author vande
@@ -190,14 +191,14 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                 .addGap(99, 99, 99)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(131, 131, 131)
-                                        .addComponent(jButton2))
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(65, 65, 65))
+                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(129, 129, 129)
+                                        .addComponent(jButton2))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,7 +231,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,7 +241,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 .addComponent(jButtonConsultarLiquidaciones)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonMostrar)
                     .addComponent(jButtonAprobar)
@@ -255,15 +256,20 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConsultarLiquidacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarLiquidacionesActionPerformed
-
+  //Limpia la tabla
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            while (model.getRowCount()>0) {
+            model.removeRow(0);
+        }
+     //manda a buscar con los parametros       
         Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
         ArrayList <DTOLiquidacion> listDtoLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
-        System.out.print(listDtoLiquidacion.isEmpty());
+        
+        //LLena la tabla
         
         for (int i=0; i< listDtoLiquidacion.size(); i++){
-           DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-           jTable2.removeAll();
+           
       model.addRow(new Object[]{});
        jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
        jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i,1);

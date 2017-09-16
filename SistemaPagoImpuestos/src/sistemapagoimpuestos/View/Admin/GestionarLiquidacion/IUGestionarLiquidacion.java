@@ -33,11 +33,15 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         initComponents();
         jComboBoxEmpresa.setEditable(false);
         jComboBoxTipoImpuesto.addItem("Todos");
-        jComboBoxEmpresa.addItem("Todos");
         ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarLiquidacion.getInstance().obtenerTipoImpuestos();  
          for(DTOTipoImpuesto obj : listDtoTipoImpuesto){
              jComboBoxTipoImpuesto.addItem(obj.getNombreDTOTipoImpuesto());
            }  
+         jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.addItem("Todos");
+         List<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+       for(DTOEmpresa obj : listDtoDTOEmpresa){
+            jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}     
     }
 
     /**
@@ -192,7 +196,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                         .addGap(131, 131, 131)
                                         .addComponent(jButton2))
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(65, 65, 65))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,12 +258,25 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
 
         Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
-        ArrayList <DTOLiquidacion> listLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
-        System.out.print(listLiquidacion.isEmpty());
+        ArrayList <DTOLiquidacion> listDtoLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
+        System.out.print(listDtoLiquidacion.isEmpty());
+        
+        for (int i=0; i< listDtoLiquidacion.size(); i++){
+           DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+           jTable2.removeAll();
+      model.addRow(new Object[]{});
+       jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
+       jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i,1);
+        jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
+         jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 3);
+          jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
+           jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
+        }
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
-jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.removeAllItems();
         jComboBoxEmpresa.addItem("Todos");
          List<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
        for(DTOEmpresa obj : listDtoDTOEmpresa){

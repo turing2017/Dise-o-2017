@@ -5,7 +5,6 @@
  */
 package sistemapagoimpuestos.Controller;
 
-import datosPrueba.IUdatosPrueba;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,10 +44,6 @@ public class ControladorGestionarLiquidacion {
         pantallaPrincipal.setVisible(true); 
         }        
     }
-    
-    public void cuack(){
-    IUdatosPrueba pantallaNoPrincipal = new IUdatosPrueba();
-        pantallaNoPrincipal.setVisible(true); }
     
     
 public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  

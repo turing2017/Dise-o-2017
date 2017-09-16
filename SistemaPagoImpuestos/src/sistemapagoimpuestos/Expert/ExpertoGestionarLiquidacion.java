@@ -19,13 +19,16 @@ import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.EstadoLiquidacion;
 import sistemapagoimpuestos.Entity.Liquidacion;
+import sistemapagoimpuestos.Entity.LiquidacionEstado;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrar;
+import java.util.Calendar;
 
 /**
  *
@@ -158,7 +161,46 @@ public class ExpertoGestionarLiquidacion {
         }
         return listDtoLiquidacion;
     }
-//en caso de que  explote mirar los if else
+     public Liquidacion obtenerLiquidacion(String numeroLiquidacion) {
+         //BUSCO LA LIQUIDACION
+         List<DTOCriterio> criterios = new ArrayList();
+         
+         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion","=",numeroLiquidacion);
+         Liquidacion liquidacion = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+         
+      
+       Calendar calendario = Calendar.getInstance();
+       
+       //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
+        liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size()-1).setFechaHoraHastaLiquidacionEstado(calendario.getTime());
+        
+         
+        FachadaPersistencia.getInstance().guardar(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size()-1));
+      
+        //BUSCO EL ESTADO APROBADO
+        criterios.clear();
+         DTOCriterio criterio1 = new DTOCriterio("nombreEstadoLiquidacion","=","Aprobado");
+         criterios.add(criterio1);
+        EstadoLiquidacion estadoLiquidacion = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
+        
+        //CREO LA NUEVA LIQUIDACION ESTADO
+        LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
+        liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime()); 
+        liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
+        liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
+        
+        
+        //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
+        liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
+       
+        FachadaPersistencia.getInstance().guardar(liquidacionEstado);
+           FachadaPersistencia.getInstance().guardar(liquidacion);
+       
+     
+        
+         return liquidacion;
+     }
+
 
     public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
 
@@ -398,5 +440,7 @@ public class ExpertoGestionarLiquidacion {
         IUMostrar.jTextFieldMontoTotal.setText("" + montoTotla);
 
     }
+
+   
 
 }

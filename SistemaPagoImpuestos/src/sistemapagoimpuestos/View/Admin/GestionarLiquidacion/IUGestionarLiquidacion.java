@@ -418,7 +418,11 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
       int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Aprobar la liquidacion numero "+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
         switch (opcion) {
             case 0:System.out.println("---------------ACEPTO------------");
-                
+            
+            
+               Liquidacion liquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
+              int a = liquidacion.getNumeroLiquidacion();
+                System.out.println(a);
                 break;
             default:
                 throw new AssertionError();

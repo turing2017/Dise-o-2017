@@ -29,6 +29,7 @@ import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrar;
 import java.util.Calendar;
+import sistemapagoimpuestos.Entity.Operacion;
 
 /**
  *
@@ -173,8 +174,9 @@ public class ExpertoGestionarLiquidacion {
        
        //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
         liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size()-1).setFechaHoraHastaLiquidacionEstado(calendario.getTime());
-        
-         
+         System.out.println(liquidacion.getLiquidacionEstadoList().get(0).getFechaHoraDesdeLiquidacionEstado());
+         System.out.println(liquidacion.getLiquidacionEstadoList().get(0).getFechaHoraHastaLiquidacionEstado());
+         System.out.println("------------------------------------------------------------------------"); 
         FachadaPersistencia.getInstance().guardar(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size()-1));
       
         //BUSCO EL ESTADO APROBADO
@@ -191,10 +193,11 @@ public class ExpertoGestionarLiquidacion {
         
         
         //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
-        liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
        
+         System.out.println("pikachi");
         FachadaPersistencia.getInstance().guardar(liquidacionEstado);
-           FachadaPersistencia.getInstance().guardar(liquidacion);
+         liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
+          FachadaPersistencia.getInstance().guardar(liquidacion);
        
      
         
@@ -412,30 +415,32 @@ public class ExpertoGestionarLiquidacion {
         IUMostrar.jLabelFechaLiquidacion.setText(fechaLiquidacion);
         IUMostrar.jLabelNrodeLiquidacion.setText(numeroLiquidacion);
         //LLena la tabla de operaciones
+ 
         //Busca  esa liquidacion 
-        /*        List<DTOCriterio> criterios = new ArrayList<>();
-          DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=",numeroLiquidacion);
+               List<DTOCriterio> criterios = new ArrayList<>();
+          DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=",Integer.valueOf(numeroLiquidacion));
+          criterios.clear();
         criterios.add(criterio);
-        Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios);*/
-        ArrayList<DTOOperacion> listDTOOperacion = new ArrayList<DTOOperacion>();
-        listDTOOperacion = this.buscarOperaciones(numeroLiquidacion);
+        Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);      
+       List<Operacion> listOperacion = liquidacion.getOperacionList();
 
 //LLena la tabla con las operaciones de esa liquidacion
         double montoTotla = 0;
 
-        for (int i = 0; i > listDTOOperacion.size(); i++) {
+        for (int i = 0; i < listOperacion.size(); i++) {
 
             // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
             DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
             model.addRow(new Object[]{});
+   
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNumeroOperacion(), i, 0);
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 1);
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getValorComisionOperacion(), i, 2);
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getImportePagadoOperacion(), i, 3);
 
-            IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getNumeroOperacion(), i, 0);
-            IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getNroComprobanteFactura(), i, 1);
-            IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getValorComisionOperacion(), i, 2);
-            IUMostrar.jTableOperacion.setValueAt(listDTOOperacion.get(i).getImportePagadoOperacion(), i, 3);
-
-            montoTotla = montoTotla + listDTOOperacion.get(i).getValorComisionOperacion();
+            montoTotla = montoTotla + listOperacion.get(i).getValorComisionOperacion();
         }
+          
         // Metodo van den bosch,  nose como convertir double a string
         IUMostrar.jTextFieldMontoTotal.setText("" + montoTotla);
 

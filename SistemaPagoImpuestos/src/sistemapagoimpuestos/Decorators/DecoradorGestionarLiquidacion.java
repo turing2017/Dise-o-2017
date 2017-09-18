@@ -81,6 +81,14 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
     
     }
     @Override
+    public Liquidacion AnularLiquidacion(String nroLiquidacion){
+        Liquidacion listObject;
+        FachadaInterna.getInstance().iniciarTransaccion();
+        listObject= super.AnularLiquidacion(nroLiquidacion); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listObject;
+    }
+    @Override
     public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto,String nombreEmpresa,Date fechaDesde,Date fechaHasta){
         ArrayList<DTOLiquidacion> listObject;
         FachadaInterna.getInstance().iniciarTransaccion();

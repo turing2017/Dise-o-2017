@@ -447,6 +447,47 @@ public class ExpertoGestionarLiquidacion {
 
     }
 
+    public Liquidacion AnularLiquidacion(String nroLiquidacion) {
+         //BUSCO LA LIQUIDACION
+         List<DTOCriterio> criterios = new ArrayList();
+         
+         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion","=",nroLiquidacion);
+         Liquidacion liquidacion = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+ 
+      
+       Calendar calendario = Calendar.getInstance();
+       
+       //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
+        liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size()-1).setFechaHoraHastaLiquidacionEstado(calendario.getTime());
+         System.out.println(liquidacion.getLiquidacionEstadoList().get(0).getFechaHoraDesdeLiquidacionEstado());
+         System.out.println(liquidacion.getLiquidacionEstadoList().get(0).getFechaHoraHastaLiquidacionEstado());
+         System.out.println("------------------------------------------------------------------------"); 
+        FachadaPersistencia.getInstance().guardar(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size()-1));
+      
+        //BUSCO EL ESTADO ARecalcular
+        criterios.clear();
+         DTOCriterio criterio1 = new DTOCriterio("nombreEstadoLiquidacion","=","ARecalcular");
+         criterios.add(criterio1);
+        EstadoLiquidacion estadoLiquidacion = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
+        System.out.println(estadoLiquidacion.getNombreEstadoLiquidacion());
+        //CREO LA NUEVA LIQUIDACION ESTADO
+        LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
+        liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime()); 
+        liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
+        liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
+        
+        
+        //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
+       
+        FachadaPersistencia.getInstance().guardar(liquidacionEstado);
+         liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
+          FachadaPersistencia.getInstance().guardar(liquidacion);
+       
+     
+        
+         return liquidacion;
+    }
+
    
 
 }

@@ -387,7 +387,16 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
       int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Anular la liquidacion numero "+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
         switch (opcion) {
             case 0:System.out.println("---------------ACEPTO------------");
-                
+               if(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("ARecalcular")||jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("Aprobado")){
+                        JOptionPane.showMessageDialog(null,
+                        "Solo se pueden anular liquidaciones en estado Recalculada o Creada",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                        break;
+               }
+               Liquidacion liquidacion = ControladorGestionarLiquidacion.getInstance().AnularLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
+            
+              int a = liquidacion.getNumeroLiquidacion();
                 break;
             default:
                 throw new AssertionError();

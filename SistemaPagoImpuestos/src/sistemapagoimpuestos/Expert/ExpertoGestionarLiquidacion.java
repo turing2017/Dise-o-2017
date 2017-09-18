@@ -162,7 +162,7 @@ public class ExpertoGestionarLiquidacion {
         }
         return listDtoLiquidacion;
     }
-     public Liquidacion obtenerLiquidacion(String numeroLiquidacion) {
+     public void AprobarLiquidacion(String numeroLiquidacion) {
          //BUSCO LA LIQUIDACION
          List<DTOCriterio> criterios = new ArrayList();
          
@@ -197,7 +197,7 @@ public class ExpertoGestionarLiquidacion {
        
      
         
-         return liquidacion;
+         
      }
 
 

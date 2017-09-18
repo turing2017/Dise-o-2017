@@ -294,10 +294,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseExited
 //delete THIS
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-            /*if(!jComboBoxTipoImpuesto.getItemAt(0).equals("")){
-                 jComboBoxEmpresa.setEditable(true);
-            }
-        */
+    
     }//GEN-LAST:event_formWindowActivated
 
     private void jComboBoxEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpresaActionPerformed
@@ -429,9 +426,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             case 0:System.out.println("---------------ACEPTO------------");
             
             
-               Liquidacion liquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-              int a = liquidacion.getNumeroLiquidacion();
-                System.out.println(a);
+                ControladorGestionarLiquidacion.getInstance().AprobarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
+             
                 break;
             default:
                 throw new AssertionError();

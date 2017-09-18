@@ -72,12 +72,12 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
     }
     
     @Override
-    public Liquidacion obtenerLiquidacion(String numeroLiquidacion){
+    public void AprobarLiquidacion(String numeroLiquidacion){
         Liquidacion listObject;
         FachadaInterna.getInstance().iniciarTransaccion();
-        listObject= super.obtenerLiquidacion(numeroLiquidacion); //To change body of generated methods, choose Tools | Templates.
+        super.AprobarLiquidacion(numeroLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
-        return listObject;
+        
     
     }
     @Override

@@ -63,8 +63,8 @@ public List<DTOEmpresa> buscarEmpresas(){
 public ArrayList<DTOLiquidacion> buscarLiquidacion(){
         return experto.obtenerLiquidacion();
 }
-        public Liquidacion buscarLiquidacion(String numeroLiquidacion) {
-            return experto.obtenerLiquidacion(numeroLiquidacion);
+        public void AprobarLiquidacion(String numeroLiquidacion) {
+             experto.AprobarLiquidacion(numeroLiquidacion);
         
     }
     

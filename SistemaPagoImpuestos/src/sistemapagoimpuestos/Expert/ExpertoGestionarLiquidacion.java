@@ -365,12 +365,13 @@ public class ExpertoGestionarLiquidacion {
                     DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
 
                     dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
-                            dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
-                            dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
-                            dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
-                            dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
-                            dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                            dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(liquidacion.getLiquidacionEstadoList().size() - 1).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+                    dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
+                    dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
+                    dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
+                    dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
+                    dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+                    dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getLiquidacionEstadoList().get(0).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+
                     listDtoLiquidacion.add(dtoLiquidacion);
                 }
             }

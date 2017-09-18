@@ -391,9 +391,9 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                         break;
                }
-               Liquidacion liquidacion = ControladorGestionarLiquidacion.getInstance().AnularLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
+                ControladorGestionarLiquidacion.getInstance().AnularLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
             
-              int a = liquidacion.getNumeroLiquidacion();
+              
                 break;
             default:
                 throw new AssertionError();

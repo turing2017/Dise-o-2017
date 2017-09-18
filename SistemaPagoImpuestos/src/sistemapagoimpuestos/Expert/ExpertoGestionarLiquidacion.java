@@ -442,7 +442,7 @@ public class ExpertoGestionarLiquidacion {
 
     }
 
-    public Liquidacion AnularLiquidacion(String nroLiquidacion) {
+    public void AnularLiquidacion(String nroLiquidacion) {
          //BUSCO LA LIQUIDACION
          List<DTOCriterio> criterios = new ArrayList();
          
@@ -477,7 +477,7 @@ public class ExpertoGestionarLiquidacion {
        
      
         
-         return liquidacion;
+         
     }
 
    

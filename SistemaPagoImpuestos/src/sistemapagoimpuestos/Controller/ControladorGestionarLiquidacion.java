@@ -81,8 +81,8 @@ public void mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipo
  experto.mostrar( numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
 }
 
-    public Liquidacion AnularLiquidacion(String nroLiquidacion) {
-        return experto.AnularLiquidacion(nroLiquidacion);
+    public void AnularLiquidacion(String nroLiquidacion) {
+         experto.AnularLiquidacion(nroLiquidacion);
     }
 
     

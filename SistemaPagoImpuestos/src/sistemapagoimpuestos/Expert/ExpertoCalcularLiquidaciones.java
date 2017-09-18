@@ -35,19 +35,19 @@ public class ExpertoCalcularLiquidaciones {
         }
     }
 
-    public ArrayList<DTOAccionesSistema> iniciar(ArrayList<DTOAccionesSistema> dtosAccionesSistema) {
+      public ArrayList<DTOAccionesSistema> iniciar(ArrayList<DTOAccionesSistema> dtosAccionesSistema) {
 
-        //varaiables globales
-        Liquidacion liquidacionAnulada = new Liquidacion();
+        //variables globales
         String nombreEstadoRecalculada = "Recalculada";
         String nombreEstadoAnulado = "Anulada";
         String nombreEstadoPendiente = "Calculada";
         List<DTOCriterio> criterios = new ArrayList();
         Date fechaALiquidar;
+        Liquidacion liquidacionAnulada = new Liquidacion();
         int cantidadAnuladas = 0;
         int cantidadLiquidacionesGeneradas = 0;
 
-        dtosAccionesSistema.add(new DTOAccionesSistema("INICIO RECÁLCULO DE LIQUIDACIONES", "Se comprueba si existen liquidaciones a recalcular...", new Date()));
+        dtosAccionesSistema.add(new DTOAccionesSistema("INICIO DEL PROCESO PARA EL CÁLCULO DE LIQUIDACIONES", "...", new Date()));
 
         //buscar "EstadoLiquidacion","nombreEstadoLiquidacion=Anulada"
         DTOCriterio criterio = new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoAnulado);
@@ -68,6 +68,7 @@ public class ExpertoCalcularLiquidaciones {
         }
 
         dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN LIQUIDACIONES EN ESTADO ANULADA", "Existen " + cantidadAnuladas + " liquidaciones a recalcular.", new Date()));
+        
 
         //por cada liquidacion Estado
         for (Object objlistLiquidacion : listLiquidacionEstado) {
@@ -91,6 +92,7 @@ public class ExpertoCalcularLiquidaciones {
                         }
                     }
                 }
+                dtosAccionesSistema.add(new DTOAccionesSistema("INICIANDO RECÁLCULO DE LA LIQUIDACIÓN...", "Empresa: " + liquidacionAnulada.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n" + "Tipo Impuesto: " + liquidacionAnulada.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto(), new Date()));
 
                 //getfechaHoradesdeLiquidacion       
                 Date fechaDesdeLiquidacion = liquidacionAnulada.getFechaHoraDesdeLiquidacion();
@@ -111,18 +113,18 @@ public class ExpertoCalcularLiquidaciones {
                 List<Object> listOperacion = new ArrayList();
                 try {
                     listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
-                    dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A RECALCULAR", "Existen " + listOperacion.size() + "operaciones a liquidar.", new Date()));
+                    dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A RECALCULAR", "Existen " + listOperacion.size() + "operaciones a recalcular.", new Date()));
                 } catch (Exception e) {
                     e.printStackTrace();
-                    
+                    //dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A RECALCULAR", "No existen operaciones a recalcular.", new Date()));
+                    //System.out.println("No existen operaciones");
                 }
                 // loop por cada operacion
 
-                dtosAccionesSistema.add(new DTOAccionesSistema("INICIANDO RECÁLCULO DE LA LIQUIDACIÓN...", "Empresa: " + liquidacionAnulada.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n Tipo Impuesto: " + liquidacionAnulada.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto(), new Date()));
-
+              
                 for (Object op : listOperacion) {
                     Operacion operacion = (Operacion) op;
-                    dtosAccionesSistema.add(new DTOAccionesSistema("CALCULANDO COMISIÓN...", "Operación número " + operacion.getNumeroOperacion() + " generada el día " + operacion.getFechaHoraOperacion() + " con importe pagado de $ " + operacion.getImportePagadoOperacion(), new Date()));
+                    dtosAccionesSistema.add(new DTOAccionesSistema("CALCULANDO COMISIÓN", "...", new Date()));
                     Double valorComision;
                     EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia(operacion);
                     valorComision = estrategia.obtenerValorComision(operacion);
@@ -136,7 +138,7 @@ public class ExpertoCalcularLiquidaciones {
                     List<Comision> listComision = liquidacionAnulada.getComisionList();
                     listComision.add(comision);
                     liquidacionAnulada.setComisionList(listComision);
-                    dtosAccionesSistema.add(new DTOAccionesSistema("COMISIÓN CALCULADA", "Comisión calculada = $ " + valorComision, new Date()));
+                    dtosAccionesSistema.add(new DTOAccionesSistema("COMISIÓN CALCULADA", "Operación número: " + operacion.getNumeroOperacion() + "\n" + "Generada el día: " + operacion.getFechaHoraOperacion() + "\n" + "Importe pagado: $ " + operacion.getImportePagadoOperacion() + "\n" + "Comisión calculada: $ " + valorComision, new Date()));
                     FachadaPersistencia.getInstance().guardar(operacion);
                     FachadaPersistencia.getInstance().guardar(comision);
 
@@ -162,21 +164,23 @@ public class ExpertoCalcularLiquidaciones {
                 liquidacionAnulada.setFechaHoraLiquidacion(new Date());
                 //Guardo la liquidacion
                 FachadaPersistencia.getInstance().guardar(liquidacionAnulada);
-                dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE RECÁLCULO DE LA LIQUIDACIÓN...", "Empresa: " + liquidacionAnulada.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n Tipo Impuesto: " + liquidacionAnulada.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n Número de liquidación: " + liquidacionAnulada.getNumeroLiquidacion() + "\n Fecha desde: " + liquidacionAnulada.getFechaHoraDesdeLiquidacion() + "\n Fecha hasta: " + liquidacionAnulada.getFechaHoraHastaLiquidacion(), new Date()));
+                dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE RECÁLCULO DE LA LIQUIDACIÓN...", "Empresa: " + liquidacionAnulada.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n Tipo Impuesto: " + liquidacionAnulada.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n NÃºmero de liquidaciÃ³n: " + liquidacionAnulada.getNumeroLiquidacion() + "\n Fecha desde: " + liquidacionAnulada.getFechaHoraDesdeLiquidacion() + "\n Fecha hasta: " + liquidacionAnulada.getFechaHoraHastaLiquidacion(), new Date()));
             }
 
         }
 
-        
+        if (cantidadAnuladas == 0) {
+            dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE RECÁLCULOS PENDIENTES...", "No se generaron liquidaciones recalculadas.", new Date()));
+        } else {
             dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE RECÁLCULOS PENDIENTES...", "Se generaron un total de " + cantidadAnuladas + " liquidaciones recalculadas.", new Date()));
-        
+        }
 
         /*
         ---------------------------------------
         INICIO CALCULO PARA LIQUIDACIONES NUEVAS
         ----------------------------------------
          */
-        dtosAccionesSistema.add(new DTOAccionesSistema("INICIO DE CÁLCULO DE LIQUIDACIONES", "Se comprueba si existen operaciones a liquidar...", new Date()));
+        dtosAccionesSistema.add(new DTOAccionesSistema("INICIO DE LIQUIDACIONES A CALCULAR", "...", new Date()));
 
         List<Object> listOperacion = new ArrayList();
         //busca empresaTipoImpuesto
@@ -186,7 +190,7 @@ public class ExpertoCalcularLiquidaciones {
             // crear una lista para las operaciones para poder buscar despues por rango de fechas
             List<Operacion> operacionesEnRangoDeFechas = new ArrayList();
             EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eTI;
-            dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI DEBE LIQUIDAR A EMPRESA TIPO IMPUESTO", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n Tipo de impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto(), new Date()));
+            dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI DEBE LIQUIDAR A EMPRESA TIPO IMPUESTO", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n" + "Tipo de impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto(), new Date()));
 
             System.out.println("fecha: " + empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
             System.out.println(empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
@@ -245,8 +249,8 @@ public class ExpertoCalcularLiquidaciones {
                         dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A LIQUIDAR", "Existen " + listOperacion.size() + " operaciones a liquidar.", new Date()));
                     } catch (Exception e) {
                         e.printStackTrace();
-                       // dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A LIQUIDAR", "No existen operaciones a liquidar.", new Date()));
-                     //   System.out.println("No existen operaciones");
+//                        dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A LIQUIDAR", "No existen operaciones a liquidar.", new Date()));
+//                        System.out.println("No existen operaciones");
                     }
                     for (Object op : listOperacion) {
                         Operacion operacion = (Operacion) op;
@@ -292,21 +296,21 @@ public class ExpertoCalcularLiquidaciones {
                     } catch (Exception e) {
                         e.printStackTrace();
                         //dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A LIQUIDAR", "No existen operaciones a liquidar.", new Date()));
-                       // System.out.println("No existen operaciones");
+                        //System.out.println("No existen operaciones");
                     }
                     for (Object op : listOperacion) {
                         Operacion operacion = (Operacion) op;
-                        System.out.println(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
-                        System.out.println(empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
-                        System.out.println(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
-                        System.out.println(operacion.getFechaHoraOperacion() + ">" + empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto() + "y" + operacion.getFechaHoraOperacion() + "<" + new Date());
+//                        System.out.println(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
+//                        System.out.println(empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
+//                        System.out.println(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
+//                        System.out.println(operacion.getFechaHoraOperacion() + ">" + empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto() + "y" + operacion.getFechaHoraOperacion() + "<" + new Date());
                         if (operacion.getFechaHoraOperacion().after(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto())
                                 && operacion.getFechaHoraOperacion().before(new Date())) {
                             operacionesEnRangoDeFechas.add(operacion);
                         }
                     }
                 }
-                dtosAccionesSistema.add(new DTOAccionesSistema("No se genera liquidación...", "Corresponde liquidar el día " + fechaALiquidar, new Date()));
+                 dtosAccionesSistema.add(new DTOAccionesSistema("No se genera liquidación...", "Corresponde liquidar el día " + fechaALiquidar, new Date()));
             }
 
             //buscar numero liquidacion
@@ -324,7 +328,7 @@ public class ExpertoCalcularLiquidaciones {
             //por cada Operacion
             for (Operacion lo : operacionesEnRangoDeFechas) {
                 Operacion operacion = (Operacion) lo;
-                dtosAccionesSistema.add(new DTOAccionesSistema("CALCULANDO COMISIÓN...", "Operación número " + operacion.getNumeroOperacion() + " generada el día " + operacion.getFechaHoraOperacion() + " con importe pagado de $ " + operacion.getImportePagadoOperacion(), new Date()));
+                dtosAccionesSistema.add(new DTOAccionesSistema("CALCULANDO COMISIÓN...","..." , new Date()));
                 Double valorComision;
                 EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia(operacion);
                 valorComision = estrategia.obtenerValorComision(operacion);
@@ -337,7 +341,7 @@ public class ExpertoCalcularLiquidaciones {
                 operacion.setLiquidadaOperacion(true);
                 nuevaLiquidacion.getComisionList().add(comision);
                 nuevaLiquidacion.getOperacionList().add(operacion);
-                dtosAccionesSistema.add(new DTOAccionesSistema("COMISIÓN CALCULADA", "Comisión calculada = $" + valorComision, new Date()));
+                dtosAccionesSistema.add(new DTOAccionesSistema("COMISIÓN CALCULADA", "Operación número: " + operacion.getNumeroOperacion() + "\n" + "Generada el día: " + operacion.getFechaHoraOperacion() + "\n" + "Importe pagado: $ " + operacion.getImportePagadoOperacion() + "\n" + "Comisión calculada: $" + valorComision, new Date()));
 
                 FachadaPersistencia.getInstance().guardar(operacion);
                 FachadaPersistencia.getInstance().guardar(nuevaLiquidacion);
@@ -375,7 +379,7 @@ public class ExpertoCalcularLiquidaciones {
                 //setEmpresaTipoImpuesto
                 nuevaLiquidacion.setEmpresaTipoImpuesto(empresaTipoImpuesto);
 
-                dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE CÁLCULO DE LA LIQUIDACIÓN", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n Tipo Impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\n Número de liquidación: " + nuevaLiquidacion.getNumeroLiquidacion() + "\n Fecha desde: " + nuevaLiquidacion.getFechaHoraDesdeLiquidacion() + "\n Fecha hasta: " + nuevaLiquidacion.getFechaHoraHastaLiquidacion(), new Date()));
+                dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE CÁLCULO DE LA LIQUIDACIÓN", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n Tipo Impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\n NÃºmero de liquidaciÃ³n: " + nuevaLiquidacion.getNumeroLiquidacion() + "\n Fecha desde: " + nuevaLiquidacion.getFechaHoraDesdeLiquidacion() + "\n Fecha hasta: " + nuevaLiquidacion.getFechaHoraHastaLiquidacion(), new Date()));
                 //Guardo nuevo LiquidacionEstado
                 FachadaPersistencia.getInstance().guardar(liqEstado);
                 //Guardo la liquidacion
@@ -392,7 +396,10 @@ public class ExpertoCalcularLiquidaciones {
             dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE CÁLCULO DE LIQUIDACIONES", "Se generaron un total de " + cantidadLiquidacionesGeneradas + " liquidaciones en estado Calculada.", new Date()));
         }
 
+        dtosAccionesSistema.add(new DTOAccionesSistema("FIN DEL PROCESO PARA EL CÁLCULO DE LIQUIDACIONES", "...", new Date()));
+
         return dtosAccionesSistema;
     }
+
 
 }

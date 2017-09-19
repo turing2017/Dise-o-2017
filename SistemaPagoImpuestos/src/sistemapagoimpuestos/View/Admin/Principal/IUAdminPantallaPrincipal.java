@@ -7,6 +7,10 @@ import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
 
+    ControladorGestionarTipoImpuesto controladorGestTipoImp = new ControladorGestionarTipoImpuesto();
+    ControladorGestionarTipoUsuario controladorGestTipoUsu = new ControladorGestionarTipoUsuario();
+    ControladorGestionarUsuario controladorGestUsu = new ControladorGestionarUsuario();
+    
     public IUAdminPantallaPrincipal() {
         initComponents();
     }
@@ -93,19 +97,19 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_gestionarTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarTipoUsuarioActionPerformed
-        ControladorGestionarTipoUsuario.getInstance().iniciar();
-        //this.dispose();
+        controladorGestTipoUsu.iniciar();
+        this.dispose();
 
 
     }//GEN-LAST:event_button_gestionarTipoUsuarioActionPerformed
 
     private void button_gestionarTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarTipoImpuestoActionPerformed
-        ControladorGestionarTipoImpuesto.getInstance().iniciar();
+        controladorGestTipoImp.iniciar();
         this.dispose();
     }//GEN-LAST:event_button_gestionarTipoImpuestoActionPerformed
 
     private void button_gestionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarUsuarioActionPerformed
-        ControladorGestionarUsuario.getInstance().iniciar();
+        controladorGestUsu.iniciar();
         this.dispose();
     }//GEN-LAST:event_button_gestionarUsuarioActionPerformed
 

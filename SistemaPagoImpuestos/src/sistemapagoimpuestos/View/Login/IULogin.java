@@ -8,6 +8,8 @@ import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
  */
 public class IULogin extends javax.swing.JFrame {
 
+    ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
+    
     public IULogin() {
         initComponents();
     }
@@ -120,7 +122,7 @@ public class IULogin extends javax.swing.JFrame {
         try{
             nombreUsuarioIngres = textfield_usuario.getText();
             passwordUsuarioIngres = textfield_contraseña.getText();
-            ControladorLoguearUsuario.getInstance().buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
+            controlador.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
             this.dispose();
         } catch(IndexOutOfBoundsException e){
             exceptions.Excepciones.getInstance().usuarioNoValido();

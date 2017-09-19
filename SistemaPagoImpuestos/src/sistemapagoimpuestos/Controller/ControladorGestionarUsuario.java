@@ -18,17 +18,7 @@ import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuarioModifi
  */
 public class ControladorGestionarUsuario {
 
-    private static ControladorGestionarUsuario controladorGestionarUsuario;
-
     public ControladorGestionarUsuario() {
-    }
-
-    public static ControladorGestionarUsuario getInstance() {
-
-        if (controladorGestionarUsuario == null) {
-            controladorGestionarUsuario = new ControladorGestionarUsuario();
-        }
-        return controladorGestionarUsuario;
     }
 
     private ExpertoGestionarUsuario experto = (ExpertoGestionarUsuario) FabricaExpertos.getInstancia().crearExperto("CU07");

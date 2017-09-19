@@ -3,11 +3,9 @@ package sistemapagoimpuestos.View.Admin.GestionarUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
-import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuario;
 /**
  *
  * @author Rodri
@@ -20,6 +18,7 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
     String tipoUsuarioSelec;
     String empresaSelec;
     
+    ControladorGestionarUsuario controlador = new ControladorGestionarUsuario();
     
     public IUGestionarUsuarioModificar() {
         initComponents();
@@ -43,14 +42,14 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
     }
     
     private void setearComboTipoUsuario(){
-        List<DTOTipoUsuario> listado = ControladorGestionarUsuario.getInstance().setearComboTipoUsuario();
+        List<DTOTipoUsuario> listado = controlador.setearComboTipoUsuario();
         for (int i = 0; i < listado.size(); i++) {
             combo_TipoUsuario.addItem(listado.get(i).getNombreDTOTipoUsuario());
         }
     }
     
     private void setearComboEmpresa() {
-        List<DTOEmpresa> listado = ControladorGestionarUsuario.getInstance().setearComboEmpresa();
+        List<DTOEmpresa> listado = controlador.setearComboEmpresa();
         for (int i = 0; i < listado.size(); i++) {
             combo_Empresa.addItem(listado.get(i).getNombreDTOEmpresa());
     }
@@ -230,7 +229,7 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
         tipoUsuarioSelec = combo_TipoUsuario.getSelectedItem().toString();
         empresaSelec = combo_Empresa.getSelectedItem().toString();
         
-        ControladorGestionarUsuario.getInstance().modificarDatosUsuario(nombreUsuario, contraseñaNueva, esHabilitado, tipoUsuarioSelec, empresaSelec);
+        controlador.modificarDatosUsuario(nombreUsuario, contraseñaNueva, esHabilitado, tipoUsuarioSelec, empresaSelec);
         this.dispose();
     }//GEN-LAST:event_button_AceptarActionPerformed
 

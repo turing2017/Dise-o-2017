@@ -22,6 +22,8 @@ import sistemapagoimpuestos.Dto.DTOUsuario;
  */
 public class IUGestionarUsuario extends javax.swing.JFrame {
 
+    ControladorGestionarUsuario controlador = new ControladorGestionarUsuario();
+    
     public IUGestionarUsuario() {
         initComponents();
         obtenerUsuario();
@@ -137,7 +139,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AltaActionPerformed
-        ControladorGestionarUsuario.getInstance().mostrarPantallaAlta();
+        controlador.mostrarPantallaAlta();
     }//GEN-LAST:event_button_AltaActionPerformed
 
     private void button_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ActualizarActionPerformed
@@ -148,7 +150,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
         int columnaNombre = 0; 
         int fila = tabla_usuario.getSelectedRow();
         String nombreUsuario = tabla_usuario.getValueAt(fila, columnaNombre).toString();
-        ControladorGestionarUsuario.getInstance().modificarUsuario(nombreUsuario);
+        controlador.modificarUsuario(nombreUsuario);
     }//GEN-LAST:event_button_modificacionActionPerformed
 
     public static void main(String args[]) {
@@ -185,7 +187,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
     
        public void obtenerUsuario() {
 
-        ArrayList<DTOUsuario> listDtoUsuario = ControladorGestionarUsuario.getInstance().obtenerUsuario();
+        ArrayList<DTOUsuario> listDtoUsuario = controlador.obtenerUsuario();
 
         String[] columnas = {"Nombre", "Password", "Fecha Inhabilitacion", "Fecha Ulitmo Acceso", "Tipo Usuario", "Empresa Asociada"};
 
@@ -223,14 +225,8 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
             vect.add(dtoUsuario.getFechaHoraInhabilitacionDTOUsuario());
             vect.add(dtoUsuario.getFechaHoraUltimoIngresoSistemaDTOUsuario());
             vect.add(dtoUsuario.getTipoUsuarioDTOUsuario());
-            
-            //String empresaNula = "";
-           // if (dtoUsuario.getEmpresaDTOUsuario() != null) {
-                vect.add(dtoUsuario.getEmpresaDTOUsuario());
-            //} else {
-              //  vect.add("");
-            //}
-            
+            vect.add(dtoUsuario.getEmpresaDTOUsuario());
+
             String fecha = "";
             if (dtoUsuario.getFechaHoraInhabilitacionDTOUsuario() != null) {
                 fecha = sdf.format(dtoUsuario.getFechaHoraInhabilitacionDTOUsuario()).toString();

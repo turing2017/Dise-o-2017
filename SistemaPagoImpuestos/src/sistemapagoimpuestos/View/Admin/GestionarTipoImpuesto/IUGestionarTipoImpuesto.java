@@ -20,6 +20,8 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
+    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+    
     public IUGestionarTipoImpuesto() {
         initComponents();
         obtenerTipoImpuestos();
@@ -188,7 +190,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
                         pantallaAlta.dispose();
-                        ControladorGestionarTipoImpuesto.getInstance().iniciar();
+                        controlador.iniciar();
                     }
                 });
 
@@ -196,7 +198,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
             case "Modificar":
                 // Muestro pantalla de Modificación
-                DTOTipoImpuesto dtoTi = ControladorGestionarTipoImpuesto.getInstance().obtenerTipoImpuesto((int) object);
+                DTOTipoImpuesto dtoTi = controlador.obtenerTipoImpuesto((int) object);
                 if (dtoTi != null) {
                     IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
                     pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
@@ -206,7 +208,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                     pantallaModificar.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
                             pantallaModificar.dispose();
-                            ControladorGestionarTipoImpuesto.getInstance().iniciar();
+                            controlador.iniciar();
                         }
                     });
                     pantallaModificar.obtenerEmpresaItems(dtoTi.getdTOEmpresaTipoImpuestoItemList());
@@ -232,12 +234,12 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
     public void iniciar() {
         //ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
-        ControladorGestionarTipoImpuesto.getInstance().iniciar();
+        controlador.iniciar();
     }
 
     public void obtenerTipoImpuestos() {
         // Muestro pantalla de Consultar
-        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarTipoImpuesto.getInstance().obtenerTipoImpuestos();
+        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = controlador.obtenerTipoImpuestos();
 
         String[] columnas = {"Codigo", "Nombre", "Monto Editable", "Estado"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {

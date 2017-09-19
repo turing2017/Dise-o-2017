@@ -23,6 +23,8 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
     private String passwordIngres;
     private String empresaSelec;
     
+    ControladorGestionarUsuario controlador = new ControladorGestionarUsuario();
+    
     public IUGestionarUsuarioAlta() {
         initComponents();
         setearComboTipoUsuario();
@@ -45,14 +47,14 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
     }
     
     private void setearComboTipoUsuario(){
-        List<DTOTipoUsuario> listado = ControladorGestionarUsuario.getInstance().setearComboTipoUsuario();
+        List<DTOTipoUsuario> listado = controlador.setearComboTipoUsuario();
         for (int i = 0; i < listado.size(); i++) {
             combo_TipoUsuario.addItem(listado.get(i).getNombreDTOTipoUsuario());
         }
     }
     
     private void setearComboEmpresa() {
-        List<DTOEmpresa> listado = ControladorGestionarUsuario.getInstance().setearComboEmpresa();
+        List<DTOEmpresa> listado = controlador.setearComboEmpresa();
         for (int i = 0; i < listado.size(); i++) {
             combo_Empresa.addItem(listado.get(i).getNombreDTOEmpresa());
     }
@@ -201,7 +203,7 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
         tipoUsuarioSelec = combo_TipoUsuario.getSelectedItem().toString();
         empresaSelec = combo_Empresa.getSelectedItem().toString();
         
-        ControladorGestionarUsuario.getInstance().nuevoUsuario(nombreIngres, passwordIngres, tipoUsuarioSelec, empresaSelec);
+        controlador.nuevoUsuario(nombreIngres, passwordIngres, tipoUsuarioSelec, empresaSelec);
         this.dispose();
     }//GEN-LAST:event_button_AceptarActionPerformed
 

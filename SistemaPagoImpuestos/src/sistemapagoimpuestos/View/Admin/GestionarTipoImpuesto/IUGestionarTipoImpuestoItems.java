@@ -28,6 +28,7 @@ import sistemapagoimpuestos.Entity.Item;
 
 public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     
+    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
     private List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemList;
 
     public List<DTOEmpresaTipImpItem> getdTOEmpresaTipImpItemList() {
@@ -47,19 +48,16 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     }
     public  void removeDtoetiisModf(int index){
        dTOEmpresaTipImpItemList.remove(index);
-    }    
-    
-    
-    
+    }
     
     public IUGestionarTipoImpuestoItems() {
         initComponents();
-        List<DTOEmpresa> listEmpresa = ControladorGestionarTipoImpuesto.getInstance().buscarEmpresas();
+        List<DTOEmpresa> listEmpresa = controlador.buscarEmpresas();
         llenarComboEmpresa(listEmpresa);
-        List<DTOTipoEmpresa> listTipoEmpresa = ControladorGestionarTipoImpuesto.getInstance().buscarTipoEmpresa();
+        List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
         
-        List<DTOItem> items = ControladorGestionarTipoImpuesto.getInstance().buscarItems();
+        List<DTOItem> items = controlador.buscarItems();
         llenarTabla(items);
     }
     private void llenarComboEmpresa(List<DTOEmpresa> list){
@@ -116,11 +114,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         table_Item.setModel(dtm);
     }
     
-    private void recover(){
-        
-    }
-    
-        @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -289,7 +283,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                     IUGestionarTipoImpuestoAlta.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
                             IUGestionarTipoImpuestoAlta.dispose();
-                            ControladorGestionarTipoImpuesto.getInstance().iniciar();
+                            controlador.iniciar();
                         }
                     });
                     IUGestionarTipoImpuestoAlta.RecuperarEmpresaItems();

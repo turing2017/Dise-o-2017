@@ -14,15 +14,6 @@ import sistemapagoimpuestos.Fabricas.FabricaExpertos;
  */
 public class ControladorGestionarItem {
     
-    private static ControladorGestionarItem controladorGestionarItem;
-    
-    public static ControladorGestionarItem getInstance(){
-        if(controladorGestionarItem== null){
-            controladorGestionarItem = new ControladorGestionarItem();
-        }
-        return controladorGestionarItem;
-    }
-    
     private ExpertoGestionarItem experto = (ExpertoGestionarItem) FabricaExpertos.getInstancia().crearExperto("CU13");
     
     public void iniciar(){

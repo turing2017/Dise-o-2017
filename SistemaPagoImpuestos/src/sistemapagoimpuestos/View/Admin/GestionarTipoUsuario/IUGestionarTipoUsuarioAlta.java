@@ -8,12 +8,12 @@ import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
 
 public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
 
-   
+   ControladorGestionarTipoUsuario controlador = new ControladorGestionarTipoUsuario();
+    
     public IUGestionarTipoUsuarioAlta() {
         initComponents();
     }
-
-   
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,9 +72,9 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
 
         String nombreTipoUsuario = textField_nombre.getText();
         if (!nombreTipoUsuario.equals("")) {
-            ControladorGestionarTipoUsuario.getInstance().nuevoTipoUsuario(nombreTipoUsuario);
+            controlador.nuevoTipoUsuario(nombreTipoUsuario);
             this.dispose();
-            ControladorGestionarTipoUsuario.getInstance().iniciar();
+            controlador.iniciar();
         } else {
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }

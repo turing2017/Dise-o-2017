@@ -2,6 +2,7 @@ package sistemapagoimpuestos.View;
 
 import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 /**
@@ -18,6 +19,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     public IUPagarImpuesto() {
         initComponents();
         llenarComboTipoImpuesto(buscarTipoImpuestos());
+        buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString());
     }
 
     /**
@@ -140,18 +142,27 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     
     // Método para recuperar los TipoImpuesto
     public List<DTOTipoImpuesto> buscarTipoImpuestos(){
-        List<DTOTipoImpuesto> listado = controlador.buscarTipoImpuestos();
-        return listado;
+        return controlador.buscarTipoImpuestos();
     }
     
     //Método para llenar el comboBox
     public void llenarComboTipoImpuesto(List<DTOTipoImpuesto> listaDTOTipoImpuesto){
-    for (int i = 0; i < listaDTOTipoImpuesto.size(); i++) {
-        DTOTipoImpuesto dtoTipoImpuesto = (DTOTipoImpuesto) listaDTOTipoImpuesto.get(i);
-        String nombreTipoImpuesto = dtoTipoImpuesto.getNombreDTOTipoImpuesto();
-        comboBox_tipoImpuesto.addItem(nombreTipoImpuesto);
+        for (int i = 0; i < listaDTOTipoImpuesto.size(); i++) {
+            DTOTipoImpuesto dtoTipoImpuesto = (DTOTipoImpuesto) listaDTOTipoImpuesto.get(i);
+            String nombreTipoImpuesto = dtoTipoImpuesto.getNombreDTOTipoImpuesto();
+            comboBox_tipoImpuesto.addItem(nombreTipoImpuesto);
+        }
     }
-}
+    
+    // Método para recuperar las Empresas
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto){
+        return controlador.buscarEmpresas(nombreTipoImpuesto);
+    }
+    
+    // Método para llenar el combo de Empresa
+    public void llenarComboEmpresa(){
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_buscar;

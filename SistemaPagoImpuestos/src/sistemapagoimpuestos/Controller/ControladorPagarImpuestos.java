@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Controller;
 
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -21,9 +22,14 @@ public class ControladorPagarImpuestos {
     public ControladorPagarImpuestos() {
     }
 
-    // Método para recuperar los TipoDatoItem
+    // Método para recuperar los Tipo de Impuestos
     public List<DTOTipoImpuesto> buscarTipoImpuestos(){
         List<DTOTipoImpuesto> listado = experto.buscarTipoImpuestos();
         return listado;
+    }
+    
+    // Método para recuperar las Empresas
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto){
+        return experto.buscarEmpresas(nombreTipoImpuesto);
     }
 }

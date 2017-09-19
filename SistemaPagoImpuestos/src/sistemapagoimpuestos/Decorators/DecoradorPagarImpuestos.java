@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -26,5 +27,12 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
         FachadaInterna.getInstance().finalizarTransaccion();
         return listaDTOTipoImpuesto;
     }
-    
+
+    @Override
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOEmpresa> listaDTOEmpresa = super.buscarEmpresas(nombreTipoImpuesto);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listaDTOEmpresa;
+    }
 }

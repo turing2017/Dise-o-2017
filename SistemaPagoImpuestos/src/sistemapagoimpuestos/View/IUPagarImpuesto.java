@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.View;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
@@ -18,8 +20,17 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
      */
     public IUPagarImpuesto() {
         initComponents();
+        // Agrego action listener para que se ejecute cuando cambie el valor seleccionado
+        comboBox_tipoImpuesto.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                llenarComboEmpresa(buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString()));
+            }
+        });
+        // Busco todos los tipoimpuestos
         llenarComboTipoImpuesto(buscarTipoImpuestos());
-        buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString());
+        // Obtengo la empresa
+        llenarComboEmpresa(buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString()));
+       
     }
 
     /**
@@ -43,6 +54,12 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         label_pagarImpuesto.setText("PAGAR IMPUESTO");
 
         label_tipoImpuesto.setText("Tipo de Impuesto");
+
+        comboBox_tipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBox_tipoImpuestoActionPerformed(evt);
+            }
+        });
 
         label_empresa.setText("Empresa");
         label_empresa.setToolTipText("");
@@ -105,6 +122,10 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void comboBox_tipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipoImpuestoActionPerformed
+
+    }//GEN-LAST:event_comboBox_tipoImpuestoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -160,8 +181,12 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }
     
     // Método para llenar el combo de Empresa
-    public void llenarComboEmpresa(){
-        
+    public void llenarComboEmpresa(List<DTOEmpresa> listaDTOEmpresa){
+            for (int i = 0; i < listaDTOEmpresa.size(); i++) {
+            DTOEmpresa dtoEmpresa = (DTOEmpresa) listaDTOEmpresa.get(i);
+            String nombreEmpresa = dtoEmpresa.getNombreEmpresa();
+            comboBox_empresa.addItem(nombreEmpresa);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

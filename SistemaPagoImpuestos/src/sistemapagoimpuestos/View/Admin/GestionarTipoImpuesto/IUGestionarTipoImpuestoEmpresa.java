@@ -16,10 +16,17 @@ import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUGestionarTipoImpuestoEmpresa extends javax.swing.JFrame {
     
+    private static String codigoTemp;
+    private static String nombreTemp;
+    private static boolean editTemp;
+    private static boolean statusTemp;
     ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
     
-    public IUGestionarTipoImpuestoEmpresa() {
+    public IUGestionarTipoImpuestoEmpresa(String codigoIngresado, String nombreIngresado, boolean editableIngresado) {
         initComponents();
+        codigoTemp = codigoIngresado;
+        nombreTemp = nombreIngresado;
+        editTemp = editableIngresado;
         List<DTOEmpresa> listEmpresa = controlador.buscarEmpresas();
         llenarComboEmpresa(listEmpresa);
         List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
@@ -161,7 +168,6 @@ public class IUGestionarTipoImpuestoEmpresa extends javax.swing.JFrame {
 
     private void button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelarActionPerformed
         this.dispose();
-        // TODO add your handling code here:
     }//GEN-LAST:event_button_CancelarActionPerformed
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
@@ -182,8 +188,7 @@ public class IUGestionarTipoImpuestoEmpresa extends javax.swing.JFrame {
 //                }
 //            }
 //            dTOEmpresaTipImpItem.setDtoItemOrdenList(dtoItemOrdenList);
-            if(!(dTOEmpresaTipImpItem.getNombreEmpresa().equals("-Seleccionar Empresa-")
-                    &&dTOEmpresaTipImpItem.getDtoItemOrdenList().size()<1)
+            if(!(dTOEmpresaTipImpItem.getNombreEmpresa().equals("-Seleccionar Empresa-"))
                     &&dTOEmpresaTipImpItem.getFrecuenciaSincronizacion()>0
                     &&!dTOEmpresaTipImpItem.getNombreTipoEmpresa().equals("-Seleccionar Tipo Empresa-")){
 
@@ -207,7 +212,7 @@ public class IUGestionarTipoImpuestoEmpresa extends javax.swing.JFrame {
                     IUGestionarTipoImpuestoAlta.setTextField_nombre(getNombreTemp());
                     IUGestionarTipoImpuestoAlta.setCheckbox_esEditable(isEditTemp());
                 }else{
-                    IUGestionarTipoImpuestoModificar.setdTOEmpresaTipImpItemList(getdTOEmpresaTipImpItemList());
+//                    IUGestionarTipoImpuestoModificar.setdTOEmpresaTipImpItemList(getdTOEmpresaTipImpItemList());
                     IUGestionarTipoImpuestoModificar.adddTOEmpresaTipImpItemList(dTOEmpresaTipImpItem);
                     IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
                     pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
@@ -233,7 +238,6 @@ public class IUGestionarTipoImpuestoEmpresa extends javax.swing.JFrame {
         }catch (Exception e){
 
         }
-
     }//GEN-LAST:event_button_AceptarActionPerformed
 
     private void comboBox_Tipo_EmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_Tipo_EmpresaActionPerformed
@@ -290,15 +294,12 @@ public class IUGestionarTipoImpuestoEmpresa extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new IUGestionarTipoImpuestoEmpresa().setVisible(true);
+                new IUGestionarTipoImpuestoEmpresa(codigoTemp, nombreTemp, editTemp).setVisible(true);
             }
         });
     }
     
-    private String codigoTemp;
-    private String nombreTemp;
-    private boolean editTemp;
-    private boolean statusTemp;
+
 
     public String getCodigoTemp() {
         return codigoTemp;

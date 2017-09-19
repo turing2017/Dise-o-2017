@@ -118,7 +118,19 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         // Le paso al controlador la opción seleccionada
-        opcionSeleccionada("Alta", null);
+        // Muestro pantalla de Alta
+        IUGestionarTipoImpuestoAlta pantallaAlta = new IUGestionarTipoImpuestoAlta();
+        pantallaAlta.setVisible(true); // La hago visible
+        // Modifico la operación de cierre para volver a la pantalla principal
+        pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        pantallaAlta.generarEmpresaItems();
+        IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<>());
+        pantallaAlta.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+                pantallaAlta.dispose();
+                controlador.iniciar();
+            }
+        });
         this.dispose();
     }//GEN-LAST:event_button_nuevoActionPerformed
 
@@ -129,7 +141,31 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             int columnCode = 0;
             int rowSelected = tabla_tipo_impuesto.getSelectedRow();
             String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
-            opcionSeleccionada("Modificar", Integer.parseInt(codigo));
+            
+            DTOTipoImpuesto dtoTi = controlador.obtenerTipoImpuesto(Integer.parseInt(codigo));
+            if (dtoTi != null) {
+                IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
+                pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                pantallaModificar.setVisible(true); // La hago visible
+                // Modifico la operación de cierre para volver a la pantalla principal
+                pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pantallaModificar.addWindowListener(new WindowAdapter() {
+                    public void windowClosing(WindowEvent ev) {
+                        pantallaModificar.dispose();
+                        controlador.iniciar();
+                    }
+                });
+                pantallaModificar.obtenerEmpresaItems(dtoTi.getdTOEmpresaTipoImpuestoItemList());
+                pantallaModificar.RecuperarEmpresaItems();
+                pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
+                pantallaModificar.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
+                pantallaModificar.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
+                if (dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto() == null) {
+                    pantallaModificar.setCheckbox_Habilitar(true);
+                } else {
+                    pantallaModificar.setCheckbox_Habilitar(false);
+                }
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
             Excepciones.getInstance().objetoNoSeleccionado();
@@ -174,62 +210,6 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 pantallaPrincipal.setVisible(true);
             }
         });
-    }
-
-    // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
-    public void opcionSeleccionada(String opcion, Object object) {
-        switch (opcion) {
-            case "Alta":
-                // Muestro pantalla de Alta
-                IUGestionarTipoImpuestoAlta pantallaAlta = new IUGestionarTipoImpuestoAlta();
-                pantallaAlta.setVisible(true); // La hago visible
-                // Modifico la operación de cierre para volver a la pantalla principal
-                pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pantallaAlta.generarEmpresaItems();
-                IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<>());
-                pantallaAlta.addWindowListener(new WindowAdapter() {
-                    public void windowClosing(WindowEvent ev) {
-                        pantallaAlta.dispose();
-                        controlador.iniciar();
-                    }
-                });
-
-                break; // optional
-
-            case "Modificar":
-                // Muestro pantalla de Modificación
-                DTOTipoImpuesto dtoTi = controlador.obtenerTipoImpuesto((int) object);
-                if (dtoTi != null) {
-                    IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
-                    pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-                    pantallaModificar.setVisible(true); // La hago visible
-                    // Modifico la operación de cierre para volver a la pantalla principal
-                    pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    pantallaModificar.addWindowListener(new WindowAdapter() {
-                        public void windowClosing(WindowEvent ev) {
-                            pantallaModificar.dispose();
-                            controlador.iniciar();
-                        }
-                    });
-                    pantallaModificar.obtenerEmpresaItems(dtoTi.getdTOEmpresaTipoImpuestoItemList());
-                    pantallaModificar.RecuperarEmpresaItems();
-                    pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
-                    pantallaModificar.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
-                    pantallaModificar.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
-                    if (dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto() == null) {
-                        pantallaModificar.setCheckbox_Habilitar(true);
-                    } else {
-                        pantallaModificar.setCheckbox_Habilitar(false);
-                    }
-                }
-
-                break; // optional
-
-            default:
-                break;
-        }
-        
-        this.dispose();
     }
 
     public void iniciar() {

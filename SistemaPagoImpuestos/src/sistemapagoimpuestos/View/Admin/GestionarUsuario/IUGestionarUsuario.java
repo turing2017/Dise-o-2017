@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 
@@ -78,6 +81,11 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla_usuario);
 
         button_filtrar.setText("Filtrar");
+        button_filtrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_filtrarActionPerformed(evt);
+            }
+        });
 
         button_Actualizar.setText("Actualizar");
         button_Actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -147,11 +155,22 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_button_ActualizarActionPerformed
 
     private void button_modificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificacionActionPerformed
-        int columnaNombre = 0; 
-        int fila = tabla_usuario.getSelectedRow();
+        try{
+            int columnaNombre = 0;
+            int fila = tabla_usuario.getSelectedRow();
         String nombreUsuario = tabla_usuario.getValueAt(fila, columnaNombre).toString();
         controlador.modificarUsuario(nombreUsuario);
+        } catch (Exception e){
+            exceptions.Excepciones.getInstance().objetoNoSeleccionado();
+        }
+        
     }//GEN-LAST:event_button_modificacionActionPerformed
+
+    private void button_filtrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_filtrarActionPerformed
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) tabla_usuario.getModel()));
+        sorter.setRowFilter(RowFilter.regexFilter(jTextField1.getText()));
+        tabla_usuario.setRowSorter(sorter);
+    }//GEN-LAST:event_button_filtrarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

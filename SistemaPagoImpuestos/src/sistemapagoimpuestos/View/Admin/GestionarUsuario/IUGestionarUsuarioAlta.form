@@ -170,6 +170,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_CancelarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="combo_Empresa">
           <Properties>

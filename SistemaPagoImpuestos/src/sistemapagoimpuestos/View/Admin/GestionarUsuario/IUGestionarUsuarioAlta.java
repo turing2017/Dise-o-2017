@@ -5,8 +5,10 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarUsuario;
 
+import exceptions.Excepciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
@@ -105,6 +107,11 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
         });
 
         button_Cancelar.setText("Cancelar");
+        button_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_CancelarActionPerformed(evt);
+            }
+        });
 
         combo_Empresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,9 +209,18 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
         passwordIngres = new String(pass);
         tipoUsuarioSelec = combo_TipoUsuario.getSelectedItem().toString();
         empresaSelec = combo_Empresa.getSelectedItem().toString();
-        
-        controlador.nuevoUsuario(nombreIngres, passwordIngres, tipoUsuarioSelec, empresaSelec);
-        this.dispose();
+     
+        if (!(passwordIngres.isEmpty())) {
+            if (!(nombreIngres.equals("") && passwordIngres.equals(""))) {
+                controlador.nuevoUsuario(nombreIngres, passwordIngres, tipoUsuarioSelec, empresaSelec);
+                this.dispose();
+            } else {
+                Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
+            }
+        }
+        else{
+            new Excepciones().contraseñaVacia();
+        }
     }//GEN-LAST:event_button_AceptarActionPerformed
 
     private void text_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_PasswordActionPerformed
@@ -218,6 +234,10 @@ public class IUGestionarUsuarioAlta extends javax.swing.JFrame {
     private void combo_TipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_TipoUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_TipoUsuarioActionPerformed
+
+    private void button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_button_CancelarActionPerformed
 
     /**
      * @param args the command line arguments

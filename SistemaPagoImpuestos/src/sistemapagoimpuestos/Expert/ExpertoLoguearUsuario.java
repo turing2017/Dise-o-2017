@@ -23,7 +23,7 @@ import sistemapagoimpuestos.View.Login.IULogin;
  */
 public class ExpertoLoguearUsuario {
 
-    ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
+//    ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
     Usuario usuario = new Usuario();
     private String fechaHoraInhabilitacionUsuarioEncontrada;
 
@@ -97,7 +97,7 @@ public class ExpertoLoguearUsuario {
                     @Override
                     public void windowClosing(WindowEvent ev) {
                         pp.dispose();
-                        controlador.iniciar();
+//                        controlador.iniciar();
 
                     }
                 });
@@ -110,7 +110,7 @@ public class ExpertoLoguearUsuario {
                     @Override
                     public void windowClosing(WindowEvent ev) {
                         pc.dispose();
-                        controlador.iniciar();
+//                        controlador.iniciar();
                     }
                 });
             }

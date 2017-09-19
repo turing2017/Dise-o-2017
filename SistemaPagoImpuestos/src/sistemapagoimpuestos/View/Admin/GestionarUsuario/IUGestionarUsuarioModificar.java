@@ -1,5 +1,6 @@
 package sistemapagoimpuestos.View.Admin.GestionarUsuario;
 
+import exceptions.Excepciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -29,7 +30,7 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
         combo_TipoUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!combo_TipoUsuario.getSelectedItem().toString().equals("Responsable")) {
+                if (combo_TipoUsuario.getSelectedItem().toString().equals("Responsable")) {
                     label_Empresa.setVisible(true);
                     combo_Empresa.setVisible(true);
                 }
@@ -220,21 +221,26 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_checkbox_habilitadoActionPerformed
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
-        if(passwordField1.equals(passwordField2)){
-            char[] pass = passwordField1.getPassword();
-            String passwordIngres = new String(pass);
-            contraseñaNueva = passwordIngres;
-        }
-        esHabilitado = checkbox_habilitado.isSelected();
-        tipoUsuarioSelec = combo_TipoUsuario.getSelectedItem().toString();
-        empresaSelec = combo_Empresa.getSelectedItem().toString();
+        char[] pass1 = passwordField1.getPassword();
+        String password1 = new String(pass1);
+        char[] pass2 = passwordField2.getPassword();
+        String password2 = new String(pass2);
         
-        controlador.modificarDatosUsuario(nombreUsuario, contraseñaNueva, esHabilitado, tipoUsuarioSelec, empresaSelec);
-        this.dispose();
+        if (password1.equals(password2)) {
+            String passwordIngres = password1;
+            contraseñaNueva = passwordIngres;
+            esHabilitado = checkbox_habilitado.isSelected();
+            tipoUsuarioSelec = combo_TipoUsuario.getSelectedItem().toString();
+            empresaSelec = combo_Empresa.getSelectedItem().toString();
+            controlador.modificarDatosUsuario(nombreUsuario, contraseñaNueva, esHabilitado, tipoUsuarioSelec, empresaSelec);
+            this.dispose();
+        } else {
+            new Excepciones().contraseñasNoCoinciden();
+        }
     }//GEN-LAST:event_button_AceptarActionPerformed
 
     private void button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_button_CancelarActionPerformed
 
     private void text_nombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_nombreUsuarioActionPerformed

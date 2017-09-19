@@ -6,7 +6,9 @@
 package exceptions;
 
 import java.util.List;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Errors.ErrorDatoNoEncontrado;
+import sistemapagoimpuestos.View.Errors.ErrorDatoNoValido;
 import sistemapagoimpuestos.View.Errors.UsuarioNoValido;
 
 /**
@@ -19,17 +21,12 @@ public class Excepciones extends Exception{
     private static Excepciones excepciones;
 
     
-    public static Excepciones getInstance()
-    {
-        if (excepciones == null)
-        {
+    public static Excepciones getInstance(){
+        if (excepciones == null){
             excepciones = new Excepciones();
         }
         return excepciones;
     }
-    
-    
-    
     
     public Excepciones() {
     }
@@ -117,5 +114,19 @@ public class Excepciones extends Exception{
            edne.setLabel_mensaje("Campo: "+campos.get(0));  
        }
         edne.setVisible(true);
+    }
+    
+    public void contraseñasNoCoinciden(){
+        ErrorDatoNoValido ednv = new ErrorDatoNoValido();
+        ednv.setLabel_title("Error: Contraseñas No Valida");
+        ednv.setLabel_mensaje("Asegurarse que las contraseñas coincidan");
+        MetodosPantalla.getInstance().setearPantalla(ednv);
+    }
+    
+    public void contraseñaVacia(){
+        ErrorDatoNoValido ednv = new ErrorDatoNoValido();
+        ednv.setLabel_title("Error: Contraseña No Valida");
+        ednv.setLabel_mensaje("La contraseña no puede ser vacia");
+        MetodosPantalla.getInstance().setearPantalla(ednv);
     }
 }

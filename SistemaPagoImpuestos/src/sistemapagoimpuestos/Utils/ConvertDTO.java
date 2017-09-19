@@ -7,6 +7,8 @@ package sistemapagoimpuestos.Utils;
 
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
+import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
@@ -18,6 +20,8 @@ import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.Item;
+import sistemapagoimpuestos.Entity.ParametroCalculoEditable;
+import sistemapagoimpuestos.Entity.ParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Entity.TipoDatoItem;
 
 /**
@@ -85,4 +89,24 @@ public class ConvertDTO {
     public DTOTipoDatoItem convertTipoDatoItem(TipoDatoItem tipoDatoItem){
         return new DTOTipoDatoItem(tipoDatoItem.getCodigoTipoDatoItem(), tipoDatoItem.getNombreTipoDatoItem());
     }
+    
+    public DTOParametroCalculoEditable convertParametroCalculoEditable(ParametroCalculoEditable parametroCE){
+        DTOParametroCalculoEditable  dtoParamCE = new DTOParametroCalculoEditable();
+        dtoParamCE.setSiEditablePCEditable(parametroCE.getSiEditablePCEditable());
+        dtoParamCE.setNoEditablePCEditable(parametroCE.getNoEditablePCEditable());
+        return dtoParamCE;
+    }
+    
+    public DTOParametroCalculoPeriodicidad convertParametroCalculoPeriodicidad(ParametroCalculoPeriodicidad parametroCP){
+        DTOParametroCalculoPeriodicidad dtoParamCP = new DTOParametroCalculoPeriodicidad();
+        dtoParamCP.setAnualPCPeriodicidad(parametroCP.getAnualPCPeriodicidad());
+        dtoParamCP.setBimestralPCPeriodicidad(parametroCP.getBimestralPCPeriodicidad());
+        dtoParamCP.setCuatrimestralPCPeriodicidad(parametroCP.getCuatrimestralPCPeriodicidad());
+        dtoParamCP.setMensualPCPeriodicidad(parametroCP.getMensualPCPeriodicidad());
+        dtoParamCP.setQuincenalPCPeriodicidad(parametroCP.getQuincenalPCPeriodicidad());
+        dtoParamCP.setSemestralPCPeriodicidad(parametroCP.getSemestralPCPeriodicidad());
+        dtoParamCP.setTrimestralPCPeriodicidad(parametroCP.getTrimestralPCPeriodicidad());
+        return dtoParamCP;
+    }
+   
 }

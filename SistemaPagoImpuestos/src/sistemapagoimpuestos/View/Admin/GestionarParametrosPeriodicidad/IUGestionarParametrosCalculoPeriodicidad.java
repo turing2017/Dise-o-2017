@@ -16,13 +16,14 @@ import sistemapagoimpuestos.Utils.Utils;
  *
  * @author Gabriel
  */
-public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame {
+public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialog {
 
     /**
      * Creates new form GestionarParametrosCalculoPeriodicidad
      */
     public IUGestionarParametrosCalculoPeriodicidad() {
         initComponents();
+        this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         DTOParametroCalculoPeriodicidad dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoPeriodicidad();
         jTextField4.setText(Double.toString(dtoCP.getMensualPCPeriodicidad()));
         jTextField2.setText(Double.toString(dtoCP.getBimestralPCPeriodicidad()));
@@ -70,7 +71,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JFrame
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

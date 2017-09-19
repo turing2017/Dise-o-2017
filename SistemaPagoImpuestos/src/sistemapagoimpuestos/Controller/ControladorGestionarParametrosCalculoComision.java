@@ -63,15 +63,19 @@ public class ControladorGestionarParametrosCalculoComision {
         switch (UI) {
             case "Periodicidad":
                 IUGestionarParametrosCalculoPeriodicidad gestionarParametrosCalculoPeriodicidad = new IUGestionarParametrosCalculoPeriodicidad();
-                gestionarParametrosCalculoPeriodicidad.setVisible(true);
-                gestionarParametrosCalculoPeriodicidad.setLocationRelativeTo(null);
                 gestionarParametrosCalculoPeriodicidad.setTitle("Gestionar Parámetros de Cálculo de Periodicidad");
+                gestionarParametrosCalculoPeriodicidad.setResizable(false);
+                gestionarParametrosCalculoPeriodicidad.setLocationRelativeTo(null);
+                gestionarParametrosCalculoPeriodicidad.setVisible(true);
+
                 break;
             case "Editable":
                 IUGestionarParametroCalculoEditable gestionarParametrosCalculoEditable = new IUGestionarParametroCalculoEditable();
-                gestionarParametrosCalculoEditable.setVisible(true);
-                gestionarParametrosCalculoEditable.setLocationRelativeTo(null);
                 gestionarParametrosCalculoEditable.setTitle("Gestionar Parámetros de Cálculo Editable");
+                gestionarParametrosCalculoEditable.setResizable(false);
+                gestionarParametrosCalculoEditable.setLocationRelativeTo(null);
+                gestionarParametrosCalculoEditable.setVisible(true);
+
                 break;
         }
 

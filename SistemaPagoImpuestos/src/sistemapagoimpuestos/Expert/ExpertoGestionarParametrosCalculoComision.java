@@ -11,6 +11,7 @@ import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Entity.ParametroCalculoEditable;
 import sistemapagoimpuestos.Entity.ParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -62,7 +63,7 @@ public class ExpertoGestionarParametrosCalculoComision {
     public DTOParametroCalculoPeriodicidad obtenerParametrosCalculoPeriodicidad() {
         List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", null);
         ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad;
-        DTOParametroCalculoPeriodicidad dtoParametroCP = new DTOParametroCalculoPeriodicidad();
+        DTOParametroCalculoPeriodicidad dtoParametroCP;
         if (parametros.isEmpty()) {
             parametrosCalculoPeriodicidad = new ParametroCalculoPeriodicidad();
             parametrosCalculoPeriodicidad.setAnualPCPeriodicidad(0.0);
@@ -72,24 +73,12 @@ public class ExpertoGestionarParametrosCalculoComision {
             parametrosCalculoPeriodicidad.setQuincenalPCPeriodicidad(0.0);
             parametrosCalculoPeriodicidad.setSemestralPCPeriodicidad(0.0);
             parametrosCalculoPeriodicidad.setTrimestralPCPeriodicidad(0.0);
-            dtoParametroCP.setAnualPCPeriodicidad(parametrosCalculoPeriodicidad.getAnualPCPeriodicidad());
-            dtoParametroCP.setBimestralPCPeriodicidad(parametrosCalculoPeriodicidad.getBimestralPCPeriodicidad());
-            dtoParametroCP.setCuatrimestralPCPeriodicidad(parametrosCalculoPeriodicidad.getCuatrimestralPCPeriodicidad());
-            dtoParametroCP.setMensualPCPeriodicidad(parametrosCalculoPeriodicidad.getMensualPCPeriodicidad());
-            dtoParametroCP.setQuincenalPCPeriodicidad(parametrosCalculoPeriodicidad.getQuincenalPCPeriodicidad());
-            dtoParametroCP.setSemestralPCPeriodicidad(parametrosCalculoPeriodicidad.getSemestralPCPeriodicidad());
-            dtoParametroCP.setTrimestralPCPeriodicidad(parametrosCalculoPeriodicidad.getTrimestralPCPeriodicidad());
+            dtoParametroCP = ConvertDTO.getInstance().convertParametroCalculoPeriodicidad(parametrosCalculoPeriodicidad);
             FachadaPersistencia.getInstance().guardar(parametrosCalculoPeriodicidad);
             return dtoParametroCP;
         } else {
             parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad) parametros.get(0);
-            dtoParametroCP.setAnualPCPeriodicidad(parametrosCalculoPeriodicidad.getAnualPCPeriodicidad());
-            dtoParametroCP.setBimestralPCPeriodicidad(parametrosCalculoPeriodicidad.getBimestralPCPeriodicidad());
-            dtoParametroCP.setCuatrimestralPCPeriodicidad(parametrosCalculoPeriodicidad.getCuatrimestralPCPeriodicidad());
-            dtoParametroCP.setMensualPCPeriodicidad(parametrosCalculoPeriodicidad.getMensualPCPeriodicidad());
-            dtoParametroCP.setQuincenalPCPeriodicidad(parametrosCalculoPeriodicidad.getQuincenalPCPeriodicidad());
-            dtoParametroCP.setSemestralPCPeriodicidad(parametrosCalculoPeriodicidad.getSemestralPCPeriodicidad());
-            dtoParametroCP.setTrimestralPCPeriodicidad(parametrosCalculoPeriodicidad.getTrimestralPCPeriodicidad());
+            dtoParametroCP = ConvertDTO.getInstance().convertParametroCalculoPeriodicidad(parametrosCalculoPeriodicidad);
             return dtoParametroCP;
         }
     }
@@ -98,20 +87,18 @@ public class ExpertoGestionarParametrosCalculoComision {
 
         List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoEditable", null);
         ParametroCalculoEditable parametrosCalculoEditable;
-        DTOParametroCalculoEditable dtoParametroCE = new DTOParametroCalculoEditable();
+        DTOParametroCalculoEditable dtoParametroCE;
 
         if (parametros.isEmpty()) {
             parametrosCalculoEditable = new ParametroCalculoEditable();
             parametrosCalculoEditable.setSiEditablePCEditable(0.0);
             parametrosCalculoEditable.setNoEditablePCEditable(0.0);
-            dtoParametroCE.setSiEditablePCEditable(parametrosCalculoEditable.getSiEditablePCEditable());
-            dtoParametroCE.setNoEditablePCEditable(parametrosCalculoEditable.getNoEditablePCEditable());
+            dtoParametroCE = ConvertDTO.getInstance().convertParametroCalculoEditable(parametrosCalculoEditable);
             FachadaPersistencia.getInstance().guardar(parametrosCalculoEditable);
             return dtoParametroCE;
         } else {
             parametrosCalculoEditable = (ParametroCalculoEditable) parametros.get(0);
-            dtoParametroCE.setSiEditablePCEditable(parametrosCalculoEditable.getSiEditablePCEditable());
-            dtoParametroCE.setNoEditablePCEditable(parametrosCalculoEditable.getNoEditablePCEditable());
+            dtoParametroCE = ConvertDTO.getInstance().convertParametroCalculoEditable(parametrosCalculoEditable);
             return dtoParametroCE;
         }
 

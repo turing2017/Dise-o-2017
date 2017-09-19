@@ -286,7 +286,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             
             List<DTOEmpresa> listDtoEmpresa = controlador.consultarEmpresas();
             
-            String[] columnas = {"Cuit", "Nombre", "Direccion",  "Habilitada"};
+            String[] columnas = {"Cuit", "Nombre", "Direccion",  "Deshabilitada el dia"};
             DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
             
             // Sobreescribo el método para no permitir editar la 
@@ -341,7 +341,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             }
         };
            
-       
+        tabla_empresa.setAutoCreateRowSorter(true);
         tabla_empresa.setModel(dtm);
         tabla_empresa.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_empresa.getColumnModel().getColumn(1).setCellRenderer(r);

@@ -21,7 +21,7 @@ public class Operacion extends Entity{
     private Date fechaHoraOperacion;
     private double importePagadoOperacion;
     private int nroComprobanteFacturaOperacion;
-    private boolean calculadaOperacion;
+    private boolean liquidadaOperacion;
     private double valorComisionOperacion;
     private CuentaBancaria cuentaBancaria;
     private Empresa empresa;
@@ -39,7 +39,7 @@ public class Operacion extends Entity{
         this.fechaHoraOperacion = fechaHoraOperacion;
         this.importePagadoOperacion = importePagadoOperacion;
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
-        this.calculadaOperacion = calculadaOperacion;
+        this.liquidadaOperacion = calculadaOperacion;
         this.valorComisionOperacion = valorComisionOperacion;
         this.cuentaBancaria = cuentaBancaria;
         this.empresa = empresa;
@@ -89,11 +89,11 @@ public class Operacion extends Entity{
     }
 
     public boolean isCalculadaOperacion() {
-        return calculadaOperacion;
+        return liquidadaOperacion;
     }
 
     public void setCalculadaOperacion(boolean calculadaOperacion) {
-        this.calculadaOperacion = calculadaOperacion;
+        this.liquidadaOperacion = calculadaOperacion;
     }
 
     public double getValorComisionOperacion() {

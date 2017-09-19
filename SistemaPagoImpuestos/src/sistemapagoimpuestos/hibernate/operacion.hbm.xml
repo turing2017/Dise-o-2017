@@ -21,8 +21,8 @@
         <property name="nroComprobanteFacturaOperacion" type="int" >
             <column name="nroComprobanteFacturaOperacion"/>
         </property>
-        <property name="calculadaOperacion" type="boolean">
-            <column name="calculadaOperacion"/>
+        <property name="liquidadaOperacion" type="boolean">
+            <column name="liquidadaOperacion"/>
         </property>
         <property name="valorComisionOperacion" type="double">
             <column name="valorComisionOperacion"/>

@@ -6,7 +6,6 @@
 package sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad;
 
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
-import sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad.IUGestionarParametroCalculoEditable;
 
 /**
  *
@@ -19,6 +18,7 @@ public class IUGestionarParametrosComision extends javax.swing.JFrame {
      */
     public IUGestionarParametrosComision() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**

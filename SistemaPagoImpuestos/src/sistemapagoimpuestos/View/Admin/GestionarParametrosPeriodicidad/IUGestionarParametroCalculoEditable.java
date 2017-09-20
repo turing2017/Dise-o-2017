@@ -16,19 +16,20 @@ import sistemapagoimpuestos.Utils.Utils;
  *
  * @author Gabriel
  */
-public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
+public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
 
     /**
      * Creates new form IUGestionarParametroCalculoEditable
      */
     public IUGestionarParametroCalculoEditable() {
-     
+  
         initComponents();
+        this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         DTOParametroCalculoEditable dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoEditable();
-        
+
         jTextField2.setText(Double.toString(dtoCP.getSiEditablePCEditable()));
         jTextField1.setText(Double.toString(dtoCP.getNoEditablePCEditable()));
-        
+
         jButton3.setEnabled(false);
         jTextField2.setEnabled(false);
         jTextField1.setEnabled(false);
@@ -60,7 +61,7 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Monto no editable:");
 

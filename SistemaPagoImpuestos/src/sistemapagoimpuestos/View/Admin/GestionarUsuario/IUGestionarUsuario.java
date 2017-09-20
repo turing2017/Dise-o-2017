@@ -18,6 +18,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
 import sistemapagoimpuestos.Dto.DTOUsuario;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 
 /**
  *
@@ -45,6 +47,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         button_filtrar = new javax.swing.JButton();
         button_Actualizar = new javax.swing.JButton();
+        button_Cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +97,13 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
             }
         });
 
+        button_Cerrar.setText("Cerrar");
+        button_Cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_CerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,7 +121,9 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(button_Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(59, 59, 59)
-                                .addComponent(button_modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(button_modificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(103, 103, 103)
+                                .addComponent(button_Cerrar))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,7 +151,8 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_Alta)
-                    .addComponent(button_modificacion))
+                    .addComponent(button_modificacion)
+                    .addComponent(button_Cerrar))
                 .addGap(96, 96, 96))
         );
 
@@ -171,6 +184,12 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
         sorter.setRowFilter(RowFilter.regexFilter(jTextField1.getText()));
         tabla_usuario.setRowSorter(sorter);
     }//GEN-LAST:event_button_filtrarActionPerformed
+
+    private void button_CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CerrarActionPerformed
+        this.dispose();
+        IUAdminPantallaPrincipal pantallaPrincipal = new IUAdminPantallaPrincipal();
+        MetodosPantalla.getInstance().setearPantalla(pantallaPrincipal);
+    }//GEN-LAST:event_button_CerrarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -270,6 +289,7 @@ public class IUGestionarUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_Actualizar;
     private javax.swing.JButton button_Alta;
+    private javax.swing.JButton button_Cerrar;
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_modificacion;
     private javax.swing.JLabel jLabel1;

@@ -15,6 +15,7 @@ import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 
 public class IUGestionarTipoUsuario extends javax.swing.JFrame {
 
@@ -36,6 +37,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         button_nuevo = new javax.swing.JButton();
         button_habilitar_deshabilitar = new javax.swing.JButton();
         button_filtrar = new javax.swing.JButton();
+        button_Cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +77,13 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             }
         });
 
+        button_Cerrar.setText("Cerrar");
+        button_Cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_CerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,6 +94,8 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(button_Cerrar)
+                                .addGap(36, 36, 36)
                                 .addComponent(button_habilitar_deshabilitar)
                                 .addGap(18, 18, 18)
                                 .addComponent(button_nuevo))
@@ -113,7 +124,8 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_nuevo)
-                    .addComponent(button_habilitar_deshabilitar))
+                    .addComponent(button_habilitar_deshabilitar)
+                    .addComponent(button_Cerrar))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -153,6 +165,12 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             Excepciones.getInstance().objetoNoSeleccionado();
         }
     }//GEN-LAST:event_button_habilitar_deshabilitarActionPerformed
+
+    private void button_CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CerrarActionPerformed
+        this.dispose();
+        IUAdminPantallaPrincipal pantallaPrincipal = new IUAdminPantallaPrincipal();
+        MetodosPantalla.getInstance().setearPantalla(pantallaPrincipal);
+    }//GEN-LAST:event_button_CerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,6 +268,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_Cerrar;
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_habilitar_deshabilitar;
     private javax.swing.JButton button_nuevo;

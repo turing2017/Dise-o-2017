@@ -39,6 +39,8 @@
                               <Component id="button_Alta" min="-2" pref="102" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                               <Component id="button_modificacion" min="-2" pref="102" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                              <Component id="button_Cerrar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
@@ -76,6 +78,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="button_Alta" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="button_modificacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="button_Cerrar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
           </Group>
@@ -149,6 +152,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_ActualizarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="button_Cerrar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cerrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_CerrarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

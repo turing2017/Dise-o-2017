@@ -28,6 +28,14 @@ public class Operacion extends Entity{
     private EmpresaTipoImpuesto empresaTipoImpuesto;
     private TipoImpuesto tipoImpuesto;
     private List<DetalleOperacion> detalleOperacionList = new ArrayList<>();
+
+    public boolean isLiquidadaOperacion() {
+        return liquidadaOperacion;
+    }
+
+    public void setLiquidadaOperacion(boolean liquidadaOperacion) {
+        this.liquidadaOperacion = liquidadaOperacion;
+    }
  
 
     public Operacion() {

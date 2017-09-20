@@ -127,7 +127,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         // TODO add your handling code here:
-        controlador.seleccionarOpcion("Alta", null);
+        controlador.seleccionAlta();
         this.dispose();
     }//GEN-LAST:event_button_nuevoActionPerformed
 
@@ -148,7 +148,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
             int rowSelected = tabla_item.getSelectedRow();
             String codigo = tabla_item.getModel().getValueAt(rowSelected, columnCode).toString();
             
-            controlador.seleccionarOpcion("Modificar", codigo);
+            controlador.seleccionModificar(codigo);
             this.dispose();
         } catch (ArrayIndexOutOfBoundsException e) {
             //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));

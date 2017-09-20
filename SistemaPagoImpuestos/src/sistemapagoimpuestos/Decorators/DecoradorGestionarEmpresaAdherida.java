@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOConsultarEmpresas;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOEmpresasConsultadas;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
@@ -32,9 +32,9 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada) {
+    public DTOEmpresasConsultadas cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOEmpresaExistente dtoEe= super.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
+        DTOEmpresasConsultadas dtoEe= super.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoEe;
     }

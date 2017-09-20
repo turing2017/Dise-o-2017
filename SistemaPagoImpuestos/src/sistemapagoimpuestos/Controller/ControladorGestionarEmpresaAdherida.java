@@ -16,7 +16,7 @@ import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 
 import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOEmpresasConsultadas;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdherida;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrear;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaModificacion;
@@ -53,7 +53,7 @@ public class ControladorGestionarEmpresaAdherida {
        experto.ingresarDatosEmpresa(cuit, nombre, direccion, habilitada);
     }
     
-    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
+    public DTOEmpresasConsultadas cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
         return experto.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada);
     }
     
@@ -68,7 +68,7 @@ public class ControladorGestionarEmpresaAdherida {
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
         vct = (Vector) evt;
-        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(),  vct.get(3).toString());
+        DTOEmpresasConsultadas dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(),  vct.get(3).toString());
         if(dtoEe!= null){
         final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
         pantallaModificacion.setVisible(true);

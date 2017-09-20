@@ -11,19 +11,19 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
-import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOEmpresasConsultadas;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 
 public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
    ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
-    public IUGestionarEmpresaAdheridaModificacion(DTOEmpresaExistente dtoEe) {
+    public IUGestionarEmpresaAdheridaModificacion(DTOEmpresasConsultadas dtoEe) {
         initComponents();
         this.setLocationRelativeTo(null);
-     TextField_Cuit.setText(dtoEe.getCuitDTOEmpresaExistente());
-        TextField_Nombre.setText(dtoEe.getNombreDTOEmpresaExistente());
-        TextField_Direccion.setText(dtoEe.getDireccionDTOEmpresaExistente());
-        CheckBox_Habilitada.setText(dtoEe.getHabilitadaDTOEmpresaExistente());
+     TextField_Cuit.setText(dtoEe.getCuitEmpresasConsultadas());
+        TextField_Nombre.setText(dtoEe.getNombreEmpresasConsultadas());
+        TextField_Direccion.setText(dtoEe.getDireccionEmpresasConsultadas());
+        CheckBox_Habilitada.setText(dtoEe.getHabilitadaEmpresasConsultadas());
        
     }
 

@@ -15,7 +15,7 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOEmpresasConsultadas;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
 
@@ -128,12 +128,12 @@ public class ExpertoGestionarEmpresaAdherida {
         
     }
     
-    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
-        DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
-        dtoEe.setCuitDTOEmpresaExistente(cuitEmpresa);
-        dtoEe.setNombreDTOEmpresaExistente(nombreEmpresa);
-        dtoEe.setDireccionDTOEmpresaExistente(direccionEmpresa);
-        dtoEe.setHabilitadaDTOEmpresaExistente(habilitada);
+    public DTOEmpresasConsultadas cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
+        DTOEmpresasConsultadas dtoEe = new DTOEmpresasConsultadas();
+        dtoEe.setCuitEmpresasConsultadas(cuitEmpresa);
+        dtoEe.setNombreEmpresasConsultadas(nombreEmpresa);
+        dtoEe.setDireccionEmpresasConsultadas(direccionEmpresa);
+        dtoEe.setHabilitadaEmpresasConsultadas(habilitada);
 
         
         return dtoEe;

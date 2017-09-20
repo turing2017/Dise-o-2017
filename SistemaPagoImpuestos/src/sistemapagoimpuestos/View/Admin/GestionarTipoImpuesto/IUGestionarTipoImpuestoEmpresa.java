@@ -251,6 +251,7 @@ public class IUGestionarTipoImpuestoEmpresa extends javax.swing.JFrame {
     private void button_gestionar_itemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionar_itemsActionPerformed
         IUGestionarTipoImpuestoItems pantallaItems = new IUGestionarTipoImpuestoItems();
         MetodosPantalla.getInstance().setearPantalla(pantallaItems);
+        pantallaItems.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_button_gestionar_itemsActionPerformed
 
     public static boolean nuevoTipoImpuesto;

@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
 import static sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems.setNuevoTipoImpuesto;
 
 /**
@@ -107,7 +109,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             }
         });
 
-        button_delete_EA.setText("Eleminar");
+        button_delete_EA.setText("Eliminar");
         button_delete_EA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_delete_EAActionPerformed(evt);
@@ -218,9 +220,10 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
     private void button_add_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_add_EAActionPerformed
         IUGestionarTipoImpuestoEmpresa pantallaGestionarETI = new IUGestionarTipoImpuestoEmpresa(textfield_codigo.getText(), textField_nombre.getText(), checkbox_esEditable.isSelected());
-        pantallaGestionarETI.setLocationRelativeTo(null);
-        pantallaGestionarETI.setVisible(true);
+        MetodosPantalla.getInstance().setearPantalla(pantallaGestionarETI);
         setNuevoTipoImpuesto(true);
+        pantallaGestionarETI.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
         this.dispose();
     }//GEN-LAST:event_button_add_EAActionPerformed
 
@@ -323,7 +326,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         tabla_empresa_item.getColumnModel().getColumn(1).setCellRenderer(r);
     }
 
-    public void RecuperarEmpresaItems() {
+        public void RecuperarEmpresaItems() {
         // Muestro pantalla de Consultar
         String[] columnas = {"Empresa", "Tipo Empresa", "Frec. Liquidacion", "Items"};
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorGestionarItem;
+import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 
 /**
@@ -17,6 +18,21 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
     
     public IUGestionarItemModificar() {
         initComponents();
+    }
+    public IUGestionarItemModificar(DTOItem dtoItem, List<DTOTipoDatoItem> list, String nombreItemActual) {
+        initComponents();
+                            
+                    setTextfield_nombre(dtoItem.getNombreItem());
+                    setTextfield_longitud(dtoItem.getLongitudItem());
+                    setCheckbox_requerido(dtoItem.isRequeridoItem());
+                    if (dtoItem.getFechaHoraInhabilitacionItem() == null) {
+                        setCheckbox_habilitado(true);
+                    } else {
+                        setCheckbox_habilitado(false);
+                    }
+
+                    llenarCombo(list, nombreItemActual);
+                    setNombreActual(dtoItem.getNombreItem());
     }
 
     /**

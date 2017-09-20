@@ -26,19 +26,15 @@ public class ControladorGestionarItem {
     // Experto GestionarItem
     private ExpertoGestionarItem experto = (ExpertoGestionarItem) FabricaExpertos.getInstancia().crearExperto("CU13");
     
-        // Funcion para mostrar la pantalla adecuada, en base a la opción seleccionada
-    public void seleccionarOpcion(String opcion, Object object) {
-        switch (opcion) {
-            // Si se presiona el botón de alta
-            case "Alta":
-                // Creo pantalla de alta
+    // Método para mostrar la pantalla de alta
+    public void seleccionAlta(){
+        // Creo pantalla de alta
                 IUGestionarItemAlta pantallaAlta = new IUGestionarItemAlta();
                 // Hago visible la pantalla de alta
                 pantallaAlta.setVisible(true);
                 // Modifico la operación de cierre para volver a la pantalla principal, al presionar x no stopea
                 pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 
-                //pantallaAlta.generarEmpresaItems();
                 // Modifico el Listener para que al presionar x genere la pantalla ppal.
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
@@ -46,16 +42,19 @@ public class ControladorGestionarItem {
                         iniciar();
                     }
                 });
-
-                break; // optional
-            // Si se presiona el botón de modificar
-            case "Modificar":
-                // Muestro pantalla de Modificación
-                DTOItem dtoItem = obtenerItem((String) object);
-                
+    }
+    
+    public void seleccionModificar(String codigo){
+        // Muestro pantalla de Modificación
+                DTOItem dtoItem = obtenerItem((String) codigo);           
                 if (dtoItem != null){
+                    // Obtengo los TipoDato
+                    // Completo el comboBox
+                    DTOTipoDatoItem dtoTipoDatoItem = dtoItem.getDtoTipoDatoItem();
+                    String nombreItemActual = dtoTipoDatoItem.getNombreTipoDatoItem();
+                    List<DTOTipoDatoItem> list = buscarTipoDatoItems();
                     // Creo la pantalla
-                    IUGestionarItemModificar pantallaModificar = new IUGestionarItemModificar();
+                    IUGestionarItemModificar pantallaModificar = new IUGestionarItemModificar(dtoItem,list, nombreItemActual);
                     pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
                     pantallaModificar.setVisible(true); // La hago visible
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -65,28 +64,7 @@ public class ControladorGestionarItem {
                             iniciar();
                         }
                     });
-                    pantallaModificar.setTextfield_nombre(dtoItem.getNombreItem());
-                    pantallaModificar.setTextfield_longitud(dtoItem.getLongitudItem());
-                    pantallaModificar.setCheckbox_requerido(dtoItem.isRequeridoItem());
-                    if (dtoItem.getFechaHoraInhabilitacionItem() == null) {
-                        pantallaModificar.setCheckbox_habilitado(true);
-                    } else {
-                        pantallaModificar.setCheckbox_habilitado(false);
-                    }
-                    // Completo el comboBox
-                    DTOTipoDatoItem dtoTipoDatoItem = dtoItem.getDtoTipoDatoItem();
-                    String nombreItemActual = dtoTipoDatoItem.getNombreTipoDatoItem();
-                    List<DTOTipoDatoItem> list = buscarTipoDatoItems();
-                    pantallaModificar.llenarCombo(list, nombreItemActual);
-                    pantallaModificar.setNombreActual(dtoItem.getNombreItem());
                 }
-
-                break; // optional
-
-            // You can have any number of case statements.
-            default: // Optional
-            // Statements
-        }
     }
     
     // Metodo iniciar

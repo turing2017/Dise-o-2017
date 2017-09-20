@@ -155,12 +155,6 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
             int longitudItem = Integer.parseInt(textfield_longitud.getText());
             boolean esRequerido = checkbox_requerido.isSelected();
             
-            // Aca debrria agregar para obtener del combo y validacion
-//            for (int i = 0; i < tabla_empresa_item.getRowCount(); i++) {
-//                if((Boolean)(tabla_empresa_item.getValueAt(i, 1)) == true){
-//                    String dtoItem = tabla_empresa_item.getValueAt(i, 0).toString();
-//                }
-//        }
             String nombreTipoDatoItemSeleccionado = comboBox_tipoDato.getSelectedItem().toString();
             controlador.nuevoItem(codigoItem, nombreItem, longitudItem, esRequerido, nombreTipoDatoItemSeleccionado);
             this.dispose();

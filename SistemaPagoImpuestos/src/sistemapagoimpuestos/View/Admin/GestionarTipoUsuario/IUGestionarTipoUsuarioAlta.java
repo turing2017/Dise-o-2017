@@ -13,8 +13,7 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
     public IUGestionarTipoUsuarioAlta() {
         initComponents();
     }
-
-   
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -26,6 +25,12 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Nombre Tipo Usuario");
+
+        textField_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField_nombreActionPerformed(evt);
+            }
+        });
 
         button_crear.setText("Crear");
         button_crear.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +80,10 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_button_crearActionPerformed
+
+    private void textField_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField_nombreActionPerformed
 
     /**
      * @param args the command line arguments

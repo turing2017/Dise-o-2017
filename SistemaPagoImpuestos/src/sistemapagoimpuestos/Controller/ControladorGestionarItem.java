@@ -38,7 +38,6 @@ public class ControladorGestionarItem {
                 // Modifico el Listener para que al presionar x genere la pantalla ppal.
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
-                        pantallaAlta.dispose();
                         iniciar();
                     }
                 });
@@ -60,13 +59,11 @@ public class ControladorGestionarItem {
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     pantallaModificar.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
-                            pantallaModificar.dispose();
                             iniciar();
                         }
                     });
                 }
     }
-    
     // Metodo iniciar
     public void iniciar(){
         if(experto.iniciar().equals("Administrador")){

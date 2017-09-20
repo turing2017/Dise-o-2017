@@ -59,6 +59,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textField_nombre">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField_nombreActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="button_crear">
       <Properties>

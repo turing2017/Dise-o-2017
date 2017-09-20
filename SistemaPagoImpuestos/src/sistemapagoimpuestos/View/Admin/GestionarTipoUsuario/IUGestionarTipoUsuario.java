@@ -19,7 +19,6 @@ import sistemapagoimpuestos.Utils.MetodosPantalla;
 public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     
     ControladorGestionarTipoUsuario controlador = new ControladorGestionarTipoUsuario();
-    
     public IUGestionarTipoUsuario() {
         initComponents();
         obtenerTipoUsuario();
@@ -122,7 +121,8 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
         //Le paso al controlador la operacion seleccionada
-        opcionSeleccionada("Alta", null);
+        IUGestionarTipoUsuarioAlta pantallaAlta = new IUGestionarTipoUsuarioAlta();
+        MetodosPantalla.getInstance().setearPantalla(pantallaAlta);
         this.dispose();
 
     }//GEN-LAST:event_button_nuevoActionPerformed
@@ -134,7 +134,6 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_button_filtrarActionPerformed
 
     private void button_habilitar_deshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_habilitar_deshabilitarActionPerformed
-        // TODO add your handling code here:
         // Le paso al controlador la opción seleccionada.
         try {
             // Obtento el código del elemento seleccionado
@@ -142,8 +141,12 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             int rowSelected = tabla_tipo_usuario.getSelectedRow();
             String codigo = tabla_tipo_usuario.getModel().getValueAt(rowSelected, columnCode).toString();
 
-            opcionSeleccionada("Habilitar_Deshabilitar", codigo);
+            controlador.modificarTipoUsuario(codigo);
             this.dispose();
+            IUGestionarTipoUsuario pantallaPrincipal = new IUGestionarTipoUsuario();
+            MetodosPantalla.getInstance().setearPantalla(pantallaPrincipal);
+            this.dispose();
+            
         } catch (ArrayIndexOutOfBoundsException e) {
             //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
             Excepciones.getInstance().objetoNoSeleccionado();
@@ -243,24 +246,6 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         tabla_tipo_usuario.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_tipo_usuario.getColumnModel().getColumn(1).setCellRenderer(r);
 
-    }
-
-    public void opcionSeleccionada(String opcion, Object object) {
-
-        switch (opcion) {
-            case "Alta":
-                //Muestro pantalla alta
-                IUGestionarTipoUsuarioAlta pantallaAlta = new IUGestionarTipoUsuarioAlta();
-                MetodosPantalla.getInstance().setearPantalla(pantallaAlta);
-                break;
-            case "Habilitar_Deshabilitar":
-                controlador.modificarTipoUsuario((String) object);
-                this.dispose();
-                IUGestionarTipoUsuario pantallaPrincipal = new IUGestionarTipoUsuario();
-                MetodosPantalla.getInstance().setearPantalla(pantallaPrincipal);
-
-                break;
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

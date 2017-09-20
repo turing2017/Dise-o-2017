@@ -16,7 +16,8 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     ControladorGestionarItem gestionarItem = new ControladorGestionarItem();
     ControladorGestionarParametrosCalculoComision calculoComision = new ControladorGestionarParametrosCalculoComision();
     ControladorGestionarEmpresaAdherida gestionarEmpresaAdherida = new ControladorGestionarEmpresaAdherida();
-    
+    ControladorGestionarTipoImpuesto controladorGestTipoImp = new ControladorGestionarTipoImpuesto();
+        
     public IUAdminPantallaPrincipal() {
         initComponents();
     }
@@ -137,11 +138,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
 
     private void button_gestionarTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarTipoUsuarioActionPerformed
         controladorGestTipoImpu.iniciar();
-        //this.dispose();
+        this.dispose();
     }//GEN-LAST:event_button_gestionarTipoUsuarioActionPerformed
 
     private void button_gestionarTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarTipoImpuestoActionPerformed
-        controladorGestTipoImpu.iniciar();
+        controladorGestTipoImp.iniciar();
         this.dispose();
     }//GEN-LAST:event_button_gestionarTipoImpuestoActionPerformed
 

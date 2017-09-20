@@ -271,10 +271,6 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             Excepciones.getInstance().objetoNoSeleccionado();
         }
     }//GEN-LAST:event_button_delete_EAActionPerformed
-
-    private void deleteItem(int item){
-        
-    }
     
     /**
      * @param args the command line arguments

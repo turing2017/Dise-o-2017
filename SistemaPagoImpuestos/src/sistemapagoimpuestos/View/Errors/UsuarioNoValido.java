@@ -88,7 +88,7 @@ public class UsuarioNoValido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_button_AceptarActionPerformed
 
     /**

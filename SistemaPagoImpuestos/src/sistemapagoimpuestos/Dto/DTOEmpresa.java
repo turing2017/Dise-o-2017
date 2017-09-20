@@ -19,7 +19,7 @@ public class DTOEmpresa {
     private String direccionEmpresa;
     private Date fechaHoraInhabilitacionEmpresa;
     private String nombreEmpresa;
-    
+
     public DTOEmpresa() {
     }
 
@@ -61,6 +61,5 @@ public class DTOEmpresa {
     public void setNombreEmpresa(String nombreEmpresa) {
         this.nombreEmpresa = nombreEmpresa;
     }
-
     
 }

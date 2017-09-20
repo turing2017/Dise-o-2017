@@ -108,11 +108,14 @@ public class IULogin extends javax.swing.JFrame {
 
     private void button_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_entrarActionPerformed
 
-        nombreUsuarioIngres = textfield_usuario.getText();
-        passwordUsuarioIngres = textfield_contraseña.getText();
-        controlador.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
-        this.dispose();
-
+        try{
+            nombreUsuarioIngres = textfield_usuario.getText();
+            passwordUsuarioIngres = textfield_contraseña.getText();
+            controlador.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
+            this.dispose();
+        } catch(IndexOutOfBoundsException e){
+            exceptions.Excepciones.getInstance().usuarioNoValido();
+        }
     }//GEN-LAST:event_button_entrarActionPerformed
 
     private void textfield_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_usuarioActionPerformed

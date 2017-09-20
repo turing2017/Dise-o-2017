@@ -25,8 +25,7 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
 public class ControladorGestionarTipoImpuesto {
 
     public ControladorGestionarTipoImpuesto() {
-    }    
-    
+    }
     private ExpertoGestionarTipoImpuesto experto = (ExpertoGestionarTipoImpuesto) FabricaExpertos.getInstancia().crearExperto("CU14");
     
     // Metodo iniciar
@@ -64,10 +63,9 @@ public class ControladorGestionarTipoImpuesto {
                 // Modifico la operación de cierre para volver a la pantalla principal
                 pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pantallaAlta.generarEmpresaItems();
-                IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<>());
+                IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<DTOEmpresaTipImpItem>());
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
-                        pantallaAlta.dispose();
                         iniciar();
                     }
                 });
@@ -85,7 +83,6 @@ public class ControladorGestionarTipoImpuesto {
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     pantallaModificar.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
-                            pantallaModificar.dispose();
                             iniciar();
                         }
                     });

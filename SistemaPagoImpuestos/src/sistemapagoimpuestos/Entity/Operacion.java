@@ -28,26 +28,17 @@ public class Operacion extends Entity{
     private EmpresaTipoImpuesto empresaTipoImpuesto;
     private TipoImpuesto tipoImpuesto;
     private List<DetalleOperacion> detalleOperacionList = new ArrayList<>();
-
-    public boolean isLiquidadaOperacion() {
-        return liquidadaOperacion;
-    }
-
-    public void setLiquidadaOperacion(boolean liquidadaOperacion) {
-        this.liquidadaOperacion = liquidadaOperacion;
-    }
  
-
     public Operacion() {
     }
 
-    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto,List<DetalleOperacion> detalleOperacion) {
+    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean liquidadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto,List<DetalleOperacion> detalleOperacion) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectrionicoOperacion = codigoPagoElectrionicoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
         this.importePagadoOperacion = importePagadoOperacion;
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
-        this.liquidadaOperacion = calculadaOperacion;
+        this.liquidadaOperacion = liquidadaOperacion;
         this.valorComisionOperacion = valorComisionOperacion;
         this.cuentaBancaria = cuentaBancaria;
         this.empresa = empresa;
@@ -96,12 +87,12 @@ public class Operacion extends Entity{
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
     }
 
-    public boolean isCalculadaOperacion() {
+    public boolean isLiquidadaOperacion() {
         return liquidadaOperacion;
     }
 
-    public void setCalculadaOperacion(boolean calculadaOperacion) {
-        this.liquidadaOperacion = calculadaOperacion;
+    public void setLiquidadaOperacion(boolean liquidadaOperacion) {
+        this.liquidadaOperacion = liquidadaOperacion;
     }
 
     public double getValorComisionOperacion() {

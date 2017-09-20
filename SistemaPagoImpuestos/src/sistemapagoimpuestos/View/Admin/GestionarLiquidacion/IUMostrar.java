@@ -111,6 +111,7 @@ public class IUMostrar extends javax.swing.JFrame {
 
         jLabel11.setText("Monto Comision Total");
 
+        jTextFieldMontoTotal.setEditable(false);
         jTextFieldMontoTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldMontoTotalActionPerformed(evt);

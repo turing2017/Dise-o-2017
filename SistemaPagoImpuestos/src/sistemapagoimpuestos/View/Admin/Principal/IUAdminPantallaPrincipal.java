@@ -76,7 +76,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        button_gestionar_cal_params.setText("Gestionar Gestionar Calculo Parametros");
+        button_gestionar_cal_params.setText("Gestionar Calculo Parametros");
         button_gestionar_cal_params.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_gestionar_cal_paramsActionPerformed(evt);
@@ -127,8 +127,8 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_gestionarItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_gestionar_cal_params)
+                .addGap(10, 10, 10)
                 .addComponent(button_gestionarEmpresaAdherida)
                 .addContainerGap(219, Short.MAX_VALUE))
         );

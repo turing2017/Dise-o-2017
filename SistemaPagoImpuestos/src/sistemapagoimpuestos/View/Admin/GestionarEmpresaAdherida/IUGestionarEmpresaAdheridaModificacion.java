@@ -160,7 +160,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
     private void Button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CancelarActionPerformed
          this.dispose();
-        controlador.iniciar();
     }//GEN-LAST:event_Button_CancelarActionPerformed
 
     private void TextField_CuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_CuitActionPerformed

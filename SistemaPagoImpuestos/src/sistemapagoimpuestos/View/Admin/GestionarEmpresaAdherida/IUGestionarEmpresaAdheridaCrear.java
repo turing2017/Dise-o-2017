@@ -147,9 +147,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
     }//GEN-LAST:event_CheckBox_HabilitadaActionPerformed
 
     private void Button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CancelarActionPerformed
-
-        controlador.iniciar();
-        this.dispose();       // TODO add your handling code here:
+        this.dispose();
 
     }//GEN-LAST:event_Button_CancelarActionPerformed
 

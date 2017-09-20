@@ -42,11 +42,11 @@ public class ConvertDTO {
 
     public DTOItem convertItem(Item item) {
         DTOItem dTOItem = new DTOItem();
-        dTOItem.setCodigoItem(item.getCodigoItem());
-        dTOItem.setNombreItem(item.getNombreItem());
-        dTOItem.setLongitudItem(item.getLongitudItem());
-        dTOItem.setRequeridoItem(item.isRequeridoItem());
-        dTOItem.setFechaHoraInhabilitacionItem(item.getFechaHoraInhabilitacionItem());
+        dTOItem.setCodigoDTOItem(item.getCodigoItem());
+        dTOItem.setNombreDTOItem(item.getNombreItem());
+        dTOItem.setLongitudDTOItem(item.getLongitudItem());
+        dTOItem.setRequeridoDTOItem(item.isRequeridoItem());
+        dTOItem.setFechaHoraInhabilitacionDTOItem(item.getFechaHoraInhabilitacionItem());
         return dTOItem;
     }
 

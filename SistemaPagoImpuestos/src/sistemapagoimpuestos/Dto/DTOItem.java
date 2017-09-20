@@ -9,66 +9,65 @@ import java.util.Date;
 
 /**
  *
-<<<<<<< HEAD
  * @author Markz
  */
 public class DTOItem {
-    private String codigoItem;
-    private String nombreItem;
-    private int longitudItem;
-    private boolean requeridoItem;
-    private Date fechaHoraInhabilitacionItem;
+    
+    private String codigoDTOItem;
+    private String nombreDTOItem;
+    private int longitudDTOItem;
+    private boolean requeridoDTOItem;
+    private Date fechaHoraInhabilitacionDTOItem;
 
     public DTOItem() {
     }
+
+    public DTOItem(String codigoDTOItem, String nombreDTOItem, int longitudDTOItem, boolean requeridoDTOItem, Date fechaHoraInhabilitacionDTOItem) {
+        this.codigoDTOItem = codigoDTOItem;
+        this.nombreDTOItem = nombreDTOItem;
+        this.longitudDTOItem = longitudDTOItem;
+        this.requeridoDTOItem = requeridoDTOItem;
+        this.fechaHoraInhabilitacionDTOItem = fechaHoraInhabilitacionDTOItem;
+    }
+
+    public String getCodigoDTOItem() {
+        return codigoDTOItem;
+    }
+
+    public void setCodigoDTOItem(String codigoDTOItem) {
+        this.codigoDTOItem = codigoDTOItem;
+    }
+
+    public String getNombreDTOItem() {
+        return nombreDTOItem;
+    }
+
+    public void setNombreDTOItem(String nombreDTOItem) {
+        this.nombreDTOItem = nombreDTOItem;
+    }
+
+    public int getLongitudDTOItem() {
+        return longitudDTOItem;
+    }
+
+    public void setLongitudDTOItem(int longitudDTOItem) {
+        this.longitudDTOItem = longitudDTOItem;
+    }
+
+    public boolean isRequeridoDTOItem() {
+        return requeridoDTOItem;
+    }
+
+    public void setRequeridoDTOItem(boolean requeridoDTOItem) {
+        this.requeridoDTOItem = requeridoDTOItem;
+    }
+
+    public Date getFechaHoraInhabilitacionDTOItem() {
+        return fechaHoraInhabilitacionDTOItem;
+    }
+
+    public void setFechaHoraInhabilitacionDTOItem(Date fechaHoraInhabilitacionDTOItem) {
+        this.fechaHoraInhabilitacionDTOItem = fechaHoraInhabilitacionDTOItem;
+    }
     
-    public DTOItem(String codigoItem, String nombreItem, int longitudItem, boolean requeridoItem, Date fechaHoraInhabilitacionItem) {
-        this.codigoItem = codigoItem;
-        this.nombreItem = nombreItem;
-        this.longitudItem = longitudItem;
-        this.requeridoItem = requeridoItem;
-        this.fechaHoraInhabilitacionItem = fechaHoraInhabilitacionItem;
     }
-
-    public String getCodigoItem() {
-        return codigoItem;
-    }
-
-    public void setCodigoItem(String codigoItem) {
-        this.codigoItem = codigoItem;
-    }
-
-    public String getNombreItem() {
-        return nombreItem;
-    }
-
-    public void setNombreItem(String nombreItem) {
-        this.nombreItem = nombreItem;
-    }
-
-    public int getLongitudItem() {
-        return longitudItem;
-    }
-
-    public void setLongitudItem(int longitudItem) {
-        this.longitudItem = longitudItem;
-    }
-
-    public boolean isRequeridoItem() {
-        return requeridoItem;
-    }
-
-    public void setRequeridoItem(boolean requeridoItem) {
-        this.requeridoItem = requeridoItem;
-    }
-
-    public Date getFechaHoraInhabilitacionItem() {
-        return fechaHoraInhabilitacionItem;
-    }
-
-    public void setFechaHoraInhabilitacionItem(Date fechaHoraInhabilitacionItem) {
-        this.fechaHoraInhabilitacionItem = fechaHoraInhabilitacionItem;
-    }
-    
-    
-}

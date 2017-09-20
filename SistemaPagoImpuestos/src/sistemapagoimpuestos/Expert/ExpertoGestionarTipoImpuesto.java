@@ -392,7 +392,7 @@ public class ExpertoGestionarTipoImpuesto {
             dtoItem = new DTOItem();
             Item item = (Item) items.get(i);
             String nombreItem = item.getNombreItem();
-            dtoItem.setNombreItem(nombreItem);
+            dtoItem.setNombreDTOItem(nombreItem);
             lista.add(dtoItem);
         }
         return lista;

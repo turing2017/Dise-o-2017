@@ -6,14 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import exceptions.Excepciones;
+import java.awt.Component;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
 
 public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
@@ -47,7 +49,9 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
 
     private void llenarTabla(List<DTOItem> list) {
         String[] columnas = {"Item", "Orden", "Seleccion"};
-        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
+        DefaultTableModel dtm;
+        dtm = new DefaultTableModel(null, columnas) {
+            @Override
             public Class<?> getColumnClass(int column) {
                 switch (column) {
                     case 0:
@@ -61,6 +65,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                 }
             }
 
+            @Override
             public boolean isCellEditable(int row, int column) {
                 switch (column) {
                     case 0:
@@ -74,16 +79,20 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                 }
             }
         };
+        
+        
         for (int i = 0; i < list.size(); i++) {
             Vector<Object> agregarFila = new Vector<Object>();
             DTOItem item = (DTOItem) list.get(i);
-            agregarFila.add(item.getNombreItem());
+            agregarFila.add(item.getNombreDTOItem());
             agregarFila.add(0);
             agregarFila.add(false);
 
             dtm.addRow(agregarFila);
         }
+        
         table_Item.setModel(dtm);
+        
     }
 
     @SuppressWarnings("unchecked")

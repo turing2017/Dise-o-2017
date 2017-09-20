@@ -6,17 +6,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
 import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
 import static sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems.setNuevoTipoImpuesto;
 
@@ -45,10 +42,8 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
     public void setNombre_actual(String nombre_actual) {
         this.nombre_actual.setText(nombre_actual);
     }
-
-
     
-    public static  void adddTOEmpresaTipImpItemList(DTOEmpresaTipImpItem dTOEmpresaTipImpItem){
+    public static void adddTOEmpresaTipImpItemList(DTOEmpresaTipImpItem dTOEmpresaTipImpItem){
          if(dTOEmpresaTipImpItemList==null){
             dTOEmpresaTipImpItemList = new ArrayList<>();
         }
@@ -319,7 +314,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             dTOEmpresaTipImpItem.setFrecuenciaSincronizacion(dTOEmpresaTipoImpuestoItems.getFrecuenciaSincro());
             for(DTOItem dTOItem : dTOEmpresaTipoImpuestoItems.getdTOItems()){
                 //dTOEmpresaTipImpItem.setFrecuenciaSincronizacion(dTOEmpresaTipoImpuestoItems);
-                dTOEmpresaTipImpItem.addItem(new DtoItemOrden(dTOItem.getNombreItem(), dTOEmpresaTipImpItem.getFrecuenciaSincronizacion()));
+                dTOEmpresaTipImpItem.addItem(new DtoItemOrden(dTOItem.getNombreDTOItem(), dTOEmpresaTipImpItem.getFrecuenciaSincronizacion()));
             }
             adddTOEmpresaTipImpItemList(dTOEmpresaTipImpItem);
         }

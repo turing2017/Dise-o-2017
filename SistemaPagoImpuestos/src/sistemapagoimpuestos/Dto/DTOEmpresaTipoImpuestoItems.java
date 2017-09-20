@@ -78,9 +78,9 @@ public class DTOEmpresaTipoImpuestoItems {
         int couter = 0; 
         for(DTOItem dTOItem : dTOItems){
             if(couter >0){
-                itemsConcat = " - " +dTOItem.getNombreItem();
+                itemsConcat = " - " +dTOItem.getNombreDTOItem();
             }else{
-                itemsConcat = dTOItem.getNombreItem();
+                itemsConcat = dTOItem.getNombreDTOItem();
             }
         }
         return itemsConcat;

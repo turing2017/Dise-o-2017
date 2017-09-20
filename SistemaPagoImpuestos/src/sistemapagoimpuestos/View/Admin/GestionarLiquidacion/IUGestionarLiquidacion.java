@@ -67,7 +67,6 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
         jButtonMostrar = new javax.swing.JButton();
         jButtonAprobar = new javax.swing.JButton();
         jButtonAnular = new javax.swing.JButton();
@@ -124,6 +123,11 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             }
         });
 
+        jTable2 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -142,13 +146,6 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         jComboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoImpuestoActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Boton de prueba Liquidacion");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -193,12 +190,10 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(129, 129, 129)
-                                        .addComponent(jButton2))))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(278, 278, 278))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,11 +217,10 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton2))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -241,7 +235,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                 .addComponent(jButtonConsultarLiquidaciones)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonMostrar)
                     .addComponent(jButtonAprobar)
@@ -267,16 +261,22 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         ArrayList <DTOLiquidacion> listDtoLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
         
         //LLena la tabla
-        
-        for (int i=0; i< listDtoLiquidacion.size(); i++){
-           
-      model.addRow(new Object[]{});
-       jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
-       jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i,1);
-        jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
-         jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 3);
-          jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
-           jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
+        for (int i = 0; i < listDtoLiquidacion.size(); i++) {
+
+            model.addRow(new Object[]{});
+            jTable2.isCellEditable(i, 0);
+            jTable2.isCellEditable(i, 1);
+            jTable2.isCellEditable(i, 2);
+            jTable2.isCellEditable(i, 3);
+            jTable2.isCellEditable(i, 4);
+            jTable2.isCellEditable(i, 5);
+            jTable2.isCellEditable(i, 6);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i, 1);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 3);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
             jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
         }
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
@@ -307,78 +307,6 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
          for(DTOEmpresa obj : listDtoDTOEmpresa){
              jComboBoxTipoImpuesto.addItem(obj.getNombreEmpresa()); }   */
     }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-   //ESTE VA CUANDO ESTEN CARGADAS LAS LIQUIDACIONES EN LA BD
-        //   List<DTOLiquidacion> listDtoLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacion();
-    
-
-//CREO 2 DTO PARRA PROBAR SI ANDA  
-   List<DTOLiquidacion> listDtoLiquidacion = new ArrayList<DTOLiquidacion>();
-      Liquidacion liquidacion;
-        DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
-        
-      Date hoy ;
-      Date fechaliquidacion1;
-      Date fechaliquidacion2;
-      Date fechaliquidacion3;
-      Calendar calendario =  Calendar.getInstance() ;
-     calendario.getTimeZone();
-    
-       hoy = dateChooserCombodesde.getCurrent().getTime();
-       hoy.setHours(8);
-       
-       fechaliquidacion1 = dateChooserCombodesde.getCurrent().getTime();
-       fechaliquidacion1.setMonth(0);
-       fechaliquidacion2 = dateChooserCombodesde.getCurrent().getTime();
-       fechaliquidacion2.setMonth(5);
-       fechaliquidacion3 = dateChooserCombodesde.getCurrent().getTime();
-        
-        
-        dtoLiquidacion.setNombreEmpresa("empreswa1");
-        dtoLiquidacion.setNumeroLiquidacion(23);
-        dtoLiquidacion.setFechaHoraLiquidacion(fechaliquidacion1);
-        dtoLiquidacion.setFechaHoraDesdeLiquidacion(hoy);
-        dtoLiquidacion.setFechaHoraHastaLiquidacion(null);
-        dtoLiquidacion.setNombreTipoImpuesto("tipoimpuesto1");
-        dtoLiquidacion.setNombreEstadoLiquidacion("Estado1");
-      listDtoLiquidacion.add(dtoLiquidacion);
-      
-      DTOLiquidacion dtoLiquidacion1 = new DTOLiquidacion();
-      dtoLiquidacion1.setNombreEmpresa("empresa2");
-        dtoLiquidacion1.setNumeroLiquidacion(4123);
-        dtoLiquidacion1.setFechaHoraLiquidacion(fechaliquidacion2);
-        dtoLiquidacion1.setFechaHoraDesdeLiquidacion(null);
-        dtoLiquidacion1.setFechaHoraHastaLiquidacion(null);
-        dtoLiquidacion1.setNombreTipoImpuesto("tipoimpuesto2");
-        dtoLiquidacion1.setNombreEstadoLiquidacion("estado3");
-      listDtoLiquidacion.add(dtoLiquidacion1);
-      
-       DTOLiquidacion dtoLiquidacion2 = new DTOLiquidacion();
-      dtoLiquidacion2.setNombreEmpresa("empresa3");
-        dtoLiquidacion2.setNumeroLiquidacion(713);
-        dtoLiquidacion2.setFechaHoraLiquidacion(fechaliquidacion3);
-        dtoLiquidacion2.setFechaHoraDesdeLiquidacion(null);
-        dtoLiquidacion2.setFechaHoraHastaLiquidacion(null);
-        dtoLiquidacion2.setNombreTipoImpuesto("tipoimpuesto1");
-        dtoLiquidacion2.setNombreEstadoLiquidacion("estado3");
-      listDtoLiquidacion.add(dtoLiquidacion2);
-      
-    
-      //LLENA LA TABLA DE MANDERA RUSTICA
-      for (int i=0; i< listDtoLiquidacion.size(); i++){
-           DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-      model.addRow(new Object[]{});
-       jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
-       jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i,1);
-        jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
-         jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 3);
-          jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
-           jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
-      }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularActionPerformed
       int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Anular la liquidacion numero "+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
@@ -421,20 +349,22 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     private void jButtonAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAprobarActionPerformed
       //MOSTRAR CARLEL DE OK
       //JOptionPane.showMessageDialog(rootPane, "picachu");
-      int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Aprobar la liquidacion numero "+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Aprobar la liquidacion numero " + jTable2.getValueAt(jTable2.getSelectedRow(), 0));
         switch (opcion) {
-            case 0:System.out.println("---------------ACEPTO------------");
-            
-            
+            case 0:
+                System.out.println("---------------ACEPTO------------");
+
                 ControladorGestionarLiquidacion.getInstance().AprobarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-             
+
                 break;
             default:
                 throw new AssertionError();
-            case 1 : System.out.println("--------------NO------------");
-                    
-            break;
-            case 2 : System.out.println("------------CANCEL----------");
+            case 1:
+                System.out.println("--------------NO------------");
+
+                break;
+            case 2:
+                System.out.println("------------CANCEL----------");
         }
        
     }//GEN-LAST:event_jButtonAprobarActionPerformed
@@ -481,7 +411,6 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombodesde;
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAnular;
     private javax.swing.JButton jButtonAprobar;
     private javax.swing.JButton jButtonConsultarLiquidaciones;

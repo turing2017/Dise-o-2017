@@ -72,6 +72,11 @@ public class IUMostrar extends javax.swing.JFrame {
 
         jLabel5.setText("Periodo");
 
+        jTableOperacion = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
         jTableOperacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

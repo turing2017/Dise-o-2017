@@ -428,7 +428,10 @@ public class ExpertoGestionarLiquidacion {
             // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
             DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
             model.addRow(new Object[]{});
-   
+            IUMostrar.jTableOperacion.isCellEditable(i, 0);
+            IUMostrar.jTableOperacion.isCellEditable(i, 1);
+            IUMostrar.jTableOperacion.isCellEditable(i, 2);
+            IUMostrar.jTableOperacion.isCellEditable(i, 3);
             IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNumeroOperacion(), i, 0);
             IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 1);
             IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getValorComisionOperacion(), i, 2);

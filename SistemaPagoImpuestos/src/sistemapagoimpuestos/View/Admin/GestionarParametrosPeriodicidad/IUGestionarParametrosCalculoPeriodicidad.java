@@ -294,9 +294,12 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
-
                 ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
-                Excepciones.getInstance().parametroCalculoPeriodicidadModificado();
+                JOptionPane.showMessageDialog(null,
+                        "Modificación exitosa" + "\n" + "Los parámetros fueron actualizados con éxito.",
+                        "",
+                        JOptionPane.INFORMATION_MESSAGE);
+                //Excepciones.getInstance().parametroCalculoPeriodicidadModificado();
                 this.dispose();
             }
 

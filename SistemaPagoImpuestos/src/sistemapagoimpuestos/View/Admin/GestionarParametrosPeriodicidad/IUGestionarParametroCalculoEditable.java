@@ -172,7 +172,11 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
-                Excepciones.getInstance().parametroCalculoEditableModificado();
+                JOptionPane.showMessageDialog(null,
+                        "Modificación exitosa"+ "\n" +"Los parámetros fueron actualizados con éxito.",
+                        "",
+                        JOptionPane.INFORMATION_MESSAGE);
+                //Excepciones.getInstance().parametroCalculoEditableModificado();
                 this.dispose();
             }            
         } catch (Exception e) {

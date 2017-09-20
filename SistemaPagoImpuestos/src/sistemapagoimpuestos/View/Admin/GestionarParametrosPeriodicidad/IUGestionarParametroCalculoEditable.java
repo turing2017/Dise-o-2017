@@ -30,7 +30,7 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
         jTextField2.setText(Double.toString(dtoCP.getSiEditablePCEditable()));
         jTextField1.setText(Double.toString(dtoCP.getNoEditablePCEditable()));
 
-        jButton3.setEnabled(false);
+        jButton3.setVisible(false);
         jTextField2.setEnabled(false);
         jTextField1.setEnabled(false);
     }
@@ -87,7 +87,7 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
             }
         });
 
-        jButton4.setText("Modificar");
+        jButton4.setText("Editar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -95,7 +95,7 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Parametros Calculo Editable");
+        jLabel4.setText("Parámetros  de Cálculo Editable");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,19 +107,20 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel4))
+                        .addGap(135, 135, 135)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,13 +138,13 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,24 +167,24 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
             double montoNoEditable = Double.parseDouble(jTextField1.getText());
             if (Utils.isNegative(montoSiEditable)|| Utils.isNegative(montoNoEditable)) {
                 JOptionPane.showMessageDialog(null,
-                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales positivos",
+                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use números decimales positivos. (Por ej: 2.50)",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
-                Excepciones.getInstance().modificacionExito();
+                Excepciones.getInstance().parametroCalculoEditableModificado();
                 this.dispose();
-            }
+            }            
         } catch (Exception e) {
             if (StringUtils.isEmptyOrWhitespaceOnly(jTextField1.getText())
                     || StringUtils.isEmptyOrWhitespaceOnly(jTextField2.getText())) {
                 JOptionPane.showMessageDialog(null,
-                        "Todos los campos deben estar completos, intente nuevamente",
+                        "Todos los campos deben estar completos, intente nuevamente.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales",
+                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use números decimales positivos. (Por ej: 2.50)",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
@@ -199,7 +200,8 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
        jTextField2.setEnabled(true);
        jTextField1.setEnabled(true);
        jButton4.setVisible(false);
-       jButton3.setEnabled(true);
+       jButton3.setVisible(true);
+        //jButton3.setEnabled(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

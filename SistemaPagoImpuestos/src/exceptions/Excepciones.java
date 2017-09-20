@@ -14,6 +14,8 @@ import sistemapagoimpuestos.View.Errors.EmpresaCreada;
 import sistemapagoimpuestos.View.Errors.ModificacionExito;
 
 import sistemapagoimpuestos.View.Errors.ObjetoNoSeleccionado;
+import sistemapagoimpuestos.View.Errors.ParametroCalculoEditableModificado;
+import sistemapagoimpuestos.View.Errors.ParametroCalculoPeriodicidadModificado;
 import sistemapagoimpuestos.View.Errors.UsuarioNoValido;
 
 /**
@@ -114,6 +116,22 @@ public class Excepciones extends Exception{
     me.setLabel_Titulo("Modificacion Exitosa");
     me.setLabel_mensaje("Los datos fueron modificados con éxito");
     me.setVisible(true);
+    }
+    
+    public void parametroCalculoPeriodicidadModificado(){
+    ParametroCalculoPeriodicidadModificado Ec= new ParametroCalculoPeriodicidadModificado();
+    Ec.setLabel_Titulo("Modificación exitosa");
+    Ec.setLabel_mensaje("Los parámetros fueron actualizados con éxito.");
+    //Ec.setLabel_mensaje("Los parámetros de cálculo de periodicidad" + "\n" + "fueron actualizados con éxito.");
+    Ec.setVisible(true);
+    }
+    
+    public void parametroCalculoEditableModificado(){
+    ParametroCalculoEditableModificado Ec= new ParametroCalculoEditableModificado();
+    Ec.setLabel_Titulo("Modificación exitosa");
+    Ec.setLabel_mensaje("Los parámetros fueron actualizados con éxito.");
+    //Ec.setLabel_mensaje("Los parámetros de cálculo editable" + "\n" + "fueron actualizados con éxito.");
+    Ec.setVisible(true);
     }
     public void camposVacios(){
     CamposVacios ca= new CamposVacios();

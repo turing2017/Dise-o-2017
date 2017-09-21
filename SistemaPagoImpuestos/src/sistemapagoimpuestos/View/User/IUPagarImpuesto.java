@@ -1,4 +1,4 @@
-package sistemapagoimpuestos.View;
+package sistemapagoimpuestos.View.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +23,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         // Agrego action listener para que se ejecute cuando cambie el valor seleccionado
         comboBox_tipoImpuesto.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
+                comboBox_empresa.removeAllItems();
                 llenarComboEmpresa(buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString()));
             }
         });

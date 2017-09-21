@@ -400,16 +400,8 @@ public class ExpertoGestionarLiquidacion {
         return listDTOOperacion;
     }
 
-    public void mostrar(String numeroLiquidacion, String fechaLiquidacion, String tipoImpuesto, String empresa) {
-        //Muestra la pantalla
-        IUMostrar mostrar = new IUMostrar();
-        mostrar.setVisible(true);
-        mostrar.setLocation(300, 200);
-        //LLena los labels
-        IUMostrar.jLabelEmpresa.setText(empresa);
-        IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
-        IUMostrar.jLabelFechaLiquidacion.setText(fechaLiquidacion);
-        IUMostrar.jLabelNrodeLiquidacion.setText(numeroLiquidacion);
+    public List<Operacion> mostrar(String numeroLiquidacion, String fechaLiquidacion, String tipoImpuesto, String empresa) {
+      
         //LLena la tabla de operaciones
  
         //Busca  esa liquidacion 
@@ -419,29 +411,10 @@ public class ExpertoGestionarLiquidacion {
         criterios.add(criterio);
         Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);      
        List<Operacion> listOperacion = liquidacion.getOperacionList();
+       return listOperacion;
 
 //LLena la tabla con las operaciones de esa liquidacion
-        double montoTotla = 0;
-
-        for (int i = 0; i < listOperacion.size(); i++) {
-
-            // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
-            DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
-            model.addRow(new Object[]{});
-            IUMostrar.jTableOperacion.isCellEditable(i, 0);
-            IUMostrar.jTableOperacion.isCellEditable(i, 1);
-            IUMostrar.jTableOperacion.isCellEditable(i, 2);
-            IUMostrar.jTableOperacion.isCellEditable(i, 3);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNumeroOperacion(), i, 0);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 1);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getValorComisionOperacion(), i, 2);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getImportePagadoOperacion(), i, 3);
-
-            montoTotla = montoTotla + listOperacion.get(i).getValorComisionOperacion();
-        }
-          
-        // Metodo van den bosch,  nose como convertir double a string
-        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotla);
+        
 
     }
 

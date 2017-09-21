@@ -13,6 +13,7 @@ import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Liquidacion;
+import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUGestionarLiquidacion;
@@ -77,8 +78,8 @@ public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
 }
 
 
-public void mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipoImpuesto,String empresa){
- experto.mostrar( numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
+public List<Operacion> mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipoImpuesto,String empresa){
+ return experto.mostrar( numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
 }
 
     public void AnularLiquidacion(String nroLiquidacion) {

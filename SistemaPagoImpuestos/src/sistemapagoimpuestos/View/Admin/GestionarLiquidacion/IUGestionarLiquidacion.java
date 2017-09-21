@@ -20,6 +20,7 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import sistemapagoimpuestos.Entity.Operacion;
 /**
  *
  * @author vande
@@ -329,10 +330,46 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         
         
         String nliquidacion =  jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
+        String fechaDesde =  jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString();
+        String fechaHasta =  jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
         String fechaliquidacion =jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
         String tipoImpuesto =  jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString();
         String empresa =  jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString();
-        ControladorGestionarLiquidacion.getInstance().mostrar(nliquidacion,fechaliquidacion,tipoImpuesto,empresa);
+       List<Operacion> listOperacion = ControladorGestionarLiquidacion.getInstance().mostrar(nliquidacion,fechaliquidacion,tipoImpuesto,empresa);
+        
+          //Muestra la pantalla
+        IUMostrar mostrar = new IUMostrar();
+        mostrar.setVisible(true);
+        mostrar.setLocation(300, 200);
+        //LLena los labels
+        IUMostrar.jLabelEmpresa.setText(empresa);
+        IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
+        IUMostrar.jLabelFechaLiquidacion.setText(fechaliquidacion);
+        IUMostrar.jLabelNrodeLiquidacion.setText(nliquidacion);
+        IUMostrar.jLabelPeriodo.setText(fechaDesde);
+        IUMostrar.jLabelPeriodo2.setText(fechaHasta);
+        
+        double montoTotla = 0;
+
+        for (int i = 0; i < listOperacion.size(); i++) {
+           
+            // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
+            DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
+            model.addRow(new Object[]{});
+            IUMostrar.jTableOperacion.isCellEditable(i, 0);
+            IUMostrar.jTableOperacion.isCellEditable(i, 1);
+            IUMostrar.jTableOperacion.isCellEditable(i, 2);
+            IUMostrar.jTableOperacion.isCellEditable(i, 3);
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNumeroOperacion(), i, 0);
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 1);
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getValorComisionOperacion(), i, 2);
+            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getImportePagadoOperacion(), i, 3);
+
+            montoTotla = montoTotla + listOperacion.get(i).getValorComisionOperacion();
+        }
+          
+        // Metodo van den bosch,  nose como convertir double a string
+        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotla);
         
        
     }//GEN-LAST:event_jButtonMostrarActionPerformed

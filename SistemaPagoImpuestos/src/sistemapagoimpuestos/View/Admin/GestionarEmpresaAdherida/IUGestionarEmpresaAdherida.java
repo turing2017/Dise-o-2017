@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
@@ -79,57 +79,57 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
         tabla_empresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cuit", "Nombre", "Direccion", "Deshabilitada el dia"
+                "Cuit", "Nombre", "Tipo de Impuesto", "Tipo de Empresa", "Frecuencia de Liquidación", "Dirección", "Deshabilitada el dia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -166,17 +166,15 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(Button_Filtrar)
                                 .addGap(279, 279, 279)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)))
-                .addComponent(Button_Actualizar)
-                .addGap(35, 35, 35))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(Button_Actualizar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,17 +185,13 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextField_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Button_Filtrar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(Button_Actualizar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Modificar)
-                    .addComponent(Button_Crear))
+                    .addComponent(Button_Crear)
+                    .addComponent(Button_Actualizar))
                 .addGap(34, 34, 34))
         );
 
@@ -228,7 +222,8 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             vct.add(tabla_empresa.getValueAt(rowSelected, 1));
             vct.add(tabla_empresa.getValueAt(rowSelected, 2));
             vct.add(tabla_empresa.getValueAt(rowSelected, 3));
-     
+            vct.add(tabla_empresa.getValueAt(rowSelected, 4));
+            vct.add(tabla_empresa.getValueAt(rowSelected, 5));
             controlador.modificarEmpresa(vct, controlador);
             
             
@@ -284,9 +279,9 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
         
         public void obtenerEmpresas(){
             
-            List<DTOEmpresa> listDtoEmpresa = controlador.consultarEmpresas();
+            List<DTOEmpresaTipoImpuesto> listDtoEmpresaTipoImpuesto = controlador.consultarEmpresas();
             
-            String[] columnas = {"Cuit", "Nombre", "Direccion",  "Deshabilitada el dia"};
+            String[] columnas = {"Cuit", "Nombre","Tipo de Impuesto","Tipo de Empresa","Frecuencia de Liquidacion", "Direccion",  "Deshabilitada el dia"};
             DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
             
             // Sobreescribo el método para no permitir editar la 
@@ -304,8 +299,13 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                         return String.class;
                     case 2:
                         return String.class;
-               
                     case 3:
+                        return String.class;
+                    case 4:
+                        return String.class;
+                    case 5:
+                        return String.class;
+                    case 6:
                         return String.class;
                     default:
                         return null;
@@ -315,15 +315,17 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
         };
             
             
-           for (DTOEmpresa dtoEmpresa : listDtoEmpresa) {
+           for (DTOEmpresaTipoImpuesto dtoEmpresaTipoImpuesto : listDtoEmpresaTipoImpuesto) {
             Vector<Object> vect = new Vector<>();
-            vect.add(dtoEmpresa.getCuitEmpresa());
-            vect.add(dtoEmpresa.getNombreEmpresa());
-            vect.add(dtoEmpresa.getDireccionEmpresa());
+            vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getCuitEmpresa());
+            vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getNombreEmpresa());
+            vect.add(dtoEmpresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
+            vect.add(dtoEmpresaTipoImpuesto.getTipoEmpresa().getNombreTipoEmpresa());
+            vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getDireccionEmpresa());
         
                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
-            if (dtoEmpresa.getFechaHoraInhabilitacionEmpresa() != null) {
-                vect.add(sdf.format(dtoEmpresa.getFechaHoraInhabilitacionEmpresa()));
+            if (dtoEmpresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa() != null) {
+                vect.add(sdf.format(dtoEmpresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa()));
             } else {
                 vect.add("");
             }

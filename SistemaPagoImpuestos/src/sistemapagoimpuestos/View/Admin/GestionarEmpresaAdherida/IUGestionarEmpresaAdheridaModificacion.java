@@ -11,8 +11,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
@@ -20,11 +22,14 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     public IUGestionarEmpresaAdheridaModificacion(DTOEmpresaExistente dtoEe) {
         initComponents();
         this.setLocationRelativeTo(null);
-     TextField_Cuit.setText(dtoEe.getCuitDTOEmpresaExistente());
+        TextField_Cuit.setText(dtoEe.getCuitDTOEmpresaExistente());
         TextField_Nombre.setText(dtoEe.getNombreDTOEmpresaExistente());
         TextField_Direccion.setText(dtoEe.getDireccionDTOEmpresaExistente());
-        CheckBox_Habilitada.setText(dtoEe.getHabilitadaDTOEmpresaExistente());
-       
+        CheckBox_Habilitada.setText(dtoEe.getHabilitadaDTOEmpresaExistente()); 
+        List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
+        llenarComboTipoEmpresa(listTipoEmpresa);
+        List<DTOTipoImpuesto> listTipoImpuesto = controlador.buscarTipoImpuesto();
+        llenarComboTipoEmpresa(listTipoEmpresa);
     }
 
     /**
@@ -46,6 +51,11 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         Button_Guardar = new javax.swing.JButton();
         Button_Cancelar = new javax.swing.JButton();
         TextField_Cuit = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        GestionarItems = new javax.swing.JButton();
+        comboBoxTipoImpuesto = new javax.swing.JComboBox<>();
+        comboBoxTipoEmpresa = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +66,18 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         jLabel1.setText("Cuit");
 
         jLabel4.setText("Habilitada ");
+
+        TextField_Nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextField_NombreActionPerformed(evt);
+            }
+        });
+
+        TextField_Direccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextField_DireccionActionPerformed(evt);
+            }
+        });
 
         Button_Guardar.setText("Guardar");
         Button_Guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,63 +100,92 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Tipo de Impuesto");
+
+        jLabel6.setText("Tipo de Empresa");
+
+        GestionarItems.setText("Gestionar Items");
+        GestionarItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GestionarItemsActionPerformed(evt);
+            }
+        });
+
+        comboBoxTipoImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo de Impuesto" }));
+        comboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxTipoImpuestoActionPerformed(evt);
+            }
+        });
+
+        comboBoxTipoEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo de Empresa" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(29, 29, 29)
-                                .addComponent(CheckBox_Habilitada))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TextField_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(TextField_Cuit)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 138, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Button_Cancelar)
                 .addGap(18, 18, 18)
                 .addComponent(Button_Guardar)
                 .addGap(71, 71, 71))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TextField_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(TextField_Cuit)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CheckBox_Habilitada)
+                            .addComponent(TextField_Direccion)
+                            .addComponent(GestionarItems, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(comboBoxTipoEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(comboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(22, 22, 22)
+                    .addComponent(jLabel6)
+                    .addComponent(comboBoxTipoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(CheckBox_Habilitada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
+                .addComponent(GestionarItems)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Cancelar)
                     .addComponent(Button_Guardar))
@@ -144,16 +195,31 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+  public void llenarComboTipoEmpresa(List<DTOTipoEmpresa> list){
+        for (int i = 0; i < list.size(); i++) {
+            DTOTipoEmpresa dTOTipoEmpresa = (DTOTipoEmpresa) list.get(i);
+            comboBoxTipoEmpresa.addItem(dTOTipoEmpresa.getNombreTipoEmpresa());
+        }
+    }
+    public void llenarComboTipoImpuesto(List<DTOTipoImpuesto> list){
+        for (int i = 0; i < list.size(); i++) {
+            DTOTipoImpuesto dTOTipoImpuesto = (DTOTipoImpuesto) list.get(i);
+            comboBoxTipoImpuesto.addItem(dTOTipoImpuesto.getNombreDTOTipoImpuesto());
+        }
+    }
+   
     private void Button_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_GuardarActionPerformed
 
         String cuit= TextField_Cuit.getText();
-         String nombre = TextField_Nombre.getText();
-         String direccion = TextField_Direccion.getText();
-         boolean habilitada =  CheckBox_Habilitada.isSelected();
+        String nombre = TextField_Nombre.getText();
+        String tipoImpuesto = comboBoxTipoImpuesto.toString();
+        String tipoEmpresa = comboBoxTipoEmpresa.toString();
+        String direccion = TextField_Direccion.getText();
+        boolean habilitada =  CheckBox_Habilitada.isSelected();
         
          
 
-        controlador.modificarEmpresa(cuit, nombre, direccion, habilitada);
+        controlador.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada);
         this.dispose();
 
     }//GEN-LAST:event_Button_GuardarActionPerformed
@@ -166,6 +232,22 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_TextField_CuitActionPerformed
+
+    private void TextField_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_NombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_NombreActionPerformed
+
+    private void GestionarItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarItemsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GestionarItemsActionPerformed
+
+    private void TextField_DireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_DireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField_DireccionActionPerformed
+
+    private void comboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoImpuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxTipoImpuestoActionPerformed
 
     public JCheckBox getCheckBox_Habilitada() {
         return CheckBox_Habilitada;
@@ -197,6 +279,22 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
     public void setTextField_Nombre(JTextField TextField_Nombre) {
         this.TextField_Nombre = TextField_Nombre;
+    }
+
+    public JComboBox<String> getComboBoxTipoEmpresa() {
+        return comboBoxTipoEmpresa;
+    }
+
+    public void setComboBoxTipoEmpresa(JComboBox<String> ComboBoxTipoEmpresa) {
+        this.comboBoxTipoEmpresa = ComboBoxTipoEmpresa;
+    }
+
+    public JComboBox<String> getComboBoxTipoImpuesto() {
+        return comboBoxTipoImpuesto;
+    }
+
+    public void setComboBoxTipoImpuesto(JComboBox<String> ComboBoxTipoImpuesto) {
+        this.comboBoxTipoImpuesto = ComboBoxTipoImpuesto;
     }
 
     public static void main(String args[]) {
@@ -235,12 +333,17 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private javax.swing.JButton Button_Cancelar;
     private javax.swing.JButton Button_Guardar;
     private javax.swing.JCheckBox CheckBox_Habilitada;
+    private javax.swing.JButton GestionarItems;
     private javax.swing.JTextField TextField_Cuit;
     private javax.swing.JTextField TextField_Direccion;
     private javax.swing.JTextField TextField_Nombre;
+    private javax.swing.JComboBox<String> comboBoxTipoEmpresa;
+    private javax.swing.JComboBox<String> comboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

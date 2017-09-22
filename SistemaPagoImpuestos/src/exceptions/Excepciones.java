@@ -12,10 +12,7 @@ import sistemapagoimpuestos.View.Errors.CuitExistente;
 import sistemapagoimpuestos.View.Errors.CuitNoExistente;
 import sistemapagoimpuestos.View.Errors.EmpresaCreada;
 import sistemapagoimpuestos.View.Errors.ModificacionExito;
-
 import sistemapagoimpuestos.View.Errors.ObjetoNoSeleccionado;
-import sistemapagoimpuestos.View.Errors.ParametroCalculoEditableModificado;
-import sistemapagoimpuestos.View.Errors.ParametroCalculoPeriodicidadModificado;
 import sistemapagoimpuestos.View.Errors.UsuarioNoValido;
 
 /**
@@ -118,27 +115,11 @@ public class Excepciones extends Exception{
     me.setVisible(true);
     }
     
-    public void parametroCalculoPeriodicidadModificado(){
-    ParametroCalculoPeriodicidadModificado Ec= new ParametroCalculoPeriodicidadModificado();
-    Ec.setLabel_Titulo("Modificación exitosa");
-    Ec.setLabel_mensaje("Los parámetros fueron actualizados con éxito.");
-    //Ec.setLabel_mensaje("Los parámetros de cálculo de periodicidad" + "\n" + "fueron actualizados con éxito.");
-    Ec.setVisible(true);
-    }
-    
-    public void parametroCalculoEditableModificado(){
-    ParametroCalculoEditableModificado Ec= new ParametroCalculoEditableModificado();
-    Ec.setLabel_Titulo("Modificación exitosa");
-    Ec.setLabel_mensaje("Los parámetros fueron actualizados con éxito.");
-    //Ec.setLabel_mensaje("Los parámetros de cálculo editable" + "\n" + "fueron actualizados con éxito.");
-    Ec.setVisible(true);
-    }
     public void camposVacios(){
     CamposVacios ca= new CamposVacios();
     ca.setLabel_Titulo("Campos Nulos");
     ca.setLabel_mensaje("Todos los campos deben estar completos, intente nuevamente");
     ca.setVisible(true);
-    
     }
     
     public void objetoExistente(String objeto){
@@ -176,5 +157,3 @@ public class Excepciones extends Exception{
         edne.setVisible(true);
     }
 }
- 
-

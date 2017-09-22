@@ -1,7 +1,5 @@
 package sistemapagoimpuestos.Entity;
 
-import java.util.Date;
-
 /**
  *
  * @author Gabriel

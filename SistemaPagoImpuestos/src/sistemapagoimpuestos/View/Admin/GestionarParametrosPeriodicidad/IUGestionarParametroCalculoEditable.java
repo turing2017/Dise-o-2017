@@ -5,24 +5,21 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad;
 
-import com.mysql.jdbc.StringUtils;
-import exceptions.Excepciones;
-import javax.swing.JOptionPane;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
-import sistemapagoimpuestos.Utils.Utils;
+import sistemapagoimpuestos.View.Mensajes.MensajesParametroCalculoEditable;
 
 /**
  *
  * @author Gabriel
  */
-public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
+public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
 
     /**
      * Creates new form IUGestionarParametroCalculoEditable
      */
     public IUGestionarParametroCalculoEditable() {
-  
+
         initComponents();
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         DTOParametroCalculoEditable dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoEditable();
@@ -104,29 +101,30 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(73, 73, 73)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,15 +134,14 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -157,41 +154,70 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         (this).setVisible(false);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
+    private Boolean validarCampoRequerido(String nombreCampo, String valorCampo) {
+
+        if (valorCampo.trim().equals("")) {
+            MensajesParametroCalculoEditable.getInstance().datosFaltantes(nombreCampo);
+            return false;
+        }
+
+        return true;
+    }
+
+    private Boolean validarCampoDecimalRequerido(String nombreCampo, String valorCampo) {
+
+        if (!validarCampoRequerido(nombreCampo, valorCampo)) {
+            return false;
+        }
+
         try {
-            double montoSiEditable = Double.parseDouble(jTextField2.getText());
-            double montoNoEditable = Double.parseDouble(jTextField1.getText());
-            if (Utils.isNegative(montoSiEditable)|| Utils.isNegative(montoNoEditable)) {
-                JOptionPane.showMessageDialog(null,
-                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use números decimales positivos. (Por ej: 2.50)",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
-                ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
-                JOptionPane.showMessageDialog(null,
-                        "Modificación exitosa"+ "\n" +"Los parámetros fueron actualizados con éxito.",
-                        "",
-                        JOptionPane.INFORMATION_MESSAGE);
-                //Excepciones.getInstance().parametroCalculoEditableModificado();
-                this.dispose();
-            }            
-        } catch (Exception e) {
-            if (StringUtils.isEmptyOrWhitespaceOnly(jTextField1.getText())
-                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField2.getText())) {
-                JOptionPane.showMessageDialog(null,
-                        "Todos los campos deben estar completos, intente nuevamente.",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use números decimales positivos. (Por ej: 2.50)",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            double valorConvertido = Double.parseDouble(valorCampo);
+
+            if (Double.doubleToRawLongBits(valorConvertido) < 0) {
+                MensajesParametroCalculoEditable.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 2.50)");
+                return false;
             }
+
+        } catch (NumberFormatException e) {
+            MensajesParametroCalculoEditable.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 2.50)");
+            return false;
+        }
+
+        return true;
+    }
+
+    private double obtenerCampoDecimal(String nombreCampo, String valorCampo) {
+
+        if (validarCampoDecimalRequerido(nombreCampo, valorCampo)) {
+            return Double.parseDouble(valorCampo);
+        }
+        return 0;
+    }
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        if (!validarCampoDecimalRequerido(jLabel2.getText().substring(0, jLabel2.getText().length() - 1), jTextField2.getText())
+                || !validarCampoDecimalRequerido(jLabel1.getText().substring(0, jLabel1.getText().length() - 1), jTextField1.getText())) {
+            return;
+        }
+
+        double montoSiEditable = obtenerCampoDecimal(jLabel2.getText().substring(0, jLabel2.getText().length() - 1), jTextField2.getText());
+        double montoNoEditable = obtenerCampoDecimal(jLabel1.getText().substring(0, jLabel1.getText().length() - 1), jTextField1.getText());
+
+        if (montoSiEditable == 0 & montoNoEditable == 0) {
+            MensajesParametroCalculoEditable.getInstance().datosIncorrectos("", "No pueden estar todos los valores definidos en cero.\n Al menos uno debe ser númerico positivo mayor a cero. (Por ej.: 2.50)");
+        } else {
+            try {
+                ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
+                MensajesParametroCalculoEditable.getInstance().modificacionExitosa();
+                this.dispose();
+            } catch (Exception e) {
+                MensajesParametroCalculoEditable.getInstance().modificacionFallida();
+            }
+
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -201,10 +227,10 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog{
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       jTextField2.setEnabled(true);
-       jTextField1.setEnabled(true);
-       jButton4.setVisible(false);
-       jButton3.setVisible(true);
+        jTextField2.setEnabled(true);
+        jTextField1.setEnabled(true);
+        jButton4.setVisible(false);
+        jButton3.setVisible(true);
         //jButton3.setEnabled(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

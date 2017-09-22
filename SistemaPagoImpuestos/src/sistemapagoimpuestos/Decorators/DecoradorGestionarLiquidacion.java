@@ -108,10 +108,11 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
 }
     
     @Override
-    public void mostrar(String numeroLiquidacion, String fechaLiquidacion, String tipoImpuesto, String empresa) {
+    public List<DTOOperacion> mostrar(String numeroLiquidacion, String fechaLiquidacion, String tipoImpuesto, String empresa) {
         
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.mostrar(numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
+        List<DTOOperacion> listDtoOperacion =super.mostrar(numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
         FachadaInterna.getInstance().finalizarTransaccion();
+        return listDtoOperacion;
     }
 }

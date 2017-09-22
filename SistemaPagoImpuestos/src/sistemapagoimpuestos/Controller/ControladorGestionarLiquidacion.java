@@ -77,8 +77,8 @@ public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
 }
 
 
-public void mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipoImpuesto,String empresa){
- experto.mostrar( numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
+public  List<DTOOperacion> mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipoImpuesto,String empresa){
+ return experto.mostrar( numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
 }
 
     public void AnularLiquidacion(String nroLiquidacion) {

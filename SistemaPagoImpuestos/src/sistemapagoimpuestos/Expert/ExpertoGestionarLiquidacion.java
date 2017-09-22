@@ -400,49 +400,25 @@ public class ExpertoGestionarLiquidacion {
         return listDTOOperacion;
     }
 
-    public void mostrar(String numeroLiquidacion, String fechaLiquidacion, String tipoImpuesto, String empresa) {
-        //Muestra la pantalla
-        IUMostrar mostrar = new IUMostrar();
-        mostrar.setVisible(true);
-        mostrar.setLocation(300, 200);
-        //LLena los labels
-        IUMostrar.jLabelEmpresa.setText(empresa);
-        IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
-        IUMostrar.jLabelFechaLiquidacion.setText(fechaLiquidacion);
-        IUMostrar.jLabelNrodeLiquidacion.setText(numeroLiquidacion);
-        //LLena la tabla de operaciones
- 
+    public List<DTOOperacion> mostrar(String numeroLiquidacion, String fechaLiquidacion, String tipoImpuesto, String empresa) {
+
         //Busca  esa liquidacion 
-               List<DTOCriterio> criterios = new ArrayList<>();
-          DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=",Integer.valueOf(numeroLiquidacion));
-          criterios.clear();
+        List<DTOCriterio> criterios = new ArrayList<>();
+        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.valueOf(numeroLiquidacion));
+        criterios.clear();
         criterios.add(criterio);
-        Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);      
-       List<Operacion> listOperacion = liquidacion.getOperacionList();
-
-//LLena la tabla con las operaciones de esa liquidacion
-        double montoTotla = 0;
-
-        for (int i = 0; i < listOperacion.size(); i++) {
-
-            // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
-            DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
-            model.addRow(new Object[]{});
-            IUMostrar.jTableOperacion.isCellEditable(i, 0);
-            IUMostrar.jTableOperacion.isCellEditable(i, 1);
-            IUMostrar.jTableOperacion.isCellEditable(i, 2);
-            IUMostrar.jTableOperacion.isCellEditable(i, 3);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNumeroOperacion(), i, 0);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 1);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getValorComisionOperacion(), i, 2);
-            IUMostrar.jTableOperacion.setValueAt(listOperacion.get(i).getImportePagadoOperacion(), i, 3);
-
-            montoTotla = montoTotla + listOperacion.get(i).getValorComisionOperacion();
+        Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+        List<Operacion> listOperacion = liquidacion.getOperacionList();
+        List<DTOOperacion> listDTOoperacion = new ArrayList<>();
+        for (Operacion operacion : listOperacion) {
+            DTOOperacion dtoOperacion = new DTOOperacion();
+            dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
+            dtoOperacion.setNroComprobanteFactura(operacion.getNroComprobanteFacturaOperacion());
+            dtoOperacion.setValorComisionOperacion(operacion.getValorComisionOperacion());
+            dtoOperacion.setImportePagadoOperacion(operacion.getImportePagadoOperacion());
+            listDTOoperacion.add(dtoOperacion);
         }
-          
-        // Metodo van den bosch,  nose como convertir double a string
-        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotla);
-
+        return listDTOoperacion;
     }
 
     public void AnularLiquidacion(String nroLiquidacion) {

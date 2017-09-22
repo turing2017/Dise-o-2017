@@ -20,6 +20,7 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import sistemapagoimpuestos.Dto.DTOOperacion;
 /**
  *
  * @author vande
@@ -324,17 +325,39 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAnularActionPerformed
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
+        double montoTotal = 0.0;
+        String nliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
+        String fechaliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
+        String tipoImpuesto = jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString();
+        String empresa = jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString();
+        IUMostrar mostrar = new IUMostrar();
+        mostrar.setVisible(true);
+        mostrar.setLocation(300, 200);
+        //LLena los labels
+        IUMostrar.jLabelEmpresa.setText(empresa);
+        IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
+        IUMostrar.jLabelFechaLiquidacion.setText(fechaliquidacion);
+        IUMostrar.jLabelNrodeLiquidacion.setText(nliquidacion);
+        List<DTOOperacion> listDTOoperacion = ControladorGestionarLiquidacion.getInstance().mostrar(nliquidacion, fechaliquidacion, tipoImpuesto, empresa);
 
-       
-        
-        
-        String nliquidacion =  jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
-        String fechaliquidacion =jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
-        String tipoImpuesto =  jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString();
-        String empresa =  jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString();
-        ControladorGestionarLiquidacion.getInstance().mostrar(nliquidacion,fechaliquidacion,tipoImpuesto,empresa);
-        
-       
+        for (int i = 0; i < listDTOoperacion.size(); i++) {
+
+            // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
+            DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
+            model.addRow(new Object[]{});
+            IUMostrar.jTableOperacion.isCellEditable(i, 0);
+            IUMostrar.jTableOperacion.isCellEditable(i, 1);
+            IUMostrar.jTableOperacion.isCellEditable(i, 2);
+            IUMostrar.jTableOperacion.isCellEditable(i, 3);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getNumeroOperacion(), i, 0);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getNroComprobanteFactura(), i, 1);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getValorComisionOperacion(), i, 2);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getImportePagadoOperacion(), i, 3);
+
+            montoTotal = montoTotal + listDTOoperacion.get(i).getValorComisionOperacion();
+        }
+
+        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);
     }//GEN-LAST:event_jButtonMostrarActionPerformed
 
     private void jButtonAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAprobarActionPerformed

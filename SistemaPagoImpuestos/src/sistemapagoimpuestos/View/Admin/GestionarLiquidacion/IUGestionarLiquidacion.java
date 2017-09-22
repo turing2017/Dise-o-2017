@@ -331,6 +331,9 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         String fechaliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
         String tipoImpuesto = jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString();
         String empresa = jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString();
+        String fechaDesde =  jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString();
+        String fechaHasta =  jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
+        
         IUMostrar mostrar = new IUMostrar();
         mostrar.setVisible(true);
         mostrar.setLocation(300, 200);
@@ -339,6 +342,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
         IUMostrar.jLabelFechaLiquidacion.setText(fechaliquidacion);
         IUMostrar.jLabelNrodeLiquidacion.setText(nliquidacion);
+        IUMostrar.jLabelPeriodo.setText(fechaDesde);
+        IUMostrar.jLabelPeriodo2.setText(fechaHasta);
         List<DTOOperacion> listDTOoperacion = ControladorGestionarLiquidacion.getInstance().mostrar(nliquidacion, fechaliquidacion, tipoImpuesto, empresa);
 
         for (int i = 0; i < listDTOoperacion.size(); i++) {

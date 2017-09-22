@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+
 /**
  *
  * @author vande
@@ -353,10 +354,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getNroComprobanteFactura(), i, 1);
             IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getValorComisionOperacion(), i, 2);
             IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getImportePagadoOperacion(), i, 3);
-
             montoTotal = montoTotal + listDTOoperacion.get(i).getValorComisionOperacion();
         }
-
         IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);
     }//GEN-LAST:event_jButtonMostrarActionPerformed
 

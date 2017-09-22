@@ -400,6 +400,7 @@ public class ExpertoGestionarLiquidacion {
         return listDTOOperacion;
     }
 
+
     public List<DTOOperacion> mostrar(String numeroLiquidacion, String fechaLiquidacion, String tipoImpuesto, String empresa) {
 
         //Busca  esa liquidacion 
@@ -419,6 +420,7 @@ public class ExpertoGestionarLiquidacion {
             listDTOoperacion.add(dtoOperacion);
         }
         return listDTOoperacion;
+
     }
 
     public void AnularLiquidacion(String nroLiquidacion) {

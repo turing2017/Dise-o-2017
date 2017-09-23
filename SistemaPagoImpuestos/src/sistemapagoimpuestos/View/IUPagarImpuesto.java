@@ -20,17 +20,21 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
      */
     public IUPagarImpuesto() {
         initComponents();
-        // Agrego action listener para que se ejecute cuando cambie el valor seleccionado
-        comboBox_tipoImpuesto.addActionListener (new ActionListener () {
-            public void actionPerformed(ActionEvent e) {
-                llenarComboEmpresa(buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString()));
-            }
-        });
         // Busco todos los tipoimpuestos
         llenarComboTipoImpuesto(buscarTipoImpuestos());
-        // Obtengo la empresa
-        llenarComboEmpresa(buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString()));
-       
+        System.out.println(comboBox_tipoImpuesto.getSelectedItem().toString());
+        // Agrego action listener para que se ejecute cuando cambie el valor seleccionado de TI
+        comboBox_tipoImpuesto.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                // Al seleccionar un TI debe buscar las empresas
+                if (!comboBox_tipoImpuesto.getSelectedItem().toString().equals("Seleccione Tipo de Impuesto")) {
+                    llenarComboEmpresa(buscarEmpresas(comboBox_tipoImpuesto.getSelectedItem().toString()));
+                } else {
+                    comboBox_empresa.removeAllItems();
+                    comboBox_empresa.setEnabled(false);
+                }
+            }
+        });
     }
 
     /**
@@ -55,6 +59,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
 
         label_tipoImpuesto.setText("Tipo de Impuesto");
 
+        comboBox_tipoImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Tipo de Impuesto" }));
         comboBox_tipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBox_tipoImpuestoActionPerformed(evt);
@@ -63,6 +68,8 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
 
         label_empresa.setText("Empresa");
         label_empresa.setToolTipText("");
+
+        comboBox_empresa.setEnabled(false);
 
         label_codigo.setText("Codigo pago electrónico");
 
@@ -86,9 +93,9 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
                         .addGap(91, 91, 91)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comboBox_tipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboBox_empresa, 0, 187, Short.MAX_VALUE)
+                            .addComponent(comboBox_empresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(textfield_codigo))))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(button_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,10 +189,18 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     
     // Método para llenar el combo de Empresa
     public void llenarComboEmpresa(List<DTOEmpresa> listaDTOEmpresa){
+        // Limpio el combo
+        comboBox_empresa.removeAllItems();
+        comboBox_empresa.setEnabled(false);
+        if (listaDTOEmpresa.size() > 0) {
+            comboBox_empresa.setEnabled(true);
             for (int i = 0; i < listaDTOEmpresa.size(); i++) {
-            DTOEmpresa dtoEmpresa = (DTOEmpresa) listaDTOEmpresa.get(i);
-            String nombreEmpresa = dtoEmpresa.getNombreEmpresa();
-            comboBox_empresa.addItem(nombreEmpresa);
+                DTOEmpresa dtoEmpresa = (DTOEmpresa) listaDTOEmpresa.get(i);
+                String nombreEmpresa = dtoEmpresa.getNombreEmpresa();
+                comboBox_empresa.addItem(nombreEmpresa);
+            }
+        } else {
+            comboBox_empresa.addItem("No se encontró Empresa");
         }
     }
 

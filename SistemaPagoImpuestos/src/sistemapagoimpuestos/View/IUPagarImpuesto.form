@@ -39,12 +39,12 @@
                       <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="comboBox_tipoImpuesto" max="32767" attributes="0"/>
-                          <Component id="comboBox_empresa" pref="187" max="32767" attributes="0"/>
+                          <Component id="comboBox_empresa" max="32767" attributes="0"/>
                           <Component id="textfield_codigo" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="120" max="32767" attributes="0"/>
+              <EmptySpace pref="95" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -99,7 +99,9 @@
     <Component class="javax.swing.JComboBox" name="comboBox_tipoImpuesto">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="1">
+            <StringItem index="0" value="Seleccione Tipo de Impuesto"/>
+          </StringArray>
         </Property>
       </Properties>
       <Events>
@@ -120,6 +122,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

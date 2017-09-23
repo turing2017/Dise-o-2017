@@ -2,6 +2,8 @@ package sistemapagoimpuestos.View.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
@@ -32,9 +34,28 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
                 } else {
                     comboBox_empresa.removeAllItems();
                     comboBox_empresa.setEnabled(false);
+                    // Limpio el formulario
+                    textfield_codigo.setText("");
+                    button_buscar.setEnabled(false);
                 }
             }
         });
+        textfield_codigo.addKeyListener(new KeyAdapter(){
+        public void keyPressed(KeyEvent ke)
+        {
+            if(!(ke.getKeyChar()==27||ke.getKeyChar()==65535)) //Esta sección se ejecuta cuando el usuario edita el campo
+            {
+                if (comboBox_empresa.getSelectedItem() != null && comboBox_empresa.toString() != ""
+                    && !comboBox_empresa.getSelectedItem().toString().equals("No se encontró Empresa")
+                    && textfield_codigo.getText() != null && textfield_codigo.getText().toString() != ""
+                    && textfield_codigo.getText().toString().length() > 1) {
+                    button_buscar.setEnabled(true);
+                } else {
+                    button_buscar.setEnabled(false);
+                }
+            }
+        }
+    });
     }
 
     /**
@@ -74,6 +95,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         label_codigo.setText("Codigo pago electrónico");
 
         button_buscar.setText("Buscar");
+        button_buscar.setEnabled(false);
         button_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_buscarActionPerformed(evt);
@@ -139,8 +161,13 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBox_tipoImpuestoActionPerformed
 
     private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
+        if (rootPaneCheckingEnabled) {
+            
+        }
         controlador.consultarComprobantes(textfield_codigo.getText().toString());
-        
+        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes();
+        pantallaComprobantes.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_button_buscarActionPerformed
 
     /**
@@ -212,6 +239,9 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         } else {
             comboBox_empresa.addItem("No se encontró Empresa");
         }
+        // Limpio el formulario
+        textfield_codigo.setText("");
+        button_buscar.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

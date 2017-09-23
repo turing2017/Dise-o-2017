@@ -1,9 +1,16 @@
 package sistemapagoimpuestos.View.User;
 
-public class IUPagarImpuestoComprobYCuentas extends javax.swing.JFrame {
+import java.util.List;
+import sistemapagoimpuestos.Dto.DTOComprobante;
 
-    public IUPagarImpuestoComprobYCuentas() {
+public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
+
+    public IUPagarImpuestoComprobantes() {
         initComponents();
+    }
+    
+    public IUPagarImpuestoComprobantes(List<DTOComprobante> listadoDTOComprobante){
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -134,19 +141,20 @@ public class IUPagarImpuestoComprobYCuentas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobYCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobYCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobYCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobYCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUPagarImpuestoComprobantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUPagarImpuestoComprobYCuentas().setVisible(true);
+                new IUPagarImpuestoComprobantes().setVisible(true);
             }
         });
     }

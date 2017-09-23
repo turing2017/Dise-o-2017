@@ -20,19 +20,11 @@ public class DTOEmpresaTipoImpuesto {
     
     private Date fechaHoraAltaEmpresaTipoImpuesto;
     private Date fechaHoraInhabilitacionEmpresaTipoImpuestoa;
-    private Date FechaProximaLiquidacionEmpresaTipoImpuesto;
     private TipoEmpresa tipoEmpresa;
     private TipoImpuesto tipoImpuesto;
     private Empresa empresa;
-    private Date fechaLiquidacionDTOEmpresaExistente;
+    private int frecuenciaLiquidacionDTOEmpresaExistente;
 
-    public Date getFechaLiquidacionDTOEmpresaExistente() {
-        return fechaLiquidacionDTOEmpresaExistente;
-    }
-
-    public void setFechaLiquidacionDTOEmpresaExistente(Date fechaLiquidacionDTOEmpresaExistente) {
-        this.fechaLiquidacionDTOEmpresaExistente = fechaLiquidacionDTOEmpresaExistente;
-    }
 
 
     public DTOEmpresaTipoImpuesto() {
@@ -54,13 +46,14 @@ public class DTOEmpresaTipoImpuesto {
         this.fechaHoraInhabilitacionEmpresaTipoImpuestoa = fechaHoraInhabilitacionEmpresaTipoImpuestoa;
     }
 
-    public Date getFechaProximaLiquidacionEmpresaTipoImpuesto() {
-        return FechaProximaLiquidacionEmpresaTipoImpuesto;
+    public int getFrecuenciaLiquidacionDTOEmpresaExistente() {
+        return frecuenciaLiquidacionDTOEmpresaExistente;
     }
 
-    public void setFechaProximaLiquidacionEmpresaTipoImpuesto(Date FechaProximaLiquidacionEmpresaTipoImpuesto) {
-        this.FechaProximaLiquidacionEmpresaTipoImpuesto = FechaProximaLiquidacionEmpresaTipoImpuesto;
+    public void setFrecuenciaLiquidacionDTOEmpresaExistente(int frecuenciaLiquidacionDTOEmpresaExistente) {
+        this.frecuenciaLiquidacionDTOEmpresaExistente = frecuenciaLiquidacionDTOEmpresaExistente;
     }
+
 
     public TipoEmpresa getTipoEmpresa() {
         return tipoEmpresa;
@@ -86,13 +79,15 @@ public class DTOEmpresaTipoImpuesto {
         this.empresa = empresa;
     }
 
-    public DTOEmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuestoa, Date FechaProximaLiquidacionEmpresaTipoImpuesto, TipoEmpresa tipoEmpresa, TipoImpuesto tipoImpuesto, Empresa empresa) {
+    public DTOEmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuestoa, TipoEmpresa tipoEmpresa, TipoImpuesto tipoImpuesto, Empresa empresa, int frecuenciaLiquidacionDTOEmpresaExistente) {
         this.fechaHoraAltaEmpresaTipoImpuesto = fechaHoraAltaEmpresaTipoImpuesto;
         this.fechaHoraInhabilitacionEmpresaTipoImpuestoa = fechaHoraInhabilitacionEmpresaTipoImpuestoa;
-        this.FechaProximaLiquidacionEmpresaTipoImpuesto = FechaProximaLiquidacionEmpresaTipoImpuesto;
         this.tipoEmpresa = tipoEmpresa;
         this.tipoImpuesto = tipoImpuesto;
         this.empresa = empresa;
+        this.frecuenciaLiquidacionDTOEmpresaExistente = frecuenciaLiquidacionDTOEmpresaExistente;
     }
+
+
 
 }    

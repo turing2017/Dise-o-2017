@@ -39,6 +39,7 @@ public class ExpertoGestionarEmpresaAdherida {
         return "Administrador";
     }
     public ArrayList<DTOEmpresaTipoImpuesto > consultarEmpresas (){
+        
     List<Object> listObject = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
     ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = new ArrayList<>();
     for(Object obj : listObject){
@@ -53,8 +54,8 @@ public class ExpertoGestionarEmpresaAdherida {
       DTOeti.setFechaHoraInhabilitacionEmpresaTipoImpuestoa(empresaTipoImpuesto.getFechaHoraInhabilitacionEmpresaTipoImpuesto());
       DTOeti.setTipoEmpresa(empresaTipoImpuesto.getTipoEmpresa());
       DTOeti.setTipoImpuesto(empresaTipoImpuesto.getTipoImpuesto());
-      DTOeti.setFechaProximaLiquidacionEmpresaTipoImpuesto(empresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto());
-      
+      DTOeti.setFrecuenciaLiquidacionDTOEmpresaExistente(empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto());
+
       listDTOEmpresaTipoImpuesto.add(DTOeti);
     
       }
@@ -110,7 +111,7 @@ public class ExpertoGestionarEmpresaAdherida {
     
     
     
-    public void ingresarDatosEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, String fechaLiquidacion) {
+    public void ingresarDatosEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada) {
        boolean camposVacios= camposNulos(cuit, nombre, direccion);
        if (camposVacios==true){
        Excepciones.getInstance().camposVacios();
@@ -198,7 +199,6 @@ public class ExpertoGestionarEmpresaAdherida {
         eti.setTipoEmpresa(tEmpresa);
         eti.setTipoImpuesto(tImpuesto);
         eti.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
-        eti.setFechaProximaLiquidacionEmpresaTipoImpuesto(fechaLiquidacion);
 
         //Guardo la empresa, y la empresa tipo impuesto
         FachadaPersistencia.getInstance().guardar(empresa);
@@ -238,7 +238,7 @@ public class ExpertoGestionarEmpresaAdherida {
         return error;
     }
 
-    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, String fechaLiquidacion) {
+    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
   }

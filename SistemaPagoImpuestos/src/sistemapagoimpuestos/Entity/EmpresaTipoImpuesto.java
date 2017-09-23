@@ -9,17 +9,8 @@ public class EmpresaTipoImpuesto extends Entity{
     private TipoImpuesto tipoImpuesto;
     private Empresa empresa;
     private TipoEmpresa tipoEmpresa;
-    private Date fechaProximaLiquidacionEmpresaTipoImpuesto;
 
     public EmpresaTipoImpuesto() {
-    }
-
-    public Date getFechaProximaLiquidacionEmpresaTipoImpuesto() {
-        return fechaProximaLiquidacionEmpresaTipoImpuesto;
-    }
-
-    public void setFechaProximaLiquidacionEmpresaTipoImpuesto(Date fechaProximaLiquidacionEmpresaTipoImpuesto) {
-        this.fechaProximaLiquidacionEmpresaTipoImpuesto = fechaProximaLiquidacionEmpresaTipoImpuesto;
     }
     
     public EmpresaTipoImpuesto(Date fechaHoraAltaEmpresaTipoImpuesto, Date fechaHoraInhabilitacionEmpresaTipoImpuesto, int frecuenciaLiquidacionEmpresaTipoImpuesto, TipoImpuesto tipoImpuesto, Empresa empresa, TipoEmpresa tipoEmpresa) {
@@ -77,10 +68,6 @@ public class EmpresaTipoImpuesto extends Entity{
 
     public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
         this.tipoEmpresa = tipoEmpresa;
-    }
-
-    public void setFechaProximaLiquidacionEmpresaTipoImpuesto(String fechaLiquidacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

@@ -21,6 +21,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Entity.Empresa;
+import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 
 public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
@@ -312,25 +314,18 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             }
 
         };
-            
-            
+             
            for (DTOEmpresaTipoImpuesto dtoEmpresaTipoImpuesto : listDtoEmpresaTipoImpuesto) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getCuitEmpresa());
             vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getNombreEmpresa());
             vect.add(dtoEmpresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
             vect.add(dtoEmpresaTipoImpuesto.getTipoEmpresa().getNombreTipoEmpresa());
-            vect.add(dtoEmpresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto());
             vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getDireccionEmpresa());
         
                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
             if (dtoEmpresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa() != null) {
                 vect.add(sdf.format(dtoEmpresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa()));
-            } else {
-                vect.add("");
-            }
-            if (dtoEmpresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto() != null) {
-                vect.add(sdf.format(dtoEmpresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto()));
             } else {
                 vect.add("");
             }

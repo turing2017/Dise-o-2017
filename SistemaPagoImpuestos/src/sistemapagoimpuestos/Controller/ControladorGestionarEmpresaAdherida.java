@@ -46,14 +46,14 @@ public class ControladorGestionarEmpresaAdherida {
     return experto.consultarEmpresas();
 }
     
-    public void modificarEmpresa (String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, String fechaLiquidacion) {
+    public void modificarEmpresa (String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada) {
     
-    experto.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion,  habilitada, fechaLiquidacion);
+    experto.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion,  habilitada);
         
     }
    
-    public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String fechaLiquidacion, boolean habilitada, String direccion ){
-       experto.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, fechaLiquidacion, habilitada, direccion);
+    public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada ){
+       experto.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada);
     }
     
     public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String direccionEmpresa, String habilitada){

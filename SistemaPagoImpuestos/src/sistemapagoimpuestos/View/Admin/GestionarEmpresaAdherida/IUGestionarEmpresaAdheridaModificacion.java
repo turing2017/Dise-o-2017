@@ -57,8 +57,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         GestionarItems = new javax.swing.JButton();
         comboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         comboBoxTipoEmpresa = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        TeextFieldFechaLiquidacion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,14 +127,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
         comboBoxTipoEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo de Empresa" }));
 
-        jLabel7.setText("Fecha de Liquidación");
-
-        TeextFieldFechaLiquidacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TeextFieldFechaLiquidacionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,28 +140,27 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
                         .addComponent(Button_Cancelar)
                         .addGap(19, 19, 19)
                         .addComponent(Button_Guardar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(55, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(49, 49, 49))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel7)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(comboBoxTipoEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comboBoxTipoImpuesto, 0, 266, Short.MAX_VALUE)
                                 .addComponent(TextField_Direccion)
                                 .addComponent(TextField_Nombre)
-                                .addComponent(TextField_Cuit)
-                                .addComponent(TeextFieldFechaLiquidacion, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TextField_Cuit))
                             .addComponent(CheckBox_Habilitada))
                         .addGap(30, 30, 30))))
         );
@@ -198,11 +187,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TextField_Direccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(TeextFieldFechaLiquidacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(CheckBox_Habilitada))
@@ -240,10 +225,9 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         String tipoEmpresa = comboBoxTipoEmpresa.toString();
         String direccion = TextField_Direccion.getText();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
-        String fechaLiquidacion = TeextFieldFechaLiquidacion.toString();
-         
+       
 // Ahora cuando modifica todo, lleva un monton de guasadas :D
-        controlador.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, fechaLiquidacion);
+        controlador.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada);
         this.dispose();
 
     }//GEN-LAST:event_Button_GuardarActionPerformed
@@ -277,17 +261,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CheckBox_HabilitadaActionPerformed
 
-    private void TeextFieldFechaLiquidacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeextFieldFechaLiquidacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TeextFieldFechaLiquidacionActionPerformed
-
-    public JTextField getTeextFieldFechaLiquidacion() {
-        return TeextFieldFechaLiquidacion;
-    }
-
-    public void setTeextFieldFechaLiquidacion(JTextField TeextFieldFechaLiquidacion) {
-        this.TeextFieldFechaLiquidacion = TeextFieldFechaLiquidacion;
-    }
+   
 
     public JCheckBox getCheckBox_Habilitada() {
         return CheckBox_Habilitada;
@@ -374,7 +348,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private javax.swing.JButton Button_Guardar;
     private javax.swing.JCheckBox CheckBox_Habilitada;
     private javax.swing.JButton GestionarItems;
-    private javax.swing.JTextField TeextFieldFechaLiquidacion;
     private javax.swing.JTextField TextField_Cuit;
     private javax.swing.JTextField TextField_Direccion;
     private javax.swing.JTextField TextField_Nombre;
@@ -386,6 +359,5 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

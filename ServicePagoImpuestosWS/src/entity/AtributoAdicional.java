@@ -12,12 +12,12 @@ package entity;
  */
 public class AtributoAdicional {
     private String nombreAtributo;
-    private double valorAtributo;
+    private String valorAtributo;
 
     public AtributoAdicional() {
     }
 
-    public AtributoAdicional(String nombreAtributo, double valorAtributo) {
+    public AtributoAdicional(String nombreAtributo, String valorAtributo) {
         this.nombreAtributo = nombreAtributo;
         this.valorAtributo = valorAtributo;
     }
@@ -30,12 +30,13 @@ public class AtributoAdicional {
         this.nombreAtributo = nombreAtributo;
     }
 
-    public double getValorAtributo() {
+    public String getValorAtributo() {
         return valorAtributo;
     }
 
-    public void setValorAtributo(double valorAtributo) {
+    public void setValorAtributo(String valorAtributo) {
         this.valorAtributo = valorAtributo;
     }
+
     
 }

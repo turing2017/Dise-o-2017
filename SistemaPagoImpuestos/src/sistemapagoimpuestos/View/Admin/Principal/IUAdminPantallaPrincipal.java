@@ -137,7 +137,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_gestionarTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarTipoUsuarioActionPerformed
-        controladorGestTipoImpu.iniciar();
+        controladorGestTipoUsu.iniciar();
         this.dispose();
     }//GEN-LAST:event_button_gestionarTipoUsuarioActionPerformed
 

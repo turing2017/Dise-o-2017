@@ -25,9 +25,9 @@ public class BuscarComprobantesImpPagolWS implements BuscarComprobantesPagoWS{
     public List<ComprobantePago> buscarComprobantesPago() {
         List<ComprobantePago> comprobantePagos = new ArrayList<>();
         List<AtributoAdicional> atributoAdicionalList = new ArrayList<>();
-        atributoAdicionalList.add(new AtributoAdicional("atributo 1", 2.5));
-        atributoAdicionalList.add(new AtributoAdicional("atributo 2", 12.5));
-        atributoAdicionalList.add(new AtributoAdicional("iva", 21));
+        atributoAdicionalList.add(new AtributoAdicional("atributo 1", "2.5"));
+        atributoAdicionalList.add(new AtributoAdicional("atributo 2", "12.5"));
+        atributoAdicionalList.add(new AtributoAdicional("iva", "21"));
 
         comprobantePagos.add(new ComprobantePago(null, 1, 2.4, atributoAdicionalList));
         return comprobantePagos;

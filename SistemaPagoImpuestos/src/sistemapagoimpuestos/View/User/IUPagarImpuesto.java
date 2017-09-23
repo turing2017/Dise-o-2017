@@ -1,4 +1,4 @@
-package sistemapagoimpuestos.View;
+package sistemapagoimpuestos.View.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

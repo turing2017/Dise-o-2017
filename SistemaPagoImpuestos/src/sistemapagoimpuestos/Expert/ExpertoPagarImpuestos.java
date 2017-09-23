@@ -6,9 +6,14 @@
 package sistemapagoimpuestos.Expert;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.print.attribute.standard.Compression;
+import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
@@ -61,5 +66,29 @@ public class ExpertoPagarImpuestos {
             lista.add(dtoEmpresa);
         }     
         return lista;
+    }
+    
+    // Recupera los comprobantes pendientes de pago
+    public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres){
+        
+        String codigoComprobanteRecup = "Abc123";
+        Date fechaVencimientoRecup = new Date();
+        double montoTotalRecup = 234333;
+        
+        DTOItem dtoItem = new DTOItem("cod12344", "Llamadas", 5, true, new Date());
+        dtoItem.setDtoTipoDatoItem(new DTOTipoDatoItem());
+        
+        List<DTOItem> listadoItems = new ArrayList<DTOItem>();
+        listadoItems.add(dtoItem);
+        
+        // Esto va a estar re hardcodeado
+        DTOComprobante dtoComprobante = new DTOComprobante();
+        dtoComprobante.setCodigoDTOComprobante(codigoComprobanteRecup);
+        dtoComprobante.setFechaHoraVencimientoDTOComprobante(fechaVencimientoRecup);
+        dtoComprobante.setMontoTotalDTOComprobante(montoTotalRecup);
+        dtoComprobante.setAtributosAdicionalesDTOComprobante(listadoItems);
+        
+        List<DTOComprobante> listadoComprobantes = new ArrayList<DTOComprobante>();
+        return listadoComprobantes;
     }
 }

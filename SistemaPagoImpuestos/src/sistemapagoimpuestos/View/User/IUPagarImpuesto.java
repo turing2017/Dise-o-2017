@@ -74,6 +74,11 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         label_codigo.setText("Codigo pago electrónico");
 
         button_buscar.setText("Buscar");
+        button_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_buscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,6 +137,11 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     private void comboBox_tipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipoImpuestoActionPerformed
 
     }//GEN-LAST:event_comboBox_tipoImpuestoActionPerformed
+
+    private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
+        controlador.consultarComprobantes(textfield_codigo.getText().toString());
+        
+    }//GEN-LAST:event_button_buscarActionPerformed
 
     /**
      * @param args the command line arguments

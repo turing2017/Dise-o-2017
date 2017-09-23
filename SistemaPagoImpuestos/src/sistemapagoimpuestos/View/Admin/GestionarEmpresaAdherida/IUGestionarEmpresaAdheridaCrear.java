@@ -23,6 +23,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
     
     public IUGestionarEmpresaAdheridaCrear(Object controlador) {
         initComponents();
+        cargarMetodos();
         setLocationRelativeTo(null);
   ;
 
@@ -31,7 +32,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
 
 //No se si lo de llamar para que se llenen los comboBox va aca :D
 
-    public IUGestionarEmpresaAdheridaCrear() {
+    public void cargarMetodos() {
         List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
         List<DTOTipoImpuesto> listTipoImpuesto = controlador.buscarTipoImpuesto();
@@ -256,7 +257,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUGestionarEmpresaAdheridaCrear().setVisible(true);
+                //new IUGestionarEmpresaAdheridaCrear().setVisible(true);
             }
         });
     }

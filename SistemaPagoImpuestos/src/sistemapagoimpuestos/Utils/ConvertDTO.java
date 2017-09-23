@@ -108,5 +108,4 @@ public class ConvertDTO {
         dtoParamCP.setTrimestralPCPeriodicidad(parametroCP.getTrimestralPCPeriodicidad());
         return dtoParamCP;
     }
-   
 }

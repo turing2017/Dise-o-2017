@@ -303,7 +303,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                     case 3:
                         return String.class;
                     case 4:
-                        return String.class;
+                        return Integer.class;
                     case 5:
                         return String.class;
                     case 6:
@@ -321,6 +321,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getNombreEmpresa());
             vect.add(dtoEmpresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
             vect.add(dtoEmpresaTipoImpuesto.getTipoEmpresa().getNombreTipoEmpresa());
+            vect.add(dtoEmpresaTipoImpuesto.getFrecuenciaLiquidacionDTOEmpresaExistente());
             vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getDireccionEmpresa());
         
                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");

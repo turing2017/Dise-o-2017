@@ -10,20 +10,18 @@ import java.awt.Component;
 import java.util.List;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
-
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+
 public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
     ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
@@ -159,22 +157,23 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Button_Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(Button_Modificar))
+                                .addGap(38, 38, 38)
+                                .addComponent(Button_Modificar)
+                                .addGap(30, 30, 30)
+                                .addComponent(Button_Actualizar)
+                                .addGap(11, 11, 11))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(TextField_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(Button_Filtrar)
-                                .addGap(279, 279, 279)))
-                        .addGap(53, 53, 53)
-                        .addComponent(Button_Actualizar))
+                                .addGap(332, 332, 332))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(290, 290, 290)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,11 +320,17 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getNombreEmpresa());
             vect.add(dtoEmpresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
             vect.add(dtoEmpresaTipoImpuesto.getTipoEmpresa().getNombreTipoEmpresa());
+            vect.add(dtoEmpresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto());
             vect.add(dtoEmpresaTipoImpuesto.getEmpresa().getDireccionEmpresa());
         
                SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
             if (dtoEmpresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa() != null) {
                 vect.add(sdf.format(dtoEmpresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa()));
+            } else {
+                vect.add("");
+            }
+            if (dtoEmpresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto() != null) {
+                vect.add(sdf.format(dtoEmpresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto()));
             } else {
                 vect.add("");
             }

@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
@@ -47,14 +46,14 @@ public class ControladorGestionarEmpresaAdherida {
     return experto.consultarEmpresas();
 }
     
-    public void modificarEmpresa (String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada) {
+    public void modificarEmpresa (String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, String fechaLiquidacion) {
     
-    experto.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion,  habilitada);
+    experto.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion,  habilitada, fechaLiquidacion);
         
     }
    
-    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada){
-       experto.ingresarDatosEmpresa(cuit, nombre, direccion, habilitada);
+    public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String fechaLiquidacion, boolean habilitada, String direccion ){
+       experto.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, fechaLiquidacion, habilitada, direccion);
     }
     
     public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String direccionEmpresa, String habilitada){

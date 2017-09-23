@@ -21,9 +21,19 @@ public class DTOEmpresaTipoImpuesto {
     private Date fechaHoraAltaEmpresaTipoImpuesto;
     private Date fechaHoraInhabilitacionEmpresaTipoImpuestoa;
     private Date FechaProximaLiquidacionEmpresaTipoImpuesto;
-    private  TipoEmpresa tipoEmpresa;
+    private TipoEmpresa tipoEmpresa;
     private TipoImpuesto tipoImpuesto;
     private Empresa empresa;
+    private Date fechaLiquidacionDTOEmpresaExistente;
+
+    public Date getFechaLiquidacionDTOEmpresaExistente() {
+        return fechaLiquidacionDTOEmpresaExistente;
+    }
+
+    public void setFechaLiquidacionDTOEmpresaExistente(Date fechaLiquidacionDTOEmpresaExistente) {
+        this.fechaLiquidacionDTOEmpresaExistente = fechaLiquidacionDTOEmpresaExistente;
+    }
+
 
     public DTOEmpresaTipoImpuesto() {
     }

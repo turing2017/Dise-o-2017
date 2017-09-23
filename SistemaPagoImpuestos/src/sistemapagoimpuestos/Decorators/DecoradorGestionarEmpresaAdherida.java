@@ -36,16 +36,16 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     
 
     @Override
-    public void modificarEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
+    public void modificarEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, String fechaLiquidacion) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarEmpresa(cuit, nombre, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
+        super.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion,  habilitada, fechaLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
     @Override
-    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
+    public void ingresarDatosEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, String fechaLiquidacion) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.ingresarDatosEmpresa(cuit, nombre, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
+        super.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion,  habilitada, fechaLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 

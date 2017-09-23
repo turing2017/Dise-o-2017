@@ -17,16 +17,25 @@ public class DTOEmpresaExistente {
     private String direccionDTOEmpresaExistente;
     private String habilitadaDTOEmpresaExistente;
     private String nombreTipoEmpresaDTOEmpresaExistente;
-
+    private Date fechaLiquidacionDTOEmpresaExistente;
     public DTOEmpresaExistente() {
     }
 
-    public DTOEmpresaExistente(String cuitDTOEmpresaExistente, String nombreDTOEmpresaExistente, String direccionDTOEmpresaExistente, String habilitadaDTOEmpresaExistente, String nombreTipoEmpresaDTOEmpresaExistente) {
+    public DTOEmpresaExistente(String cuitDTOEmpresaExistente, String nombreDTOEmpresaExistente, String direccionDTOEmpresaExistente, String habilitadaDTOEmpresaExistente, String nombreTipoEmpresaDTOEmpresaExistente, Date fechaLiquidacionDTOEmpresaExistente) {
         this.cuitDTOEmpresaExistente = cuitDTOEmpresaExistente;
         this.nombreDTOEmpresaExistente = nombreDTOEmpresaExistente;
         this.direccionDTOEmpresaExistente = direccionDTOEmpresaExistente;
         this.habilitadaDTOEmpresaExistente = habilitadaDTOEmpresaExistente;
         this.nombreTipoEmpresaDTOEmpresaExistente = nombreTipoEmpresaDTOEmpresaExistente;
+        this.fechaLiquidacionDTOEmpresaExistente = fechaLiquidacionDTOEmpresaExistente;
+    }
+
+    public Date getFechaLiquidacionDTOEmpresaExistente() {
+        return fechaLiquidacionDTOEmpresaExistente;
+    }
+
+    public void setFechaLiquidacionDTOEmpresaExistente(Date fechaLiquidacionDTOEmpresaExistente) {
+        this.fechaLiquidacionDTOEmpresaExistente = fechaLiquidacionDTOEmpresaExistente;
     }
 
     public String getCuitDTOEmpresaExistente() {

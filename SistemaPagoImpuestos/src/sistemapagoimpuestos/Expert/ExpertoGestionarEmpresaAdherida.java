@@ -45,11 +45,15 @@ public class ExpertoGestionarEmpresaAdherida {
       EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) obj ;
       DTOEmpresaTipoImpuesto DTOeti = new DTOEmpresaTipoImpuesto();
       DTOeti.setEmpresa(empresaTipoImpuesto.getEmpresa());
+      /*
+      La fechaHoraAltaEmpresa no se si ponerla o no, 
+      de ultima es solo mostrarla en pantalla despues
+      */
       DTOeti.setFechaHoraAltaEmpresaTipoImpuesto(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
       DTOeti.setFechaHoraInhabilitacionEmpresaTipoImpuestoa(empresaTipoImpuesto.getFechaHoraInhabilitacionEmpresaTipoImpuesto());
       DTOeti.setTipoEmpresa(empresaTipoImpuesto.getTipoEmpresa());
       DTOeti.setTipoImpuesto(empresaTipoImpuesto.getTipoImpuesto());
-     
+      DTOeti.setFechaProximaLiquidacionEmpresaTipoImpuesto(empresaTipoImpuesto.getFechaProximaLiquidacionEmpresaTipoImpuesto());
       
       listDTOEmpresaTipoImpuesto.add(DTOeti);
     
@@ -106,7 +110,7 @@ public class ExpertoGestionarEmpresaAdherida {
     
     
     
-    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
+    public void ingresarDatosEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, String fechaLiquidacion) {
        boolean camposVacios= camposNulos(cuit, nombre, direccion);
        if (camposVacios==true){
        Excepciones.getInstance().camposVacios();
@@ -145,7 +149,7 @@ public class ExpertoGestionarEmpresaAdherida {
 
    
     
-    public void modificarEmpresa (String cuit,String nombre, String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada){
+    public void modificarEmpresa (String cuit,String nombre, String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, Date fechaLiquidacion){
        
         
         try{
@@ -189,20 +193,16 @@ public class ExpertoGestionarEmpresaAdherida {
  
         //Creo el nuevo Empresa Tipo Impuesto con los datos seleccionados
         
-        EmpresaTipoImpuesto ETI = new EmpresaTipoImpuesto();
-        ETI.setEmpresa(empresa);
-        ETI.setTipoEmpresa(tEmpresa);
-        ETI.setTipoImpuesto(tImpuesto);
-        ETI.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
-        ETI.setFechaProximaLiquidacionEmpresaTipoImpuesto(fechaLiquidacion);
-        
-        
-        
-        
-        
+        EmpresaTipoImpuesto eti = new EmpresaTipoImpuesto();
+        eti.setEmpresa(empresa);
+        eti.setTipoEmpresa(tEmpresa);
+        eti.setTipoImpuesto(tImpuesto);
+        eti.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
+        eti.setFechaProximaLiquidacionEmpresaTipoImpuesto(fechaLiquidacion);
 
-       
+        //Guardo la empresa, y la empresa tipo impuesto
         FachadaPersistencia.getInstance().guardar(empresa);
+        FachadaPersistencia.getInstance().guardar(eti);
         
         Excepciones.getInstance().modificacionExito();
     }
@@ -236,6 +236,10 @@ public class ExpertoGestionarEmpresaAdherida {
         }
        
         return error;
+    }
+
+    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, String fechaLiquidacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
   }
  

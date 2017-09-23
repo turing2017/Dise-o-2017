@@ -10,20 +10,31 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 public class IUGestionarEmpresaAdheridaCrear extends javax.swing.JFrame {
+ 
 ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
     
     public IUGestionarEmpresaAdheridaCrear(Object controlador) {
         initComponents();
         setLocationRelativeTo(null);
+
+
     }
 
+//No se si lo de llamar para que se llenen los comboBox va aca :D
     public IUGestionarEmpresaAdheridaCrear() {
+        initComponents();
+        setLocationRelativeTo(null);
+        List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
+        llenarComboTipoEmpresa(listTipoEmpresa);
+        List<DTOTipoImpuesto> listTipoImpuesto = controlador.buscarTipoImpuesto();
+        llenarComboTipoEmpresa(listTipoEmpresa);
     }
     
 
@@ -46,6 +57,12 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
         TextField_Direccion = new javax.swing.JTextField();
         Button_Guardar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        comboBoxTipoEmpresa = new javax.swing.JComboBox<>();
+        comboBoxTipoImpuesto = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        FormattedTextFieldFechaLiquidacion = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,7 +83,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
 
         jLabel2.setText("Nombre");
 
-        jLabel3.setText("Direccion");
+        jLabel3.setText("Dirección");
 
         TextField_Cuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,35 +100,62 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
 
         jLabel4.setText("Habilitada");
 
+        comboBoxTipoEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Tipo de Empresa" }));
+
+        comboBoxTipoImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Tipo de Impuesto" }));
+
+        jLabel5.setText("Tipo de Impuesto");
+
+        jLabel6.setText("Tipo de Empresa");
+
+        jLabel7.setText("Fecha de Liquidación");
+
+        FormattedTextFieldFechaLiquidacion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        FormattedTextFieldFechaLiquidacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FormattedTextFieldFechaLiquidacionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(Button_Cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Button_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel2))
-                        .addGap(15, 15, 15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(TextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TextField_Direccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(CheckBox_Habilitada)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(Button_Cancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(Button_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxTipoEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox_Habilitada)
+                                    .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FormattedTextFieldFechaLiquidacion, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,15 +168,27 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxTipoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(FormattedTextFieldFechaLiquidacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(CheckBox_Habilitada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Cancelar)
                     .addComponent(Button_Guardar))
@@ -160,18 +216,40 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
 
         String cuitEmpresa = TextField_Cuit.getText().trim();
         String nombreEmpresa = TextField_Nombre.getText().trim();
+        String tipoImpuesto = comboBoxTipoImpuesto.toString().trim();
+        String tipoEmpresa = comboBoxTipoEmpresa.toString().trim();
+        //Aca no se como corno poner el calendario xD hay que agregarlo
+        String fechaLiquidacion = FormattedTextFieldFechaLiquidacion.toString() ;
         String direccionEmpresa = TextField_Direccion.getText().trim();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
+        
 
-        controlador.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada);
+        controlador.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa, fechaLiquidacion, habilitada, direccionEmpresa);
         // controlador.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa,  habilitada);
         this.dispose();
 
     }//GEN-LAST:event_Button_GuardarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void FormattedTextFieldFechaLiquidacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormattedTextFieldFechaLiquidacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FormattedTextFieldFechaLiquidacionActionPerformed
+
+    
+    //Con esto llena el combo del TipoEmpresa
+    public void llenarComboTipoEmpresa(List<DTOTipoEmpresa> list){
+        for (int i = 0; i < list.size(); i++) {
+            DTOTipoEmpresa dTOTipoEmpresa = (DTOTipoEmpresa) list.get(i);
+            comboBoxTipoEmpresa.addItem(dTOTipoEmpresa.getNombreTipoEmpresa());
+        }
+    }
+  
+  //Con esto llena el combo TipoImpuesto
+    public void llenarComboTipoImpuesto(List<DTOTipoImpuesto> list){
+        for (int i = 0; i < list.size(); i++) {
+            DTOTipoImpuesto dTOTipoImpuesto = (DTOTipoImpuesto) list.get(i);
+            comboBoxTipoImpuesto.addItem(dTOTipoImpuesto.getNombreDTOTipoImpuesto());
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -206,16 +284,20 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_Cancelar;
-    private javax.swing.JButton Button_Filtrar;
-    private javax.swing.JButton Button_Filtrar1;
     private javax.swing.JButton Button_Guardar;
     private javax.swing.JCheckBox CheckBox_Habilitada;
+    private javax.swing.JFormattedTextField FormattedTextFieldFechaLiquidacion;
     private javax.swing.JTextField TextField_Cuit;
     private javax.swing.JTextField TextField_Direccion;
     private javax.swing.JTextField TextField_Nombre;
+    private javax.swing.JComboBox<String> comboBoxTipoEmpresa;
+    private javax.swing.JComboBox<String> comboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

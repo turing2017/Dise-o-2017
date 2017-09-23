@@ -79,5 +79,9 @@ public class EmpresaTipoImpuesto extends Entity{
         this.tipoEmpresa = tipoEmpresa;
     }
 
+    public void setFechaProximaLiquidacionEmpresaTipoImpuesto(String fechaLiquidacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

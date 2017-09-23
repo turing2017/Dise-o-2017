@@ -59,7 +59,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         comboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         comboBoxTipoEmpresa = new javax.swing.JComboBox<>();
         label_frec = new javax.swing.JLabel();
-        TextField_frec = new javax.swing.JTextField();
+        spinner_Frecuencia = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,12 +132,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
         label_frec.setText("Frecuencia Liquidacion");
 
-        TextField_frec.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_frecActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,19 +155,16 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(label_frec))
-                        .addGap(18, 18, 18)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(comboBoxTipoEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(comboBoxTipoImpuesto, 0, 266, Short.MAX_VALUE)
-                                        .addComponent(TextField_Direccion)
-                                        .addComponent(TextField_Nombre)
-                                        .addComponent(TextField_Cuit))
-                                    .addComponent(CheckBox_Habilitada)))
-                            .addComponent(TextField_frec))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(comboBoxTipoEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comboBoxTipoImpuesto, 0, 266, Short.MAX_VALUE)
+                                .addComponent(TextField_Direccion)
+                                .addComponent(TextField_Nombre)
+                                .addComponent(TextField_Cuit))
+                            .addComponent(CheckBox_Habilitada)
+                            .addComponent(spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
@@ -198,8 +189,8 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_frec)
-                    .addComponent(TextField_frec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -207,7 +198,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(CheckBox_Habilitada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_Cancelar)
                     .addComponent(Button_Guardar)
@@ -237,13 +228,14 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
         String cuit= TextField_Cuit.getText();
         String nombre = TextField_Nombre.getText();
-        String tipoImpuesto = comboBoxTipoImpuesto.toString();
-        String tipoEmpresa = comboBoxTipoEmpresa.toString();
+        String tipoImpuesto = comboBoxTipoImpuesto.getSelectedItem().toString();
+        String tipoEmpresa = comboBoxTipoEmpresa.getSelectedItem().toString();
         String direccion = TextField_Direccion.getText();
+        int frecuenciaLiquidacion = (int) spinner_Frecuencia.getValue();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
        
 // Ahora cuando modifica todo, lleva un monton de guasadas :D
-        controlador.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada);
+        controlador.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, frecuenciaLiquidacion);
         this.dispose();
 
     }//GEN-LAST:event_Button_GuardarActionPerformed
@@ -276,10 +268,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private void CheckBox_HabilitadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox_HabilitadaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CheckBox_HabilitadaActionPerformed
-
-    private void TextField_frecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_frecActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_frecActionPerformed
 
    
 
@@ -371,7 +359,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private javax.swing.JTextField TextField_Cuit;
     private javax.swing.JTextField TextField_Direccion;
     private javax.swing.JTextField TextField_Nombre;
-    private javax.swing.JTextField TextField_frec;
     private javax.swing.JComboBox<String> comboBoxTipoEmpresa;
     private javax.swing.JComboBox<String> comboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
@@ -381,5 +368,6 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel label_frec;
+    private javax.swing.JSpinner spinner_Frecuencia;
     // End of variables declaration//GEN-END:variables
 }

@@ -112,14 +112,8 @@ public class ExpertoGestionarEmpresaAdherida {
     
     
     public void ingresarDatosEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada) {
-       boolean camposVacios= camposNulos(cuit, nombre, direccion);
-       if (camposVacios==true){
-       Excepciones.getInstance().camposVacios();
-       return;
-       }
-        
-        try {
-            
+       try {
+            //Busco la empresa
             List<DTOCriterio> criterios = new ArrayList<>();
             DTOCriterio criterio1 = new DTOCriterio();
             criterio1.setAtributo("cuitEmpresa");
@@ -127,90 +121,110 @@ public class ExpertoGestionarEmpresaAdherida {
             criterio1.setValor(cuit);
             criterios.add(criterio1);
             Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-            Excepciones.getInstance().cuitExistente();//En el caso de que exista, tira mensaje 
-
-
-        } catch (IndexOutOfBoundsException exception) {//Si no encuentra Empresa con ese cuit, la crea
-            Empresa empresa = new Empresa();
+            //En el caso de que exista, tira mensaje
             empresa.setNombreEmpresa(nombre);
-            empresa.setCuitEmpresa(cuit);
             empresa.setDireccionEmpresa(direccion);
-            if (habilitada == true){
-            empresa.setFechaHoraInhabilitacionEmpresa(null);
+            if (habilitada == true) {
+                empresa.setFechaHoraInhabilitacionEmpresa(null);
+            } else {
+                empresa.setFechaHoraInhabilitacionEmpresa(new Date());
             }
-            else {
-            empresa.setFechaHoraInhabilitacionEmpresa(new Date());
-                }
-            FachadaPersistencia.getInstance().guardar(empresa);
-            Excepciones.getInstance().empresaCreada();
-        
-        }
-
-    }
-
-   
-    
-    public void modificarEmpresa (String cuit,String nombre, String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, Date fechaLiquidacion){
-       
-        
-        try{
-            //Busco la empresa
-        List<DTOCriterio> criterios = new ArrayList<>();
-        DTOCriterio criterio1 = new DTOCriterio();
-        criterio1.setAtributo("cuitEmpresa");
-        criterio1.setOperacion("=");
-        criterio1.setValor(cuit);
-        criterios.add(criterio1);
-        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-       //En el caso de que exista, tira mensaje 
-        empresa.setNombreEmpresa(nombre);
-        empresa.setDireccionEmpresa(direccion);
-        empresa.setCuitEmpresa(cuit);
-        if (habilitada==true){
-            empresa.setFechaHoraInhabilitacionEmpresa(null);
-        }else{
-            empresa.setFechaHoraInhabilitacionEmpresa(new Date());
-        }
         
         //Busco el Tipo Impuesto, de acuerdo a lo que ingreso en pantalla
         
-        List<DTOCriterio> criterios2 = new ArrayList<>();
-        DTOCriterio criterio2 = new DTOCriterio();
-        criterio2.setAtributo("nombreTipoImpuesto");
-        criterio2.setOperacion("=");
-        criterio2.setValor(tipoImpuesto);
-        criterios2.add(criterio2);
-        TipoImpuesto tImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios2).get(0);
-       
-        //Busco el TIpo Empresa, de acuerdo a lo que ingreso en pantalla
-        
-        List<DTOCriterio> criterios3 = new ArrayList<>();
-        DTOCriterio criterio3 = new DTOCriterio();
-        criterio3.setAtributo("nombreTipoEmpresa");
-        criterio3.setOperacion("=");
-        criterio3.setValor(tipoEmpresa);
-        criterios2.add(criterio3);
-        TipoEmpresa tEmpresa = (TipoEmpresa) FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterios3).get(0);
- 
-        //Creo el nuevo Empresa Tipo Impuesto con los datos seleccionados
-        
-        EmpresaTipoImpuesto eti = new EmpresaTipoImpuesto();
-        eti.setEmpresa(empresa);
-        eti.setTipoEmpresa(tEmpresa);
-        eti.setTipoImpuesto(tImpuesto);
-        eti.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
+            List<DTOCriterio> criterios2 = new ArrayList<>();
+            DTOCriterio criterio2 = new DTOCriterio();
+            criterio2.setAtributo("nombreTipoImpuesto");
+            criterio2.setOperacion("=");
+            criterio2.setValor(tipoImpuesto);
+            criterios2.add(criterio2);
+            TipoImpuesto tImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios2).get(0);
 
-        //Guardo la empresa, y la empresa tipo impuesto
-        FachadaPersistencia.getInstance().guardar(empresa);
-        FachadaPersistencia.getInstance().guardar(eti);
-        
-        Excepciones.getInstance().modificacionExito();
-    }
-        catch (IndexOutOfBoundsException exception) {
-         Excepciones.getInstance().cuitNoExistente();
+            //Busco el TIpo Empresa, de acuerdo a lo que ingreso en pantalla
+            List<DTOCriterio> criterios3 = new ArrayList<>();
+            DTOCriterio criterio3 = new DTOCriterio();
+            criterio3.setAtributo("nombreTipoEmpresa");
+            criterio3.setOperacion("=");
+            criterio3.setValor(tipoEmpresa);
+            criterios2.add(criterio3);
+            TipoEmpresa tEmpresa = (TipoEmpresa) FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterios3).get(0);
+
+            //Creo el nuevo Empresa Tipo Impuesto con los datos seleccionados
+            EmpresaTipoImpuesto eti = new EmpresaTipoImpuesto();
+            eti.setEmpresa(empresa);
+            eti.setTipoEmpresa(tEmpresa);
+            eti.setTipoImpuesto(tImpuesto);
+            eti.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
+
+            //Guardo la empresa, y la empresa tipo impuesto
+            FachadaPersistencia.getInstance().guardar(empresa);
+            FachadaPersistencia.getInstance().guardar(eti);
+
+            Excepciones.getInstance().modificacionExito();
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().cuitNoExistente();
          
+        }
     }
-    } 
+   
+    
+    public void modificarEmpresa (String cuit,String nombre, String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, int frecuLiquidacion){
+       
+        
+        try {
+            //Busco la empresa
+            List<DTOCriterio> criterios = new ArrayList<>();
+            DTOCriterio criterio1 = new DTOCriterio();
+            criterio1.setAtributo("cuitEmpresa");
+            criterio1.setOperacion("=");
+            criterio1.setValor(cuit);
+            criterios.add(criterio1);
+            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+            //En el caso de que exista, tira mensaje
+            empresa.setNombreEmpresa(nombre);
+            empresa.setDireccionEmpresa(direccion);
+            if (habilitada == true) {
+                empresa.setFechaHoraInhabilitacionEmpresa(null);
+            } else {
+                empresa.setFechaHoraInhabilitacionEmpresa(new Date());
+            }
+        
+        //Busco el Tipo Impuesto, de acuerdo a lo que ingreso en pantalla
+        
+            List<DTOCriterio> criterios2 = new ArrayList<>();
+            DTOCriterio criterio2 = new DTOCriterio();
+            criterio2.setAtributo("nombreTipoImpuesto");
+            criterio2.setOperacion("=");
+            criterio2.setValor(tipoImpuesto);
+            criterios2.add(criterio2);
+            TipoImpuesto tImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios2).get(0);
+
+            //Busco el TIpo Empresa, de acuerdo a lo que ingreso en pantalla
+            List<DTOCriterio> criterios3 = new ArrayList<>();
+            DTOCriterio criterio3 = new DTOCriterio();
+            criterio3.setAtributo("nombreTipoEmpresa");
+            criterio3.setOperacion("=");
+            criterio3.setValor(tipoEmpresa);
+            criterios2.add(criterio3);
+            TipoEmpresa tEmpresa = (TipoEmpresa) FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterios3).get(0);
+
+            //Creo el nuevo Empresa Tipo Impuesto con los datos seleccionados
+            EmpresaTipoImpuesto eti = new EmpresaTipoImpuesto();
+            eti.setEmpresa(empresa);
+            eti.setTipoEmpresa(tEmpresa);
+            eti.setTipoImpuesto(tImpuesto);
+            eti.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
+
+            //Guardo la empresa, y la empresa tipo impuesto
+            FachadaPersistencia.getInstance().guardar(empresa);
+            FachadaPersistencia.getInstance().guardar(eti);
+
+            Excepciones.getInstance().modificacionExito();
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().cuitNoExistente();
+         
+        }
+    }
     public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa,String tipoImpuesto, String tipoEmpresa, String direccionEmpresa, String habilitada){
         DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
         dtoEe.setCuitDTOEmpresaExistente(cuitEmpresa);
@@ -236,10 +250,6 @@ public class ExpertoGestionarEmpresaAdherida {
         }
        
         return error;
-    }
-
-    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
   }
  

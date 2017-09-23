@@ -22,9 +22,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAdherida{
 
     @Override
-    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada) {
+    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, int frecuenciaLiquidacion) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
+        super.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
@@ -44,12 +44,12 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
         return dtoEE;
     }
 
-    @Override
-    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, Date fechaLiquidacion) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, fechaLiquidacion); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-    }
+//    @Override
+//    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, Date fechaLiquidacion) {
+//        FachadaInterna.getInstance().iniciarTransaccion();
+//        super.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, fechaLiquidacion); //To change body of generated methods, choose Tools | Templates.
+//        FachadaInterna.getInstance().finalizarTransaccion();
+//    }
 
     @Override
     public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada) {

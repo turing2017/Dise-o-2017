@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+
 public class IUGestionarEmpresaAdheridaCrear extends javax.swing.JFrame {
  
 ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
@@ -23,20 +24,20 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
     public IUGestionarEmpresaAdheridaCrear(Object controlador) {
         initComponents();
         setLocationRelativeTo(null);
+  ;
 
 
     }
 
 //No se si lo de llamar para que se llenen los comboBox va aca :D
+
     public IUGestionarEmpresaAdheridaCrear() {
-        initComponents();
-        setLocationRelativeTo(null);
         List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
         List<DTOTipoImpuesto> listTipoImpuesto = controlador.buscarTipoImpuesto();
-        llenarComboTipoEmpresa(listTipoEmpresa);
+        llenarComboTipoImpuesto(listTipoImpuesto);
     }
-    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

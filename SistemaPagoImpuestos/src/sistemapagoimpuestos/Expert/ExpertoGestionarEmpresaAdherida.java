@@ -26,8 +26,6 @@ import sistemapagoimpuestos.Entity.TipoImpuesto;
  */
 public class ExpertoGestionarEmpresaAdherida {
     
-    protected Empresa empresa;
-
     public String iniciar() {
 
         /*TipoUsuario tipoUsuario = usuario.getTipoUsuario();
@@ -43,7 +41,9 @@ public class ExpertoGestionarEmpresaAdherida {
     List<Object> listObject = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
     ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = new ArrayList<>();
     for(Object obj : listObject){
-      EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) obj ;
+     EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto();
+     empresaTipoImpuesto.setEmpresa(new Empresa());
+     empresaTipoImpuesto = (EmpresaTipoImpuesto) obj ;
       DTOEmpresaTipoImpuesto DTOeti = new DTOEmpresaTipoImpuesto();
       DTOeti.setEmpresa(empresaTipoImpuesto.getEmpresa());
       /*

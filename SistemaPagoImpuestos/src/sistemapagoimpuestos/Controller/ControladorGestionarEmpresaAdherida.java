@@ -23,6 +23,7 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdherida;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrear;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaModificacion;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 
 
 /**

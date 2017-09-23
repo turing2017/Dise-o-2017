@@ -29,7 +29,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
         List<DTOTipoImpuesto> listTipoImpuesto = controlador.buscarTipoImpuesto();
-        llenarComboTipoEmpresa(listTipoEmpresa);
+        llenarComboTipoImpuesto(listTipoImpuesto);
     
     }
 

@@ -16,8 +16,8 @@
         <property name="frecuenciaLiquidacionEmpresaTipoImpuesto" type="int">
            <column name="frecuenciaLiquidacionEmpresaTipoImpuesto"/>
         </property>
-        <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true" cascade="all"/>
-        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true" cascade="all"/>
-        <many-to-one name="tipoEmpresa" class="sistemapagoimpuestos.Entity.TipoEmpresa" column="OIDTipoEmpresa" not-null="true" cascade="all"/>
+        <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true" cascade="all" fetch="join"/>
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true" cascade="all" fetch="join"/>
+        <many-to-one name="tipoEmpresa" class="sistemapagoimpuestos.Entity.TipoEmpresa" column="OIDTipoEmpresa" not-null="true" cascade="all" fetch="join"/>
     </class>
 </hibernate-mapping>

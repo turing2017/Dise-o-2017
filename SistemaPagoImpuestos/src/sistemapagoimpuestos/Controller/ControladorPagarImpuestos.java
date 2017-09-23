@@ -5,12 +5,31 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import java.util.List;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
+import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+
 /**
  *
  * @author mvissio
  */
 public class ControladorPagarImpuestos {
+    
+    private ExpertoPagarImpuestos experto = (ExpertoPagarImpuestos) FabricaExpertos.getInstancia().crearExperto("CU02");
 
     public ControladorPagarImpuestos() {
-    }    
+    }
+
+    // Método para recuperar los Tipo de Impuestos
+    public List<DTOTipoImpuesto> buscarTipoImpuestos(){
+        List<DTOTipoImpuesto> listado = experto.buscarTipoImpuestos();
+        return listado;
+    }
+    
+    // Método para recuperar las Empresas
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto){
+        return experto.buscarEmpresas(nombreTipoImpuesto);
+    }
 }

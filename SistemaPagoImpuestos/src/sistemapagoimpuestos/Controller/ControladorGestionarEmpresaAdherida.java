@@ -53,12 +53,12 @@ public class ControladorGestionarEmpresaAdherida {
         
     }
    
-    public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada ){
-       experto.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada);
+    public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, int frecuencia, String direccion, boolean habilitada){
+       experto.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, frecuencia, direccion, habilitada);
     }
     
-    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String direccionEmpresa, String habilitada){
-        return experto.cargarDatos(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa, direccionEmpresa, habilitada);
+    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String frecuenciaEmpresaTipoImpuesto, String direccionEmpresa, String habilitada){
+        return experto.cargarDatos(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa, frecuenciaEmpresaTipoImpuesto, direccionEmpresa, habilitada);
     }
     public List<DTOTipoEmpresa> buscarTipoEmpresa(){
     return experto.buscarTipoEmpresa();
@@ -79,7 +79,7 @@ public class ControladorGestionarEmpresaAdherida {
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
         vct = (Vector) evt;
-        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(),  vct.get(3).toString(), vct.get(4).toString(), vct.get(5).toString());
+        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(),  vct.get(3).toString(), vct.get(4).toString(), vct.get(5).toString(), vct.get(6).toString());
         if(dtoEe!= null){
         final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
         pantallaModificacion.setVisible(true);

@@ -111,7 +111,7 @@ public class ExpertoGestionarEmpresaAdherida {
     
     
     
-    public void ingresarDatosEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada) {
+    public void ingresarDatosEmpresa(String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, int frecuencia ,String direccion,boolean habilitada) {
        try {
             //Busco la empresa
             List<DTOCriterio> criterios = new ArrayList<>();
@@ -122,6 +122,10 @@ public class ExpertoGestionarEmpresaAdherida {
             criterios.add(criterio1);
             Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
             //En el caso de que exista, tira mensaje
+            Excepciones.getInstance().cuitExistente();
+            } catch (IndexOutOfBoundsException exception) {
+            Empresa empresa = new Empresa();
+            empresa.setCuitEmpresa(cuit);
             empresa.setNombreEmpresa(nombre);
             empresa.setDireccionEmpresa(direccion);
             if (habilitada == true) {
@@ -151,6 +155,7 @@ public class ExpertoGestionarEmpresaAdherida {
 
             //Creo el nuevo Empresa Tipo Impuesto con los datos seleccionados
             EmpresaTipoImpuesto eti = new EmpresaTipoImpuesto();
+            eti.setFrecuenciaLiquidacionEmpresaTipoImpuesto(frecuencia);
             eti.setEmpresa(empresa);
             eti.setTipoEmpresa(tEmpresa);
             eti.setTipoImpuesto(tImpuesto);
@@ -160,11 +165,8 @@ public class ExpertoGestionarEmpresaAdherida {
             FachadaPersistencia.getInstance().guardar(empresa);
             FachadaPersistencia.getInstance().guardar(eti);
 
-            Excepciones.getInstance().modificacionExito();
-        } catch (IndexOutOfBoundsException exception) {
-            Excepciones.getInstance().cuitNoExistente();
-         
-        }
+            Excepciones.getInstance().empresaCreada();
+            }
     }
    
     
@@ -225,14 +227,14 @@ public class ExpertoGestionarEmpresaAdherida {
          
         }
     }
-    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa,String tipoImpuesto, String tipoEmpresa, String direccionEmpresa, String habilitada){
+    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa,String tipoImpuesto, String tipoEmpresa, String frecuenciaEmpresaTipoImpuesto, String direccionEmpresa, String habilitada){
         DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
         dtoEe.setCuitDTOEmpresaExistente(cuitEmpresa);
         dtoEe.setNombreDTOEmpresaExistente(nombreEmpresa);
         dtoEe.setDireccionDTOEmpresaExistente(direccionEmpresa);
         dtoEe.setHabilitadaDTOEmpresaExistente(habilitada);
+        dtoEe.setFrecuenciaEmpresaTipoImpuesto(frecuenciaEmpresaTipoImpuesto);
 
-        
         return dtoEe;
     }
     

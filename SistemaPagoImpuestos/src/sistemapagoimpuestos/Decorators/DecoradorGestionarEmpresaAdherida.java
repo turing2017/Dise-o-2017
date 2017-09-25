@@ -37,12 +37,16 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String direccionEmpresa, String habilitada) {
+    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String frecuenciaEmpresaTipoImpuesto, String direccionEmpresa, String habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOEmpresaExistente dtoEE = super.cargarDatos(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
+        DTOEmpresaExistente dtoEe = super.cargarDatos(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa, frecuenciaEmpresaTipoImpuesto, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
-        return dtoEE;
+        return dtoEe;
     }
+
+    
+
+    
 
 //    @Override
 //    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, Date fechaLiquidacion) {
@@ -52,11 +56,13 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
 //    }
 
     @Override
-    public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada) {
+    public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, int frecuencia ,String direccion, boolean habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
+        super.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, frecuencia ,direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
+
+   
 
     @Override
     public List<DTOTipoImpuesto> buscarTipoImpuesto() {

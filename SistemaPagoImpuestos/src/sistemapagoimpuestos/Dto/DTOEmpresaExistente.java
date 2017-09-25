@@ -18,17 +18,21 @@ public class DTOEmpresaExistente {
     private String habilitadaDTOEmpresaExistente;
     private String nombreTipoEmpresaDTOEmpresaExistente;
     private Date fechaLiquidacionDTOEmpresaExistente;
+    private String frecuenciaEmpresaTipoImpuesto;
     public DTOEmpresaExistente() {
     }
 
-    public DTOEmpresaExistente(String cuitDTOEmpresaExistente, String nombreDTOEmpresaExistente, String direccionDTOEmpresaExistente, String habilitadaDTOEmpresaExistente, String nombreTipoEmpresaDTOEmpresaExistente, Date fechaLiquidacionDTOEmpresaExistente) {
+    public DTOEmpresaExistente(String cuitDTOEmpresaExistente, String nombreDTOEmpresaExistente, String direccionDTOEmpresaExistente, String habilitadaDTOEmpresaExistente, String nombreTipoEmpresaDTOEmpresaExistente, Date fechaLiquidacionDTOEmpresaExistente, String frecuenciaEmpresaTipoImpuesto) {
         this.cuitDTOEmpresaExistente = cuitDTOEmpresaExistente;
         this.nombreDTOEmpresaExistente = nombreDTOEmpresaExistente;
         this.direccionDTOEmpresaExistente = direccionDTOEmpresaExistente;
         this.habilitadaDTOEmpresaExistente = habilitadaDTOEmpresaExistente;
         this.nombreTipoEmpresaDTOEmpresaExistente = nombreTipoEmpresaDTOEmpresaExistente;
         this.fechaLiquidacionDTOEmpresaExistente = fechaLiquidacionDTOEmpresaExistente;
+        this.frecuenciaEmpresaTipoImpuesto = frecuenciaEmpresaTipoImpuesto;
     }
+
+    
 
     public Date getFechaLiquidacionDTOEmpresaExistente() {
         return fechaLiquidacionDTOEmpresaExistente;
@@ -76,6 +80,14 @@ public class DTOEmpresaExistente {
 
     public void setNombreTipoEmpresaDTOEmpresaExistente(String nombreTipoEmpresaDTOEmpresaExistente) {
         this.nombreTipoEmpresaDTOEmpresaExistente = nombreTipoEmpresaDTOEmpresaExistente;
+    }
+
+    public String getFrecuenciaEmpresaTipoImpuesto() {
+        return frecuenciaEmpresaTipoImpuesto;
+    }
+
+    public void setFrecuenciaEmpresaTipoImpuesto(String frecuenciaEmpresaTipoImpuesto) {
+        this.frecuenciaEmpresaTipoImpuesto = frecuenciaEmpresaTipoImpuesto;
     }
 
 }

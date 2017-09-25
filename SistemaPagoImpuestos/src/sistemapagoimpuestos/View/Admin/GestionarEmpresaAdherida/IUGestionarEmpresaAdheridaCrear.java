@@ -217,13 +217,14 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
 
         String cuitEmpresa = TextField_Cuit.getText().trim();
         String nombreEmpresa = TextField_Nombre.getText().trim();
-        String tipoImpuesto = comboBoxTipoImpuesto.toString().trim();
-        String tipoEmpresa = comboBoxTipoEmpresa.toString().trim();
+        String tipoImpuesto = comboBoxTipoImpuesto.getSelectedItem().toString();
+        String tipoEmpresa = comboBoxTipoEmpresa.getSelectedItem().toString();
         String direccionEmpresa = TextField_Direccion.getText().trim();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
+        int frecuencia = (int) Spinner_Frecuencia.getValue();
         
 
-        controlador.ingresarDatosEmpresa(cuitEmpresa, tipoEmpresa, tipoImpuesto, tipoEmpresa, direccionEmpresa, habilitada);
+        controlador.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa,frecuencia, direccionEmpresa, habilitada );
         // controlador.ingresarDatosEmpresa(cuitEmpresa, nombreEmpresa, direccionEmpresa,  habilitada);
         this.dispose();
 

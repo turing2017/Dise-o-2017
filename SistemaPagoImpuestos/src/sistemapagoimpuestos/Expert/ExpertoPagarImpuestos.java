@@ -11,11 +11,16 @@ import java.util.List;
 import javax.print.attribute.standard.Compression;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCriterio;
+import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOTipoCuenta;
 import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.Cliente;
+import sistemapagoimpuestos.Entity.CuentaBancaria;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
@@ -71,17 +76,21 @@ public class ExpertoPagarImpuestos {
     // Recupera los comprobantes pendientes de pago
     public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres){
         
-        String codigoComprobanteRecup = "Abc123";
+        
+        // El siguiente código se encuentra hardcodeado, se debe reemplazar por la obtención de comprobantes
+        String codigoComprobanteRecup = codigoPagoElectronicoIngres;
         Date fechaVencimientoRecup = new Date();
-        double montoTotalRecup = 234333;
+        double montoTotalRecup = 2333;
         
-        DTOItem dtoItem = new DTOItem("cod12344", "Llamadas", 5, true, new Date());
+        DTOItem dtoItem = new DTOItem("23445", "Llamadas Internacionales", 5, true, new Date());
+        DTOItem dtoItemBis = new DTOItem("23425", "Llamadas locales", 5, true, new Date());
         dtoItem.setDtoTipoDatoItem(new DTOTipoDatoItem());
-        
+        dtoItemBis.setDtoTipoDatoItem(new DTOTipoDatoItem());
         List<DTOItem> listadoItems = new ArrayList<DTOItem>();
         listadoItems.add(dtoItem);
+        listadoItems.add(dtoItemBis);
         
-        // Esto va a estar re hardcodeado
+        
         DTOComprobante dtoComprobante = new DTOComprobante();
         dtoComprobante.setCodigoDTOComprobante(codigoComprobanteRecup);
         dtoComprobante.setFechaHoraVencimientoDTOComprobante(fechaVencimientoRecup);
@@ -89,6 +98,37 @@ public class ExpertoPagarImpuestos {
         dtoComprobante.setAtributosAdicionalesDTOComprobante(listadoItems);
         
         List<DTOComprobante> listadoComprobantes = new ArrayList<DTOComprobante>();
+        listadoComprobantes.add(dtoComprobante);
         return listadoComprobantes;
+    }
+    
+    // Recupera cuentas y saldos del cliente
+    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente){
+        
+        List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
+        
+        // Busco el Cliente por cuil
+        List<DTOCriterio> criteriosCliente = new ArrayList<>();
+        DTOCriterio criterioCuil = new DTOCriterio("cuilCuitCliente", "=", cuilCliente);
+        criteriosCliente.add(criterioCuil);
+        Cliente cliente = (Cliente)FachadaPersistencia.getInstance().buscar("Cliente", criteriosCliente).get(0);
+        
+        // Busco cuentas bancaria por cliente
+        List<DTOCriterio> criteriosCuenta = new ArrayList<>();
+        DTOCriterio criterioCliente = new DTOCriterio("cliente", "=", cliente);
+        criteriosCuenta.add(criterioCliente);
+        List<Object> listaCuentas = FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosCuenta);
+        
+        for (Object cuenta : listaCuentas) {
+            CuentaBancaria cuentaTemp = (CuentaBancaria) cuenta;
+            TipoCuenta tipoCuentaTemp = (TipoCuenta) cuentaTemp.getTipoCuenta();
+            DTOTipoCuenta dtoTipoCuenta = new DTOTipoCuenta();
+            dtoTipoCuenta.setNombreTipoCuenta(tipoCuentaTemp.getNombreTipoCuenta());
+            DTOCuentaBancaria dtoCuentaBancariaTemp = new DTOCuentaBancaria();
+            dtoCuentaBancariaTemp.setCbuCuentaBancaria(cuentaTemp.getCbuCuentaBancaria());
+            dtoCuentaBancariaTemp.setTipoCuenta(dtoTipoCuenta);
+            listaDTOCuentaBancaria.add(dtoCuentaBancariaTemp);
+        }
+        return listaDTOCuentaBancaria;
     }
 }

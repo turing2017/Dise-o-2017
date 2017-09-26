@@ -1,16 +1,30 @@
 package sistemapagoimpuestos.View.User;
 
+import java.awt.Component;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
+import sistemapagoimpuestos.Dto.DTOItem;
 
 public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
+    
+    ControladorPagarImpuestos controlador = new ControladorPagarImpuestos();
 
     public IUPagarImpuestoComprobantes() {
         initComponents();
     }
     
     public IUPagarImpuestoComprobantes(List<DTOComprobante> listadoDTOComprobante){
-        
+        initComponents();
+        cargarTablaComprobantes(listadoDTOComprobante);
+        cargarTablaCuentas(controlador.obtenerCuentas("10000000"));
+        //controlador.obtenerCuentas("10000000");
     }
 
     @SuppressWarnings("unchecked")
@@ -19,7 +33,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_comprobantes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         label_TipoImpuesto = new javax.swing.JLabel();
         label_Empresa = new javax.swing.JLabel();
@@ -27,7 +41,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         label_EmpresaSelec = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabla_cuentas = new javax.swing.JTable();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -42,7 +56,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_comprobantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -53,7 +67,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla_comprobantes);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Comprobantes Pendientes de Pago");
@@ -69,7 +83,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Cuentas disponibles");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_cuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -80,7 +94,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabla_cuentas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,6 +172,115 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         });
     }
+    
+    // Método para cargar los comprobantes en la tabla
+    public void cargarTablaComprobantes(List<DTOComprobante> listaComprobantes){
+        
+        // Muestro los datos en la tabla
+        String[] columnas = {"Codigo", "Monto Total", "Atributos adicionales"};
+        
+        // Creo el modelo
+        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
+            
+            // Sobreescribo el método para no permitir editar la 
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+    
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return String.class;
+                    case 1:
+                        return double.class;
+                    case 2:
+                        return String.class;
+                    default:
+                        return null;
+                }
+            }
+
+        };
+        
+        for (DTOComprobante dtoComprobante : listaComprobantes) {
+            Vector<Object> vect = new Vector<>();
+            vect.add(dtoComprobante.getCodigoDTOComprobante());
+            vect.add(dtoComprobante.getMontoTotalDTOComprobante());
+            
+            String atribAdic = "";
+            List<DTOItem> listadoItems = dtoComprobante.getAtributosAdicionalesDTOComprobante();
+            for(DTOItem item : listadoItems){
+                atribAdic = atribAdic.concat(item.getNombreItem()).concat(" ");
+            }
+            vect.add(atribAdic);
+            dtm.addRow(vect);
+            
+        }
+
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
+        tabla_comprobantes.setModel(dtm);
+        tabla_comprobantes.getColumnModel().getColumn(0).setCellRenderer(r);
+        tabla_comprobantes.getColumnModel().getColumn(1).setCellRenderer(r);
+    }
+    
+        // Método para cargar las cuentas bancarias en la tabla
+    public void cargarTablaCuentas(List<DTOCuentaBancaria> listaCuentaBancaria){
+        
+        // Muestro los datos en la tabla
+        String[] columnas = {"CBU Cuenta", "Tipo Cuenta"};
+        
+        // Creo el modelo
+        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
+            
+            // Sobreescribo el método para no permitir editar la 
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+    
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return String.class;
+                    case 1:
+                        return String.class;
+                    default:
+                        return null;
+                }
+            }
+
+        };
+        
+        for (DTOCuentaBancaria dtoCuentaBancaria : listaCuentaBancaria) {
+            Vector<Object> vect = new Vector<>();
+            vect.add(dtoCuentaBancaria.getCbuCuentaBancaria());
+            vect.add(dtoCuentaBancaria.getTipoCuenta().getNombreTipoCuenta());
+            dtm.addRow(vect);
+            
+        }
+
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
+        tabla_cuentas.setModel(dtm);
+        tabla_cuentas.getColumnModel().getColumn(0).setCellRenderer(r);
+        tabla_cuentas.getColumnModel().getColumn(1).setCellRenderer(r);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -165,11 +288,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel label_Empresa;
     private javax.swing.JLabel label_EmpresaSelec;
     private javax.swing.JLabel label_TipoImpuesto;
     private javax.swing.JLabel label_TipoImpuestoSelec;
+    private javax.swing.JTable tabla_comprobantes;
+    private javax.swing.JTable tabla_cuentas;
     // End of variables declaration//GEN-END:variables
 }

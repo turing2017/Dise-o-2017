@@ -17,30 +17,23 @@ public class DTOEmpresaExistente {
     private String direccionDTOEmpresaExistente;
     private String habilitadaDTOEmpresaExistente;
     private String nombreTipoEmpresaDTOEmpresaExistente;
-    private Date fechaLiquidacionDTOEmpresaExistente;
-    private String frecuenciaEmpresaTipoImpuesto;
+    private String frecuenciaLiquidacionEmpresaTipoImpuesto;
+    private String tipoImpuestoEmpresaDTOEmpresaExistente;
+    private String tipoEmpresaEmpresaDTOEmpresaExistente;
     public DTOEmpresaExistente() {
     }
 
-    public DTOEmpresaExistente(String cuitDTOEmpresaExistente, String nombreDTOEmpresaExistente, String direccionDTOEmpresaExistente, String habilitadaDTOEmpresaExistente, String nombreTipoEmpresaDTOEmpresaExistente, Date fechaLiquidacionDTOEmpresaExistente, String frecuenciaEmpresaTipoImpuesto) {
+    public DTOEmpresaExistente(String cuitDTOEmpresaExistente, String nombreDTOEmpresaExistente, String direccionDTOEmpresaExistente, String habilitadaDTOEmpresaExistente, String nombreTipoEmpresaDTOEmpresaExistente, String frecuenciaLiquidacionEmpresaTipoImpuesto, String tipoImpuestoEmpresaDTOEmpresaExistente, String tipoEmpresaEmpresaDTOEmpresaExistente) {
         this.cuitDTOEmpresaExistente = cuitDTOEmpresaExistente;
         this.nombreDTOEmpresaExistente = nombreDTOEmpresaExistente;
         this.direccionDTOEmpresaExistente = direccionDTOEmpresaExistente;
         this.habilitadaDTOEmpresaExistente = habilitadaDTOEmpresaExistente;
         this.nombreTipoEmpresaDTOEmpresaExistente = nombreTipoEmpresaDTOEmpresaExistente;
-        this.fechaLiquidacionDTOEmpresaExistente = fechaLiquidacionDTOEmpresaExistente;
-        this.frecuenciaEmpresaTipoImpuesto = frecuenciaEmpresaTipoImpuesto;
+        this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
+        this.tipoImpuestoEmpresaDTOEmpresaExistente = tipoImpuestoEmpresaDTOEmpresaExistente;
+        this.tipoEmpresaEmpresaDTOEmpresaExistente = tipoEmpresaEmpresaDTOEmpresaExistente;
     }
-
     
-
-    public Date getFechaLiquidacionDTOEmpresaExistente() {
-        return fechaLiquidacionDTOEmpresaExistente;
-    }
-
-    public void setFechaLiquidacionDTOEmpresaExistente(Date fechaLiquidacionDTOEmpresaExistente) {
-        this.fechaLiquidacionDTOEmpresaExistente = fechaLiquidacionDTOEmpresaExistente;
-    }
 
     public String getCuitDTOEmpresaExistente() {
         return cuitDTOEmpresaExistente;
@@ -82,12 +75,30 @@ public class DTOEmpresaExistente {
         this.nombreTipoEmpresaDTOEmpresaExistente = nombreTipoEmpresaDTOEmpresaExistente;
     }
 
-    public String getFrecuenciaEmpresaTipoImpuesto() {
-        return frecuenciaEmpresaTipoImpuesto;
+    public String getFrecuenciaLiquidacionEmpresaTipoImpuesto() {
+        return frecuenciaLiquidacionEmpresaTipoImpuesto;
     }
 
-    public void setFrecuenciaEmpresaTipoImpuesto(String frecuenciaEmpresaTipoImpuesto) {
-        this.frecuenciaEmpresaTipoImpuesto = frecuenciaEmpresaTipoImpuesto;
+    public void setFrecuenciaLiquidacionEmpresaTipoImpuesto(String frecuenciaLiquidacionEmpresaTipoImpuesto) {
+        this.frecuenciaLiquidacionEmpresaTipoImpuesto = frecuenciaLiquidacionEmpresaTipoImpuesto;
     }
+
+    public String getTipoImpuestoEmpresaDTOEmpresaExistente() {
+        return tipoImpuestoEmpresaDTOEmpresaExistente;
+    }
+
+    public void setTipoImpuestoEmpresaDTOEmpresaExistente(String tipoImpuestoEmpresaDTOEmpresaExistente) {
+        this.tipoImpuestoEmpresaDTOEmpresaExistente = tipoImpuestoEmpresaDTOEmpresaExistente;
+    }
+
+    public String getTipoEmpresaEmpresaDTOEmpresaExistente() {
+        return tipoEmpresaEmpresaDTOEmpresaExistente;
+    }
+
+    public void setTipoEmpresaEmpresaDTOEmpresaExistente(String tipoEmpresaEmpresaDTOEmpresaExistente) {
+        this.tipoEmpresaEmpresaDTOEmpresaExistente = tipoEmpresaEmpresaDTOEmpresaExistente;
+    }
+    
+    
 
 }

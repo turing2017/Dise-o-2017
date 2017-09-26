@@ -47,9 +47,9 @@ public class ControladorGestionarEmpresaAdherida {
     return experto.consultarEmpresas();
 }
     
-    public void modificarEmpresa (String cuit,String nombre,String tipoImpuesto, String tipoEmpresa, String direccion,boolean habilitada, int frecuenciaLiquidacion) {
+    public void modificarEmpresa (String cuit,String nombre,String nuevoTipoImpuesto, String anteriorTipoImpuesto, String nuevoTipoEmpresa,String anteriorTipoEmpresa, String direccion,boolean habilitada, int frecuenciaLiquidacion) {
         
-        experto.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion,  habilitada, frecuenciaLiquidacion );
+        experto.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion,  habilitada, frecuenciaLiquidacion);
         
     }
    
@@ -91,7 +91,8 @@ public class ControladorGestionarEmpresaAdherida {
                             iniciar();
                         }
                     }
-                );
+                )
+                            ;
           
         }
      }

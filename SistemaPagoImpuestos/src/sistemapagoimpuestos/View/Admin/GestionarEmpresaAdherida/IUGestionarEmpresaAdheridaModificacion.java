@@ -18,6 +18,8 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
+    DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
+    
    ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
     public IUGestionarEmpresaAdheridaModificacion(DTOEmpresaExistente dtoEe) {
         initComponents();
@@ -26,12 +28,12 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         TextField_Nombre.setText(dtoEe.getNombreDTOEmpresaExistente());
         TextField_Direccion.setText(dtoEe.getDireccionDTOEmpresaExistente());
         CheckBox_Habilitada.setText(dtoEe.getHabilitadaDTOEmpresaExistente()); 
-        //TextField_frec.setText(dtoEe.);0
+        //TextField_frec.setText(dtoEe.);
         List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
         List<DTOTipoImpuesto> listTipoImpuesto = controlador.buscarTipoImpuesto();
         llenarComboTipoImpuesto(listTipoImpuesto);
-    
+        this.dtoEe = dtoEe;
     }
 
     /**
@@ -225,17 +227,19 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     }
    
     private void Button_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_GuardarActionPerformed
-
+    
         String cuit= TextField_Cuit.getText();
         String nombre = TextField_Nombre.getText();
-        String tipoImpuesto = comboBoxTipoImpuesto.getSelectedItem().toString();
-        String tipoEmpresa = comboBoxTipoEmpresa.getSelectedItem().toString();
+        String nuevoTipoImpuesto = comboBoxTipoImpuesto.getSelectedItem().toString();
+        String anteriorTipoImpuesto = dtoEe.getNombreTipoEmpresaDTOEmpresaExistente();
+        String nuevoTipoEmpresa = comboBoxTipoEmpresa.getSelectedItem().toString();
+        String AnteriorTipoEmpresa = dtoEe.getTipoEmpresaEmpresaDTOEmpresaExistente();
         String direccion = TextField_Direccion.getText();
         int frecuenciaLiquidacion = (int) spinner_Frecuencia.getValue();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
        
 // Ahora cuando modifica todo, lleva un monton de guasadas :D
-        controlador.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, frecuenciaLiquidacion);
+        controlador.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, AnteriorTipoEmpresa, direccion, habilitada, frecuenciaLiquidacion);
         this.dispose();
 
     }//GEN-LAST:event_Button_GuardarActionPerformed

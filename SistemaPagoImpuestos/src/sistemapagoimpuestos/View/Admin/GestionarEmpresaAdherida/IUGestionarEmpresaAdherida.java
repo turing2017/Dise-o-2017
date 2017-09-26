@@ -225,6 +225,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             vct.add(tabla_empresa.getValueAt(rowSelected, 3));
             vct.add(tabla_empresa.getValueAt(rowSelected, 4));
             vct.add(tabla_empresa.getValueAt(rowSelected, 5));
+            vct.add(tabla_empresa.getValueAt(rowSelected, 6));
             controlador.modificarEmpresa(vct, controlador);
             
             

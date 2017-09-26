@@ -22,9 +22,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAdherida{
 
     @Override
-    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, int frecuenciaLiquidacion) {
+    public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto, String anteriorTipoImpuesto, String nuevoTipoEmpresa,String anteriorTipoEmpresa, String direccion,boolean habilitada, int frecuenciaLiquidacion) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
+        super.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion, habilitada, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 

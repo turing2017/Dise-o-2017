@@ -7,14 +7,17 @@ package sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida;
 
 import java.awt.Component;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
@@ -24,10 +27,10 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     public IUGestionarEmpresaAdheridaModificacion(DTOEmpresaExistente dtoEe) {
         initComponents();
         this.setLocationRelativeTo(null);
-        TextField_Cuit.setText(dtoEe.getCuitDTOEmpresaExistente());
-        TextField_Nombre.setText(dtoEe.getNombreDTOEmpresaExistente());
-        TextField_Direccion.setText(dtoEe.getDireccionDTOEmpresaExistente());
-        CheckBox_Habilitada.setText(dtoEe.getHabilitadaDTOEmpresaExistente()); 
+        TextField_Cuit.setText(dtoEe.getCuitEmpresaExistente());
+        TextField_Nombre.setText(dtoEe.getNombreEmpresaExistente());
+        TextField_Direccion.setText(dtoEe.getDireccionEmpresaExistente());
+        CheckBox_Habilitada.setText(dtoEe.getHabilitadaEmpresaExistente()); 
         //TextField_frec.setText(dtoEe.);
         List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
@@ -231,9 +234,9 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         String cuit= TextField_Cuit.getText();
         String nombre = TextField_Nombre.getText();
         String nuevoTipoImpuesto = comboBoxTipoImpuesto.getSelectedItem().toString();
-        String anteriorTipoImpuesto = dtoEe.getNombreTipoEmpresaDTOEmpresaExistente();
+        String anteriorTipoImpuesto = dtoEe.getNombreTipoEmpresaEmpresaExistente();
         String nuevoTipoEmpresa = comboBoxTipoEmpresa.getSelectedItem().toString();
-        String AnteriorTipoEmpresa = dtoEe.getTipoEmpresaEmpresaDTOEmpresaExistente();
+        String AnteriorTipoEmpresa = dtoEe.getTipoEmpresaEmpresaEmpresaExistente();
         String direccion = TextField_Direccion.getText();
         int frecuenciaLiquidacion = (int) spinner_Frecuencia.getValue();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
@@ -258,7 +261,12 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextField_NombreActionPerformed
 
     private void GestionarItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarItemsActionPerformed
-        // TODO add your handling code here:
+            Vector vct = new Vector();
+            vct.add(dtoEe.getCuitEmpresaExistente());
+            vct.add(dtoEe.getNombreEmpresaExistente());
+            vct.add(dtoEe.getTipoImpuestoEmpresaEmpresaExistente());
+            
+            controlador.gestionarItems(vct, controlador);
     }//GEN-LAST:event_GestionarItemsActionPerformed
 
     private void TextField_DireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_DireccionActionPerformed

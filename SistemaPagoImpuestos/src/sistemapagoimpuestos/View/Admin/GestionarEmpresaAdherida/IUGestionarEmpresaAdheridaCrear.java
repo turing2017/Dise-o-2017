@@ -13,9 +13,14 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
+
 
 public class IUGestionarEmpresaAdheridaCrear extends javax.swing.JFrame {
  
@@ -117,9 +122,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(Button_Cancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Button_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
             .addGroup(layout.createSequentialGroup()
@@ -144,7 +147,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
                                     .addComponent(jLabel7))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4)
-                                    .addGap(43, 43, 43)))
+                                    .addGap(79, 79, 79)))
                             .addComponent(jLabel3))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +157,8 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(CheckBox_Habilitada)
-                                    .addComponent(Spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Button_Cancelar))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(56, 56, 56))
         );
@@ -246,6 +250,15 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
             comboBoxTipoImpuesto.addItem(dTOTipoImpuesto.getNombreDTOTipoImpuesto());
         }
     }
+    
+  
+
+    public static void setDtoetiisModfAlta(List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItem) {
+        dTOEmpresaTipImpItem = dTOEmpresaTipImpItem;
+    }
+    
+    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

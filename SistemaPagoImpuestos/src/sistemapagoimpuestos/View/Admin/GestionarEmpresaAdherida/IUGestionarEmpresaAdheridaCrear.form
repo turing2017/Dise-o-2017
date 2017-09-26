@@ -24,9 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-              <Component id="Button_Cancelar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="24" max="32767" attributes="0"/>
               <Component id="Button_Guardar" min="-2" pref="83" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
@@ -56,7 +54,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -70,6 +68,7 @@
                                   <Component id="TextField_Direccion" min="-2" pref="182" max="-2" attributes="0"/>
                                   <Component id="CheckBox_Habilitada" min="-2" max="-2" attributes="0"/>
                                   <Component id="Spinner_Frecuencia" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Component id="Button_Cancelar" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>

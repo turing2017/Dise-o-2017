@@ -250,10 +250,10 @@ public class ExpertoGestionarEmpresaAdherida {
     }
     public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa,String tipoImpuesto, String tipoEmpresa, String frecuenciaEmpresaTipoImpuesto, String direccionEmpresa, String habilitada){
         DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
-        dtoEe.setCuitDTOEmpresaExistente(cuitEmpresa);
-        dtoEe.setNombreDTOEmpresaExistente(nombreEmpresa);
-        dtoEe.setDireccionDTOEmpresaExistente(direccionEmpresa);
-        dtoEe.setHabilitadaDTOEmpresaExistente(habilitada);
+        dtoEe.setCuitEmpresaExistente(cuitEmpresa);
+        dtoEe.setNombreEmpresaExistente(nombreEmpresa);
+        dtoEe.setDireccionEmpresaExistente(direccionEmpresa);
+        dtoEe.setHabilitadaEmpresaExistente(habilitada);
         dtoEe.setFrecuenciaLiquidacionEmpresaTipoImpuesto(frecuenciaEmpresaTipoImpuesto);
 
         return dtoEe;

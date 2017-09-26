@@ -24,6 +24,7 @@ import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpre
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrear;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaModificacion;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaItems;
 
 
 /**
@@ -52,6 +53,28 @@ public class ControladorGestionarEmpresaAdherida {
         experto.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion,  habilitada, frecuenciaLiquidacion);
         
     }
+    
+        public void modificarEmpresa(Object evt, Object controlador){
+        // Muestro pantalla de Modificación
+        Vector vct = new Vector();
+        vct = (Vector) evt;
+        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(), vct.get(3).toString(), vct.get(4).toString(), vct.get(5).toString(), vct.get(6).toString());
+        if(dtoEe!= null){
+        final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
+        pantallaModificacion.setVisible(true);
+        // Modifico la operación de cierre para volver a la pantalla principal
+                    pantallaModificacion.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    pantallaModificacion.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent ev) {
+                            pantallaModificacion.dispose();
+                            iniciar();
+                        }
+                    }
+                )
+                            ;
+          
+        }
+     }
    
     public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, int frecuencia, String direccion, boolean habilitada){
        experto.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, frecuencia, direccion, habilitada);
@@ -75,27 +98,26 @@ public class ControladorGestionarEmpresaAdherida {
             pantallaCrear.setVisible(true); // La hago visible
      }
         
-    public void modificarEmpresa(Object evt, Object controlador){
+    public void gestionarItems(Object evt, Object controlador){
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
         vct = (Vector) evt;
-        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(),  vct.get(3).toString(), vct.get(4).toString(), vct.get(5).toString(), vct.get(6).toString());
-        if(dtoEe!= null){
-        final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
-        pantallaModificacion.setVisible(true);
+        
+        final IUGestionarEmpresaAdheridaItems pantallaItems = new IUGestionarEmpresaAdheridaItems();
+        pantallaItems.setVisible(true);
         // Modifico la operación de cierre para volver a la pantalla principal
-                    pantallaModificacion.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    pantallaModificacion.addWindowListener(new WindowAdapter() {
+                    pantallaItems.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    pantallaItems.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
-                            pantallaModificacion.dispose();
+                            pantallaItems.dispose();
                             iniciar();
                         }
                     }
                 )
                             ;
           
-        }
-     }
+       }
+     
   
   }
 

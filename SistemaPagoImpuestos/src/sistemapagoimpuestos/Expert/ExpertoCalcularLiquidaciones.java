@@ -10,12 +10,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import sistemapagoimpuestos.Dto.DTOCriterio;
+import sistemapagoimpuestos.Entity.Comision;
 import sistemapagoimpuestos.Entity.DetalleOperacion;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.EstadoLiquidacion;
 import sistemapagoimpuestos.Entity.Liquidacion;
 import sistemapagoimpuestos.Entity.LiquidacionEstado;
 import sistemapagoimpuestos.Entity.Operacion;
+import sistemapagoimpuestos.Estrategias.EstrategiaCalculoComision;
+import sistemapagoimpuestos.Fabricas.FabricaEstrategias;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -23,9 +26,9 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  * @author Gabriel
  */
 public class ExpertoCalcularLiquidaciones {
-    
+
     public void iniciar() {
-       
+
         //varaiables globales
         String nombreEstadoAnulado = "ARecalcular";
         List<DTOCriterio> criterios = new ArrayList();
@@ -68,27 +71,24 @@ public class ExpertoCalcularLiquidaciones {
                 criterios.add(criterio5);
                 List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
                 // loop por cada operacion
-                for (Object objlistOperacion : listOperacion) {
-                    Operacion operacion = (Operacion) objlistOperacion;
-                    if (operacion.getEmpresaTipoImpuesto().getTipoEmpresa().getNombreTipoEmpresa().toLowerCase().equals("servicio")) {
-                        // es de servicio la empresa
-                    } else {
-                        List<DetalleOperacion> listDetalleOperacion = operacion.getDetalleOperacionList();
-                        for (DetalleOperacion detalleOperacion : listDetalleOperacion) {
 
-                            /*
-                        HAY
-                        QUE CAMBIAR 
-                        EL MAPEO DE empresaTipoImpuesto, no tiene indica Periodicidad
-                             */
-                            // if(detalleOperacion.getItemEmpresaTipoImpuesto().getInd
-                        }
-                    }
-
+                //INCOMPLETO FALTA IMPLEMENTAR LOS METODOS DE LAS ESTRATEGIAS Y SETEAR MAS RELACIONES
+                for (Object op : listOperacion) {
+                    Operacion operacion = (Operacion) op;
+                    Double valorComision;
+                    EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia((Operacion) operacion);
+                    valorComision = estrategia.obtenerValorComision(operacion);
+                    Comision comision = new Comision();
+                    comision.setFechaCalculoComision(new Date());
+                    comision.setValorComision(valorComision);
+                    comision.setOperacion(operacion);
+                    operacion.setValorComisionOperacion(valorComision);
+                    /*
+                            CONTINUARA
+                     */
                 }
             }
+
         }
-
     }
-
 }

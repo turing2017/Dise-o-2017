@@ -21,19 +21,25 @@
         <property name="nroComprobanteFacturaOperacion" type="int" >
             <column name="nroComprobanteFacturaOperacion"/>
         </property>
-        <property name="calculadaOperacion" type="boolean">
-            <column name="calculadaOperacion"/>
+        <property name="liquidadaOperacion" type="boolean">
+            <column name="liquidadaOperacion"/>
         </property>
         <property name="valorComisionOperacion" type="double">
             <column name="valorComisionOperacion"/>
         </property>
+        
+        
         <many-to-one name="cuentaBancaria" class="sistemapagoimpuestos.Entity.CuentaBancaria" column="OIDCuentaBancaria" not-null="true"/>
         <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="true"/>
         <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto" not-null="true"/>
         <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true"/>
-        <set name="listDetalleOperacion" table="list_detalle_operacion" inverse="true" lazy="true" fetch="select" >             
-            <key column="OIDDetalleOperacion" not-null="true" />             
-            <one-to-many class="sistemapagoimpuestos.Entity.DetalleOperacion"/>         
-        </set>
+        
+         <bag name="detalleOperacionList" table="detalleOperacion" cascade="none" inverse="false">
+       <key column="OIDOperacion" not-null="true" />
+         <one-to-many class="sistemapagoimpuestos.Entity.DetalleOperacion"/>  
+       </bag>
+        
+                
+       
     </class>
 </hibernate-mapping>

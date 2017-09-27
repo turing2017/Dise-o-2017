@@ -5,10 +5,18 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import sistemapagoimpuestos.Expert.ExpertoCalcularLiquidaciones;
+import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+
 /**
  *
  * @author Gabriel
  */
 public class ControladoCalcularLiquidaciones {
-    
+
+    private ExpertoCalcularLiquidaciones experto = (ExpertoCalcularLiquidaciones) FabricaExpertos.getInstancia().crearExperto("CU03");
+
+    public ControladoCalcularLiquidaciones() {
+    }
+
 }

@@ -17,9 +17,7 @@ public class DetalleOperacion extends Entity{
     public DetalleOperacion() {
     }
 
-    public DetalleOperacion(String valorDetalleOperacion) {
-        this.valorDetalleOperacion = valorDetalleOperacion;
-    }
+    
 
     
     public String getValorDetalleOperacion() {
@@ -37,6 +35,8 @@ public class DetalleOperacion extends Entity{
     public void setItemEmpresaTipoImpuesto(ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto) {
         this.itemEmpresaTipoImpuesto = itemEmpresaTipoImpuesto;
     }
+
+ 
     
     
     

@@ -10,6 +10,9 @@
        <property name="ordenItemEmpresaTipoImpuesto" type="int" unique="true" not-null="true">
            <column name="ordenItemEmpresaTipoImpuesto"/>
        </property>
+        <property name="indicaPeriodicidadItemEmpresaTipoImpuesto" type="boolean" unique="true" not-null="true">
+           <column name="indicaPeriodicidadItemEmpresaTipoImpuesto"/>
+       </property>
        <property name="fechaInhabilitacionItemEmpresaTipoImpuesto" type="timestamp" >
            <column name="fechaInhabilitacionItemEmpresaTipoImpuesto"/>
        </property>

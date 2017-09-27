@@ -22,8 +22,25 @@
       <column name="fechaHoraHastaLiquidacion"/>
     </property>
     
-    <many-to-one name="operacion" class="sistemapagoimpuestos.Entity.Operacion" column="OIDOperacion" not-null="true"/>
+    
     <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto"/>
-    <many-to-one name="liquidacionEstado" class="sistemapagoimpuestos.Entity.LiquidacionEstado" column="OIDLiquidacionEstado" not-null="true"/>
+    
+    
+    <bag name="operacionList" table="operacion" cascade="none" inverse="false">
+       <key column="OIDLiquidacion" not-null="false" />
+         <one-to-many class="sistemapagoimpuestos.Entity.Operacion"/>  
+       </bag>
+      
+         <bag name="liquidacionEstadoList" table="liquidacionEstado" cascade="none" inverse="false">
+       <key column="OIDLiquidacion" not-null="false" />
+         <one-to-many class="sistemapagoimpuestos.Entity.LiquidacionEstado"/>  
+       </bag>
+       
+        <bag name="comisionList" table="comision" cascade="none" inverse="false">
+       <key column="OIDLiquidacion" not-null="true" />
+         <one-to-many class="sistemapagoimpuestos.Entity.Comision"/>  
+       </bag>
+       
+       
   </class>
 </hibernate-mapping>

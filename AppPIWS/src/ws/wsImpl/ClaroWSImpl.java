@@ -7,6 +7,7 @@ package ws.wsImpl;
 
 import dao.ClaroModel;
 import Entity.Claro;
+import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
 
@@ -56,6 +57,19 @@ public class ClaroWSImpl implements ws.ClaroWS{
     @Override
     public List<Claro> buscarComprobantesPago(String comprobante) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Claro> buscarComprobantesCodigo(String codigo) {
+        ClaroModel cm = new ClaroModel();
+        List<Claro> listClaro = cm.findAll();
+        List<Claro> comprobantes = new ArrayList<>();
+        for(Claro claro : listClaro){
+            if(claro.getCodigo().equals(codigo)){
+                comprobantes.add(claro);
+            }
+        }
+        return comprobantes;
     }
     
 }

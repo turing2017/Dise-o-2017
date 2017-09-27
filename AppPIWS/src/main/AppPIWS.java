@@ -25,7 +25,7 @@ public class AppPIWS {
         try {
             //ClaroWSImpl claroWSImpl = new ClaroWSImpl();
             //claroWSImpl.create(new Claro("test", "test", 2.3, 1.2, "test", 1, new Date()));
-            //Claro c =claroWSImpl.find("test");
+            //List<Claro> c = claroWSImpl.buscarComprobantesCodigo("test");
             //System.out.println(c);
             Endpoint.publish("http://localhost:3030/ws/claro", new ClaroWSImpl());
         } catch (Exception e) {

@@ -35,4 +35,7 @@ public interface ClaroWS {
 
     @WebMethod
     public List<Claro> buscarComprobantesPago(String comprobante);
+    
+    @WebMethod
+    public List<Claro> buscarComprobantesCodigo(String codigo);
 }

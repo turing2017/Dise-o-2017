@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.print.attribute.standard.Compression;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
@@ -22,6 +23,7 @@ import sistemapagoimpuestos.Entity.CuentaBancaria;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
+import sistemapagoimpuestos.Fabricas.FabricaAdaptadores;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -29,6 +31,8 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  * @author mvissio
  */
 public class ExpertoPagarImpuestos {
+    
+    private AdaptadorEmpresaClaro adaptadorEmpresaClaro =  (AdaptadorEmpresaClaro) FabricaAdaptadores.getInstancia().crearExperto("Claro");
     
         // Método para recuperar los TipoDatoItem
         public List<DTOTipoImpuesto> buscarTipoImpuestos(){
@@ -75,31 +79,7 @@ public class ExpertoPagarImpuestos {
     
     // Recupera los comprobantes pendientes de pago
     public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres){
-        
-        
-        // El siguiente código se encuentra hardcodeado, se debe reemplazar por la obtención de comprobantes
-        String codigoComprobanteRecup = codigoPagoElectronicoIngres;
-        Date fechaVencimientoRecup = new Date();
-        double montoTotalRecup = 2333;
-        
-        DTOItem dtoItem = new DTOItem("23445", "Llamadas Internacionales", 5, true, new Date());
-        DTOItem dtoItemBis = new DTOItem("23425", "Llamadas locales", 5, true, new Date());
-        dtoItem.setDtoTipoDatoItem(new DTOTipoDatoItem());
-        dtoItemBis.setDtoTipoDatoItem(new DTOTipoDatoItem());
-        List<DTOItem> listadoItems = new ArrayList<DTOItem>();
-        listadoItems.add(dtoItem);
-        listadoItems.add(dtoItemBis);
-        
-        
-        DTOComprobante dtoComprobante = new DTOComprobante();
-        dtoComprobante.setCodigoDTOComprobante(codigoComprobanteRecup);
-        dtoComprobante.setFechaHoraVencimientoDTOComprobante(fechaVencimientoRecup);
-        dtoComprobante.setMontoTotalDTOComprobante(montoTotalRecup);
-        dtoComprobante.setAtributosAdicionalesDTOComprobante(listadoItems);
-        
-        List<DTOComprobante> listadoComprobantes = new ArrayList<DTOComprobante>();
-        listadoComprobantes.add(dtoComprobante);
-        return listadoComprobantes;
+        return adaptadorEmpresaClaro.findComprobantes(codigoPagoElectronicoIngres);
     }
     
     // Recupera cuentas y saldos del cliente

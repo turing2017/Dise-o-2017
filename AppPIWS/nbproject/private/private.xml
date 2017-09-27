@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/ws/ClaroWS.java</file>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/Entity/Claro.java</file>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/Dao/ClaroModel.java</file>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/Dao/AbstractModel.java</file>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/main/AppPIWS.java</file>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/ws/wsImpl/ClaroWSImpl.java</file>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/Dao/HibernateUtil.java</file>
-            <file>file:/C:/Users/mviss/Documents/NetBeansProjects/AppPIWS/src/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/mviss/Documents/Proyectos-Personales/AppPIWS/src/ws/wsImpl/ClaroWSImpl.java</file>
+            <file>file:/C:/Users/mviss/Documents/Proyectos-Personales/AppPIWS/src/main/AppPIWS.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
 
+<xs:element name="buscarComprobantesCodigo" type="tns:buscarComprobantesCodigo"></xs:element>
+
+<xs:element name="buscarComprobantesCodigoResponse" type="tns:buscarComprobantesCodigoResponse"></xs:element>
+
 <xs:element name="buscarComprobantesPago" type="tns:buscarComprobantesPago"></xs:element>
 
 <xs:element name="buscarComprobantesPagoResponse" type="tns:buscarComprobantesPagoResponse"></xs:element>
@@ -28,6 +32,30 @@
 
 <xs:element name="updateResponse" type="tns:updateResponse"></xs:element>
 
+<xs:complexType name="buscarComprobantesCodigo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarComprobantesCodigoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:claro" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="claro">
+<xs:sequence>
+<xs:element name="codigo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoPagado" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="montoTotal" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="nombreServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nroTelefono" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="status" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="vencimiento" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="pagarComprobante">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
@@ -50,18 +78,6 @@
 <xs:complexType name="findResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:claro" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="claro">
-<xs:sequence>
-<xs:element name="codigo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="montoPagado" type="xs:double" minOccurs="0"></xs:element>
-<xs:element name="montoTotal" type="xs:double" minOccurs="0"></xs:element>
-<xs:element name="nombreServicio" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nroTelefono" type="xs:int" minOccurs="0"></xs:element>
-<xs:element name="status" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="vencimiento" type="xs:dateTime" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Dto;
 
 import java.util.Date;
+import sistemapagoimpuestos.Entity.Item;
 
 /**
  *
@@ -78,5 +79,7 @@ public class DTOItem {
         return dtoTipoDatoItem;
     }
     
-    
+    public DTOItem ConvertDto(Item item){
+        return new DTOItem(item.getCodigoItem(), item.getNombreItem(), item.getLongitudItem(), item.isRequeridoItem(), item.getFechaHoraInhabilitacionItem());
+    }
 }

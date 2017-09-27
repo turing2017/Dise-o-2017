@@ -38,6 +38,15 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
+<operation name="buscarComprobantesCodigo">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
 <operation name="buscarComprobantesPago">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -47,7 +56,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="pagarComprobante">
+<operation name="findAll">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -56,7 +65,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="findAll">
+<operation name="pagarComprobante">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

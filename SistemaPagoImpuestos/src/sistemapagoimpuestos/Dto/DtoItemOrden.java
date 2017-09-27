@@ -12,14 +12,29 @@ package sistemapagoimpuestos.Dto;
 public class DtoItemOrden {
     private String nombreItem;
     private int orden;
-
-    public DtoItemOrden() {
+    private Boolean perioricidad;
+    
+    
+        public DtoItemOrden() {
     }
 
-    public DtoItemOrden(String nombreItem, int orden) {
+    public DtoItemOrden(String nombreItem, int orden, Boolean perioricidad) {
         this.nombreItem = nombreItem;
         this.orden = orden;
+        this.perioricidad = perioricidad;
     }
+        
+    
+
+    public Boolean getPerioricidad() {
+        return perioricidad;
+    }
+
+    public void setPerioricidad(Boolean perioricidad) {
+        this.perioricidad = perioricidad;
+    }
+
+
 
     public String getNombreItem() {
         return nombreItem;

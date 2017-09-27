@@ -24,6 +24,8 @@ import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpre
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrear;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaModificacion;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
+import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaItems;
 
 
@@ -54,10 +56,15 @@ public class ControladorGestionarEmpresaAdherida {
         
     }
     
-        public void modificarEmpresa(Object evt, Object controlador){
+    public void modificarItemEmpresaTipoImpuesto (DTOEmpresaTipImpItem dTOEmpresaTipImpItemList){
+        experto.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList);
+    }
+            
+            
+        public void modificarEmpresa(Object eE, Object controlador){
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
-        vct = (Vector) evt;
+        vct = (Vector) eE;
         DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(), vct.get(3).toString(), vct.get(4).toString(), vct.get(5).toString(), vct.get(6).toString());
         if(dtoEe!= null){
         final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
@@ -75,7 +82,10 @@ public class ControladorGestionarEmpresaAdherida {
           
         }
      }
-   
+    
+    public List<DTOItem> buscarItems(){
+        return experto.buscarItems();
+    }
     public void ingresarDatosEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, int frecuencia, String direccion, boolean habilitada){
        experto.ingresarDatosEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, frecuencia, direccion, habilitada);
     }
@@ -103,7 +113,7 @@ public class ControladorGestionarEmpresaAdherida {
         Vector vct = new Vector();
         vct = (Vector) evt;
         
-        final IUGestionarEmpresaAdheridaItems pantallaItems = new IUGestionarEmpresaAdheridaItems();
+        final IUGestionarEmpresaAdheridaItems pantallaItems = new IUGestionarEmpresaAdheridaItems(vct);
         pantallaItems.setVisible(true);
         // Modifico la operación de cierre para volver a la pantalla principal
                     pantallaItems.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

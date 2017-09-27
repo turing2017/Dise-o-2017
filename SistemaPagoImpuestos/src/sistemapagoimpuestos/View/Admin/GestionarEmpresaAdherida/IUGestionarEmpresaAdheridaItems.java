@@ -10,7 +10,7 @@ import exceptions.Excepciones;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOItem;
@@ -18,7 +18,7 @@ import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
 
 public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
-    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+    ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
     private List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemList;
 
     public List<DTOEmpresaTipImpItem> getdTOEmpresaTipImpItemList() {
@@ -39,19 +39,17 @@ public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
     public void removeDtoetiisModf(int index) {
         dTOEmpresaTipImpItemList.remove(index);
     }
-
-    public IUGestionarEmpresaAdheridaItems() {
+Vector empresaExistente;
+    public IUGestionarEmpresaAdheridaItems(Object vct) {
         initComponents();
-        List<DTOEmpresa> listEmpresa = controlador.buscarEmpresas();
-        //llenarComboEmpresa(listEmpresa);
-        List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
-        //llenarComboTipoEmpresa(listTipoEmpresa);
         List<DTOItem> items = controlador.buscarItems();
         llenarTabla(items);
+        empresaExistente = (Vector) vct;
+        
     }
 
     private void llenarTabla(List<DTOItem> list) {
-        String[] columnas = {"Item", "Orden", "Seleccion"};
+        String[] columnas = {"Item", "Orden", "Perioricidad","Seleccion"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
             public Class<?> getColumnClass(int column) {
                 switch (column) {
@@ -60,6 +58,8 @@ public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
                     case 1:
                         return Integer.class;
                     case 2:
+                        return Boolean.class;
+                    case 3:
                         return Boolean.class;
                     default:
                         return null;
@@ -73,6 +73,8 @@ public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
                     case 1:
                         return true;
                     case 2:
+                        return true;
+                    case 3:
                         return true;
                     default:
                         return false;
@@ -175,52 +177,57 @@ public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
     }//GEN-LAST:event_button_CancelarActionPerformed
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
-
+        
         try {
             DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
             List<DtoItemOrden> dtoItemOrdenList = new ArrayList<>();
+            
+            dTOEmpresaTipImpItem.setCuitEmpresa(empresaExistente.get(0).toString());
+            dTOEmpresaTipImpItem.setNombreEmpresa(empresaExistente.get(1).toString());
+                        dTOEmpresaTipImpItem.setNombreTipoImpuesto(empresaExistente.get(2).toString());
+            dTOEmpresaTipImpItem.setNombreTipoEmpresa( empresaExistente.get(3).toString());
             
             for (int i = 0; i < table_Item.getRowCount(); i++) {
                 if ((Boolean) (table_Item.getValueAt(i, 2))) {
                     DtoItemOrden dtoItemOrden = new DtoItemOrden();
                     dtoItemOrden.setNombreItem(table_Item.getValueAt(i, 0).toString());
                     dtoItemOrden.setOrden(Integer.parseInt(table_Item.getValueAt(i, 1).toString()));
+                    dtoItemOrden.setPerioricidad(table_Item.getColumnSelectionAllowed());
                     dtoItemOrdenList.add(dtoItemOrden);
                 }
             }
             dTOEmpresaTipImpItem.setDtoItemOrdenList(dtoItemOrdenList);
+           
+            controlador.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItem);
+            
+            
+            /*
             if (! (dTOEmpresaTipImpItem.getDtoItemOrdenList().size() < 1)) {
                 if (getNuevoTipoImpuesto()) {
-                    IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(getdTOEmpresaTipImpItemList());
-                    IUGestionarTipoImpuestoAlta.addDtoetiisModfAlta(dTOEmpresaTipImpItem);
-                    IUGestionarTipoImpuestoAlta IUGestionarTipoImpuestoAlta = new IUGestionarTipoImpuestoAlta();
-                    IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-                    IUGestionarTipoImpuestoAlta.setVisible(true); // La hago visible
+     
+                    IUGestionarEmpresaAdheridaItemsAsociacion IUGestionarEmpresaAdheridaItemsAsociacion = new IUGestionarEmpresaAdheridaItemsAsociacion();
+                    IUGestionarEmpresaAdheridaItemsAsociacion.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+                    IUGestionarEmpresaAdheridaItemsAsociacion.setVisible(true); // La hago visible
                     // Modifico la operación de cierre para volver a la pantalla principal
-                    IUGestionarTipoImpuestoAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    IUGestionarTipoImpuestoAlta.addWindowListener(new WindowAdapter() {
+                    IUGestionarEmpresaAdheridaItemsAsociacion.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    IUGestionarEmpresaAdheridaItemsAsociacion.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
                             controlador.iniciar();
                         }
                     });
-                    IUGestionarTipoImpuestoAlta.RecuperarEmpresaItems();
-                    IUGestionarTipoImpuestoAlta.setTextfield_codigo(getCodigoTemp());
-                    IUGestionarTipoImpuestoAlta.setTextField_nombre(getNombreTemp());
-                    IUGestionarTipoImpuestoAlta.setCheckbox_esEditable(isEditTemp());
+                    IUGestionarEmpresaAdheridaItemsAsociacion.RecuperarEmpresaItems();
+                    
                 } else {
-                    IUGestionarTipoImpuestoModificar.setdTOEmpresaTipImpItemList(getdTOEmpresaTipImpItemList());
-                    IUGestionarTipoImpuestoModificar.adddTOEmpresaTipImpItemList(dTOEmpresaTipImpItem);
-                    IUGestionarTipoImpuestoModificar pantallaModificar = new IUGestionarTipoImpuestoModificar();
+                    IUGestionarEmpresaAdheridaItemsAsociacion.setdTOEmpresaTipImpItemList(getdTOEmpresaTipImpItemList());
+                    IUGestionarEmpresaAdheridaItemsAsociacion.adddTOEmpresaTipImpItemList(dTOEmpresaTipImpItem);
+                    IUGestionarEmpresaAdheridaItemsAsociacion pantallaModificar = new IUGestionarEmpresaAdheridaItemsAsociacion();
                     pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
                     pantallaModificar.setVisible(true); // La hago visible
                     // Modifico la operación de cierre para volver a la pantalla principal
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-                    pantallaModificar.RecuperarEmpresaItems();
-                    pantallaModificar.setLabel_nombre(getCodigoTemp());
-                    pantallaModificar.setTextfield_nombre(getNombreTemp());
-                    pantallaModificar.setCheckbox_Habilitar(isEditTemp());
-                    pantallaModificar.setCheckbox_esEditable(isStatusTemp());
+                pantallaModificar.RecuperarEmpresaItems();
+                   
                 }
 
                 this.dispose();
@@ -232,10 +239,11 @@ public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
                 stringList.add("Item");
                 Excepciones.getInstance().camposRequerido(stringList);
             }
-        } catch (Exception e) {
+            */
+        } catch (IndexOutOfBoundsException e) {
 
-        }
-
+     }  
+        
     }//GEN-LAST:event_button_AceptarActionPerformed
 
 
@@ -278,7 +286,7 @@ public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUGestionarEmpresaAdheridaItems().setVisible(true);
+             //   new IUGestionarEmpresaAdheridaItems().setVisible(true);
             }
         });
     }

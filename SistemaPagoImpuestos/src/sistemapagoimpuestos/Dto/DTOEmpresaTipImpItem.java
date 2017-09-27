@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class DTOEmpresaTipImpItem {
     private int id;
-    private int codigoTI;
+    private String cuitEmpresa;
+    private String nombreTipoImpuesto;
     private String nombreEmpresa;
     private String nombreTipoEmpresa;
     private int frecuenciaSincronizacion;
@@ -23,15 +24,25 @@ public class DTOEmpresaTipImpItem {
     public DTOEmpresaTipImpItem() {
     }
 
-    public DTOEmpresaTipImpItem(int id, int codigoTI, String nombreEmpresa, String nombreTipoEmpresa, int frecuenciaSincronizacion, List<DtoItemOrden> dtoItemOrdenList) {
+    public String getCuitEmpresa() {
+        return cuitEmpresa;
+    }
+
+    public void setCuitEmpresa(String cuitEmpresa) {
+        this.cuitEmpresa = cuitEmpresa;
+    }
+
+    public DTOEmpresaTipImpItem(int id, String cuitEmpresa, String nombreTipoImpuesto, String nombreEmpresa, String nombreTipoEmpresa, int frecuenciaSincronizacion, List<DtoItemOrden> dtoItemOrdenList) {
         this.id = id;
-        this.codigoTI = codigoTI;
+        this.cuitEmpresa = cuitEmpresa;
+        this.nombreTipoImpuesto = nombreTipoImpuesto;
         this.nombreEmpresa = nombreEmpresa;
         this.nombreTipoEmpresa = nombreTipoEmpresa;
         this.frecuenciaSincronizacion = frecuenciaSincronizacion;
         this.dtoItemOrdenList = dtoItemOrdenList;
     }
 
+  
 
 
     public int getId() {
@@ -42,14 +53,8 @@ public class DTOEmpresaTipImpItem {
         this.id = id;
     }
 
-    public int getCodigoTI() {
-        return codigoTI;
-    }
-
-    public void setCodigoTI(int codigoTI) {
-        this.codigoTI = codigoTI;
-    }
-
+   
+    
     public String getNombreEmpresa() {
         return nombreEmpresa;
     }
@@ -81,6 +86,16 @@ public class DTOEmpresaTipImpItem {
     public void setDtoItemOrdenList(List<DtoItemOrden> dtoItemOrdenList) {
         this.dtoItemOrdenList = dtoItemOrdenList;
     }
+
+    public String getNombreTipoImpuesto() {
+        return nombreTipoImpuesto;
+    }
+
+    public void setNombreTipoImpuesto(String nombreTipoImpuesto) {
+        this.nombreTipoImpuesto = nombreTipoImpuesto;
+    }
+
+
     
     public void addItem(DtoItemOrden dtoItemOrden){
         if(dtoItemOrdenList ==null){

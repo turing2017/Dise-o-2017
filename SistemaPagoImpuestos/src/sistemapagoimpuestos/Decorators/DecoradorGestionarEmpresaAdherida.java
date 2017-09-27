@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
@@ -22,10 +24,25 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAdherida{
 
     @Override
+    public void modificarItemEmpresaTipoImpuesto(DTOEmpresaTipImpItem dTOEmpresaTipImpItemList) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList);
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+
+    @Override
     public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto, String anteriorTipoImpuesto, String nuevoTipoEmpresa,String anteriorTipoEmpresa, String direccion,boolean habilitada, int frecuenciaLiquidacion) {
         FachadaInterna.getInstance().iniciarTransaccion();
         super.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion, habilitada, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
+    }
+
+    @Override
+    public List<DTOItem> buscarItems() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOItem>  dtoI= super.buscarItems(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return dtoI;
     }
 
     @Override

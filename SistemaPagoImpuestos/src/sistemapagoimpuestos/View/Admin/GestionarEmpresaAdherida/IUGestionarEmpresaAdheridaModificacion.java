@@ -15,6 +15,7 @@ import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
@@ -39,6 +40,10 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         this.dtoEe = dtoEe;
     }
 
+    
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -263,8 +268,10 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
     private void GestionarItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarItemsActionPerformed
             Vector vct = new Vector();
             vct.add(dtoEe.getCuitEmpresaExistente());
-            vct.add(dtoEe.getNombreEmpresaExistente());
-            vct.add(dtoEe.getTipoImpuestoEmpresaEmpresaExistente());
+            vct.add(dtoEe.getNombreEmpresaExistente().toString());
+            vct.add(dtoEe.getTipoImpuestoEmpresaEmpresaExistente().toString());
+            vct.add(dtoEe.getNombreTipoEmpresaEmpresaExistente());
+            
             
             controlador.gestionarItems(vct, controlador);
     }//GEN-LAST:event_GestionarItemsActionPerformed

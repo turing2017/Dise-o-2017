@@ -112,7 +112,7 @@ public class ExpertoGestionarEmpresaAdherida {
             
             ItemEmpresaTipoImpuesto itemETI = new ItemEmpresaTipoImpuesto();
             itemETI.setOrdenItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getOrden());
-            itemETI.setIndicaPerioricidadEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getPerioricidad());
+            itemETI.setIndicaPeriodicidadItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getPerioricidad());
             itemETI.setEmpresaTipoImpuesto(empresaTI);
             List<DTOCriterio> criterios4 = new ArrayList<>();
             DTOCriterio criterio4 = new DTOCriterio();

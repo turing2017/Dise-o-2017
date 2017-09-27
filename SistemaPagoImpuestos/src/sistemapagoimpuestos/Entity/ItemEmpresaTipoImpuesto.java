@@ -16,30 +16,18 @@ public class ItemEmpresaTipoImpuesto extends Entity{
     private Date fechaInhabilitacionItemEmpresaTipoImpuesto;
     private Item item;
     private EmpresaTipoImpuesto empresaTipoImpuesto;
-    private Boolean indicaPerioricidadItemEmpresaTipoImpuesto;
+    private boolean indicaPeriodicidadItemEmpresaTipoImpuesto;
 
     public ItemEmpresaTipoImpuesto() {
     }
 
-    public ItemEmpresaTipoImpuesto(int ordenItemEmpresaTipoImpuesto, Date fechaInhabilitacionItemEmpresaTipoImpuesto, Item item, EmpresaTipoImpuesto empresaTipoImpuesto, Boolean indicaPerioricidadEmpresaTipoImpuesto) {
+    public ItemEmpresaTipoImpuesto(int ordenItemEmpresaTipoImpuesto, Date fechaInhabilitacionItemEmpresaTipoImpuesto, Item item, EmpresaTipoImpuesto empresaTipoImpuesto, boolean indicaPerioricidadItemEmpresaTipoImpuesto) {
         this.ordenItemEmpresaTipoImpuesto = ordenItemEmpresaTipoImpuesto;
         this.fechaInhabilitacionItemEmpresaTipoImpuesto = fechaInhabilitacionItemEmpresaTipoImpuesto;
         this.item = item;
         this.empresaTipoImpuesto = empresaTipoImpuesto;
-        this.indicaPerioricidadItemEmpresaTipoImpuesto = indicaPerioricidadEmpresaTipoImpuesto;
+        this.indicaPeriodicidadItemEmpresaTipoImpuesto = indicaPerioricidadItemEmpresaTipoImpuesto;
     }
-    
-    
-
-    public Boolean getIndicaPerioricidadEmpresaTipoImpuesto() {
-        return indicaPerioricidadItemEmpresaTipoImpuesto;
-    }
-
-    public void setIndicaPerioricidadEmpresaTipoImpuesto(Boolean indicaPerioricidadEmpresaTipoImpuesto) {
-        this.indicaPerioricidadItemEmpresaTipoImpuesto = indicaPerioricidadEmpresaTipoImpuesto;
-    }
-
-
 
     public int getOrdenItemEmpresaTipoImpuesto() {
         return ordenItemEmpresaTipoImpuesto;
@@ -71,6 +59,14 @@ public class ItemEmpresaTipoImpuesto extends Entity{
 
     public void setEmpresaTipoImpuesto(EmpresaTipoImpuesto empresaTipoImpuesto) {
         this.empresaTipoImpuesto = empresaTipoImpuesto;
+    }
+
+    public boolean isIndicaPeriodicidadItemEmpresaTipoImpuesto() {
+        return indicaPeriodicidadItemEmpresaTipoImpuesto;
+    }
+
+    public void setIndicaPeriodicidadItemEmpresaTipoImpuesto(boolean indicaPerioricidadItemEmpresaTipoImpuesto) {
+        this.indicaPeriodicidadItemEmpresaTipoImpuesto = indicaPerioricidadItemEmpresaTipoImpuesto;
     }
     
 }

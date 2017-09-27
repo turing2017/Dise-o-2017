@@ -6,6 +6,8 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
@@ -35,4 +37,22 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
         FachadaInterna.getInstance().finalizarTransaccion();
         return listaDTOEmpresa;
     }
+
+    @Override
+    public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOComprobante> listadoDTOComprobante = super.consultarComprobantes(codigoPagoElectronicoIngres);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listadoDTOComprobante;
+    }
+
+    @Override
+    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOCuentaBancaria> listaCuentasBancarias = super.obtenerCuentas(cuilCliente);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listaCuentasBancarias;
+    }
+    
+    
 }

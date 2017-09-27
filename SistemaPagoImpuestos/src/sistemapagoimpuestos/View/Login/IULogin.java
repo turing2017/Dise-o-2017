@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.View.Login;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
 
 /**
@@ -12,6 +14,17 @@ public class IULogin extends javax.swing.JFrame {
     
     public IULogin() {
         initComponents();
+        textfield_password.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                try{
+                    nombreUsuarioIngres = textfield_usuario.getText();
+                    passwordUsuarioIngres = textfield_password.getText();
+                    controlador.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
+                    dispose();
+        } catch(IndexOutOfBoundsException e1){
+            exceptions.Excepciones.getInstance().usuarioNoValido();
+        }
+            }});
     }
     
     @SuppressWarnings("unchecked")
@@ -20,10 +33,10 @@ public class IULogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         label_usuario = new javax.swing.JLabel();
-        label_constraseña = new javax.swing.JLabel();
+        label_password = new javax.swing.JLabel();
         textfield_usuario = new javax.swing.JTextField();
         button_entrar = new javax.swing.JButton();
-        textfield_contraseña = new javax.swing.JPasswordField();
+        textfield_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -31,7 +44,7 @@ public class IULogin extends javax.swing.JFrame {
 
         label_usuario.setText("Usuario");
 
-        label_constraseña.setText("Contraseña");
+        label_password.setText("Contraseña");
 
         textfield_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,6 +56,12 @@ public class IULogin extends javax.swing.JFrame {
         button_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_entrarActionPerformed(evt);
+            }
+        });
+
+        textfield_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfield_passwordActionPerformed(evt);
             }
         });
 
@@ -58,12 +77,12 @@ public class IULogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_constraseña)
+                            .addComponent(label_password)
                             .addComponent(label_usuario))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(textfield_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                            .addComponent(textfield_contraseña))))
+                            .addComponent(textfield_password))))
                 .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -81,8 +100,8 @@ public class IULogin extends javax.swing.JFrame {
                     .addComponent(textfield_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_constraseña)
-                    .addComponent(textfield_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(label_password)
+                    .addComponent(textfield_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(button_entrar)
                 .addGap(24, 24, 24))
@@ -110,7 +129,7 @@ public class IULogin extends javax.swing.JFrame {
 
         try{
             nombreUsuarioIngres = textfield_usuario.getText();
-            passwordUsuarioIngres = textfield_contraseña.getText();
+            passwordUsuarioIngres = textfield_password.getText();
             controlador.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
             this.dispose();
         } catch(IndexOutOfBoundsException e){
@@ -121,6 +140,10 @@ public class IULogin extends javax.swing.JFrame {
     private void textfield_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textfield_usuarioActionPerformed
+
+    private void textfield_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textfield_passwordActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -158,9 +181,9 @@ public class IULogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_entrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel label_constraseña;
+    private javax.swing.JLabel label_password;
     private javax.swing.JLabel label_usuario;
-    private javax.swing.JPasswordField textfield_contraseña;
+    private javax.swing.JPasswordField textfield_password;
     private javax.swing.JTextField textfield_usuario;
     // End of variables declaration//GEN-END:variables
 }

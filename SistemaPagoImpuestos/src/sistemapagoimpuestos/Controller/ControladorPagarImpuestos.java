@@ -6,6 +6,8 @@
 package sistemapagoimpuestos.Controller;
 
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
@@ -31,5 +33,15 @@ public class ControladorPagarImpuestos {
     // Método para recuperar las Empresas
     public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto){
         return experto.buscarEmpresas(nombreTipoImpuesto);
+    }
+    
+    // Método para buscar los comprobantes
+    public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres){
+        return experto.consultarComprobantes(codigoPagoElectronicoIngres);
+    }
+    
+    // Método para buscar las cuentas y saldos
+    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente){
+        return experto.obtenerCuentas(cuilCliente);
     }
 }

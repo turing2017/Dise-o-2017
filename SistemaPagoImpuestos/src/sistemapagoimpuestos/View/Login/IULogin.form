@@ -32,13 +32,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="label_constraseña" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="label_password" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="label_usuario" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="textfield_usuario" pref="167" max="32767" attributes="0"/>
-                          <Component id="textfield_contraseña" alignment="0" max="32767" attributes="0"/>
+                          <Component id="textfield_password" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -63,8 +63,8 @@
               </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label_constraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textfield_contraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="label_password" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textfield_password" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="77" max="32767" attributes="0"/>
               <Component id="button_entrar" min="-2" max="-2" attributes="0"/>
@@ -84,7 +84,7 @@
         <Property name="text" type="java.lang.String" value="Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="label_constrase&#xf1;a">
+    <Component class="javax.swing.JLabel" name="label_password">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
       </Properties>
@@ -102,7 +102,10 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_entrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="textfield_contrase&#xf1;a">
+    <Component class="javax.swing.JPasswordField" name="textfield_password">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_passwordActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

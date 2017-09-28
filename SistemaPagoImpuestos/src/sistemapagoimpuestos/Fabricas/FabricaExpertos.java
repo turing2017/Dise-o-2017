@@ -9,6 +9,8 @@ import sistemapagoimpuestos.Decorators.DecoradorCalcularLiquidaciones;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarItem;
+import sistemapagoimpuestos.Decorators.DecoradorConsultarLiquidacion;
+import sistemapagoimpuestos.Decorators.DecoradorGestionarLiquidacion;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoDeCuenta;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoUsuario;
@@ -16,6 +18,7 @@ import sistemapagoimpuestos.Decorators.DecoradorGestionarUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorLoguearUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorPagarImpuestos;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaAdherida;
+
 
 /**
  *
@@ -60,6 +63,10 @@ public class FabricaExpertos {
                 return new DecoradorLoguearUsuario();
             case "CU10":
                 return new DecoradorGestionarEmpresaAdherida();
+            case "CU18":
+                return new DecoradorConsultarLiquidacion();
+            case "CU21":
+                return new DecoradorGestionarLiquidacion();
             default:
                 return null;
         }

@@ -33,6 +33,11 @@
     <mapping resource="sistemapagoimpuestos/hibernate/parametroCalculoEditable.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/estadoLiquidacion.hbm.xml"/>
     <mapping resource="sistemapagoimpuestos/hibernate/liquidacionEstado.hbm.xml"/>
+<<<<<<< HEAD
+=======
+    <mapping resource="sistemapagoimpuestos/hibernate/parametroCalculoEditable.hbm.xml"/>
+    <mapping resource="sistemapagoimpuestos/hibernate/parametroCalculoPeriodicidad.hbm.xml"/>
+>>>>>>> feature/gestionarLiquidacion
     <mapping resource="sistemapagoimpuestos/hibernate/comision.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

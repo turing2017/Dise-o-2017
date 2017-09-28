@@ -8,7 +8,7 @@ import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 public class SistemaPagoImpuestos {
   
     public static void main(String[] args) {
-        //generarDatosPrueba();
+        
         //ControladorGestionarTipoDeCuenta.getInstance().iniciar();
         //ControladorGestionarEmpresaTipoImpuesto.getInstance().iniciar();
         //FachadaInterna.getInstance().iniciarTransaccion();

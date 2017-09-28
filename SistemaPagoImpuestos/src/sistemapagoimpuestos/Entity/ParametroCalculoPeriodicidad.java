@@ -1,3 +1,4 @@
+
 package sistemapagoimpuestos.Entity;
 
 /**
@@ -88,5 +89,4 @@ public class ParametroCalculoPeriodicidad extends Entity {
     public static void setInstancia(ParametroCalculoPeriodicidad aInstancia) {
         instancia = aInstancia;
     }
-
 }

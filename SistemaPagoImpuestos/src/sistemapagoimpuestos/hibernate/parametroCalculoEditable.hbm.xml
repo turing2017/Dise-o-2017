@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<<<<<<< HEAD
 <hibernate-mapping>
     <class name="sistemapagoimpuestos.Entity.ParametroCalculoEditable" table="parametro_calculo_editable">
         
+=======
+
+<hibernate-mapping>
+    <class name="sistemapagoimpuestos.Entity.ParametroCalculoEditable" table="parametro_Calculo_Editable">
+>>>>>>> feature/gestionarLiquidacion
         <id name="OID" type="string">
             <column name="OIDParametroCalculoEditable"/>
             <generator class="uuid2"/>
         </id>
        
+<<<<<<< HEAD
         <property name="siEditablePCEditable" type="double" not-null="true">
             <column name="siEditablePCEditable"/>
         </property>
@@ -16,5 +23,14 @@
             <column name="noEditablePCEditable"/>
         </property>
         
+=======
+        <property name="siEditable" type="double">
+            <column name="siEditable"/>
+        </property>
+        <property name="noEditable" type="double">
+            <column name="noEditable"/>
+        </property>
+       
+>>>>>>> feature/gestionarLiquidacion
     </class>
 </hibernate-mapping>

@@ -31,6 +31,7 @@ public class ExpertoCalcularLiquidaciones {
 
         //varaiables globales
         String nombreEstadoAnulado = "ARecalcular";
+        String nombreEstadoRecalcular = "Recalculada";
         List<DTOCriterio> criterios = new ArrayList();
 
         //buscar "EstadoLiquidacion","nombreEstadoLiquidacion=Anulada"
@@ -72,21 +73,45 @@ public class ExpertoCalcularLiquidaciones {
                 List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
                 // loop por cada operacion
 
-                //INCOMPLETO FALTA IMPLEMENTAR LOS METODOS DE LAS ESTRATEGIAS Y SETEAR MAS RELACIONES
+                
                 for (Object op : listOperacion) {
                     Operacion operacion = (Operacion) op;
                     Double valorComision;
                     EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia((Operacion) operacion);
                     valorComision = estrategia.obtenerValorComision(operacion);
+                  //  Creamos la comision correspondiente para la operacion y la seteamos 
                     Comision comision = new Comision();
                     comision.setFechaCalculoComision(new Date());
                     comision.setValorComision(valorComision);
                     comision.setOperacion(operacion);
                     operacion.setValorComisionOperacion(valorComision);
-                    /*
-                            CONTINUARA
-                     */
+                    operacion.setLiquidadaOperacion(true);
+                    List<Comision> listComision = liquidacion.getComisionList();
+                    listComision.add(comision);
+                    liquidacion.setComisionList(listComision);
+                    FachadaPersistencia.getInstance().guardar(operacion);
+                    FachadaPersistencia.getInstance().guardar(comision);
+                 
+                   
                 }
+                liquidacionEstado.setFechaHoraHastaLiquidacionEstado(new Date());
+                FachadaPersistencia.getInstance().guardar(liquidacionEstado);
+                // Busco el estado recalculada
+                DTOCriterio criterio8 = new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoRecalcular);
+                criterios.clear();
+                criterios.add(criterio8);
+                EstadoLiquidacion estadoLiquidacionRecalculada= (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
+                LiquidacionEstado liqEstado = new LiquidacionEstado();
+                liqEstado.setFechaHoraDesdeLiquidacionEstado(new Date());
+                liqEstado.setEstadoLiquidacion(estadoLiquidacionRecalculada);
+                //Guardo nuevo estado
+                FachadaPersistencia.getInstance().guardar(liqEstado);
+                List<LiquidacionEstado> listLiqEstados = liquidacion.getLiquidacionEstadoList();
+                //Agrego el nuevo estado
+                listLiqEstados.add(liqEstado);
+                liquidacion.setLiquidacionEstadoList(listLiqEstados);
+                 //Guardo la liquidacion
+                FachadaPersistencia.getInstance().guardar(liquidacion);
             }
 
         }

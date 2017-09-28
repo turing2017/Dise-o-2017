@@ -179,9 +179,8 @@ public class ExpertoGestionarTipoImpuesto {
                             empresaTipoImpuestoItemList.add(new ItemEmpresaTipoImpuesto(
                                     dtoItemOrden.getOrden(), 
                                     null, 
-                                    item, 
+                                    item, false,
                                     empresaTipoImpuesto));
-
                         }
                     }
                  }

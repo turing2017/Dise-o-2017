@@ -239,15 +239,15 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         String cuit= TextField_Cuit.getText();
         String nombre = TextField_Nombre.getText();
         String nuevoTipoImpuesto = comboBoxTipoImpuesto.getSelectedItem().toString();
-        String anteriorTipoImpuesto = dtoEe.getNombreTipoEmpresaEmpresaExistente();
+        String anteriorTipoImpuesto = dtoEe.getTipoImpuestoEmpresaEmpresaExistente();
         String nuevoTipoEmpresa = comboBoxTipoEmpresa.getSelectedItem().toString();
-        String AnteriorTipoEmpresa = dtoEe.getTipoEmpresaEmpresaEmpresaExistente();
+        String anteriorTipoEmpresa = dtoEe.getNombreTipoEmpresaEmpresaExistente();
         String direccion = TextField_Direccion.getText();
         int frecuenciaLiquidacion = (int) spinner_Frecuencia.getValue();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
        
 // Ahora cuando modifica todo, lleva un monton de guasadas :D
-        controlador.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, AnteriorTipoEmpresa, direccion, habilitada, frecuenciaLiquidacion);
+        controlador.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion, habilitada, frecuenciaLiquidacion);
         this.dispose();
 
     }//GEN-LAST:event_Button_GuardarActionPerformed

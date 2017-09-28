@@ -5,12 +5,9 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad;
 
-import com.mysql.jdbc.StringUtils;
-import exceptions.Excepciones;
-import javax.swing.JOptionPane;
 import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
-import sistemapagoimpuestos.Utils.Utils;
+import sistemapagoimpuestos.View.Mensajes.MensajesParametroCalculoPeriodicidad;
 
 /**
  *
@@ -25,15 +22,15 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         initComponents();
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         DTOParametroCalculoPeriodicidad dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoPeriodicidad();
-        jTextField4.setText(Double.toString(dtoCP.getMensualPCPeriodicidad()));
-        jTextField2.setText(Double.toString(dtoCP.getBimestralPCPeriodicidad()));
+        jTextField1.setText(Double.toString(dtoCP.getMensualPCPeriodicidad()));
+        jTextField3.setText(Double.toString(dtoCP.getBimestralPCPeriodicidad()));
         jTextField7.setText(Double.toString(dtoCP.getTrimestralPCPeriodicidad()));
-        jTextField3.setText(Double.toString(dtoCP.getCuatrimestralPCPeriodicidad()));
+        jTextField4.setText(Double.toString(dtoCP.getCuatrimestralPCPeriodicidad()));
         jTextField6.setText(Double.toString(dtoCP.getSemestralPCPeriodicidad()));
-        jTextField1.setText(Double.toString(dtoCP.getAnualPCPeriodicidad()));
+        jTextField2.setText(Double.toString(dtoCP.getAnualPCPeriodicidad()));
         jTextField5.setText(Double.toString(dtoCP.getQuincenalPCPeriodicidad()));
 
-        jButton2.setEnabled(false);
+        jButton2.setVisible(false);
         jTextField4.setEnabled(false);
         jTextField7.setEnabled(false);
         jTextField3.setEnabled(false);
@@ -143,7 +140,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
             }
         });
 
-        jButton3.setText("Modificar");
+        jButton3.setText("Editar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -151,51 +148,45 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("Parametros Calculo Periodicidad");
+        jLabel7.setText("Parámetros de Cálculo de Periodicidad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(82, 82, 82)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(53, 53, 53)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jTextField1)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(jTextField1)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addComponent(jLabel7))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3, jLabel4, jLabel5, jLabel6, jLabel8, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});
@@ -203,9 +194,8 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,13 +223,12 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});
@@ -270,53 +259,79 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
-    //Guardar 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    private Boolean validarCampoRequerido(String nombreCampo, String valorCampo) {
+
+        if (valorCampo.trim().equals("")) {
+            MensajesParametroCalculoPeriodicidad.getInstance().datosFaltantes(nombreCampo);
+            return false;
+        }
+
+        return true;
+    }
+
+    private Boolean validarCampoDecimalRequerido(String nombreCampo, String valorCampo) {
+
+        if (!validarCampoRequerido(nombreCampo, valorCampo)) {
+            return false;
+        }
+
         try {
-            double mensual = Double.parseDouble(jTextField4.getText());
-            double bimestral = Double.parseDouble(jTextField2.getText());
-            double trimestral = Double.parseDouble(jTextField7.getText());
-            double cuatrimestral = Double.parseDouble(jTextField3.getText());
-            double semestral = Double.parseDouble(jTextField6.getText());
-            double anual = Double.parseDouble(jTextField1.getText());
-            double quincenal = Double.parseDouble(jTextField5.getText());
-            //Validamos que no se puedan ingresar numeros negativos
-            if (Utils.isNegative(mensual)
-                    || Utils.isNegative(bimestral)
-                    || Utils.isNegative(trimestral)
-                    || Utils.isNegative(cuatrimestral)
-                    || Utils.isNegative(semestral)
-                    || Utils.isNegative(anual)
-                    || Utils.isNegative(quincenal)) {
-                JOptionPane.showMessageDialog(null,
-                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales positivos",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
+            double valorConvertido = Double.parseDouble(valorCampo);
 
+            if (Double.doubleToRawLongBits(valorConvertido) < 0) {
+                MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 2.50)");
+                return false;
+            }
+
+        } catch (NumberFormatException e) {
+            MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 2.50)");
+            return false;
+        }
+
+        return true;
+    }
+
+    private double obtenerCampoDecimal(String nombreCampo, String valorCampo) {
+
+        if (validarCampoDecimalRequerido(nombreCampo, valorCampo)) {
+            return Double.parseDouble(valorCampo);
+        }
+        return 0;
+    }
+
+//Guardar 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        if (!validarCampoDecimalRequerido(jLabel6.getText().substring(0, jLabel6.getText().length() - 1), jTextField1.getText())
+                || !validarCampoDecimalRequerido(jLabel1.getText().substring(0, jLabel1.getText().length() - 1), jTextField3.getText())
+                || !validarCampoDecimalRequerido(jLabel8.getText().substring(0, jLabel8.getText().length() - 1), jTextField7.getText())
+                || !validarCampoDecimalRequerido(jLabel5.getText().substring(0, jLabel5.getText().length() - 1), jTextField4.getText())
+                || !validarCampoDecimalRequerido(jLabel4.getText().substring(0, jLabel4.getText().length() - 1), jTextField6.getText())
+                || !validarCampoDecimalRequerido(jLabel3.getText().substring(0, jLabel3.getText().length() - 1), jTextField2.getText())
+                || !validarCampoDecimalRequerido(jLabel2.getText().substring(0, jLabel2.getText().length() - 1), jTextField5.getText())) {
+            return;
+        }
+
+        double mensual = obtenerCampoDecimal(jLabel6.getText().substring(0, jLabel6.getText().length() - 1), jTextField1.getText());
+        double bimestral = obtenerCampoDecimal(jLabel1.getText().substring(0, jLabel1.getText().length() - 1), jTextField3.getText());
+        double trimestral = obtenerCampoDecimal(jLabel8.getText().substring(0, jLabel8.getText().length() - 1), jTextField7.getText());
+        double cuatrimestral = obtenerCampoDecimal(jLabel5.getText().substring(0, jLabel5.getText().length() - 1), jTextField4.getText());
+        double semestral = obtenerCampoDecimal(jLabel4.getText().substring(0, jLabel4.getText().length() - 1), jTextField6.getText());
+        double anual = obtenerCampoDecimal(jLabel3.getText().substring(0, jLabel3.getText().length() - 1), jTextField2.getText());
+        double quincenal = obtenerCampoDecimal(jLabel2.getText().substring(0, jLabel2.getText().length() - 1), jTextField5.getText());
+
+        if (mensual == 0 & bimestral == 0 & trimestral == 0 & cuatrimestral == 0 & semestral == 0 & anual == 0 & quincenal == 0) {
+            MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos("", "No pueden estar todos los valores definidos en cero.\n Al menos uno debe ser númerico positivo mayor a cero. (Por ej.: 2.50)");
+        } else {
+            try {
                 ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
-                Excepciones.getInstance().modificacionExito();
+                MensajesParametroCalculoPeriodicidad.getInstance().modificacionExitosa();
                 this.dispose();
+            } catch (Exception e) {
+                MensajesParametroCalculoPeriodicidad.getInstance().modificacionFallida();
             }
 
-        } catch (Exception e) {
-            if (StringUtils.isEmptyOrWhitespaceOnly(jTextField1.getText())
-                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField2.getText())
-                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField3.getText())
-                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField4.getText())
-                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField5.getText())
-                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField6.getText())
-                    || StringUtils.isEmptyOrWhitespaceOnly(jTextField7.getText())) {
-                JOptionPane.showMessageDialog(null,
-                        "Todos los campos deben estar completos, intente nuevamente",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Algunos de los valores son incorrectos." + "\n" + "Por favor solo use numeros decimales positivos",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
         }
 
 
@@ -325,7 +340,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         (this).setVisible(false);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
@@ -341,7 +356,8 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         jTextField5.setEnabled(true);
         jTextField1.setEnabled(true);
         jButton3.setVisible(false);
-        jButton2.setEnabled(true);
+        jButton2.setVisible(true);
+        //jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -381,7 +397,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
             }
         });
     }
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

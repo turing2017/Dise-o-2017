@@ -13,7 +13,6 @@ import sistemapagoimpuestos.View.Errors.CuitExistente;
 import sistemapagoimpuestos.View.Errors.CuitNoExistente;
 import sistemapagoimpuestos.View.Errors.EmpresaCreada;
 import sistemapagoimpuestos.View.Errors.ModificacionExito;
-
 import sistemapagoimpuestos.View.Errors.ObjetoNoSeleccionado;
 import sistemapagoimpuestos.View.Errors.ErrorDatoNoValido;
 import sistemapagoimpuestos.View.Errors.UsuarioNoValido;
@@ -112,12 +111,12 @@ public class Excepciones extends Exception{
     me.setLabel_mensaje("Los datos fueron modificados con éxito");
     me.setVisible(true);
     }
+    
     public void camposVacios(){
     CamposVacios ca= new CamposVacios();
     ca.setLabel_Titulo("Campos Nulos");
     ca.setLabel_mensaje("Todos los campos deben estar completos, intente nuevamente");
     ca.setVisible(true);
-    
     }
     
     public void objetoExistente(String objeto){
@@ -169,5 +168,3 @@ public class Excepciones extends Exception{
         MetodosPantalla.getInstance().setearPantalla(ednv);
     }
 }
- 
-

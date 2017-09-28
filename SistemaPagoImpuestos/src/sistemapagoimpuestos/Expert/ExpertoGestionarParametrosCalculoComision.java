@@ -41,9 +41,9 @@ public class ExpertoGestionarParametrosCalculoComision {
         parametrosCalculoPeriodicidad.setBimestralPCPeriodicidad(bimestral);
         parametrosCalculoPeriodicidad.setTrimestralPCPeriodicidad(trimestral);
         parametrosCalculoPeriodicidad.setCuatrimestralPCPeriodicidad(cuatrimestral);
-        parametrosCalculoPeriodicidad.setQuincenalPCPeriodicidad(quincenal);
         parametrosCalculoPeriodicidad.setSemestralPCPeriodicidad(semestral);
         parametrosCalculoPeriodicidad.setAnualPCPeriodicidad(anual);
+        parametrosCalculoPeriodicidad.setQuincenalPCPeriodicidad(quincenal);
         FachadaPersistencia.getInstance().guardar(parametrosCalculoPeriodicidad);
 
     }

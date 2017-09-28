@@ -16,14 +16,23 @@ public class ItemEmpresaTipoImpuesto extends Entity{
     private Date fechaInhabilitacionItemEmpresaTipoImpuesto;
     private Item item;
     private EmpresaTipoImpuesto empresaTipoImpuesto;
-
+    private boolean indicaPeriodicidadItemEmpresaTipoImpuesto;
     public ItemEmpresaTipoImpuesto() {
     }
 
-    public ItemEmpresaTipoImpuesto(int ordenItemEmpresaTipoImpuesto, Date fechaInhabilitacionItemEmpresaTipoImpuesto, Item item, EmpresaTipoImpuesto empresaTipoImpuesto) {
+    public boolean isIndicaPeriodicidadItemEmpresaTipoImpuesto() {
+        return indicaPeriodicidadItemEmpresaTipoImpuesto;
+    }
+
+    public void setIndicaPeriodicidadItemEmpresaTipoImpuesto(boolean indicaPeriodicidadItemEmpresaTipoImpuesto) {
+        this.indicaPeriodicidadItemEmpresaTipoImpuesto = indicaPeriodicidadItemEmpresaTipoImpuesto;
+    }
+
+    public ItemEmpresaTipoImpuesto(int ordenItemEmpresaTipoImpuesto, Date fechaInhabilitacionItemEmpresaTipoImpuesto, Item item, boolean indicaPeriodicidadItemEmpresaTipoImpuesto,EmpresaTipoImpuesto empresaTipoImpuesto) {
         this.ordenItemEmpresaTipoImpuesto = ordenItemEmpresaTipoImpuesto;
         this.fechaInhabilitacionItemEmpresaTipoImpuesto = fechaInhabilitacionItemEmpresaTipoImpuesto;
         this.item = item;
+        this.indicaPeriodicidadItemEmpresaTipoImpuesto = indicaPeriodicidadItemEmpresaTipoImpuesto;
         this.empresaTipoImpuesto = empresaTipoImpuesto;
     }
  

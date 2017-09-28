@@ -176,16 +176,16 @@ public class DatosPrueba {
 
         Item item = (Item) listItem.get(0);
 
-        ItemEmpresaTipoImpuesto  itemEmpresaTipoImpuesto =new ItemEmpresaTipoImpuesto(1, null, item, empresaTipoImpuesto);
+        ItemEmpresaTipoImpuesto  itemEmpresaTipoImpuesto =new ItemEmpresaTipoImpuesto(1, null, item,true, empresaTipoImpuesto);
         
         FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
         
         System.out.println("Guardado: Item Empresa Tipo Impuesto");
     }
-    
+    /*
     public static void createOperation(){
         Operacion operacion = new Operacion();
-        operacion.setCalculadaOperacion(true);
+        operacion.setLiquidadaOperacion(true);
         operacion.setCodigoPagoElectrionicoOperacion("2331");
         operacion.setCuentaBancaria(new CuentaBancaria("23",
                                                     "3124223",
@@ -212,4 +212,5 @@ public class DatosPrueba {
         
         FachadaPersistencia.getInstance().guardar(operacion);
     }
+*/
 }

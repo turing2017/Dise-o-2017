@@ -8,6 +8,7 @@ package sistemapagoimpuestos.Entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,31 +21,31 @@ public class Operacion extends Entity{
     private Date fechaHoraOperacion;
     private double importePagadoOperacion;
     private int nroComprobanteFacturaOperacion;
-    private boolean calculadaOperacion;
+    private boolean liquidadaOperacion;
     private double valorComisionOperacion;
     private CuentaBancaria cuentaBancaria;
     private Empresa empresa;
     private EmpresaTipoImpuesto empresaTipoImpuesto;
     private TipoImpuesto tipoImpuesto;
-    private Set<DetalleOperacion> listDetalleOperacion= new HashSet<DetalleOperacion>(0);
-
+    private List<DetalleOperacion> detalleOperacionList = new ArrayList<>();
+ 
     public Operacion() {
     }
 
-    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean calculadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto) {
+    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean liquidadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto,List<DetalleOperacion> detalleOperacion) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectrionicoOperacion = codigoPagoElectrionicoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
         this.importePagadoOperacion = importePagadoOperacion;
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
-        this.calculadaOperacion = calculadaOperacion;
+        this.liquidadaOperacion = liquidadaOperacion;
         this.valorComisionOperacion = valorComisionOperacion;
         this.cuentaBancaria = cuentaBancaria;
         this.empresa = empresa;
         this.empresaTipoImpuesto = empresaTipoImpuesto;
         this.tipoImpuesto = tipoImpuesto;
+        this.detalleOperacionList = detalleOperacion;
     }
-
 
     public int getNumeroOperacion() {
         return numeroOperacion;
@@ -86,12 +87,12 @@ public class Operacion extends Entity{
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
     }
 
-    public boolean isCalculadaOperacion() {
-        return calculadaOperacion;
+    public boolean isLiquidadaOperacion() {
+        return liquidadaOperacion;
     }
 
-    public void setCalculadaOperacion(boolean calculadaOperacion) {
-        this.calculadaOperacion = calculadaOperacion;
+    public void setLiquidadaOperacion(boolean liquidadaOperacion) {
+        this.liquidadaOperacion = liquidadaOperacion;
     }
 
     public double getValorComisionOperacion() {
@@ -133,13 +134,15 @@ public class Operacion extends Entity{
     public void setTipoImpuesto(TipoImpuesto tipoImpuesto) {
         this.tipoImpuesto = tipoImpuesto;
     }
-    
-    public Set<DetalleOperacion> getListDetalleOperacion() {
-        return listDetalleOperacion;
+
+    public List<DetalleOperacion> getDetalleOperacionList() {
+        return detalleOperacionList;
     }
 
-    public void setListDetalleOperacion(Set<DetalleOperacion> listDetalleOperacion) {
-        this.listDetalleOperacion = listDetalleOperacion;
+    public void setDetalleOperacionList(List<DetalleOperacion> detalleOperacion) {
+        this.detalleOperacionList = detalleOperacion;
     }
+
+ 
     
 }

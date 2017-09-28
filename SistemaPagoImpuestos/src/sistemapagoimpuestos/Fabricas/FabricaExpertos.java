@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Fabricas;
 
+import sistemapagoimpuestos.Decorators.DecoradorCalcularLiquidaciones;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarItem;
@@ -39,6 +40,8 @@ public class FabricaExpertos {
 
             case "CU02":
                 return new DecoradorPagarImpuestos();
+            case "CU03":
+                return new DecoradorCalcularLiquidaciones();
             case "CU05":
                 return new DecoradorGestionarTipoDeCuenta();
             case "CU13":

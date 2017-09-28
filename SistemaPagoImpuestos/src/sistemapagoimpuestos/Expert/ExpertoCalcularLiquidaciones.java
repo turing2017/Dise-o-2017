@@ -115,5 +115,34 @@ public class ExpertoCalcularLiquidaciones {
             }
 
         }
+        /*
+        INICIO CALCULO PARA LIQUIDACIONES NUEVAS
+        */
+        List<Object> EmpresaTipoImpuestoList = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
+        for (Object empresaTipoImpuesto : EmpresaTipoImpuestoList) {
+            DTOCriterio criterio9 = new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoRecalcular);
+            criterios.clear();
+            criterios.add(criterio9);
+            List<Object> liquidaciones = FachadaPersistencia.getInstance().buscar("Liquidacion", criterios);
+            //Si tiene Liquidaciones generadas
+            if (liquidaciones != null) {
+                for(Object liquidacion : liquidaciones){
+                  //Buscar la ultima liquidacion con la fechaHoraHasta mas reciente
+                  Liquidacion liq = (Liquidacion)liquidacion;
+                  liq.getFechaHoraHastaLiquidacion();
+                  /*
+                  FALTA
+                  FALTA
+                  FALTA
+                  */
+                }
+            } else {
+            //No tiene Liquidaciones generardas
+            
+            }
+
+        }
+
+
     }
 }

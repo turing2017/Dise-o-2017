@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<<<<<<< HEAD
 <hibernate-mapping>
     <class name="sistemapagoimpuestos.Entity.ParametroCalculoPeriodicidad" table="parametro_calculo_periodicidad">
-=======
-
-<hibernate-mapping>
-    <class name="sistemapagoimpuestos.Entity.ParametroCalculoPeriodicidad" table="parametro_Calculo_Periodicidad">
->>>>>>> feature/gestionarLiquidacion
         <id name="OID" type="string">
             <column name="OIDParametroCalculoPeriodicidad"/>
             <generator class="uuid2"/>
         </id>
-       
-<<<<<<< HEAD
         <property name="mensualPCPeriodicidad" type="double" not-null="true">
             <column name="mensualPCPeriodicidad"/>
         </property>
@@ -41,29 +33,5 @@
         <property name="quincenalPCPeriodicidad" type="double" not-null="true">
             <column name="quincenalPCPeriodicidad"/>
         </property>
-       
-=======
-        <property name="mensual" type="double">
-            <column name="mensual"/>
-        </property>
-        <property name="bimestral" type="double">
-            <column name="bimestral"/>
-        </property>   
-        <property name="trimestral" type="double">
-            <column name="trimestral"/>
-        </property>
-        <property name="cuatrimestral" type="double">
-            <column name="cuatrimestral"/>
-        </property>  
-        <property name="semestral" type="double">
-            <column name="semestral"/>
-        </property>
-        <property name="anual" type="double">
-            <column name="anual"/>
-        </property>
-        <property name="quincenal" type="double">
-            <column name="quincenal"/>
-        </property>
->>>>>>> feature/gestionarLiquidacion
     </class>
 </hibernate-mapping>

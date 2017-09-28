@@ -34,10 +34,10 @@
         <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto" not-null="true"/>
         <many-to-one name="tipoImpuesto" class="sistemapagoimpuestos.Entity.TipoImpuesto" column="OIDTipoImpuesto" not-null="true"/>
         
-         <bag name="detalleOperacionList" table="detalleOperacion" cascade="none" inverse="false">
-       <key column="OIDOperacion" not-null="true" />
-         <one-to-many class="sistemapagoimpuestos.Entity.DetalleOperacion"/>  
-       </bag>
+        <bag name="detalleOperacionList" table="detalleOperacion" cascade="none" inverse="false">
+            <key column="OIDOperacion" not-null="true" />
+              <one-to-many class="sistemapagoimpuestos.Entity.DetalleOperacion"/>  
+        </bag>
         
                 
        

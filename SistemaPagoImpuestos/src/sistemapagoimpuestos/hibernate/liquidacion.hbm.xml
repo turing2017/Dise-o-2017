@@ -27,9 +27,9 @@
     
     
     <bag name="operacionList" table="operacion" cascade="none" inverse="false">
-       <key column="OIDLiquidacion" not-null="false" />
-         <one-to-many class="sistemapagoimpuestos.Entity.Operacion"/>  
-       </bag>
+    <key column="OIDLiquidacion" not-null="false" />
+      <one-to-many class="sistemapagoimpuestos.Entity.Operacion"/>  
+    </bag>
       
          <bag name="liquidacionEstadoList" table="liquidacionEstado" cascade="none" inverse="false">
        <key column="OIDLiquidacion" not-null="false" />

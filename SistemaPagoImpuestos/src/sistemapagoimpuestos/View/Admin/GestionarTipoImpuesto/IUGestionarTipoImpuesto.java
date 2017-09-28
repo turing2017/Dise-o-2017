@@ -112,8 +112,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
-        // Le paso al controlador la opción seleccionada
-        controlador.opcionSeleccionada("Alta", null);
+        controlador.mostrarPantallaAlta();
         this.dispose();
     }//GEN-LAST:event_button_nuevoActionPerformed
 
@@ -124,7 +123,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             int columnCode = 0;
             int rowSelected = tabla_tipo_impuesto.getSelectedRow();
             String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
-            controlador.opcionSeleccionada("Modificar", Integer.parseInt(codigo));
+            controlador.mostrarPantallaModificacion(Integer.parseInt(codigo));
         } catch (ArrayIndexOutOfBoundsException e) {
             //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
             Excepciones.getInstance().objetoNoSeleccionado();

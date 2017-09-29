@@ -104,15 +104,51 @@ public class ExpertoGestionarEmpresaAdherida {
             EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criteriosEmpresaTipoImpuesto).get(0);
             
             
-            List<ItemEmpresaTipoImpuesto> listItemETI;
+            //List<ItemEmpresaTipoImpuesto> listItemETI = null;
             
             List<DTOCriterio> criterios4 = new ArrayList<>();
             DTOCriterio criterio4 = new DTOCriterio();
             criterio4.setAtributo("empresaTipoImpuesto");
             criterio4.setOperacion("=");
             criterio4.setValor(empresaTI);
-            criterios4.add(criterio4);
-            ItemEmpresaTipoImpuesto ItemETI = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterios4).get(0);
+            DTOCriterio criterioHabilitada = new DTOCriterio();
+            criterioHabilitada.setAtributo("fechaInhabilitacionItemEmpresaTipoImpuesto");
+            criterioHabilitada.setOperacion("IS");
+            criterioHabilitada.setValor(null);
+            criterios4.add(criterioHabilitada);
+            List<Object> listObject = (List<Object>) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterios4);
+            List<ItemEmpresaTipoImpuesto> listItemETI = new ArrayList<>();
+            ArrayList<ItemEmpresaTipoImpuesto> listItemEmpresaTipoImpuesto = new ArrayList<>();
+            for(Object obj : listObject){
+                ItemEmpresaTipoImpuesto itemETI = new ItemEmpresaTipoImpuesto();
+                itemETI = (ItemEmpresaTipoImpuesto) obj;
+                listItemETI.add(itemETI);
+            }
+            
+            /*
+            List<Object> listObject = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
+            ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = new ArrayList<>();
+            for(Object obj : listObject){
+            EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto();
+            empresaTipoImpuesto.setEmpresa(new Empresa());
+            empresaTipoImpuesto = (EmpresaTipoImpuesto) obj ;
+            DTOEmpresaTipoImpuesto DTOeti = new DTOEmpresaTipoImpuesto();
+            DTOeti.setEmpresa(empresaTipoImpuesto.getEmpresa());
+             
+            
+             
+             DTOeti.setFechaHoraAltaEmpresaTipoImpuesto(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
+             DTOeti.setFechaHoraInhabilitacionEmpresaTipoImpuestoa(empresaTipoImpuesto.getFechaHoraInhabilitacionEmpresaTipoImpuesto());
+             DTOeti.setTipoEmpresa(empresaTipoImpuesto.getTipoEmpresa());
+             DTOeti.setTipoImpuesto(empresaTipoImpuesto.getTipoImpuesto());
+             DTOeti.setFrecuenciaLiquidacionDTOEmpresaExistente(empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto());
+
+             listDTOEmpresaTipoImpuesto.add(DTOeti);
+
+             }
+            
+            
+            */
             
             return listItemETI;
              
@@ -121,7 +157,7 @@ public class ExpertoGestionarEmpresaAdherida {
     
     
     public void modificarItemEmpresaTipoImpuesto(DTOEmpresaTipImpItem dTOEmpresaTipImpItemList){
-                //Busco la Empresa
+            //Busco la Empresa
             List<DTOCriterio> criterios = new ArrayList<>();
             DTOCriterio criterio1 = new DTOCriterio();
             criterio1.setAtributo("cuitEmpresa");
@@ -158,21 +194,61 @@ public class ExpertoGestionarEmpresaAdherida {
             
             
             for(int i = 0; i < dTOEmpresaTipImpItemList.getDtoItemOrdenList().size(); i++){
-            
-                ItemEmpresaTipoImpuesto itemETI = new ItemEmpresaTipoImpuesto();
-                itemETI.setOrdenItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getOrden());
-                itemETI.setIndicaPeriodicidadItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getPerioricidad());
-                itemETI.setEmpresaTipoImpuesto(empresaTI);
-                List<DTOCriterio> criterios4 = new ArrayList<>();
-                DTOCriterio criterio4 = new DTOCriterio();
-                criterio4.setAtributo("nombreItem");
-                criterio4.setOperacion("=");
-                criterio4.setValor(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getNombreItem());
-                criterios4.add(criterio4);
-                Item item = (Item) FachadaPersistencia.getInstance().buscar("Item", criterios4).get(0);
-                itemETI.setItem(item);
-                FachadaPersistencia.getInstance().guardar(itemETI);
-            
+                Boolean seleccionado = dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getSeleccionado();
+                if(seleccionado.equals(true)){
+                    try{
+                        List<DTOCriterio> criteriosItemEmpresaTI = new ArrayList<>();
+                        
+                        List<DTOCriterio> criterios4 = new ArrayList<>();
+                        DTOCriterio criterio4 = new DTOCriterio();
+                        criterio4.setAtributo("nombreItem");
+                        criterio4.setOperacion("=");
+                        criterio4.setValor(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getNombreItem());
+                        criterios4.add(criterio4);
+                        Item item = (Item) FachadaPersistencia.getInstance().buscar("Item", criterios4).get(0);
+                        criteriosItemEmpresaTI.add(new DTOCriterio("Item", "=", item ));
+                        criteriosItemEmpresaTI.add(new DTOCriterio("fechaInhabilitacionItemEmpresaTipoImpuesto", "IS", null ));
+                        criteriosItemEmpresaTI.add(new DTOCriterio("EmpresaTipoImpuesto", "=", empresaTI ));
+                        ItemEmpresaTipoImpuesto itemETI = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosItemEmpresaTI).get(0);
+                        itemETI.setOrdenItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getOrden());
+                        itemETI.setIndicaPeriodicidadItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getPerioricidad());
+                    
+                    }catch(Exception x){
+                    
+                        ItemEmpresaTipoImpuesto itemETI = new ItemEmpresaTipoImpuesto();
+                        itemETI.setOrdenItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getOrden());
+                        itemETI.setIndicaPeriodicidadItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getPerioricidad());
+                        itemETI.setEmpresaTipoImpuesto(empresaTI);
+                        List<DTOCriterio> criterios4 = new ArrayList<>();
+                        DTOCriterio criterio4 = new DTOCriterio();
+                        criterio4.setAtributo("nombreItem");
+                        criterio4.setOperacion("=");
+                        criterio4.setValor(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getNombreItem());
+                        criterios4.add(criterio4);
+                        Item item = (Item) FachadaPersistencia.getInstance().buscar("Item", criterios4).get(0);
+                        itemETI.setItem(item);
+                        FachadaPersistencia.getInstance().guardar(itemETI);
+                    }
+                }else{
+                     try{
+                        List<DTOCriterio> criteriosItemEmpresaTI = new ArrayList<>();
+                        List<DTOCriterio> criterios4 = new ArrayList<>();
+                        DTOCriterio criterio4 = new DTOCriterio();
+                        criterio4.setAtributo("nombreItem");
+                        criterio4.setOperacion("=");
+                        criterio4.setValor(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getNombreItem());
+                        criterios4.add(criterio4);
+                        Item item = (Item) FachadaPersistencia.getInstance().buscar("Item", criterios4).get(0);
+                        criteriosItemEmpresaTI.add(new DTOCriterio("Item", "=", item ));
+                        criteriosItemEmpresaTI.add(new DTOCriterio("fechaInhabilitacionItemEmpresaTipoImpuesto", "IS", null ));
+                        criteriosItemEmpresaTI.add(new DTOCriterio("EmpresaTipoImpuesto", "=", empresaTI ));
+                        ItemEmpresaTipoImpuesto itemETI = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosItemEmpresaTI).get(0);
+                        itemETI.setFechaInhabilitacionItemEmpresaTipoImpuesto(new Date());
+                        FachadaPersistencia.getInstance().guardar(itemETI);
+                        
+                    }catch(Exception x){
+                                 }
+                    }
             }
     }
     

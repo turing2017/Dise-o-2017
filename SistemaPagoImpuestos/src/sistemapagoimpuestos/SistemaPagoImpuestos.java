@@ -1,6 +1,7 @@
 package sistemapagoimpuestos;
 
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
+import sistemapagoimpuestos.Controller.ControladorCalcularLiquidaciones;
 import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.View.User.IUPagarImpuesto;
@@ -17,8 +18,10 @@ public class SistemaPagoImpuestos {
         //AdaptadorEmpresaClaro c = new AdaptadorEmpresaClaro();
         //c.findComprobantes("test");
         //FachadaInterna.getInstance().finalizarTransaccion();
-        IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
-        iUPagarImpuesto.show();
+        //IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
+        //iUPagarImpuesto.show();
+        ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
+        controlador.iniciar();
         //ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
         //controlador.iniciar();
     }

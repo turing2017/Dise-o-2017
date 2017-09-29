@@ -12,11 +12,15 @@ import sistemapagoimpuestos.Fabricas.FabricaExpertos;
  *
  * @author Gabriel
  */
-public class ControladoCalcularLiquidaciones {
+public class ControladorCalcularLiquidaciones {
 
     private ExpertoCalcularLiquidaciones experto = (ExpertoCalcularLiquidaciones) FabricaExpertos.getInstancia().crearExperto("CU03");
 
-    public ControladoCalcularLiquidaciones() {
+    public ControladorCalcularLiquidaciones() {
+    }
+    
+    public void iniciar(){
+        experto.iniciar();
     }
 
 }

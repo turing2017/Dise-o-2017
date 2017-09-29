@@ -11,6 +11,7 @@ import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
@@ -31,7 +32,16 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         TextField_Cuit.setText(dtoEe.getCuitEmpresaExistente());
         TextField_Nombre.setText(dtoEe.getNombreEmpresaExistente());
         TextField_Direccion.setText(dtoEe.getDireccionEmpresaExistente());
-        CheckBox_Habilitada.setText(dtoEe.getHabilitadaEmpresaExistente()); 
+        CheckBox_Habilitada.setText(dtoEe.getHabilitadaEmpresaExistente());
+        comboBoxTipoImpuesto.setSelectedItem(dtoEe.getTipoImpuestoEmpresaEmpresaExistente().toString());
+        comboBoxTipoEmpresa.setSelectedItem(dtoEe.getNombreTipoEmpresaEmpresaExistente().toString());
+        
+        SpinnerNumberModel sf = new SpinnerNumberModel();
+        sf.setMinimum(0);
+        sf.setValue(Integer.parseInt(dtoEe.getFrecuenciaLiquidacionEmpresaTipoImpuesto()));
+        spinner_Frecuencia.setModel(sf);
+        
+        
         //TextField_frec.setText(dtoEe.);
         List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
@@ -71,7 +81,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         label_frec = new javax.swing.JLabel();
         spinner_Frecuencia = new javax.swing.JSpinner();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setText("Direccion");
 
@@ -131,14 +141,11 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
             }
         });
 
-        comboBoxTipoImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo de Impuesto" }));
         comboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxTipoImpuestoActionPerformed(evt);
             }
         });
-
-        comboBoxTipoEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo de Empresa" }));
 
         label_frec.setText("Frecuencia Liquidacion");
 
@@ -174,7 +181,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
                                 .addComponent(TextField_Nombre)
                                 .addComponent(TextField_Cuit))
                             .addComponent(CheckBox_Habilitada)
-                            .addComponent(spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
@@ -197,10 +204,10 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(comboBoxTipoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_frec)
-                    .addComponent(spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(TextField_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -271,7 +278,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
             vct.add(dtoEe.getNombreEmpresaExistente().toString());
             vct.add(dtoEe.getTipoImpuestoEmpresaEmpresaExistente().toString());
             vct.add(dtoEe.getNombreTipoEmpresaEmpresaExistente());
-            
+         
             
             controlador.gestionarItems(vct, controlador);
     }//GEN-LAST:event_GestionarItemsActionPerformed

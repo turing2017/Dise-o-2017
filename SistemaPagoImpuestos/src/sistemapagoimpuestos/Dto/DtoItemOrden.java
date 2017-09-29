@@ -13,17 +13,30 @@ public class DtoItemOrden {
     private String nombreItem;
     private int orden;
     private Boolean perioricidad;
+    private Boolean seleccionado;
+
+    public DtoItemOrden(String nombreItem, int orden, Boolean perioricidad, Boolean seleccionado) {
+        this.nombreItem = nombreItem;
+        this.orden = orden;
+        this.perioricidad = perioricidad;
+        this.seleccionado = seleccionado;
+    }
+
+    
+    
+    
+    public Boolean getSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(Boolean seleccionado) {
+        this.seleccionado = seleccionado;
+    }
     
     
         public DtoItemOrden() {
     }
 
-    public DtoItemOrden(String nombreItem, int orden, Boolean perioricidad) {
-        this.nombreItem = nombreItem;
-        this.orden = orden;
-        this.perioricidad = perioricidad;
-    }
-        
     
 
     public Boolean getPerioricidad() {

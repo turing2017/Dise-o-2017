@@ -8,12 +8,14 @@ package sistemapagoimpuestos.Decorators;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -35,6 +37,14 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
         FachadaInterna.getInstance().iniciarTransaccion();
         super.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion, habilitada, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
+    }
+
+    @Override
+    public List<ItemEmpresaTipoImpuesto> setearTabla(Vector vct) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<ItemEmpresaTipoImpuesto> listIETI = super.setearTabla(vct); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listIETI;
     }
 
     @Override

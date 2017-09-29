@@ -16,6 +16,7 @@ import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
+import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 
 public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
     ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
@@ -42,13 +43,16 @@ public class IUGestionarEmpresaAdheridaItems extends javax.swing.JFrame {
 Vector empresaExistente;
     public IUGestionarEmpresaAdheridaItems(Object vct) {
         initComponents();
+        this.setLocationRelativeTo(null);
         List<DTOItem> items = controlador.buscarItems();
-        llenarTabla(items);
+        List<ItemEmpresaTipoImpuesto> itemsPreexistentes = controlador.setearTabla((Vector) vct);
+        llenarTabla(items, itemsPreexistentes);
+        
         empresaExistente = (Vector) vct;
         
     }
 
-    private void llenarTabla(List<DTOItem> list) {
+    private void llenarTabla(List<DTOItem> dtoItemList,List<ItemEmpresaTipoImpuesto> itemsPreexistentes) {
         String[] columnas = {"Item", "Orden", "Perioricidad","Seleccion"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
             public Class<?> getColumnClass(int column) {
@@ -81,15 +85,35 @@ Vector empresaExistente;
                 }
             }
         };
-        for (int i = 0; i < list.size(); i++) {
+
+        for (int i = 0; i < dtoItemList.size(); i++) {
             Vector<Object> agregarFila = new Vector<Object>();
-            DTOItem item = (DTOItem) list.get(i);
+            DTOItem item = (DTOItem) dtoItemList.get(i);
             agregarFila.add(item.getNombreItem());
             agregarFila.add(0);
             agregarFila.add(false);
-
+            
             dtm.addRow(agregarFila);
-        }
+
+            for (int p = 0; p < itemsPreexistentes.size(); p++) {
+                    
+                    String tuMama = dtm.getValueAt(i, 0).toString();
+                    String tuVieja = itemsPreexistentes.get(p).getItem().getNombreItem().toString();
+                        if (tuMama.equals(tuVieja)){
+                            dtm.removeRow(i);
+                            Vector<Object> agregarFila2 = new Vector<Object>();
+                            ItemEmpresaTipoImpuesto iETI= (itemsPreexistentes.get(p));
+                            agregarFila2.add(iETI.getItem().getNombreItem());
+                            agregarFila2.add(iETI.getOrdenItemEmpresaTipoImpuesto());
+                            agregarFila2.add(iETI.isIndicaPeriodicidadItemEmpresaTipoImpuesto());
+                            agregarFila2.add(true);
+                            dtm.addRow(agregarFila2);
+                        }
+                    }
+            
+        
+        
+     }
         table_Item.setModel(dtm);
     }
 
@@ -104,7 +128,7 @@ Vector empresaExistente;
         button_Cancelar = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         table_Item.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,77 +196,49 @@ Vector empresaExistente;
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelarActionPerformed
+        
         this.dispose();
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_button_CancelarActionPerformed
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
         
         try {
+            
             DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
             List<DtoItemOrden> dtoItemOrdenList = new ArrayList<>();
             
             dTOEmpresaTipImpItem.setCuitEmpresa(empresaExistente.get(0).toString());
             dTOEmpresaTipImpItem.setNombreEmpresa(empresaExistente.get(1).toString());
-                        dTOEmpresaTipImpItem.setNombreTipoImpuesto(empresaExistente.get(2).toString());
+            dTOEmpresaTipImpItem.setNombreTipoImpuesto(empresaExistente.get(2).toString());
             dTOEmpresaTipImpItem.setNombreTipoEmpresa( empresaExistente.get(3).toString());
             
             for (int i = 0; i < table_Item.getRowCount(); i++) {
-                if ((Boolean) (table_Item.getValueAt(i, 2))) {
+       
                     DtoItemOrden dtoItemOrden = new DtoItemOrden();
                     dtoItemOrden.setNombreItem(table_Item.getValueAt(i, 0).toString());
                     dtoItemOrden.setOrden(Integer.parseInt(table_Item.getValueAt(i, 1).toString()));
-                    dtoItemOrden.setPerioricidad(table_Item.getColumnSelectionAllowed());
-                    dtoItemOrdenList.add(dtoItemOrden);
-                }
+                    if (table_Item.getValueAt(i, 2)==null){
+                    table_Item.setValueAt(false, i, 2);
+                    } 
+                    if (table_Item.getValueAt(i, 3)==null){
+                    table_Item.setValueAt(false, i, 3);
+                    } 
+                    Boolean peri =(Boolean) table_Item.getValueAt(i, 2);
+                    Boolean selec = (Boolean) table_Item.getValueAt(i, 3);
+                    dtoItemOrden.setPerioricidad(peri);
+                    dtoItemOrden.setSeleccionado(selec);
+                    dtoItemOrdenList.add(dtoItemOrden);    
             }
             dTOEmpresaTipImpItem.setDtoItemOrdenList(dtoItemOrdenList);
            
             controlador.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItem);
             
-            
-            /*
-            if (! (dTOEmpresaTipImpItem.getDtoItemOrdenList().size() < 1)) {
-                if (getNuevoTipoImpuesto()) {
-     
-                    IUGestionarEmpresaAdheridaItemsAsociacion IUGestionarEmpresaAdheridaItemsAsociacion = new IUGestionarEmpresaAdheridaItemsAsociacion();
-                    IUGestionarEmpresaAdheridaItemsAsociacion.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-                    IUGestionarEmpresaAdheridaItemsAsociacion.setVisible(true); // La hago visible
-                    // Modifico la operación de cierre para volver a la pantalla principal
-                    IUGestionarEmpresaAdheridaItemsAsociacion.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    IUGestionarEmpresaAdheridaItemsAsociacion.addWindowListener(new WindowAdapter() {
-                        public void windowClosing(WindowEvent ev) {
-                            controlador.iniciar();
-                        }
-                    });
-                    IUGestionarEmpresaAdheridaItemsAsociacion.RecuperarEmpresaItems();
-                    
-                } else {
-                    IUGestionarEmpresaAdheridaItemsAsociacion.setdTOEmpresaTipImpItemList(getdTOEmpresaTipImpItemList());
-                    IUGestionarEmpresaAdheridaItemsAsociacion.adddTOEmpresaTipImpItemList(dTOEmpresaTipImpItem);
-                    IUGestionarEmpresaAdheridaItemsAsociacion pantallaModificar = new IUGestionarEmpresaAdheridaItemsAsociacion();
-                    pantallaModificar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-                    pantallaModificar.setVisible(true); // La hago visible
-                    // Modifico la operación de cierre para volver a la pantalla principal
-                    pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-                pantallaModificar.RecuperarEmpresaItems();
-                   
-                }
-
-                this.dispose();
-            } else {
-                List<String> stringList = new ArrayList<>();
-                stringList.add("Empresa");
-                stringList.add("Tipo Empresa");
-                stringList.add("Frec. Liquidación");
-                stringList.add("Item");
-                Excepciones.getInstance().camposRequerido(stringList);
-            }
-            */
         } catch (IndexOutOfBoundsException e) {
 
-     }  
+     }
+        
+    this.dispose();
         
     }//GEN-LAST:event_button_AceptarActionPerformed
 

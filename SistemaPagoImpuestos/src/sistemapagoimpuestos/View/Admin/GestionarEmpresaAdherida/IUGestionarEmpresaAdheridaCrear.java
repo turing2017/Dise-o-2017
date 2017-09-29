@@ -71,7 +71,7 @@ ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpres
         Spinner_Frecuencia = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         CheckBox_Habilitada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

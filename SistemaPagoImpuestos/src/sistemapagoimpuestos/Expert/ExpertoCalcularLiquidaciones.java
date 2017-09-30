@@ -30,6 +30,7 @@ public class ExpertoCalcularLiquidaciones {
         //varaiables globales
          List<Liquidacion> liquidacionesAnuladas = new ArrayList();
          Liquidacion liquidacionAnulada = new Liquidacion();
+        String nombreEstadoRecalculada = "Recalculado";
         String nombreEstadoAnulado = "ARecalcular";
         List<DTOCriterio> criterios = new ArrayList();
 
@@ -78,10 +79,6 @@ public class ExpertoCalcularLiquidaciones {
              //getEmpresaTipoImpuesto     
                   EmpresaTipoImpuesto empresaTipoImpuesto = liquidacionAnulada.getEmpresaTipoImpuesto();
                     
-                
-            
-               
-              
                 //buscar "Operacion", "fechaHoraOperacion >= fechaHoraDesdeLiquidacion AND fechaOperacion <= fechaHoraHastaLiquidacion AND EmpresaTipoImpuesto="+empresaTipoImpuesto.toString()
                DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", fechaDesdeLiquidacion);
                 DTOCriterio criterio4 = new DTOCriterio("fechaHoraOperacion", "<=", fechaHastaLiquidacion);
@@ -96,28 +93,80 @@ public class ExpertoCalcularLiquidaciones {
                  listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
                 }
                catch(Exception e){
+                   e.printStackTrace();
                    System.out.println("No existen operaciones");}
                 // loop por cada operacion
 
                     //INCOMPLETO FALTA IMPLEMENTAR LOS METODOS DE LAS ESTRATEGIAS Y SETEAR MAS RELACIONES
-                    for (Object op : listOperacion) {
-                        Operacion operacion = (Operacion) op;
-                        Double valorComision;
-                        EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia((Operacion) operacion);
-                        valorComision = estrategia.obtenerValorComision(operacion);
-                        Comision comision = new Comision();
-                        comision.setFechaCalculoComision(new Date());
-                        comision.setValorComision(valorComision);
-                        comision.setOperacion(operacion);
-                        operacion.setValorComisionOperacion(valorComision);
-                        /*
-                            CONTINUARA
-                         */
-                    
+                   for (Object op : listOperacion) {
+                    Operacion operacion = (Operacion) op;
+                    Double valorComision;
+                    EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia((Operacion) operacion);
+                    valorComision = estrategia.obtenerValorComision(operacion);
+                  //  Creamos la comision correspondiente para la operacion y la seteamos 
+                    Comision comision = new Comision();
+                    comision.setFechaCalculoComision(new Date());
+                    comision.setValorComision(valorComision);
+                    comision.setOperacion(operacion);
+                    operacion.setValorComisionOperacion(valorComision);
+                    operacion.setLiquidadaOperacion(true);
+                    List<Comision> listComision = liquidacionAnulada.getComisionList();
+                    listComision.add(comision);
+                    liquidacionAnulada.setComisionList(listComision);
+                    FachadaPersistencia.getInstance().guardar(operacion);
+                    FachadaPersistencia.getInstance().guardar(comision);
+                 
+                   
                 }
+                liquidacionEstado.setFechaHoraHastaLiquidacionEstado(new Date());
+                FachadaPersistencia.getInstance().guardar(liquidacionEstado);
+                // Busco el estado recalculada
+                DTOCriterio criterio8 = new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoRecalculada);
+                criterios.clear();
+                criterios.add(criterio8);
+                EstadoLiquidacion estadoLiquidacionRecalculada= (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
+                LiquidacionEstado liqEstado = new LiquidacionEstado();
+                liqEstado.setFechaHoraDesdeLiquidacionEstado(new Date());
+                liqEstado.setEstadoLiquidacion(estadoLiquidacionRecalculada);
+                //Guardo nuevo estado
+                FachadaPersistencia.getInstance().guardar(liqEstado);
+                List<LiquidacionEstado> listLiqEstados = liquidacionAnulada.getLiquidacionEstadoList();
+                //Agrego el nuevo estado
+                listLiqEstados.add(liqEstado);
+                liquidacionAnulada.setLiquidacionEstadoList(listLiqEstados);
+                 //Guardo la liquidacion
+                FachadaPersistencia.getInstance().guardar(liquidacionAnulada);
             }
 
         }
-    }
+        /*
+        INICIO CALCULO PARA LIQUIDACIONES NUEVAS
+        */
+        List<Object> EmpresaTipoImpuestoList = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
+        for (Object empresaTipoImpuesto : EmpresaTipoImpuestoList) {
+            DTOCriterio criterio9 = new DTOCriterio("nombreEstadoLiquidacion", "=", "Pendiente");
+            criterios.clear();
+            criterios.add(criterio9);
+            List<Object> liquidaciones = FachadaPersistencia.getInstance().buscar("Liquidacion", criterios);
+            //Si tiene Liquidaciones generadas
+            if (liquidaciones != null) {
+                for(Object liquidacion : liquidaciones){
+                  //Buscar la ultima liquidacion con la fechaHoraHasta mas reciente
+                  Liquidacion liq = (Liquidacion)liquidacion;
+                  liq.getFechaHoraHastaLiquidacion();
+                  /*
+                  FALTA
+                  FALTA
+                  FALTA
+                  */
+                }
+            } else {
+            //No tiene Liquidaciones generardas
+            
+            }
 
+        }
+
+
+    }
 }

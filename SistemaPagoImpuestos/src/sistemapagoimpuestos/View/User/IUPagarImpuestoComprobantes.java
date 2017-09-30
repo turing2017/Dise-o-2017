@@ -23,7 +23,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     public IUPagarImpuestoComprobantes(List<DTOComprobante> listadoDTOComprobante){
         initComponents();
         cargarTablaComprobantes(listadoDTOComprobante);
-        cargarTablaCuentas(controlador.obtenerCuentas("10000000"));
+        //cargarTablaCuentas(controlador.obtenerCuentas("10000000"));
         //controlador.obtenerCuentas("10000000");
     }
 
@@ -39,9 +39,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         label_Empresa = new javax.swing.JLabel();
         label_TipoImpuestoSelec = new javax.swing.JLabel();
         label_EmpresaSelec = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabla_cuentas = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -80,21 +79,14 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         label_EmpresaSelec.setText("(Empresa seleccionada por usuario)");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("Cuentas disponibles");
-
-        tabla_cuentas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
+        jButton1.setText("Continuar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(tabla_cuentas);
+        });
+
+        jButton2.setText("Cancelar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,19 +94,22 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_TipoImpuesto)
-                    .addComponent(label_Empresa)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_TipoImpuestoSelec)
-                            .addComponent(label_EmpresaSelec)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(149, Short.MAX_VALUE))
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(label_TipoImpuesto)
+                        .addComponent(label_Empresa)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(171, 171, 171)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(label_TipoImpuestoSelec)
+                                .addComponent(label_EmpresaSelec)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,15 +126,19 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                     .addComponent(label_EmpresaSelec))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(46, 46, 46))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -233,7 +232,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     }
     
         // Método para cargar las cuentas bancarias en la tabla
-    public void cargarTablaCuentas(List<DTOCuentaBancaria> listaCuentaBancaria){
+    /*public void cargarTablaCuentas(List<DTOCuentaBancaria> listaCuentaBancaria){
         
         // Muestro los datos en la tabla
         String[] columnas = {"CBU Cuenta", "Tipo Cuenta"};
@@ -281,18 +280,17 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_cuentas.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_cuentas.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label_Empresa;
     private javax.swing.JLabel label_EmpresaSelec;
     private javax.swing.JLabel label_TipoImpuesto;
     private javax.swing.JLabel label_TipoImpuestoSelec;
     private javax.swing.JTable tabla_comprobantes;
-    private javax.swing.JTable tabla_cuentas;
     // End of variables declaration//GEN-END:variables
 }

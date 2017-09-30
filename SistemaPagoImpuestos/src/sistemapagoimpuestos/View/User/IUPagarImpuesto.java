@@ -161,9 +161,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBox_tipoImpuestoActionPerformed
 
     private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
-        
-        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(controlador.consultarComprobantes(textfield_codigo.getText().toString()));
-        pantallaComprobantes.setVisible(true);
+        controlador.mostrarComprobantes(textfield_codigo.getText().toString());
         this.dispose();
     }//GEN-LAST:event_button_buscarActionPerformed
 

@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistemapagoimpuestos.Adaptador;
+package Dao;
+
+import Entity.Dgr;
 
 /**
  *
  * @author mviss
  */
-public class AdaptadorEmpresaMovistar {
-    
+public class DgrModel extends dao.AbstractModel<Dgr>{
+    public DgrModel() {
+        super(Dgr.class);
+    }
+
 }

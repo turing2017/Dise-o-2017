@@ -16,22 +16,22 @@
             <classpath path="${libs.jaxws21.classpath}"/>
         </taskdef>
     </target>
-    <target name="wsimport-client-claro" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/claro"/>
-        <property name="wsdl-claro" location="xml-resources/web-service-references/claro/wsdl/localhost_3030/ws/claro.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/claro" destdir="${build.generated.dir}/jax-wsCache/claro" wsdl="${wsdl-claro}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:3030/ws/claro?wsdl" xnocompile="true" xendorsed="true" package="clientWS.claro">
-            <depends file="${wsdl-claro}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/claro"/>
+    <target name="wsimport-client-empresas" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/empresas"/>
+        <property name="wsdl-empresas" location="xml-resources/web-service-references/empresas/wsdl/localhost_3030/ws/empresas.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/empresas" destdir="${build.generated.dir}/jax-wsCache/empresas" wsdl="${wsdl-empresas}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:3030/ws/empresas?wsdl" xnocompile="true" xendorsed="true" package="ws.empresas">
+            <depends file="${wsdl-empresas}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/empresas"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/claro">
+            <fileset dir="${build.generated.dir}/jax-wsCache/empresas">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-claro" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/claro"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/clientWS/claro"/>
+    <target name="wsimport-client-clean-empresas" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/empresas"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ws/empresas"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-claro"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-empresas"/>
 </project>

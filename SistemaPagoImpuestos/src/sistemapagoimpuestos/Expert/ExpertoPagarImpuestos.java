@@ -6,17 +6,13 @@
 package sistemapagoimpuestos.Expert;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.print.attribute.standard.Compression;
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoCuenta;
-import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Cliente;
 import sistemapagoimpuestos.Entity.CuentaBancaria;
@@ -24,7 +20,7 @@ import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
-import sistemapagoimpuestos.Fabricas.FabricaAdaptadores;
+import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionEmpresa;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -137,6 +133,9 @@ public class ExpertoPagarImpuestos {
         
         // Necesito recordar la empresa tipo impuesto
         setEmpresaTipoImpuesto(empresaTipoImpuesto);
+        
+        // Obtengo el adaptador
+        setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIng));
         
     }
 

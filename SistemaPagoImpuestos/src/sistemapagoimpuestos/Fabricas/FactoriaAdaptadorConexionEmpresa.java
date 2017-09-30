@@ -6,31 +6,31 @@
 package sistemapagoimpuestos.Fabricas;
 
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
-import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaMovistar;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaDgr;
 
 /**
  *
  * @author mviss
  */
-public class FabricaAdaptadores {
+public class FactoriaAdaptadorConexionEmpresa {
     
-    private static FabricaAdaptadores instancia;
+    private static FactoriaAdaptadorConexionEmpresa instancia;
 
-    public FabricaAdaptadores() {
+    public FactoriaAdaptadorConexionEmpresa() {
     }
 
-    public static FabricaAdaptadores getInstancia() {
+    public static FactoriaAdaptadorConexionEmpresa getInstancia() {
         if (instancia == null) {
-            instancia = new FabricaAdaptadores();
+            instancia = new FactoriaAdaptadorConexionEmpresa();
         }
         return instancia;
     }
 
-    public Object crearExperto(String nombreEmpresa) {
+    public Object getAdaptadorConexionEmpresa(String nombreEmpresa) {
              switch (nombreEmpresa) {
            
             case "DGR": 
-                return new AdaptadorEmpresaMovistar();
+                return new AdaptadorEmpresaDgr();
             case "Claro":
                 return new AdaptadorEmpresaClaro();
             default:

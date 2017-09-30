@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOComprobante;
-import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOItem;
 
 public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
@@ -23,8 +22,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     public IUPagarImpuestoComprobantes(List<DTOComprobante> listadoDTOComprobante){
         initComponents();
         cargarTablaComprobantes(listadoDTOComprobante);
-        //cargarTablaCuentas(controlador.obtenerCuentas("10000000"));
-        //controlador.obtenerCuentas("10000000");
     }
 
     @SuppressWarnings("unchecked")
@@ -39,8 +36,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         label_Empresa = new javax.swing.JLabel();
         label_TipoImpuestoSelec = new javax.swing.JLabel();
         label_EmpresaSelec = new javax.swing.JLabel();
-        button_Continuar = new javax.swing.JButton();
-        button_Cancelar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -79,42 +74,23 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         label_EmpresaSelec.setText("(Empresa seleccionada por usuario)");
 
-        button_Continuar.setText("Continuar");
-        button_Continuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_ContinuarActionPerformed(evt);
-            }
-        });
-
-        button_Cancelar.setText("Cancelar");
-        button_Cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_CancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(label_TipoImpuesto)
+                    .addComponent(label_Empresa)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(button_Cancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_Continuar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(label_TipoImpuesto)
-                        .addComponent(label_Empresa)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(171, 171, 171)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(label_TipoImpuestoSelec)
-                                .addComponent(label_EmpresaSelec)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                        .addGap(171, 171, 171)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_TipoImpuestoSelec)
+                            .addComponent(label_EmpresaSelec)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,27 +107,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                     .addComponent(label_EmpresaSelec))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_Continuar)
-                    .addComponent(button_Cancelar))
-                .addGap(46, 46, 46))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void button_ContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ContinuarActionPerformed
-        int fila = tabla_comprobantes.getSelectedRow();
-        String numeroComprobanteIngres=  tabla_comprobantes.getValueAt(fila, 0).toString();
-        //Insertar codigo que permite recuperar los comprobantes pendientes de pago
-        //controlador.mostrarCuentas();
-        this.dispose();
-    }//GEN-LAST:event_button_ContinuarActionPerformed
-
-    private void button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_button_CancelarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -243,13 +203,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_comprobantes.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_comprobantes.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-    
-        // Método para cargar las cuentas bancarias en la tabla
-    /*
-*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button_Cancelar;
-    private javax.swing.JButton button_Continuar;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

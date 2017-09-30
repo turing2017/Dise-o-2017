@@ -15,6 +15,7 @@ import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoComprobantes;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoCuentas;
 
+
 /**
  *
  * @author mvissio
@@ -47,13 +48,17 @@ public class ControladorPagarImpuestos {
         return experto.obtenerCuentas(cuilCliente);
     }
     
-    public void mostrarComprobantes(String comprobanteIngres){
-        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(consultarComprobantes(comprobanteIngres));
+    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
+        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(experto.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres));
         pantallaComprobantes.setVisible(true);
     }
     
-    public void mostrarCuentas(){
-        IUPagarImpuestoCuentas pantallaCuentas = new IUPagarImpuestoCuentas();
+    public void seleccionarComprobante(String numeroComprobanteIngres){
+        IUPagarImpuestoCuentas pantallaCuentas = new IUPagarImpuestoCuentas(numeroComprobanteIngres);
         pantallaCuentas.setVisible(true);
+    }
+    
+    public void seleccionarCuenta(String cbuCuentaBancariaIngres){
+        experto.seleccionarCuenta(cbuCuentaBancariaIngres);
     }
 }

@@ -18,6 +18,21 @@
 </message>
 <message name="findAllClaro">
 <part name="parameters" element="tns:findAllClaro"></part>
+<<<<<<< HEAD
+=======
+</message>
+<message name="findAllClaroResponse">
+<part name="parameters" element="tns:findAllClaroResponse"></part>
+</message>
+<message name="findForCodeClaro">
+<part name="parameters" element="tns:findForCodeClaro"></part>
+</message>
+<message name="findForCodeClaroResponse">
+<part name="parameters" element="tns:findForCodeClaroResponse"></part>
+</message>
+<message name="pagarComprobanteDgr">
+<part name="parameters" element="tns:pagarComprobanteDgr"></part>
+>>>>>>> feature/pagar_impuesto_comprobantes
 </message>
 <message name="findAllClaroResponse">
 <part name="parameters" element="tns:findAllClaroResponse"></part>
@@ -60,6 +75,17 @@
 <operation name="findForCodeDgr">
 <input xmlns:ns3="http://www.w3.org/2007/05/addressing/metadata" ns3:Action="http://ws/EmpresasWS/findForCodeDgrRequest" message="tns:findForCodeDgr"></input>
 <output xmlns:ns4="http://www.w3.org/2007/05/addressing/metadata" ns4:Action="http://ws/EmpresasWS/findForCodeDgrResponse" message="tns:findForCodeDgrResponse"></output>
+<<<<<<< HEAD
+=======
+</operation>
+<operation name="findAllClaro">
+<input xmlns:ns5="http://www.w3.org/2007/05/addressing/metadata" ns5:Action="http://ws/EmpresasWS/findAllClaroRequest" message="tns:findAllClaro"></input>
+<output xmlns:ns6="http://www.w3.org/2007/05/addressing/metadata" ns6:Action="http://ws/EmpresasWS/findAllClaroResponse" message="tns:findAllClaroResponse"></output>
+</operation>
+<operation name="findForCodeClaro">
+<input xmlns:ns7="http://www.w3.org/2007/05/addressing/metadata" ns7:Action="http://ws/EmpresasWS/findForCodeClaroRequest" message="tns:findForCodeClaro"></input>
+<output xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://ws/EmpresasWS/findForCodeClaroResponse" message="tns:findForCodeClaroResponse"></output>
+>>>>>>> feature/pagar_impuesto_comprobantes
 </operation>
 <operation name="findAllClaro">
 <input xmlns:ns5="http://www.w3.org/2007/05/addressing/metadata" ns5:Action="http://ws/EmpresasWS/findAllClaroRequest" message="tns:findAllClaro"></input>

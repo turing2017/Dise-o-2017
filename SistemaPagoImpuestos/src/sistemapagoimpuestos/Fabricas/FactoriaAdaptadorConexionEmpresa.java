@@ -26,7 +26,7 @@ public class FactoriaAdaptadorConexionEmpresa {
         return instancia;
     }
 
-    public Object crearExperto(String nombreEmpresa) {
+    public Object getAdaptadorConexionEmpresa(String nombreEmpresa) {
              switch (nombreEmpresa) {
            
             case "DGR": 

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOSaldo;
 /**
  *
@@ -19,9 +20,15 @@ import sistemapagoimpuestos.Dto.DTOSaldo;
  */
 public class IUPagarImpuestoCuentas extends javax.swing.JFrame {
 
-    public IUPagarImpuestoCuentas() {
+    ControladorPagarImpuestos controlador = new ControladorPagarImpuestos();
+    
+    public IUPagarImpuestoCuentas(String numeroComprobanteIngres) {
         initComponents();
-        //cargarTablaCuentas(listadoDTOSaldo);
+//        cargarTablaCuentas(listadoDTOSaldo);
+        
+    }
+
+    private IUPagarImpuestoCuentas() {
         
     }
 
@@ -136,7 +143,10 @@ public class IUPagarImpuestoCuentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_PagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_PagarActionPerformed
-        // TODO add your handling code here:
+        int fila = tabla_cuentas.getSelectedRow();
+        String cbuCuentaBancariaIngres = tabla_cuentas.getValueAt(fila, 0).toString();
+        
+        controlador.seleccionarCuenta(cbuCuentaBancariaIngres);
     }//GEN-LAST:event_button_PagarActionPerformed
 
     public static void main(String args[]) {

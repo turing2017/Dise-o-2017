@@ -209,7 +209,7 @@ public class ExpertoGestionarEmpresaAdherida {
                         criteriosItemEmpresaTI.add(new DTOCriterio("Item", "=", item ));
                         criteriosItemEmpresaTI.add(new DTOCriterio("fechaInhabilitacionItemEmpresaTipoImpuesto", "IS", null ));
                         criteriosItemEmpresaTI.add(new DTOCriterio("EmpresaTipoImpuesto", "=", empresaTI ));
-                        ItemEmpresaTipoImpuesto itemETI = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosItemEmpresaTI).get(0);
+                        ItemEmpresaTipoImpuesto itemETI = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosItemEmpresaTI);
                         itemETI.setOrdenItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getOrden());
                         itemETI.setIndicaPeriodicidadItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList.getDtoItemOrdenList().get(i).getPerioricidad());
                     
@@ -242,7 +242,7 @@ public class ExpertoGestionarEmpresaAdherida {
                         criteriosItemEmpresaTI.add(new DTOCriterio("Item", "=", item ));
                         criteriosItemEmpresaTI.add(new DTOCriterio("fechaInhabilitacionItemEmpresaTipoImpuesto", "IS", null ));
                         criteriosItemEmpresaTI.add(new DTOCriterio("EmpresaTipoImpuesto", "=", empresaTI ));
-                        ItemEmpresaTipoImpuesto itemETI = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosItemEmpresaTI).get(0);
+                        ItemEmpresaTipoImpuesto itemETI = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosItemEmpresaTI);
                         itemETI.setFechaInhabilitacionItemEmpresaTipoImpuesto(new Date());
                         FachadaPersistencia.getInstance().guardar(itemETI);
                         

@@ -78,8 +78,8 @@ public class ExpertoPagarImpuestos {
     }
     
     // Recupera los comprobantes pendientes de pago
-    public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres){
-        return adaptadorEmpresaClaro.findComprobantes(codigoPagoElectronicoIngres);
+    public List<DTOComprobante> consultarComprobantes(String tipoImpuesto, String nombreEmpresa, String codigoPagoElectronicoIngres){
+        return adaptadorEmpresaClaro.findComprobantes(tipoImpuesto, nombreEmpresa, codigoPagoElectronicoIngres);
     }
     
     // Recupera cuentas y saldos del cliente

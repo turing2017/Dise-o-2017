@@ -15,6 +15,7 @@ import sistemapagoimpuestos.Entity.Item;
 public class DTOItem {
     private String codigoItem;
     private String nombreItem;
+    private String itemVal;
     private int longitudItem;
     private boolean requeridoItem;
     private Date fechaHoraInhabilitacionItem;
@@ -77,6 +78,14 @@ public class DTOItem {
 
     public DTOTipoDatoItem getDtoTipoDatoItem() {
         return dtoTipoDatoItem;
+    }
+
+    public String getItemVal() {
+        return itemVal;
+    }
+
+    public void setItemVal(String itemVal) {
+        this.itemVal = itemVal;
     }
     
     public DTOItem ConvertDto(Item item){

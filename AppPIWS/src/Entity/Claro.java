@@ -23,7 +23,7 @@ public class Claro  implements java.io.Serializable {
      private String codigo;
      private String nombreServicio;
      private Double montoTotal;
-     private Double montoPagado;
+     private Double montoMinimo;
      private String status;
      private Integer nroTelefono;
      private Date vencimiento;
@@ -37,7 +37,7 @@ public class Claro  implements java.io.Serializable {
         this.codigo = codigo;
         this.nombreServicio = nombreServicio;
         this.montoTotal = montoTotal;
-        this.montoPagado = montoPagado;
+        this.montoMinimo = montoPagado;
         this.status = status;
         this.nroTelefono = nroTelefono;
         this.vencimiento = vencimiento;
@@ -75,13 +75,13 @@ public class Claro  implements java.io.Serializable {
     }
 
     
-    @Column(name="montoPagado", precision=22, scale=0)
-    public Double getMontoPagado() {
-        return this.montoPagado;
+    @Column(name="montoMinimo", precision=22, scale=0)
+    public Double getMontoMinimo() {
+        return this.montoMinimo;
     }
     
-    public void setMontoPagado(Double montoPagado) {
-        this.montoPagado = montoPagado;
+    public void setMontoMinimo(Double montoMinimo) {
+        this.montoMinimo = montoMinimo;
     }
 
     

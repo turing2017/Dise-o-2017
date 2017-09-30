@@ -39,9 +39,9 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres) {
+    public List<DTOComprobante> consultarComprobantes(String tipoImpuesto, String nombreEmpresa, String codigoPagoElectronicoIngres) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOComprobante> listadoDTOComprobante = super.consultarComprobantes(codigoPagoElectronicoIngres);
+        List<DTOComprobante> listadoDTOComprobante = super.consultarComprobantes(tipoImpuesto,nombreEmpresa,codigoPagoElectronicoIngres);
         FachadaInterna.getInstance().finalizarTransaccion();
         return listadoDTOComprobante;
     }

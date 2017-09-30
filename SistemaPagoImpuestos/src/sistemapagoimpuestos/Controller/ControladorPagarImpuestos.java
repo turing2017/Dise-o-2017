@@ -36,8 +36,8 @@ public class ControladorPagarImpuestos {
     }
     
     // Método para buscar los comprobantes
-    public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres){
-        return experto.consultarComprobantes(codigoPagoElectronicoIngres);
+    public List<DTOComprobante> consultarComprobantes(String tipoImpuesto, String nombreEmpresa, String codigoPagoElectronicoIngres){
+        return experto.consultarComprobantes(tipoImpuesto, nombreEmpresa, codigoPagoElectronicoIngres);
     }
     
     // Método para buscar las cuentas y saldos

@@ -1,6 +1,9 @@
 package sistemapagoimpuestos.View.User;
 
 import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JLabel;
@@ -177,7 +180,15 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     public void cargarTablaComprobantes(List<DTOComprobante> listaComprobantes){
         
         // Muestro los datos en la tabla
-        String[] columnas = {"Codigo", "Monto Total", "Vencimiento", "Atributos adicionales"};
+        ArrayList<String> columnList = new ArrayList<>();          
+        columnList.add("Codigo");
+        columnList.add("Monto Total");
+        columnList.add("Vencimiento");
+        
+        for(DTOItem item : listaComprobantes.get(0).getAtributosAdicionalesDTOComprobante()){
+            columnList.add(item.getNombreItem());
+        }      
+        Object[] columnas =  columnList.toArray();
         
         // Creo el modelo
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -203,18 +214,19 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
 
         };
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         
         for (DTOComprobante dtoComprobante : listaComprobantes) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoComprobante.getCodigoDTOComprobante());
+            vect.add(format.format(dtoComprobante.getFechaHoraVencimientoDTOComprobante()));
             vect.add(dtoComprobante.getMontoTotalDTOComprobante());
             
             String atribAdic = "";
             List<DTOItem> listadoItems = dtoComprobante.getAtributosAdicionalesDTOComprobante();
             for(DTOItem item : listadoItems){
-                atribAdic = atribAdic.concat(item.getNombreItem()).concat(" ");
+                vect.add(item.getItemVal());
             }
-            vect.add(atribAdic);
             dtm.addRow(vect);
             
         }

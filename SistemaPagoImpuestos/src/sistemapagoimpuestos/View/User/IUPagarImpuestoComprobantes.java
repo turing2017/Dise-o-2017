@@ -39,8 +39,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         label_Empresa = new javax.swing.JLabel();
         label_TipoImpuestoSelec = new javax.swing.JLabel();
         label_EmpresaSelec = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        button_Continuar = new javax.swing.JButton();
+        button_Cancelar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -79,14 +79,19 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         label_EmpresaSelec.setText("(Empresa seleccionada por usuario)");
 
-        jButton1.setText("Continuar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        button_Continuar.setText("Continuar");
+        button_Continuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                button_ContinuarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        button_Cancelar.setText("Cancelar");
+        button_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,9 +101,9 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(button_Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(button_Continuar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
                         .addComponent(label_TipoImpuesto)
@@ -128,17 +133,25 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(button_Continuar)
+                    .addComponent(button_Cancelar))
                 .addGap(46, 46, 46))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void button_ContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ContinuarActionPerformed
+        int fila = tabla_comprobantes.getSelectedRow();
+        String numeroComprobanteIngres = tabla_comprobantes.getValueAt(fila, 0).toString();
+        //Insertar codigo que permite recuperar los comprobantes pendientes de pago
+        //controlador.mostrarCuentas();
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_button_ContinuarActionPerformed
+
+    private void button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_button_CancelarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -282,8 +295,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     }
 */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton button_Cancelar;
+    private javax.swing.JButton button_Continuar;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

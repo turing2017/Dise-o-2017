@@ -20,6 +20,7 @@ import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Cliente;
 import sistemapagoimpuestos.Entity.CuentaBancaria;
+import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
@@ -32,7 +33,9 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoPagarImpuestos {
     
-    private AdaptadorEmpresaClaro adaptadorEmpresaClaro =  (AdaptadorEmpresaClaro) FabricaAdaptadores.getInstancia().crearExperto("Claro");
+    private AdaptadorEmpresaClaro adaptadorEmpresaClaro;
+    private EmpresaTipoImpuesto empresaTipoImpuesto;
+    private TipoImpuesto tipoImpuesto;
     
         // Método para recuperar los TipoDatoItem
         public List<DTOTipoImpuesto> buscarTipoImpuestos(){
@@ -59,6 +62,9 @@ public class ExpertoPagarImpuestos {
         criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
         List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
         TipoImpuesto tipoImpuesto = (TipoImpuesto) ti.get(0);
+        
+        // Necesito recordar el tipo de impuesto
+        setTipoImpuesto(tipoImpuesto);
         
         //Busca instancia de EmpresaTipoImpuesto, aplicando el tipo de impuesto como criterio
         List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
@@ -111,4 +117,50 @@ public class ExpertoPagarImpuestos {
         }
         return listaDTOCuentaBancaria;
     }
+    
+    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
+        // Busco las Empresa seleccionada
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
+        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        Empresa empresaSeleccionada = (Empresa) empresas.get(0);
+        
+        // Debo recuperar el tipoImpuesto del experto recordado
+        TipoImpuesto tipoImpuestoSeleccionado = getTipoImpuesto();
+        
+        //Busca EmpresaTipoImpuesto, aplicando la empresa como criterio y el tipo de impuesto
+        List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
+        List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto);
+        EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eti.get(0);
+        
+        // Necesito recordar la empresa tipo impuesto
+        setEmpresaTipoImpuesto(empresaTipoImpuesto);
+        
+    }
+
+    public void setEmpresaTipoImpuesto(EmpresaTipoImpuesto empresaTipoImpuesto) {
+        this.empresaTipoImpuesto = empresaTipoImpuesto;
+    }
+
+    public void setTipoImpuesto(TipoImpuesto tipoImpuesto) {
+        this.tipoImpuesto = tipoImpuesto;
+    }
+
+    public void setAdaptadorEmpresaClaro(AdaptadorEmpresaClaro adaptadorEmpresaClaro) {
+        this.adaptadorEmpresaClaro = adaptadorEmpresaClaro;
+    }
+
+    public EmpresaTipoImpuesto getEmpresaTipoImpuesto() {
+        return empresaTipoImpuesto;
+    }
+
+    public TipoImpuesto getTipoImpuesto() {
+        return tipoImpuesto;
+    }
+
+    public AdaptadorEmpresaClaro getAdaptadorEmpresaClaro() {
+        return adaptadorEmpresaClaro;
+    }   
 }

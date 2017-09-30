@@ -24,7 +24,7 @@ import ws.empresas.EmpresasWSImplService;
  */
 public class AdaptadorEmpresaClaro {
     
-    public List<DTOComprobante> findComprobantes(String codigoComprobante){
+    public List<DTOComprobante> consultarComprabantes(String codigoComprobante){
         EmpresasWSImplService wsImplService =
                 new EmpresasWSImplService();
             EmpresasWS claroWs = wsImplService.getEmpresasWSImplPort();

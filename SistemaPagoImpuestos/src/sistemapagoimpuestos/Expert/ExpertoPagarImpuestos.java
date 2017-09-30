@@ -81,7 +81,7 @@ public class ExpertoPagarImpuestos {
     
     // Recupera los comprobantes pendientes de pago
     public List<DTOComprobante> consultarComprobantes(String codigoPagoElectronicoIngres){
-        return adaptadorEmpresaClaro.findComprobantes(codigoPagoElectronicoIngres);
+        return adaptadorEmpresaClaro.consultarComprabantes(codigoPagoElectronicoIngres);
     }
     
     // Recupera cuentas y saldos del cliente
@@ -114,7 +114,7 @@ public class ExpertoPagarImpuestos {
         return listaDTOCuentaBancaria;
     }
     
-    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
+    public List<DTOComprobante> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
         // Busco las Empresa seleccionada
         List<DTOCriterio> criterioEmpresa = new ArrayList();
         criterioEmpresa.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
@@ -137,6 +137,10 @@ public class ExpertoPagarImpuestos {
         // Obtengo el adaptador
         setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIng));
         
+        // Recupero los comprobantes
+        List<DTOComprobante> listadoComprobantes = adaptadorEmpresaClaro.consultarComprabantes(codigoPagoElectronicoIngres);
+        
+        return listadoComprobantes;
     }
 
     public void setEmpresaTipoImpuesto(EmpresaTipoImpuesto empresaTipoImpuesto) {

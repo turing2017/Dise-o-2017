@@ -6,22 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import sistemapagoimpuestos.Dto.DTOEmpresaItem;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
-import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Entity.Item;
-import sistemapagoimpuestos.Entity.TipoEmpresa;
-import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoAlta;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoEmpresa;
-import static sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems.setNuevoTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificar;
 
 
@@ -58,7 +48,6 @@ public class ControladorGestionarTipoImpuesto {
         pantallaAlta.setVisible(true); // La hago visible
         // Modifico la operación de cierre para volver a la pantalla principal
         pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        pantallaAlta.generarEmpresaItems();
         IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<DTOEmpresaTipImpItem>());
         pantallaAlta.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
@@ -67,12 +56,6 @@ public class ControladorGestionarTipoImpuesto {
         });
     }
     
-    public void mostrarPantallaGestionETI(String codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean editableTipoImpuestoIngres){
-        IUGestionarTipoImpuestoEmpresa pantallaGestionarETI = new IUGestionarTipoImpuestoEmpresa(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, editableTipoImpuestoIngres);
-        MetodosPantalla.getInstance().setearPantalla(pantallaGestionarETI);
-        setNuevoTipoImpuesto(true);
-        pantallaGestionarETI.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    }
     
     public void mostrarPantallaModificacion(Object object) {
         DTOTipoImpuesto dtoTi = obtenerTipoImpuesto((int) object);
@@ -87,8 +70,6 @@ public class ControladorGestionarTipoImpuesto {
                     iniciar();
                 }
             });
-            pantallaModificar.obtenerEmpresaItems(dtoTi.getdTOEmpresaTipoImpuestoItemList());
-            pantallaModificar.RecuperarEmpresaItems();
             pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
             pantallaModificar.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
             pantallaModificar.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());

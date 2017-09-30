@@ -29,7 +29,7 @@ import ws.empresas.EmpresasWSImplService;
  */
 public class AdaptadorEmpresaClaro {
 
-    public List<DTOComprobante> findComprobantes(String tipoImpuesto, String nombreEmpresa, String codigoPagoElectronicoIngres) {
+    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) {
         EmpresasWSImplService wsImplService
                 = new EmpresasWSImplService();
         EmpresasWS claroWs = wsImplService.getEmpresasWSImplPort();
@@ -41,24 +41,14 @@ public class AdaptadorEmpresaClaro {
             comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
             comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
 
-            comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(tipoImpuesto, nombreEmpresa, claro));
+            comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, claro));
             dTOComprobanteList.add(comprobante);
         }
         return dTOComprobanteList;
     }
 
-    public List<DTOItem> buscarItems(String tipoImpuesto, String nombreEmpresa, Claro claro) {
+    public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Claro claro) {
         List<DTOCriterio> criterioList = new ArrayList<>();
-        criterioList.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresa));
-        Empresa empresaTemp = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterioList).get(0);
-        criterioList.clear();
-        criterioList.add(new DTOCriterio("nombreTipoImpuesto", "=", tipoImpuesto));
-        TipoImpuesto tipoImpuestoTemp = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioList).get(0);
-        criterioList.clear();
-        criterioList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoTemp));
-        criterioList.add(new DTOCriterio("empresa", "=", empresaTemp));
-        EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioList).get(0);
-        criterioList.clear();
         criterioList.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         List<Object> itemEmpresaTipoImpuesto = FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioList);
         List<DTOItem> dTOItems = new ArrayList<>();

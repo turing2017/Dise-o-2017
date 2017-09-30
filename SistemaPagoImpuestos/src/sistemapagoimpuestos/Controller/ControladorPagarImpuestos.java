@@ -12,6 +12,7 @@ import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.User.IUPagarImpuestoComprobantes;
 
 /**
  *
@@ -35,13 +36,15 @@ public class ControladorPagarImpuestos {
         return experto.buscarEmpresas(nombreTipoImpuesto);
     }
     
-    // Método para buscar los comprobantes
-    public List<DTOComprobante> consultarComprobantes(String tipoImpuesto, String nombreEmpresa, String codigoPagoElectronicoIngres){
-        return experto.consultarComprobantes(tipoImpuesto, nombreEmpresa, codigoPagoElectronicoIngres);
-    }
+
     
     // Método para buscar las cuentas y saldos
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente){
         return experto.obtenerCuentas(cuilCliente);
+    }
+    
+    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
+        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(experto.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres));
+        pantallaComprobantes.setVisible(true);
     }
 }

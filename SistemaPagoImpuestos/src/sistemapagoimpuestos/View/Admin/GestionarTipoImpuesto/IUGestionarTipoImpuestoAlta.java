@@ -175,22 +175,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_crearActionPerformed
 
-    private void button_add_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_add_EAActionPerformed
-        controlador.mostrarPantallaGestionETI(textfield_codigo.getText(), textField_nombre.getText(), checkbox_esEditable.isSelected());
-        this.dispose();
-    }//GEN-LAST:event_button_add_EAActionPerformed
-
-    private void button_delete_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_delete_EAActionPerformed
-        try {
-            DefaultTableModel model = (DefaultTableModel) tabla_empresa_item.getModel();
-            int rowSelected = tabla_empresa_item.getSelectedRow();
-            removeDtoetiisModfAlta(rowSelected);
-            model.removeRow(rowSelected);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
-            Excepciones.getInstance().objetoNoSeleccionado();
-        }
-    }//GEN-LAST:event_button_delete_EAActionPerformed
+  
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
         controlador.iniciar();
@@ -204,9 +189,6 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkbox_esEditableActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

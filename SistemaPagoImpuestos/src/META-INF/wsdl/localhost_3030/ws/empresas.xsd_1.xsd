@@ -101,6 +101,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="buscarComprobantesCodigoDgr">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarComprobantesCodigoDgrResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dgr" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="pagarComprobanteDgr">
 <xs:sequence>
 <xs:element name="arg0" type="xs:int"></xs:element>
@@ -111,18 +123,6 @@
 <xs:complexType name="pagarComprobanteDgrResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="buscarComprobantesCodigoDgr">
-<xs:sequence>
-<xs:element name="arg0" type="xs:int"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="buscarComprobantesCodigoDgrResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:dgr" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

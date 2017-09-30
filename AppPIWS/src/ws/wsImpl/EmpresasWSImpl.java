@@ -5,7 +5,7 @@
  */
 package ws.wsImpl;
 
-import Dao.DgrModel;
+import dao.DgrModel;
 import Entity.Claro;
 import Entity.Dgr;
 import dao.ClaroModel;

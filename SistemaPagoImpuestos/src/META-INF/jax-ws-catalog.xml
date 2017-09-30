@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:3031/ws/dgr?wsdl" uri="wsdl/localhost_3031/ws/dgr.wsdl"/>
-    <system systemId="http://localhost:3031/ws/dgr?wsdl=1" uri="wsdl/localhost_3031/ws/dgr.wsdl_1.wsdl"/>
-    <system systemId="http://localhost:3031/ws/dgr?xsd=1" uri="wsdl/localhost_3031/ws/dgr.xsd_1.xsd"/>
-    <system systemId="http://localhost:3030/ws/claro?wsdl" uri="wsdl/localhost_3030/ws/claro.wsdl"/>
-    <system systemId="http://localhost:3030/ws/claro?wsdl=1" uri="wsdl/localhost_3030/ws/claro.wsdl_1.wsdl"/>
-    <system systemId="http://localhost:3030/ws/claro?xsd=1" uri="wsdl/localhost_3030/ws/claro.xsd_1.xsd"/>
-    <system systemId="http://localhost:3030/ws/dgr?wsdl" uri="wsdl/localhost_3030/ws/dgr.wsdl"/>
-    <system systemId="http://localhost:3030/ws/dgr?wsdl=1" uri="wsdl/localhost_3030/ws/dgr.wsdl_1.wsdl"/>
-    <system systemId="http://localhost:3030/ws/dgr?xsd=1" uri="wsdl/localhost_3030/ws/dgr.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/claro?wsdl" uri="wsdl/localhost_8080/claro.wsdl"/>
-    <system systemId="http://localhost:8080/claro?wsdl=1" uri="wsdl/localhost_8080/claro.wsdl_1.wsdl"/>
-    <system systemId="http://localhost:8080/claro?xsd=1" uri="wsdl/localhost_8080/claro.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/dgr?wsdl" uri="wsdl/localhost_8080/dgr.wsdl"/>
-    <system systemId="http://localhost:8080/dgr?wsdl=1" uri="wsdl/localhost_8080/dgr.wsdl_1.wsdl"/>
-    <system systemId="http://localhost:8080/dgr?xsd=1" uri="wsdl/localhost_8080/dgr.xsd_1.xsd"/>
+    <system systemId="http://localhost:3031/ws/dgr?wsdl" uri="xml-resources/web-service-references/dgr/wsdl/localhost_3031/ws/dgr.wsdl"/>
+    <system systemId="http://localhost:3031/ws/dgr?wsdl=1" uri="xml-resources/web-service-references/dgr/wsdl/localhost_3031/ws/dgr.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:3031/ws/dgr?xsd=1" uri="xml-resources/web-service-references/dgr/wsdl/localhost_3031/ws/dgr.xsd_1.xsd"/>
+    <system systemId="http://localhost:3030/ws/dgr?wsdl" uri="xml-resources/web-service-references/dgr/wsdl/localhost_3030/ws/dgr.wsdl"/>
+    <system systemId="http://localhost:3030/ws/dgr?wsdl=1" uri="xml-resources/web-service-references/dgr/wsdl/localhost_3030/ws/dgr.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:3030/ws/dgr?xsd=1" uri="xml-resources/web-service-references/dgr/wsdl/localhost_3030/ws/dgr.xsd_1.xsd"/>
+    <system systemId="http://localhost:3030/ws/claro?wsdl" uri="xml-resources/web-service-references/claro/wsdl/localhost_3030/ws/claro.wsdl"/>
+    <system systemId="http://localhost:3030/ws/claro?wsdl=1" uri="xml-resources/web-service-references/claro/wsdl/localhost_3030/ws/claro.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:3030/ws/claro?xsd=1" uri="xml-resources/web-service-references/claro/wsdl/localhost_3030/ws/claro.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/claro?wsdl" uri="xml-resources/web-service-references/claro/wsdl/localhost_8080/claro.wsdl"/>
+    <system systemId="http://localhost:8080/claro?wsdl=1" uri="xml-resources/web-service-references/claro/wsdl/localhost_8080/claro.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/claro?xsd=1" uri="xml-resources/web-service-references/claro/wsdl/localhost_8080/claro.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/dgr?wsdl" uri="xml-resources/web-service-references/dgr/wsdl/localhost_8080/dgr.wsdl"/>
+    <system systemId="http://localhost:8080/dgr?wsdl=1" uri="xml-resources/web-service-references/dgr/wsdl/localhost_8080/dgr.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/dgr?xsd=1" uri="xml-resources/web-service-references/dgr/wsdl/localhost_8080/dgr.xsd_1.xsd"/>
     <system systemId="http://localhost:3030/ws/empresas?wsdl" uri="wsdl/localhost_3030/ws/empresas.wsdl"/>
     <system systemId="http://localhost:3030/ws/empresas?wsdl=1" uri="wsdl/localhost_3030/ws/empresas.wsdl_1.wsdl"/>
     <system systemId="http://localhost:3030/ws/empresas?xsd=1" uri="wsdl/localhost_3030/ws/empresas.xsd_1.xsd"/>

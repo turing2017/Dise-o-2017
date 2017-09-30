@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dao.HibernateUtil;
 import java.io.*;
 import org.hibernate.*;
 import java.util.*;

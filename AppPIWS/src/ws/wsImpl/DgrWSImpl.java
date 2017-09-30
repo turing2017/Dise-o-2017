@@ -5,7 +5,7 @@
  */
 package ws.wsImpl;
 
-import Dao.DgrModel;
+import dao.DgrModel;
 import Entity.Dgr;
 import java.util.ArrayList;
 import java.util.List;

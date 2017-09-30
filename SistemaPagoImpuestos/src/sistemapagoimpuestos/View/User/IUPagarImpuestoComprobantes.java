@@ -143,7 +143,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
     private void button_ContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ContinuarActionPerformed
         int fila = tabla_comprobantes.getSelectedRow();
-        String numeroComprobanteIngres = tabla_comprobantes.getValueAt(fila, 0).toString();
+        String numeroComprobanteIngres=  tabla_comprobantes.getValueAt(fila, 0).toString();
         //Insertar codigo que permite recuperar los comprobantes pendientes de pago
         //controlador.mostrarCuentas();
         this.dispose();
@@ -245,54 +245,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     }
     
         // Método para cargar las cuentas bancarias en la tabla
-    /*public void cargarTablaCuentas(List<DTOCuentaBancaria> listaCuentaBancaria){
-        
-        // Muestro los datos en la tabla
-        String[] columnas = {"CBU Cuenta", "Tipo Cuenta"};
-        
-        // Creo el modelo
-        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
-            
-            // Sobreescribo el método para no permitir editar la 
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //all cells false
-                return false;
-            }
-    
-            public Class<?> getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return String.class;
-                    case 1:
-                        return String.class;
-                    default:
-                        return null;
-                }
-            }
-
-        };
-        
-        for (DTOCuentaBancaria dtoCuentaBancaria : listaCuentaBancaria) {
-            Vector<Object> vect = new Vector<>();
-            vect.add(dtoCuentaBancaria.getCbuCuentaBancaria());
-            vect.add(dtoCuentaBancaria.getTipoCuenta().getNombreTipoCuenta());
-            dtm.addRow(vect);
-            
-        }
-
-        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
-                setHorizontalAlignment(JLabel.CENTER);
-                return this;
-            }
-        };
-        tabla_cuentas.setModel(dtm);
-        tabla_cuentas.getColumnModel().getColumn(0).setCellRenderer(r);
-        tabla_cuentas.getColumnModel().getColumn(1).setCellRenderer(r);
-    }
+    /*
 */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_Cancelar;

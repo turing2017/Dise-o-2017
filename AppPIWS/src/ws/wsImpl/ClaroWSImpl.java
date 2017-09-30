@@ -55,11 +55,6 @@ public class ClaroWSImpl implements ws.ClaroWS{
     }
 
     @Override
-    public List<Claro> buscarComprobantesPago(String comprobante) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Claro> buscarComprobantesCodigo(String codigo) {
         ClaroModel cm = new ClaroModel();
         List<Claro> listClaro = cm.findAll();

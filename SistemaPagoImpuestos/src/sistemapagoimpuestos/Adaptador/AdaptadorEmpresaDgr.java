@@ -5,30 +5,21 @@
  */
 package sistemapagoimpuestos.Adaptador;
 
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOComprobante;
-import sistemapagoimpuestos.Dto.DTOCriterio;
-import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Entity.Item;
-import sistemapagoimpuestos.Entity.TipoDatoItem;
-import sistemapagoimpuestos.Utils.FachadaPersistencia;
-import ws.empresas.Claro;
-import ws.empresas.EmpresasWS;
-import ws.empresas.EmpresasWSImplService;
 
 /**
  *
  * @author mviss
  */
-public class AdaptadorEmpresaClaro {
-    
+public class AdaptadorEmpresaDgr {
+    /*
     public List<DTOComprobante> findComprobantes(String codigoComprobante){
-        EmpresasWSImplService wsImplService =
-                new EmpresasWSImplService();
-            EmpresasWS claroWs = wsImplService.getEmpresasWSImplPort();
-            List<Claro> listClaro = claroWs.buscarComprobantesCodigoClaro(codigoComprobante);
+        DgrWSImplService dgrWSImplService =
+                new DgrWSImplService();
+            DgrWS claroWs = dgrWSImplService.getDgrWSImplPort();
+            List<> listClaro = claroWs.buscarComprobantesCodigo(codigoComprobante);
             List<DTOComprobante> dTOComprobanteList =  new ArrayList<>();
             for (Claro claro : listClaro) {
                 DTOComprobante comprobante = new DTOComprobante();
@@ -54,5 +45,5 @@ public class AdaptadorEmpresaClaro {
             dTOItems.add(new DTOItem().ConvertDto((Item) objec));
         }
         return dTOItems;
-    }
+    }*/
 }

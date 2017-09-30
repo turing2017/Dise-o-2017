@@ -5,7 +5,7 @@
  */
 package ws;
 
-import Entity.Claro;
+import Entity.Dgr;
 import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -15,24 +15,24 @@ import javax.jws.WebService;
  * @author mviss
  */
 @WebService
-public interface ClaroWS {
+public interface DgrWS {
     @WebMethod
-    public List<Claro> findAll();
+    public List<Dgr> findAll();
     
     @WebMethod
-    public Claro find(String id);
+    public Dgr find(String id);
 //    
     @WebMethod
-    public void create(Claro claro);
+    public void create(Dgr dgr);
     @WebMethod
-    public void update(Claro claro);
+    public void update(Dgr dgr);
     
     @WebMethod
-    public void delete(Claro claro);
+    public void delete(Dgr claro);
     
     @WebMethod
-    public boolean pagarComprobante(String codigo, double montoPagar);
+    public boolean pagarComprobante(int codigo, double montoPagar);
 
     @WebMethod
-    public List<Claro> buscarComprobantesCodigo(String codigo);
+    public List<Dgr> buscarComprobantesCodigo(int codigo);
 }

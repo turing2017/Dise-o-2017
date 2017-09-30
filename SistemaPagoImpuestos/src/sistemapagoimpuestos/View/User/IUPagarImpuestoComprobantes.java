@@ -177,7 +177,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     public void cargarTablaComprobantes(List<DTOComprobante> listaComprobantes){
         
         // Muestro los datos en la tabla
-        String[] columnas = {"Codigo", "Monto Total", "Atributos adicionales"};
+        String[] columnas = {"Codigo", "Monto Total", "Vencimiento", "Atributos adicionales"};
         
         // Creo el modelo
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -198,7 +198,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                     case 2:
                         return String.class;
                     default:
-                        return null;
+                        return String.class;
                 }
             }
 

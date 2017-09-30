@@ -23,7 +23,7 @@ import sistemapagoimpuestos.Entity.CuentaBancaria;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
-import sistemapagoimpuestos.Fabricas.FabricaAdaptadores;
+import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionEmpresa;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -32,7 +32,7 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoPagarImpuestos {
     
-    private AdaptadorEmpresaClaro adaptadorEmpresaClaro =  (AdaptadorEmpresaClaro) FabricaAdaptadores.getInstancia().crearExperto("Claro");
+    private AdaptadorEmpresaClaro adaptadorEmpresaClaro =  (AdaptadorEmpresaClaro) FactoriaAdaptadorConexionEmpresa.getInstancia().crearExperto("Claro");
     
         // Método para recuperar los TipoDatoItem
         public List<DTOTipoImpuesto> buscarTipoImpuestos(){

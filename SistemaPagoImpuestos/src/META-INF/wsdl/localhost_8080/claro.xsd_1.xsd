@@ -28,6 +28,19 @@
 
 <xs:element name="updateResponse" type="tns:updateResponse"></xs:element>
 
+<xs:complexType name="pagarComprobante">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagarComprobanteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="buscarComprobantesCodigo">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
@@ -49,19 +62,6 @@
 <xs:element name="nroTelefono" type="xs:int" minOccurs="0"></xs:element>
 <xs:element name="status" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="vencimiento" type="xs:dateTime" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="pagarComprobante">
-<xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="arg1" type="xs:double"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="pagarComprobanteResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

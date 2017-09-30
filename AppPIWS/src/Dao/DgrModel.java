@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package Dao;
 
-import Entity.Claro;
-import java.util.List;
+import Entity.Dgr;
 
 /**
  *
  * @author mviss
  */
-public class ClaroModel extends AbstractModel<Claro>{
-    
-    public ClaroModel() {
-        super(Claro.class);
+public class DgrModel extends dao.AbstractModel<Dgr>{
+    public DgrModel() {
+        super(Dgr.class);
     }
-  
+
 }

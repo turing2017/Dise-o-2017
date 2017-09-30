@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
+
+<xs:element name="buscarComprobantesCodigoClaro" type="tns:buscarComprobantesCodigoClaro"></xs:element>
+
+<xs:element name="buscarComprobantesCodigoClaroResponse" type="tns:buscarComprobantesCodigoClaroResponse"></xs:element>
+
+<xs:element name="buscarComprobantesCodigoDgr" type="tns:buscarComprobantesCodigoDgr"></xs:element>
+
+<xs:element name="buscarComprobantesCodigoDgrResponse" type="tns:buscarComprobantesCodigoDgrResponse"></xs:element>
+
+<xs:element name="findAllClaro" type="tns:findAllClaro"></xs:element>
+
+<xs:element name="findAllClaroResponse" type="tns:findAllClaroResponse"></xs:element>
+
+<xs:element name="findAllDgr" type="tns:findAllDgr"></xs:element>
+
+<xs:element name="findAllDgrResponse" type="tns:findAllDgrResponse"></xs:element>
+
+<xs:element name="findForCodeClaro" type="tns:findForCodeClaro"></xs:element>
+
+<xs:element name="findForCodeClaroResponse" type="tns:findForCodeClaroResponse"></xs:element>
+
+<xs:element name="findForCodeDgr" type="tns:findForCodeDgr"></xs:element>
+
+<xs:element name="findForCodeDgrResponse" type="tns:findForCodeDgrResponse"></xs:element>
+
+<xs:element name="pagarComprobanteClaro" type="tns:pagarComprobanteClaro"></xs:element>
+
+<xs:element name="pagarComprobanteClaroResponse" type="tns:pagarComprobanteClaroResponse"></xs:element>
+
+<xs:element name="pagarComprobanteDgr" type="tns:pagarComprobanteDgr"></xs:element>
+
+<xs:element name="pagarComprobanteDgrResponse" type="tns:pagarComprobanteDgrResponse"></xs:element>
+
+<xs:complexType name="findAllClaro">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllClaroResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:claro" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="claro">
+<xs:sequence>
+<xs:element name="codigo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="montoPagado" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="montoTotal" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="nombreServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nroTelefono" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="status" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="vencimiento" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagarComprobanteClaro">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"></xs:element>
+<xs:element name="arg1" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagarComprobanteClaroResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllDgr">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllDgrResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dgr" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dgr">
+<xs:sequence>
+<xs:element name="codigoImpuesto" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="montoPagar" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="nombreImpuesto" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="oiddgr" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="primerVencimiento" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="segundoVencimiento" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="status" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findForCodeClaro">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findForCodeClaroResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:claro" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagarComprobanteDgr">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"></xs:element>
+<xs:element name="arg1" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagarComprobanteDgrResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarComprobantesCodigoDgr">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarComprobantesCodigoDgrResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dgr" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findForCodeDgr">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findForCodeDgrResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dgr" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarComprobantesCodigoClaro">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarComprobantesCodigoClaroResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:claro" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

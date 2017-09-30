@@ -28,15 +28,9 @@
 
 <xs:element name="updateResponse" type="tns:updateResponse"></xs:element>
 
-<xs:complexType name="buscarComprobantesCodigo">
+<xs:complexType name="delete">
 <xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="buscarComprobantesCodigoResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:claro" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="arg0" type="tns:claro" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -52,28 +46,17 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="pagarComprobante">
-<xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="arg1" type="xs:double"></xs:element>
-</xs:sequence>
+<xs:complexType name="deleteResponse">
+<xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="pagarComprobanteResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"></xs:element>
-</xs:sequence>
+<xs:complexType name="findAll">
+<xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="find">
+<xs:complexType name="findAllResponse">
 <xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:claro" minOccurs="0"></xs:element>
+<xs:element name="return" type="tns:claro" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -97,23 +80,40 @@
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="delete">
+<xs:complexType name="find">
 <xs:sequence>
-<xs:element name="arg0" type="tns:claro" minOccurs="0"></xs:element>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="deleteResponse">
-<xs:sequence></xs:sequence>
+<xs:complexType name="findResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:claro" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findAll">
-<xs:sequence></xs:sequence>
+<xs:complexType name="buscarComprobantesCodigo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findAllResponse">
+<xs:complexType name="buscarComprobantesCodigoResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:claro" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagarComprobante">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagarComprobanteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

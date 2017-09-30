@@ -6,7 +6,9 @@
 package ws;
 
 import Entity.Claro;
+import Entity.CuentaCliente;
 import Entity.Dgr;
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -40,5 +42,17 @@ public interface EmpresasWS {
 
     @WebMethod
     public List<Claro> buscarComprobantesCodigoClaro(String codigo);    
+    
+    @WebMethod
+    public CuentaCliente buscarCuentas(String tipoCuenta, String cbu);
+    
+    @WebMethod
+    public double debitarMonto(String cbu, double monto);
+    
+    @WebMethod
+    public double acreditarPagoDgr(String codigo, Date vencimiento, double monto);
+
+    @WebMethod
+    public double acreditarPagoClaro(String codigo, Date vencimiento, double monto);
     
 }

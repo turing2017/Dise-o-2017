@@ -40,6 +40,14 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         label_Empresa = new javax.swing.JLabel();
         label_TipoImpuestoSelec = new javax.swing.JLabel();
         label_EmpresaSelec = new javax.swing.JLabel();
+        btn_cerrar = new javax.swing.JButton();
+        btn_Selec_Cuenta = new javax.swing.JButton();
+        title_cuenta_select = new javax.swing.JLabel();
+        text_cbu = new javax.swing.JLabel();
+        txt_tipo_cuenta = new javax.swing.JLabel();
+        lbl_out_tipo_Cuenta = new javax.swing.JLabel();
+        lbl_out_cbu = new javax.swing.JLabel();
+        btn_continuar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -78,23 +86,68 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         label_EmpresaSelec.setText("(Empresa seleccionada por usuario)");
 
+        btn_cerrar.setText("Cerrar");
+
+        btn_Selec_Cuenta.setText("Seleccionar Cuenta");
+        btn_Selec_Cuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Selec_CuentaActionPerformed(evt);
+            }
+        });
+
+        title_cuenta_select.setText("Cuenta Seleccionada");
+
+        text_cbu.setText("CBU:");
+
+        txt_tipo_cuenta.setText("Tipo de Cuenta:");
+
+        lbl_out_tipo_Cuenta.setText("jLabel5");
+
+        lbl_out_cbu.setText("jLabel6");
+
+        btn_continuar.setText("Continuar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(label_TipoImpuesto)
-                    .addComponent(label_Empresa)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_TipoImpuestoSelec)
-                            .addComponent(label_EmpresaSelec)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(label_TipoImpuesto)
+                            .addComponent(label_Empresa)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_TipoImpuestoSelec)
+                                    .addComponent(label_EmpresaSelec)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(41, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(text_cbu)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl_out_cbu))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txt_tipo_cuenta)
+                                    .addGap(113, 113, 113)
+                                    .addComponent(lbl_out_tipo_Cuenta)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(title_cuenta_select)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Selec_Cuenta)
+                        .addGap(58, 58, 58))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_cerrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_continuar)
+                        .addGap(86, 86, 86))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,13 +162,34 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_Empresa)
                     .addComponent(label_EmpresaSelec))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(title_cuenta_select)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_tipo_cuenta)
+                            .addComponent(lbl_out_tipo_Cuenta)))
+                    .addComponent(btn_Selec_Cuenta))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(text_cbu)
+                    .addComponent(lbl_out_cbu))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_cerrar)
+                    .addComponent(btn_continuar))
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_Selec_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Selec_CuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Selec_CuentaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -192,8 +266,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         for (DTOComprobante dtoComprobante : listaComprobantes) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoComprobante.getCodigoDTOComprobante());
-            vect.add(format.format(dtoComprobante.getFechaHoraVencimientoDTOComprobante()));
             vect.add(dtoComprobante.getMontoTotalDTOComprobante());
+            vect.add(format.format(dtoComprobante.getFechaHoraVencimientoDTOComprobante()));
             
             String atribAdic = "";
             List<DTOItem> listadoItems = dtoComprobante.getAtributosAdicionalesDTOComprobante();
@@ -218,6 +292,9 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Selec_Cuenta;
+    private javax.swing.JButton btn_cerrar;
+    private javax.swing.JButton btn_continuar;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -225,6 +302,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private javax.swing.JLabel label_EmpresaSelec;
     private javax.swing.JLabel label_TipoImpuesto;
     private javax.swing.JLabel label_TipoImpuestoSelec;
+    private javax.swing.JLabel lbl_out_cbu;
+    private javax.swing.JLabel lbl_out_tipo_Cuenta;
     private javax.swing.JTable tabla_comprobantes;
+    private javax.swing.JLabel text_cbu;
+    private javax.swing.JLabel title_cuenta_select;
+    private javax.swing.JLabel txt_tipo_cuenta;
     // End of variables declaration//GEN-END:variables
 }

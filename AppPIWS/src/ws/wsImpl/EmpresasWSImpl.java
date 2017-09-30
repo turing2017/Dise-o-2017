@@ -5,11 +5,14 @@
  */
 package ws.wsImpl;
 
+import Dao.CuentaClienteModel;
 import Dao.DgrModel;
 import Entity.Claro;
+import Entity.CuentaCliente;
 import Entity.Dgr;
 import dao.ClaroModel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
 import ws.EmpresasWS;
@@ -68,7 +71,7 @@ public class EmpresasWSImpl implements EmpresasWS{
 
     @Override
     public List<Claro> buscarComprobantesCodigoClaro(String codigo) {
-                ClaroModel cm = new ClaroModel();
+        ClaroModel cm = new ClaroModel();
         List<Claro> listClaro = cm.findAll();
         List<Claro> comprobantes = new ArrayList<>();
         for(Claro claro : listClaro){
@@ -78,5 +81,35 @@ public class EmpresasWSImpl implements EmpresasWS{
         }
         return comprobantes;
     }
+
+    @Override
+    public CuentaCliente buscarCuentas(String tipoCuenta, String cbu) {
+        CuentaClienteModel ccm = new CuentaClienteModel();
+        List<CuentaCliente> listCuentaCliente = ccm.findAll();
+        CuentaCliente cuentaCliente = new CuentaCliente();     
+        for(CuentaCliente cc : listCuentaCliente){
+            if(tipoCuenta.equals(cc.getTipoCuenta())&&tipoCuenta.equals(cc.getCbu())){
+                cuentaCliente = cc;
+                break;
+            }
+        }
+        return cuentaCliente;
+    }
+
+    @Override
+    public double debitarMonto(String cbu, double monto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public double acreditarPagoDgr(String codigo, Date vencimiento, double monto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public double acreditarPagoClaro(String codigo, Date vencimiento, double monto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

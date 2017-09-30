@@ -14,8 +14,6 @@ import java.util.Date;
 import java.util.List;
 import ws.*;
 import javax.xml.ws.*;
-import ws.wsImpl.ClaroWSImpl;
-import ws.wsImpl.DgrWSImpl;
 import ws.wsImpl.EmpresasWSImpl;
 
 /**
@@ -28,15 +26,7 @@ public class AppPIWS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            
-            
-            //DgrWSImpl dgrWSImpl = new DgrWSImpl();
-            //claroWSImpl.create(new Claro("test", "test", 2.3, 1.2, "test", 1, new Date()));
-            //List<Dgr> c = dgrWSImpl.findAll();
-            //System.out.println(c);
-            //Endpoint.publish("http://localhost:3030/ws/dgr", new DgrWSImpl());
-            //Endpoint.publish("http://localhost:3030/ws/claro", new ClaroWSImpl());       
+        try { 
             Endpoint.publish("http://localhost:3030/ws/empresas", new EmpresasWSImpl());
 
         } catch (Exception e) {

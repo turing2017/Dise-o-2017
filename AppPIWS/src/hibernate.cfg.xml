@@ -12,6 +12,7 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.show_sql">true</property>
     <mapping class="Entity.Claro"/>
-    <mapping class="Entity.Dgr"/>
+    <mapping class="Entity.Dgr"/>    
+    <mapping class="Entity.CuentaCliente"/>
   </session-factory>
 </hibernate-configuration>

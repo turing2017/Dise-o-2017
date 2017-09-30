@@ -5,6 +5,8 @@ package Entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,10 +21,11 @@ import javax.persistence.TemporalType;
 )
 public class Claro  implements java.io.Serializable {
 
-
+    private int id;
      private String codigo;
      private String nombreServicio;
      private Double montoTotal;
+     private Double montoPagado;
      private Double montoMinimo;
      private String status;
      private Integer nroTelefono;
@@ -44,12 +47,23 @@ public class Claro  implements java.io.Serializable {
     }
     
     
-    @Id     
-    @Column(name="codigo", unique = true)
+    @Id   
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+    @Column(name="codigo")
     public String getCodigo() {
         return this.codigo;
     }
-    
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -113,6 +127,16 @@ public class Claro  implements java.io.Serializable {
     public void setVencimiento(Date vencimiento) {
         this.vencimiento = vencimiento;
     }
+
+    @Column(name="montoPagado")
+    public Double getMontoPagado() {
+        return montoPagado;
+    }
+    public void setMontoPagado(Double montoPagado) {
+        this.montoPagado = montoPagado;
+    }
+
+    
 
 
 

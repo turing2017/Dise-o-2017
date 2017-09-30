@@ -11,6 +11,7 @@ import Entity.Claro;
 import Entity.CuentaCliente;
 import Entity.Dgr;
 import dao.ClaroModel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,32 +84,62 @@ public class EmpresasWSImpl implements EmpresasWS{
     }
 
     @Override
-    public CuentaCliente buscarCuentas(String tipoCuenta, String cbu) {
+    public double obtenerSaldo(String tipoCuenta, String cbu) {
         CuentaClienteModel ccm = new CuentaClienteModel();
         List<CuentaCliente> listCuentaCliente = ccm.findAll();
-        CuentaCliente cuentaCliente = new CuentaCliente();     
+        double saldo = 0;
         for(CuentaCliente cc : listCuentaCliente){
-            if(tipoCuenta.equals(cc.getTipoCuenta())&&tipoCuenta.equals(cc.getCbu())){
-                cuentaCliente = cc;
+            if(tipoCuenta.equals(cc.getTipoCuenta())
+                    &&cbu.equals(cc.getCbu())
+                    &&cc.isActivo()){
+                saldo = cc.getMonto();
                 break;
             }
         }
-        return cuentaCliente;
+        return saldo;
     }
 
     @Override
-    public double debitarMonto(String cbu, double monto) {
+    public boolean debitarMonto(String cbu, double monto) {
+        try {
+            CuentaClienteModel ccm = new CuentaClienteModel();
+            CuentaCliente cc = ccm.find(cbu);
+            cc.setMonto(cc.getMonto()-monto);
+            ccm.update(cc);        
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean acreditarPagoDgr(String codigo, Date vencimiento, double monto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public double acreditarPagoDgr(String codigo, Date vencimiento, double monto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public double acreditarPagoClaro(String codigo, Date vencimiento, double monto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean acreditarPagoClaro(String codigo, Date vencimiento, double monto) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            ClaroModel cm = new  ClaroModel();
+            List<Claro> claroList = cm.findAll();
+            Claro c = new Claro();
+            for (Claro claro : claroList) {
+                String date1 = sdf.format(claro.getVencimiento());
+                String date2 = sdf.format(vencimiento);
+                if(codigo.equals(claro.getCodigo())
+                        &&date1
+                                .equals(date2)){
+                    claro.setMontoPagado(monto);
+                    c=claro;
+                    break;
+                }
+            }
+            cm.update(c);        
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
     
     

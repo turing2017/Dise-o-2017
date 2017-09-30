@@ -44,15 +44,15 @@ public interface EmpresasWS {
     public List<Claro> buscarComprobantesCodigoClaro(String codigo);    
     
     @WebMethod
-    public CuentaCliente buscarCuentas(String tipoCuenta, String cbu);
+    public double obtenerSaldo(String tipoCuenta, String cbu);
     
     @WebMethod
-    public double debitarMonto(String cbu, double monto);
+    public boolean debitarMonto(String cbu, double monto);
     
     @WebMethod
-    public double acreditarPagoDgr(String codigo, Date vencimiento, double monto);
+    public boolean acreditarPagoDgr(String codigo, Date vencimiento, double monto);
 
     @WebMethod
-    public double acreditarPagoClaro(String codigo, Date vencimiento, double monto);
+    public boolean acreditarPagoClaro(String codigo, Date vencimiento, double monto);
     
 }

@@ -165,7 +165,7 @@ public class ExpertoCalcularLiquidaciones {
             ultimaLiquidacion.setFechaHoraLiquidacion(date0);
             // fin metodo vandenbosch
             
-             //Si tiene Liquidaciones generadas
+            //Si tiene Liquidaciones generadas
             if (liquidaciones != null) {
                 for (Object liquidacion : liquidaciones) {
                     //Buscar la ultima liquidacion con la fechaHoraHasta mas reciente
@@ -182,12 +182,12 @@ public class ExpertoCalcularLiquidaciones {
                 
                 Date fechaLiquidacion = ultimaLiquidacion.getFechaHoraLiquidacion();
                 //fecha de la condicion
+                //sumo dias + frecuencia y eso lo asigno a fechaALiquidar
                 fechaLiquidacion.setDate(fechaLiquidacion.getDate() + frecuencia);
                 Date fechaALiquidar = fechaLiquidacion;
-                
-                Date d = new Date();
-                if (fechaALiquidar.after(d)) {
-                    //  buscar Operacion
+                //si fechaHoraLiquidacion+frecuencia >= fecha actual
+                if (fechaALiquidar.after(new Date())) {
+                    //  buscar  "Operacion", "fechaHoraOperacion >= fechaHoraLiquidacion AND fechaHoraOperacion <= fechaActual " ysea del empresaTipoImpuesto
                     
                     DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", ultimaLiquidacion.getFechaHoraLiquidacion());
                     DTOCriterio criterio4 = new DTOCriterio("fechaHoraOperacion", "<=", new Date());
@@ -206,12 +206,12 @@ public class ExpertoCalcularLiquidaciones {
                     
                 }
             } else {
-                //No tiene Liquidaciones generardas
-                Date d = new Date();
+                //si NO tiene Liquidaciones generardas
+                
                 int frecuencia = empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto();
                 Date fechaLiquidacion = empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto();
                 fechaLiquidacion.setDate(fechaLiquidacion.getDate() + frecuencia);
-                if (fechaLiquidacion.after(d)) {
+                if (fechaLiquidacion.after(new Date())) {
                     // buscar Operacion
                     
                     DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
@@ -256,26 +256,35 @@ public class ExpertoCalcularLiquidaciones {
 
                 //fin loop por cada operacion
             }
-            
+            //busco "EstadoLiquidacion", nombreEstadoLiquidacion= Creada"
             DTOCriterio criterio8 = new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoCreada);
             criterios.clear();
             criterios.add(criterio8);
             EstadoLiquidacion estadoLiquidacionPendiente = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
             
+            // newLiquidacionEstado
             LiquidacionEstado liqEstado = new LiquidacionEstado();
-            liqEstado.setFechaHoraDesdeLiquidacionEstado(new Date());
+            //setEstadoLiquidacion(estadoLiquidacion)
             liqEstado.setEstadoLiquidacion(estadoLiquidacionPendiente);
-            //Guardo nuevo estado
-            FachadaPersistencia.getInstance().guardar(liqEstado);
+            //setFechaHoraDesdeLiquidacionEstado(fechaActual)
+            liqEstado.setFechaHoraDesdeLiquidacionEstado(new Date());
+            
+            //setLiquidacionEstado(LiquidacionEstado)
             nuevaLiquidacion.getLiquidacionEstadoList().add(liqEstado);
-            //ver como genearar el numero
-            nuevaLiquidacion.setNumeroLiquidacion(ultimaLiquidacion.getNumeroLiquidacion() + 1);
+            //setnumeroLiquidacion(numeroLiquidacion)
+            nuevaLiquidacion.setNumeroLiquidacion(ultimaLiquidacion.getNumeroLiquidacion() + 1);//ver como genearar el numero
+            //setFechaHoraLiquidacion(fechaActual)
             nuevaLiquidacion.setFechaHoraLiquidacion(new Date());
-            //creo q asi, quiza explote en la 1era tengo miedo
-            nuevaLiquidacion.setFechaHoraDesdeLiquidacion(ultimaLiquidacion.getFechaHoraHastaLiquidacion());
+           //setfechaHoraDesdeLiquidacion(fechahoraDesdeLiquidacion)
+            nuevaLiquidacion.setFechaHoraDesdeLiquidacion(ultimaLiquidacion.getFechaHoraHastaLiquidacion()); //creo q asi, quiza explote en la 1era tengo miedo
+            //setFechaHoraHastaLiquidacion
             nuevaLiquidacion.setFechaHoraHastaLiquidacion(new Date());
+            //setEmpresaTipoImpuesto
             nuevaLiquidacion.setEmpresaTipoImpuesto(empresaTipoImpuesto);
 
+            
+            //Guardo nuevo LiquidacionEstado
+            FachadaPersistencia.getInstance().guardar(liqEstado);
             //Guardo la liquidacion
             FachadaPersistencia.getInstance().guardar(nuevaLiquidacion);
 

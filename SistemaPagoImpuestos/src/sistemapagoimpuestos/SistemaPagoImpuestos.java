@@ -20,9 +20,10 @@ public class SistemaPagoImpuestos {
         //FachadaInterna.getInstance().finalizarTransaccion();
         //IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
         //iUPagarImpuesto.show();
-        ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
+        
+        //ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
+       // controlador.iniciar();
+        ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
         controlador.iniciar();
-        //ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
-        //controlador.iniciar();
     }
 }

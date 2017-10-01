@@ -19,8 +19,12 @@ public class EstrategiaPeriodicidad implements EstrategiaCalculoComision{
     
     @Override
     public Double obtenerValorComision(Operacion operacion) {
+       
        String tipoPeriodicidad = "";
        Double porcentajeComision = 0.0;
+       Double comisionCalculada;
+       Double importeOperacionPagado;
+      
        List<DetalleOperacion> listDetallesOp = operacion.getDetalleOperacionList() ;
        for (DetalleOperacion detalleOp : listDetallesOp){
           if (detalleOp.getItemEmpresaTipoImpuesto().isIndicaPeriodicidadItemEmpresaTipoImpuesto()){
@@ -53,7 +57,8 @@ public class EstrategiaPeriodicidad implements EstrategiaCalculoComision{
                 porcentajeComision = parametrosCalculoPeriodicidad.getQuincenalPCPeriodicidad();
                 break;
         }
-        
-        return operacion.getImportePagadoOperacion()*porcentajeComision;
+        importeOperacionPagado = operacion.getImportePagadoOperacion();
+        comisionCalculada = importeOperacionPagado * porcentajeComision;
+        return comisionCalculada;
     }
 }

@@ -61,16 +61,17 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="text_cbu" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="lbl_out_cbu" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="text_cbu" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="text_monto_a_pagar" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="txt_tipo_cuenta" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="lbl_out_tipo_Cuenta" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textfield_monto_a_pagar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_out_cbu" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -126,7 +127,12 @@
                   <Component id="text_cbu" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_out_cbu" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="text_monto_a_pagar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textfield_monto_a_pagar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_cerrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_continuar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -217,18 +223,34 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_out_tipo_Cuenta">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel5"/>
+        <Property name="text" type="java.lang.String" value="-Seleccionar Cuenta-"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_out_cbu">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel6"/>
+        <Property name="text" type="java.lang.String" value="-Seleccionar Cuenta-"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_continuar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Continuar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_continuarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="text_monto_a_pagar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Monto a pagar:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textfield_monto_a_pagar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-Ingresar monto a pagar-"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_monto_a_pagarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

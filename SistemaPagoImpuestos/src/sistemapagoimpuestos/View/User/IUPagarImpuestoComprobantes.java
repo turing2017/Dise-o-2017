@@ -1,6 +1,8 @@
 package sistemapagoimpuestos.View.User;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,16 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
     public IUPagarImpuestoComprobantes() {
         initComponents();
+        btn_continuar.setEnabled(false);
+        textfield_monto_a_pagar.setEnabled(false);
+        btn_continuar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (lbl_out_tipo_Cuenta.getText() != "-Seleccionar Cuenta-") {
+                    btn_continuar.setEnabled(true);
+                }
+            }
+        });
     }
     
     public IUPagarImpuestoComprobantes(List<DTOComprobante> listadoDTOComprobante){
@@ -48,6 +60,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         lbl_out_tipo_Cuenta = new javax.swing.JLabel();
         lbl_out_cbu = new javax.swing.JLabel();
         btn_continuar = new javax.swing.JButton();
+        text_monto_a_pagar = new javax.swing.JLabel();
+        textfield_monto_a_pagar = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -101,11 +115,25 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         txt_tipo_cuenta.setText("Tipo de Cuenta:");
 
-        lbl_out_tipo_Cuenta.setText("jLabel5");
+        lbl_out_tipo_Cuenta.setText("-Seleccionar Cuenta-");
 
-        lbl_out_cbu.setText("jLabel6");
+        lbl_out_cbu.setText("-Seleccionar Cuenta-");
 
         btn_continuar.setText("Continuar");
+        btn_continuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_continuarActionPerformed(evt);
+            }
+        });
+
+        text_monto_a_pagar.setText("Monto a pagar:");
+
+        textfield_monto_a_pagar.setText("-Ingresar monto a pagar-");
+        textfield_monto_a_pagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfield_monto_a_pagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,15 +156,16 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                         .addContainerGap(41, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(text_cbu)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl_out_cbu))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txt_tipo_cuenta)
-                                    .addGap(113, 113, 113)
-                                    .addComponent(lbl_out_tipo_Cuenta)))
+                                    .addComponent(text_monto_a_pagar)
+                                    .addComponent(txt_tipo_cuenta))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_out_tipo_Cuenta)
+                                    .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_out_cbu)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
                                 .addComponent(title_cuenta_select)))
@@ -177,7 +206,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text_cbu)
                     .addComponent(lbl_out_cbu))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(text_monto_a_pagar)
+                    .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cerrar)
                     .addComponent(btn_continuar))
@@ -191,6 +224,14 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         List<DTOCuentaBancaria> listaDTOCuentas = controlador.obtenerCuentas("10000");
         
     }//GEN-LAST:event_btn_Selec_CuentaActionPerformed
+
+    private void btn_continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_continuarActionPerformed
+        
+    }//GEN-LAST:event_btn_continuarActionPerformed
+
+    private void textfield_monto_a_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_monto_a_pagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textfield_monto_a_pagarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -307,6 +348,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_out_tipo_Cuenta;
     private javax.swing.JTable tabla_comprobantes;
     private javax.swing.JLabel text_cbu;
+    private javax.swing.JLabel text_monto_a_pagar;
+    private javax.swing.JTextField textfield_monto_a_pagar;
     private javax.swing.JLabel title_cuenta_select;
     private javax.swing.JLabel txt_tipo_cuenta;
     // End of variables declaration//GEN-END:variables

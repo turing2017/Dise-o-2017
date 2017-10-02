@@ -161,7 +161,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBox_tipoImpuestoActionPerformed
 
     private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
-        controlador.seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
+        controlador.seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString(), comboBox_tipoImpuesto.getSelectedItem().toString());
         this.dispose();
     }//GEN-LAST:event_button_buscarActionPerformed
 

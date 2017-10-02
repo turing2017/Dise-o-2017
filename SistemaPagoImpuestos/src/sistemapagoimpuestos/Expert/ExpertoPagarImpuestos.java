@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import sistemapagoimpuestos.Adaptador.AdaptadorBanco;
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCriterio;
@@ -29,6 +30,7 @@ import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Entity.ParametroSistema;
 import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
+import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionBanco;
 import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionEmpresa;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
@@ -39,6 +41,7 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
 public class ExpertoPagarImpuestos {
     
     private AdaptadorEmpresaClaro adaptadorEmpresaClaro;
+    private AdaptadorBanco adaptadorBanco;
     private TipoImpuesto tipoImpuesto;
     
         // Método para recuperar los TipoDatoItem
@@ -94,16 +97,9 @@ public class ExpertoPagarImpuestos {
         
         // Busco los parámetros del sistema
         ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
-        String nombreBanco = parametroSistema.getNombreBancoParametroSistema();
-        
-        // Aca se deberia crear el adaptador segun el cual conectarse a la URL del banco y recuperar los saldos de las cuentas
-        //
-        //
-        // @mvissio
-        //
-        //
-        //
-        
+        // En base al parametro del sistema creo el adaptador del banco
+        setAdaptadorBanco((AdaptadorBanco)FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema));
+
         // Busco el Cliente por cuil
         List<DTOCriterio> criteriosCliente = new ArrayList<>();
         DTOCriterio criterioCuil = new DTOCriterio("cuilCuitCliente", "=", cuilCliente);
@@ -116,16 +112,7 @@ public class ExpertoPagarImpuestos {
         criteriosCuenta.add(criterioCliente);
         List<Object> listaCuentas = FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosCuenta);
         
-        for (Object cuenta : listaCuentas) {
-            
-            // Esto se encuentra hardcodeado
-            // Debe conectarse al adaptador del banco y devolver para CADA UNA
-            // de las cuentas el saldo
-            double saldoRecuperado = 6543.43;
-            
-            
-            
-            
+        for (Object cuenta : listaCuentas) {      
             CuentaBancaria cuentaTemp = (CuentaBancaria) cuenta;
             TipoCuenta tipoCuentaTemp = (TipoCuenta) cuentaTemp.getTipoCuenta();
             DTOTipoCuenta dtoTipoCuenta = new DTOTipoCuenta();
@@ -133,7 +120,7 @@ public class ExpertoPagarImpuestos {
             DTOCuentaBancaria dtoCuentaBancariaTemp = new DTOCuentaBancaria();
             dtoCuentaBancariaTemp.setCbuCuentaBancaria(cuentaTemp.getCbuCuentaBancaria());
             dtoCuentaBancariaTemp.setTipoCuenta(dtoTipoCuenta);
-            dtoCuentaBancariaTemp.setSaldoRecuperado(saldoRecuperado);
+            dtoCuentaBancariaTemp.setSaldoRecuperado(adaptadorBanco.consultarSaldo(cuentaTemp.getCbuCuentaBancaria())); // Consulto mediante adaptador el saldo
             listaDTOCuentaBancaria.add(dtoCuentaBancariaTemp);
         }
         return listaDTOCuentaBancaria;
@@ -169,17 +156,15 @@ public class ExpertoPagarImpuestos {
     public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, DTOComprobante dtoComprobante, String codigoPagoIngres, String empresaSelec, String tipoImpuestoSelec){
         
         // Debito el pago
-        // Aca se deberia conectar con el servicio del banco para avisarle que debite el pago
-        // deberia recibir el cbu y el monto, y devolver boolean
-        // por ejemplo: debitarMonto(cbuSeleccionado, montoIngresado)
-        //debitarPago(cbuCuentaSeleccionada);
+        adaptadorBanco.debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
         
         // Creo la operación
         Operacion operacion = new Operacion();
         operacion.setCodigoPagoElectrionicoOperacion(codigoPagoIngres);
         operacion.setFechaHoraOperacion(new Date());
         operacion.setImportePagadoOperacion(montoAbonado);
-        operacion.setNroComprobanteFacturaOperacion(ThreadLocalRandom.current().nextInt(1,1000000000)); // es aleatorio
+        int nroComprobanteFactura = ThreadLocalRandom.current().nextInt(1,1000000000); // Esto se deberia recuperar del DTO, proviene del web service
+        operacion.setNroComprobanteFacturaOperacion(nroComprobanteFactura);
         operacion.setNumeroOperacion(ThreadLocalRandom.current().nextInt(1,1000000000)); // es aleatorio
         operacion.setLiquidadaOperacion(false);    
         // Para setear la cuenta bancaria la busco por CBU
@@ -239,9 +224,8 @@ public class ExpertoPagarImpuestos {
         FachadaPersistencia.getInstance().guardar(operacion);
         
         // Aviso del pago a la Empresa
-        // Aca se debería utilziar el adaptador para la Empresa Claro
-        // Y mediante un metodo avisarles del pago. Debe devolver boolean
-        //avisarPago(nroComprobante, fechaVencimiento)
+        setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSelec)); // Obtengo el adaptador
+        adaptadorEmpresaClaro.confirmarPago(nroComprobanteFactura, dtoComprobante.getFechaHoraVencimientoDTOComprobante());
         
         // Creo y devuelvo el DTOOperacion
         DTOOperacion dtoOperacion= new DTOOperacion();
@@ -266,6 +250,14 @@ public class ExpertoPagarImpuestos {
 
     public void setAdaptadorEmpresaClaro(AdaptadorEmpresaClaro adaptadorEmpresaClaro) {
         this.adaptadorEmpresaClaro = adaptadorEmpresaClaro;
+    }
+
+    public void setAdaptadorBanco(AdaptadorBanco adaptadorBanco) {
+        this.adaptadorBanco = adaptadorBanco;
+    }
+
+    public AdaptadorBanco getAdaptadorBanco() {
+        return adaptadorBanco;
     }
 
     public TipoImpuesto getTipoImpuesto() {

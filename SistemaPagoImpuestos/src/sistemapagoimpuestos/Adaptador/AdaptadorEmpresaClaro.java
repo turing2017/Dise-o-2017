@@ -73,4 +73,9 @@ public class AdaptadorEmpresaClaro {
         }
         return dTOItems;
     }
+    
+    public boolean confirmarPago(int numeroComprobante, Date fechaVencimiento){
+        // Esto esta hardcodeado, deberia conectarse y avisar del pago a la empresa
+        return true;
+    }
 }

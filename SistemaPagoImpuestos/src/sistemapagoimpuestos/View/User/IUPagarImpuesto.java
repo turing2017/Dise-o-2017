@@ -24,7 +24,6 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         initComponents();
         // Busco todos los tipoimpuestos
         llenarComboTipoImpuesto(buscarTipoImpuestos());
-        System.out.println(comboBox_tipoImpuesto.getSelectedItem().toString());
         // Agrego action listener para que se ejecute cuando cambie el valor seleccionado de TI
         comboBox_tipoImpuesto.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
@@ -154,6 +153,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboBox_tipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipoImpuestoActionPerformed

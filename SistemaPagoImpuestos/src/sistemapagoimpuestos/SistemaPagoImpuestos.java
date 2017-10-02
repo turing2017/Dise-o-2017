@@ -19,7 +19,8 @@ public class SistemaPagoImpuestos {
         //c.findComprobantes("test");
         //FachadaInterna.getInstance().finalizarTransaccion();
         IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
-        iUPagarImpuesto.show();
+        iUPagarImpuesto.setVisible(true);
+        
         //ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
         //controlador.iniciar();
     }

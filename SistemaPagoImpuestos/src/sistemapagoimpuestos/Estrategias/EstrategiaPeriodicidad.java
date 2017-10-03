@@ -36,26 +36,35 @@ public class EstrategiaPeriodicidad implements EstrategiaCalculoComision{
         parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad) parametros.get(0);
         switch (tipoPeriodicidad) {
             case "mensual":
+            case "30":
                 porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
                 break;
             case "bimestral":
+            case "60":
                 porcentajeComision = parametrosCalculoPeriodicidad.getBimestralPCPeriodicidad();
                 break;
             case "trimestral":
+            case "90":
                 porcentajeComision = parametrosCalculoPeriodicidad.getTrimestralPCPeriodicidad();
                 break;
             case "cuatrimestral":
+            case "120":
                 porcentajeComision = parametrosCalculoPeriodicidad.getCuatrimestralPCPeriodicidad();
                 break;
             case "semestral":
+            case "180":
                 porcentajeComision = parametrosCalculoPeriodicidad.getSemestralPCPeriodicidad();
                 break;
             case "anual":
+            case "360":
                 porcentajeComision = parametrosCalculoPeriodicidad.getAnualPCPeriodicidad();
                 break;
             case "quincenal":
+            case "15":
                 porcentajeComision = parametrosCalculoPeriodicidad.getQuincenalPCPeriodicidad();
                 break;
+                default: porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
+
         }
         importeOperacionPagado = operacion.getImportePagadoOperacion();
         comisionCalculada = importeOperacionPagado * porcentajeComision;

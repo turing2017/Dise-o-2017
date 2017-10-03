@@ -63,5 +63,4 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
         return dtoOperacion;
     }
     
-    
 }

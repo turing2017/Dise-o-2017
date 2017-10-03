@@ -12,6 +12,9 @@ import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
@@ -47,7 +50,16 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         this.setLabel_EmpresaSelec(nombreEmpresa);
         this.setLabel_TipoImpuestoSelec(nombreTipoImpuesto);
         cargarTablaComprobantes(listadoDTOComprobante);
-    }
+        
+        btn_Selec_Cuenta.setEnabled(false);
+        ListSelectionModel listSelectionModel = tabla_comprobantes.getSelectionModel();
+        listSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+                btn_Selec_Cuenta.setEnabled(!lsm.isSelectionEmpty());
+        }
+        });
+        }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

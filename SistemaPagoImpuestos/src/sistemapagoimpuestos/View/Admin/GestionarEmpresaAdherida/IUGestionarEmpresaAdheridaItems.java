@@ -203,7 +203,6 @@ Vector empresaExistente;
 
     private void button_AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AceptarActionPerformed
         
-        try {
             
             DTOEmpresaTipImpItem dTOEmpresaTipImpItem = new DTOEmpresaTipImpItem();
             List<DtoItemOrden> dtoItemOrdenList = new ArrayList<>();
@@ -234,10 +233,6 @@ Vector empresaExistente;
            
             controlador.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItem);
             
-        } catch (IndexOutOfBoundsException e) {
-
-     }
-        
     this.dispose();
         
     }//GEN-LAST:event_button_AceptarActionPerformed

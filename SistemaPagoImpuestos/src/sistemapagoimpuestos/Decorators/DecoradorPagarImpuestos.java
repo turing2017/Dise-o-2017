@@ -9,6 +9,7 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -53,6 +54,13 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
         FachadaInterna.getInstance().finalizarTransaccion();
         return listaCuentasBancarias;
     }
-    
+
+    @Override
+    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, DTOComprobante dtoComprobante, String codigoPagoIngres, String empresaSelec, String tipoImpuestoSelec) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        DTOOperacion dtoOperacion = super.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, dtoComprobante, codigoPagoIngres, empresaSelec, tipoImpuestoSelec);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return dtoOperacion;
+    }
     
 }

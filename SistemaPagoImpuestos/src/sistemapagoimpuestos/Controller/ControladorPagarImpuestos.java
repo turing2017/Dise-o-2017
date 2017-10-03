@@ -5,14 +5,17 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoComprobantes;
+import sistemapagoimpuestos.View.User.IUPagarImpuestoCuentas;
 
 /**
  *
@@ -36,15 +39,28 @@ public class ControladorPagarImpuestos {
         return experto.buscarEmpresas(nombreTipoImpuesto);
     }
     
-
-    
     // Método para buscar las cuentas y saldos
-    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente){
-        return experto.obtenerCuentas(cuilCliente);
+    public void obtenerCuentas(String cuilCliente, IUPagarImpuestoComprobantes pantallaComprobantes){
+        IUPagarImpuestoCuentas pantallaCuentas = new IUPagarImpuestoCuentas(experto.obtenerCuentas(cuilCliente), pantallaComprobantes);
+        pantallaCuentas.setVisible(true);
     }
     
-    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
-        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(experto.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres));
+    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres, String tipoImpuestoIngres){
+        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(experto.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres), codigoPagoElectronicoIngres, nombreEmpresaIng, tipoImpuestoIngres);
+        // Si es editable se debe mostrar para que edite, falta esta funcionalidad
+        if (empresaTipoImpuestoEsEditable()) {
+            pantallaComprobantes.setearEditable();
+        }
         pantallaComprobantes.setVisible(true);
+    }
+    
+    // Verifico si la empresa tipoImpuesto es editable
+    public boolean empresaTipoImpuestoEsEditable(){
+        return experto.getTipoImpuesto().isEsMontoEditableTipoImpuesto();
+    }
+    
+    // Pagar impuesto
+    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, DTOComprobante dtoComprobante, String codigoPagoIngres, String empresaSelec, String tipoImpuestoSelec){
+        return experto.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, dtoComprobante, codigoPagoIngres, empresaSelec, tipoImpuestoSelec);
     }
 }

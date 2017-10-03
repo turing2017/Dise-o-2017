@@ -23,7 +23,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -41,54 +41,48 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="label_TipoImpuesto" min="-2" max="-2" attributes="0"/>
-                          <Component id="label_Empresa" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="label_TipoImpuestoSelec" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label_EmpresaSelec" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="532" max="-2" attributes="0"/>
+                          <Component id="text_cbu" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="text_monto_a_pagar" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_tipo_cuenta" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="text_cbu" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="lbl_out_cbu" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="txt_tipo_cuenta" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                                  <Component id="lbl_out_tipo_Cuenta" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="title_cuenta_select" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lbl_out_cbu" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_out_tipo_Cuenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="textfield_monto_a_pagar" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Component id="btn_Selec_Cuenta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="label_TipoImpuesto" min="-2" max="-2" attributes="0"/>
+                              <Component id="label_Empresa" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="label_TipoImpuestoSelec" min="-2" max="-2" attributes="0"/>
+                                      <Component id="label_EmpresaSelec" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btn_cerrar" min="-2" pref="107" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="button_pagar" min="-2" pref="109" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="719" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btn_cerrar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btn_continuar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="title_cuenta_select" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,28 +104,30 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="145" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="title_cuenta_select" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_tipo_cuenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_out_tipo_Cuenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="btn_Selec_Cuenta" min="-2" max="-2" attributes="0"/>
+              <Component id="btn_Selec_Cuenta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Component id="title_cuenta_select" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_tipo_cuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_out_tipo_Cuenta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="text_cbu" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_out_cbu" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btn_cerrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_continuar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="text_monto_a_pagar" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="textfield_monto_a_pagar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="button_pagar" pref="40" max="32767" attributes="0"/>
+                  <Component id="btn_cerrar" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -202,7 +198,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="title_cuenta_select">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cuenta Seleccionada"/>
+        <Property name="text" type="java.lang.String" value="Datos de la cuenta seleccionada:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="text_cbu">
@@ -217,18 +213,31 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_out_tipo_Cuenta">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel5"/>
+        <Property name="text" type="java.lang.String" value="-Seleccionar Cuenta-"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_out_cbu">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel6"/>
+        <Property name="text" type="java.lang.String" value="-Seleccionar Cuenta-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_continuar">
+    <Component class="javax.swing.JButton" name="button_pagar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Continuar"/>
+        <Property name="text" type="java.lang.String" value="Pagar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_pagarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="text_monto_a_pagar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Monto a pagar:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textfield_monto_a_pagar">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_monto_a_pagarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

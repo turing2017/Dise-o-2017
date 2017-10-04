@@ -37,7 +37,7 @@ public class AdaptadorEmpresaClaro {
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
         for (Claro claro : listClaro) {
             DTOComprobante comprobante = new DTOComprobante();
-            comprobante.setCodigoDTOComprobante(claro.getCodigo());
+            comprobante.setCodigoDTOComprobante(claro.getNroFactura()+"");
             comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
             comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
 

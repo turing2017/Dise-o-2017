@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 )
 public class Claro  implements java.io.Serializable {
 
-    private int id;
+    private int nroFactura;
      private String codigo;
      private String nombreServicio;
      private Double montoTotal;
@@ -47,15 +47,14 @@ public class Claro  implements java.io.Serializable {
     }
     
     
-    @Id   
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    public int getId() {
-        return id;
+    @Id
+    @Column(name="nroFactura")
+    public int getNroFactura() {
+        return nroFactura;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNroFactura(int id) {
+        this.nroFactura = id;
     }
     
     

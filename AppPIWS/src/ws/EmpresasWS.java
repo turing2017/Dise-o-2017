@@ -44,7 +44,7 @@ public interface EmpresasWS {
     public List<Claro> buscarComprobantesCodigoClaro(String codigo);    
     
     @WebMethod
-    public double obtenerSaldo(String tipoCuenta, String cbu);
+    public double obtenerSaldo(String cbu);
     
     @WebMethod
     public boolean debitarMonto(String cbu, double monto);

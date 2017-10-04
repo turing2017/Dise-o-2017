@@ -84,13 +84,12 @@ public class EmpresasWSImpl implements EmpresasWS{
     }
 
     @Override
-    public double obtenerSaldo(String tipoCuenta, String cbu) {
+    public double obtenerSaldo(String cbu) {
         CuentaClienteModel ccm = new CuentaClienteModel();
         List<CuentaCliente> listCuentaCliente = ccm.findAll();
         double saldo = 0;
         for(CuentaCliente cc : listCuentaCliente){
-            if(tipoCuenta.equals(cc.getTipoCuenta())
-                    &&cbu.equals(cc.getCbu())
+            if(cbu.equals(cc.getCbu())
                     &&cc.isActivo()){
                 saldo = cc.getMonto();
                 break;

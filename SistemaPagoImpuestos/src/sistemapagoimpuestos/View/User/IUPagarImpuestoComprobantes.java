@@ -299,7 +299,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         
         // Muestro los datos en la tabla
         ArrayList<String> columnList = new ArrayList<>();          
-        columnList.add("Codigo");
+        columnList.add("Numero Factura");
         columnList.add("Monto Total");
         columnList.add("Vencimiento");
              

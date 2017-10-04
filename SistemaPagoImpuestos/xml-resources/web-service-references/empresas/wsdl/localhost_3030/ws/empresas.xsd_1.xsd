@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
 
+<xs:element name="acreditarPagoClaro" type="tns:acreditarPagoClaro"></xs:element>
+
+<xs:element name="acreditarPagoClaroResponse" type="tns:acreditarPagoClaroResponse"></xs:element>
+
+<xs:element name="acreditarPagoDgr" type="tns:acreditarPagoDgr"></xs:element>
+
+<xs:element name="acreditarPagoDgrResponse" type="tns:acreditarPagoDgrResponse"></xs:element>
+
 <xs:element name="buscarComprobantesCodigoClaro" type="tns:buscarComprobantesCodigoClaro"></xs:element>
 
 <xs:element name="buscarComprobantesCodigoClaroResponse" type="tns:buscarComprobantesCodigoClaroResponse"></xs:element>
@@ -7,6 +15,10 @@
 <xs:element name="buscarComprobantesCodigoDgr" type="tns:buscarComprobantesCodigoDgr"></xs:element>
 
 <xs:element name="buscarComprobantesCodigoDgrResponse" type="tns:buscarComprobantesCodigoDgrResponse"></xs:element>
+
+<xs:element name="debitarMonto" type="tns:debitarMonto"></xs:element>
+
+<xs:element name="debitarMontoResponse" type="tns:debitarMontoResponse"></xs:element>
 
 <xs:element name="findAllClaro" type="tns:findAllClaro"></xs:element>
 
@@ -24,6 +36,10 @@
 
 <xs:element name="findForCodeDgrResponse" type="tns:findForCodeDgrResponse"></xs:element>
 
+<xs:element name="obtenerSaldo" type="tns:obtenerSaldo"></xs:element>
+
+<xs:element name="obtenerSaldoResponse" type="tns:obtenerSaldoResponse"></xs:element>
+
 <xs:element name="pagarComprobanteClaro" type="tns:pagarComprobanteClaro"></xs:element>
 
 <xs:element name="pagarComprobanteClaroResponse" type="tns:pagarComprobanteClaroResponse"></xs:element>
@@ -31,6 +47,19 @@
 <xs:element name="pagarComprobanteDgr" type="tns:pagarComprobanteDgr"></xs:element>
 
 <xs:element name="pagarComprobanteDgrResponse" type="tns:pagarComprobanteDgrResponse"></xs:element>
+
+<xs:complexType name="debitarMonto">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="debitarMontoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="findAllClaro">
 <xs:sequence></xs:sequence>
@@ -46,8 +75,10 @@
 <xs:sequence>
 <xs:element name="codigo" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="montoMinimo" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="montoPagado" type="xs:double" minOccurs="0"></xs:element>
 <xs:element name="montoTotal" type="xs:double" minOccurs="0"></xs:element>
 <xs:element name="nombreServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nroFactura" type="xs:int"></xs:element>
 <xs:element name="nroTelefono" type="xs:int" minOccurs="0"></xs:element>
 <xs:element name="status" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="vencimiento" type="xs:dateTime" minOccurs="0"></xs:element>
@@ -62,6 +93,20 @@
 </xs:complexType>
 
 <xs:complexType name="pagarComprobanteClaroResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="acreditarPagoDgr">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="acreditarPagoDgrResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"></xs:element>
 </xs:sequence>
@@ -114,6 +159,20 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="acreditarPagoClaro">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="acreditarPagoClaroResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="buscarComprobantesCodigoDgr">
 <xs:sequence>
 <xs:element name="arg0" type="xs:int"></xs:element>
@@ -123,6 +182,18 @@
 <xs:complexType name="buscarComprobantesCodigoDgrResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:dgr" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerSaldo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerSaldoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

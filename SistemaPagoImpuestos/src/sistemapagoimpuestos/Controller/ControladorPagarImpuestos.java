@@ -12,6 +12,7 @@ import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoComprobantes;
@@ -35,8 +36,8 @@ public class ControladorPagarImpuestos {
     }
     
     // Método para recuperar las Empresas
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto){
-        return experto.buscarEmpresas(nombreTipoImpuesto);
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuestoSelec){
+        return experto.buscarEmpresas(nombreTipoImpuestoSelec);
     }
     
     // Método para buscar las cuentas y saldos
@@ -45,8 +46,8 @@ public class ControladorPagarImpuestos {
         pantallaCuentas.setVisible(true);
     }
     
-    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres, String tipoImpuestoIngres){
-        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(experto.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres), codigoPagoElectronicoIngres, nombreEmpresaIng, tipoImpuestoIngres);
+    public void seleccionarEmpresa(String nombreEmpresaIngres, String codigoPagoElectronicoIngres, String nombreTipoImpuestoIngres){
+        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(experto.seleccionarEmpresa(nombreEmpresaIngres, codigoPagoElectronicoIngres), codigoPagoElectronicoIngres, nombreEmpresaIngres, nombreTipoImpuestoIngres);
         // Si es editable se debe mostrar para que edite, falta esta funcionalidad
         if (empresaTipoImpuestoEsEditable()) {
             pantallaComprobantes.setearEditable();
@@ -62,5 +63,9 @@ public class ControladorPagarImpuestos {
     // Pagar impuesto
     public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, DTOComprobante dtoComprobante, String codigoPagoIngres, String empresaSelec, String tipoImpuestoSelec){
         return experto.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, dtoComprobante, codigoPagoIngres, empresaSelec, tipoImpuestoSelec);
+    }
+    
+    public boolean tipoImpuestoEditable(String nombreTipoImpuesto){
+        return experto.tipoImpuestoEditable(nombreTipoImpuesto);
     }
 }

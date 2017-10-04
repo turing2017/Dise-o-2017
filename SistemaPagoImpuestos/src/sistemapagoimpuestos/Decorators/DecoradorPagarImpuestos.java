@@ -11,6 +11,7 @@ import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -63,4 +64,10 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
         return dtoOperacion;
     }
     
+    public boolean tipoImpuestoEditable(String nombreTipoImpuesto){
+        FachadaInterna.getInstance().iniciarTransaccion();
+        boolean esEditable = super.tipoImpuestoEditable(nombreTipoImpuesto);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return esEditable;
+    }
 }

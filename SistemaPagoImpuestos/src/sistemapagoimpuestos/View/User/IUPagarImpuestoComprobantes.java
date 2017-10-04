@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JLabel;
@@ -19,9 +18,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOComprobante;
-import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
 
 public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     
@@ -31,16 +30,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     
     public IUPagarImpuestoComprobantes() {
         initComponents();
-        button_pagar.setEnabled(false);
-        textfield_monto_a_pagar.setEnabled(false);
-        button_pagar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (lbl_out_tipo_Cuenta.getText() != "-Seleccionar Cuenta-") {
-                    button_pagar.setEnabled(true);
-                }
-            }
-        });
+        
     }
     
     public IUPagarImpuestoComprobantes(List<DTOComprobante> listadoDTOComprobante, String codigoPagoIngresado, String nombreEmpresa, String nombreTipoImpuesto){
@@ -54,14 +44,24 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         btn_Selec_Cuenta.setEnabled(false);
         ListSelectionModel listSelectionModel = tabla_comprobantes.getSelectionModel();
         listSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 ListSelectionModel lsm = (ListSelectionModel)e.getSource();
                 btn_Selec_Cuenta.setEnabled(!lsm.isSelectionEmpty());
         }
         });
+        
+        boolean esEditable = controlador.tipoImpuestoEditable(nombreTipoImpuesto);
+        if (esEditable){
+            textfield_monto_a_pagar.setEnabled(true);
         }
-
-    @SuppressWarnings("unchecked")
+        else{
+            textfield_monto_a_pagar.setEnabled(false);
+        }
+        
+    }
+    
+//    @SuppressWarnings("unchecked");
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -141,6 +141,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         lbl_out_cbu.setText("-Seleccionar Cuenta-");
 
         button_pagar.setText("Pagar");
+        button_pagar.setEnabled(false);
         button_pagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_pagarActionPerformed(evt);
@@ -237,6 +238,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
     private void btn_Selec_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Selec_CuentaActionPerformed
         controlador.obtenerCuentas("10000000", this);
+        button_pagar.setEnabled(true);
     }//GEN-LAST:event_btn_Selec_CuentaActionPerformed
 
     private void button_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pagarActionPerformed
@@ -244,15 +246,16 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             // Obtengo el código del elemento seleccionado
             int columnCode = 0;
             int rowSelected = tabla_comprobantes.getSelectedRow();
-            String codigo = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString(); 
+            
+            String codigo = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString();
             DTOOperacion dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(), Double.parseDouble(textfield_monto_a_pagar.getText()),
-                obtenerComprobanteSeleccionado(codigo), getCodigoPagoElectronico(), getLabel_EmpresaSelec(), getLabel_TipoImpuestoSelec());
+                    obtenerComprobanteSeleccionado(codigo), getCodigoPagoElectronico(), getLabel_EmpresaSelec(), getLabel_TipoImpuestoSelec());
             this.dispose();
-            JOptionPane.showMessageDialog(null,"Se ha pagado el impuesto " +dtoOperacion.getTipoImpuesto().getNombreTipoImpuesto() + " de la empresa " + 
-                dtoOperacion.getEmpresa().getNombreEmpresa() + ", el número de la operación es " + dtoOperacion.getNumeroOperacion(), "Operación completada",
-                JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se ha pagado el impuesto " + dtoOperacion.getTipoImpuesto().getNombreTipoImpuesto() + " de la empresa "
+                    + dtoOperacion.getEmpresa().getNombreEmpresa() + ", el número de la operación es " + dtoOperacion.getNumeroOperacion(), "Operación completada",
+                    JOptionPane.PLAIN_MESSAGE);
             IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
-            iUPagarImpuesto.show();          
+            iUPagarImpuesto.show();
         } catch (ArrayIndexOutOfBoundsException e) {
             Excepciones.getInstance().objetoNoSeleccionado();
         }

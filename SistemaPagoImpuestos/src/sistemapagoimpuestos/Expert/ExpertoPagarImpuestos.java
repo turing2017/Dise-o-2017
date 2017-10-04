@@ -33,6 +33,7 @@ import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionBanco;
 import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionEmpresa;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
+import ws.empresas.Claro;
 
 /**
  *
@@ -47,7 +48,9 @@ public class ExpertoPagarImpuestos {
         // Método para recuperar los TipoDatoItem
         public List<DTOTipoImpuesto> buscarTipoImpuestos(){
             //Busqueda de todos los TipoImpuesto (sin criterios)
-            List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
+            List<DTOCriterio> criterioTipoImpuesto = new ArrayList<>();
+            criterioTipoImpuesto.add(new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "IS", null));
+            List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
             List<DTOTipoImpuesto> lista = new ArrayList<>();
             DTOTipoImpuesto dtoTipoImpuesto;
 
@@ -62,11 +65,11 @@ public class ExpertoPagarImpuestos {
     }
     
     // Método para recuperar la Empresa
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto){
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuestoSelec){
             
         //Busca instancia de TipoImpuesto
         List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
-        criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
+        criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuestoSelec));
         List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
         TipoImpuesto tipoImpuesto = (TipoImpuesto) ti.get(0);
         
@@ -126,10 +129,10 @@ public class ExpertoPagarImpuestos {
         return listaDTOCuentaBancaria;
     }
     
-    public List<DTOComprobante> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
+    public List<DTOComprobante> seleccionarEmpresa(String nombreEmpresaIngres, String codigoPagoElectronicoIngres){
         // Busco las Empresa seleccionada
         List<DTOCriterio> criterioEmpresa = new ArrayList();
-        criterioEmpresa.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
+        criterioEmpresa.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIngres));
         List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
         Empresa empresaSeleccionada = (Empresa) empresas.get(0);
         
@@ -144,12 +147,13 @@ public class ExpertoPagarImpuestos {
         EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eti.get(0);
         
         // Obtengo el adaptador
-        setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIng));
+        setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIngres));
         
         // Recupero los comprobantes
         List<DTOComprobante> listadoComprobantes = adaptadorEmpresaClaro.consultarComprobantes(empresaTipoImpuesto, codigoPagoElectronicoIngres);
         
         return listadoComprobantes;
+        
     }
     
     // Metodo para pagar el impuesto, crea la operacion
@@ -234,6 +238,16 @@ public class ExpertoPagarImpuestos {
         dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
         return dtoOperacion;
         
+    }
+    
+    public boolean tipoImpuestoEditable(String nombreTipoImpuesto){
+        List<DTOCriterio> criterioTipoImpuestoEditable = new ArrayList<>();
+        criterioTipoImpuestoEditable.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
+        List tipoImpuesto = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuestoEditable);
+        
+        TipoImpuesto tipoImpuestoEncontrado = (TipoImpuesto)tipoImpuesto.get(0);
+        
+        return tipoImpuestoEncontrado.isEsMontoEditableTipoImpuesto();
     }
     
     public boolean debitarPago(String cbuCuentaSeleccionada){

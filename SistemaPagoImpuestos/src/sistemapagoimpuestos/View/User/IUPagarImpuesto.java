@@ -8,6 +8,7 @@ import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
 
 /**
  *
@@ -215,8 +216,8 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }
     
     // Método para recuperar las Empresas
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto){
-        return controlador.buscarEmpresas(nombreTipoImpuesto);
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuestoSelec){
+        return controlador.buscarEmpresas(nombreTipoImpuestoSelec);
     }
     
     // Método para llenar el combo de Empresa

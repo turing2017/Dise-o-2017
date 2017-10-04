@@ -74,6 +74,7 @@
 <xs:complexType name="claro">
 <xs:sequence>
 <xs:element name="codigo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="codigoCP" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="montoMinimo" type="xs:double" minOccurs="0"></xs:element>
 <xs:element name="montoPagado" type="xs:double" minOccurs="0"></xs:element>
 <xs:element name="montoTotal" type="xs:double" minOccurs="0"></xs:element>
@@ -162,7 +163,7 @@
 <xs:complexType name="acreditarPagoClaro">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="arg1" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="arg2" type="xs:double"></xs:element>
 </xs:sequence>
 </xs:complexType>

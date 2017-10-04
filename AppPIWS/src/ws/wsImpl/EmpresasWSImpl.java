@@ -23,7 +23,7 @@ import ws.EmpresasWS;
  * @author mviss
  */
 @WebService(endpointInterface = "ws.EmpresasWS")
-public class EmpresasWSImpl implements EmpresasWS{
+public class EmpresasWSImpl implements EmpresasWS {
 
     @Override
     public List<Dgr> findAllDgr() {
@@ -57,12 +57,12 @@ public class EmpresasWSImpl implements EmpresasWS{
         DgrModel dm = new DgrModel();
         List<Dgr> listDgr = dm.findAll();
         List<Dgr> comprobantes = new ArrayList<>();
-        for(Dgr dgr : listDgr){
-            if(dgr.getCodigoImpuesto()==codigo){
+        for (Dgr dgr : listDgr) {
+            if (dgr.getCodigoImpuesto() == codigo) {
                 comprobantes.add(dgr);
             }
         }
-        return comprobantes;    
+        return comprobantes;
     }
 
     @Override
@@ -75,8 +75,8 @@ public class EmpresasWSImpl implements EmpresasWS{
         ClaroModel cm = new ClaroModel();
         List<Claro> listClaro = cm.findAll();
         List<Claro> comprobantes = new ArrayList<>();
-        for(Claro claro : listClaro){
-            if(claro.getCodigo().equals(codigo)){
+        for (Claro claro : listClaro) {
+            if (claro.getCodigo().equals(codigo) && claro.getStatus().equals("Pendiente")) {
                 comprobantes.add(claro);
             }
         }
@@ -88,9 +88,9 @@ public class EmpresasWSImpl implements EmpresasWS{
         CuentaClienteModel ccm = new CuentaClienteModel();
         List<CuentaCliente> listCuentaCliente = ccm.findAll();
         double saldo = 0;
-        for(CuentaCliente cc : listCuentaCliente){
-            if(cbu.equals(cc.getCbu())
-                    &&cc.isActivo()){
+        for (CuentaCliente cc : listCuentaCliente) {
+            if (cbu.equals(cc.getCbu())
+                    && cc.isActivo()) {
                 saldo = cc.getMonto();
                 break;
             }
@@ -103,8 +103,8 @@ public class EmpresasWSImpl implements EmpresasWS{
         try {
             CuentaClienteModel ccm = new CuentaClienteModel();
             CuentaCliente cc = ccm.find(cbu);
-            cc.setMonto(cc.getMonto()-monto);
-            ccm.update(cc);        
+            cc.setMonto(cc.getMonto() - monto);
+            ccm.update(cc);
             return true;
         } catch (Exception e) {
             return false;
@@ -117,29 +117,25 @@ public class EmpresasWSImpl implements EmpresasWS{
     }
 
     @Override
-    public boolean acreditarPagoClaro(String codigo, Date vencimiento, double monto) {
+    public boolean acreditarPagoClaro(String nroFactura, String codigoCP, double monto) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            ClaroModel cm = new  ClaroModel();
+            ClaroModel cm = new ClaroModel();
             List<Claro> claroList = cm.findAll();
             Claro c = new Claro();
             for (Claro claro : claroList) {
-                String date1 = sdf.format(claro.getVencimiento());
-                String date2 = sdf.format(vencimiento);
-                if(codigo.equals(claro.getCodigo())
-                        &&date1
-                                .equals(date2)){
+                if (Integer.parseInt(nroFactura)==claro.getNroFactura()) {
                     claro.setMontoPagado(monto);
-                    c=claro;
+                    claro.setStatus("Pagado");
+                    claro.setCodigoCP(codigoCP);
+                    c = claro;
                     break;
                 }
             }
-            cm.update(c);        
+            cm.update(c);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
-    
-    
+
 }

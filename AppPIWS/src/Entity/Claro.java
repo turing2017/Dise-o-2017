@@ -30,7 +30,7 @@ public class Claro  implements java.io.Serializable {
      private String status;
      private Integer nroTelefono;
      private Date vencimiento;
-
+     private String codigoCP;
     public Claro() {
     }
 
@@ -133,6 +133,14 @@ public class Claro  implements java.io.Serializable {
     }
     public void setMontoPagado(Double montoPagado) {
         this.montoPagado = montoPagado;
+    }
+    @Column(name="codigoCP")
+    public String getCodigoCP() {
+        return codigoCP;
+    }
+
+    public void setCodigoCP(String codigoCP) {
+        this.codigoCP = codigoCP;
     }
 
     

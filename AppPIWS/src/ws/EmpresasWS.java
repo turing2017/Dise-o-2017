@@ -53,6 +53,6 @@ public interface EmpresasWS {
     public boolean acreditarPagoDgr(String codigo, Date vencimiento, double monto);
 
     @WebMethod
-    public boolean acreditarPagoClaro(String codigo, Date vencimiento, double monto);
+    public boolean acreditarPagoClaro(String codigo, String codigoCP, double monto);
     
 }

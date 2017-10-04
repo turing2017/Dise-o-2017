@@ -225,7 +225,7 @@ public class ExpertoPagarImpuestos {
         
         // Aviso del pago a la Empresa
         setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSelec)); // Obtengo el adaptador
-        adaptadorEmpresaClaro.confirmarPago(nroComprobanteFactura, dtoComprobante.getFechaHoraVencimientoDTOComprobante());
+        adaptadorEmpresaClaro.confirmarPago(dtoComprobante.getCodigoDTOComprobante(), nroComprobanteFactura, montoAbonado);
         
         // Creo y devuelvo el DTOOperacion
         DTOOperacion dtoOperacion= new DTOOperacion();
@@ -234,14 +234,6 @@ public class ExpertoPagarImpuestos {
         dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
         return dtoOperacion;
         
-    }
-    
-    public boolean debitarPago(String cbuCuentaSeleccionada){
-        return true;
-    }
-    
-    public boolean avisarPago(String numeroComprobante, Date fechaVencimiento){
-        return true;
     }
 
     public void setTipoImpuesto(TipoImpuesto tipoImpuesto) {

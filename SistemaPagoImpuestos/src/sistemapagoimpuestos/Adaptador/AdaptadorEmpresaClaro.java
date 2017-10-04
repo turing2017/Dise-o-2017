@@ -28,11 +28,15 @@ import ws.empresas.EmpresasWSImplService;
  * @author mviss
  */
 public class AdaptadorEmpresaClaro {
-
-    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) {
         EmpresasWSImplService wsImplService
                 = new EmpresasWSImplService();
-        EmpresasWS claroWs = wsImplService.getEmpresasWSImplPort();
+        EmpresasWS claroWs;
+        
+        public AdaptadorEmpresaClaro(){
+            claroWs = wsImplService.getEmpresasWSImplPort();
+        }
+        
+    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) {
         List<Claro> listClaro = claroWs.buscarComprobantesCodigoClaro(codigoPagoElectronicoIngres);
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
         for (Claro claro : listClaro) {
@@ -74,8 +78,7 @@ public class AdaptadorEmpresaClaro {
         return dTOItems;
     }
     
-    public boolean confirmarPago(int numeroComprobante, Date fechaVencimiento){
-        // Esto esta hardcodeado, deberia conectarse y avisar del pago a la empresa
-        return true;
+    public boolean confirmarPago(String nroFactura, Integer codigoCP, double monto){
+        return claroWs.acreditarPagoClaro(nroFactura.toString(), codigoCP.toString(), monto);
     }
 }

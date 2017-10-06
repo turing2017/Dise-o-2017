@@ -5,8 +5,9 @@
  */
 package sistemapagoimpuestos.Fabricas;
 
-import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
-import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaDgr;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresa;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl.AdaptadorEmpresaClaro;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl.AdaptadorEmpresaDgr;
 
 /**
  *
@@ -26,7 +27,7 @@ public class FactoriaAdaptadorConexionEmpresa {
         return instancia;
     }
 
-    public Object getAdaptadorConexionEmpresa(String nombreEmpresa) {
+    public AdaptadorEmpresa getAdaptadorConexionEmpresa(String nombreEmpresa) {
              switch (nombreEmpresa) {
            
             case "DGR": 

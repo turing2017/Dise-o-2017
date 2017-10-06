@@ -253,7 +253,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 JOptionPane.PLAIN_MESSAGE);
             IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
             iUPagarImpuesto.show();          
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NullPointerException e) {
             Excepciones.getInstance().objetoNoSeleccionado();
         }
     }//GEN-LAST:event_button_pagarActionPerformed

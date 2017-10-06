@@ -1,6 +1,6 @@
 package sistemapagoimpuestos;
 
-import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl.AdaptadorEmpresaClaro;
 import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.View.User.IUPagarImpuesto;

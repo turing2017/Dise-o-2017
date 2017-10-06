@@ -3,17 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistemapagoimpuestos.Adaptador;
+package sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl;
 
 
 import java.util.List;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresa;
 import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 
 /**
  *
  * @author mviss
  */
-public class AdaptadorEmpresaDgr {
+public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
+
+    @Override
+    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean confirmarPago(String nroFactura, Integer codigoCP, double monto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     /*
     public List<DTOComprobante> findComprobantes(String codigoComprobante){
         DgrWSImplService dgrWSImplService =

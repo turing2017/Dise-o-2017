@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import sistemapagoimpuestos.Adaptador.AdaptadorBanco;
-import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaClaro;
+import sistemapagoimpuestos.Adaptador.AdaptadorBancoImpl.AdaptadorBancoGalicia;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresa;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl.AdaptadorEmpresaClaro;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
@@ -41,7 +42,7 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
 public class ExpertoPagarImpuestos {
     
     private AdaptadorEmpresaClaro adaptadorEmpresaClaro;
-    private AdaptadorBanco adaptadorBanco;
+    private AdaptadorBancoGalicia adaptadorBanco;
     private TipoImpuesto tipoImpuesto;
     
         // Método para recuperar los TipoDatoItem
@@ -98,7 +99,7 @@ public class ExpertoPagarImpuestos {
         // Busco los parámetros del sistema
         ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
         // En base al parametro del sistema creo el adaptador del banco
-        setAdaptadorBanco((AdaptadorBanco)FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema));
+        setAdaptadorBanco((AdaptadorBancoGalicia)FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema));
 
         // Busco el Cliente por cuil
         List<DTOCriterio> criteriosCliente = new ArrayList<>();
@@ -147,7 +148,7 @@ public class ExpertoPagarImpuestos {
         setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIng));
         
         // Recupero los comprobantes
-        List<DTOComprobante> listadoComprobantes = adaptadorEmpresaClaro.consultarComprobantes(empresaTipoImpuesto, codigoPagoElectronicoIngres);
+        List<DTOComprobante> listadoComprobantes = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIng).consultarComprobantes(empresaTipoImpuesto, codigoPagoElectronicoIngres);
         
         return listadoComprobantes;
     }
@@ -244,11 +245,11 @@ public class ExpertoPagarImpuestos {
         this.adaptadorEmpresaClaro = adaptadorEmpresaClaro;
     }
 
-    public void setAdaptadorBanco(AdaptadorBanco adaptadorBanco) {
+    public void setAdaptadorBanco(AdaptadorBancoGalicia adaptadorBanco) {
         this.adaptadorBanco = adaptadorBanco;
     }
 
-    public AdaptadorBanco getAdaptadorBanco() {
+    public AdaptadorBancoGalicia getAdaptadorBanco() {
         return adaptadorBanco;
     }
 

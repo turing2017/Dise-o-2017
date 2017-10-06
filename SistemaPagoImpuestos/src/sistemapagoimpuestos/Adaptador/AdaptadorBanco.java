@@ -1,25 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sistemapagoimpuestos.Adaptador;
-
-import ws.empresas.EmpresasWS;
-import ws.empresas.EmpresasWSImplService;
 
 /**
  *
- * @author lunamarcos
+ * @author Maximiliano
  */
-public class AdaptadorBanco {
-    EmpresasWS empresasWs;
-    public AdaptadorBanco(){
-        EmpresasWSImplService wsImplService = new EmpresasWSImplService();
-        empresasWs = wsImplService.getEmpresasWSImplPort();
-    }
-    
-    
-    public double consultarSaldo( String cbuCuenta){
-        return empresasWs.obtenerSaldo( cbuCuenta);
-    }
-    
-    public boolean debitarSaldo(String cbuCuenta, double montoADebitar){
-        return empresasWs.debitarMonto(cbuCuenta, montoADebitar);
-    }
+public interface AdaptadorBanco {
+    public double consultarSaldo( String cbuCuenta);
+    public boolean debitarSaldo(String cbuCuenta, double montoADebitar);
 }

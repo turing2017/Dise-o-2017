@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistemapagoimpuestos.Adaptador;
+package sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import sistemapagoimpuestos.Adaptador.AdaptadorEmpresa;
 import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
@@ -27,7 +28,7 @@ import ws.empresas.EmpresasWSImplService;
  *
  * @author mviss
  */
-public class AdaptadorEmpresaClaro {
+public class AdaptadorEmpresaClaro implements AdaptadorEmpresa{
         EmpresasWSImplService wsImplService
                 = new EmpresasWSImplService();
         EmpresasWS claroWs;

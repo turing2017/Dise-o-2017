@@ -10,10 +10,13 @@
        <property name="ordenItemEmpresaTipoImpuesto" type="int" unique="true" not-null="true">
            <column name="ordenItemEmpresaTipoImpuesto"/>
        </property>
+       <property name="indicaPeriodicidadItemEmpresaTipoImpuesto" type="boolean">
+           <column name="indicaPeriodicidadItemEmpresaTipoImpuesto"/>
+       </property>
        <property name="fechaInhabilitacionItemEmpresaTipoImpuesto" type="timestamp" >
            <column name="fechaInhabilitacionItemEmpresaTipoImpuesto"/>
        </property>
-        <many-to-one name="item" class="sistemapagoimpuestos.Entity.Item" column="OIDItem" not-null="true" cascade="all"/>
-        <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto" not-null="true" cascade="all"/>
+        <many-to-one name="item" class="sistemapagoimpuestos.Entity.Item" column="OIDItem" not-null="true" cascade="all" fetch="join"/>
+        <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto" not-null="true" cascade="all" fetch="join"/>
     </class>
 </hibernate-mapping>

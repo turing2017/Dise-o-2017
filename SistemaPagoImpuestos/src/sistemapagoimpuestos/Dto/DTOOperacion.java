@@ -26,11 +26,36 @@ public class DTOOperacion {
     boolean liquidadaOperacion;
     Empresa empresa;
     CuentaBancaria cuentabancaria;
+    List<DTODetalleOperacion> dtoDetalleOperacion;
     List<DetalleOperacion> detalleOperacion;
     TipoImpuesto tipoImpuesto;
 
     public DTOOperacion() {
     }
+
+    public List<DTODetalleOperacion> getDtoDetalleOperacion() {
+        return dtoDetalleOperacion;
+    }
+
+    public void setDtoDetalleOperacion(List<DTODetalleOperacion> dtoDetalleOperacion) {
+        this.dtoDetalleOperacion = dtoDetalleOperacion;
+    }
+
+    public DTOOperacion(int numeroOperacion, String codigoPagoElectronicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, long nroComprobanteFactura, double valorComisionOperacion, boolean liquidadaOperacion, Empresa empresa, CuentaBancaria cuentabancaria, List<DTODetalleOperacion> dtoDetalleOperacion) {
+        this.numeroOperacion = numeroOperacion;
+        this.codigoPagoElectronicoOperacion = codigoPagoElectronicoOperacion;
+        this.fechaHoraOperacion = fechaHoraOperacion;
+        this.importePagadoOperacion = importePagadoOperacion;
+        this.nroComprobanteFactura = nroComprobanteFactura;
+        this.valorComisionOperacion = valorComisionOperacion;
+        this.liquidadaOperacion = liquidadaOperacion;
+        this.empresa = empresa;
+        this.cuentabancaria = cuentabancaria;
+        this.dtoDetalleOperacion = dtoDetalleOperacion;
+    }
+    
+    
+    
     public DTOOperacion(int numeroOperacion, String codigoPagoElectronicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, long nroComprobanteFactura, double valorComisionOperacion, boolean liquidadaOperacion, Empresa empresa, CuentaBancaria cuentabancaria, List<DetalleOperacion> detalleOperacion, TipoImpuesto tipoImpuesto) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectronicoOperacion = codigoPagoElectronicoOperacion;

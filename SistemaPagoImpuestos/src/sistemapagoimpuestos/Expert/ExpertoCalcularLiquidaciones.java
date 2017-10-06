@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.Comision;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
@@ -26,8 +27,12 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoCalcularLiquidaciones {
     
-    public void iniciar() {
-
+    public void iniciar(DTOAccionesSistema dtoAccionesSistema) {
+        dtoAccionesSistema.setAccion("Iniciando Calculo Comisiones...");
+        dtoAccionesSistema.setDescripcionAccion("Calculo de las comisiones de las operaciones");
+        dtoAccionesSistema.setFechaHoraAccion(new Date());
+        dtoAccionesSistema.imprimirSTD();
+           
         //varaiables globales
         Liquidacion liquidacionAnulada = new Liquidacion();
         String nombreEstadoRecalculada = "Recalculado";
@@ -326,6 +331,9 @@ public class ExpertoCalcularLiquidaciones {
             //Por cada tipo impuesto fin
            // }  //{del liquidada por si no hay q crearlas
         }
-         
+        dtoAccionesSistema.setAccion("Calculo Finalizado");
+        dtoAccionesSistema.setDescripcionAccion("Se calcularon todas las comisiones para las operaciones pendientes al dia de la fecha.");
+        dtoAccionesSistema.setFechaHoraAccion(new Date());
+        dtoAccionesSistema.imprimirSTD();
     }
 }

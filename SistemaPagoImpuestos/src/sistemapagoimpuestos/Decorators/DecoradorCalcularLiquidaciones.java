@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 import sistemapagoimpuestos.Expert.ExpertoCalcularLiquidaciones;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -15,9 +16,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 public class DecoradorCalcularLiquidaciones extends ExpertoCalcularLiquidaciones{
     
     @Override
-    public void iniciar(){
+    public void iniciar(DTOAccionesSistema dtoAccionesSistema){
          FachadaInterna.getInstance().iniciarTransaccion();
-         super.iniciar();
+         super.iniciar(dtoAccionesSistema);
          FachadaInterna.getInstance().finalizarTransaccion();
     }
 }

@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 import sistemapagoimpuestos.Expert.ExpertoCalcularLiquidaciones;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 
@@ -19,8 +20,8 @@ public class ControladorCalcularLiquidaciones {
     public ControladorCalcularLiquidaciones() {
     }
     
-    public void iniciar(){
-        experto.iniciar();
+    public void iniciar(DTOAccionesSistema dtoAccionesSistema){
+        experto.iniciar(dtoAccionesSistema);
     }
 
 }

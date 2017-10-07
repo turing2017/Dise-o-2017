@@ -24,20 +24,9 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
  * @author facun
  */
 public class ControladorGestionarLiquidacion {
-    private static ControladorGestionarLiquidacion controladorGestionarLiquidacion;
-    private ExpertoGestionarLiquidacion experto = (ExpertoGestionarLiquidacion) FabricaExpertos.getInstancia().crearExperto("CU21");
-
-    public ControladorGestionarLiquidacion() {
-    }
     
-     public static ControladorGestionarLiquidacion getInstance()
-    {
-        if (controladorGestionarLiquidacion == null)
-        {
-            controladorGestionarLiquidacion = new ControladorGestionarLiquidacion();
-        }
-        return controladorGestionarLiquidacion;
-    }
+    private ExpertoGestionarLiquidacion experto = (ExpertoGestionarLiquidacion) FabricaExpertos.getInstancia().crearExperto("CU21");
+    
       // Metodo iniciar
     public void iniciar(){
         if(experto.iniciar().equals("Administrador"))

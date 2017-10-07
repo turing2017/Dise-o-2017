@@ -311,7 +311,15 @@ public class ExpertoCalcularLiquidaciones {
             //setLiquidacionEstado(LiquidacionEstado)
             nuevaLiquidacion.getLiquidacionEstadoList().add(liqEstado);
             //setnumeroLiquidacion(numeroLiquidacion)
-            nuevaLiquidacion.setNumeroLiquidacion(ultimaLiquidacion.getNumeroLiquidacion() + 1);//ver como genearar el numero
+            
+            //buscar numero liquidacion
+            
+            List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion",null);
+            Liquidacion a = (Liquidacion)liquidacion.get(0);
+            int numeroLiquidacion = a.getNumeroLiquidacion()+1;
+        
+            //setNumeroLiquidacion
+            nuevaLiquidacion.setNumeroLiquidacion(numeroLiquidacion);
             //setFechaHoraLiquidacion(fechaActual)
             nuevaLiquidacion.setFechaHoraLiquidacion(new Date());
            //setfechaHoraDesdeLiquidacion(fechahoraDesdeLiquidacion)

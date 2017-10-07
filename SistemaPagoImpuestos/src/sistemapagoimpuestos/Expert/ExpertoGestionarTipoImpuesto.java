@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Entity.Empresa;
+import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
@@ -54,11 +56,8 @@ public class ExpertoGestionarTipoImpuesto {
 
     }
  
-    
-    
-    // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
+
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
-        // Como vuelven de la DB?
         List<Object> listObject =  FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
         ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = new ArrayList<DTOTipoImpuesto>();
         for(Object obj : listObject){
@@ -71,6 +70,42 @@ public class ExpertoGestionarTipoImpuesto {
             listDtoTipoImpuesto.add(dtoTipoImpuesto);
         }
         return listDtoTipoImpuesto;
+    }
+    
+    // Metodo para recuperar los tipos de impuestos asociados a una empresa
+    public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestosEmpresa(String cuitEmpresa){
+        
+        ArrayList<DTOTipoImpuesto> listaDTOTipoImpuesto = new ArrayList<DTOTipoImpuesto>();
+        
+        // Busco la empresa por nombre
+        List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
+        DTOCriterio criterioCuit = new DTOCriterio();
+        criterioCuit.setAtributo("cuitEmpresa");
+        criterioCuit.setOperacion("=");
+        criterioCuit.setValor(cuitEmpresa);
+        criteriosEmpresa.add(criterioCuit);
+        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa).get(0);
+        
+        // Busco los empresa tipo impuesto
+        List<DTOCriterio> criteriosEmpresaTI = new ArrayList<>();
+        DTOCriterio criterioEmpresa = new DTOCriterio();
+        criterioEmpresa.setAtributo("empresa");
+        criterioEmpresa.setOperacion("=");
+        criterioEmpresa.setValor(empresa);
+        criteriosEmpresaTI.add(criterioEmpresa);
+        List<Object> listObject =  FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criteriosEmpresaTI);
+        for(Object obj : listObject){
+            EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) obj;
+            TipoImpuesto tipoImpuesto = empresaTipoImpuesto.getTipoImpuesto();
+            DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto();
+            dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
+            dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
+            dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
+            dtoTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
+            listaDTOTipoImpuesto.add(dtoTipoImpuesto);
+        }
+        
+        return listaDTOTipoImpuesto;
     }
     
     // Metodo para recuperar el TipoImpuesto a modificar

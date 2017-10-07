@@ -63,6 +63,14 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
         ArrayList<DTOTipoImpuesto> listadoDtoTipoImpuesto= super.obtenerTipoImpuestos(); 
         FachadaInterna.getInstance().finalizarTransaccion();
         return listadoDtoTipoImpuesto;//To change body of generated methods, choose Tools | Templates.
-    }   
+    }
+
+    @Override
+    public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestosEmpresa(String cuitEmpresa) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        ArrayList<DTOTipoImpuesto> listadoDtoTipoImpuesto = super.obtenerTipoImpuestosEmpresa(cuitEmpresa); 
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listadoDtoTipoImpuesto;
+    }
 }
     

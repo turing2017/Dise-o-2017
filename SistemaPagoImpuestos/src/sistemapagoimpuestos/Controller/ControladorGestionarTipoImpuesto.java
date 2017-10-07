@@ -12,6 +12,8 @@ import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoAlta;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoAltaItem;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificar;
 
 
@@ -43,8 +45,12 @@ public class ControladorGestionarTipoImpuesto {
         return  experto.obtenerTipoImpuestos();
     }
     
-    public void mostrarPantallaAlta() {
-        IUGestionarTipoImpuestoAlta pantallaAlta = new IUGestionarTipoImpuestoAlta();
+    public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestosEmpresa(String cuitEmpresa){  
+        return  experto.obtenerTipoImpuestosEmpresa(cuitEmpresa);
+    }
+    
+    public void mostrarPantallaAlta(String cuilEmpresa) {
+        IUGestionarTipoImpuestoAlta pantallaAlta = new IUGestionarTipoImpuestoAlta(cuilEmpresa);
         pantallaAlta.setVisible(true); // La hago visible
         // Modifico la operación de cierre para volver a la pantalla principal
         pantallaAlta.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -54,6 +60,12 @@ public class ControladorGestionarTipoImpuesto {
                 iniciar();
             }
         });
+    }
+    
+    public void mostrarItems(String cuitEmpresa, int codigoTipoImpuesto){
+        IUGestionarTipoImpuestoItems pantallaItems = new IUGestionarTipoImpuestoItems(cuitEmpresa, codigoTipoImpuesto);
+        pantallaItems.setVisible(true);
+        pantallaItems.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     
@@ -85,6 +97,13 @@ public class ControladorGestionarTipoImpuesto {
     // Metodo para recuperar el TipoImpuesto a modificar
     public DTOTipoImpuesto obtenerTipoImpuesto(int codigo){
         return experto.obtenerTipoImpuesto(codigo);
+    }
+    
+    // Muestro pantalla agregar
+    public void agregarItem(String cuitEmpresa, int codigoTipoImpuesto){
+        IUGestionarTipoImpuestoAltaItem pantallaAltaItem = new IUGestionarTipoImpuestoAltaItem(cuitEmpresa, codigoTipoImpuesto);
+        pantallaAltaItem.setVisible(true);
+        pantallaAltaItem.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 }

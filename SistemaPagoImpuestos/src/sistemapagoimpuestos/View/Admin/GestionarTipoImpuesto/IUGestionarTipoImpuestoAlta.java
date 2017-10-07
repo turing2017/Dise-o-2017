@@ -11,8 +11,10 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 /**
@@ -22,9 +24,18 @@ import sistemapagoimpuestos.Utils.MetodosPantalla;
 public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
     ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+    ControladorGestionarEmpresaTipoImpuesto controladorETI = new ControladorGestionarEmpresaTipoImpuesto();
+    public String cuitEmpresa;
+    
     
     public IUGestionarTipoImpuestoAlta() {
         initComponents();
+    }
+    
+    public IUGestionarTipoImpuestoAlta(String cuilEmpresa){
+        initComponents();
+        llenarComboTipoImpuesto(obtenerTipoEmpresas());
+        this.cuitEmpresa = cuilEmpresa;
     }
     public static List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemAltaList;
 
@@ -59,6 +70,10 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         checkbox_esEditable = new javax.swing.JCheckBox();
         button_crear = new javax.swing.JButton();
         cancel_button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        comboBox_tipoEmpresa = new javax.swing.JComboBox<>();
+        label_frecuencia = new javax.swing.JLabel();
+        textfield_frecuencia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,60 +109,83 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Tipo de Empresa");
+
+        comboBox_tipoEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBox_tipoEmpresaActionPerformed(evt);
+            }
+        });
+
+        label_frecuencia.setText("Frecuencia de Liquidación");
+
+        textfield_frecuencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfield_frecuenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_esEditable)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(button_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_codigo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_nombre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(label_codigo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
+                                .addComponent(cancel_button))
+                            .addComponent(label_esEditable)
+                            .addComponent(label_nombre)
+                            .addComponent(label_frecuencia))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(checkbox_esEditable)
+                                .addGap(90, 90, 90))
+                            .addComponent(textfield_codigo)
+                            .addComponent(textField_nombre)
+                            .addComponent(button_crear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBox_tipoEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textfield_frecuencia))
                         .addGap(34, 34, 34))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(checkbox_esEditable)
-                        .addGap(92, 92, 92))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancel_button)
-                        .addGap(433, 433, 433))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label_nombre)
-                    .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_codigo)
-                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_nombre))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label_esEditable)
-                    .addComponent(checkbox_esEditable))
-                .addGap(42, 42, 42)
+                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_codigo))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkbox_esEditable)
+                    .addComponent(label_esEditable))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(comboBox_tipoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_frecuencia)
+                    .addComponent(textfield_frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancel_button)
                     .addComponent(button_crear))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -160,9 +198,14 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             int codigoTipoImpuestoIngres = Integer.parseInt(textfield_codigo.getText());
             String nombreTipoImpuestoIngres = textField_nombre.getText();
             boolean esMontoEditableIngres = checkbox_esEditable.isSelected();
+            String nombreTipoEmpresa = comboBox_tipoEmpresa.getSelectedItem().toString();
             List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemIngres = getDtoetiisModfAlta();
+            int frecuencia = Integer.parseInt(textfield_frecuencia.getText());
             if (codigoTipoImpuestoIngres < 0 || !nombreTipoImpuestoIngres.equals("")) {
+                // Creo el tipo de impuesto
                 controlador.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres, dTOEmpresaTipImpItemIngres);
+                // Creo la empresa tipo de impuesto
+                controladorETI.nuevoEmpresaTipoImpuesto(cuitEmpresa, nombreTipoImpuestoIngres, nombreTipoEmpresa, frecuencia);
                 this.dispose();
                 controlador.iniciar();
             } else {
@@ -188,6 +231,14 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
     private void checkbox_esEditableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_esEditableActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_checkbox_esEditableActionPerformed
+
+    private void comboBox_tipoEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipoEmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBox_tipoEmpresaActionPerformed
+
+    private void textfield_frecuenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_frecuenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textfield_frecuenciaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -220,7 +271,19 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             }
         });
     }
-
+    
+        //Método para llenar el comboBox
+    public void llenarComboTipoImpuesto(List<DTOTipoEmpresa> listaDTOTipoEmpresa){
+        for (int i = 0; i < listaDTOTipoEmpresa.size(); i++) {
+            DTOTipoEmpresa dtoTipoEmpresa = (DTOTipoEmpresa) listaDTOTipoEmpresa.get(i);
+            String nombreTipoEmpresa = dtoTipoEmpresa.getNombreTipoEmpresa();
+            comboBox_tipoEmpresa.addItem(nombreTipoEmpresa);
+        }
+    }
+    
+    public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
+        return controladorETI.obtenerTipoEmpresas();
+    }
 
     public boolean getCheckbox_esEditable() {
         return checkbox_esEditable.isSelected();
@@ -251,10 +314,14 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
     private javax.swing.JButton button_crear;
     private javax.swing.JButton cancel_button;
     private javax.swing.JCheckBox checkbox_esEditable;
+    private javax.swing.JComboBox<String> comboBox_tipoEmpresa;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel label_codigo;
     private javax.swing.JLabel label_esEditable;
+    private javax.swing.JLabel label_frecuencia;
     private javax.swing.JLabel label_nombre;
     private javax.swing.JTextField textField_nombre;
     private javax.swing.JTextField textfield_codigo;
+    private javax.swing.JTextField textfield_frecuencia;
     // End of variables declaration//GEN-END:variables
 }

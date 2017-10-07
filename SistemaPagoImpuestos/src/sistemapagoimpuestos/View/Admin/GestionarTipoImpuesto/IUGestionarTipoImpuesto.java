@@ -15,16 +15,31 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     
-    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();    
+    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+    ControladorGestionarEmpresaTipoImpuesto controladorETI = new ControladorGestionarEmpresaTipoImpuesto();
+    String cuitEmpresa;
+    
     public IUGestionarTipoImpuesto() {
         initComponents();
-        obtenerTipoImpuestos();
+        // Esto hay que quitarlo, cuando se llame a esta pantalla se debe llamar al metodo siguiente pasando el cuitEmpresa
+        this.cuitEmpresa = "123434343";
+        obtenerTipoImpuestos("123434343");
+        
+    }
+    public IUGestionarTipoImpuesto(String cuitEmpresa) {
+        initComponents();
+        // Esto hay que quitarlo, cuando se llame a esta pantalla se debe llamar al metodo siguiente pasando el cuitEmpresa
+        // this.cuitEmpresa = cuitEmpresa;
+        
+        obtenerTipoImpuestos(cuitEmpresa);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +53,8 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         textfield_filtro = new javax.swing.JTextField();
         button_filtrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,45 +83,68 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Ver items");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Agregar Item");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(226, 226, 226))
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(button_filtrar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(button_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(228, 228, 228))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_filtrar)
                     .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(button_nuevo)
                     .addComponent(button_modificar))
-                .addGap(46, 46, 46))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,7 +152,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nuevoActionPerformed
-        controlador.mostrarPantallaAlta();
+        controlador.mostrarPantallaAlta(cuitEmpresa);
         this.dispose();
     }//GEN-LAST:event_button_nuevoActionPerformed
 
@@ -136,6 +176,30 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         sorter.setRowFilter(RowFilter.regexFilter(textfield_filtro.getText()));
         tabla_tipo_impuesto.setRowSorter(sorter);
     }//GEN-LAST:event_button_filtrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+            // Obtento el código del elemento seleccionado
+            int columnCode = 0;
+            int rowSelected = tabla_tipo_impuesto.getSelectedRow();
+            String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
+            controlador.mostrarItems(cuitEmpresa, Integer.parseInt(codigo));
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // Obtento el código del elemento seleccionado
+            int columnCode = 0;
+            int rowSelected = tabla_tipo_impuesto.getSelectedRow();
+            String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
+            controlador.agregarItem(cuitEmpresa, Integer.parseInt(codigo));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+            Excepciones.getInstance().objetoNoSeleccionado();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -174,9 +238,9 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         controlador.iniciar();
     }
 
-    public void obtenerTipoImpuestos() {
+    public void obtenerTipoImpuestos(String cuitEmpresa) {
         // Muestro pantalla de Consultar
-        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = controlador.obtenerTipoImpuestos();
+        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = controlador.obtenerTipoImpuestosEmpresa(cuitEmpresa);
 
         String[] columnas = {"Codigo", "Nombre", "Monto Editable", "Estado"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -236,6 +300,8 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_modificar;
     private javax.swing.JButton button_nuevo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla_tipo_impuesto;

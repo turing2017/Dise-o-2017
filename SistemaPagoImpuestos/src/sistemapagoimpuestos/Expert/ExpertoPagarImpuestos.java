@@ -41,12 +41,9 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoPagarImpuestos {
     
-    private AdaptadorEmpresaClaro adaptadorEmpresaClaro;
-    private AdaptadorBancoGalicia adaptadorBanco;
-    private TipoImpuesto tipoImpuesto;
     
         // Método para recuperar los TipoDatoItem
-        public List<DTOTipoImpuesto> buscarTipoImpuestos(){
+    public List<DTOTipoImpuesto> buscarTipoImpuestos(){
             //Busqueda de todos los TipoImpuesto (sin criterios)
             List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", null);
             List<DTOTipoImpuesto> lista = new ArrayList<>();
@@ -71,9 +68,6 @@ public class ExpertoPagarImpuestos {
         List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
         TipoImpuesto tipoImpuesto = (TipoImpuesto) ti.get(0);
         
-        // Necesito recordar el tipo de impuesto
-        setTipoImpuesto(tipoImpuesto);
-        
         //Busca instancia de EmpresaTipoImpuesto, aplicando el tipo de impuesto como criterio
         List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
         criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
@@ -90,6 +84,22 @@ public class ExpertoPagarImpuestos {
         }     
         return lista;
     }
+
+    public List<DTOComprobante> seleccionarEmpresa(String nombreTipoImpuesto, String nombreEmpresaIng, String codigoPagoElectronicoIngres){
+        List<DTOCriterio> criterioList = new ArrayList();
+        criterioList.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
+        Empresa empresaSeleccionada = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterioList).get(0);        
+        criterioList.clear();
+        criterioList.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
+        TipoImpuesto tipoImpuestoSeleccionado = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioList).get(0);
+        criterioList.clear();
+        criterioList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
+        criterioList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
+        EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioList).get(0);        
+        List<DTOComprobante> listadoComprobantes = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).consultarComprobantes(empresaTI, codigoPagoElectronicoIngres);
+        return listadoComprobantes;
+    }
+
     
     // Recupera cuentas y saldos del cliente
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente){
@@ -99,7 +109,7 @@ public class ExpertoPagarImpuestos {
         // Busco los parámetros del sistema
         ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
         // En base al parametro del sistema creo el adaptador del banco
-        setAdaptadorBanco((AdaptadorBancoGalicia)FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema));
+        //setAdaptadorBanco((AdaptadorBancoGalicia)FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema));
 
         // Busco el Cliente por cuil
         List<DTOCriterio> criteriosCliente = new ArrayList<>();
@@ -121,43 +131,18 @@ public class ExpertoPagarImpuestos {
             DTOCuentaBancaria dtoCuentaBancariaTemp = new DTOCuentaBancaria();
             dtoCuentaBancariaTemp.setCbuCuentaBancaria(cuentaTemp.getCbuCuentaBancaria());
             dtoCuentaBancariaTemp.setTipoCuenta(dtoTipoCuenta);
-            dtoCuentaBancariaTemp.setSaldoRecuperado(adaptadorBanco.consultarSaldo(cuentaTemp.getCbuCuentaBancaria())); // Consulto mediante adaptador el saldo
+          //  dtoCuentaBancariaTemp.setSaldoRecuperado(adaptadorBanco.consultarSaldo(cuentaTemp.getCbuCuentaBancaria())); // Consulto mediante adaptador el saldo
             listaDTOCuentaBancaria.add(dtoCuentaBancariaTemp);
         }
         return listaDTOCuentaBancaria;
     }
     
-    public List<DTOComprobante> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres){
-        // Busco las Empresa seleccionada
-        List<DTOCriterio> criterioEmpresa = new ArrayList();
-        criterioEmpresa.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
-        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
-        Empresa empresaSeleccionada = (Empresa) empresas.get(0);
-        
-        // Debo recuperar el tipoImpuesto del experto recordado
-        TipoImpuesto tipoImpuestoSeleccionado = getTipoImpuesto();
-        
-        //Busca EmpresaTipoImpuesto, aplicando la empresa como criterio y el tipo de impuesto
-        List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
-        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
-        criterioEmpresaTipoImpuesto.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
-        List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto);
-        EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eti.get(0);
-        
-        // Obtengo el adaptador
-        setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIng));
-        
-        // Recupero los comprobantes
-        List<DTOComprobante> listadoComprobantes = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(nombreEmpresaIng).consultarComprobantes(empresaTipoImpuesto, codigoPagoElectronicoIngres);
-        
-        return listadoComprobantes;
-    }
     
     // Metodo para pagar el impuesto, crea la operacion
     public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, DTOComprobante dtoComprobante, String codigoPagoIngres, String empresaSelec, String tipoImpuestoSelec){
         
         // Debito el pago
-        adaptadorBanco.debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
+        //adaptadorBanco.debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
         
         // Creo la operación
         Operacion operacion = new Operacion();
@@ -225,8 +210,8 @@ public class ExpertoPagarImpuestos {
         FachadaPersistencia.getInstance().guardar(operacion);
         
         // Aviso del pago a la Empresa
-        setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSelec)); // Obtengo el adaptador
-        adaptadorEmpresaClaro.confirmarPago(dtoComprobante.getCodigoDTOComprobante(), nroComprobanteFactura, montoAbonado);
+        //setAdaptadorEmpresaClaro((AdaptadorEmpresaClaro)FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSelec)); // Obtengo el adaptador
+        //adaptadorEmpresaClaro.confirmarPago(dtoComprobante.getCodigoDTOComprobante(), nroComprobanteFactura, montoAbonado);
         
         // Creo y devuelvo el DTOOperacion
         DTOOperacion dtoOperacion= new DTOOperacion();
@@ -236,28 +221,4 @@ public class ExpertoPagarImpuestos {
         return dtoOperacion;
         
     }
-
-    public void setTipoImpuesto(TipoImpuesto tipoImpuesto) {
-        this.tipoImpuesto = tipoImpuesto;
-    }
-
-    public void setAdaptadorEmpresaClaro(AdaptadorEmpresaClaro adaptadorEmpresaClaro) {
-        this.adaptadorEmpresaClaro = adaptadorEmpresaClaro;
-    }
-
-    public void setAdaptadorBanco(AdaptadorBancoGalicia adaptadorBanco) {
-        this.adaptadorBanco = adaptadorBanco;
-    }
-
-    public AdaptadorBancoGalicia getAdaptadorBanco() {
-        return adaptadorBanco;
-    }
-
-    public TipoImpuesto getTipoImpuesto() {
-        return tipoImpuesto;
-    }
-
-    public AdaptadorEmpresaClaro getAdaptadorEmpresaClaro() {
-        return adaptadorEmpresaClaro;
-    }   
 }

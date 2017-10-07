@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 public class Dgr  implements java.io.Serializable {
 
 
-     private String oiddgr;
+     private String nroFactura;
      private Integer codigoImpuesto;
      private String nombreImpuesto;
      private Double montoPagar;
@@ -31,12 +31,8 @@ public class Dgr  implements java.io.Serializable {
     public Dgr() {
     }
 
-	
-    public Dgr(String oiddgr) {
-        this.oiddgr = oiddgr;
-    }
-    public Dgr(String oiddgr, Integer codigoImpuesto, String nombreImpuesto, Double montoPagar, String status, Date primerVencimiento, Date segundoVencimiento) {
-       this.oiddgr = oiddgr;
+    public Dgr(String nroFactura, Integer codigoImpuesto, String nombreImpuesto, Double montoPagar, String status, Date primerVencimiento, Date segundoVencimiento) {
+       this.nroFactura = nroFactura;
        this.codigoImpuesto = codigoImpuesto;
        this.nombreImpuesto = nombreImpuesto;
        this.montoPagar = montoPagar;
@@ -48,13 +44,13 @@ public class Dgr  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="OIDDgr", unique=true, nullable=false)
-    public String getOiddgr() {
-        return this.oiddgr;
+    @Column(name="nroFactura", unique=true, nullable=false)
+    public String getNroFactura() {
+        return this.nroFactura;
     }
     
-    public void setOiddgr(String oiddgr) {
-        this.oiddgr = oiddgr;
+    public void setNroFactura(String nroFactura) {
+        this.nroFactura = nroFactura;
     }
 
     

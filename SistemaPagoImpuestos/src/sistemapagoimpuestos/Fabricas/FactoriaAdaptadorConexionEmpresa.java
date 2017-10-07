@@ -8,6 +8,7 @@ package sistemapagoimpuestos.Fabricas;
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresa;
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl.AdaptadorEmpresaClaro;
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl.AdaptadorEmpresaDgr;
+import sistemapagoimpuestos.Entity.Empresa;
 
 /**
  *
@@ -27,8 +28,8 @@ public class FactoriaAdaptadorConexionEmpresa {
         return instancia;
     }
 
-    public AdaptadorEmpresa getAdaptadorConexionEmpresa(String nombreEmpresa) {
-             switch (nombreEmpresa) {
+    public AdaptadorEmpresa getAdaptadorConexionEmpresa(Empresa empresa) {
+             switch (empresa.getNombreEmpresa()) {
            
             case "DGR": 
                 return new AdaptadorEmpresaDgr();

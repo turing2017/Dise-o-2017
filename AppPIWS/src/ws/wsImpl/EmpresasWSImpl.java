@@ -91,7 +91,7 @@ public class EmpresasWSImpl implements EmpresasWS {
         for (CuentaCliente cc : listCuentaCliente) {
             if (cbu.equals(cc.getCbu())
                     && cc.isActivo()) {
-                saldo = cc.getMonto();
+                saldo = (cc.getMonto()>0)?cc.getMonto():0;
                 break;
             }
         }

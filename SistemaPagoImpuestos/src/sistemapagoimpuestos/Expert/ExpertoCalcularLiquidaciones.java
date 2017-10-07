@@ -35,10 +35,9 @@ public class ExpertoCalcularLiquidaciones {
            
         //varaiables globales
         Liquidacion liquidacionAnulada = new Liquidacion();
-        String nombreEstadoRecalculada = "Recalculado";
-        String nombreEstadoAnulado = "ARecalcular";
-        String nombreEstadoPendiente = "Pendiente";
-        String nombreEstadoCreada = "Pendiente";
+        String nombreEstadoRecalculada = "Recalculada";
+        String nombreEstadoAnulado = "Anulada";
+        String nombreEstadoPendiente = "Calculada";
         List<DTOCriterio> criterios = new ArrayList();
         Date fechaALiquidar;
         
@@ -108,7 +107,7 @@ public class ExpertoCalcularLiquidaciones {
                 for (Object op : listOperacion) {
                     Operacion operacion = (Operacion) op;
                     Double valorComision;
-                    EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia((Operacion) operacion);
+                    EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia(operacion);
                     valorComision = estrategia.obtenerValorComision(operacion);
                     //  Creamos la comision correspondiente para la operacion y la seteamos 
                     Comision comision = new Comision();
@@ -277,7 +276,7 @@ public class ExpertoCalcularLiquidaciones {
                 Operacion operacion = (Operacion) lo;
                 
                 Double valorComision;
-                EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia((Operacion) operacion);
+                EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia(operacion);
                 valorComision = estrategia.obtenerValorComision(operacion);
                 //  Creamos la comision correspondiente para la operacion y la seteamos 
                 Comision comision = new Comision();
@@ -296,7 +295,7 @@ public class ExpertoCalcularLiquidaciones {
                 //fin loop por cada operacion
             }
             //busco "EstadoLiquidacion", nombreEstadoLiquidacion= Creada"
-            DTOCriterio criterio8 = new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoCreada);
+            DTOCriterio criterio8 = new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoPendiente);
             criterios.clear();
             criterios.add(criterio8);
             EstadoLiquidacion estadoLiquidacionPendiente = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);

@@ -11,24 +11,6 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="buscarComprobantesCodigoDgr">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-</operation>
-<operation name="buscarComprobantesCodigoClaro">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-</operation>
 <operation name="pagarComprobanteDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -39,6 +21,24 @@
 </output>
 </operation>
 <operation name="pagarComprobanteClaro">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="buscarComprobantesCodigoDgr">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="buscarComprobantesCodigoClaro">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -65,6 +65,24 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
+<operation name="findAllClaro">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="debitarMonto">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
 <operation name="acreditarPagoDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -83,25 +101,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="debitarMonto">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-</operation>
 <operation name="findForCodeClaro">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-</operation>
-<operation name="findAllClaro">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

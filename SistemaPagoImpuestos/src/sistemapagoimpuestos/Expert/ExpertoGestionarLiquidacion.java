@@ -38,8 +38,8 @@ import sistemapagoimpuestos.Entity.Operacion;
 public class ExpertoGestionarLiquidacion {
 
     Usuario usuario = new Usuario();
-    TipoUsuario admin = new TipoUsuario(0, "Administrador", null);
-    TipoUsuario user = new TipoUsuario(1, "Usuario", null);
+    TipoUsuario admin = new TipoUsuario( "Administrador", null);
+    TipoUsuario user = new TipoUsuario( "Usuario", null);
 
     public ExpertoGestionarLiquidacion() {
         usuario.setTipoUsuario(admin);

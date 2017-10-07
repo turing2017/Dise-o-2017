@@ -28,10 +28,6 @@
         <property name="nombreBancoParametroSistema" type="string" not-null="true">
             <column name="nombreBancoParametroSistema"/>
         </property>
-        
-        <property name="urlConexionBancoParametroSistema" type="string" unique="true" not-null="true">
-            <column name="urlConexionBancoParametroSistema"/>
-        </property>
 
         <property name="fechaInhabilitacionParametroSistema" type="timestamp" >
             <column name="fechaInhabilitacionParametroSistema"/>

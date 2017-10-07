@@ -20,9 +20,9 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
 public class ExpertoConsultarLiquidacion {
    
     Usuario usuario = new Usuario();
-    TipoUsuario uAdmin = new TipoUsuario(0, "Administrador", null);
-    TipoUsuario uCliente = new TipoUsuario(1, "Cliente", null);
-    TipoUsuario uEmpresa = new TipoUsuario(2, "Empresa", null);
+    TipoUsuario uAdmin = new TipoUsuario("Administrador", null);
+    TipoUsuario uCliente = new TipoUsuario("Cliente", null);
+    TipoUsuario uEmpresa = new TipoUsuario("Empresa", null);
 
     public ExpertoConsultarLiquidacion() {
         usuario.setTipoUsuario(uEmpresa);

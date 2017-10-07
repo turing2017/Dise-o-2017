@@ -62,5 +62,14 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoOperacion;
     }
+
+    @Override
+    public boolean MontoEditable(String nombreTipoImpuesto) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        boolean result = super.MontoEditable(nombreTipoImpuesto);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return result;
+    }
+    
     
 }

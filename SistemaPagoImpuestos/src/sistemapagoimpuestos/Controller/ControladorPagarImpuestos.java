@@ -48,15 +48,17 @@ public class ControladorPagarImpuestos {
     public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres, String tipoImpuestoIngres){
         IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(experto.seleccionarEmpresa(tipoImpuestoIngres, nombreEmpresaIng, codigoPagoElectronicoIngres), codigoPagoElectronicoIngres, nombreEmpresaIng, tipoImpuestoIngres);
         // Si es editable se debe mostrar para que edite, falta esta funcionalidad
-        if (empresaTipoImpuestoEsEditable()) {
+        if (empresaTipoImpuestoEsEditable(tipoImpuestoIngres)) {
             pantallaComprobantes.setearEditable();
+        }else{
+
         }
         pantallaComprobantes.setVisible(true);
     }
     
     // Verifico si la empresa tipoImpuesto es editable
-    public boolean empresaTipoImpuestoEsEditable(){
-        return true;//experto.getTipoImpuesto().isEsMontoEditableTipoImpuesto();
+    public boolean empresaTipoImpuestoEsEditable(String nombreTipoImpuesto){
+        return experto.MontoEditable(nombreTipoImpuesto);
     }
     
     // Pagar impuesto

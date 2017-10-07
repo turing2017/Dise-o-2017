@@ -47,6 +47,7 @@ public class Operacion extends Entity{
         this.detalleOperacionList = detalleOperacion;
     }
 
+    
     public int getNumeroOperacion() {
         return numeroOperacion;
     }

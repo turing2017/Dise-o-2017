@@ -41,7 +41,7 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
         for (Dgr dgr : listDgr) {
             DTOComprobante comprobante = new DTOComprobante();
-            comprobante.setCodigoDTOComprobante(dgr.getNroFactura().toString());
+            comprobante.setCodigoDTOComprobante(Integer.toString(dgr.getNroFactura()));
             comprobante.setFechaHoraVencimientoDTOComprobante(dgr.getPrimerVencimiento().toGregorianCalendar().getTime());
             comprobante.setMontoTotalDTOComprobante(dgr.getMontoPagar());
 

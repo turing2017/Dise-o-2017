@@ -18,19 +18,17 @@ public class ParametroSistema extends Entity{
     private String cuitBancoParametroSistema;
     private int frecuenciaSincronizacionParametroSistema;
     private String nombreBancoParametroSistema;
-    private String urlConexionBancoParametroSistema;
     private Date fechaInhabilitacionParametroSistema;
 
     public ParametroSistema() {
     }
 
-    public ParametroSistema(int codigoParametroSistema, int cantIntentosSincronizacionParametroSistema, String cuitBancoParametroSistema, int frecuenciaSincronizacionParametroSistema, String nombreBancoParametroSistema, String urlConexionBancoParametroSistema, Date fechaInhabilitacionParametroSistema) {
+    public ParametroSistema(int codigoParametroSistema, int cantIntentosSincronizacionParametroSistema, String cuitBancoParametroSistema, int frecuenciaSincronizacionParametroSistema, String nombreBancoParametroSistema, Date fechaInhabilitacionParametroSistema) {
         this.codigoParametroSistema = codigoParametroSistema;
         this.cantIntentosSincronizacionParametroSistema = cantIntentosSincronizacionParametroSistema;
         this.cuitBancoParametroSistema = cuitBancoParametroSistema;
         this.frecuenciaSincronizacionParametroSistema = frecuenciaSincronizacionParametroSistema;
         this.nombreBancoParametroSistema = nombreBancoParametroSistema;
-        this.urlConexionBancoParametroSistema = urlConexionBancoParametroSistema;
         this.fechaInhabilitacionParametroSistema = fechaInhabilitacionParametroSistema;
     }
 
@@ -65,14 +63,6 @@ public class ParametroSistema extends Entity{
 
     public void setNombreBancoParametroSistema(String nombreBancoParametroSistema) {
         this.nombreBancoParametroSistema = nombreBancoParametroSistema;
-    }
-
-    public String getUrlConexionBancoParametroSistema() {
-        return urlConexionBancoParametroSistema;
-    }
-
-    public void setUrlConexionBancoParametroSistema(String urlConexionBancoParametroSistema) {
-        this.urlConexionBancoParametroSistema = urlConexionBancoParametroSistema;
     }
 
     public int getCodigoParametroSistema() {

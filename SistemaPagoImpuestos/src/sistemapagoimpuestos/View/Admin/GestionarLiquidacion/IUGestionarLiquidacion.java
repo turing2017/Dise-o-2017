@@ -314,7 +314,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                         break;
                }
                 controlador.AnularLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-            
+                jButtonConsultarLiquidaciones.doClick();
               
                 break;
             default:
@@ -380,7 +380,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
                         break;
                }
                 controlador.AprobarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-
+                jButtonConsultarLiquidaciones.doClick();
                 break;
             default:
                 throw new AssertionError();

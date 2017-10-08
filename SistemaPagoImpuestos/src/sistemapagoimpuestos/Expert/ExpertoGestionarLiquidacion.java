@@ -167,7 +167,7 @@ public class ExpertoGestionarLiquidacion {
          //BUSCO LA LIQUIDACION
          List<DTOCriterio> criterios = new ArrayList();
          
-         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion","=",numeroLiquidacion);
+         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion","=",Integer.valueOf(numeroLiquidacion));
          criterios.add(criterio);
          Liquidacion liquidacion = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
          

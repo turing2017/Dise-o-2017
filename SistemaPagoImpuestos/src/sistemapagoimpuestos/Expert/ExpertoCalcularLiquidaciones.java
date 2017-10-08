@@ -268,6 +268,16 @@ public class ExpertoCalcularLiquidaciones {
                    }
                 }
             }
+            
+               //buscar numero liquidacion
+            List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion",null);
+              int numeroLiquidacion  = 0;
+            for (Object l:liquidacion) {
+                     Liquidacion liq = (Liquidacion)l;
+                     if (liq.getNumeroLiquidacion()>numeroLiquidacion){
+                     numeroLiquidacion = liq.getNumeroLiquidacion();
+                     }
+                 }
             //new liquidacion
             Liquidacion nuevaLiquidacion = new Liquidacion();
 
@@ -312,14 +322,12 @@ public class ExpertoCalcularLiquidaciones {
             nuevaLiquidacion.getLiquidacionEstadoList().add(liqEstado);
             //setnumeroLiquidacion(numeroLiquidacion)
             
-            //buscar numero liquidacion
+         
             
-            List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion",null);
-            Liquidacion a = (Liquidacion)liquidacion.get(0);
-            int numeroLiquidacion = a.getNumeroLiquidacion()+1;
+            
         
             //setNumeroLiquidacion
-            nuevaLiquidacion.setNumeroLiquidacion(numeroLiquidacion);
+            nuevaLiquidacion.setNumeroLiquidacion(numeroLiquidacion+1);
             //setFechaHoraLiquidacion(fechaActual)
             nuevaLiquidacion.setFechaHoraLiquidacion(new Date());
            //setfechaHoraDesdeLiquidacion(fechahoraDesdeLiquidacion)

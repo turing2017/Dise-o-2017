@@ -2,12 +2,14 @@ package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOItem;
 
 /**
@@ -15,7 +17,8 @@ import sistemapagoimpuestos.Dto.DTOItem;
  * @author lunamarcos
  */
 public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
-    ControladorGestionarEmpresaTipoImpuesto controlador = new ControladorGestionarEmpresaTipoImpuesto(); 
+    ControladorGestionarEmpresaTipoImpuesto controladorETI = new ControladorGestionarEmpresaTipoImpuesto();
+    ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
     String cuitEmpresa;
     int codigoTipoImpuesto;
     /**
@@ -29,6 +32,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         initComponents();
         this.cuitEmpresa = cuitEmpresa;
         this.codigoTipoImpuesto = codigoTipoImpuesto;
+        llenarComboItem(obtenerTodosItems());
         obtenerItems(cuitEmpresa, codigoTipoImpuesto);
     }
 
@@ -41,10 +45,26 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_items = new javax.swing.JTable();
+        comboBox_items = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        button_agregar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        textfield_orden = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setViewportView(tabla_items);
+
+        jLabel1.setText("Agregar Item:");
+
+        button_agregar.setText("Agregar");
+        button_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_agregarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Orden:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,19 +72,46 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboBox_items, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textfield_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBox_items, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(button_agregar)
+                    .addComponent(jLabel2)
+                    .addComponent(textfield_orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void button_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_agregarActionPerformed
+        // TODO add your handling code here:
+        String nombreItem = comboBox_items.getSelectedItem().toString();
+        int orden = Integer.parseInt(textfield_orden.getText());
+        controladorETI.agregarItem(nombreItem, cuitEmpresa, codigoTipoImpuesto, orden);
+        this.dispose();
+        controlador.mostrarItems(cuitEmpresa, codigoTipoImpuesto);
+    }//GEN-LAST:event_button_agregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,7 +151,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     
         public void obtenerItems(String cuitEmpresa, int codigoTipoImpuesto) {
         // Muestro pantalla de Consultar
-        ArrayList<DTOItem> listDTOItem = controlador.obtenerItems(cuitEmpresa, codigoTipoImpuesto);
+        ArrayList<DTOItem> listDTOItem = controladorETI.obtenerItems(cuitEmpresa, codigoTipoImpuesto);
 
         String[] columnas = {"Nombre"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -144,9 +191,27 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         tabla_items.setModel(dtm);
         tabla_items.getColumnModel().getColumn(0).setCellRenderer(r);
     }
+        
+    //Método para llenar el comboBox
+    public void llenarComboItem(List<DTOItem> listaDTOItem){
+        for (int i = 0; i < listaDTOItem.size(); i++) {
+            DTOItem dtoItem = (DTOItem) listaDTOItem.get(i);
+            String nombreItem = dtoItem.getNombreItem();
+            comboBox_items.addItem(nombreItem);
+        }
+    }
+    
+    public List<DTOItem> obtenerTodosItems() {
+        return controladorETI.obtenerTodosItems();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_agregar;
+    private javax.swing.JComboBox<String> comboBox_items;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla_items;
+    private javax.swing.JTextField textfield_orden;
     // End of variables declaration//GEN-END:variables
 }

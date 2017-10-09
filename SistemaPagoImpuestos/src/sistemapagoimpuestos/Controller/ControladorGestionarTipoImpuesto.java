@@ -12,7 +12,6 @@ import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoAlta;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoAltaItem;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificar;
 
@@ -97,13 +96,6 @@ public class ControladorGestionarTipoImpuesto {
     // Metodo para recuperar el TipoImpuesto a modificar
     public DTOTipoImpuesto obtenerTipoImpuesto(int codigo){
         return experto.obtenerTipoImpuesto(codigo);
-    }
-    
-    // Muestro pantalla agregar
-    public void agregarItem(String cuitEmpresa, int codigoTipoImpuesto){
-        IUGestionarTipoImpuestoAltaItem pantallaAltaItem = new IUGestionarTipoImpuestoAltaItem(cuitEmpresa, codigoTipoImpuesto);
-        pantallaAltaItem.setVisible(true);
-        pantallaAltaItem.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 }

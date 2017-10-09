@@ -335,11 +335,12 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         String fechaDesde =  jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString();
         String fechaHasta =  jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
         
-        IUMostrar mostrar = new IUMostrar();
+        IUMostrarHistorialEstados mostrar = new IUMostrarHistorialEstados(nliquidacion,fechaliquidacion);
         mostrar.setVisible(true);
         mostrar.setLocation(300, 200);
         //LLena los labels
-        IUMostrar.jLabelEmpresa.setText(empresa);
+        
+     /*   IUMostrar.jLabelEmpresa.setText(empresa);
         IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
         IUMostrar.jLabelFechaLiquidacion.setText(fechaliquidacion);
         IUMostrar.jLabelNrodeLiquidacion.setText(nliquidacion);
@@ -362,7 +363,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getImportePagadoOperacion(), i, 3);
             montoTotal = montoTotal + listDTOoperacion.get(i).getValorComisionOperacion();
         }
-        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);
+        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);*/
     }//GEN-LAST:event_jButtonMostrarActionPerformed
 
     private void jButtonAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAprobarActionPerformed

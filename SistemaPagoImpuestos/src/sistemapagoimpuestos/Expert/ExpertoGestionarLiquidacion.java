@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos.Expert;
 
+
+import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +32,7 @@ import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrar;
 import java.util.Calendar;
+import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Entity.Operacion;
 
 /**
@@ -534,4 +537,20 @@ public class ExpertoGestionarLiquidacion {
 
     }
 
+    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion){
+        List<DTOLiquidacionEstado> estados = new ArrayList();
+         List<DTOCriterio> criterios = new ArrayList();
+          DTOCriterio criterio1 = new DTOCriterio("numeroLiquidacion","=",Integer.parseInt(numeroLiquidacion));
+          criterios.add(criterio1);
+          Liquidacion liquidacionSeleccionada = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+          for (int i = 0; i<liquidacionSeleccionada.getLiquidacionEstadoList().size(); i++) {
+              DTOLiquidacionEstado dtole = new DTOLiquidacionEstado();
+            dtole.setEstadoLiquidacion(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getEstadoLiquidacion().getNombreEstadoLiquidacion());
+             dtole.setFechaHoraDesdeLiquidacionEstado(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getFechaHoraDesdeLiquidacionEstado());
+             dtole.setFechaHoraHastaLiquidacionEstado(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado());
+             estados.add(dtole);
+        }
+         
+        return estados;
+    }
 }

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Liquidacion;
@@ -117,4 +118,13 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
         return listDtoOperacion;
 
     }
+    @Override
+    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion){
+    FachadaInterna.getInstance().iniciarTransaccion();
+    List<DTOLiquidacionEstado> estados = super.buscarLiquidacionEstado(numeroLiquidacion);
+    FachadaInterna.getInstance().finalizarTransaccion();
+    return estados;
+    }
+
+
 }

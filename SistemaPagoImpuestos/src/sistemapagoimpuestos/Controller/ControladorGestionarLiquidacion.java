@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Liquidacion;
@@ -76,7 +77,8 @@ public  List<DTOOperacion> mostrar(String numeroLiquidacion,String fechaLiquidac
     }
 
     
+public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion){
 
-
-
+return experto.buscarLiquidacionEstado(numeroLiquidacion);
+        }
 }

@@ -5,6 +5,12 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
+
 /**
  *
  * @author vande
@@ -14,8 +20,22 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
     /**
      * Creates new form IUMostrarHistorialEstados
      */
-    public IUMostrarHistorialEstados() {
+    public IUMostrarHistorialEstados(String numeroLiquidacion,String fechaLiquidacion) {
         initComponents();
+        jLabelNumeroLiquidacion.setText(numeroLiquidacion);
+        jLabelFechaLiquidacion.setText(fechaLiquidacion);
+        ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
+        List<DTOLiquidacionEstado> estados = controlador.buscarLiquidacionEstado(numeroLiquidacion);
+        DefaultTableModel model = (DefaultTableModel)jTableEstados.getModel();
+        
+        for (int i = 0; i < estados.size(); i++) {
+            model.addRow(new Object[]{});
+            jTableEstados.setValueAt(estados.get(i).getEstadoLiquidacion(), i, 0);
+            jTableEstados.setValueAt(estados.get(i).getFechaHoraDesdeLiquidacionEstado().toString(), i, 1);
+            jTableEstados.setValueAt(estados.get(i).getFechaHoraHastaLiquidacionEstado(), i, 2);
+        }
+
+         
     }
 
     /**
@@ -36,7 +56,7 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
         jLabelNumeroLiquidacion = new javax.swing.JLabel();
         jLabelFechaLiquidacion = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Numero Liquidacion");
 
@@ -140,7 +160,7 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrarHistorialEstados().setVisible(true);
+                new IUMostrarHistorialEstados("","").setVisible(true);
             }
         });
     }

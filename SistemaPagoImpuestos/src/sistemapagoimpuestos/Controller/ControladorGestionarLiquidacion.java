@@ -68,8 +68,8 @@ public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
 }
 
 
-public  DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta){
- return experto.mostrar( numeroLiquidacion, fechaDesde, fechaHasta);
+public  DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta,String estado){
+ return experto.mostrar( numeroLiquidacion, fechaDesde, fechaHasta,estado);
 }
 
     public void AnularLiquidacion(String nroLiquidacion) {

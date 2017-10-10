@@ -110,10 +110,10 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
 }
 
     @Override
-    public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta) {
+    public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta,String estado) {
 
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOLiquidacion dtoLiquidacion = super.mostrar(numeroLiquidacion, fechaDesde, fechaHasta);
+        DTOLiquidacion dtoLiquidacion = super.mostrar(numeroLiquidacion, fechaDesde, fechaHasta,estado);
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoLiquidacion;
 

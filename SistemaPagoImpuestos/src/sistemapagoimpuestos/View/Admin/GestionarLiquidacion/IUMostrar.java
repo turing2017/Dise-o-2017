@@ -19,10 +19,10 @@ public class IUMostrar extends javax.swing.JFrame {
     /**
      * Creates new form IUMostrar
      */
-    public IUMostrar(String nliquidacion,Date fechaDesde,Date fechaHasta) {
+    public IUMostrar(String nliquidacion,Date fechaDesde,Date fechaHasta,String estado) {
         initComponents();
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion,fechaDesde,fechaHasta);
+        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion,fechaDesde,fechaHasta,estado);
         
         jLabelNrodeLiquidacion.setText(nliquidacion);
         jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
@@ -290,7 +290,7 @@ public class IUMostrar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrar("",null,null).setVisible(true);
+                new IUMostrar("",null,null,"").setVisible(true);
             }
         });
     }

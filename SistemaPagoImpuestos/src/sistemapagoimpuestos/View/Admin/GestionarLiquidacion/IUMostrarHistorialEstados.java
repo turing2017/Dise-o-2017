@@ -142,7 +142,9 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
 
     private void jButtonDetalleOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetalleOperacionActionPerformed
      String nliquidacion = jLabelNumeroLiquidacion.getText();
+     
     int f = jTableEstados.getSelectedRow();
+    String estado = jTableEstados.getValueAt(f, 0).toString();
     String fechaDesdeS = jTableEstados.getValueAt(f, 1).toString();
     
     String dateString = fechaDesdeS;
@@ -173,7 +175,7 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
    
     
         System.out.println("fechaHasta"+fechaHasta);
-        IUMostrar mostrar = new IUMostrar(nliquidacion,fechaDesde,fechaHasta);
+        IUMostrar mostrar = new IUMostrar(nliquidacion,fechaDesde,fechaHasta,estado);
         mostrar.setVisible(true);
         mostrar.setLocation(300, 200);
         

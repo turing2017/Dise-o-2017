@@ -21,7 +21,7 @@ import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdherida;
-import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrear;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrearEmpresa;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaModificacion;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
@@ -30,6 +30,7 @@ import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrearEmpresa;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaItems;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaVerTipoImpuesto;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 
 
 /**
@@ -53,8 +54,8 @@ public class ControladorGestionarEmpresaAdherida {
     return experto.consultarEmpresas();
 }
     
-    public void modificarEmpresa (String cuit,String nombre,String nuevoTipoImpuesto, String anteriorTipoImpuesto, String nuevoTipoEmpresa,String anteriorTipoEmpresa, String direccion,boolean habilitada, int frecuenciaLiquidacion) {
-        experto.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion,  habilitada, frecuenciaLiquidacion);
+    public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada) {
+        experto.modificarEmpresa(cuit, nombre, direccion,  habilitada);
         
     }
     
@@ -71,7 +72,7 @@ public class ControladorGestionarEmpresaAdherida {
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
         vct = (Vector) eE;
-        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(), vct.get(3).toString(), vct.get(4).toString(), vct.get(5).toString(), vct.get(6).toString());
+        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(), vct.get(3).toString());
         if(dtoEe!= null){
         final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
         pantallaModificacion.setVisible(true);
@@ -92,6 +93,14 @@ public class ControladorGestionarEmpresaAdherida {
     public List<DTOItem> buscarItems(){
         return experto.buscarItems();
     }
+    
+    public void asociarEmpresa(String cuitEmpresa){
+    ControladorGestionarTipoImpuesto controladorGTI = new ControladorGestionarTipoImpuesto();
+    IUGestionarTipoImpuesto pantallaAsociar = new IUGestionarTipoImpuesto(cuitEmpresa);
+    pantallaAsociar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+    pantallaAsociar.setVisible(true); // La hago visible
+    
+    }
     public void ingresarDatosEmpresa(String cuitEmpresa, String tipoImpuesto, String tipoEmpresa, int frecuencia){
        experto.ingresarDatosEmpresa(cuitEmpresa, tipoImpuesto, tipoEmpresa, frecuencia);
     }
@@ -99,8 +108,8 @@ public class ControladorGestionarEmpresaAdherida {
            experto.ingresarDatosEmpresaCrear(cuitEmpresa,nombreEmpresa,direccionEmpresa,habilitada);
     }
     
-    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String frecuenciaEmpresaTipoImpuesto, String direccionEmpresa, String habilitada){
-        return experto.cargarDatos(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa, frecuenciaEmpresaTipoImpuesto, direccionEmpresa, habilitada);
+    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
+        return experto.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada);
     }
     public List<DTOTipoEmpresa> buscarTipoEmpresa(){
     return experto.buscarTipoEmpresa();
@@ -126,7 +135,7 @@ public class ControladorGestionarEmpresaAdherida {
     
     public void crearEmpresa(Object evt, Object controlador){
         // Muestro pantalla de Nueva Empresa
-            IUGestionarEmpresaAdheridaCrear pantallaCrear = new IUGestionarEmpresaAdheridaCrear(controlador);
+            IUGestionarEmpresaAdheridaCrearEmpresa pantallaCrear = new IUGestionarEmpresaAdheridaCrearEmpresa(controlador);
             pantallaCrear.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaCrear.setVisible(true); // La hago visible
      }

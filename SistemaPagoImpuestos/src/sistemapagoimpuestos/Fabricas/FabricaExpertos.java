@@ -9,12 +9,12 @@ import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarParametrosCalculoComision;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarItem;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoDeCuenta;
-import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorLoguearUsuario;
 import sistemapagoimpuestos.Decorators.DecoradorPagarImpuestos;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Decorators.DecoradorGestionarTipoImpuesto;
 
 /**
  *

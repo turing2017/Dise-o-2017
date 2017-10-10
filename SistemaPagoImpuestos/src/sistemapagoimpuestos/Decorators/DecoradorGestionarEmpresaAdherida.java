@@ -35,9 +35,9 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto, String anteriorTipoImpuesto, String nuevoTipoEmpresa,String anteriorTipoEmpresa, String direccion,boolean habilitada, int frecuenciaLiquidacion) {
+    public void modificarEmpresa(String cuit, String nombre, String direccion, boolean habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, anteriorTipoImpuesto, nuevoTipoEmpresa, anteriorTipoEmpresa, direccion, habilitada, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
+        super.modificarEmpresa(cuit, nombre,direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
@@ -73,9 +73,9 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String tipoImpuesto, String tipoEmpresa, String frecuenciaEmpresaTipoImpuesto, String direccionEmpresa, String habilitada) {
+    public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOEmpresaExistente dtoEe = super.cargarDatos(cuitEmpresa, nombreEmpresa, tipoImpuesto, tipoEmpresa, frecuenciaEmpresaTipoImpuesto, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
+        DTOEmpresaExistente dtoEe = super.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoEe;
     }
@@ -95,19 +95,7 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
         return dtoE;
     }
 
-    
-
-    
-
-//    @Override
-//    public void modificarEmpresa(String cuit, String nombre, String tipoImpuesto, String tipoEmpresa, String direccion, boolean habilitada, Date fechaLiquidacion) {
-//        FachadaInterna.getInstance().iniciarTransaccion();
-//        super.modificarEmpresa(cuit, nombre, tipoImpuesto, tipoEmpresa, direccion, habilitada, fechaLiquidacion); //To change body of generated methods, choose Tools | Templates.
-//        FachadaInterna.getInstance().finalizarTransaccion();
-//    }
-
-
-
+   
    
 
     @Override

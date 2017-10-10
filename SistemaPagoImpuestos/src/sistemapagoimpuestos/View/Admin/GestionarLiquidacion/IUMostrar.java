@@ -5,6 +5,11 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
 
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacion;
+
 /**
  *
  * @author vande
@@ -14,8 +19,31 @@ public class IUMostrar extends javax.swing.JFrame {
     /**
      * Creates new form IUMostrar
      */
-    public IUMostrar() {
+    public IUMostrar(String nliquidacion,Date fechaDesde,Date fechaHasta) {
         initComponents();
+        ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
+        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion,fechaDesde,fechaHasta);
+        
+        jLabelNrodeLiquidacion.setText(nliquidacion);
+        jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
+        jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
+        jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
+        jLabelPeriodo.setText(fechaDesde.toString());
+        jLabelPeriodo2.setText(fechaHasta.toString());
+   
+        DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
+        
+        for (int i = 0; i < liquidacion.getListComision().size(); i++) {
+            model.addRow(new Object[]{});
+            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNumeroOperacion(), i, 0);
+            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNroComprobanteFactura(), i, 1);
+            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getValorComision(), i, 2);
+            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getImportePagadoOperacion(), i, 3);
+        }
+        
+       
+       
+        
         
     }
 
@@ -261,7 +289,7 @@ public class IUMostrar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrar().setVisible(true);
+                new IUMostrar("",null,null).setVisible(true);
             }
         });
     }

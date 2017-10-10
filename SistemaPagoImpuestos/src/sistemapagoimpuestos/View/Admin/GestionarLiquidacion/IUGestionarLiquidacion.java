@@ -339,7 +339,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         mostrar.setVisible(true);
         mostrar.setLocation(300, 200);
         //LLena los labels
-        
+    //     IUMostrar mostrar = new IUMostrar(nliquidacion,fechaliquidacion);
      /*   IUMostrar.jLabelEmpresa.setText(empresa);
         IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
         IUMostrar.jLabelFechaLiquidacion.setText(fechaliquidacion);

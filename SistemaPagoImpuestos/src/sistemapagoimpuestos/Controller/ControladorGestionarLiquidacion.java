@@ -68,8 +68,8 @@ public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
 }
 
 
-public  List<DTOOperacion> mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipoImpuesto,String empresa){
- return experto.mostrar( numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
+public  DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta){
+ return experto.mostrar( numeroLiquidacion, fechaDesde, fechaHasta);
 }
 
     public void AnularLiquidacion(String nroLiquidacion) {
@@ -81,4 +81,6 @@ public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidaci
 
 return experto.buscarLiquidacionEstado(numeroLiquidacion);
         }
+
+//public  buscarPeriodos(String nliquidacion,Date fechaDesde,Date fechaHasta)
 }

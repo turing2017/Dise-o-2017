@@ -5,7 +5,12 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
@@ -75,6 +80,11 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
         jButtonCancelar.setText("Cancelar");
 
         jButtonDetalleOperacion.setText("Detalle Operacion");
+        jButtonDetalleOperacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDetalleOperacionActionPerformed(evt);
+            }
+        });
 
         jLabelNumeroLiquidacion.setText("jLabel3");
 
@@ -129,6 +139,40 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonDetalleOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetalleOperacionActionPerformed
+     String nliquidacion = jLabelNumeroLiquidacion.getText();
+    int f = jTableEstados.getSelectedRow();
+    String fechaDesdeS = jTableEstados.getValueAt(f, 1).toString();
+    
+    String dateString = fechaDesdeS;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Date fechaDesde = null;
+        try {
+            fechaDesde = sdf.parse(dateString);
+        } catch (ParseException ex) {
+            Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    String fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
+    
+    String dateString1 = fechaHastaS;
+    
+    Date fechaHasta = null;
+        try {
+            fechaHasta = sdf.parse(dateString1);
+        } catch (ParseException ex) {
+            Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        IUMostrar mostrar = new IUMostrar(nliquidacion,fechaDesde,fechaHasta);
+        mostrar.setVisible(true);
+        mostrar.setLocation(300, 200);
+        
+    
+    
+     //   IUMostrar mostrar = new IUMostrar(nliquidacion);
+        
+        
+    }//GEN-LAST:event_jButtonDetalleOperacionActionPerformed
 
     /**
      * @param args the command line arguments

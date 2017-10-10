@@ -153,16 +153,26 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
         }
-    String fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
+        
+        
+        Date fechaHasta = null;
+        try { String fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
+            String dateString1 = fechaHastaS;
     
-    String dateString1 = fechaHastaS;
-    
-    Date fechaHasta = null;
+    ;
         try {
             fechaHasta = sdf.parse(dateString1);
         } catch (ParseException ex) {
             Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        } catch (Exception e) {
+            fechaHasta=null;
+        
+        }
+   
+    
+        System.out.println("fechaHasta"+fechaHasta);
         IUMostrar mostrar = new IUMostrar(nliquidacion,fechaDesde,fechaHasta);
         mostrar.setVisible(true);
         mostrar.setLocation(300, 200);

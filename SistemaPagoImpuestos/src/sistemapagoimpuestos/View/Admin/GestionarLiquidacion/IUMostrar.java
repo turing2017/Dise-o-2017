@@ -29,7 +29,8 @@ public class IUMostrar extends javax.swing.JFrame {
         jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
         jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
         jLabelPeriodo.setText(fechaDesde.toString());
-        jLabelPeriodo2.setText(fechaHasta.toString());
+        if (fechaHasta == null){jLabelPeriodo2.setText("---");}else{
+        jLabelPeriodo2.setText(fechaHasta.toString());}
    
         DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
         

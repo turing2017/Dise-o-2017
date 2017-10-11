@@ -28,8 +28,6 @@ import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrearEmpresa;
-import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaItems;
-import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaVerTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 
 
@@ -127,11 +125,7 @@ public class ControladorGestionarEmpresaAdherida {
         return experto.verTipoImpuesto(vct);
     }
     
-    public void verTipoImpuesto(Object vct, ControladorGestionarEmpresaAdherida controlador){
-        IUGestionarEmpresaAdheridaVerTipoImpuesto pantallaVerTipoImpuesto = new IUGestionarEmpresaAdheridaVerTipoImpuesto( vct, controlador);
-        pantallaVerTipoImpuesto.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-        pantallaVerTipoImpuesto.setVisible(true); // La hago visible
-    }
+
     
     public void crearEmpresa(Object evt, Object controlador){
         // Muestro pantalla de Nueva Empresa
@@ -145,26 +139,7 @@ public class ControladorGestionarEmpresaAdherida {
             pantallaCrear.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaCrear.setVisible(true); // La hago visible
      }     
-    public void gestionarItems(Vector evt, Object controlador){
-        // Muestro pantalla de Modificación
-        Vector vct = new Vector();
-        vct = (Vector) evt;
-        
-        final IUGestionarEmpresaAdheridaItems pantallaItems = new IUGestionarEmpresaAdheridaItems(vct);
-        pantallaItems.setVisible(true);
-        // Modifico la operación de cierre para volver a la pantalla principal
-                   pantallaItems.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    pantallaItems.addWindowListener(new WindowAdapter() {
-                        public void windowClosing(WindowEvent ev) {
-                            pantallaItems.dispose();
-                            iniciar();
-                        }
-                    }
-                )
-                            ;
-          
-       }
-     
+ 
   
   }
 

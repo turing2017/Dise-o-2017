@@ -23,7 +23,7 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
     ControladorGestionarEmpresaTipoImpuesto controlador = new ControladorGestionarEmpresaTipoImpuesto();
     public IUGestionarTipoImpuestoModificacionItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto,String nombreTipoEmpresa, int ordenItem) {
         initComponents();
-
+        this.setLocationRelativeTo(null);
         this.nombreTipoEmpresa = nombreTipoEmpresa;
         this.codigoTipoImpuesto = codigoTipoImpuesto;
         this.cuitEmpresa = cuitEmpresa;
@@ -71,6 +71,11 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
         });
 
         jButton_cancelar.setText("Cancelar");
+        jButton_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_cancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,7 +127,12 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
         int orden = (int) spinner_Orden.getValue();
         String nombreItem = jTextField_ItemNombre.getText();
         controlador.modificarItem(nombreItem, cuitEmpresa,codigoTipoImpuesto,nombreTipoEmpresa,orden);
+        this.dispose();
     }//GEN-LAST:event_jButton_aceptarActionPerformed
+
+    private void jButton_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_cancelarActionPerformed
 
     /**
      * @param args the command line arguments

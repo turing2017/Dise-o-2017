@@ -112,6 +112,13 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
         FachadaInterna.getInstance().finalizarTransaccion();
         return listadoDtoTipoImpuesto;
     }
+
+    @Override
+    public void eliminarItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto, String nombreTipoEmpresa, int ordenItem) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.eliminarItem(nombreItem, cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, ordenItem); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
     
 }
     

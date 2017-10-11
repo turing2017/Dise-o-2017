@@ -95,7 +95,7 @@ public class ControladorGestionarEmpresaAdherida {
     }
     
     public void asociarEmpresa(String cuitEmpresa){
-    ControladorGestionarTipoImpuesto controladorGTI = new ControladorGestionarTipoImpuesto();
+   
     IUGestionarTipoImpuesto pantallaAsociar = new IUGestionarTipoImpuesto(cuitEmpresa);
     pantallaAsociar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
     pantallaAsociar.setVisible(true); // La hago visible

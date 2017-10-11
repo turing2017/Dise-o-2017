@@ -54,7 +54,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="31" max="32767" attributes="0"/>
+              <EmptySpace min="31" pref="65" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

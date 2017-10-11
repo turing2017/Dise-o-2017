@@ -60,6 +60,10 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
         return  experto.obtenerTipoImpuestos();
     }
     
+    public void eliminarItem(String nombreItem, String  cuitEmpresa,int  codigoTipoImpuesto,String  nombreTipoEmpresa,int ordenItem){
+        experto.eliminarItem(nombreItem,  cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, ordenItem);
+    }
+    
    public void asociarEmpresa(String cuitEmpresa){
         IUGestionarTipoImpuesto pantallaAsociar;
         pantallaAsociar = new IUGestionarTipoImpuesto(cuitEmpresa);

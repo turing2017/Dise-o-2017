@@ -9,11 +9,25 @@ import java.util.List;
  */
 public class DTOComprobante {
     
-    String codigoDTOComprobante;
-    Date fechaHoraVencimientoDTOComprobante;
-    double montoTotalDTOComprobante;
-    List<DTOItem> atributosAdicionalesDTOComprobante;
+    private int numeroFactura;
+    private String codigoDTOComprobante;
+    private Date fechaHoraVencimientoDTOComprobante;
+    private double montoTotalDTOComprobante;
+    private List<DTOItem> atributosAdicionalesDTOComprobante;
 
+    public DTOComprobante() {
+    }
+
+    public int getNumeroFactura() {
+        return numeroFactura;
+    }
+
+    public void setNumeroFactura(int numeroFactura) {
+        this.numeroFactura = numeroFactura;
+    }
+
+    
+    
     public void setCodigoDTOComprobante(String codigoDTOComprobante) {
         this.codigoDTOComprobante = codigoDTOComprobante;
     }

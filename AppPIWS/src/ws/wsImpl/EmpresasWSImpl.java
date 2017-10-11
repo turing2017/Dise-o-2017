@@ -112,8 +112,25 @@ public class EmpresasWSImpl implements EmpresasWS {
     }
 
     @Override
-    public boolean acreditarPagoDgr(String codigo, Date vencimiento, double monto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean acreditarPagoDgr(String nroFactura, String codigoCP, double monto) {
+        try {
+            DgrModel dm = new DgrModel();
+            List<Dgr> dgrList = dm.findAll();
+            Dgr dgr = new Dgr();
+            for (Dgr dgrTemp : dgrList) {
+                if (Integer.parseInt(nroFactura)==dgrTemp.getNroFactura()) {
+                    dgrTemp.setMontoPagar(monto);
+                    dgrTemp.setStatus("Pagado");
+                    dgrTemp.setCodigoCP(codigoCP);
+                    dgr = dgrTemp;
+                    break;
+                }
+            }
+            dm.update(dgr);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

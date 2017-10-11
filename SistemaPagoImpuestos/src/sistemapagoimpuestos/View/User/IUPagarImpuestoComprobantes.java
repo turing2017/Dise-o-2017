@@ -336,7 +336,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         
         for (DTOComprobante dtoComprobante : listaComprobantes) {
             Vector<Object> vect = new Vector<>();
-            vect.add(dtoComprobante.getCodigoDTOComprobante());
+            vect.add(dtoComprobante.getNumeroFactura());
             vect.add(dtoComprobante.getMontoTotalDTOComprobante());
             vect.add(format.format(dtoComprobante.getFechaHoraVencimientoDTOComprobante()));
             
@@ -407,8 +407,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         DTOComprobante comprobante = new DTOComprobante();
         
         for (DTOComprobante dtoComprobante : listadoComprobantes) {
-            String codigo = dtoComprobante.getCodigoDTOComprobante();
-            if (codigo == numeroComprobante) {
+            if (Integer.parseInt(numeroComprobante)==dtoComprobante.getNumeroFactura() ) {
                 comprobante = dtoComprobante;
                 break;
             }      

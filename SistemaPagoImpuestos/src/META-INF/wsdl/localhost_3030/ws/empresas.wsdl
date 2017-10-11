@@ -2,7 +2,7 @@
 <import namespace="http://ws/" location="http://localhost:3030/ws/empresas?wsdl=1"></import>
 <binding xmlns:ns1="http://ws/" name="EmpresasWSImplPortBinding" type="ns1:EmpresasWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
-<operation name="acreditarPagoClaro">
+<operation name="buscarComprobantesCodigoDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -11,7 +11,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="pagarComprobanteDgr">
+<operation name="acreditarPagoClaro">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -29,7 +29,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="buscarComprobantesCodigoDgr">
+<operation name="pagarComprobanteDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -47,7 +47,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="findForCodeDgr">
+<operation name="findAllClaro">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -65,7 +65,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="findAllClaro">
+<operation name="findAllDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -74,7 +74,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="debitarMonto">
+<operation name="findForCodeDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -92,7 +92,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="findAllDgr">
+<operation name="findForCodeClaro">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -101,7 +101,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="findForCodeClaro">
+<operation name="debitarMonto">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

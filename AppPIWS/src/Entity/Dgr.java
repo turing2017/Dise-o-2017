@@ -25,6 +25,7 @@ public class Dgr  implements java.io.Serializable {
      private String nombreImpuesto;
      private Double montoPagar;
      private String status;
+     private String codigoCP;
      private Date primerVencimiento;
      private Date segundoVencimiento;
 
@@ -114,7 +115,14 @@ public class Dgr  implements java.io.Serializable {
     }
 
 
+    @Column(name="codigoCP")
+    public String getCodigoCP() {
+        return codigoCP;
+    }
 
+    public void setCodigoCP(String codigoCP) {
+        this.codigoCP = codigoCP;
+    }
 
 }
 

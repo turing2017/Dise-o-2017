@@ -42,10 +42,10 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa{
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
         for (Claro claro : listClaro) {
             DTOComprobante comprobante = new DTOComprobante();
-            comprobante.setCodigoDTOComprobante(claro.getNroFactura()+"");
+            comprobante.setCodigoDTOComprobante(claro.getCodigo());
             comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
             comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
-
+            comprobante.setNumeroFactura(claro.getNroFactura());
             comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, claro));
             dTOComprobanteList.add(comprobante);
         }

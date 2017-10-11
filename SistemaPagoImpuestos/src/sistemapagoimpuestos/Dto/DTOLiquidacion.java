@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Dto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,11 +21,32 @@ public class DTOLiquidacion {
     private String nombreEmpresa;
     private String nombreTipoImpuesto;
     private String nombreEstadoLiquidacion;
-
+    private List<DTOComision> listComision;
     public DTOLiquidacion() {
     }
 
-    public DTOLiquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion, String nombreEmpresa, String nombreTipoImpuesto, String nombreEstadoLiquidacion) {
+   
+
+    public List<DTOComision> getListComision() {
+        return listComision;
+    }
+
+    public void setListComision(List<DTOComision> listComision) {
+        this.listComision = listComision;
+    }
+
+    public DTOLiquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion, String nombreEmpresa, String nombreTipoImpuesto, String nombreEstadoLiquidacion, List<DTOComision> listComision) {
+        this.numeroLiquidacion = numeroLiquidacion;
+        this.fechaHoraLiquidacion = fechaHoraLiquidacion;
+        this.fechaHoraDesdeLiquidacion = fechaHoraDesdeLiquidacion;
+        this.fechaHoraHastaLiquidacion = fechaHoraHastaLiquidacion;
+        this.nombreEmpresa = nombreEmpresa;
+        this.nombreTipoImpuesto = nombreTipoImpuesto;
+        this.nombreEstadoLiquidacion = nombreEstadoLiquidacion;
+        this.listComision = listComision;
+    }
+
+    public DTOLiquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion, String nombreEmpresa, String nombreTipoImpuesto, String nombreEstadoLiquidacion) {//por si alguien lo usaba sin los operacion/comision para q no explote
         this.numeroLiquidacion = numeroLiquidacion;
         this.fechaHoraLiquidacion = fechaHoraLiquidacion;
         this.fechaHoraDesdeLiquidacion = fechaHoraDesdeLiquidacion;

@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 import sistemapagoimpuestos.Expert.ExpertoCalcularLiquidaciones;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 
@@ -12,11 +13,15 @@ import sistemapagoimpuestos.Fabricas.FabricaExpertos;
  *
  * @author Gabriel
  */
-public class ControladoCalcularLiquidaciones {
+public class ControladorCalcularLiquidaciones {
 
     private ExpertoCalcularLiquidaciones experto = (ExpertoCalcularLiquidaciones) FabricaExpertos.getInstancia().crearExperto("CU03");
 
-    public ControladoCalcularLiquidaciones() {
+    public ControladorCalcularLiquidaciones() {
+    }
+    
+    public void iniciar(DTOAccionesSistema dtoAccionesSistema){
+        experto.iniciar(dtoAccionesSistema);
     }
 
 }

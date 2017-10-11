@@ -31,21 +31,19 @@ public class IUMostrar extends javax.swing.JFrame {
         jLabelPeriodo.setText(fechaDesde.toString());
         if (fechaHasta == null){jLabelPeriodo2.setText("---");}else{
         jLabelPeriodo2.setText(fechaHasta.toString());}
-   
         DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
-        
+        Double montoTotal = 0.0;
         for (int i = 0; i < liquidacion.getListComision().size(); i++) {
             model.addRow(new Object[]{});
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNumeroOperacion(), i, 0);
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNroComprobanteFactura(), i, 1);
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getValorComision(), i, 2);
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getImportePagadoOperacion(), i, 3);
+             System.out.println(liquidacion.getListComision().get(i).getValorComision());
+            montoTotal= liquidacion.getListComision().get(i).getValorComision() +montoTotal;
         }
-        
-       
-       
-        
-        
+       System.out.println(montoTotal);
+       jTextFieldMontoTotal.setText(montoTotal.toString());
     }
 
     /**

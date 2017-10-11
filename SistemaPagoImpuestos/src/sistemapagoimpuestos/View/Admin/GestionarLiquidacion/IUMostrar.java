@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
 
+import static java.awt.Dialog.DEFAULT_MODALITY_TYPE;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
@@ -14,7 +15,7 @@ import sistemapagoimpuestos.Dto.DTOLiquidacion;
  *
  * @author vande
  */
-public class IUMostrar extends javax.swing.JFrame {
+public class IUMostrar extends javax.swing.JDialog {
 
     /**
      * Creates new form IUMostrar
@@ -44,6 +45,11 @@ public class IUMostrar extends javax.swing.JFrame {
         }
        System.out.println(montoTotal);
        jTextFieldMontoTotal.setText(montoTotal.toString());
+        this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
+        this.setTitle("Operaciones");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -69,7 +75,6 @@ public class IUMostrar extends javax.swing.JFrame {
         jLabelNrodeLiquidacion = new javax.swing.JLabel();
         jLabelFechaLiquidacion = new javax.swing.JLabel();
         jLabelPeriodo = new javax.swing.JLabel();
-        jButtonDescargar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldMontoTotal = new javax.swing.JTextField();
@@ -129,8 +134,6 @@ public class IUMostrar extends javax.swing.JFrame {
 
         jLabelPeriodo.setText("jLabel10");
 
-        jButtonDescargar.setText("Descargar");
-
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +166,14 @@ public class IUMostrar extends javax.swing.JFrame {
                 .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102))
             .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabelPeriodo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelPeriodo2)
+                .addGap(166, 166, 166))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
@@ -187,22 +198,12 @@ public class IUMostrar extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jButtonDescargar)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButtonCancelar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(217, 217, 217)
-                        .addComponent(jLabel5)))
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jButtonCancelar)))
                 .addContainerGap(73, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabelPeriodo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelPeriodo2)
-                .addGap(166, 166, 166))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,11 +240,9 @@ public class IUMostrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDescargar)
-                    .addComponent(jButtonCancelar))
-                .addGap(30, 30, 30))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonCancelar)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,8 +253,7 @@ public class IUMostrar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldMontoTotalActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-       IUMostrar.this.setVisible(false);
-       
+       this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
@@ -295,7 +293,6 @@ public class IUMostrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonDescargar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

@@ -336,8 +336,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         String fechaHasta =  jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
         
         IUMostrarHistorialEstados mostrar = new IUMostrarHistorialEstados(nliquidacion,fechaliquidacion);
-        mostrar.setVisible(true);
-        mostrar.setLocation(300, 200);
+    
         //LLena los labels
     //     IUMostrar mostrar = new IUMostrar(nliquidacion,fechaliquidacion);
      /*   IUMostrar.jLabelEmpresa.setText(empresa);

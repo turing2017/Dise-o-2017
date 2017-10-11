@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
 
+import static java.awt.Dialog.DEFAULT_MODALITY_TYPE;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +21,7 @@ import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
  *
  * @author vande
  */
-public class IUMostrarHistorialEstados extends javax.swing.JFrame {
+public class IUMostrarHistorialEstados extends javax.swing.JDialog {
 
     /**
      * Creates new form IUMostrarHistorialEstados
@@ -39,7 +40,11 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
             jTableEstados.setValueAt(estados.get(i).getFechaHoraDesdeLiquidacionEstado().toString(), i, 1);
             jTableEstados.setValueAt(estados.get(i).getFechaHoraHastaLiquidacionEstado(), i, 2);
         }
-
+        this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
+        this.setTitle("Historial Liquidaciones");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
          
     }
 
@@ -78,6 +83,11 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableEstados);
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonDetalleOperacion.setText("Detalle Operacion");
         jButtonDetalleOperacion.addActionListener(new java.awt.event.ActionListener() {
@@ -176,15 +186,15 @@ public class IUMostrarHistorialEstados extends javax.swing.JFrame {
     
         System.out.println("fechaHasta"+fechaHasta);
         IUMostrar mostrar = new IUMostrar(nliquidacion,fechaDesde,fechaHasta,estado);
-        mostrar.setVisible(true);
-        mostrar.setLocation(300, 200);
-        
-    
-    
+       
      //   IUMostrar mostrar = new IUMostrar(nliquidacion);
         
         
     }//GEN-LAST:event_jButtonDetalleOperacionActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments

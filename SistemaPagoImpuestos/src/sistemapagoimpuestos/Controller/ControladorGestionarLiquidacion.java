@@ -18,6 +18,8 @@ import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Expert.ExpertoGestionarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUGestionarLiquidacion;
+import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrar;
+import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrarHistorialEstados;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 
 /**
@@ -82,5 +84,12 @@ public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidaci
 return experto.buscarLiquidacionEstado(numeroLiquidacion);
         }
 
-//public  buscarPeriodos(String nliquidacion,Date fechaDesde,Date fechaHasta)
+public void pantallaIUmostrarHistorialEstados(String nliquidacion,String fechaliquidacion){
+    IUMostrarHistorialEstados mostrarHistorico = new IUMostrarHistorialEstados(nliquidacion, fechaliquidacion);
+}
+
+public void pantallaIUmostrar(String nliquidacion,Date fechaDesde,Date fechaHasta,String estado){
+    IUMostrar mostrar = new IUMostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+}
+
 }

@@ -341,7 +341,8 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         String fechaDesde = jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString();
         String fechaHasta = jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
 
-        IUMostrarHistorialEstados mostrar = new IUMostrarHistorialEstados(nliquidacion, fechaliquidacion);
+        controlador.pantallaIUmostrarHistorialEstados(nliquidacion,fechaliquidacion);
+        
     }//GEN-LAST:event_jButtonMostrarActionPerformed
 
     private void jButtonAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAprobarActionPerformed

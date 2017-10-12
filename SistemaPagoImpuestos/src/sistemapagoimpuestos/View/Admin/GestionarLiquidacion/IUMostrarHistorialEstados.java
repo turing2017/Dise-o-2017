@@ -179,8 +179,9 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
         } catch (Exception e) {
             fechaHasta = null;
         }
-       
-        IUMostrar mostrar = new IUMostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+        ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
+        controlador.pantallaIUmostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+        
 
         //   IUMostrar mostrar = new IUMostrar(nliquidacion);
 

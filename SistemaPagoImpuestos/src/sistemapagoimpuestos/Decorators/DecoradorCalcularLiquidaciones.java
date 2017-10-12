@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import java.util.ArrayList;
 import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 import sistemapagoimpuestos.Expert.ExpertoCalcularLiquidaciones;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -14,11 +15,12 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  * @author Gabriel
  */
 public class DecoradorCalcularLiquidaciones extends ExpertoCalcularLiquidaciones{
-    
+
     @Override
-    public void iniciar(DTOAccionesSistema dtoAccionesSistema){
-         FachadaInterna.getInstance().iniciarTransaccion();
-         super.iniciar(dtoAccionesSistema);
-         FachadaInterna.getInstance().finalizarTransaccion();
+    public ArrayList<DTOAccionesSistema> iniciar(ArrayList<DTOAccionesSistema> dtosAccionesSistema) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        ArrayList<DTOAccionesSistema> dtos = super.iniciar(dtosAccionesSistema);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return dtos;
     }
 }

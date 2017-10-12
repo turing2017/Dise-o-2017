@@ -16,6 +16,12 @@ public class DTOAccionesSistema {
     private Date fechaHoraAccion;
     private String accion;
     private String descripcionAccion;
+
+    public DTOAccionesSistema(String accion, String descripcionAccion, Date fechaHoraAccion) {
+        this.accion = accion;
+        this.descripcionAccion = descripcionAccion;
+        this.fechaHoraAccion = fechaHoraAccion;
+    }
       
     public Date getFechaHoraAccion() {
         return fechaHoraAccion;

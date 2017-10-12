@@ -1,6 +1,7 @@
 package sistemapagoimpuestos;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Controller.ControladorCalcularLiquidaciones;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
@@ -20,15 +21,20 @@ public class SistemaPagoImpuestos {
   
     public static void main(String[] args) {
        
-        //  DTOAccionesSistema dtoAccionesSistema = new DTOAccionesSistema();
-       // ControladorGestionarLiquidacion.getInstance().iniciar();
-       // ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
-        //controlador.iniciar(dtoAccionesSistema);
-       // ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
-       // controlador.iniciar();
-   
-        ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        controlador.iniciar();
-
+        ArrayList<DTOAccionesSistema> dtoAcciones =new ArrayList();
+        ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
+        dtoAcciones = controlador.iniciar(dtoAcciones);
+        
+        for ( DTOAccionesSistema dtoAccion : dtoAcciones){
+            dtoAccion.imprimirSTD();
+        }
+    
+        /*
+       ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
+       ControladorLoguearUsuario controlador = new ControladorLoguearUsuario();
+       controlador.iniciar();
+       ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
+       controlador.iniciar();
+       */
     }
 }

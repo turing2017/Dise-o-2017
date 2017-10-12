@@ -27,12 +27,9 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoCalcularLiquidaciones {
     
-    public void iniciar(DTOAccionesSistema dtoAccionesSistema) {
-        dtoAccionesSistema.setAccion("Iniciando Calculo Comisiones...");
-        dtoAccionesSistema.setDescripcionAccion("Calculo de las comisiones de las operaciones");
-        dtoAccionesSistema.setFechaHoraAccion(new Date());
-        dtoAccionesSistema.imprimirSTD();
-           
+    public ArrayList<DTOAccionesSistema> iniciar(ArrayList<DTOAccionesSistema> dtosAccionesSistema) {
+     
+        dtosAccionesSistema.add(new DTOAccionesSistema("Iniciando Calculo Comisiones...","Calculo de las comisiones de las operaciones",new Date()));
         //varaiables globales
         Liquidacion liquidacionAnulada = new Liquidacion();
         String nombreEstadoRecalculada = "Recalculada";
@@ -346,9 +343,8 @@ public class ExpertoCalcularLiquidaciones {
             //Por cada tipo impuesto fin
            // }  //{del liquidada por si no hay q crearlas
         }
-        dtoAccionesSistema.setAccion("Calculo Finalizado");
-        dtoAccionesSistema.setDescripcionAccion("Se calcularon todas las comisiones para las operaciones pendientes al dia de la fecha.");
-        dtoAccionesSistema.setFechaHoraAccion(new Date());
-        dtoAccionesSistema.imprimirSTD();
+        
+       dtosAccionesSistema.add(new DTOAccionesSistema("Calculo Finalizado","Se calcularon todas las comisiones para las operaciones pendientes al dia de la fecha.",new Date()));
+       return dtosAccionesSistema;
     }
 }

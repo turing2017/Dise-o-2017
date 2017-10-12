@@ -39,15 +39,6 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
         super.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres); 
         FachadaInterna.getInstance().finalizarTransaccion(); 
     }
-
-    @Override
-    public void nuevaEmpresaTipoImpuesto(String nombreTipoImpuestoIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItems) {
-        FachadaInterna.getInstance().iniciarTransaccion(); 
-        super.nuevaEmpresaTipoImpuesto(nombreTipoImpuestoIngres, dTOEmpresaTipImpItems); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion(); 
-    }
-    
-    
     
     
     @Override
@@ -72,49 +63,6 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
         ArrayList<DTOTipoImpuesto> listadoDtoTipoImpuesto= super.obtenerTipoImpuestos(); 
         FachadaInterna.getInstance().finalizarTransaccion();
         return listadoDtoTipoImpuesto;//To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<DTOEmpresaItem> obtenerEmpresaItem() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        ArrayList<DTOEmpresaItem> empresaItems= super.obtenerEmpresaItem();
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return empresaItems;
-    }
-
-    @Override
-    public List<DTOEmpresa> buscarEmpresas() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOEmpresa> tempString = super.buscarEmpresas(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return tempString;
-    }
-     
-    @Override
-    public List<DTOItem> buscarItems() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOItem> tempString = super.buscarItems(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return tempString;
-    }
-
-    @Override
-    public List<DTOTipoEmpresa> buscarTipoEmpresa() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOTipoEmpresa> tempDtoTipoEmpresa = super.buscarTipoEmpresa(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return tempDtoTipoEmpresa;
-    }
-
-    @Override
-    public void nuevaEmpresaTipoImpuestoItem(String nombreTipoImpuestoIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItem) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.nuevaEmpresaTipoImpuestoItem(nombreTipoImpuestoIngres, dTOEmpresaTipImpItem); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-    }
-    
-    
-    
-    
+    }   
 }
     

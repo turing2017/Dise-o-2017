@@ -31,18 +31,19 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     /**
      * Creates new form IUGestionarLiquidacion
      */
+    ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
     public IUGestionarLiquidacion() {
         //LLENA EL COMBO BOX TIPO EMPRESA, Y INICIALIZA EL DE EMRPESA CON "TODOS"
         initComponents();
         jComboBoxEmpresa.setEditable(false);
         jComboBoxTipoImpuesto.addItem("Todos");
-        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorGestionarLiquidacion.getInstance().obtenerTipoImpuestos();  
+        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = controlador.obtenerTipoImpuestos();  
          for(DTOTipoImpuesto obj : listDtoTipoImpuesto){
              jComboBoxTipoImpuesto.addItem(obj.getNombreDTOTipoImpuesto());
            }  
          jComboBoxEmpresa.removeAllItems();
         jComboBoxEmpresa.addItem("Todos");
-         List<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+         List<DTOEmpresa> listDtoDTOEmpresa = controlador.obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
        for(DTOEmpresa obj : listDtoDTOEmpresa){
             jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}     
     }
@@ -251,7 +252,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
      //manda a buscar con los parametros       
         Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
-        ArrayList <DTOLiquidacion> listDtoLiquidacion = ControladorGestionarLiquidacion.getInstance().buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
+        ArrayList <DTOLiquidacion> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
         
         //LLena la tabla
         for (int i = 0; i < listDtoLiquidacion.size(); i++) {
@@ -277,7 +278,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
         jComboBoxEmpresa.removeAllItems();
         jComboBoxEmpresa.addItem("Todos");
-         List<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+         List<DTOEmpresa> listDtoDTOEmpresa = controlador.obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
        for(DTOEmpresa obj : listDtoDTOEmpresa){
             jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}     
     }//GEN-LAST:event_jComboBoxTipoImpuestoActionPerformed
@@ -305,15 +306,15 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
       int opcion = JOptionPane.showConfirmDialog(rootPane, "Desea Anular la liquidacion numero "+jTable2.getValueAt(jTable2.getSelectedRow(), 0));
         switch (opcion) {
             case 0:System.out.println("---------------ACEPTO------------");
-               if(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("ARecalcular")||jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("Aprobado")){
+               if(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("Aprobada")||jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("Anulada")){
                         JOptionPane.showMessageDialog(null,
                         "Solo se pueden anular liquidaciones en estado Recalculada o Creada",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                         break;
                }
-                ControladorGestionarLiquidacion.getInstance().AnularLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-            
+                controlador.AnularLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
+                jButtonConsultarLiquidaciones.doClick();
               
                 break;
             default:
@@ -334,17 +335,17 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         String fechaDesde =  jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString();
         String fechaHasta =  jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
         
-        IUMostrar mostrar = new IUMostrar();
-        mostrar.setVisible(true);
-        mostrar.setLocation(300, 200);
+        IUMostrarHistorialEstados mostrar = new IUMostrarHistorialEstados(nliquidacion,fechaliquidacion);
+    
         //LLena los labels
-        IUMostrar.jLabelEmpresa.setText(empresa);
+    //     IUMostrar mostrar = new IUMostrar(nliquidacion,fechaliquidacion);
+     /*   IUMostrar.jLabelEmpresa.setText(empresa);
         IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
         IUMostrar.jLabelFechaLiquidacion.setText(fechaliquidacion);
         IUMostrar.jLabelNrodeLiquidacion.setText(nliquidacion);
         IUMostrar.jLabelPeriodo.setText(fechaDesde);
         IUMostrar.jLabelPeriodo2.setText(fechaHasta);
-        List<DTOOperacion> listDTOoperacion = ControladorGestionarLiquidacion.getInstance().mostrar(nliquidacion, fechaliquidacion, tipoImpuesto, empresa);
+        List<DTOOperacion> listDTOoperacion = controlador.mostrar(nliquidacion, fechaliquidacion, tipoImpuesto, empresa);
 
         for (int i = 0; i < listDTOoperacion.size(); i++) {
 
@@ -361,7 +362,7 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
             IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getImportePagadoOperacion(), i, 3);
             montoTotal = montoTotal + listDTOoperacion.get(i).getValorComisionOperacion();
         }
-        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);
+        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);*/
     }//GEN-LAST:event_jButtonMostrarActionPerformed
 
     private void jButtonAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAprobarActionPerformed
@@ -371,9 +372,15 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         switch (opcion) {
             case 0:
                 System.out.println("---------------ACEPTO------------");
-
-                ControladorGestionarLiquidacion.getInstance().AprobarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-
+                        if(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("Aprobada")||jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().equals("Anulada")){
+                        JOptionPane.showMessageDialog(null,
+                        "Solo se pueden aprobar liquidaciones en estado Recalculada o Creada",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                        break;
+               }
+                controlador.AprobarLiquidacion(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
+                jButtonConsultarLiquidaciones.doClick();
                 break;
             default:
                 throw new AssertionError();

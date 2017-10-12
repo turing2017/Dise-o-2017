@@ -11,6 +11,8 @@ public class DTOCuentaBancaria {
     private String nroCuentaBancaria;
     private String cbuCuentaBancaria;
     private Date fechaInhabilitacionCuentaBancaria;
+    // Saldo recuperado del servicio del banco
+    private double saldoRecuperado;
     
     // Atributos dados por relación
     private DTOTipoCuenta tipoCuenta;
@@ -50,6 +52,10 @@ public class DTOCuentaBancaria {
     public void setCliente(DTOCliente cliente) {
         this.cliente = cliente;
     }
+
+    public void setSaldoRecuperado(double saldoRecuperado) {
+        this.saldoRecuperado = saldoRecuperado;
+    }
     
     
 
@@ -73,4 +79,9 @@ public class DTOCuentaBancaria {
     public DTOCliente getCliente() {
         return cliente;
     }
+
+    public double getSaldoRecuperado() {
+        return saldoRecuperado;
+    }
+    
 }

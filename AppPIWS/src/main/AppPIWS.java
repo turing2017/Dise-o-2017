@@ -6,11 +6,16 @@
 package main;
 
 import Entity.Claro;
+import Entity.Dgr;
+import com.sun.net.httpserver.HttpServer;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import ws.*;
 import javax.xml.ws.*;
-import ws.wsImpl.ClaroWSImpl;
+import ws.wsImpl.EmpresasWSImpl;
 
 /**
  *
@@ -23,11 +28,8 @@ public class AppPIWS {
      */
     public static void main(String[] args) {
         try {
-            //ClaroWSImpl claroWSImpl = new ClaroWSImpl();
-            //claroWSImpl.create(new Claro("test", "test", 2.3, 1.2, "test", 1, new Date()));
-            //List<Claro> c = claroWSImpl.buscarComprobantesCodigo("test");
-            //System.out.println(c);
-            Endpoint.publish("http://localhost:3030/ws/claro", new ClaroWSImpl());
+            Endpoint.publish("http://localhost:3030/ws/empresas", new EmpresasWSImpl());
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -5,6 +5,8 @@ package Entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,15 +21,16 @@ import javax.persistence.TemporalType;
 )
 public class Claro  implements java.io.Serializable {
 
-
+    private int nroFactura;
      private String codigo;
      private String nombreServicio;
      private Double montoTotal;
      private Double montoPagado;
+     private Double montoMinimo;
      private String status;
      private Integer nroTelefono;
      private Date vencimiento;
-
+     private String codigoCP;
     public Claro() {
     }
 
@@ -37,19 +40,29 @@ public class Claro  implements java.io.Serializable {
         this.codigo = codigo;
         this.nombreServicio = nombreServicio;
         this.montoTotal = montoTotal;
-        this.montoPagado = montoPagado;
+        this.montoMinimo = montoPagado;
         this.status = status;
         this.nroTelefono = nroTelefono;
         this.vencimiento = vencimiento;
     }
     
     
-    @Id     
-    @Column(name="codigo", unique = true)
+    @Id
+    @Column(name="nroFactura")
+    public int getNroFactura() {
+        return nroFactura;
+    }
+
+    public void setNroFactura(int id) {
+        this.nroFactura = id;
+    }
+    
+    
+    @Column(name="codigo")
     public String getCodigo() {
         return this.codigo;
     }
-    
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -75,13 +88,13 @@ public class Claro  implements java.io.Serializable {
     }
 
     
-    @Column(name="montoPagado", precision=22, scale=0)
-    public Double getMontoPagado() {
-        return this.montoPagado;
+    @Column(name="montoMinimo", precision=22, scale=0)
+    public Double getMontoMinimo() {
+        return this.montoMinimo;
     }
     
-    public void setMontoPagado(Double montoPagado) {
-        this.montoPagado = montoPagado;
+    public void setMontoMinimo(Double montoMinimo) {
+        this.montoMinimo = montoMinimo;
     }
 
     
@@ -113,6 +126,24 @@ public class Claro  implements java.io.Serializable {
     public void setVencimiento(Date vencimiento) {
         this.vencimiento = vencimiento;
     }
+
+    @Column(name="montoPagado")
+    public Double getMontoPagado() {
+        return montoPagado;
+    }
+    public void setMontoPagado(Double montoPagado) {
+        this.montoPagado = montoPagado;
+    }
+    @Column(name="codigoCP")
+    public String getCodigoCP() {
+        return codigoCP;
+    }
+
+    public void setCodigoCP(String codigoCP) {
+        this.codigoCP = codigoCP;
+    }
+
+    
 
 
 

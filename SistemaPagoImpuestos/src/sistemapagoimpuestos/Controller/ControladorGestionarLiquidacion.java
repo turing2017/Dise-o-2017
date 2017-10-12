@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Liquidacion;
@@ -24,20 +25,9 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
  * @author facun
  */
 public class ControladorGestionarLiquidacion {
-    private static ControladorGestionarLiquidacion controladorGestionarLiquidacion;
-    private ExpertoGestionarLiquidacion experto = (ExpertoGestionarLiquidacion) FabricaExpertos.getInstancia().crearExperto("CU21");
-
-    public ControladorGestionarLiquidacion() {
-    }
     
-     public static ControladorGestionarLiquidacion getInstance()
-    {
-        if (controladorGestionarLiquidacion == null)
-        {
-            controladorGestionarLiquidacion = new ControladorGestionarLiquidacion();
-        }
-        return controladorGestionarLiquidacion;
-    }
+    private ExpertoGestionarLiquidacion experto = (ExpertoGestionarLiquidacion) FabricaExpertos.getInstancia().crearExperto("CU21");
+    
       // Metodo iniciar
     public void iniciar(){
         if(experto.iniciar().equals("Administrador"))
@@ -78,8 +68,8 @@ public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
 }
 
 
-public  List<DTOOperacion> mostrar(String numeroLiquidacion,String fechaLiquidacion,String tipoImpuesto,String empresa){
- return experto.mostrar( numeroLiquidacion, fechaLiquidacion, tipoImpuesto, empresa);
+public  DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta,String estado){
+ return experto.mostrar( numeroLiquidacion, fechaDesde, fechaHasta,estado);
 }
 
     public void AnularLiquidacion(String nroLiquidacion) {
@@ -87,7 +77,10 @@ public  List<DTOOperacion> mostrar(String numeroLiquidacion,String fechaLiquidac
     }
 
     
+public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion){
 
+return experto.buscarLiquidacionEstado(numeroLiquidacion);
+        }
 
-
+//public  buscarPeriodos(String nliquidacion,Date fechaDesde,Date fechaHasta)
 }

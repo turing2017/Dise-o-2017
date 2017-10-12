@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
-import static sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems.setNuevoTipoImpuesto;
 
 /**
  *
@@ -59,10 +58,6 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         textfield_codigo = new javax.swing.JTextField();
         checkbox_esEditable = new javax.swing.JCheckBox();
         button_crear = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabla_empresa_item = new javax.swing.JTable();
-        button_add_EA = new javax.swing.JButton();
-        button_delete_EA = new javax.swing.JButton();
         cancel_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,26 +74,16 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             }
         });
 
+        checkbox_esEditable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkbox_esEditableActionPerformed(evt);
+            }
+        });
+
         button_crear.setText("Crear");
         button_crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_crearActionPerformed(evt);
-            }
-        });
-
-        jScrollPane1.setViewportView(tabla_empresa_item);
-
-        button_add_EA.setText("Añadir");
-        button_add_EA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_add_EAActionPerformed(evt);
-            }
-        });
-
-        button_delete_EA.setText("Eliminar");
-        button_delete_EA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_delete_EAActionPerformed(evt);
             }
         });
 
@@ -114,70 +99,55 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_codigo)
-                            .addComponent(label_nombre)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(label_esEditable)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(label_esEditable)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(button_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_codigo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label_nombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(10, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(checkbox_esEditable)
-                        .addGap(85, 85, 85))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(92, 92, 92))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cancel_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_crear)
-                        .addGap(49, 49, 49))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(button_delete_EA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(button_add_EA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addGap(433, 433, 433))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(76, 76, 76)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label_nombre)
                     .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_codigo)
                     .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label_esEditable)
                     .addComponent(checkbox_esEditable))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(button_add_EA)
-                        .addGap(67, 67, 67)
-                        .addComponent(button_delete_EA)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button_crear)
-                    .addComponent(cancel_button))
-                .addGap(25, 25, 25))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancel_button)
+                    .addComponent(button_crear))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,23 +175,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_crearActionPerformed
 
-    private void button_add_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_add_EAActionPerformed
-        controlador.mostrarPantallaGestionETI(textfield_codigo.getText(), textField_nombre.getText(), checkbox_esEditable.isSelected());
-        this.dispose();
-    }//GEN-LAST:event_button_add_EAActionPerformed
-
-    private void button_delete_EAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_delete_EAActionPerformed
-        try {
-            DefaultTableModel model = (DefaultTableModel) tabla_empresa_item.getModel();
-            int rowSelected = tabla_empresa_item.getSelectedRow();
-            removeDtoetiisModfAlta(rowSelected);
-            model.removeRow(rowSelected);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
-            Excepciones.getInstance().objetoNoSeleccionado();
-        }
-    }//GEN-LAST:event_button_delete_EAActionPerformed
-
+  
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
         controlador.iniciar();
@@ -231,9 +185,10 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textField_nombreActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void checkbox_esEditableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_esEditableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkbox_esEditableActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -266,99 +221,6 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         });
     }
 
-    public void generarEmpresaItems() {
-
-        // Muestro pantalla de Consultar
-        String[] columnas = {"Empresa", "Tipo Empresa", "Frec. Liquidacion", "Items"};
-
-        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //all cells false
-                return false;
-            }
-
-            public Class<?> getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return String.class;
-                    case 1:
-                        return String.class;
-                    case 2:
-                        return int.class;
-                    case 3:
-                        return String.class;
-                    default:
-                        return null;
-                }
-            }
-
-        };
-
-        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
-                setHorizontalAlignment(JLabel.CENTER);
-                return this;
-            }
-        };
-        tabla_empresa_item.setModel(dtm);
-        tabla_empresa_item.getColumnModel().getColumn(0).setCellRenderer(r);
-        tabla_empresa_item.getColumnModel().getColumn(1).setCellRenderer(r);
-    }
-
-        public void RecuperarEmpresaItems() {
-        // Muestro pantalla de Consultar
-        String[] columnas = {"Empresa", "Tipo Empresa", "Frec. Liquidacion", "Items"};
-
-        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //all cells false
-                return false;
-            }
-
-            public Class<?> getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return String.class;
-                    case 1:
-                        return String.class;
-                    case 2:
-                        return int.class;
-                    case 3:
-                        return String.class;
-                    default:
-                        return null;
-                }
-            }
-
-        };
-
-        for (DTOEmpresaTipImpItem dTOEmpresaTipImpItem : dTOEmpresaTipImpItemAltaList) {
-            Vector<Object> vect = new Vector<>();
-            vect.add(dTOEmpresaTipImpItem.getNombreEmpresa());
-            vect.add(dTOEmpresaTipImpItem.getNombreTipoEmpresa());
-            vect.add(dTOEmpresaTipImpItem.getFrecuenciaSincronizacion());
-            vect.add(dTOEmpresaTipImpItem.concatItems());
-            dtm.addRow(vect);
-        }
-
-        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
-                setHorizontalAlignment(JLabel.CENTER);
-                return this;
-            }
-        };
-        tabla_empresa_item.setModel(dtm);
-        tabla_empresa_item.getColumnModel().getColumn(0).setCellRenderer(r);
-        tabla_empresa_item.getColumnModel().getColumn(1).setCellRenderer(r);
-    }
 
     public boolean getCheckbox_esEditable() {
         return checkbox_esEditable.isSelected();
@@ -386,16 +248,12 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button_add_EA;
     private javax.swing.JButton button_crear;
-    private javax.swing.JButton button_delete_EA;
     private javax.swing.JButton cancel_button;
     private javax.swing.JCheckBox checkbox_esEditable;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_codigo;
     private javax.swing.JLabel label_esEditable;
     private javax.swing.JLabel label_nombre;
-    private javax.swing.JTable tabla_empresa_item;
     private javax.swing.JTextField textField_nombre;
     private javax.swing.JTextField textfield_codigo;
     // End of variables declaration//GEN-END:variables

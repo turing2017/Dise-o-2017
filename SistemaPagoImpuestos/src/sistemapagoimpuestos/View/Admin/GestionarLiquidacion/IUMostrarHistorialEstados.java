@@ -26,26 +26,28 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
     /**
      * Creates new form IUMostrarHistorialEstados
      */
-    public IUMostrarHistorialEstados(String numeroLiquidacion,String fechaLiquidacion) {
+    public IUMostrarHistorialEstados(String numeroLiquidacion, String fechaLiquidacion) {
         initComponents();
         jLabelNumeroLiquidacion.setText(numeroLiquidacion);
         jLabelFechaLiquidacion.setText(fechaLiquidacion);
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
         List<DTOLiquidacionEstado> estados = controlador.buscarLiquidacionEstado(numeroLiquidacion);
-        DefaultTableModel model = (DefaultTableModel)jTableEstados.getModel();
-        
+        DefaultTableModel model = (DefaultTableModel) jTableEstados.getModel();
+
         for (int i = 0; i < estados.size(); i++) {
             model.addRow(new Object[]{});
+
             jTableEstados.setValueAt(estados.get(i).getEstadoLiquidacion(), i, 0);
             jTableEstados.setValueAt(estados.get(i).getFechaHoraDesdeLiquidacionEstado().toString(), i, 1);
             jTableEstados.setValueAt(estados.get(i).getFechaHoraHastaLiquidacionEstado(), i, 2);
         }
+
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         this.setTitle("Historial Liquidaciones");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-         
+
     }
 
     /**
@@ -151,49 +153,41 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDetalleOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetalleOperacionActionPerformed
-     String nliquidacion = jLabelNumeroLiquidacion.getText();
-     
-    int f = jTableEstados.getSelectedRow();
-    String estado = jTableEstados.getValueAt(f, 0).toString();
-    String fechaDesdeS = jTableEstados.getValueAt(f, 1).toString();
-    
-    String dateString = fechaDesdeS;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    Date fechaDesde = null;
+        String nliquidacion = jLabelNumeroLiquidacion.getText();
+
+        int f = jTableEstados.getSelectedRow();
+        String estado = jTableEstados.getValueAt(f, 0).toString();
+        String fechaDesdeS = jTableEstados.getValueAt(f, 1).toString();
+
+        String dateString = fechaDesdeS;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date fechaDesde = null;
         try {
             fechaDesde = sdf.parse(dateString);
         } catch (ParseException ex) {
             Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         Date fechaHasta = null;
-        try { String fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
-            String dateString1 = fechaHastaS;
-    
-    ;
         try {
-            fechaHasta = sdf.parse(dateString1);
-        } catch (ParseException ex) {
-            Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+            String fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
+            String dateString1 = fechaHastaS;
+            try {
+                fechaHasta = sdf.parse(dateString1);
+            } catch (ParseException ex) {
+                Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (Exception e) {
-            fechaHasta=null;
-        
+            fechaHasta = null;
         }
-   
-    
-        System.out.println("fechaHasta"+fechaHasta);
-        IUMostrar mostrar = new IUMostrar(nliquidacion,fechaDesde,fechaHasta,estado);
        
-     //   IUMostrar mostrar = new IUMostrar(nliquidacion);
-        
-        
+        IUMostrar mostrar = new IUMostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+
+        //   IUMostrar mostrar = new IUMostrar(nliquidacion);
+
     }//GEN-LAST:event_jButtonDetalleOperacionActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
@@ -226,7 +220,7 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrarHistorialEstados("","").setVisible(true);
+                new IUMostrarHistorialEstados("", "").setVisible(true);
             }
         });
     }

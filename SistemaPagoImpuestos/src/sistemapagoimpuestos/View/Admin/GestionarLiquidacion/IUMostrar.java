@@ -20,19 +20,22 @@ public class IUMostrar extends javax.swing.JDialog {
     /**
      * Creates new form IUMostrar
      */
-    public IUMostrar(String nliquidacion,Date fechaDesde,Date fechaHasta,String estado) {
+    public IUMostrar(String nliquidacion, Date fechaDesde, Date fechaHasta, String estado) {
         initComponents();
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion,fechaDesde,fechaHasta,estado);
-        
+        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+
         jLabelNrodeLiquidacion.setText(nliquidacion);
         jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
         jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
         jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
         jLabelPeriodo.setText(fechaDesde.toString());
-        if (fechaHasta == null){jLabelPeriodo2.setText("---");}else{
-        jLabelPeriodo2.setText(fechaHasta.toString());}
-        DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
+        if (fechaHasta == null) {
+            jLabelPeriodo2.setText("---");
+        } else {
+            jLabelPeriodo2.setText(fechaHasta.toString());
+        }
+        DefaultTableModel model = (DefaultTableModel) jTableOperacion.getModel();
         Double montoTotal = 0.0;
         for (int i = 0; i < liquidacion.getListComision().size(); i++) {
             model.addRow(new Object[]{});
@@ -40,11 +43,11 @@ public class IUMostrar extends javax.swing.JDialog {
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNroComprobanteFactura(), i, 1);
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getValorComision(), i, 2);
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getImportePagadoOperacion(), i, 3);
-             System.out.println(liquidacion.getListComision().get(i).getValorComision());
-            montoTotal= liquidacion.getListComision().get(i).getValorComision() +montoTotal;
+            System.out.println(liquidacion.getListComision().get(i).getValorComision());
+            montoTotal = liquidacion.getListComision().get(i).getValorComision() + montoTotal;
         }
-       System.out.println(montoTotal);
-       jTextFieldMontoTotal.setText(montoTotal.toString());
+        System.out.println(montoTotal);
+        jTextFieldMontoTotal.setText(montoTotal.toString());
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         this.setTitle("Operaciones");
         this.setResizable(false);
@@ -253,7 +256,7 @@ public class IUMostrar extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldMontoTotalActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
@@ -286,7 +289,7 @@ public class IUMostrar extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrar("",null,null,"").setVisible(true);
+                new IUMostrar("", null, null, "").setVisible(true);
             }
         });
     }

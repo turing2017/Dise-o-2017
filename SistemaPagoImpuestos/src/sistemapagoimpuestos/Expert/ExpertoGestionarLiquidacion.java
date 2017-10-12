@@ -5,7 +5,6 @@
  */
 package sistemapagoimpuestos.Expert;
 
-
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 import java.util.ArrayList;
@@ -168,59 +167,54 @@ public class ExpertoGestionarLiquidacion {
         }
         return listDtoLiquidacion;
     }
-     public void AprobarLiquidacion(String numeroLiquidacion) {
-         //BUSCO LA LIQUIDACION
-         List<DTOCriterio> criterios = new ArrayList();
-         
-         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion","=",Integer.valueOf(numeroLiquidacion));
-         criterios.add(criterio);
-         Liquidacion liquidacion = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
-         
-      
-       Calendar calendario = Calendar.getInstance();
-       
-       //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
-        
-// Buscar la ultima liquidacionEstado ( la actual)
-                LiquidacionEstado liquidacionEstadoultima = new LiquidacionEstado();
-                for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
-                    if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()== null ) {
-                        liquidacionEstadoultima = liquidacion.getLiquidacionEstadoList().get(i);
-                    
-                    }
-                        }
-                // si tiene estado para aprobar
-                if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada") || 
-                        liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
-             
-         
-        liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(calendario.getTime());
-        FachadaPersistencia.getInstance().guardar(liquidacionEstadoultima);
-      
-        //BUSCO EL ESTADO APROBADO
-        criterios.clear();
-         DTOCriterio criterio1 = new DTOCriterio("nombreEstadoLiquidacion","=","Aprobada");
-         criterios.add(criterio1);
-        EstadoLiquidacion estadoLiquidacion = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
-        
-        //CREO LA NUEVA LIQUIDACION ESTADO
-        LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
-        liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime()); 
-        liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
-        liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
-        
-        
-        //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
-       
-        FachadaPersistencia.getInstance().guardar(liquidacionEstado);
-         liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
-          FachadaPersistencia.getInstance().guardar(liquidacion);
-       
-     
-        
-                } else {System.out.println("no se puede Aprobar una liquidacion Ya aprobada o Anulada");} //Sacar mensaje por pantalla no un sout
-     }
 
+    public void AprobarLiquidacion(String numeroLiquidacion) {
+        //BUSCO LA LIQUIDACION
+        List<DTOCriterio> criterios = new ArrayList();
+
+        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.valueOf(numeroLiquidacion));
+        criterios.add(criterio);
+        Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+
+        Calendar calendario = Calendar.getInstance();
+
+        //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
+// Buscar la ultima liquidacionEstado ( la actual)
+        LiquidacionEstado liquidacionEstadoultima = new LiquidacionEstado();
+        for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
+            if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null) {
+                liquidacionEstadoultima = liquidacion.getLiquidacionEstadoList().get(i);
+
+            }
+        }
+        // si tiene estado para aprobar
+        if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada")
+                || liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
+
+            liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(calendario.getTime());
+            FachadaPersistencia.getInstance().guardar(liquidacionEstadoultima);
+
+            //BUSCO EL ESTADO APROBADO
+            criterios.clear();
+            DTOCriterio criterio1 = new DTOCriterio("nombreEstadoLiquidacion", "=", "Aprobada");
+            criterios.add(criterio1);
+            EstadoLiquidacion estadoLiquidacion = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
+
+            //CREO LA NUEVA LIQUIDACION ESTADO
+            LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
+            liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime());
+            liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
+            liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
+
+            //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
+            FachadaPersistencia.getInstance().guardar(liquidacionEstado);
+            liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
+            FachadaPersistencia.getInstance().guardar(liquidacion);
+
+        } else {
+            System.out.println("no se puede Aprobar una liquidacion Ya aprobada o Anulada");
+        } //Sacar mensaje por pantalla no un sout
+    }
 
     public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
 
@@ -246,18 +240,18 @@ public class ExpertoGestionarLiquidacion {
                 dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
                 dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                 dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                
+
                 // Buscar la ultima liquidacionEstado ( la actual)
                 LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
                 for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
-                    if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()== null ) {
+                    if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null) {
                         liquidacionEstado = liquidacion.getLiquidacionEstadoList().get(i);
-                    
+
                     }
-                        }
-                
+                }
+
                 dtoLiquidacion.setNombreEstadoLiquidacion(liquidacionEstado.getEstadoLiquidacion().getNombreEstadoLiquidacion());
-                
+
                 listDtoLiquidacion.add(dtoLiquidacion);
 
             }
@@ -265,7 +259,7 @@ public class ExpertoGestionarLiquidacion {
         } else {
             if ("Todos".equals(nombreTipoImpuesto)) {
                 //HACE  BUSQUEDA DE EMPRESA , TODOS LOS EMPRESA TIPO IMPUESTO DE ESA EMPRESA Y TODAS LAS LIQUIDACIONES DE TODAS ESAS EMRPESAS TIPO IMPUESTO COOMING SOON
-                
+
                 //BUSCA LA EMPRESA SELECCIONADA
                 DTOCriterio criterio7 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
                 criterios.clear();
@@ -301,16 +295,16 @@ public class ExpertoGestionarLiquidacion {
                             dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
                             dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                             dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                            
-                             // Buscar la ultima liquidacionEstado ( la actual)
-                LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
-                for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
-                    if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()== null ) {
-                        liquidacionEstado = liquidacion.getLiquidacionEstadoList().get(i);
-                    
-                    }
-                        }
-                            
+
+                            // Buscar la ultima liquidacionEstado ( la actual)
+                            LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
+                            for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
+                                if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null) {
+                                    liquidacionEstado = liquidacion.getLiquidacionEstadoList().get(i);
+
+                                }
+                            }
+
                             dtoLiquidacion.setNombreEstadoLiquidacion(liquidacionEstado.getEstadoLiquidacion().getNombreEstadoLiquidacion());
 
                             listDtoLiquidacion.add(dtoLiquidacion);
@@ -348,7 +342,7 @@ public class ExpertoGestionarLiquidacion {
                     Liquidacion liquidacion = (Liquidacion) obj;
                     for (Object obj1 : listEmpresaTipoImpuesto) {
                         EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) obj1;
-                        
+
                         if (liquidacion.getEmpresaTipoImpuesto().equals(empresaTipoImpuesto)) {
 
                             DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
@@ -358,16 +352,16 @@ public class ExpertoGestionarLiquidacion {
                             dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
                             dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                             dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                            
-                             // Buscar la ultima liquidacionEstado ( la actual)
-                LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
-                for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
-                    if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()== null ) {
-                        liquidacionEstado = liquidacion.getLiquidacionEstadoList().get(i);
-                    
-                    }
-                        }
-                            
+
+                            // Buscar la ultima liquidacionEstado ( la actual)
+                            LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
+                            for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
+                                if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null) {
+                                    liquidacionEstado = liquidacion.getLiquidacionEstadoList().get(i);
+
+                                }
+                            }
+
                             dtoLiquidacion.setNombreEstadoLiquidacion(liquidacionEstado.getEstadoLiquidacion().getNombreEstadoLiquidacion());
 
                             listDtoLiquidacion.add(dtoLiquidacion);
@@ -416,16 +410,16 @@ public class ExpertoGestionarLiquidacion {
                     dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
                     dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                     dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                    
-                     // Buscar la ultima liquidacionEstado ( la actual)
-                LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
-                for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
-                    if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()== null ) {
-                        liquidacionEstado = liquidacion.getLiquidacionEstadoList().get(i);
-                    
-                    }
+
+                    // Buscar la ultima liquidacionEstado ( la actual)
+                    LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
+                    for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
+                        if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null) {
+                            liquidacionEstado = liquidacion.getLiquidacionEstadoList().get(i);
+
                         }
-                    
+                    }
+
                     dtoLiquidacion.setNombreEstadoLiquidacion(liquidacionEstado.getEstadoLiquidacion().getNombreEstadoLiquidacion());
 
                     listDtoLiquidacion.add(dtoLiquidacion);
@@ -461,7 +455,6 @@ public class ExpertoGestionarLiquidacion {
         return listDTOOperacion;
     }
 
-
     public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta, String estado) {
         boolean flag = false;
         //Busca  esa liquidacion 
@@ -479,28 +472,28 @@ public class ExpertoGestionarLiquidacion {
 
         List<Comision> listComision = liquidacion.getComisionList();
         List<DTOComision> listDTOComision = new ArrayList<>();
-        
-        
-        if ("Aprobada".equals(estado)||"Anulada".equals(estado)){
-            for(int i=0;i<liquidacion.getLiquidacionEstadoList().size();i++){
-                if(!(liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()==null)){
-            if(!liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado().before(fechaDesde)&& !liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado().after(fechaDesde)){ //que no explote al buscar un null
-                fechaDesde = liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraDesdeLiquidacionEstado();
-                fechaHasta = liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado();
-                System.out.println("fechadesde"+fechaDesde+" Fecha hasta:"+fechaHasta);
-                break;
-            }}
+
+        if ("Aprobada".equals(estado) || "Anulada".equals(estado)) {
+            for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
+                if (!(liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null)) {
+                    if (!liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado().before(fechaDesde) && !liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado().after(fechaDesde)) { //si es el anterior
+                        fechaDesde = liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraDesdeLiquidacionEstado();
+                        fechaHasta = liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado();
+                        System.out.println("fechadesde" + fechaDesde + " Fecha hasta:" + fechaHasta);
+                        break;
+                    }
+                }
             }
-                            }
-        
+        }
+
         List<DTOComision> comisionlistdto = new ArrayList<>();
         for (Comision comision : listComision) {
 
-            
-        
+            boolean comisionIgualDesde = (!comision.getFechaCalculoComision().after(fechaDesde) && !comision.getFechaCalculoComision().before(fechaDesde));
+            boolean comisionMayorDesde = (comision.getFechaCalculoComision().after(fechaDesde));
+
             if (fechaHasta == null) {
-                if (((!comision.getFechaCalculoComision().after(fechaDesde) && !comision.getFechaCalculoComision().before(fechaDesde)) //igual
-                        || comision.getFechaCalculoComision().after(fechaDesde))) {// o mayor
+                if (comisionIgualDesde || comisionMayorDesde) { //mayor o igual
                     flag = true;
                     DTOComision dtoComision = new DTOComision();
                     dtoComision.setFechaCalculoComision(comision.getFechaCalculoComision());
@@ -514,21 +507,17 @@ public class ExpertoGestionarLiquidacion {
                 }
 
             } else {
-                
-                System.out.println("fecha calculo comision"+comision.getFechaCalculoComision().toString());
-                System.out.println("fechadesde:"+fechaDesde);
-                System.out.println("fechaHasta:"+fechaHasta);
-                System.out.println(!comision.getFechaCalculoComision().after(fechaDesde));
-                System.out.println(!comision.getFechaCalculoComision().before(fechaDesde));
-                System.out.println(!comision.getFechaCalculoComision().before(fechaHasta));
-                
-                
-                
-                if (((!comision.getFechaCalculoComision().after(fechaDesde) && !comision.getFechaCalculoComision().equals(fechaDesde)) //igual
-                        || comision.getFechaCalculoComision().after(fechaDesde)) // o mayor
-                        && (comision.getFechaCalculoComision().before(fechaHasta)) ||
-                        !comision.getFechaCalculoComision().after(fechaHasta) && !comision.getFechaCalculoComision().equals(fechaHasta))
-                        { // menor
+
+                System.out.println("fecha calculo comision" + comision.getFechaCalculoComision().toString());
+                System.out.println("fechadesde:" + fechaDesde);
+                System.out.println("fechaHasta:" + fechaHasta);
+
+                boolean comisionMenorHasta = (comision.getFechaCalculoComision().before(fechaHasta));
+
+                System.out.println("Entra en el rango");
+                System.out.println(((comisionIgualDesde || comisionMayorDesde) && (comisionMenorHasta)));
+
+                if ((comisionIgualDesde || comisionMayorDesde) && (comisionMenorHasta)) { // mayor igual DESDE, y menor a Hasta
                     flag = true;
                     DTOComision dtoComision = new DTOComision();
                     dtoComision.setFechaCalculoComision(comision.getFechaCalculoComision());
@@ -541,84 +530,77 @@ public class ExpertoGestionarLiquidacion {
                     comisionlistdto.add(dtoComision);
                 }
             }
-            if (flag) {
-                
-                //
-            }
+
         }
-        dtoLiquidacion.setListComision(comisionlistdto);
+        if (flag) {
+            dtoLiquidacion.setListComision(comisionlistdto);
+        }
         return dtoLiquidacion;
     }
 
     public void AnularLiquidacion(String nroLiquidacion) {
-         //BUSCO LA LIQUIDACION
-         List<DTOCriterio> criterios = new ArrayList();
-         
-         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion","=",Integer.valueOf(nroLiquidacion));
-         criterios.add(criterio);
-         Liquidacion liquidacion = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
- 
-      
-       Calendar calendario = Calendar.getInstance();
-       
-       //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
-       
-       // Buscar la ultima liquidacionEstado ( la actual)
-                LiquidacionEstado liquidacionEstadoultima = new LiquidacionEstado();
-                for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
-                    if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()== null ) {
-                        liquidacionEstadoultima = liquidacion.getLiquidacionEstadoList().get(i);
-                    
-                    }
-                        }
-                // si tiene estado para aprobar
-               System.out.println( liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion());
-                if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada")|| liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
-       
-       
-        liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(calendario.getTime());
-        FachadaPersistencia.getInstance().guardar(liquidacionEstadoultima);
-      
-        //BUSCO EL ESTADO ARecalcular
-        criterios.clear();
-         DTOCriterio criterio1 = new DTOCriterio("nombreEstadoLiquidacion","=","Anulada");
-         criterios.add(criterio1);
-        EstadoLiquidacion estadoLiquidacion = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
-        
-        //CREO LA NUEVA LIQUIDACION ESTADO
-        LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
-        liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime()); 
-        liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
-        liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
-        
-        
-        //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
-       
-        FachadaPersistencia.getInstance().guardar(liquidacionEstado);
-         liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
-          FachadaPersistencia.getInstance().guardar(liquidacion);
-       
-     
-        
-         
-    }else {System.out.println("no se puede Anular una liquidacion Ya aprobada o Anulada");} //Sacar mensaje por pantalla no un sout
+        //BUSCO LA LIQUIDACION
+        List<DTOCriterio> criterios = new ArrayList();
+
+        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.valueOf(nroLiquidacion));
+        criterios.add(criterio);
+        Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+
+        Calendar calendario = Calendar.getInstance();
+
+        //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
+        // Buscar la ultima liquidacionEstado ( la actual)
+        LiquidacionEstado liquidacionEstadoultima = new LiquidacionEstado();
+        for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
+            if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null) {
+                liquidacionEstadoultima = liquidacion.getLiquidacionEstadoList().get(i);
+
+            }
+        }
+        // si tiene estado para aprobar
+        System.out.println(liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion());
+        if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada") || liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
+
+            liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(calendario.getTime());
+            FachadaPersistencia.getInstance().guardar(liquidacionEstadoultima);
+
+            //BUSCO EL ESTADO ARecalcular
+            criterios.clear();
+            DTOCriterio criterio1 = new DTOCriterio("nombreEstadoLiquidacion", "=", "Anulada");
+            criterios.add(criterio1);
+            EstadoLiquidacion estadoLiquidacion = (EstadoLiquidacion) FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", criterios).get(0);
+
+            //CREO LA NUEVA LIQUIDACION ESTADO
+            LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
+            liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime());
+            liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
+            liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
+
+            //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
+            FachadaPersistencia.getInstance().guardar(liquidacionEstado);
+            liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
+            FachadaPersistencia.getInstance().guardar(liquidacion);
+
+        } else {
+            System.out.println("no se puede Anular una liquidacion Ya aprobada o Anulada");
+        } //Sacar mensaje por pantalla no un sout
 
     }
 
-    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion){
+    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion) {
         List<DTOLiquidacionEstado> estados = new ArrayList();
-         List<DTOCriterio> criterios = new ArrayList();
-          DTOCriterio criterio1 = new DTOCriterio("numeroLiquidacion","=",Integer.parseInt(numeroLiquidacion));
-          criterios.add(criterio1);
-          Liquidacion liquidacionSeleccionada = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
-          for (int i = 0; i<liquidacionSeleccionada.getLiquidacionEstadoList().size(); i++) {
-              DTOLiquidacionEstado dtole = new DTOLiquidacionEstado();
+        List<DTOCriterio> criterios = new ArrayList();
+        DTOCriterio criterio1 = new DTOCriterio("numeroLiquidacion", "=", Integer.parseInt(numeroLiquidacion));
+        criterios.add(criterio1);
+        Liquidacion liquidacionSeleccionada = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+        for (int i = 0; i < liquidacionSeleccionada.getLiquidacionEstadoList().size(); i++) {
+            DTOLiquidacionEstado dtole = new DTOLiquidacionEstado();
             dtole.setEstadoLiquidacion(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getEstadoLiquidacion().getNombreEstadoLiquidacion());
-             dtole.setFechaHoraDesdeLiquidacionEstado(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getFechaHoraDesdeLiquidacionEstado());
-             dtole.setFechaHoraHastaLiquidacionEstado(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado());
-             estados.add(dtole);
+            dtole.setFechaHoraDesdeLiquidacionEstado(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getFechaHoraDesdeLiquidacionEstado());
+            dtole.setFechaHoraHastaLiquidacionEstado(liquidacionSeleccionada.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado());
+            estados.add(dtole);
         }
-         
+
         return estados;
     }
 }

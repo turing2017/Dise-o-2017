@@ -27,7 +27,7 @@ public class EstrategiaPeriodicidad implements EstrategiaCalculoComision{
       
        List<DetalleOperacion> listDetallesOp = operacion.getDetalleOperacionList() ;
        for (DetalleOperacion detalleOp : listDetallesOp){
-          if (detalleOp.getItemEmpresaTipoImpuesto().isIndicaPeriodicidadItemEmpresaTipoImpuesto()){
+          if (detalleOp.getItemEmpresaTipoImpuesto().getItem().getNombreItem().equals("Periodicidad")){
               tipoPeriodicidad = detalleOp.getValorDetalleOperacion().toLowerCase();
           }
        }

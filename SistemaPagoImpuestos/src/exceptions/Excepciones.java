@@ -134,6 +134,13 @@ public class Excepciones extends Exception{
         edne.setVisible(true);
     }
     
+    public void objetoNoExistente(String objeto){
+        ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("Error: Registro Existente");            
+        edne.setLabel_mensaje("El "+objeto+" ingresado no existe");
+        edne.setVisible(true);
+    }
+    
     public void tipoDatoInvalid(List<String> campos){
         ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
         edne.setLabel_title("Error: Campo Invalido");

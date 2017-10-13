@@ -9,12 +9,14 @@ import java.util.Date;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
 import sistemapagoimpuestos.Dto.DTOCriterio;
+import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.Cliente.IUPantallaCliente;
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
+import sistemapagoimpuestos.View.Empresa.Principal.IUPantallaEmpresa;
 import sistemapagoimpuestos.View.Login.IULogin;
 
 /**
@@ -33,9 +35,10 @@ public class ExpertoLoguearUsuario {
         return "Administrador";
     }
 
-    public void buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
-
+    public DTOUsuario buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
+        DTOUsuario dtoUsuario = new DTOUsuario();
         try {
+            
             List<DTOCriterio> criteriosUsuario = new ArrayList<>();
             List<DTOCriterio> criteriosTipoUsuario = new ArrayList<>();
 
@@ -61,7 +64,8 @@ public class ExpertoLoguearUsuario {
             Usuario usuario = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criteriosUsuario).get(0);
             String tipoUsuarioEncontrado = usuario.tipoUsuario.getNombreTipoUsuario();
             Date dateFechaUltimoAcceso = (Date) usuario.getFechaHoraUltimoIngresoSistemaUsuario();
-
+            
+          
             if (dateFechaUltimoAcceso == null) {
                 fechaHoraInhabilitacionUsuarioEncontrada = "Sin último acceso";              
             } else {
@@ -89,7 +93,11 @@ public class ExpertoLoguearUsuario {
             usuario.setFechaHoraUltimoIngresoSistemaUsuario(new Date());
             FachadaPersistencia.getInstance().guardar(usuario);
 
+          
             if (nombreTipoUsuario.equals("Administrador")) {
+                 dtoUsuario = new DTOUsuario(usuario.getNombreUsuario(), null, null, dateFechaUltimoAcceso, nombreTipoUsuario, null);
+             //   public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario, Date fechaHoraInhabilitacionDTOUsuario, Date fechaHoraUltimoIngresoSistemaDTOUsuario, String tipoUsuarioDTOUsuario, String empresaDTOUsuario) {
+
                 IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
                 pp.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pp.setLocationRelativeTo(null);
@@ -99,7 +107,20 @@ public class ExpertoLoguearUsuario {
                     public void windowClosing(WindowEvent ev) {
                     }
                 });
+            }
+            if (nombreTipoUsuario.equals("Empresa")) {
+                dtoUsuario = new DTOUsuario(usuario.getNombreUsuario(), null, null, dateFechaUltimoAcceso, nombreTipoUsuario, usuario.getEmpresa().getCuitEmpresa());
+                IUPantallaEmpresa pe = new IUPantallaEmpresa();
+                pe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pe.setLocationRelativeTo(null);
+                pe.mostrarPantallaPrincipal(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada, dtoUsuario);
+                pe.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent ev) {
+                    }
+                });
             } else {
+                dtoUsuario = new DTOUsuario(usuario.getNombreUsuario(), null, null, dateFechaUltimoAcceso, nombreTipoUsuario, null);
                 IUPantallaCliente pc = new IUPantallaCliente();
                 pc.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pc.setLocationRelativeTo(null);
@@ -109,11 +130,13 @@ public class ExpertoLoguearUsuario {
                     public void windowClosing(WindowEvent ev) {
                     }
                 });
+             
             }
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("Codigo Ingresado No Encontrado");
             new Excepciones().datoNoEncontrado("Usuario");
 
         }
+           return dtoUsuario;
     }
 }

@@ -5,28 +5,49 @@
  */
 package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 
+import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.*;
+import static datosPrueba.DatosPrueba.generarDatosPrueba;
+import java.time.Instant;
 import java.util.ArrayList;
-import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
+import java.util.List;
+import javafx.util.converter.LocalDateStringConverter;
+import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Entity.Liquidacion;
+import java.util.Date;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import sistemapagoimpuestos.Dto.DTOOperacion;
 
 /**
  *
- * @author Dario
+ * @author vande
  */
 public class IUConsultarLiquidacion extends javax.swing.JFrame {
 
     /**
-     * Creates new form IUConsultarLiquidacion
+     * Creates new form IUGestionarLiquidacion
      */
+    ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
     public IUConsultarLiquidacion() {
+        //LLENA EL COMBO BOX TIPO EMPRESA, Y INICIALIZA EL DE EMRPESA CON "TODOS"
         initComponents();
+        /*
         jComboBoxEmpresa.setEditable(false);
-        jComboBoxEmpresa.addItem("Todas");
         jComboBoxTipoImpuesto.addItem("Todos");
-        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = ControladorConsultarLiquidacion.getInstance().obtenerTipoImpuestos();  
+        ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = controlador.obtenerTipoImpuestos();  
          for(DTOTipoImpuesto obj : listDtoTipoImpuesto){
              jComboBoxTipoImpuesto.addItem(obj.getNombreDTOTipoImpuesto());
            }  
+         jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.addItem("Todos");
+         List<DTOEmpresa> listDtoDTOEmpresa = controlador.obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+       for(DTOEmpresa obj : listDtoDTOEmpresa){
+            jComboBoxEmpresa.addItem(obj.getNombreEmpresa());} */    
     }
 
     /**
@@ -38,9 +59,9 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jComboBoxEmpresa = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -49,12 +70,33 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
         jButtonConsultarLiquidaciones = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
+        jButtonMostrar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jComboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTipoImpuestoActionPerformed(evt);
+        setTitle("Liquidaciones");
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -77,18 +119,40 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             }
         });
 
+        jTable2 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Numero Liquidacion", "Fecha Liquidacion", "fecha desde", "fecha hasta", "Empresa", "Tipo Impuesto", "Estado"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
+
+        jComboBoxTipoImpuesto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTipoImpuestoItemStateChanged(evt);
+            }
+        });
+        jComboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoImpuestoActionPerformed(evt);
+            }
+        });
+
+        jButtonMostrar.setText("Mostrar");
+        jButtonMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMostrarActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,68 +161,160 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
+                        .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(99, 99, 99)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(67, 67, 67))
+                                        .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(194, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
-                    .addContainerGap()))
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addComponent(jButtonMostrar)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(32, 32, 32)
                 .addComponent(jButtonConsultarLiquidaciones)
-                .addContainerGap(341, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(275, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(49, Short.MAX_VALUE)))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(jButtonMostrar)
+                .addContainerGap(127, Short.MAX_VALUE))
         );
+
+        jComboBoxTipoImpuesto.getAccessibleContext().setAccessibleName("");
+        jComboBoxTipoImpuesto.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTipoImpuestoActionPerformed
-
     private void jButtonConsultarLiquidacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarLiquidacionesActionPerformed
-        // TODO add your handling code here:
+  //Limpia la tabla
+    /* DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            while (model.getRowCount()>0) {
+            model.removeRow(0);
+        }
+     //manda a buscar con los parametros       
+        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
+       Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
+        ArrayList <DTOLiquidacion> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
+        
+        //LLena la tabla
+        for (int i = 0; i < listDtoLiquidacion.size(); i++) {
+
+            model.addRow(new Object[]{});
+            jTable2.isCellEditable(i, 0);
+            jTable2.isCellEditable(i, 1);
+            jTable2.isCellEditable(i, 2);
+            jTable2.isCellEditable(i, 3);
+            jTable2.isCellEditable(i, 4);
+            jTable2.isCellEditable(i, 5);
+            jTable2.isCellEditable(i, 6);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i, 1);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 3);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
+        }*/
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
 
+    private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
+     /*   jComboBoxEmpresa.removeAllItems();
+        jComboBoxEmpresa.addItem("Todos");
+         List<DTOEmpresa> listDtoDTOEmpresa = controlador.obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
+       for(DTOEmpresa obj : listDtoDTOEmpresa){
+            jComboBoxEmpresa.addItem(obj.getNombreEmpresa());}     */
+    }//GEN-LAST:event_jComboBoxTipoImpuestoActionPerformed
+
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+
+    }//GEN-LAST:event_formMouseExited
+//delete THIS
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jComboBoxTipoImpuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoItemStateChanged
+        
+    /*   ArrayList<DTOEmpresa> listDtoDTOEmpresa = ControladorGestionarLiquidacion.getInstance().obtenerEmpresarelacionadaATipoImpuesto();
+         for(DTOEmpresa obj : listDtoDTOEmpresa){
+             jComboBoxTipoImpuesto.addItem(obj.getNombreEmpresa()); }   */
+    }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
+
+    private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
+        double montoTotal = 0.0;
+        String nliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
+        String fechaliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
+        String tipoImpuesto = jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString();
+        String empresa = jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString();
+        String fechaDesde =  jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString();
+        String fechaHasta =  jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
+        
+        IUMostrarHistorialEstados mostrar = new IUMostrarHistorialEstados(nliquidacion,fechaliquidacion);
+    
+        //LLena los labels
+    //     IUMostrar mostrar = new IUMostrar(nliquidacion,fechaliquidacion);
+     /*   IUMostrar.jLabelEmpresa.setText(empresa);
+        IUMostrar.jLabelTipoImpuesto.setText(tipoImpuesto);
+        IUMostrar.jLabelFechaLiquidacion.setText(fechaliquidacion);
+        IUMostrar.jLabelNrodeLiquidacion.setText(nliquidacion);
+        IUMostrar.jLabelPeriodo.setText(fechaDesde);
+        IUMostrar.jLabelPeriodo2.setText(fechaHasta);
+        List<DTOOperacion> listDTOoperacion = controlador.mostrar(nliquidacion, fechaliquidacion, tipoImpuesto, empresa);
+
+        for (int i = 0; i < listDTOoperacion.size(); i++) {
+
+            // AGREGAR UNA FILA CADA VEZ QUE CREO OTRA OPERACION
+            DefaultTableModel model = (DefaultTableModel) IUMostrar.jTableOperacion.getModel();
+            model.addRow(new Object[]{});
+            IUMostrar.jTableOperacion.isCellEditable(i, 0);
+            IUMostrar.jTableOperacion.isCellEditable(i, 1);
+            IUMostrar.jTableOperacion.isCellEditable(i, 2);
+            IUMostrar.jTableOperacion.isCellEditable(i, 3);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getNumeroOperacion(), i, 0);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getNroComprobanteFactura(), i, 1);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getValorComisionOperacion(), i, 2);
+            IUMostrar.jTableOperacion.setValueAt(listDTOoperacion.get(i).getImportePagadoOperacion(), i, 3);
+            montoTotal = montoTotal + listDTOoperacion.get(i).getValorComisionOperacion();
+        }
+        IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);*/
+    }//GEN-LAST:event_jButtonMostrarActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -185,11 +341,22 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(IUConsultarLiquidacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUConsultarLiquidacion().setVisible(true);
+                IUConsultarLiquidacion pantallaPrincipal = new IUConsultarLiquidacion();
+                pantallaPrincipal.setVisible(true);
+               // new IUGestionarLiquidacion().setVisible(true);
+             
             }
         });
     }
@@ -198,13 +365,16 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
     private datechooser.beans.DateChooserCombo dateChooserCombodesde;
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
     private javax.swing.JButton jButtonConsultarLiquidaciones;
-    private javax.swing.JComboBox<String> jComboBoxEmpresa;
+    private javax.swing.JButton jButtonMostrar;
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.Controller;
 
+import sistemapagoimpuestos.Dto.DTOUsuario;
+import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Expert.ExpertoLoguearUsuario;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
@@ -21,7 +23,7 @@ public class ControladorLoguearUsuario {
         MetodosPantalla.getInstance().setearPantalla(login);
     }
     
-    public void buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
-        experto.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
+    public DTOUsuario buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
+       return experto.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
     }
 }

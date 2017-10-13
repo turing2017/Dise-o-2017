@@ -41,6 +41,18 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
             jTableEstados.setValueAt(estados.get(i).getFechaHoraDesdeLiquidacionEstado().toString(), i, 1);
             jTableEstados.setValueAt(estados.get(i).getFechaHoraHastaLiquidacionEstado(), i, 2);
         }
+      // Ordenar la tabla por fechas Desde
+       for (int i = 0; i < (model.getRowCount()*(model.getRowCount()-1)); i++) {
+          
+            for (int j = 0; j <  model.getRowCount()-1; j++) {
+                String d = (String)jTableEstados.getValueAt(j, 1);
+                String d2 = (String)jTableEstados.getValueAt(j+1, 1);
+                if (d.compareTo(d2)>0){ //d>d2
+                model.moveRow(j, j, j+1);
+                }
+                
+            }
+        }
 
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         this.setTitle("Historial Liquidaciones");

@@ -5,21 +5,11 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida;
 
-import java.awt.Component;
-import java.util.List;
-import java.util.Vector;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
-import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
+
 
 public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 

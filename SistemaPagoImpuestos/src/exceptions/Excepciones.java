@@ -119,6 +119,13 @@ public class Excepciones extends Exception{
     ca.setVisible(true);
     
     }
+        
+    public void objetoLaExistente(String objeto){
+        ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("Error: Registro Existente");            
+        edne.setLabel_mensaje("La "+objeto+" ingresado ya existe");
+        edne.setVisible(true);
+    }
     
     public void objetoExistente(String objeto){
         ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();

@@ -5,23 +5,12 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
+
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
-
-
 public class IUGestionarEmpresaAdheridaCrearEmpresa extends javax.swing.JFrame {
  
 ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();

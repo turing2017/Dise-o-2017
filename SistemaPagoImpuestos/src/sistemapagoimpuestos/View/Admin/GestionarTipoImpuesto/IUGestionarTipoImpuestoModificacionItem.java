@@ -20,6 +20,7 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
     String cuitEmpresa;
     int codigoTipoImpuesto;
     String nombreTipoEmpresa;
+    int ordenAnterior;
     ControladorGestionarEmpresaTipoImpuesto controlador = new ControladorGestionarEmpresaTipoImpuesto();
     public IUGestionarTipoImpuestoModificacionItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto,String nombreTipoEmpresa, int ordenItem) {
         initComponents();
@@ -27,6 +28,7 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
         this.nombreTipoEmpresa = nombreTipoEmpresa;
         this.codigoTipoImpuesto = codigoTipoImpuesto;
         this.cuitEmpresa = cuitEmpresa;
+        this.ordenAnterior = ordenItem;
         jTextField_ItemNombre.setText(nombreItem);
         SpinnerNumberModel sf = new SpinnerNumberModel();
         sf.setMinimum(0);
@@ -126,7 +128,7 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
     private void jButton_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_aceptarActionPerformed
         int orden = (int) spinner_Orden.getValue();
         String nombreItem = jTextField_ItemNombre.getText();
-        controlador.modificarItem(nombreItem, cuitEmpresa,codigoTipoImpuesto,nombreTipoEmpresa,orden);
+        controlador.modificarItem(nombreItem, cuitEmpresa,codigoTipoImpuesto,nombreTipoEmpresa,orden, ordenAnterior);
         this.dispose();
     }//GEN-LAST:event_jButton_aceptarActionPerformed
 

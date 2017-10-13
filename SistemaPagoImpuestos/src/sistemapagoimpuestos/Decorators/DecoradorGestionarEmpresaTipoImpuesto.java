@@ -46,9 +46,9 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
 }
 
     @Override
-    public void modificarItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto, String nombreTipoEmpresa, int orden) {
+    public void modificarItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto, String nombreTipoEmpresa, int orden, int ordenAnterior) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarItem(nombreItem, cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, orden);
+        super.modificarItem(nombreItem, cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, orden, ordenAnterior);
         FachadaInterna.getInstance().finalizarTransaccion();//To change body of generated methods, choose Tools | Templates.
     }
 

@@ -188,7 +188,7 @@ public class IUPagarImpuestoCuentas extends javax.swing.JFrame {
         for (DTOCuentaBancaria dtoCuenta : listadoCuentas) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoCuenta.getCbuCuentaBancaria());
-            vect.add(dtoCuenta.getTipoCuenta().getNombreTipoCuenta());
+            vect.add(dtoCuenta.getNombreTipoCuenta());
             vect.add(dtoCuenta.getSaldoRecuperado());
             dtm.addRow(vect);
         }

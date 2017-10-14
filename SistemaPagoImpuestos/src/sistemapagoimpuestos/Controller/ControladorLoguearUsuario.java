@@ -42,8 +42,8 @@ public class ControladorLoguearUsuario {
                 });
                 break;
             case "Cliente":
-                IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
-                iUPagarImpuesto.setVisible(true);
+                ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
+                cpi.validadarUsuario();
                 break;
         }
     }

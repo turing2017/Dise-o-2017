@@ -22,8 +22,8 @@
        </property>
         
         <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoUsuario" column="OIDTipoUsuario" not-null="true"/>
-        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="false"/>
-        <one-to-one name="cliente" class="sistemapagoimpuestos.Entity.Cliente" cascade="save-update"></one-to-one>
+        <one-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" cascade="all" ></one-to-one>
+        <one-to-one name="cliente" class="sistemapagoimpuestos.Entity.Cliente" cascade="all"></one-to-one>
    
     </class>
 </hibernate-mapping>

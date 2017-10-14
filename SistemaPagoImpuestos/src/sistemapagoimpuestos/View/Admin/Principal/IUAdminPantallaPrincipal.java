@@ -6,6 +6,7 @@ import sistemapagoimpuestos.Controller.ControladorGestionarParametrosCalculoComi
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
 import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
@@ -22,10 +23,11 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void mostrarPantallaPrincipal(String nombreUsuarioLogeado, String ultimoAccesoUsuario){
+    public void mostrarPantallaPrincipal(){
         IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
-        pp.label_nombre.setText("Nombre Usuario: " + nombreUsuarioLogeado );
-        pp.label_fecha.setText("Ultimo acceso " + ultimoAccesoUsuario );
+        String fechaHoraInhabilitacionUsuarioEncontrada = (GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario() == null)?"Sin último acceso":GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString();        
+        pp.label_nombre.setText("Nombre Usuario: " + GlobalVars.userActive.getNombreUsuario());
+        pp.label_fecha.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
         MetodosPantalla.getInstance().setearPantalla(pp);
     }
 

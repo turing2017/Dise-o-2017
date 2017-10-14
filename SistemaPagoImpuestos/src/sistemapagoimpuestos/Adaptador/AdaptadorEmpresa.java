@@ -18,5 +18,5 @@ import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 public interface AdaptadorEmpresa {
     public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres);
     public void confirmarPago(String nroFactura, Integer codigoCP, double monto);
-    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura);
+    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura, String codigoPago);
 }

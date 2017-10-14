@@ -87,7 +87,7 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
         return dTOItems;
     }
 
-    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura) {
+    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura, String codigoPago) {
         Claro claroComprobante = claroWs.findForCodeClaro(Integer.toString(nroFactura));
         return new DTOComprobanteUnico(claroComprobante.getNroFactura(),
                 claroComprobante.getCodigo(),

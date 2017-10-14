@@ -1,5 +1,6 @@
 package sistemapagoimpuestos;
 
+import datosPrueba.DatosPrueba;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -19,6 +20,7 @@ public class SistemaPagoImpuestos {
         //c.findComprobantes("test");
         //ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
         //controlador.iniciar();
+        DatosPrueba.buscarCliente();
         ControladorPagarImpuestos controladorPagarImpuestos = new ControladorPagarImpuestos();
         IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
         iUPagarImpuesto.setVisible(true);

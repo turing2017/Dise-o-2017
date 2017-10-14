@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.Cliente;
 import sistemapagoimpuestos.Entity.CuentaBancaria;
 import sistemapagoimpuestos.Entity.DetalleOperacion;
@@ -62,6 +63,33 @@ public class DatosPrueba {
         FachadaInterna.getInstance().finalizarTransaccion();
         
     }
+    
+    public static void generarUsuarioCliente(){
+        FachadaInterna.getInstance().iniciarTransaccion();
+        Usuario u = new Usuario();
+        u.setNombreUsuario("eluna");
+        u.setPasswordUsuario("123456");
+        List<DTOCriterio> criterios = new ArrayList<>();
+        criterios.add(new DTOCriterio("cuilCuitCliente", "=", "10000000"));
+        Cliente cliente = (Cliente) FachadaPersistencia.getInstance().buscar("Cliente", criterios).get(0);   
+        criterios.clear();
+        criterios.add(new DTOCriterio("nombreTipoUsuario", "=", "Cliente"));
+        TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios).get(0);
+        u.setCliente(cliente);
+        u.setTipoUsuario(tipoUsuario);
+        FachadaPersistencia.getInstance().guardar(u);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        
+    }
+    public static void buscarCliente(){
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOCriterio> criterios = new ArrayList<>();
+        criterios.add(new DTOCriterio("nombreUsuario", "=", "eluna"));
+        Usuario u = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criterios).get(0);
+        FachadaInterna.getInstance().finalizarTransaccion();
+
+    }
+    
     
     public static void generarTipoDatoItem(){
         TipoDatoItem  tipoDatoItem1 =new TipoDatoItem(1, "Dato Item 1");

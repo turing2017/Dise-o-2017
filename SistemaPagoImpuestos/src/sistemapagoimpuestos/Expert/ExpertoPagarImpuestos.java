@@ -119,7 +119,11 @@ public class ExpertoPagarImpuestos {
         }
         return comprobantePantallas;
     }
-
+    
+    public boolean isMontoEditable() {
+            return tipoImpuestoSeleccionado.isEsMontoEditableTipoImpuesto();
+    }
+    
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
 
         List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
@@ -150,9 +154,15 @@ public class ExpertoPagarImpuestos {
     }
 
     public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago) {
-        /*
+           /* 
+    List<DTOCriterio> criteriosList = new ArrayList<>();
         ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
         FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema).debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
+        criteriosList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
+        criteriosList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
+        EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criteriosList).get(0);
+        DTOComprobante dtoComprobante = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).buscarComprobanteSeleccionado(empresaTI, nroFactura, codigoPago);
+        
         Operacion operacion = new Operacion();
         operacion.setNumeroOperacion(ThreadLocalRandom.current().nextInt(1, 1000000000)); // es aleatorio
         operacion.setCodigoPagoElectrionicoOperacion(dtoComprobante.getCodigoDTOComprobante());
@@ -161,7 +171,6 @@ public class ExpertoPagarImpuestos {
         operacion.setLiquidadaOperacion(false);
         operacion.setNroComprobanteFacturaOperacion(dtoComprobante.getNumeroFactura());
 
-        List<DTOCriterio> criteriosList = new ArrayList<>();
         criteriosList.add(new DTOCriterio("cbuCuentaBancaria", "=", cbuCuentaSeleccionada));
         CuentaBancaria cuentaBancaria = (CuentaBancaria) FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList).get(0);
         operacion.setCuentaBancaria(cuentaBancaria);
@@ -217,10 +226,6 @@ public class ExpertoPagarImpuestos {
         dtoOperacion.setEmpresa(operacion.getEmpresa());
         dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
         return dtoOperacion;*/
-        return new DTOOperacion();
-    }
-
-    public boolean MontoEditable() {
-        return tipoImpuestoSeleccionado.isEsMontoEditableTipoImpuesto();
-    }
+       return new DTOOperacion();
+    }    
 }

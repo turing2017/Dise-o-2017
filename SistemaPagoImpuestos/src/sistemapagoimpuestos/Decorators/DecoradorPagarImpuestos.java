@@ -75,8 +75,8 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public boolean MontoEditable() {
-        return  super.MontoEditable();
+    public boolean isMontoEditable() {
+        return  super.isMontoEditable();
     }
     
     

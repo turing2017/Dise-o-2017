@@ -64,17 +64,12 @@ public class ControladorPagarImpuestos {
                 experto.seleccionarEmpresa(
                         nombreEmpresaIng, 
                         codigoPagoElectronicoIngres));
-        if (empresaTipoImpuestoEsEditable()) {
+        if (experto.isMontoEditable()) {
             pantallaComprobantes.setearEditable();
         } else {
-
+            
         }
         pantallaComprobantes.setVisible(true);
-    }
-
-    // Verifico si la empresa tipoImpuesto es editable
-    public boolean empresaTipoImpuestoEsEditable() {
-        return experto.MontoEditable();
     }
 
     // Pagar impuesto

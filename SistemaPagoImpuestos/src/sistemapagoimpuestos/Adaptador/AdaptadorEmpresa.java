@@ -7,6 +7,7 @@ package sistemapagoimpuestos.Adaptador;
 
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOComprobanteUnico;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 
@@ -16,5 +17,6 @@ import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
  */
 public interface AdaptadorEmpresa {
     public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres);
-    public boolean confirmarPago(String nroFactura, Integer codigoCP, double monto);
+    public void confirmarPago(String nroFactura, Integer codigoCP, double monto);
+    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura);
 }

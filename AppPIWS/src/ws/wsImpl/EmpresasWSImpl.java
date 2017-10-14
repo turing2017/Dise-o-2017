@@ -29,12 +29,7 @@ public class EmpresasWSImpl implements EmpresasWS {
     public List<Dgr> findAllDgr() {
         return new DgrModel().findAll();
     }
-
-    @Override
-    public Dgr findForCodeDgr(String code) {
-        return new DgrModel().find(code);
-    }
-
+ 
     @Override
     public List<Claro> findAllClaro() {
         ClaroModel cm = new ClaroModel();
@@ -42,16 +37,30 @@ public class EmpresasWSImpl implements EmpresasWS {
     }
 
     @Override
-    public Claro findForCodeClaro(String code) {
-        ClaroModel cm = new ClaroModel();
-        return cm.find(code);
+    public Dgr findForCodeDgr(String code) {
+        return new DgrModel().find(code);
     }
+
 
     @Override
-    public boolean pagarComprobanteDgr(int codigo, double montoPagar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Claro findForCodeClaro(String code) {
+        return new ClaroModel().find(code);
     }
 
+    
+    @Override
+    public List<Claro> buscarComprobantesCodigoClaro(String codigo) {
+        ClaroModel cm = new ClaroModel();
+        List<Claro> listClaro = cm.findAll();
+        List<Claro> comprobantes = new ArrayList<>();
+        for (Claro claro : listClaro) {
+            if (claro.getCodigo().equals(codigo) && claro.getStatus().equals("Pendiente")) {
+                comprobantes.add(claro);
+            }
+        }
+        return comprobantes;
+    }
+    
     @Override
     public List<Dgr> buscarComprobantesCodigoDgr(int codigo) {
         DgrModel dm = new DgrModel();
@@ -65,23 +74,6 @@ public class EmpresasWSImpl implements EmpresasWS {
         return comprobantes;
     }
 
-    @Override
-    public boolean pagarComprobanteClaro(int codigo, double montoPagar) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Claro> buscarComprobantesCodigoClaro(String codigo) {
-        ClaroModel cm = new ClaroModel();
-        List<Claro> listClaro = cm.findAll();
-        List<Claro> comprobantes = new ArrayList<>();
-        for (Claro claro : listClaro) {
-            if (claro.getCodigo().equals(codigo) && claro.getStatus().equals("Pendiente")) {
-                comprobantes.add(claro);
-            }
-        }
-        return comprobantes;
-    }
 
     @Override
     public double obtenerSaldo(String cbu) {
@@ -134,7 +126,7 @@ public class EmpresasWSImpl implements EmpresasWS {
     }
 
     @Override
-    public boolean acreditarPagoClaro(String nroFactura, String codigoCP, double monto) {
+    public String acreditarPagoClaro(String nroFactura, String codigoCP, double monto) {
         try {
             ClaroModel cm = new ClaroModel();
             List<Claro> claroList = cm.findAll();
@@ -149,9 +141,9 @@ public class EmpresasWSImpl implements EmpresasWS {
                 }
             }
             cm.update(c);
-            return true;
+            return "Pago Aprobado";
         } catch (Exception e) {
-            return false;
+            return "Pago No Aprobado";
         }
     }
 

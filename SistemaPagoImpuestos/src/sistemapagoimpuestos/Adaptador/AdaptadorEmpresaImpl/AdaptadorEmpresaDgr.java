@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresa;
 import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOComprobanteUnico;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
@@ -52,7 +53,14 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
     }
 
     @Override
-    public boolean confirmarPago(String nroFactura, Integer codigoCP, double monto) {
+    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
+    @Override
+    public void confirmarPago(String nroFactura, Integer codigoCP, double monto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

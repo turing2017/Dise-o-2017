@@ -19,16 +19,16 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 
 public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
-    
+
     ControladorPagarImpuestos controlador = new ControladorPagarImpuestos();
-    List<DTOComprobante> listadoComprobantes;
     String codigoPagoElectronico;
-    
+
     public IUPagarImpuestoComprobantes() {
         initComponents();
         button_pagar.setEnabled(false);
@@ -42,24 +42,20 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         });
     }
-    
-    public IUPagarImpuestoComprobantes(List<DTOComprobante> listadoDTOComprobante, String codigoPagoIngresado, String nombreEmpresa, String nombreTipoImpuesto){
+
+    public IUPagarImpuestoComprobantes(List<DTOComprobantePantalla> listadoDTOComprobantePantalla) {
         initComponents();
-        this.setCodigoPagoElectronico(codigoPagoIngresado);
-        this.setListadoComprobantes(listadoDTOComprobante);
-        this.setLabel_EmpresaSelec(nombreEmpresa);
-        this.setLabel_TipoImpuestoSelec(nombreTipoImpuesto);
-        cargarTablaComprobantes(listadoDTOComprobante);
-        
+        cargarTablaComprobantes(listadoDTOComprobantePantalla);
+
         btn_Selec_Cuenta.setEnabled(false);
         ListSelectionModel listSelectionModel = tabla_comprobantes.getSelectionModel();
         listSelectionModel.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+                ListSelectionModel lsm = (ListSelectionModel) e.getSource();
                 btn_Selec_Cuenta.setEnabled(!lsm.isSelectionEmpty());
-        }
+            }
         });
-        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -69,10 +65,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_comprobantes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        label_TipoImpuesto = new javax.swing.JLabel();
-        label_Empresa = new javax.swing.JLabel();
-        label_TipoImpuestoSelec = new javax.swing.JLabel();
-        label_EmpresaSelec = new javax.swing.JLabel();
         btn_cerrar = new javax.swing.JButton();
         btn_Selec_Cuenta = new javax.swing.JButton();
         title_cuenta_select = new javax.swing.JLabel();
@@ -112,14 +104,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Comprobantes Pendientes de Pago");
-
-        label_TipoImpuesto.setText("Tipo de Impuesto:");
-
-        label_Empresa.setText("Empresa:");
-
-        label_TipoImpuestoSelec.setText("(Tipo de Impuesto Seleccionado por usuario)");
-
-        label_EmpresaSelec.setText("(Empresa seleccionada por usuario)");
 
         btn_cerrar.setText("Cerrar");
 
@@ -175,16 +159,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btn_Selec_Cuenta)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(label_TipoImpuesto)
-                                .addComponent(label_Empresa)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(171, 171, 171)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(label_TipoImpuestoSelec)
-                                        .addComponent(label_EmpresaSelec))))
-                            .addGap(157, 157, 157))
+                            .addComponent(jLabel1)
+                            .addGap(272, 272, 272))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,16 +174,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_TipoImpuesto)
-                    .addComponent(label_TipoImpuestoSelec))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_Empresa)
-                    .addComponent(label_EmpresaSelec))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_Selec_Cuenta)
                 .addGap(16, 16, 16)
@@ -242,17 +210,21 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private void button_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pagarActionPerformed
         try {
             // Obtengo el código del elemento seleccionado
-            int columnCode = 0;
+            int columnNroFac = 0;
+            int columnCode = 1;
             int rowSelected = tabla_comprobantes.getSelectedRow();
-            String codigo = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString(); 
-            DTOOperacion dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(), Double.parseDouble(textfield_monto_a_pagar.getText()),
-                obtenerComprobanteSeleccionado(codigo), getCodigoPagoElectronico(), getLabel_EmpresaSelec(), getLabel_TipoImpuestoSelec());
+            String nroFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnNroFac).toString();
+            String CodigoFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString();
+            DTOOperacion dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(), 
+                    Double.parseDouble(textfield_monto_a_pagar.getText()),
+                    nroFactura,
+                    CodigoFactura);
             this.dispose();
-            JOptionPane.showMessageDialog(null,"Se ha pagado el impuesto " +dtoOperacion.getTipoImpuesto().getNombreTipoImpuesto() + " de la empresa " + 
-                dtoOperacion.getEmpresa().getNombreEmpresa() + ", el número de la operación es " + dtoOperacion.getNumeroOperacion(), "Operación completada",
-                JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se ha pagado el impuesto " + dtoOperacion.getTipoImpuesto().getNombreTipoImpuesto() + " de la empresa "
+                    + dtoOperacion.getEmpresa().getNombreEmpresa() + ", el número de la operación es " + dtoOperacion.getNumeroOperacion(), "Operación completada",
+                    JOptionPane.PLAIN_MESSAGE);
             IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
-            iUPagarImpuesto.show();          
+            iUPagarImpuesto.show();
         } catch (NullPointerException e) {
             Excepciones.getInstance().objetoNoSeleccionado();
         }
@@ -293,38 +265,41 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Método para cargar los comprobantes en la tabla
-    public void cargarTablaComprobantes(List<DTOComprobante> listaComprobantes){
-        
+    public void cargarTablaComprobantes(List<DTOComprobantePantalla> listaComprobantesPantalla) {
+
         // Muestro los datos en la tabla
-        ArrayList<String> columnList = new ArrayList<>();          
+        ArrayList<String> columnList = new ArrayList<>();
         columnList.add("Numero Factura");
+        columnList.add("Codigo Comprobante");
         columnList.add("Monto Total");
         columnList.add("Vencimiento");
-             
-        for(DTOItem item : listaComprobantes.get(0).getAtributosAdicionalesDTOComprobante()){
+
+        for (DTOItem item : listaComprobantesPantalla.get(0).getAtributosAdicionalesDTOComprobante()) {
             columnList.add(item.getNombreItem());
-        }      
-        Object[] columnas =  columnList.toArray();
-        
+        }
+        Object[] columnas = columnList.toArray();
+
         // Creo el modelo
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
-            
+
             // Sobreescribo el método para no permitir editar la 
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
                 return false;
             }
-    
+
             public Class<?> getColumnClass(int column) {
                 switch (column) {
                     case 0:
                         return String.class;
                     case 1:
-                        return double.class;
+                        return String.class;
                     case 2:
+                        return double.class;
+                    case 3:
                         return String.class;
                     default:
                         return String.class;
@@ -333,20 +308,20 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         };
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        
-        for (DTOComprobante dtoComprobante : listaComprobantes) {
+
+        for (DTOComprobantePantalla dtoComprobante : listaComprobantesPantalla) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoComprobante.getNumeroFactura());
             vect.add(dtoComprobante.getMontoTotalDTOComprobante());
             vect.add(format.format(dtoComprobante.getFechaHoraVencimientoDTOComprobante()));
-            
+
             String atribAdic = "";
             List<DTOItem> listadoItems = dtoComprobante.getAtributosAdicionalesDTOComprobante();
-            for(DTOItem item : listadoItems){
+            for (DTOItem item : listadoItems) {
                 vect.add(item.getItemVal());
             }
             dtm.addRow(vect);
-            
+
         }
 
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
@@ -370,54 +345,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         this.lbl_out_tipo_Cuenta.setText(nombreTipoCuenta);
     }
 
-    public void setListadoComprobantes(List<DTOComprobante> listadoComprobantes) {
-        this.listadoComprobantes = listadoComprobantes;
-    }
-
-    public void setCodigoPagoElectronico(String codigoPagoElectronico) {
-        this.codigoPagoElectronico = codigoPagoElectronico;
-    }
-
-    public String getCodigoPagoElectronico() {
-        return codigoPagoElectronico;
-    }
-
-    public void setLabel_EmpresaSelec(String nombreEmpresaSelec) {
-        this.label_EmpresaSelec.setText(nombreEmpresaSelec);
-    }
-
-    public void setLabel_TipoImpuestoSelec(String nombreTipoImpuestoSelec) {
-        this.label_TipoImpuestoSelec.setText(nombreTipoImpuestoSelec);
-    }
-
-    public String getLabel_EmpresaSelec() {
-        return label_EmpresaSelec.getText();
-    }
-
-    public String getLabel_TipoImpuestoSelec() {
-        return label_TipoImpuestoSelec.getText();
-    }
-    
-    
-    
-    // Método para recuperar el comprobante seleccionado
-    public DTOComprobante obtenerComprobanteSeleccionado(String numeroComprobante){
-        
-        List<DTOComprobante> listadoComprobantes = this.listadoComprobantes;    
-        DTOComprobante comprobante = new DTOComprobante();
-        
-        for (DTOComprobante dtoComprobante : listadoComprobantes) {
-            if (Integer.parseInt(numeroComprobante)==dtoComprobante.getNumeroFactura() ) {
-                comprobante = dtoComprobante;
-                break;
-            }      
-        }
-        
-        return comprobante;
-    }
-    
     // Metodo para modificar la pantalla si el TI es editable
-    public void setearEditable(){
+    public void setearEditable() {
         System.out.println("es editable");
     }
 
@@ -428,10 +357,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel label_Empresa;
-    private javax.swing.JLabel label_EmpresaSelec;
-    private javax.swing.JLabel label_TipoImpuesto;
-    private javax.swing.JLabel label_TipoImpuestoSelec;
     private javax.swing.JLabel lbl_out_cbu;
     private javax.swing.JLabel lbl_out_tipo_Cuenta;
     private javax.swing.JTable tabla_comprobantes;

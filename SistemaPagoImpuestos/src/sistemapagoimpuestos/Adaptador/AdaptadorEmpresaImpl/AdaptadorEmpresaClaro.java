@@ -5,12 +5,14 @@
  */
 package sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl;
 
+import exceptions.Excepciones;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Adaptador.AdaptadorEmpresa;
 import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOComprobanteUnico;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Entity.Empresa;
@@ -28,28 +30,34 @@ import ws.empresas.EmpresasWSImplService;
  *
  * @author mviss
  */
-public class AdaptadorEmpresaClaro implements AdaptadorEmpresa{
-        EmpresasWSImplService wsImplService
-                = new EmpresasWSImplService();
-        EmpresasWS claroWs;
-        
-        public AdaptadorEmpresaClaro(){
-            claroWs = wsImplService.getEmpresasWSImplPort();
-        }
-        
+public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
+
+    EmpresasWSImplService wsImplService
+            = new EmpresasWSImplService();
+    EmpresasWS claroWs;
+
+    public AdaptadorEmpresaClaro() {
+        claroWs = wsImplService.getEmpresasWSImplPort();
+    }
+
     public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) {
-        List<Claro> listClaro = claroWs.buscarComprobantesCodigoClaro(codigoPagoElectronicoIngres);
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
-        for (Claro claro : listClaro) {
-            DTOComprobante comprobante = new DTOComprobante();
-            comprobante.setCodigoDTOComprobante(claro.getCodigo());
-            comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
-            comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
-            comprobante.setNumeroFactura(claro.getNroFactura());
-            comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, claro));
-            dTOComprobanteList.add(comprobante);
+        try {
+            List<Claro> listClaro = claroWs.buscarComprobantesCodigoClaro(codigoPagoElectronicoIngres);
+            for (Claro claro : listClaro) {
+                DTOComprobante comprobante = new DTOComprobante();
+                comprobante.setCodigoDTOComprobante(claro.getCodigo());
+                comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
+                comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
+                comprobante.setNumeroFactura(claro.getNroFactura());
+                comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, claro));
+                dTOComprobanteList.add(comprobante);
+            }
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error de conexion", "No se pudo realizar el pago, intente mas tarde");
         }
         return dTOComprobanteList;
+
     }
 
     public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Claro claro) {
@@ -78,8 +86,24 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa{
         }
         return dTOItems;
     }
-    
-    public boolean confirmarPago(String nroFactura, Integer codigoCP, double monto){
-        return claroWs.acreditarPagoClaro(nroFactura.toString(), codigoCP.toString(), monto);
+
+    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura) {
+        Claro claroComprobante = claroWs.findForCodeClaro(Integer.toString(nroFactura));
+        return new DTOComprobanteUnico(claroComprobante.getNroFactura(),
+                claroComprobante.getCodigo(),
+                claroComprobante.getVencimiento().toGregorianCalendar().getTime(),
+                claroComprobante.getMontoTotal(),
+                buscarItems(empresaTipoImpuesto, claroComprobante));
+    }
+
+    @Override
+    public void confirmarPago(String nroFactura, Integer codigoCP, double monto) {
+        try {
+            if (!claroWs.acreditarPagoClaro(nroFactura.toString(), codigoCP.toString(), monto).equals("Pago Aprobado")) {
+                Excepciones.getInstance().errorGenerico("Error: Empresa Claro", "El pago no se pudo realizar.");
+            }
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error de conexion", "No se pudo realizar el pago, intente mas tarde");
+        }
     }
 }

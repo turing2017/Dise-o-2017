@@ -11,5 +11,5 @@ package sistemapagoimpuestos.Adaptador;
  */
 public interface AdaptadorBanco {
     public double consultarSaldo( String cbuCuenta);
-    public boolean debitarSaldo(String cbuCuenta, double montoADebitar);
+    public void debitarSaldo(String cbuCuenta, double montoADebitar);
 }

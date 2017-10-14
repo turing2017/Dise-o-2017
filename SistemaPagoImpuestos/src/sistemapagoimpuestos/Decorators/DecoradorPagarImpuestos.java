@@ -5,8 +5,10 @@
  */
 package sistemapagoimpuestos.Decorators;
 
+import exceptions.ExcepcionGenerica;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOComprobante;
+import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
@@ -22,6 +24,15 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
 
     public DecoradorPagarImpuestos() {
     }
+
+    @Override
+    public void validarUsuario() throws ExcepcionGenerica {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.validarUsuario(); //To change body of generated methods, choose Tools | Templates.
+        FachadaInterna.getInstance().finalizarTransaccion();
+    }
+    
+    
 
     @Override
     public List<DTOTipoImpuesto> buscarTipoImpuestos() {
@@ -40,11 +51,11 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public List<DTOComprobante> seleccionarEmpresa(String nombreTI, String nombreEmpresa, String codigoPagoElectronicoIngres) {
+    public List<DTOComprobantePantalla> seleccionarEmpresa( String nombreEmpresa, String codigoPagoElectronicoIngres) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOComprobante> listadoDTOComprobante = super.seleccionarEmpresa(nombreTI, nombreEmpresa,codigoPagoElectronicoIngres);
+        List<DTOComprobantePantalla> listadoDTOComprobantepantalla = super.seleccionarEmpresa(nombreEmpresa,codigoPagoElectronicoIngres);
         FachadaInterna.getInstance().finalizarTransaccion();
-        return listadoDTOComprobante;
+        return listadoDTOComprobantepantalla;
     }
 
     @Override
@@ -56,19 +67,16 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, DTOComprobante dtoComprobante, String codigoPagoIngres, String empresaSelec, String tipoImpuestoSelec) {
+    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOOperacion dtoOperacion = super.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, dtoComprobante, codigoPagoIngres, empresaSelec, tipoImpuestoSelec);
+        DTOOperacion dtoOperacion = super.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, codigoPago);
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoOperacion;
     }
 
     @Override
-    public boolean MontoEditable(String nombreTipoImpuesto) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        boolean result = super.MontoEditable(nombreTipoImpuesto);
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return result;
+    public boolean MontoEditable() {
+        return  super.MontoEditable();
     }
     
     

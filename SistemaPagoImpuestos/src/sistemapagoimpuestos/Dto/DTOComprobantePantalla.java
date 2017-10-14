@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sistemapagoimpuestos.Dto;
 
 import java.util.Date;
@@ -5,18 +10,28 @@ import java.util.List;
 
 /**
  *
- * @author lunamarcos
+ * @author mviss
  */
-public class DTOComprobante {
-    
+public class DTOComprobantePantalla {
+
     private int numeroFactura;
     private String codigoComprobante;
     private Date fechaHoraVencimientoComprobante;
     private double montoTotalComprobante;
     private List<DTOItem> atributosAdicionalesComprobante;
 
-    public DTOComprobante() {
+    public DTOComprobantePantalla() {
     }
+
+    public DTOComprobantePantalla(int numeroFactura, String codigoDTOComprobante, Date fechaHoraVencimientoDTOComprobante, double montoTotalDTOComprobante, List<DTOItem> atributosAdicionalesDTOComprobante) {
+        this.numeroFactura = numeroFactura;
+        this.codigoComprobante = codigoDTOComprobante;
+        this.fechaHoraVencimientoComprobante = fechaHoraVencimientoDTOComprobante;
+        this.montoTotalComprobante = montoTotalDTOComprobante;
+        this.atributosAdicionalesComprobante = atributosAdicionalesDTOComprobante;
+    }
+    
+    
 
     public int getNumeroFactura() {
         return numeroFactura;
@@ -26,8 +41,6 @@ public class DTOComprobante {
         this.numeroFactura = numeroFactura;
     }
 
-    
-    
     public void setCodigoDTOComprobante(String codigoDTOComprobante) {
         this.codigoComprobante = codigoDTOComprobante;
     }

@@ -32,13 +32,7 @@ public interface EmpresasWS {
     public Claro findForCodeClaro(String code);
     
     @WebMethod
-    public boolean pagarComprobanteDgr(int codigo, double montoPagar);
-
-    @WebMethod
     public List<Dgr> buscarComprobantesCodigoDgr(int codigo);    
-    
-    @WebMethod
-    public boolean pagarComprobanteClaro(int codigo, double montoPagar);
 
     @WebMethod
     public List<Claro> buscarComprobantesCodigoClaro(String codigo);    
@@ -50,9 +44,9 @@ public interface EmpresasWS {
     public boolean debitarMonto(String cbu, double monto);
     
     @WebMethod
-    public boolean acreditarPagoDgr(String codigo, Date vencimiento, double monto);
+    public boolean acreditarPagoDgr(String nroFactura, String codigoCP, double monto);
 
     @WebMethod
-    public boolean acreditarPagoClaro(String codigo, String codigoCP, double monto);
+    public String acreditarPagoClaro(String codigo, String codigoCP, double monto);
     
 }

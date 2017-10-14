@@ -41,9 +41,10 @@ public class ExpertoLoguearUsuario {
             criteriosList.add(new DTOCriterio("nombreUsuario","=", nombreUsuarioIngres));
             criteriosList.add(new DTOCriterio("passwordUsuario","=", passwordUsuarioIngres));
             criteriosList.add(new DTOCriterio("fechaHoraInhabilitacionUsuario","IS", null));
-            usuario.setFechaHoraUltimoIngresoSistemaUsuario(new Date());
-            FachadaPersistencia.getInstance().guardar(usuario);
             GlobalVars.userActive = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criteriosList).get(0);
+            GlobalVars.userActive.setFechaHoraUltimoIngresoSistemaUsuario(new Date());
+            FachadaPersistencia.getInstance().guardar(GlobalVars.userActive);
+            
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("Codigo Ingresado No Encontrado");
             new Excepciones().datoNoEncontrado("Usuario");

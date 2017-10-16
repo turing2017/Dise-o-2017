@@ -38,13 +38,29 @@ public class EmpresasWSImpl implements EmpresasWS {
 
     @Override
     public Dgr findForCodeDgr(String code) {
-        return new DgrModel().find(code);
+        DgrModel cm = new DgrModel();
+        List<Dgr> listDgr = cm.findAll();
+        Dgr d = new Dgr();
+        for (Dgr dgr : listDgr) {
+            if (dgr.getNroFactura()==Integer.parseInt(code)) {
+                d =dgr;
+            }
+        }
+        return d;
     }
 
 
     @Override
     public Claro findForCodeClaro(String code) {
-        return new ClaroModel().find(code);
+        ClaroModel cm = new ClaroModel();
+        List<Claro> listClaro = cm.findAll();
+        Claro c = new Claro();
+        for (Claro claro : listClaro) {
+            if (claro.getNroFactura()==Integer.parseInt(code)) {
+                c =claro;
+            }
+        }
+        return c;
     }
 
     

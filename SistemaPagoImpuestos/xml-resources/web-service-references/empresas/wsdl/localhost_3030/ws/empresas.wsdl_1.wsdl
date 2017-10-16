@@ -4,47 +4,23 @@
 <xsd:import namespace="http://ws/" schemaLocation="http://localhost:3030/ws/empresas?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="acreditarPagoClaro">
-<part name="parameters" element="tns:acreditarPagoClaro"></part>
-</message>
-<message name="acreditarPagoClaroResponse">
-<part name="parameters" element="tns:acreditarPagoClaroResponse"></part>
-</message>
 <message name="buscarComprobantesCodigoDgr">
 <part name="parameters" element="tns:buscarComprobantesCodigoDgr"></part>
 </message>
 <message name="buscarComprobantesCodigoDgrResponse">
 <part name="parameters" element="tns:buscarComprobantesCodigoDgrResponse"></part>
 </message>
+<message name="acreditarPagoClaro">
+<part name="parameters" element="tns:acreditarPagoClaro"></part>
+</message>
+<message name="acreditarPagoClaroResponse">
+<part name="parameters" element="tns:acreditarPagoClaroResponse"></part>
+</message>
 <message name="buscarComprobantesCodigoClaro">
 <part name="parameters" element="tns:buscarComprobantesCodigoClaro"></part>
 </message>
 <message name="buscarComprobantesCodigoClaroResponse">
 <part name="parameters" element="tns:buscarComprobantesCodigoClaroResponse"></part>
-</message>
-<message name="findAllClaro">
-<part name="parameters" element="tns:findAllClaro"></part>
-</message>
-<message name="findAllClaroResponse">
-<part name="parameters" element="tns:findAllClaroResponse"></part>
-</message>
-<message name="findForCodeDgr">
-<part name="parameters" element="tns:findForCodeDgr"></part>
-</message>
-<message name="findForCodeDgrResponse">
-<part name="parameters" element="tns:findForCodeDgrResponse"></part>
-</message>
-<message name="acreditarPagoDgr">
-<part name="parameters" element="tns:acreditarPagoDgr"></part>
-</message>
-<message name="acreditarPagoDgrResponse">
-<part name="parameters" element="tns:acreditarPagoDgrResponse"></part>
-</message>
-<message name="debitarMonto">
-<part name="parameters" element="tns:debitarMonto"></part>
-</message>
-<message name="debitarMontoResponse">
-<part name="parameters" element="tns:debitarMontoResponse"></part>
 </message>
 <message name="findForCodeClaro">
 <part name="parameters" element="tns:findForCodeClaro"></part>
@@ -58,6 +34,30 @@
 <message name="findAllDgrResponse">
 <part name="parameters" element="tns:findAllDgrResponse"></part>
 </message>
+<message name="findForCodeDgr">
+<part name="parameters" element="tns:findForCodeDgr"></part>
+</message>
+<message name="findForCodeDgrResponse">
+<part name="parameters" element="tns:findForCodeDgrResponse"></part>
+</message>
+<message name="findAllClaro">
+<part name="parameters" element="tns:findAllClaro"></part>
+</message>
+<message name="findAllClaroResponse">
+<part name="parameters" element="tns:findAllClaroResponse"></part>
+</message>
+<message name="debitarMonto">
+<part name="parameters" element="tns:debitarMonto"></part>
+</message>
+<message name="debitarMontoResponse">
+<part name="parameters" element="tns:debitarMontoResponse"></part>
+</message>
+<message name="acreditarPagoDgr">
+<part name="parameters" element="tns:acreditarPagoDgr"></part>
+</message>
+<message name="acreditarPagoDgrResponse">
+<part name="parameters" element="tns:acreditarPagoDgrResponse"></part>
+</message>
 <message name="obtenerSaldo">
 <part name="parameters" element="tns:obtenerSaldo"></part>
 </message>
@@ -65,41 +65,41 @@
 <part name="parameters" element="tns:obtenerSaldoResponse"></part>
 </message>
 <portType name="EmpresasWS">
-<operation name="acreditarPagoClaro">
-<input xmlns:ns1="http://www.w3.org/2007/05/addressing/metadata" ns1:Action="http://ws/EmpresasWS/acreditarPagoClaroRequest" message="tns:acreditarPagoClaro"></input>
-<output xmlns:ns2="http://www.w3.org/2007/05/addressing/metadata" ns2:Action="http://ws/EmpresasWS/acreditarPagoClaroResponse" message="tns:acreditarPagoClaroResponse"></output>
-</operation>
 <operation name="buscarComprobantesCodigoDgr">
-<input xmlns:ns3="http://www.w3.org/2007/05/addressing/metadata" ns3:Action="http://ws/EmpresasWS/buscarComprobantesCodigoDgrRequest" message="tns:buscarComprobantesCodigoDgr"></input>
-<output xmlns:ns4="http://www.w3.org/2007/05/addressing/metadata" ns4:Action="http://ws/EmpresasWS/buscarComprobantesCodigoDgrResponse" message="tns:buscarComprobantesCodigoDgrResponse"></output>
+<input xmlns:ns1="http://www.w3.org/2007/05/addressing/metadata" ns1:Action="http://ws/EmpresasWS/buscarComprobantesCodigoDgrRequest" message="tns:buscarComprobantesCodigoDgr"></input>
+<output xmlns:ns2="http://www.w3.org/2007/05/addressing/metadata" ns2:Action="http://ws/EmpresasWS/buscarComprobantesCodigoDgrResponse" message="tns:buscarComprobantesCodigoDgrResponse"></output>
+</operation>
+<operation name="acreditarPagoClaro">
+<input xmlns:ns3="http://www.w3.org/2007/05/addressing/metadata" ns3:Action="http://ws/EmpresasWS/acreditarPagoClaroRequest" message="tns:acreditarPagoClaro"></input>
+<output xmlns:ns4="http://www.w3.org/2007/05/addressing/metadata" ns4:Action="http://ws/EmpresasWS/acreditarPagoClaroResponse" message="tns:acreditarPagoClaroResponse"></output>
 </operation>
 <operation name="buscarComprobantesCodigoClaro">
 <input xmlns:ns5="http://www.w3.org/2007/05/addressing/metadata" ns5:Action="http://ws/EmpresasWS/buscarComprobantesCodigoClaroRequest" message="tns:buscarComprobantesCodigoClaro"></input>
 <output xmlns:ns6="http://www.w3.org/2007/05/addressing/metadata" ns6:Action="http://ws/EmpresasWS/buscarComprobantesCodigoClaroResponse" message="tns:buscarComprobantesCodigoClaroResponse"></output>
 </operation>
-<operation name="findAllClaro">
-<input xmlns:ns7="http://www.w3.org/2007/05/addressing/metadata" ns7:Action="http://ws/EmpresasWS/findAllClaroRequest" message="tns:findAllClaro"></input>
-<output xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://ws/EmpresasWS/findAllClaroResponse" message="tns:findAllClaroResponse"></output>
-</operation>
-<operation name="findForCodeDgr">
-<input xmlns:ns9="http://www.w3.org/2007/05/addressing/metadata" ns9:Action="http://ws/EmpresasWS/findForCodeDgrRequest" message="tns:findForCodeDgr"></input>
-<output xmlns:ns10="http://www.w3.org/2007/05/addressing/metadata" ns10:Action="http://ws/EmpresasWS/findForCodeDgrResponse" message="tns:findForCodeDgrResponse"></output>
-</operation>
-<operation name="acreditarPagoDgr">
-<input xmlns:ns11="http://www.w3.org/2007/05/addressing/metadata" ns11:Action="http://ws/EmpresasWS/acreditarPagoDgrRequest" message="tns:acreditarPagoDgr"></input>
-<output xmlns:ns12="http://www.w3.org/2007/05/addressing/metadata" ns12:Action="http://ws/EmpresasWS/acreditarPagoDgrResponse" message="tns:acreditarPagoDgrResponse"></output>
-</operation>
-<operation name="debitarMonto">
-<input xmlns:ns13="http://www.w3.org/2007/05/addressing/metadata" ns13:Action="http://ws/EmpresasWS/debitarMontoRequest" message="tns:debitarMonto"></input>
-<output xmlns:ns14="http://www.w3.org/2007/05/addressing/metadata" ns14:Action="http://ws/EmpresasWS/debitarMontoResponse" message="tns:debitarMontoResponse"></output>
-</operation>
 <operation name="findForCodeClaro">
-<input xmlns:ns15="http://www.w3.org/2007/05/addressing/metadata" ns15:Action="http://ws/EmpresasWS/findForCodeClaroRequest" message="tns:findForCodeClaro"></input>
-<output xmlns:ns16="http://www.w3.org/2007/05/addressing/metadata" ns16:Action="http://ws/EmpresasWS/findForCodeClaroResponse" message="tns:findForCodeClaroResponse"></output>
+<input xmlns:ns7="http://www.w3.org/2007/05/addressing/metadata" ns7:Action="http://ws/EmpresasWS/findForCodeClaroRequest" message="tns:findForCodeClaro"></input>
+<output xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://ws/EmpresasWS/findForCodeClaroResponse" message="tns:findForCodeClaroResponse"></output>
 </operation>
 <operation name="findAllDgr">
-<input xmlns:ns17="http://www.w3.org/2007/05/addressing/metadata" ns17:Action="http://ws/EmpresasWS/findAllDgrRequest" message="tns:findAllDgr"></input>
-<output xmlns:ns18="http://www.w3.org/2007/05/addressing/metadata" ns18:Action="http://ws/EmpresasWS/findAllDgrResponse" message="tns:findAllDgrResponse"></output>
+<input xmlns:ns9="http://www.w3.org/2007/05/addressing/metadata" ns9:Action="http://ws/EmpresasWS/findAllDgrRequest" message="tns:findAllDgr"></input>
+<output xmlns:ns10="http://www.w3.org/2007/05/addressing/metadata" ns10:Action="http://ws/EmpresasWS/findAllDgrResponse" message="tns:findAllDgrResponse"></output>
+</operation>
+<operation name="findForCodeDgr">
+<input xmlns:ns11="http://www.w3.org/2007/05/addressing/metadata" ns11:Action="http://ws/EmpresasWS/findForCodeDgrRequest" message="tns:findForCodeDgr"></input>
+<output xmlns:ns12="http://www.w3.org/2007/05/addressing/metadata" ns12:Action="http://ws/EmpresasWS/findForCodeDgrResponse" message="tns:findForCodeDgrResponse"></output>
+</operation>
+<operation name="findAllClaro">
+<input xmlns:ns13="http://www.w3.org/2007/05/addressing/metadata" ns13:Action="http://ws/EmpresasWS/findAllClaroRequest" message="tns:findAllClaro"></input>
+<output xmlns:ns14="http://www.w3.org/2007/05/addressing/metadata" ns14:Action="http://ws/EmpresasWS/findAllClaroResponse" message="tns:findAllClaroResponse"></output>
+</operation>
+<operation name="debitarMonto">
+<input xmlns:ns15="http://www.w3.org/2007/05/addressing/metadata" ns15:Action="http://ws/EmpresasWS/debitarMontoRequest" message="tns:debitarMonto"></input>
+<output xmlns:ns16="http://www.w3.org/2007/05/addressing/metadata" ns16:Action="http://ws/EmpresasWS/debitarMontoResponse" message="tns:debitarMontoResponse"></output>
+</operation>
+<operation name="acreditarPagoDgr">
+<input xmlns:ns17="http://www.w3.org/2007/05/addressing/metadata" ns17:Action="http://ws/EmpresasWS/acreditarPagoDgrRequest" message="tns:acreditarPagoDgr"></input>
+<output xmlns:ns18="http://www.w3.org/2007/05/addressing/metadata" ns18:Action="http://ws/EmpresasWS/acreditarPagoDgrResponse" message="tns:acreditarPagoDgrResponse"></output>
 </operation>
 <operation name="obtenerSaldo">
 <input xmlns:ns19="http://www.w3.org/2007/05/addressing/metadata" ns19:Action="http://ws/EmpresasWS/obtenerSaldoRequest" message="tns:obtenerSaldo"></input>

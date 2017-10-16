@@ -211,7 +211,7 @@ public class DatosPrueba {
 
         Item item = (Item) listItem.get(0);
 
-        ItemEmpresaTipoImpuesto  itemEmpresaTipoImpuesto =new ItemEmpresaTipoImpuesto(1, null, item,true, empresaTipoImpuesto);
+        ItemEmpresaTipoImpuesto  itemEmpresaTipoImpuesto =new ItemEmpresaTipoImpuesto(1, null, item, empresaTipoImpuesto);
         
         FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
         

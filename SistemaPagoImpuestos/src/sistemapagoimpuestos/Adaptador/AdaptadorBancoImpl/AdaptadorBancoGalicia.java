@@ -18,20 +18,14 @@ public class AdaptadorBancoGalicia implements AdaptadorBanco{
     }
 
     @Override    
-    public double consultarSaldo( String cbuCuenta){
+    public double consultarSaldo( String cbuCuenta) throws Exception{
         return empresasWs.obtenerSaldo( cbuCuenta);
     }
     
     @Override
-    public void debitarSaldo(String cbuCuenta, double montoADebitar){
-        try {
-            if(!empresasWs.debitarMonto(cbuCuenta, montoADebitar)){
-                throw new ExcepcionGenerica("Error Debito");
-            }
-        } catch (ExcepcionGenerica e){
-            Excepciones.getInstance().errorGenerico("Error: Banco Galicia", "No se pudo debitar el pago.");
-        }catch (Exception e) {
-            Excepciones.getInstance().errorGenerico("Error de conexion", "No se pudo realizar el debito, intente mas tarde");
+    public void debitarSaldo(String cbuCuenta, double montoADebitar) throws Exception{        
+        if(!empresasWs.debitarMonto(cbuCuenta, montoADebitar)){
+            throw new ExcepcionGenerica("No se pudo debitar el pago.");
         }
     }
 }

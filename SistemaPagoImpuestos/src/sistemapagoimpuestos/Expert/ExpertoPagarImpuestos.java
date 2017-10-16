@@ -125,54 +125,68 @@ public class ExpertoPagarImpuestos {
     }
     
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
+        try{
+            List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
+            ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
+            List<DTOCriterio> criteriosList = new ArrayList<>();
+            criteriosList.add(new DTOCriterio("cliente", "=", GlobalVars.userActive.cliente));
+            List<Object> listaCuentas = FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList);
 
-        List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
-        ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
-        List<DTOCriterio> criteriosList = new ArrayList<>();
-        criteriosList.add(new DTOCriterio("cliente", "=", GlobalVars.userActive.cliente));
-        List<Object> listaCuentas = FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList);
+            for (Object cuentaObject : listaCuentas) {
+                CuentaBancaria cuentaTemp = (CuentaBancaria) cuentaObject;
 
-        for (Object cuentaObject : listaCuentas) {
-            CuentaBancaria cuentaTemp = (CuentaBancaria) cuentaObject;
-            
-            DTOCuentaBancaria dtoCuentaBancaria = new DTOCuentaBancaria();
-            
-            dtoCuentaBancaria.setCbuCuentaBancaria(cuentaTemp.getCbuCuentaBancaria());
-            dtoCuentaBancaria.setNombreTipoCuenta(cuentaTemp.getTipoCuenta().getNombreTipoCuenta());
-            dtoCuentaBancaria.setNroCuentaBancaria(cuentaTemp.getNroCuentaBancaria());
-            dtoCuentaBancaria.setSaldoRecuperado(
-                    FactoriaAdaptadorConexionBanco.
-                            getInstancia().
-                            getAdaptadorConexionBanco(parametroSistema)
-                            .consultarSaldo(cuentaTemp.getCbuCuentaBancaria()));
-            listaDTOCuentaBancaria.add(dtoCuentaBancaria);
-        }
+                DTOCuentaBancaria dtoCuentaBancaria = new DTOCuentaBancaria();
+
+                dtoCuentaBancaria.setCbuCuentaBancaria(cuentaTemp.getCbuCuentaBancaria());
+                dtoCuentaBancaria.setNombreTipoCuenta(cuentaTemp.getTipoCuenta().getNombreTipoCuenta());
+                dtoCuentaBancaria.setNroCuentaBancaria(cuentaTemp.getNroCuentaBancaria());
+                dtoCuentaBancaria.setSaldoRecuperado(
+                        FactoriaAdaptadorConexionBanco.
+                                getInstancia().
+                                getAdaptadorConexionBanco(parametroSistema)
+                                .consultarSaldo(cuentaTemp.getCbuCuentaBancaria()));
+                listaDTOCuentaBancaria.add(dtoCuentaBancaria);
+                        }
         return listaDTOCuentaBancaria;
+
+        }catch (Exception e){
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al conectar el sistema");
+            return null;
+        }        
     }
 
     public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago) {
-        List<DTOCriterio> criteriosList = new ArrayList<>();
-        ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
-        FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema).debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
-        criteriosList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
-        criteriosList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
-        EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criteriosList).get(0);
-        DTOComprobanteUnico dtoComprobanteUnico = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).buscarComprobanteSeleccionado(empresaTI, Integer.parseInt(nroFactura), codigoPago);
+        try{
+            List<DTOCriterio> criteriosList = new ArrayList<>();
+            ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
+            FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema).debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
+            criteriosList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
+            criteriosList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
+            EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criteriosList).get(0);
+            DTOComprobanteUnico dtoComprobanteUnico = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).buscarComprobanteSeleccionado(empresaTI, Integer.parseInt(nroFactura), codigoPago);
+            criteriosList.add(new DTOCriterio("cbuCuentaBancaria", "=", cbuCuentaSeleccionada));
+            CuentaBancaria cuentaBancaria = (CuentaBancaria) FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList).get(0);
+
+            Operacion operacion = new Operacion();
+            operacion.setNumeroOperacion(Integer.parseInt(nroFactura.substring(3).toString()+new Date().getTime())); // es aleatorio
+            operacion.setCodigoPagoElectrionicoOperacion(dtoComprobanteUnico.getCodigoDTOComprobante());
+            operacion.setFechaHoraOperacion(new Date());
+            operacion.setImportePagadoOperacion(montoAbonado);
+            operacion.setLiquidadaOperacion(false);
+            operacion.setNroComprobanteFacturaOperacion(dtoComprobanteUnico.getNumeroFactura());
+            operacion.setCuentaBancaria(cuentaBancaria);
+            
+            
+            return null;
+        } catch (ExcepcionGenerica e){
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
+            return null;
+        }catch(Exception e){
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al conectar el sistema");
+            return null;
+        }
         
-        criteriosList.add(new DTOCriterio("cbuCuentaBancaria", "=", cbuCuentaSeleccionada));
-        CuentaBancaria cuentaBancaria = (CuentaBancaria) FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList).get(0);
         
-        
-        
-        
-        Operacion operacion = new Operacion();
-        operacion.setNumeroOperacion(ThreadLocalRandom.current().nextInt(1, 1000000000)); // es aleatorio
-        operacion.setCodigoPagoElectrionicoOperacion(dtoComprobanteUnico.getCodigoDTOComprobante());
-        operacion.setFechaHoraOperacion(new Date());
-        operacion.setImportePagadoOperacion(montoAbonado);
-        operacion.setLiquidadaOperacion(false);
-        operacion.setNroComprobanteFacturaOperacion(dtoComprobanteUnico.getNumeroFactura());
-        operacion.setCuentaBancaria(cuentaBancaria);
 
         
         
@@ -229,6 +243,5 @@ public class ExpertoPagarImpuestos {
         dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
         return dtoOperacion;
 */
-return new DTOOperacion();
     }    
 }

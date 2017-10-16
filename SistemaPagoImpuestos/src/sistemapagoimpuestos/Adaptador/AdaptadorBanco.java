@@ -10,6 +10,6 @@ package sistemapagoimpuestos.Adaptador;
  * @author Maximiliano
  */
 public interface AdaptadorBanco {
-    public double consultarSaldo( String cbuCuenta);
-    public void debitarSaldo(String cbuCuenta, double montoADebitar);
+    public double consultarSaldo( String cbuCuenta) throws Exception;
+    public void debitarSaldo(String cbuCuenta, double montoADebitar) throws Exception;
 }

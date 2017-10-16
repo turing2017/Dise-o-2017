@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.Controller;
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -21,15 +23,19 @@ public class ControladorGestionarTipoImpuesto {
     }
     private ExpertoGestionarTipoImpuesto experto = (ExpertoGestionarTipoImpuesto) FabricaExpertos.getInstancia().crearExperto("CU14");
     
-    // Metodo iniciar
-    public void iniciar(){
-        if(experto.iniciar().equals("Administrador")){
-        IUGestionarTipoImpuesto pantallaPrincipal = new IUGestionarTipoImpuesto();
-        pantallaPrincipal.setVisible(true); 
-        }        
+    public void validarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUGestionarTipoImpuesto pantallaPrincipal = new IUGestionarTipoImpuesto();
+            pantallaPrincipal.setVisible(true); 
+
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
     }
     
-    // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
     public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres, List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItems){
         experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres);
     }
@@ -51,7 +57,7 @@ public class ControladorGestionarTipoImpuesto {
         IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<DTOEmpresaTipImpItem>());
         pantallaAlta.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
-                iniciar();
+                validarUsuario();
             }
         });
     }
@@ -67,7 +73,7 @@ public class ControladorGestionarTipoImpuesto {
             pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             pantallaModificar.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent ev) {
-                    iniciar();
+                    validarUsuario();
                 }
             });
             pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());

@@ -200,7 +200,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             }
             controlador.modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected(), dTOEmpresaTipImpItemList);
             this.dispose();
-            controlador.iniciar();
+            controlador.validarUsuario();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
@@ -212,7 +212,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
 
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
-        controlador.iniciar();
+        controlador.validarUsuario();
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void checkbox_habilitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_habilitadoActionPerformed

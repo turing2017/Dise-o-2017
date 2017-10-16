@@ -164,7 +164,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             if (codigoTipoImpuestoIngres < 0 || !nombreTipoImpuestoIngres.equals("")) {
                 controlador.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres, dTOEmpresaTipImpItemIngres);
                 this.dispose();
-                controlador.iniciar();
+                controlador.validarUsuario();
             } else {
                 Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
             }
@@ -178,7 +178,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
   
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
-        controlador.iniciar();
+        controlador.validarUsuario();
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void textField_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_nombreActionPerformed

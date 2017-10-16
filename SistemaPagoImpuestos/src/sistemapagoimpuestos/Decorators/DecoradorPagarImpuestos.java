@@ -26,7 +26,7 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public void validarUsuario() throws ExcepcionGenerica {
+    public void validarUsuario()  throws Exception {
         FachadaInterna.getInstance().iniciarTransaccion();
         super.validarUsuario(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -35,7 +35,7 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     
 
     @Override
-    public List<DTOTipoImpuesto> buscarTipoImpuestos() {
+    public List<DTOTipoImpuesto> buscarTipoImpuestos()  throws Exception{
         FachadaInterna.getInstance().iniciarTransaccion();
         List<DTOTipoImpuesto> listaDTOTipoImpuesto = super.buscarTipoImpuestos();
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -43,7 +43,7 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto) {
+    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto)  throws Exception{
         FachadaInterna.getInstance().iniciarTransaccion();
         List<DTOEmpresa> listaDTOEmpresa = super.buscarEmpresas(nombreTipoImpuesto);
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -51,7 +51,7 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public List<DTOComprobantePantalla> seleccionarEmpresa( String nombreEmpresa, String codigoPagoElectronicoIngres) {
+    public List<DTOComprobantePantalla> seleccionarEmpresa( String nombreEmpresa, String codigoPagoElectronicoIngres) throws Exception {
         FachadaInterna.getInstance().iniciarTransaccion();
         List<DTOComprobantePantalla> listadoDTOComprobantepantalla = super.seleccionarEmpresa(nombreEmpresa,codigoPagoElectronicoIngres);
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -59,7 +59,7 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
+    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) throws Exception {
         FachadaInterna.getInstance().iniciarTransaccion();
         List<DTOCuentaBancaria> listaCuentasBancarias = super.obtenerCuentas(cuilCliente);
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -67,7 +67,7 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago) {
+    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago)  throws Exception{
         FachadaInterna.getInstance().iniciarTransaccion();
         DTOOperacion dtoOperacion = super.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, codigoPago);
         FachadaInterna.getInstance().finalizarTransaccion();
@@ -75,7 +75,7 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public boolean isMontoEditable() {
+    public boolean isMontoEditable()  throws Exception{
         return  super.isMontoEditable();
     }
     

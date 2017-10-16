@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl;
 
 
+import exceptions.ExcepcionGenerica;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import ws.empresas.Dgr;
 import ws.empresas.EmpresasWS;
@@ -37,7 +39,7 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
         }
 
     @Override
-    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) {
+    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) throws Exception{
         List<Dgr> listDgr = dgrWs.buscarComprobantesCodigoDgr(Integer.parseInt(codigoPagoElectronicoIngres));
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
         for (Dgr dgr : listDgr) {
@@ -53,18 +55,25 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
     }
 
     @Override
-    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura, String codigoPago) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura, String codigoPago) throws Exception{
+        Dgr dgrComprobante = dgrWs.findForCodeDgr(Integer.toString(nroFactura));
+        return new DTOComprobanteUnico(dgrComprobante.getNroFactura(),
+                Integer.toString(dgrComprobante.getCodigoImpuesto()),
+                dgrComprobante.getPrimerVencimiento().toGregorianCalendar().getTime(),
+                dgrComprobante.getMontoPagar(),
+                buscarItems(empresaTipoImpuesto, dgrComprobante));
     }
 
     
     
     @Override
-    public void confirmarPago(String nroFactura, Integer codigoCP, double monto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void confirmarPago(Operacion operacion) throws Exception{
+        if (!dgrWs.acreditarPagoDgr(Integer.toString(operacion.getNroComprobanteFacturaOperacion()), operacion.getCodigoPagoElectrionicoOperacion(), operacion.getImportePagadoOperacion())) {
+            throw new ExcepcionGenerica("No se pudo confirmar el pago.");
+        }
     }
     
-    public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Dgr dgr) {
+    public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Dgr dgr) throws Exception{
         List<DTOCriterio> criterioList = new ArrayList<>();
         criterioList.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         List<Object> itemEmpresaTipoImpuesto = FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioList);
@@ -74,14 +83,14 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
             ItemEmpresaTipoImpuesto ieti = (ItemEmpresaTipoImpuesto) object;
             DTOItem dTOItem = new DTOItem().ConvertDto((Item) ieti.getItem());
             dTOItems.add(dTOItem);
-            switch (ieti.getOrdenItemEmpresaTipoImpuesto()) {
-                case 1:
+            switch (ieti.getItem().getNombreItem()) {
+                case "Nombre Impuesto":
                     dTOItem.setItemVal(dgr.getNombreImpuesto());
                     break;
-                case 2:
+                case "Status":
                     dTOItem.setItemVal(dgr.getStatus());
                     break;
-                case 3:
+                case "Fecha Segundo Vencimiento":
                     dTOItem.setItemVal(sdf.format(dgr.getSegundoVencimiento().toGregorianCalendar().getTime()));
                     break;
             }

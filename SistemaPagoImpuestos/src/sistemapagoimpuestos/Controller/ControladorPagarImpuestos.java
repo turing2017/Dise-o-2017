@@ -36,41 +36,71 @@ public class ControladorPagarImpuestos {
             
         } catch (ExcepcionGenerica e) {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es cliente");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
 
-    // Método para recuperar los Tipo de Impuestos
     public List<DTOTipoImpuesto> buscarTipoImpuestos() {
-        List<DTOTipoImpuesto> listado = experto.buscarTipoImpuestos();
-        return listado;
+        try {
+            List<DTOTipoImpuesto> listado = experto.buscarTipoImpuestos();
+            return listado;
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "No se pudieron encontrar tipos de impuesto");
+            return null;
+        }
     }
 
-    // Método para recuperar las Empresas
     public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto) {
-        return experto.buscarEmpresas(nombreTipoImpuesto);
-    }
-
-    // Método para buscar las cuentas y saldos
-    public void obtenerCuentas(String cuilCliente, IUPagarImpuestoComprobantes pantallaComprobantes) {
-        IUPagarImpuestoCuentas pantallaCuentas = new IUPagarImpuestoCuentas(experto.obtenerCuentas(cuilCliente), pantallaComprobantes);
-        pantallaCuentas.setVisible(true);
+        try {
+            return experto.buscarEmpresas(nombreTipoImpuesto);
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "No se pudieron encontrar Empresas");
+            return null;
+        }
     }
 
     public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres) {
-        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(
-                experto.seleccionarEmpresa(
-                        nombreEmpresaIng, 
-                        codigoPagoElectronicoIngres));
-        if (experto.isMontoEditable()) {
-            pantallaComprobantes.setearEditable();
-        } else {
-            
+        try {
+            IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(
+                    experto.seleccionarEmpresa(
+                            nombreEmpresaIng,
+                            codigoPagoElectronicoIngres));
+            if (experto.isMontoEditable()) {
+                pantallaComprobantes.setearEditable();
+            } else {
+
+            }
+            pantallaComprobantes.setVisible(true);
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al buscar los comprobantes de pago.");
+
         }
-        pantallaComprobantes.setVisible(true);
+    }
+
+    public void obtenerCuentas(String cuilCliente, IUPagarImpuestoComprobantes pantallaComprobantes) {
+        try {
+            IUPagarImpuestoCuentas pantallaCuentas = new IUPagarImpuestoCuentas(experto.obtenerCuentas(cuilCliente), pantallaComprobantes);
+            pantallaCuentas.setVisible(true);
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al conectar el sistema");
+        }
     }
 
     // Pagar impuesto
     public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String CodigoPago) {
-        return experto.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, CodigoPago);
+        try {
+            return experto.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, CodigoPago);
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
+            return null;
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al conectar el sistema");
+            return null;
+        }
     }
 }

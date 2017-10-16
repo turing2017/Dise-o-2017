@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Adaptador.AdaptadorEmpresaImpl;
 
+import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Entity.TipoDatoItem;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
@@ -40,27 +42,24 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
         claroWs = wsImplService.getEmpresasWSImplPort();
     }
 
-    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) {
+    @Override
+    public List<DTOComprobante> consultarComprobantes(EmpresaTipoImpuesto empresaTipoImpuesto, String codigoPagoElectronicoIngres) throws Exception {
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
-        try {
-            List<Claro> listClaro = claroWs.buscarComprobantesCodigoClaro(codigoPagoElectronicoIngres);
-            for (Claro claro : listClaro) {
-                DTOComprobante comprobante = new DTOComprobante();
-                comprobante.setCodigoDTOComprobante(claro.getCodigo());
-                comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
-                comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
-                comprobante.setNumeroFactura(claro.getNroFactura());
-                comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, claro));
-                dTOComprobanteList.add(comprobante);
-            }
-        } catch (Exception e) {
-            Excepciones.getInstance().errorGenerico("Error de conexion", "No se pudo realizar el pago, intente mas tarde");
+        List<Claro> listClaro = claroWs.buscarComprobantesCodigoClaro(codigoPagoElectronicoIngres);
+        for (Claro claro : listClaro) {
+            DTOComprobante comprobante = new DTOComprobante();
+            comprobante.setCodigoDTOComprobante(claro.getCodigo());
+            comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
+            comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
+            comprobante.setNumeroFactura(claro.getNroFactura());
+            comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, claro));
+            dTOComprobanteList.add(comprobante);
         }
         return dTOComprobanteList;
 
     }
 
-    public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Claro claro) {
+    public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Claro claro) throws Exception {
         List<DTOCriterio> criterioList = new ArrayList<>();
         criterioList.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         List<Object> itemEmpresaTipoImpuesto = FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioList);
@@ -69,17 +68,17 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
             ItemEmpresaTipoImpuesto ieti = (ItemEmpresaTipoImpuesto) object;
             DTOItem dTOItem = new DTOItem().ConvertDto((Item) ieti.getItem());
             dTOItems.add(dTOItem);
-            switch (ieti.getOrdenItemEmpresaTipoImpuesto()) {
-                case 1:
+            switch (ieti.getItem().getNombreItem()) {
+                case "Nombre Servicio":
                     dTOItem.setItemVal(claro.getNombreServicio());
                     break;
-                case 2:
+                case "Status":
                     dTOItem.setItemVal(claro.getStatus());
                     break;
-                case 3:
+                case "Numero de Telefono":
                     dTOItem.setItemVal(claro.getNroTelefono().toString());
                     break;
-                case 4:
+                case "Monto Minimo":
                     dTOItem.setItemVal(claro.getMontoMinimo().toString());
                     break;
             }
@@ -87,7 +86,8 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
         return dTOItems;
     }
 
-    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura, String codigoPago) {
+    @Override
+    public DTOComprobanteUnico buscarComprobanteSeleccionado(EmpresaTipoImpuesto empresaTipoImpuesto, int nroFactura, String codigoPago) throws Exception {
         Claro claroComprobante = claroWs.findForCodeClaro(Integer.toString(nroFactura));
         return new DTOComprobanteUnico(claroComprobante.getNroFactura(),
                 claroComprobante.getCodigo(),
@@ -97,13 +97,9 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
     }
 
     @Override
-    public void confirmarPago(String nroFactura, Integer codigoCP, double monto) {
-        try {
-            if (!claroWs.acreditarPagoClaro(nroFactura.toString(), codigoCP.toString(), monto).equals("Pago Aprobado")) {
-                Excepciones.getInstance().errorGenerico("Error: Empresa Claro", "El pago no se pudo realizar.");
-            }
-        } catch (Exception e) {
-            Excepciones.getInstance().errorGenerico("Error de conexion", "No se pudo realizar el pago, intente mas tarde");
+    public void confirmarPago(Operacion operacion) throws Exception {
+        if (!claroWs.acreditarPagoClaro(Integer.toString(operacion.getNroComprobanteFacturaOperacion()), operacion.getCodigoPagoElectrionicoOperacion(), operacion.getImportePagadoOperacion()).equals("Pago Aprobado")) {
+            throw new ExcepcionGenerica("No se pudo confirmar el pago.");
         }
     }
 }

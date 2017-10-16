@@ -2,11 +2,14 @@ package sistemapagoimpuestos.View.User;
 
 import exceptions.Excepciones;
 import java.awt.Component;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
@@ -27,8 +30,17 @@ public class IUPagarImpuestoCuentas extends javax.swing.JFrame {
     
     public IUPagarImpuestoCuentas(List<DTOCuentaBancaria> listaDTOCuentas, IUPagarImpuestoComprobantes pantallaComprobantes){
         initComponents();
+        // Modifico la operación de cierre para no finalizar al presionar X
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        // Modifico el Listener para el evento de la X
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+
+            }
+        });
         this.setPantallaComprobantes(pantallaComprobantes);
         cargarTablaCuentas(listaDTOCuentas);
+        
     }
 
     /**
@@ -74,28 +86,26 @@ public class IUPagarImpuestoCuentas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(button_continuar)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(32, 32, 32)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(label_seleccionarCuenta))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(button_continuar)
-                .addGap(91, 91, 91))
+                        .addGap(187, 187, 187)
+                        .addComponent(label_seleccionarCuenta)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(29, 29, 29)
                 .addComponent(label_seleccionarCuenta)
-                .addGap(52, 52, 52)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(button_continuar)
-                .addGap(61, 61, 61))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();

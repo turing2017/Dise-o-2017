@@ -22,7 +22,7 @@ public class ControladorGestionarItem {
 
     public ControladorGestionarItem() {      
     }
-  
+    
     // Experto GestionarItem
     private ExpertoGestionarItem experto = (ExpertoGestionarItem) FabricaExpertos.getInstancia().crearExperto("CU13");
     

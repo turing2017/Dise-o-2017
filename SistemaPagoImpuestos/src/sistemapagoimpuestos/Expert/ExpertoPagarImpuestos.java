@@ -99,23 +99,23 @@ public class ExpertoPagarImpuestos {
         return lista;
     }
 
-    public List<DTOComprobantePantalla> seleccionarEmpresa( String nombreEmpresaIng, String codigoPagoElectronicoIngres) {
-        List<DTOCriterio> criterioList = new ArrayList();
-        criterioList.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
-        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterioList).get(0);
-        empresaSeleccionada= empresa;
-        criterioList.clear();
-        criterioList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
-        criterioList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
-        EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioList).get(0);
-        List<DTOComprobante> listadoComprobantes = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).consultarComprobantes(empresaTI, codigoPagoElectronicoIngres);
-        List<DTOComprobantePantalla> comprobantePantallas = new ArrayList<>();
-        for(DTOComprobante dtoComprobante: listadoComprobantes){
-            comprobantePantallas.add(new DTOComprobantePantalla(dtoComprobante.getNumeroFactura(),
-                                                                dtoComprobante.getCodigoDTOComprobante(),
-                                                                dtoComprobante.getFechaHoraVencimientoDTOComprobante(),
-                                                                dtoComprobante.getMontoTotalDTOComprobante(),
-                                                                dtoComprobante.getAtributosAdicionalesDTOComprobante()));
+    public List<DTOComprobantePantalla> seleccionarEmpresa( String nombreEmpresaIng, String codigoPagoElectronicoIngres){
+            List<DTOCriterio> criterioList = new ArrayList();
+            criterioList.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
+            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterioList).get(0);
+            empresaSeleccionada= empresa;
+            criterioList.clear();
+            criterioList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
+            criterioList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
+            EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioList).get(0);
+            List<DTOComprobante> listadoComprobantes = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).consultarComprobantes(empresaTI, codigoPagoElectronicoIngres);
+            List<DTOComprobantePantalla> comprobantePantallas = new ArrayList<>();
+            for(DTOComprobante dtoComprobante: listadoComprobantes){
+                comprobantePantallas.add(new DTOComprobantePantalla(dtoComprobante.getNumeroFactura(),
+                                                                    dtoComprobante.getCodigoDTOComprobante(),
+                                                                    dtoComprobante.getFechaHoraVencimientoDTOComprobante(),
+                                                                    dtoComprobante.getMontoTotalDTOComprobante(),
+                                                                    dtoComprobante.getAtributosAdicionalesDTOComprobante()));
         }
         return comprobantePantallas;
     }

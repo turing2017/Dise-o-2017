@@ -23,6 +23,7 @@ import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Globals.GlobalVars;
 
 public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
@@ -106,6 +107,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         jLabel1.setText("Comprobantes Pendientes de Pago");
 
         btn_cerrar.setText("Cerrar");
+        btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarActionPerformed(evt);
+            }
+        });
 
         btn_Selec_Cuenta.setText("Seleccionar Cuenta");
         btn_Selec_Cuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +210,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_Selec_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Selec_CuentaActionPerformed
-        controlador.obtenerCuentas("10000000", this);
+        controlador.obtenerCuentas(GlobalVars.userActive.getCliente().getCuilCuitCliente(), this);
     }//GEN-LAST:event_btn_Selec_CuentaActionPerformed
 
     private void button_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pagarActionPerformed
@@ -233,6 +239,12 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private void textfield_monto_a_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_monto_a_pagarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textfield_monto_a_pagarActionPerformed
+
+    private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
+        this.dispose();
+        ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
+        cpi.validadarUsuario();
+    }//GEN-LAST:event_btn_cerrarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -312,6 +324,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         for (DTOComprobantePantalla dtoComprobante : listaComprobantesPantalla) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoComprobante.getNumeroFactura());
+            vect.add(dtoComprobante.getCodigoDTOComprobante());
             vect.add(dtoComprobante.getMontoTotalDTOComprobante());
             vect.add(format.format(dtoComprobante.getFechaHoraVencimientoDTOComprobante()));
 

@@ -7,10 +7,7 @@ package sistemapagoimpuestos.Controller;
 
 import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
-import java.util.ArrayList;
 import java.util.List;
-import sistemapagoimpuestos.Dto.DTOComprobante;
-import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -36,7 +33,7 @@ public class ControladorPagarImpuestos {
             experto.validarUsuario();
             IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
             iUPagarImpuesto.setVisible(true);
-
+            
         } catch (ExcepcionGenerica e) {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es cliente");
         }

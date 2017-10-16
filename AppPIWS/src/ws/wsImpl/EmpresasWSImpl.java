@@ -83,7 +83,7 @@ public class EmpresasWSImpl implements EmpresasWS {
         List<Dgr> listDgr = dm.findAll();
         List<Dgr> comprobantes = new ArrayList<>();
         for (Dgr dgr : listDgr) {
-            if (dgr.getCodigoImpuesto() == codigo) {
+            if (dgr.getCodigoImpuesto() == codigo && dgr.getStatus().equals("Pendiente")) {
                 comprobantes.add(dgr);
             }
         }

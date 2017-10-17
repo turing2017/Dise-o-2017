@@ -4,15 +4,20 @@ import exceptions.Excepciones;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -226,11 +231,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                     nroFactura,
                     CodigoFactura);
             this.dispose();
-            JOptionPane.showMessageDialog(null, "Se ha pagado el impuesto " + dtoOperacion.getTipoImpuesto().getNombreTipoImpuesto() + " de la empresa "
-                    + dtoOperacion.getEmpresa().getNombreEmpresa() + ", el número de la operación es " + dtoOperacion.getNumeroOperacion(), "Operación completada",
-                    JOptionPane.PLAIN_MESSAGE);
-            IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
-            iUPagarImpuesto.show();
+            IUPagarImpuestoOperacion iuOperacion = new IUPagarImpuestoOperacion(dtoOperacion);
+            iuOperacion.setVisible(true);
         } catch (NullPointerException e) {
             Excepciones.getInstance().objetoNoSeleccionado();
         }

@@ -70,7 +70,7 @@
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Component id="dateChooserCombodesde" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jTextField1" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldNombreEmpresa" min="-2" pref="86" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jComboBoxTipoImpuesto" alignment="1" min="-2" pref="153" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="jTextFieldNombreEmpresa" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -265,10 +265,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMostrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="jTextFieldNombreEmpresa">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNombreEmpresaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

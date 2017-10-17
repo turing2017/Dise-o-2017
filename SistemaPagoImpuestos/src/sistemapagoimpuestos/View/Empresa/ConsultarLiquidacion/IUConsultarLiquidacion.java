@@ -5,7 +5,6 @@
  */
 package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 
-import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.*;
 import static datosPrueba.DatosPrueba.generarDatosPrueba;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -21,7 +20,10 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOUsuario;
 
 /**
  *
@@ -29,13 +31,21 @@ import sistemapagoimpuestos.Dto.DTOOperacion;
  */
 public class IUConsultarLiquidacion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IUGestionarLiquidacion
-     */
-    ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-    public IUConsultarLiquidacion() {
-        //LLENA EL COMBO BOX TIPO EMPRESA, Y INICIALIZA EL DE EMRPESA CON "TODOS"
+    public IUConsultarLiquidacion(DTOUsuario usuario) {
         initComponents();
+        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+        ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = controlador.obtenerTipoImpuestos(usuario);
+        jTextFieldNombreEmpresa.setText(listDTOEmpresaTipoImpuesto.get(0).getdTOempresa().getNombreEmpresa());
+        jTextFieldNombreEmpresa.setEnabled(false);
+        jComboBoxTipoImpuesto.addItem("Todos");
+        for (DTOEmpresaTipoImpuesto dtoEmpresaTI : listDTOEmpresaTipoImpuesto ){
+            jComboBoxTipoImpuesto.addItem(dtoEmpresaTI.getdTOtipoImpuesto().getNombreDTOTipoImpuesto());
+            jComboBoxTipoImpuesto.isEditable();
+        } 
+        this.setVisible(true);
+        
+        //DTOUsuario dtoUser = new DTOUsuario();
+        //ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = controlador.iniciar(usuario)
         /*
         jComboBoxEmpresa.setEditable(false);
         jComboBoxTipoImpuesto.addItem("Todos");
@@ -48,6 +58,10 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
          List<DTOEmpresa> listDtoDTOEmpresa = controlador.obtenerEmpresarelacionadaATipoImpuesto(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()));
        for(DTOEmpresa obj : listDtoDTOEmpresa){
             jComboBoxEmpresa.addItem(obj.getNombreEmpresa());} */    
+    }
+
+    private IUConsultarLiquidacion() {
+     //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -72,7 +86,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         jButtonMostrar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldNombreEmpresa = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,7 +166,12 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextFieldNombreEmpresa.setText("jTextField1");
+        jTextFieldNombreEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreEmpresaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,7 +195,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(67, 67, 67))
                                         .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
@@ -193,7 +212,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,16 +241,16 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConsultarLiquidacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarLiquidacionesActionPerformed
-  //Limpia la tabla
-    /* DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             while (model.getRowCount()>0) {
             model.removeRow(0);
         }
-     //manda a buscar con los parametros       
-        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
+     //manda a buscar con los parametros
+       ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+       Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
-        ArrayList <DTOLiquidacion> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()),fechadesde,fechahasta);
-        
+       ArrayList <DTOLiquidacion> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
         //LLena la tabla
         for (int i = 0; i < listDtoLiquidacion.size(); i++) {
 
@@ -250,7 +269,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
             jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
             jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
-        }*/
+        }
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
@@ -314,6 +333,10 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
         }
         IUMostrar.jTextFieldMontoTotal.setText("" + montoTotal);*/
     }//GEN-LAST:event_jButtonMostrarActionPerformed
+
+    private void jTextFieldNombreEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreEmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreEmpresaActionPerformed
     
     /**
      * @param args the command line arguments
@@ -375,6 +398,6 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldNombreEmpresa;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,10 +6,14 @@
 package sistemapagoimpuestos.Controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoConsultarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUConsultarLiquidacion;
 
 
 /**
@@ -24,7 +28,15 @@ public class ControladorConsultarLiquidacion {
     }
       // Metodo iniciar
     public void iniciar(DTOUsuario usuario){
-      experto.consultarLiquidacion(usuario);
+      IUConsultarLiquidacion consultarLiquidacionIU = new IUConsultarLiquidacion(usuario);
+    }
+
+    public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos(DTOUsuario usuario) {
+        return experto.obtenerTipoImpuestos(usuario);
+    }
+
+    public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
+        return experto.buscarLiquidacionConFiltro(itemAt, text, fechadesde, fechahasta);
     }
 
 }

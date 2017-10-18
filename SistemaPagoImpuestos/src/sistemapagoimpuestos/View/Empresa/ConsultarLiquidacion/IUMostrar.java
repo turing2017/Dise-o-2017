@@ -7,13 +7,20 @@ package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.*;
 import static java.awt.Dialog.DEFAULT_MODALITY_TYPE;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Utils.Printer;
+import sistemapagoimpuestos.Utils.PrinterPDF;
 
 /**
  *
@@ -160,7 +167,7 @@ public class IUMostrar extends javax.swing.JDialog {
         jLabel6.setText("-");
         jLabel6.setEnabled(false);
 
-        buttonDescargar.setText("Descargar");
+        buttonDescargar.setText("Imprimir");
         buttonDescargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDescargarActionPerformed(evt);
@@ -273,13 +280,36 @@ public class IUMostrar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void buttonDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDescargarActionPerformed
-      MessageFormat header = new MessageFormat("Operaciones");
+       PrinterJob pjob = PrinterJob.getPrinterJob();
+        PageFormat preformat = pjob.defaultPage();
+        preformat.setOrientation(PageFormat.PORTRAIT);
+        PageFormat postformat = pjob.pageDialog(preformat);
+        //If user does not hit cancel then print.
+        if (preformat != postformat) {
+            //Set print component
+            pjob.setPrintable(new Printer(this), postformat);
+            if (pjob.printDialog()) {
+                try {
+                    pjob.print();
+                } catch (PrinterException ex) {
+                    Logger.getLogger(IUMostrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+       /* MessageFormat header = new MessageFormat("Operaciones");
       MessageFormat footer = new MessageFormat("Pagina 1");
       try {
           jTableOperacion.print(JTable.PrintMode.NORMAL, header, footer);
       } catch(Exception e){
           JOptionPane.showMessageDialog(this,e.getMessage());
-      }
+      }*/
+       
+       /*
+         String pdfFilename = "‪D:\\UTN\\reports\\reportTest.pdf";
+  PrinterPDF printReport = new PrinterPDF();
+  printReport.createPDF(pdfFilename);
+       */
     }//GEN-LAST:event_buttonDescargarActionPerformed
 
     /**

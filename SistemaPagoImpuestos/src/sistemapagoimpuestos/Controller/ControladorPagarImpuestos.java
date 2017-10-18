@@ -79,6 +79,10 @@ public class ControladorPagarImpuestos {
 
         }
     }
+    
+    public boolean isMontoEditable() throws Exception {
+        return experto.isMontoEditable();
+    }
 
     public void obtenerCuentas(String cuilCliente, IUPagarImpuestoComprobantes pantallaComprobantes) {
         try {

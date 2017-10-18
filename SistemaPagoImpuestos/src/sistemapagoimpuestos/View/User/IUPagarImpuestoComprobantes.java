@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -52,7 +54,25 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     public IUPagarImpuestoComprobantes(List<DTOComprobantePantalla> listadoDTOComprobantePantalla) {
         initComponents();
         cargarTablaComprobantes(listadoDTOComprobantePantalla);
-
+        try {
+            // Verifico si es monto editable
+            textfield_monto_a_pagar.setEditable(controlador.isMontoEditable());
+            if(controlador.isMontoEditable()){
+                textfield_monto_a_pagar.setEditable(true);
+            } else {
+                textfield_monto_a_pagar.setEditable(false);
+                tabla_comprobantes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent event) {
+                        if (tabla_comprobantes.getSelectedRow() > -1) {
+                            textfield_monto_a_pagar.setText(tabla_comprobantes.getValueAt(tabla_comprobantes.getSelectedRow(), 2).toString());
+                        }
+                    }
+                });
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(IUPagarImpuestoComprobantes.class.getName()).log(Level.SEVERE, null, ex);
+        }
         btn_Selec_Cuenta.setEnabled(false);
         ListSelectionModel listSelectionModel = tabla_comprobantes.getSelectionModel();
         listSelectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -279,7 +299,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Método para cargar los comprobantes en la tabla
     public void cargarTablaComprobantes(List<DTOComprobantePantalla> listaComprobantesPantalla) {
 

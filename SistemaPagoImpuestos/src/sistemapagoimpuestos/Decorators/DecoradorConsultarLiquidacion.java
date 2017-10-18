@@ -6,7 +6,11 @@
 package sistemapagoimpuestos.Decorators;
 
 import java.util.ArrayList;
+import java.util.Date;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoConsultarLiquidacion;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -16,26 +20,18 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorConsultarLiquidacion extends ExpertoConsultarLiquidacion {
     
-     @Override
-    public String iniciar() {
+   @Override
+   public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos(DTOUsuario usuario) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        String tempString = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<DTOEmpresaTipoImpuesto> listDtos = super.obtenerTipoImpuestos(usuario); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
-        return tempString;
+        return listDtos;
     }
-
-    @Override
-    public void consultarLiquidacion() {
-
-    }
-  
-    @Override
-    public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){
-        ArrayList<DTOTipoImpuesto> listObject;
+   @Override
+   public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta){
         FachadaInterna.getInstance().iniciarTransaccion();
-        listObject= super.obtenerTipoImpuestos(); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<DTOLiquidacion> listDtos = super.buscarLiquidacionConFiltro(nombreTipoImpuesto,nombreEmpresa,fechaDesde,fechaHasta);
         FachadaInterna.getInstance().finalizarTransaccion();
-        return listObject;
-        
-    }
+        return listDtos;
+   }
 }

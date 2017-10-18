@@ -16,9 +16,10 @@ public class DecoradorLoguearUsuario extends ExpertoLoguearUsuario {
     }
     
     @Override
-    public void buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
+    public DTOUsuario buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
+        DTOUsuario dto = super.buscarUsuario(nombreUsuarioIngres, passwordUsuarioIngres);
         FachadaInterna.getInstance().finalizarTransaccion();
+        return dto;
     }
 }

@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida;
 
+import exceptions.Excepciones;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
@@ -155,16 +156,15 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
    
     private void Button_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_GuardarActionPerformed
-    
-        String cuit= TextField_Cuit.getText();
-        String nombre = TextField_Nombre.getText();
-        String direccion = TextField_Direccion.getText();
+   
+        String cuit= TextField_Cuit.getText().trim();
+        String nombre = TextField_Nombre.getText().trim();
+        String direccion = TextField_Direccion.getText().trim();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
-       
-// Ahora cuando modifica todo, lleva un monton de guasadas :D
         controlador.modificarEmpresa(cuit, nombre, direccion, habilitada);
         this.dispose();
-
+    
+    
     }//GEN-LAST:event_Button_GuardarActionPerformed
 
     private void Button_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CancelarActionPerformed

@@ -41,6 +41,33 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         usuario.setTipoUsuario(admin);
     }
     
+    
+    public List<DTOTipoImpuesto> obtenerTipoImpuesto(){
+            List <DTOTipoImpuesto> lista = new ArrayList<>();
+        if(usuario.getTipoUsuario().getNombreTipoUsuario() == "Administrador"){
+            List<DTOCriterio> criterioFecha = new ArrayList();
+            criterioFecha.add(new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "IS", null));
+            List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioFecha);
+            
+            DTOTipoImpuesto dTOTipoImpuesto;
+
+            for (int i = 0; i < tipoImpuestos.size(); i++) {
+                dTOTipoImpuesto = new DTOTipoImpuesto();
+                TipoImpuesto tipoImpuesto = (TipoImpuesto)tipoImpuestos.get(i);
+                String nombreTipoImpuesto = tipoImpuesto.getNombreTipoImpuesto();
+                dTOTipoImpuesto.setNombreDTOTipoImpuesto(nombreTipoImpuesto);
+                lista.add(dTOTipoImpuesto);
+            }
+        }
+        else{
+            System.out.println("No es posible");
+        }
+        
+        return lista;
+    
+    }
+    
+    
     // Metodo iniciar
     public List<DTOTipoImpuesto> iniciar(){
         List <DTOTipoImpuesto> lista = new ArrayList<>();
@@ -192,6 +219,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioItemEmpresaTipoImpuesto).get(0);
         
         List<DTOCriterio> criteriosItem = new ArrayList<>();
+        criteriosItem.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         criteriosItem.add(new DTOCriterio("ordenItemEmpresaTipoImpuesto", "=", orden));
         criteriosItem.add(new DTOCriterio("item", "=", item));
         criteriosItem.add(new DTOCriterio("fechaInhabilitacionItemEmpresaTipoImpuesto", "IS", null));

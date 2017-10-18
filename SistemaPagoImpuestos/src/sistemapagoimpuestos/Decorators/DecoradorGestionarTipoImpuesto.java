@@ -59,6 +59,24 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
     }
 
     @Override
+    public int setearFrecuencia(String nombreTipoImpuesto, String cuitEmpresa, String nombreTipoEmpresa) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        int frecuencia = super.setearFrecuencia(nombreTipoImpuesto, cuitEmpresa, nombreTipoEmpresa); 
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return frecuencia;//To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void ModificarETI(String nombreTE, String nombreTI, String cuit, String nuevoTE, String nuevoTI, int frec, boolean habilitada) {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        super.ModificarETI(nombreTE, nombreTI, cuit, nuevoTE, nuevoTI, frec, habilitada);
+        FachadaInterna.getInstance().finalizarTransaccion();
+        //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
+    @Override
     public void modificarEmpresa(String cuit, String nombre, String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion) {
         FachadaInterna.getInstance().iniciarTransaccion();
         super.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, nuevoTipoEmpresa, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.

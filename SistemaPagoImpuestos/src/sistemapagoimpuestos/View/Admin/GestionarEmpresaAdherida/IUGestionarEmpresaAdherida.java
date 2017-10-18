@@ -223,11 +223,16 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
     }//GEN-LAST:event_Button_FiltrarActionPerformed
 
     private void Button_CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CrearActionPerformed
+    try{ 
         int columnCode = 0;
         int rowSelected = tabla_empresa.getSelectedRow();
         String cuitEmpresa = tabla_empresa.getModel().getValueAt(rowSelected, columnCode).toString();
-
-        controlador.asociarEmpresa(cuitEmpresa);
+ 
+    controlador.asociarEmpresa(cuitEmpresa);
+    } catch (ArrayIndexOutOfBoundsException e) {
+            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+            Excepciones.getInstance().objetoNoSeleccionado();
+    }
     }//GEN-LAST:event_Button_CrearActionPerformed
 
     private void Button_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ModificarActionPerformed

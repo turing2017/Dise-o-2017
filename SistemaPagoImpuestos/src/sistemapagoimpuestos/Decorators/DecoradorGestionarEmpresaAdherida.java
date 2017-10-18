@@ -64,13 +64,6 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
-    @Override
-    public boolean camposNulos(String cuit, String nombre, String direccion) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        boolean cn = super.camposNulos(cuit, nombre, direccion); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return cn;
-    }
 
     @Override
     public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada) {

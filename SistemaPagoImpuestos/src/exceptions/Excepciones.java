@@ -90,7 +90,7 @@ public class Excepciones extends Exception{
        
     ObjetoNoSeleccionado ons = new ObjetoNoSeleccionado();
     ons.setLabel_Titulo("Seleccionar opcion");
-    ons.setLabel_mensaje(" Debe seleccionar una fila en la tabla para modificar,intente nuevamnete");
+    ons.setLabel_mensaje(" Debe seleccionar una fila en la tabla,intente nuevamnete");
     ons.setVisible(true);
     ons.setVisible(true);
     }
@@ -104,6 +104,12 @@ public class Excepciones extends Exception{
     CuitExistente ce= new CuitExistente();
     ce.setLabel_Titulo("Cuit existente");
     ce.setLabel_mensaje("El CUIT ingresado existe, intente nuevamente");
+    ce.setVisible(true);
+    }
+    public void nombreExistente(){
+    CuitExistente ce= new CuitExistente();
+    ce.setLabel_Titulo("nombre existente");
+    ce.setLabel_mensaje("El Nombre ingresado existe, intente nuevamente");
     ce.setVisible(true);
     }
     public void modificacionExito(){
@@ -123,7 +129,7 @@ public class Excepciones extends Exception{
     public void objetoLaExistente(String objeto){
         ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
         edne.setLabel_title("Error: Registro Existente");            
-        edne.setLabel_mensaje("La "+objeto+" ingresado ya existe");
+        edne.setLabel_mensaje("La "+objeto+" ingresada ya existe");
         edne.setVisible(true);
     }
     

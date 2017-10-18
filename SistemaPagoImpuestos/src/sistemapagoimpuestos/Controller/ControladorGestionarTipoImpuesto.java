@@ -20,6 +20,7 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificar;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarEmpresa;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificacionItem;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarETI;
 
 public class ControladorGestionarTipoImpuesto {
 
@@ -38,6 +39,15 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
         pantallaPrincipal.setVisible(true); 
         }        
     }
+    
+    public int setearFrecuencia(String nombreTipoImpuesto, String cuitEmpresa, String nombreTipoEmpresa){
+       return experto.setearFrecuencia(nombreTipoImpuesto, cuitEmpresa, nombreTipoEmpresa);
+    }
+    public void modificarETI(String cuitEmpresa, String nombreTI, String nombreTE, boolean estadoETI, boolean montoEditable){
+        IUGestionarTipoImpuestoModificarETI pantallaModificarETI = new IUGestionarTipoImpuestoModificarETI(cuitEmpresa, nombreTI,nombreTE, estadoETI, montoEditable);
+        pantallaModificarETI.setVisible(true);
+    }
+        
     
     
     public void iniciar(String cuitEmpresa){
@@ -95,6 +105,10 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestosEmpresa(String cuitEmpresa){
         
         return  experto.obtenerTipoImpuestosEmpresa(cuitEmpresa);
+    }
+    
+    public void ModificarETI(String nombreTE, String nombreTI, String cuit, String  nuevoTE, String nuevoTI, int frec, boolean habilitada){
+        experto.ModificarETI(nombreTE, nombreTI, cuit, nuevoTE, nuevoTI, frec, habilitada);
     }
     
     public void mostrarPantallaAlta(String cuilEmpresa) {
@@ -172,7 +186,7 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
             }
         }
     }
-    
+
     // Metodo para recuperar el TipoImpuesto a modificar
     public DTOTipoImpuesto obtenerTipoImpuesto(int codigo){
         return experto.obtenerTipoImpuesto(codigo);

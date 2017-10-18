@@ -5,6 +5,7 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
@@ -37,6 +38,10 @@ public class ControladorGestionarEmpresaTipoImpuesto {
         return experto.obtenerItems(cuitEmpresa, codigoTipoImpuesto, nombreTE);
     }
     
+    
+    public List<DTOTipoImpuesto> obtenerTipoImpuesto(){
+        return experto.obtenerTipoImpuesto();
+    }
     
     public void modificarItem(String nombreItem,String cuitEmpresa,int codigoTipoImpuesto,String nombreTipoEmpresa, int orden,int ordenAnterior){
         experto.modificarItem(nombreItem, cuitEmpresa,codigoTipoImpuesto,nombreTipoEmpresa,orden, ordenAnterior);

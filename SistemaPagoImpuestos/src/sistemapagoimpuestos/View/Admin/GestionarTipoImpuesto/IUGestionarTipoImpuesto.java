@@ -51,10 +51,11 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         textfield_filtro = new javax.swing.JTextField();
         button_filtrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonVerItemAsociado = new javax.swing.JButton();
         nombreEmpresa = new javax.swing.JLabel();
         jButton_asociar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonModificarVinculo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,10 +85,11 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ver items Asociados");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVerItemAsociado.setText("Ver items Asociados");
+        jButtonVerItemAsociado.setEnabled(false);
+        jButtonVerItemAsociado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonVerItemAsociadoActionPerformed(evt);
             }
         });
 
@@ -106,38 +108,49 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
 
+        jButtonModificarVinculo.setText("Modificar Vinculo");
+        jButtonModificarVinculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarVinculoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(button_filtrar))
+                    .addComponent(nombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addComponent(jLabel1)
+                        .addGap(210, 210, 210))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(button_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(button_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(button_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(button_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton_asociar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(36, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(button_filtrar))
-                            .addComponent(nombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(210, 210, 210))
+                                    .addComponent(jButtonVerItemAsociado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonModificarVinculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,18 +164,20 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(nombreEmpresa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonVerItemAsociado)
                     .addComponent(button_modificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_nuevo)
                     .addComponent(jButton_asociar))
-                .addGap(10, 10, 10)
-                .addComponent(jButtonCancelar)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonModificarVinculo))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -220,16 +235,18 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     
     
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void jButtonVerItemAsociadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerItemAsociadoActionPerformed
+        try{
             // Obtento el código del elemento seleccionado
             int columnCode = 0;
             int rowSelected = tabla_tipo_impuesto.getSelectedRow();
             String codigoTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
             String nombreTE = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 4).toString();
             controlador.mostrarItems(cuitEmpresa, Integer.parseInt(codigoTI),nombreTE);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }catch (ArrayIndexOutOfBoundsException e) {
+            Excepciones.getInstance().objetoNoSeleccionado();
+    }
+    }//GEN-LAST:event_jButtonVerItemAsociadoActionPerformed
 
     private void jButton_asociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_asociarActionPerformed
         controlador.asociarETI(cuitEmpresa);
@@ -239,6 +256,17 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonModificarVinculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarVinculoActionPerformed
+        
+        int rowSelected = tabla_tipo_impuesto.getSelectedRow();
+        String nombreTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 1).toString();
+        boolean montoEditable = (boolean) tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 2);
+        boolean estadoETI = (boolean) tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 3);
+        String nombreTE = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 4).toString();
+        controlador.modificarETI(cuitEmpresa, nombreTI, nombreTE, estadoETI, montoEditable);
+        this.dispose();
+    }//GEN-LAST:event_jButtonModificarVinculoActionPerformed
 
 
     public static void main(String args[]) {
@@ -284,6 +312,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         DTOEmpresa dtoEmpresa = controlador.buscarEmpresa(cuitEmpresa);
         nombreEmpresa.setText(dtoEmpresa.getNombreEmpresa());
         jButton_asociar.setEnabled(true);
+        jButtonVerItemAsociado.setEnabled(true);
         String[] columnas = {"Codigo Tipo Impuesto", "Nombre Tipo Impuesto", "Monto Editable", "Estado", "Nombre TipoEmpresa"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
 
@@ -449,11 +478,11 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     }
 
     public JButton getjButton1() {
-        return jButton1;
+        return jButtonVerItemAsociado;
     }
 
     public void setjButton1(JButton jButton1) {
-        this.jButton1 = jButton1;
+        this.jButtonVerItemAsociado = jButton1;
     }
 
     public JLabel getjLabel1() {
@@ -502,8 +531,9 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_modificar;
     private javax.swing.JButton button_nuevo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonModificarVinculo;
+    private javax.swing.JButton jButtonVerItemAsociado;
     private javax.swing.JButton jButton_asociar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

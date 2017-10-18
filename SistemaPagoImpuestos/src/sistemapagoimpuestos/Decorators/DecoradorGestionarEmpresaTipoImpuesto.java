@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -44,6 +45,14 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
         FachadaInterna.getInstance().finalizarTransaccion();
         return tempString;
 }
+
+    @Override
+    public List<DTOTipoImpuesto> obtenerTipoImpuesto() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        List<DTOTipoImpuesto> dtoTI = super.obtenerTipoImpuesto();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return dtoTI;
+    }
 
     @Override
     public void modificarItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto, String nombreTipoEmpresa, int orden, int ordenAnterior) {

@@ -15,7 +15,6 @@ import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
-import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
@@ -37,7 +36,59 @@ public class ExpertoGestionarTipoImpuesto {
         }*/
         return "Administrador";        
     }
+    public int setearFrecuencia(String nombreTipoImpuesto, String cuitEmpresa, String nombreTipoEmpresa){
+        TipoImpuesto tipoImpuesto = new TipoImpuesto();
+        Empresa empresa = new Empresa();
+        TipoEmpresa tipoEmpresa = new TipoEmpresa();
+        EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto();
+        
+        try{ 
+        //Busca instancia de TipoImpuesto
+        List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
+        criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
+        List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
+        tipoImpuesto = (TipoImpuesto) ti.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Tipo de Impuesto");
+        }
+        
+        
+        try{
+        //Busca instancia de Empresa
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("cuitEmpresa", "=", cuitEmpresa));
+        List e = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        empresa = (Empresa) e.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Empresa");
+        }
+        
+        
+        try{
+        //Busca instancia de TipoEmpresa
+        List<DTOCriterio> criterioTipoEmpresa = new ArrayList();
+        criterioTipoEmpresa.add(new DTOCriterio("nombreTipoEmpresa", "=", nombreTipoEmpresa));
+        List tE = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterioTipoEmpresa);
+        tipoEmpresa = (TipoEmpresa) tE.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Tipo de Empresa");
+        }  
+        
+        try{
+        // Busco EmpresaTipoImpuesto
+        List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("empresa", "=", empresa));
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoEmpresa", "=", tipoEmpresa));
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
+        empresaTipoImpuesto = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto).get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Empresa Tipo Impuesto");
+        }
+        int frecuencia = empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto();
+        return frecuencia;
     
+    
+    }
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)
     public void nuevoTipoImpuesto(int codigoTipoImpuestoIngres, String nombreTipoImpuestoIngres, boolean esMontoEditableIngres){
        
@@ -63,6 +114,91 @@ public class ExpertoGestionarTipoImpuesto {
 
     }
     
+    public void ModificarETI(String nombreTE, String nombreTI, String cuit, String  nuevoTE, String nuevoTI, int frec, boolean habilitada){
+        TipoImpuesto tipoImpuesto = new TipoImpuesto();
+        Empresa empresa = new Empresa();
+        TipoEmpresa tipoEmpresa = new TipoEmpresa();
+        EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto();
+        TipoImpuesto nuevoTipoImpuesto = new TipoImpuesto();
+        TipoEmpresa nuevoTipoEmpresa = new TipoEmpresa();
+        
+        try{ 
+        //Busca instancia de TipoImpuesto
+        List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
+        criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTI));
+        List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
+        tipoImpuesto = (TipoImpuesto) ti.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Tipo de Impuesto");
+        }
+       
+        try{ 
+        //Busca instancia de TipoImpuesto
+        List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
+        criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nuevoTI));
+        List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
+        nuevoTipoImpuesto = (TipoImpuesto) ti.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Tipo de Impuesto");
+        }
+        
+        try{
+        //Busca instancia de Empresa
+        List<DTOCriterio> criterioEmpresa = new ArrayList();
+        criterioEmpresa.add(new DTOCriterio("cuitEmpresa", "=", cuit));
+        List e = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
+        empresa = (Empresa) e.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Empresa");
+        }
+        
+        
+        try{
+        //Busca instancia de TipoEmpresa
+        List<DTOCriterio> criterioTipoEmpresa = new ArrayList();
+        criterioTipoEmpresa.add(new DTOCriterio("nombreTipoEmpresa", "=", nombreTE));
+        List tE = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterioTipoEmpresa);
+        tipoEmpresa = (TipoEmpresa) tE.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Tipo de Empresa");
+        } 
+        
+        
+        try{
+        //Busca instancia de TipoEmpresa
+        List<DTOCriterio> criterioTipoEmpresa = new ArrayList();
+        criterioTipoEmpresa.add(new DTOCriterio("nombreTipoEmpresa", "=", nuevoTE));
+        List tE = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterioTipoEmpresa);
+        nuevoTipoEmpresa = (TipoEmpresa) tE.get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Tipo de Empresa");
+        }  
+        
+        try{
+            // Busco EmpresaTipoImpuesto
+            List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
+            criterioEmpresaTipoImpuesto.add(new DTOCriterio("empresa", "=", empresa));
+            criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoEmpresa", "=", tipoEmpresa));
+            criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
+            empresaTipoImpuesto = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto).get(0);
+            empresaTipoImpuesto.setTipoEmpresa(nuevoTipoEmpresa);
+            empresaTipoImpuesto.setTipoImpuesto(nuevoTipoImpuesto);
+            empresaTipoImpuesto.setFrecuenciaLiquidacionEmpresaTipoImpuesto(frec);
+            if(habilitada){
+                empresaTipoImpuesto.setFechaHoraInhabilitacionEmpresaTipoImpuesto(null);
+            }else{
+                empresaTipoImpuesto.setFechaHoraInhabilitacionEmpresaTipoImpuesto(new Date());
+            }
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().objetoNoExistente("Empresa Tipo Impuesto");
+        }
+     
+        
+        
+        
+        
+    }
+    
      public void modificarEmpresa (String cuit,String nombre,String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion){
         Empresa empresa = new Empresa();
         TipoImpuesto nuevoTImpuesto = new TipoImpuesto();
@@ -83,7 +219,7 @@ public class ExpertoGestionarTipoImpuesto {
             empresa= (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
             
             } catch (IndexOutOfBoundsException exception) {
-            Excepciones.getInstance().objetoNoExistente("Empresa");
+            Excepciones.getInstance().objetoNoExistente("Empresa loquilla");
         }
         
         try {
@@ -122,6 +258,12 @@ public class ExpertoGestionarTipoImpuesto {
         }
         
         
+        
+        List<DTOCriterio> criteriosETI = new ArrayList<>();
+        criteriosETI.add(new DTOCriterio("empresa", "=", empresa));
+        criteriosETI.add(new DTOCriterio("tipoImpuesto", "=", nuevoTImpuesto));
+        criteriosETI.add(new DTOCriterio("tipoEmpresa", "=", nuevoTEmpresa));
+        if(!existeDato("EmpresaTipoImpuesto", criteriosETI)){
             //Seteo lo que ha seleccionado en la pantalla, el nuevo TipoImpuesto, la nueva TipoEmpresa y la frecuenciaLiquidacion
             EmpresaTipoImpuesto empresaTI = new EmpresaTipoImpuesto();
             empresaTI.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
@@ -134,7 +276,10 @@ public class ExpertoGestionarTipoImpuesto {
             FachadaPersistencia.getInstance().guardar(empresaTI);
 
             Excepciones.getInstance().modificacionExito();
-        
+            }else{
+                Excepciones.getInstance().objetoLaExistente("combinacion");
+            
+        } 
     }
      
      public void eliminarItem(String nombreItem,String  cuitEmpresa,int codigoTipoImpuesto,String nombreTipoEmpresa,int ordenItem){
@@ -169,7 +314,6 @@ public class ExpertoGestionarTipoImpuesto {
         //Busca instancia de TipoEmpresa
         List<DTOCriterio> criterioTipoEmpresa = new ArrayList();
         criterioTipoEmpresa.add(new DTOCriterio("nombreTipoEmpresa", "=", nombreTipoEmpresa));
-        criterioTipoEmpresa.add(new DTOCriterio("fechaInhabilitacionTipoEmpresa", "IS", null));
         List tE = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterioTipoEmpresa);
         tipoEmpresa = (TipoEmpresa) tE.get(0);
         } catch (IndexOutOfBoundsException exception) {
@@ -201,6 +345,8 @@ public class ExpertoGestionarTipoImpuesto {
                
         
         List<DTOCriterio> criterioItemEmpresaTipoImpuesto = new ArrayList();
+        
+        criterioItemEmpresaTipoImpuesto.add(new DTOCriterio("ordenItemEmpresaTipoImpuesto", "=", ordenItem));
         criterioItemEmpresaTipoImpuesto.add(new DTOCriterio("item", "=", item));
         criterioItemEmpresaTipoImpuesto.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioItemEmpresaTipoImpuesto).get(0);

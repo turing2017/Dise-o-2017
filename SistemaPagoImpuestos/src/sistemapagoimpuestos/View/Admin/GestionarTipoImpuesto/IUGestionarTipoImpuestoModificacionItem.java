@@ -7,7 +7,7 @@ package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import javax.swing.SpinnerNumberModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
-
+import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 /**
  *
  * @author Tongas
@@ -21,6 +21,7 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
     int codigoTipoImpuesto;
     String nombreTipoEmpresa;
     int ordenAnterior;
+    ControladorGestionarTipoImpuesto controladorGTI = new ControladorGestionarTipoImpuesto();
     ControladorGestionarEmpresaTipoImpuesto controlador = new ControladorGestionarEmpresaTipoImpuesto();
     public IUGestionarTipoImpuestoModificacionItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto,String nombreTipoEmpresa, int ordenItem) {
         initComponents();
@@ -129,10 +130,12 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
         int orden = (int) spinner_Orden.getValue();
         String nombreItem = jTextField_ItemNombre.getText();
         controlador.modificarItem(nombreItem, cuitEmpresa,codigoTipoImpuesto,nombreTipoEmpresa,orden, ordenAnterior);
+        controladorGTI.mostrarItems( cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa);
         this.dispose();
     }//GEN-LAST:event_jButton_aceptarActionPerformed
 
     private void jButton_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelarActionPerformed
+        controladorGTI.mostrarItems( cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton_cancelarActionPerformed
 

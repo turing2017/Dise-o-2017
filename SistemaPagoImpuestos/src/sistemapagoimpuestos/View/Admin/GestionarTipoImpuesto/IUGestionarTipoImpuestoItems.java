@@ -1,5 +1,6 @@
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
+import exceptions.Excepciones;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,12 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
 
         jLabel2.setText("Orden:");
 
+        textfield_orden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfield_ordenActionPerformed(evt);
+            }
+        });
+
         ButtonModificarItem.setText("Modificar Item");
         ButtonModificarItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,22 +152,30 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_agregarActionPerformed
-        // TODO add your handling code here:
+        if(textfield_orden.getText().length()==0){
+            Excepciones.getInstance().camposVacios();
+        }else{
         String nombreItem = comboBox_items.getSelectedItem().toString();
         int orden = Integer.parseInt(textfield_orden.getText());
         controladorETI.agregarItem(nombreItem, cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa,orden);
         this.dispose();
-        //controlador.mostrarItems(cuitEmpresa, codigoTipoImpuesto,);
+      
+        }
     }//GEN-LAST:event_button_agregarActionPerformed
 
     private void ButtonModificarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonModificarItemActionPerformed
-        
+        try{
         int columnCode = 0;
         int rowSelected = tabla_items.getSelectedRow();
         String nombreItem = tabla_items.getModel().getValueAt(rowSelected, columnCode).toString();
         int ordenItem = (int) tabla_items.getModel().getValueAt(rowSelected, 1);
-                
         controlador.modificarItem(nombreItem,  cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, ordenItem);
+        this.dispose();
+        }catch (ArrayIndexOutOfBoundsException e) {
+            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+            Excepciones.getInstance().objetoNoSeleccionado();
+        
+        }
     }//GEN-LAST:event_ButtonModificarItemActionPerformed
 
     private void jButton_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelarActionPerformed
@@ -175,6 +190,10 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         controlador.eliminarItem(nombreItem,  cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, ordenItem);
         this.dispose();
     }//GEN-LAST:event_jButton_EliminarItemActionPerformed
+
+    private void textfield_ordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_ordenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textfield_ordenActionPerformed
 
     /**
      * @param args the command line arguments

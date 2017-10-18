@@ -51,11 +51,15 @@ public class ExpertoCalcularLiquidaciones {
         criterios.add(criterio1);
         List<Object> listLiquidacionEstado = FachadaPersistencia.getInstance().buscar("LiquidacionEstado", criterios);
 
-        if (listLiquidacionEstado.isEmpty()) {
-            dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN LIQUIDACIONES EN ESTADO ANULADA", "No existen liquidaciones a recalcular.", new Date()));
-        } else {
-            dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN LIQUIDACIONES EN ESTADO ANULADA", "Existen " + listLiquidacionEstado.size() + " liquidaciones a recalcular.", new Date()));
-        }
+         
+            for (Object objlistLiquidacion : listLiquidacionEstado) {
+            LiquidacionEstado liquidacionEstado = (LiquidacionEstado) objlistLiquidacion;
+            Date fechaHasta = liquidacionEstado.getFechaHoraHastaLiquidacionEstado();
+            if (fechaHasta == null) {
+                cantidadAnuladas++;}}
+            
+            dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN LIQUIDACIONES EN ESTADO ANULADA", "Existen " + cantidadAnuladas + " liquidaciones a recalcular.", new Date()));
+        
 
         //por cada liquidacion Estado
         for (Object objlistLiquidacion : listLiquidacionEstado) {
@@ -64,7 +68,7 @@ public class ExpertoCalcularLiquidaciones {
             Date fechaHasta = liquidacionEstado.getFechaHoraHastaLiquidacionEstado();
             // alt si fechaHoraHastaLiquidacion is null
             if (fechaHasta == null) {
-                cantidadAnuladas++;
+               
                 //Busco la liquidacion que tenga ese LiquidacionEstado
                 List<Object> liquidaciones = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
 

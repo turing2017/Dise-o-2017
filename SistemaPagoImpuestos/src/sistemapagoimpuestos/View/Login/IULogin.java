@@ -39,7 +39,6 @@ public class IULogin extends javax.swing.JFrame {
         textfield_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jLabel1.setText("Acceso Sistema Pago de Impuestos");
 

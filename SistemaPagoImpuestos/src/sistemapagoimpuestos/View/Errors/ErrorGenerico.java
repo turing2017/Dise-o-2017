@@ -32,6 +32,7 @@ public class ErrorGenerico extends javax.swing.JFrame {
         button_aceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         label_title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         label_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -77,6 +78,7 @@ public class ErrorGenerico extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_aceptarActionPerformed

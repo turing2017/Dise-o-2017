@@ -246,6 +246,21 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             int rowSelected = tabla_comprobantes.getSelectedRow();
             String nroFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnNroFac).toString();
             String CodigoFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString();
+            if(textfield_monto_a_pagar.isEditable()){
+                if(Double.parseDouble(textfield_monto_a_pagar.getText()) < Double.parseDouble(tabla_comprobantes.getModel().getValueAt(rowSelected, 7).toString())){
+                    JOptionPane msg = new JOptionPane("No puede abonar el monto seleccionado", JOptionPane.PLAIN_MESSAGE);
+                    JDialog dlg = msg.createDialog("Error");
+                    dlg.setVisible(true);
+                    return;
+                }
+            }
+            
+            if(lbl_out_cbu.getText().toString().equals("-Seleccionar Cuenta-")){
+                JOptionPane msg = new JOptionPane("Debe seleccionar una cuenta", JOptionPane.PLAIN_MESSAGE);
+                JDialog dlg = msg.createDialog("Error");
+                dlg.setVisible(true);
+                return;
+            }
             DTOOperacion dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(), 
                     Double.parseDouble(textfield_monto_a_pagar.getText()),
                     nroFactura,
@@ -253,8 +268,16 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             this.dispose();
             IUPagarImpuestoOperacion iuOperacion = new IUPagarImpuestoOperacion(dtoOperacion);
             iuOperacion.setVisible(true);
-        } catch (NullPointerException e) {
-            Excepciones.getInstance().objetoNoSeleccionado();
+        } catch (ArrayIndexOutOfBoundsException e){
+            JOptionPane msg = new JOptionPane("Debe seleccionar un comprobante", JOptionPane.PLAIN_MESSAGE);
+            JDialog dlg = msg.createDialog("Error");
+            dlg.setVisible(true);
+            return;
+        } catch (java.lang.NumberFormatException e){
+            JOptionPane msg = new JOptionPane("Debe ingresar importe válido", JOptionPane.PLAIN_MESSAGE);
+            JDialog dlg = msg.createDialog("Error");
+            dlg.setVisible(true);
+            return;
         }
     }//GEN-LAST:event_button_pagarActionPerformed
 

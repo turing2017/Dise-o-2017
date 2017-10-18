@@ -75,8 +75,8 @@ public class ControladorPagarImpuestos {
         } catch (ExcepcionGenerica e) {
             Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
         } catch (Exception e) {
-            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al buscar los comprobantes de pago.");
-
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "No se encontró comprobantes de pago.");
+            validadarUsuario();
         }
     }
     

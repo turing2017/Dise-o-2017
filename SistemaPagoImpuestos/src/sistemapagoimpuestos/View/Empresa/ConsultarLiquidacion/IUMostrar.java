@@ -3,13 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistemapagoimpuestos.View.Admin.GestionarLiquidacion;
+package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 
+import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.*;
 import static java.awt.Dialog.DEFAULT_MODALITY_TYPE;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.text.MessageFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Utils.Printer;
+
 
 /**
  *
@@ -20,22 +31,19 @@ public class IUMostrar extends javax.swing.JDialog {
     /**
      * Creates new form IUMostrar
      */
-    public IUMostrar(String nliquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+    public IUMostrar(String nliquidacion,Date fechaDesde,Date fechaHasta,String estado) {
         initComponents();
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion, fechaDesde, fechaHasta, estado);
-
+        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion,fechaDesde,fechaHasta,estado);
+        
         jLabelNrodeLiquidacion.setText(nliquidacion);
         jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
         jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
         jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
         jLabelPeriodo.setText(fechaDesde.toString());
-        if (fechaHasta == null) {
-            jLabelPeriodo2.setText("---");
-        } else {
-            jLabelPeriodo2.setText(fechaHasta.toString());
-        }
-        DefaultTableModel model = (DefaultTableModel) jTableOperacion.getModel();
+        if (fechaHasta == null){jLabelPeriodo2.setText("---");}else{
+        jLabelPeriodo2.setText(fechaHasta.toString());}
+        DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
         Double montoTotal = 0.0;
         for (int i = 0; i < liquidacion.getListComision().size(); i++) {
             model.addRow(new Object[]{});
@@ -43,11 +51,11 @@ public class IUMostrar extends javax.swing.JDialog {
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNroComprobanteFactura(), i, 1);
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getValorComision(), i, 2);
             jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getImportePagadoOperacion(), i, 3);
-            System.out.println(liquidacion.getListComision().get(i).getValorComision());
-            montoTotal = liquidacion.getListComision().get(i).getValorComision() + montoTotal;
+             System.out.println(liquidacion.getListComision().get(i).getValorComision());
+            montoTotal= liquidacion.getListComision().get(i).getValorComision() +montoTotal;
         }
-        System.out.println(montoTotal);
-        jTextFieldMontoTotal.setText(montoTotal.toString());
+       System.out.println(montoTotal);
+       jTextFieldMontoTotal.setText(montoTotal.toString());
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         this.setTitle("Operaciones");
         this.setResizable(false);
@@ -83,6 +91,7 @@ public class IUMostrar extends javax.swing.JDialog {
         jTextFieldMontoTotal = new javax.swing.JTextField();
         jLabelPeriodo2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        buttonDescargar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,16 +167,17 @@ public class IUMostrar extends javax.swing.JDialog {
         jLabel6.setText("-");
         jLabel6.setEnabled(false);
 
+        buttonDescargar.setText("Imprimir");
+        buttonDescargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDescargarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jLabelPeriodo)
@@ -204,9 +214,17 @@ public class IUMostrar extends javax.swing.JDialog {
                         .addGap(217, 217, 217)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(142, 142, 142)
                         .addComponent(jButtonCancelar)))
                 .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonDescargar)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +262,9 @@ public class IUMostrar extends javax.swing.JDialog {
                     .addComponent(jLabel11)
                     .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCancelar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancelar)
+                    .addComponent(buttonDescargar))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -256,8 +276,41 @@ public class IUMostrar extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldMontoTotalActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        this.dispose();
+       this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void buttonDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDescargarActionPerformed
+       PrinterJob pjob = PrinterJob.getPrinterJob();
+        PageFormat preformat = pjob.defaultPage();
+        preformat.setOrientation(PageFormat.PORTRAIT);
+        PageFormat postformat = pjob.pageDialog(preformat);
+        //If user does not hit cancel then print.
+        if (preformat != postformat) {
+            //Set print component
+            pjob.setPrintable(new Printer(this), postformat);
+            if (pjob.printDialog()) {
+                try {
+                    pjob.print();
+                } catch (PrinterException ex) {
+                    Logger.getLogger(IUMostrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+       /* MessageFormat header = new MessageFormat("Operaciones");
+      MessageFormat footer = new MessageFormat("Pagina 1");
+      try {
+          jTableOperacion.print(JTable.PrintMode.NORMAL, header, footer);
+      } catch(Exception e){
+          JOptionPane.showMessageDialog(this,e.getMessage());
+      }*/
+       
+       /*
+         String pdfFilename = "‪D:\\UTN\\reports\\reportTest.pdf";
+  PrinterPDF printReport = new PrinterPDF();
+  printReport.createPDF(pdfFilename);
+       */
+    }//GEN-LAST:event_buttonDescargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,16 +338,18 @@ public class IUMostrar extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(IUMostrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrar("", null, null, "").setVisible(true);
+                new IUMostrar("",null,null,"").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonDescargar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

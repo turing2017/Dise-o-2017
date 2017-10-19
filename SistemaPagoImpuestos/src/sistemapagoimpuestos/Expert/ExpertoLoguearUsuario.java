@@ -1,5 +1,4 @@
 package sistemapagoimpuestos.Expert;
-
 import exceptions.Excepciones;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

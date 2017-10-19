@@ -15,22 +15,23 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  *
  * @author ggiorgi
  */
-public class EstrategiaPeriodicidad implements EstrategiaCalculoComision{
-    
+public class EstrategiaPeriodicidad implements EstrategiaCalculoComision {
+
     @Override
     public Double obtenerValorComision(Operacion operacion) {
-       
-       String tipoPeriodicidad = "";
-       Double porcentajeComision = 0.0;
-       Double comisionCalculada;
-       Double importeOperacionPagado;
-      
-       List<DetalleOperacion> listDetallesOp = operacion.getDetalleOperacionList() ;
-       for (DetalleOperacion detalleOp : listDetallesOp){
-          //if (detalleOp.getItemEmpresaTipoImpuesto().isIndicaPeriodicidadItemEmpresaTipoImpuesto()){
-              tipoPeriodicidad = detalleOp.getValorDetalleOperacion().toLowerCase();
-          //}
-       }
+
+        String tipoPeriodicidad = "";
+        Double porcentajeComision = 0.0;
+        Double comisionCalculada;
+        Double importeOperacionPagado;
+
+        List<DetalleOperacion> listDetallesOp = operacion.getDetalleOperacionList();
+        for (DetalleOperacion detalleOp : listDetallesOp) {
+
+            if (detalleOp.getItemEmpresaTipoImpuesto().getItem().getNombreItem().equals("Periodicidad")) {
+                tipoPeriodicidad = detalleOp.getValorDetalleOperacion().toLowerCase();
+            }
+        }
         List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", null);
         ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad;
         parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad) parametros.get(0);
@@ -63,11 +64,13 @@ public class EstrategiaPeriodicidad implements EstrategiaCalculoComision{
             case "15":
                 porcentajeComision = parametrosCalculoPeriodicidad.getQuincenalPCPeriodicidad();
                 break;
-                default: porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
+            default:
+                porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
 
         }
         importeOperacionPagado = operacion.getImportePagadoOperacion();
         comisionCalculada = importeOperacionPagado * porcentajeComision;
         return comisionCalculada;
+
     }
 }

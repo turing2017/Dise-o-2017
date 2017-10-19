@@ -7,6 +7,7 @@ package sistemapagoimpuestos.Controller;
 
 import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
+import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
@@ -27,8 +28,8 @@ public class ControladorPagarImpuestos {
 
     public ControladorPagarImpuestos() {
     }
-
-    public void validadarUsuario() {
+    
+      public void validadarUsuario() {
         try {
             experto.validarUsuario();
             IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();

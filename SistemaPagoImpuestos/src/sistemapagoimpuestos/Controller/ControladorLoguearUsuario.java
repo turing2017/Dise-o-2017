@@ -8,6 +8,7 @@ import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
+import sistemapagoimpuestos.View.Empresa.Principal.IUPantallaEmpresa;
 import sistemapagoimpuestos.View.Login.IULogin;
 import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 
@@ -44,6 +45,17 @@ public class ControladorLoguearUsuario {
             case "Cliente":
                 ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
                 cpi.validadarUsuario();
+                break;
+            case "Empresa":
+                IUPantallaEmpresa pe = new IUPantallaEmpresa();
+                pe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                pe.setLocationRelativeTo(null);
+                pe.mostrarPantallaPrincipal();
+                pe.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent ev) {
+                    }
+                });
                 break;
         }
     }

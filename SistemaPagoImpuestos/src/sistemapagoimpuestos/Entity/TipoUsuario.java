@@ -19,9 +19,6 @@ public class TipoUsuario extends Entity {
         this.nombreTipoUsuario = nombreTipoUsuario;
         this.fechaHoraInhabilitacionTipoUsuario = fechaHoraInhabilitacionTipoUsuario;
     }
-
-
-
     public void setNombreTipoUsuario(String nombreTipoUsuario) {
         this.nombreTipoUsuario = nombreTipoUsuario;
     }

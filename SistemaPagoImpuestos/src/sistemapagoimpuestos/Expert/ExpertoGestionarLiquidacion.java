@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 import java.util.ArrayList;
@@ -35,18 +36,21 @@ import sistemapagoimpuestos.Dto.DTOComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Entity.Comision;
 import sistemapagoimpuestos.Entity.Operacion;
+import sistemapagoimpuestos.Globals.GlobalVars;
 
 /**
  *
  * @author facun
  */
 public class ExpertoGestionarLiquidacion {
-
-    // Metodo iniciar
-    public String iniciar() {
-        return "Administrador";
-    }
-
+    
+    
+   public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
+    }    
+    
     public void consultarLiquidacion() {
 
     }
@@ -597,4 +601,5 @@ public class ExpertoGestionarLiquidacion {
 
         return estados;
     }
+
 }

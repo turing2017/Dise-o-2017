@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +20,7 @@ import sistemapagoimpuestos.Entity.LiquidacionEstado;
 import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Estrategias.EstrategiaCalculoComision;
 import sistemapagoimpuestos.Fabricas.FabricaEstrategias;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -26,6 +28,12 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  * @author Gabriel
  */
 public class ExpertoCalcularLiquidaciones {
+
+    public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
+    }
 
     public ArrayList<DTOAccionesSistema> iniciar(ArrayList<DTOAccionesSistema> dtosAccionesSistema) {
 
@@ -51,15 +59,15 @@ public class ExpertoCalcularLiquidaciones {
         criterios.add(criterio1);
         List<Object> listLiquidacionEstado = FachadaPersistencia.getInstance().buscar("LiquidacionEstado", criterios);
 
-         
-            for (Object objlistLiquidacion : listLiquidacionEstado) {
+        for (Object objlistLiquidacion : listLiquidacionEstado) {
             LiquidacionEstado liquidacionEstado = (LiquidacionEstado) objlistLiquidacion;
             Date fechaHasta = liquidacionEstado.getFechaHoraHastaLiquidacionEstado();
             if (fechaHasta == null) {
-                cantidadAnuladas++;}}
-            
-            dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN LIQUIDACIONES EN ESTADO ANULADA", "Existen " + cantidadAnuladas + " liquidaciones a recalcular.", new Date()));
-        
+                cantidadAnuladas++;
+            }
+        }
+
+        dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN LIQUIDACIONES EN ESTADO ANULADA", "Existen " + cantidadAnuladas + " liquidaciones a recalcular.", new Date()));
 
         //por cada liquidacion Estado
         for (Object objlistLiquidacion : listLiquidacionEstado) {
@@ -68,7 +76,7 @@ public class ExpertoCalcularLiquidaciones {
             Date fechaHasta = liquidacionEstado.getFechaHoraHastaLiquidacionEstado();
             // alt si fechaHoraHastaLiquidacion is null
             if (fechaHasta == null) {
-               
+
                 //Busco la liquidacion que tenga ese LiquidacionEstado
                 List<Object> liquidaciones = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
 
@@ -388,4 +396,5 @@ public class ExpertoCalcularLiquidaciones {
 
         return dtosAccionesSistema;
     }
+
 }

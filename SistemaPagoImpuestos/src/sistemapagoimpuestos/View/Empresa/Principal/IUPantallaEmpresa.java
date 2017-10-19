@@ -16,9 +16,8 @@ import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
  * @author Gabriel
  */
 public class IUPantallaEmpresa extends javax.swing.JFrame {
-    /**
-     * Creates new form IUPantallaEmpresa
-     */
+    ControladorConsultarLiquidacion controladorConsultarLiq = new ControladorConsultarLiquidacion();
+
     public IUPantallaEmpresa() {
         initComponents();
     }
@@ -35,7 +34,7 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        buttonConsultarLiquidacion = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         label_fecha1 = new javax.swing.JLabel();
         label_nombre1 = new javax.swing.JLabel();
@@ -48,11 +47,11 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
 
         jLabel1.setText("Bienvenido a Sistema de Pago de Impuestos");
 
-        jToggleButton2.setSelected(true);
-        jToggleButton2.setText("Consultar Liquidacion");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonConsultarLiquidacion.setSelected(true);
+        buttonConsultarLiquidacion.setText("Consultar Liquidacion");
+        buttonConsultarLiquidacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                buttonConsultarLiquidacionActionPerformed(evt);
             }
         });
 
@@ -75,7 +74,7 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToggleButton2)
+                        .addComponent(buttonConsultarLiquidacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label_nombre1)
@@ -90,7 +89,7 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jToggleButton2)
+                        .addComponent(buttonConsultarLiquidacion)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton3))
                     .addGroup(layout.createSequentialGroup()
@@ -104,10 +103,10 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
-        controlador.iniciar();
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    private void buttonConsultarLiquidacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultarLiquidacionActionPerformed
+        controladorConsultarLiq.validarUsuario();
+        this.dispose();
+    }//GEN-LAST:event_buttonConsultarLiquidacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,10 +143,10 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton buttonConsultarLiquidacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JLabel label_fecha1;
     private javax.swing.JLabel label_nombre1;

@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,75 +23,78 @@ import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUGestionarLiquidaci
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrar;
 import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.IUMostrarHistorialEstados;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
+import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 
 /**
  *
  * @author facun
  */
 public class ControladorGestionarLiquidacion {
-    
+
     private ExpertoGestionarLiquidacion experto = (ExpertoGestionarLiquidacion) FabricaExpertos.getInstancia().crearExperto("CU21");
-    
-      // Metodo iniciar
-    public void iniciar(){
-        if(experto.iniciar().equals("Administrador"))
-        {
-        IUGestionarLiquidacion pantallaPrincipal = new IUGestionarLiquidacion();
-        pantallaPrincipal.setVisible(true); 
-        }        
-    }
-    
-    
-public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
-        return  experto.obtenerTipoImpuestos();
-    }
-public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto){  
-        return  experto.obtenerEmpresarelacionadaATipoImpuesto( nombreTipoImpuesto);
+
+    public void validarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUGestionarLiquidacion UIGestionaLiquidacion = new IUGestionarLiquidacion();
+            UIGestionaLiquidacion.setVisible(true);
+
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
     }
 
-public List<DTOEmpresa> buscarEmpresas(){
+    public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos() {
+        return experto.obtenerTipoImpuestos();
+    }
+
+    public ArrayList<DTOEmpresa> obtenerEmpresarelacionadaATipoImpuesto(String nombreTipoImpuesto) {
+        return experto.obtenerEmpresarelacionadaATipoImpuesto(nombreTipoImpuesto);
+    }
+
+    public List<DTOEmpresa> buscarEmpresas() {
         List<DTOEmpresa> listado = experto.buscarEmpresas();
         return listado;
     }
 
-
-public ArrayList<DTOLiquidacion> buscarLiquidacion(){
+    public ArrayList<DTOLiquidacion> buscarLiquidacion() {
         return experto.obtenerLiquidacion();
-}
-        public void AprobarLiquidacion(String numeroLiquidacion) {
-             experto.AprobarLiquidacion(numeroLiquidacion);
-        
     }
-    
-public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto,String nombreEmpresa,Date fechaDesde,Date fechaHasta){
-        return experto.buscarLiquidacionConFiltro( nombreTipoImpuesto, nombreEmpresa, fechaDesde, fechaHasta);
-}
 
-public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
+    public void AprobarLiquidacion(String numeroLiquidacion) {
+        experto.AprobarLiquidacion(numeroLiquidacion);
+
+    }
+
+    public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
+        return experto.buscarLiquidacionConFiltro(nombreTipoImpuesto, nombreEmpresa, fechaDesde, fechaHasta);
+    }
+
+    public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion) {
         return experto.buscarOperaciones(numeroLiquidacion);
-}
+    }
 
-
-public  DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta,String estado){
- return experto.mostrar( numeroLiquidacion, fechaDesde, fechaHasta,estado);
-}
+    public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+        return experto.mostrar(numeroLiquidacion, fechaDesde, fechaHasta, estado);
+    }
 
     public void AnularLiquidacion(String nroLiquidacion) {
-         experto.AnularLiquidacion(nroLiquidacion);
+        experto.AnularLiquidacion(nroLiquidacion);
     }
 
-    
-public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion){
+    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion) {
 
-return experto.buscarLiquidacionEstado(numeroLiquidacion);
-        }
+        return experto.buscarLiquidacionEstado(numeroLiquidacion);
+    }
 
-public void pantallaIUmostrarHistorialEstados(String nliquidacion,String fechaliquidacion){
-    IUMostrarHistorialEstados mostrarHistorico = new IUMostrarHistorialEstados(nliquidacion, fechaliquidacion);
-}
+    public void pantallaIUmostrarHistorialEstados(String nliquidacion, String fechaliquidacion) {
+        IUMostrarHistorialEstados mostrarHistorico = new IUMostrarHistorialEstados(nliquidacion, fechaliquidacion);
+    }
 
-public void pantallaIUmostrar(String nliquidacion,Date fechaDesde,Date fechaHasta,String estado){
-    IUMostrar mostrar = new IUMostrar(nliquidacion, fechaDesde, fechaHasta, estado);
-}
+    public void pantallaIUmostrar(String nliquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+        IUMostrar mostrar = new IUMostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+    }
 
 }

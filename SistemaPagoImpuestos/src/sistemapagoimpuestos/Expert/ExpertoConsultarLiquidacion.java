@@ -28,12 +28,12 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 public class ExpertoConsultarLiquidacion {
 
-       public void validarUsuario() throws Exception {
-        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Empresa")) {
+    public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
             throw new ExcepcionGenerica("Error de privilegios");
         }
     }
-
+    
     // Metodo iniciar
     public String iniciar() {
         return "Empresa";

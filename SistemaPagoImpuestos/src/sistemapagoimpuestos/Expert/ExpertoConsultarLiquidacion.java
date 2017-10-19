@@ -25,31 +25,16 @@ import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
-/**
- *
- * @author Dario
- */
-public class ExpertoConsultarLiquidacion {
-   
-    Usuario usuario = new Usuario();
-    TipoUsuario uAdmin = new TipoUsuario(0, "Administrador", null);
-    TipoUsuario uCliente = new TipoUsuario(1, "Cliente", null);
-    TipoUsuario uEmpresa = new TipoUsuario(2, "Empresa", null);
 
-    
-    
+public class ExpertoConsultarLiquidacion {
+
        public void validarUsuario() throws Exception {
         if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Empresa")) {
             throw new ExcepcionGenerica("Error de privilegios");
         }
     }
-    
-    
-    public ExpertoConsultarLiquidacion() {
-        usuario.setTipoUsuario(uEmpresa);
-    }
-    // Metodo iniciar
 
+    // Metodo iniciar
     public String iniciar() {
         return "Empresa";
     }

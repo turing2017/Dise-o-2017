@@ -21,9 +21,9 @@
            <column name="fechaHoraUltimoIngresoSistemaUsuario"/>
        </property>
         
-        <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoUsuario" column="OIDTipoUsuario" not-null="true"/>
-        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="false"/>
-        <one-to-one name="cliente" class="sistemapagoimpuestos.Entity.Cliente" cascade="save-update"></one-to-one>
+        <many-to-one name="tipoUsuario" class="sistemapagoimpuestos.Entity.TipoUsuario" column="OIDTipoUsuario" not-null="true" fetch="join"/>
+        <many-to-one name="empresa" class="sistemapagoimpuestos.Entity.Empresa" column="OIDEmpresa" not-null="false" fetch="join"/>
+        <many-to-one name="cliente" class="sistemapagoimpuestos.Entity.Cliente" column="OIDCliente" not-null="false" fetch="join"/>
    
     </class>
 </hibernate-mapping>

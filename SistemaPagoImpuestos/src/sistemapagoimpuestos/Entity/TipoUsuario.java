@@ -9,24 +9,15 @@ import java.util.Date;
 public class TipoUsuario extends Entity {
     
     // Atributos propios de la clase
-    private int codigoTipoUsuario;
     private String nombreTipoUsuario;
     private Date fechaHoraInhabilitacionTipoUsuario;
 
     public TipoUsuario() {
     }
 
-    public TipoUsuario(int codigoTipoUsuario, String nombreTipoUsuario, Date fechaHoraInhabilitacionTipoUsuario) {
-        this.codigoTipoUsuario = codigoTipoUsuario;
+    public TipoUsuario(String nombreTipoUsuario, Date fechaHoraInhabilitacionTipoUsuario) {
         this.nombreTipoUsuario = nombreTipoUsuario;
         this.fechaHoraInhabilitacionTipoUsuario = fechaHoraInhabilitacionTipoUsuario;
-    }
-
-
-
-    // Setters
-    public void setCodigoTipoUsuario(int codigoTipoUsuario) {
-        this.codigoTipoUsuario = codigoTipoUsuario;
     }
 
     public void setNombreTipoUsuario(String nombreTipoUsuario) {
@@ -37,11 +28,6 @@ public class TipoUsuario extends Entity {
         this.fechaHoraInhabilitacionTipoUsuario = fechaHoraInhabilitacionTipoUsuario;
     }
     
-    // Getters
-    public int getCodigoTipoUsuario() {
-        return codigoTipoUsuario;
-    }
-
     public String getNombreTipoUsuario() {
         return nombreTipoUsuario;
     }

@@ -9,6 +9,8 @@ import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
+import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -61,38 +63,31 @@ public class ControladorPagarImpuestos {
         }
     }
 
-    public void seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres) {
+    public List<DTOComprobantePantalla> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres) {
         try {
-            IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(
-                    experto.seleccionarEmpresa(
-                            nombreEmpresaIng,
-                            codigoPagoElectronicoIngres));
-            if (experto.isMontoEditable()) {
-                pantallaComprobantes.setearEditable();
-            } else {
-
-            }
-            pantallaComprobantes.setVisible(true);
-        } catch (ExcepcionGenerica e) {
-            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
+            return experto.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres);
         } catch (Exception e) {
             Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "No se encontró comprobantes de pago.");
             validadarUsuario();
+            return null;
         }
+    }
+    
+    public void mostrarPantallaComprobantes(List<DTOComprobantePantalla> listaComprobantePantalla){
+        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(listaComprobantePantalla);
+        pantallaComprobantes.setVisible(true);
     }
     
     public boolean isMontoEditable() throws Exception {
         return experto.isMontoEditable();
     }
 
-    public void obtenerCuentas(String cuilCliente, IUPagarImpuestoComprobantes pantallaComprobantes) {
+    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
         try {
-            IUPagarImpuestoCuentas pantallaCuentas = new IUPagarImpuestoCuentas(experto.obtenerCuentas(cuilCliente), pantallaComprobantes);
-            pantallaCuentas.setVisible(true);
-        } catch (ExcepcionGenerica e) {
-            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
+            return experto.obtenerCuentas(cuilCliente);
         } catch (Exception e) {
             Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al conectar el sistema");
+            return null;
         }
     }
 

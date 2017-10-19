@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
+import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.View.Login.IULogin;
@@ -182,7 +183,8 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBox_tipoImpuestoActionPerformed
 
     private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
-        controlador.seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
+        List<DTOComprobantePantalla> listadoComprobantePantalla = controlador.seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
+        controlador.mostrarPantallaComprobantes(listadoComprobantePantalla);
         this.dispose();
     }//GEN-LAST:event_button_buscarActionPerformed
 

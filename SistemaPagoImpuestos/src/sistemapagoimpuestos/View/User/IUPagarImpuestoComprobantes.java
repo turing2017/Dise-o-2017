@@ -55,6 +55,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     public IUPagarImpuestoComprobantes(List<DTOComprobantePantalla> listadoDTOComprobantePantalla) {
         initComponents();
         cargarTablaComprobantes(listadoDTOComprobantePantalla);
+        cargarTablaCuentas(controlador.obtenerCuentas(GlobalVars.userActive.getCliente().getCuilCuitCliente()));
         try {
             // Verifico si es monto editable
             textfield_monto_a_pagar.setEditable(controlador.isMontoEditable());
@@ -102,6 +103,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         button_pagar = new javax.swing.JButton();
         text_monto_a_pagar = new javax.swing.JLabel();
         textfield_monto_a_pagar = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla_cuentas = new javax.swing.JTable();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -171,64 +174,91 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         });
 
+        tabla_cuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tabla_cuentas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(text_cbu)
-                            .addComponent(text_monto_a_pagar)
-                            .addComponent(txt_tipo_cuenta))
-                        .addGap(82, 82, 82)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(button_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(title_cuenta_select)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(text_cbu)
+                                    .addComponent(text_monto_a_pagar)
+                                    .addComponent(txt_tipo_cuenta))
+                                .addGap(82, 82, 82)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_out_cbu)
+                                    .addComponent(lbl_out_tipo_Cuenta)
+                                    .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 414, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_out_cbu)
-                            .addComponent(lbl_out_tipo_Cuenta)
-                            .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btn_Selec_Cuenta)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(272, 272, 272))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(button_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(title_cuenta_select))
-                .addContainerGap(51, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(btn_Selec_Cuenta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_Selec_Cuenta)
-                .addGap(16, 16, 16)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(title_cuenta_select)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_tipo_cuenta)
                     .addComponent(lbl_out_tipo_Cuenta))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text_cbu)
                     .addComponent(lbl_out_cbu))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(button_pagar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btn_cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(btn_Selec_Cuenta)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -236,7 +266,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_Selec_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Selec_CuentaActionPerformed
-        controlador.obtenerCuentas(GlobalVars.userActive.getCliente().getCuilCuitCliente(), this);
+        controlador.obtenerCuentas(GlobalVars.userActive.getCliente().getCuilCuitCliente());
     }//GEN-LAST:event_btn_Selec_CuentaActionPerformed
 
     private void button_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_pagarActionPerformed
@@ -396,6 +426,57 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_comprobantes.getColumnModel().getColumn(1).setCellRenderer(r);
     }
 
+    // Método para cargar los cuentas en la tabla
+    public void cargarTablaCuentas(List<DTOCuentaBancaria> ListaCuentaBancaria) {
+
+        // Muestro los datos en la tabla
+        String[] columnas = {"CBU", "Tipo de Cuenta", "Saldo"};
+        
+        // Creo el modelo
+        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
+            
+            // Sobreescribo el método para no permitir editar la tabla
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+    
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return String.class;
+                    case 1:
+                        return String.class;
+                    case 2:
+                        return double.class;
+                    default:
+                        return null;
+                }
+            }
+
+        };
+
+        for (DTOCuentaBancaria dtoCuenta : ListaCuentaBancaria) {
+            Vector<Object> vect = new Vector<>();
+            vect.add(dtoCuenta.getCbuCuentaBancaria());
+            vect.add(dtoCuenta.getNombreTipoCuenta());
+            vect.add(dtoCuenta.getSaldoRecuperado());
+            dtm.addRow(vect);
+        }
+
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
+        tabla_cuentas.setModel(dtm);
+        tabla_cuentas.getColumnModel().getColumn(0).setCellRenderer(r);
+        tabla_cuentas.getColumnModel().getColumn(1).setCellRenderer(r);
+    }
+    
     public void setLbl_out_cbu(String cbu) {
         this.lbl_out_cbu.setText(cbu);
     }
@@ -416,9 +497,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_out_cbu;
     private javax.swing.JLabel lbl_out_tipo_Cuenta;
     private javax.swing.JTable tabla_comprobantes;
+    private javax.swing.JTable tabla_cuentas;
     private javax.swing.JLabel text_cbu;
     private javax.swing.JLabel text_monto_a_pagar;
     private javax.swing.JTextField textfield_monto_a_pagar;

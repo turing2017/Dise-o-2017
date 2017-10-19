@@ -1,5 +1,4 @@
 package sistemapagoimpuestos.Expert;
-
 import exceptions.Excepciones;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -9,14 +8,13 @@ import java.util.Date;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorLoguearUsuario;
 import sistemapagoimpuestos.Dto.DTOCriterio;
-import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.Cliente.IUPantallaCliente;
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
-import sistemapagoimpuestos.View.Empresa.Principal.IUPantallaEmpresa;
 import sistemapagoimpuestos.View.Login.IULogin;
 
 /**
@@ -35,108 +33,21 @@ public class ExpertoLoguearUsuario {
         return "Administrador";
     }
 
-    public DTOUsuario buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
-        DTOUsuario dtoUsuario = new DTOUsuario();
+    public void buscarUsuario(String nombreUsuarioIngres, String passwordUsuarioIngres) {
+
         try {
+            List<DTOCriterio> criteriosList = new ArrayList<>();
+            criteriosList.add(new DTOCriterio("nombreUsuario","=", nombreUsuarioIngres));
+            criteriosList.add(new DTOCriterio("passwordUsuario","=", passwordUsuarioIngres));
+            criteriosList.add(new DTOCriterio("fechaHoraInhabilitacionUsuario","IS", null));
+            GlobalVars.userActive = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criteriosList).get(0);
+            GlobalVars.userActive.setFechaHoraUltimoIngresoSistemaUsuario(new Date());
+            FachadaPersistencia.getInstance().guardar(GlobalVars.userActive);
             
-            List<DTOCriterio> criteriosUsuario = new ArrayList<>();
-            List<DTOCriterio> criteriosTipoUsuario = new ArrayList<>();
-
-            DTOCriterio criterio1 = new DTOCriterio();
-            criterio1.setAtributo("nombreUsuario");
-            criterio1.setOperacion("=");
-            criterio1.setValor(nombreUsuarioIngres);
-
-            DTOCriterio criterio2 = new DTOCriterio();
-            criterio2.setAtributo("passwordUsuario");
-            criterio2.setOperacion("=");
-            criterio2.setValor(passwordUsuarioIngres);
-
-            DTOCriterio criterio3 = new DTOCriterio();
-            criterio3.setAtributo("fechaHoraInhabilitacionUsuario");
-            criterio3.setOperacion("IS");
-            criterio3.setValor(null);
-
-            criteriosUsuario.add(criterio1);
-            criteriosUsuario.add(criterio2);
-            criteriosUsuario.add(criterio3);
-
-            Usuario usuario = (Usuario) FachadaPersistencia.getInstance().buscar("Usuario", criteriosUsuario).get(0);
-            String tipoUsuarioEncontrado = usuario.tipoUsuario.getNombreTipoUsuario();
-            Date dateFechaUltimoAcceso = (Date) usuario.getFechaHoraUltimoIngresoSistemaUsuario();
-            
-          
-            if (dateFechaUltimoAcceso == null) {
-                fechaHoraInhabilitacionUsuarioEncontrada = "Sin último acceso";              
-            } else {
-                fechaHoraInhabilitacionUsuarioEncontrada = dateFechaUltimoAcceso.toString();
-            }            
-                                  
-            //Criterio para buscar el tipo de usuario del usuario encontrado
-            DTOCriterio criterio4 = new DTOCriterio();
-            criterio4.setAtributo("nombreTipoUsuario");
-            criterio4.setOperacion("=");
-            criterio4.setValor(tipoUsuarioEncontrado);
-
-            DTOCriterio criterio5 = new DTOCriterio();
-            criterio5.setAtributo("fechaHoraInhabilitacionTipoUsuario");
-            criterio5.setOperacion("IS");
-            criterio5.setValor(null);
-
-            criteriosTipoUsuario.add(criterio4);
-            criteriosTipoUsuario.add(criterio5);
-
-            TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criteriosTipoUsuario).get(0);
-            String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
-            
-            //Setear la fecha de nuevo ingreso en la BD, obviamente no se ve reflejada hasta el proximo inicio.
-            usuario.setFechaHoraUltimoIngresoSistemaUsuario(new Date());
-            FachadaPersistencia.getInstance().guardar(usuario);
-
-          
-            if (nombreTipoUsuario.equals("Administrador")) {
-                 dtoUsuario = new DTOUsuario(usuario.getNombreUsuario(), null, null, dateFechaUltimoAcceso, nombreTipoUsuario, null);
-             //   public DTOUsuario(String nombreDTOUsuario, String passwordDTOUsuario, Date fechaHoraInhabilitacionDTOUsuario, Date fechaHoraUltimoIngresoSistemaDTOUsuario, String tipoUsuarioDTOUsuario, String empresaDTOUsuario) {
-
-                IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
-                pp.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pp.setLocationRelativeTo(null);
-                pp.mostrarPantallaPrincipal(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada);
-                pp.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent ev) {
-                    }
-                });
-            }
-            if (nombreTipoUsuario.equals("Empresa")) {
-                dtoUsuario = new DTOUsuario(usuario.getNombreUsuario(), null, null, dateFechaUltimoAcceso, nombreTipoUsuario, usuario.getEmpresa().getCuitEmpresa());
-                IUPantallaEmpresa pe = new IUPantallaEmpresa();
-                pe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pe.setLocationRelativeTo(null);
-                pe.mostrarPantallaPrincipal(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada, dtoUsuario);
-                pe.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent ev) {
-                    }
-                });
-            } else {
-                dtoUsuario = new DTOUsuario(usuario.getNombreUsuario(), null, null, dateFechaUltimoAcceso, nombreTipoUsuario, null);
-                IUPantallaCliente pc = new IUPantallaCliente();
-                pc.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                pc.setLocationRelativeTo(null);
-                pc.mostrarPantallaCliente(nombreUsuarioIngres, fechaHoraInhabilitacionUsuarioEncontrada);
-                pc.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent ev) {
-                    }
-                });
-             
-            }
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("Codigo Ingresado No Encontrado");
             new Excepciones().datoNoEncontrado("Usuario");
 
         }
-           return dtoUsuario;
     }
 }

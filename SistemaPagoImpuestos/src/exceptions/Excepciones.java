@@ -15,6 +15,7 @@ import sistemapagoimpuestos.View.Errors.EmpresaCreada;
 import sistemapagoimpuestos.View.Errors.ModificacionExito;
 import sistemapagoimpuestos.View.Errors.ObjetoNoSeleccionado;
 import sistemapagoimpuestos.View.Errors.ErrorDatoNoValido;
+import sistemapagoimpuestos.View.Errors.ErrorGenerico;
 import sistemapagoimpuestos.View.Errors.UsuarioNoValido;
 
 /**
@@ -77,6 +78,13 @@ public class Excepciones extends Exception{
         unv.setLabel_Titulo("Usuario Incorrecto");
         unv.setField_Error("No tiene la autorizacion para realizar esta operación");
         unv.setVisible(true);
+    }
+    
+    public void errorGenerico(String titulo, String mensaje){
+        ErrorGenerico eg = new ErrorGenerico();
+        eg.setLabel_title(titulo);
+        eg.setLabel_mensaje(mensaje);
+        eg.setVisible(true);
     }
     
     public void datoNoEncontrado(String dato){

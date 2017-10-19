@@ -31,10 +31,10 @@ import sistemapagoimpuestos.Dto.DTOUsuario;
  */
 public class IUConsultarLiquidacion extends javax.swing.JFrame {
 
-    public IUConsultarLiquidacion(DTOUsuario usuario) {
+    public IUConsultarLiquidacion() {
         initComponents();
         ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
-        ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = controlador.obtenerTipoImpuestos(usuario);
+        ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = controlador.obtenerTipoImpuestos();
         jTextFieldNombreEmpresa.setText(listDTOEmpresaTipoImpuesto.get(0).getdTOempresa().getNombreEmpresa());
         jTextFieldNombreEmpresa.setEnabled(false);
         jComboBoxTipoImpuesto.addItem("Todos");
@@ -59,11 +59,6 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
        for(DTOEmpresa obj : listDtoDTOEmpresa){
             jComboBoxEmpresa.addItem(obj.getNombreEmpresa());} */    
     }
-
-    private IUConsultarLiquidacion() {
-     //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

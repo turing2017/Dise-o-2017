@@ -7,6 +7,7 @@ package sistemapagoimpuestos.View.Empresa.Principal;
 
 import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOUsuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 
@@ -15,7 +16,6 @@ import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
  * @author Gabriel
  */
 public class IUPantallaEmpresa extends javax.swing.JFrame {
-    static DTOUsuario usuario;
     /**
      * Creates new form IUPantallaEmpresa
      */
@@ -106,8 +106,7 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
-        System.out.println(usuario.getEmpresaDTOUsuario());
-        controlador.iniciar(usuario);
+        controlador.iniciar();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     /**
@@ -154,11 +153,11 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
     private javax.swing.JLabel label_nombre1;
     // End of variables declaration//GEN-END:variables
 
-    public void mostrarPantallaPrincipal(String nombreUsuarioIngres, String fechaHoraInhabilitacionUsuarioEncontrada, DTOUsuario usuario1) {
+    public void mostrarPantallaPrincipal() {
         IUPantallaEmpresa pe = new IUPantallaEmpresa();
-        pe.label_fecha1.setText("Nombre Usuario: " + nombreUsuarioIngres );
-        pe.label_nombre1.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
-        usuario = usuario1;
-        MetodosPantalla.getInstance().setearPantalla(pe);
+        String fechaHoraInhabilitacionUsuarioEncontrada = (GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario() == null)?"Sin último acceso":GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString();        
+        pe.label_nombre1.setText("Nombre Usuario: " + GlobalVars.userActive.getNombreUsuario());
+        pe.label_fecha1.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
+        MetodosPantalla.getInstance().setearPantalla(this);
     }
 }

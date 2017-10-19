@@ -21,9 +21,9 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
 public class DecoradorConsultarLiquidacion extends ExpertoConsultarLiquidacion {
     
    @Override
-   public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos(DTOUsuario usuario) {
+   public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos() {
         FachadaInterna.getInstance().iniciarTransaccion();
-        ArrayList<DTOEmpresaTipoImpuesto> listDtos = super.obtenerTipoImpuestos(usuario); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<DTOEmpresaTipoImpuesto> listDtos = super.obtenerTipoImpuestos(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return listDtos;
     }

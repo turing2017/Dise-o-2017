@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,7 @@ import sistemapagoimpuestos.Entity.LiquidacionEstado;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -34,6 +36,15 @@ public class ExpertoConsultarLiquidacion {
     TipoUsuario uCliente = new TipoUsuario(1, "Cliente", null);
     TipoUsuario uEmpresa = new TipoUsuario(2, "Empresa", null);
 
+    
+    
+       public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Empresa")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
+    }
+    
+    
     public ExpertoConsultarLiquidacion() {
         usuario.setTipoUsuario(uEmpresa);
     }
@@ -43,9 +54,9 @@ public class ExpertoConsultarLiquidacion {
         return "Empresa";
     }
 
-    public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos(DTOUsuario usuario) {
+    public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos() {
         //Buscamos la empresa com el cuit del usuario.
-        String cuit = usuario.getEmpresaDTOUsuario();
+        String cuit =   GlobalVars.userActive.getEmpresa().getCuitEmpresa();
         String nombreEmpresa;
         List<DTOCriterio> criterios = new ArrayList();
         criterios.add(new DTOCriterio("cuitEmpresa", "=", cuit));

@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOComprobante;
@@ -14,6 +16,7 @@ import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoComprobantes;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoCuentas;
 
@@ -26,6 +29,19 @@ public class ControladorPagarImpuestos {
     private ExpertoPagarImpuestos experto = (ExpertoPagarImpuestos) FabricaExpertos.getInstancia().crearExperto("CU02");
 
     public ControladorPagarImpuestos() {
+    }
+    
+      public void validadarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUPagarImpuesto iUPagarImpuesto = new IUPagarImpuesto();
+            iUPagarImpuesto.setVisible(true);
+            
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es cliente");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
     }
 
     // Método para recuperar los Tipo de Impuestos

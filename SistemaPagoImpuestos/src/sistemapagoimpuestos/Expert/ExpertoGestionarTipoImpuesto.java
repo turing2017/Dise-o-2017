@@ -1,5 +1,6 @@
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,24 +10,16 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import static sistemapagoimpuestos.Utils.Utils.existeDato;
 
 public class ExpertoGestionarTipoImpuesto {
     
-    Usuario usuario = new Usuario();
-    
-    // Metodo iniciar
-    public String iniciar(){
-        
-        
-        /*TipoUsuario tipoUsuario = usuario.getTipoUsuario();
-        String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
-        System.out.println("1");
-        if (nombreTipoUsuario != "Adminstrador") {
-            System.out.println("Debe ser Cliente para realizar esta acción");
-        }*/
-        return "Administrador";        
+    public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
     }
     
     // Metodo nuevoTipoImpuesto (crea un tipoImpuesto)

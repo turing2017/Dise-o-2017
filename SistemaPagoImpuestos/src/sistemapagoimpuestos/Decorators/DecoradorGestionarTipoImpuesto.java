@@ -24,13 +24,11 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
 
     public DecoradorGestionarTipoImpuesto() {
     }
-
     @Override
-    public String iniciar() {
+    public void validarUsuario()  throws Exception {
         FachadaInterna.getInstance().iniciarTransaccion();
-        String role = super.iniciar(); //To change body of generated methods, choose Tools | Templates.
+        super.validarUsuario(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
-        return role;
     }
 
     @Override

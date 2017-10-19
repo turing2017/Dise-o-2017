@@ -170,8 +170,8 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         });
     }
 
-    public void iniciar() {
-        controlador.iniciar();
+    public void validadarUsuario() {
+        controlador.validarUsuario();
     }
 
     public void obtenerTipoImpuestos() {

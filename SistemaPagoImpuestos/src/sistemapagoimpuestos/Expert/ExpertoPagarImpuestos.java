@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +34,7 @@ import sistemapagoimpuestos.Entity.TipoCuenta;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionBanco;
 import sistemapagoimpuestos.Fabricas.FactoriaAdaptadorConexionEmpresa;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 /**
@@ -45,6 +47,11 @@ public class ExpertoPagarImpuestos {
     private AdaptadorBancoGalicia adaptadorBanco;
     private TipoImpuesto tipoImpuesto;
     
+       public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Cliente")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
+    }
         // Método para recuperar los TipoDatoItem
         public List<DTOTipoImpuesto> buscarTipoImpuestos(){
             //Busqueda de todos los TipoImpuesto (sin criterios)

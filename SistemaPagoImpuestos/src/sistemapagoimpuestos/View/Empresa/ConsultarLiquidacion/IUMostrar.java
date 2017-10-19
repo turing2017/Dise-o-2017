@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Utils.Printer;
-import sistemapagoimpuestos.Utils.PrinterPDF;
+
 
 /**
  *

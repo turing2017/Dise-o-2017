@@ -27,12 +27,12 @@ public class ControladorConsultarLiquidacion {
     public ControladorConsultarLiquidacion() {
     }
       // Metodo iniciar
-    public void iniciar(DTOUsuario usuario){
-      IUConsultarLiquidacion consultarLiquidacionIU = new IUConsultarLiquidacion(usuario);
+    public void iniciar(){
+      IUConsultarLiquidacion consultarLiquidacionIU = new IUConsultarLiquidacion();
     }
 
-    public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos(DTOUsuario usuario) {
-        return experto.obtenerTipoImpuestos(usuario);
+    public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos() {
+        return experto.obtenerTipoImpuestos();
     }
 
     public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {

@@ -45,14 +45,14 @@ public class IUMostrar extends javax.swing.JDialog {
         jLabelPeriodo2.setText(fechaHasta.toString());}
         DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
         Double montoTotal = 0.0;
-        for (int i = 0; i < liquidacion.getListComision().size(); i++) {
+        for (int i = 0; i < liquidacion.getListOperacionComision().size(); i++) {
             model.addRow(new Object[]{});
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNumeroOperacion(), i, 0);
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNroComprobanteFactura(), i, 1);
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getValorComision(), i, 2);
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getImportePagadoOperacion(), i, 3);
-             System.out.println(liquidacion.getListComision().get(i).getValorComision());
-            montoTotal= liquidacion.getListComision().get(i).getValorComision() +montoTotal;
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getNumeroOperacion(), i, 0);
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 1);
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getValorComision(), i, 2);
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 3);
+             System.out.println(liquidacion.getListOperacionComision().get(i).getValorComision());
+            montoTotal= liquidacion.getListOperacionComision().get(i).getValorComision() +montoTotal;
         }
        System.out.println(montoTotal);
        jTextFieldMontoTotal.setText(montoTotal.toString());

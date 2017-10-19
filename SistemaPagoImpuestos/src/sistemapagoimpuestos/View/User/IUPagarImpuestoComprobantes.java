@@ -29,6 +29,7 @@ import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOItemComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Globals.GlobalVars;
 
@@ -333,8 +334,8 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         columnList.add("Monto Total");
         columnList.add("Vencimiento");
 
-        for (DTOItem item : listaComprobantesPantalla.get(0).getAtributosAdicionalesDTOComprobante()) {
-            columnList.add(item.getNombreItem());
+        for (DTOItemComprobantePantalla dtoicp : listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante()) {
+            columnList.add(dtoicp.getNombreItem());
         }
         Object[] columnas = columnList.toArray();
 
@@ -369,13 +370,13 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         for (DTOComprobantePantalla dtoComprobante : listaComprobantesPantalla) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoComprobante.getNumeroFactura());
-            vect.add(dtoComprobante.getCodigoDTOComprobante());
-            vect.add(dtoComprobante.getMontoTotalDTOComprobante());
-            vect.add(format.format(dtoComprobante.getFechaHoraVencimientoDTOComprobante()));
+            vect.add(dtoComprobante.getCodigoComprobante());
+            vect.add(dtoComprobante.getMontoTotalComprobante());
+            vect.add(format.format(dtoComprobante.getFechaHoraVencimientoComprobante()));
 
             String atribAdic = "";
-            List<DTOItem> listadoItems = dtoComprobante.getAtributosAdicionalesDTOComprobante();
-            for (DTOItem item : listadoItems) {
+            List<DTOItemComprobantePantalla> listadoItems = dtoComprobante.getAtributosAdicionalesComprobante();
+            for (DTOItemComprobantePantalla item : listadoItems) {
                 vect.add(item.getItemVal());
             }
             dtm.addRow(vect);

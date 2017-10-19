@@ -16,6 +16,7 @@ import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOComprobanteUnico;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOItemComprobante;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
@@ -48,42 +49,43 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
         List<Claro> listClaro = claroWs.buscarComprobantesCodigoClaro(codigoPagoElectronicoIngres);
         for (Claro claro : listClaro) {
             DTOComprobante comprobante = new DTOComprobante();
-            comprobante.setCodigoDTOComprobante(claro.getCodigo());
-            comprobante.setFechaHoraVencimientoDTOComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
-            comprobante.setMontoTotalDTOComprobante(claro.getMontoTotal());
+            comprobante.setCodigoComprobante(claro.getCodigo());
+            comprobante.setFechaHoraVencimientoComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
+            comprobante.setMontoTotalComprobante(claro.getMontoTotal());
             comprobante.setNumeroFactura(claro.getNroFactura());
-            comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, claro));
+            comprobante.setAtributosAdicionalesComprobante(buscarItems(empresaTipoImpuesto, claro));
             dTOComprobanteList.add(comprobante);
         }
         return dTOComprobanteList;
 
     }
 
-    public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Claro claro) throws Exception {
+    public List<DTOItemComprobante> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Claro claro) throws Exception {
         List<DTOCriterio> criterioList = new ArrayList<>();
         criterioList.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         List<Object> itemEmpresaTipoImpuesto = FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioList);
-        List<DTOItem> dTOItems = new ArrayList<>();
+        List<DTOItemComprobante> dTOItemsComprobanteList = new ArrayList<>();
         for (Object object : itemEmpresaTipoImpuesto) {
             ItemEmpresaTipoImpuesto ieti = (ItemEmpresaTipoImpuesto) object;
-            DTOItem dTOItem = new DTOItem().ConvertDto((Item) ieti.getItem());
-            dTOItems.add(dTOItem);
+            DTOItemComprobante dTOItemComprobante = new DTOItemComprobante();
+            dTOItemComprobante.setItem(ieti.getItem());
             switch (ieti.getItem().getNombreItem()) {
                 case "Nombre Servicio":
-                    dTOItem.setItemVal(claro.getNombreServicio());
+                    dTOItemComprobante.setValue(claro.getNombreServicio());
                     break;
                 case "Status":
-                    dTOItem.setItemVal(claro.getStatus());
+                    dTOItemComprobante.setValue(claro.getStatus());
                     break;
                 case "Numero de Telefono":
-                    dTOItem.setItemVal(claro.getNroTelefono().toString());
+                    dTOItemComprobante.setValue(claro.getNroTelefono().toString());
                     break;
                 case "Monto Minimo":
-                    dTOItem.setItemVal(claro.getMontoMinimo().toString());
+                    dTOItemComprobante.setValue(claro.getMontoMinimo().toString());
                     break;
             }
+            dTOItemsComprobanteList.add(dTOItemComprobante);
         }
-        return dTOItems;
+        return dTOItemsComprobanteList;
     }
 
     @Override

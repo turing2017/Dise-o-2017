@@ -16,6 +16,8 @@ import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOItemComprobante;
+import sistemapagoimpuestos.Dto.DTOItemComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.CuentaBancaria;
@@ -48,67 +50,73 @@ public class ExpertoPagarImpuestos {
     }
 
     public List<DTOTipoImpuesto> buscarTipoImpuestos() throws Exception {
-            List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
-            criterioTipoImpuesto.add(new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "IS", null));
-            List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
-            List<DTOTipoImpuesto> lista = new ArrayList<>();
-            DTOTipoImpuesto dtoTipoImpuesto;
+        List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
+        criterioTipoImpuesto.add(new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "IS", null));
+        List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
+        List<DTOTipoImpuesto> lista = new ArrayList<>();
+        DTOTipoImpuesto dtoTipoImpuesto;
 
-            for (int i = 0; i < tipoImpuestos.size(); i++) {
-                dtoTipoImpuesto = new DTOTipoImpuesto();
-                TipoImpuesto tipoImpuesto = (TipoImpuesto) tipoImpuestos.get(i);
-                String nombreTipoImpuesto = tipoImpuesto.getNombreTipoImpuesto();
-                dtoTipoImpuesto.setNombreDTOTipoImpuesto(nombreTipoImpuesto);
-                lista.add(dtoTipoImpuesto);
-            }
-            return lista;
+        for (int i = 0; i < tipoImpuestos.size(); i++) {
+            dtoTipoImpuesto = new DTOTipoImpuesto();
+            TipoImpuesto tipoImpuesto = (TipoImpuesto) tipoImpuestos.get(i);
+            String nombreTipoImpuesto = tipoImpuesto.getNombreTipoImpuesto();
+            dtoTipoImpuesto.setNombreDTOTipoImpuesto(nombreTipoImpuesto);
+            lista.add(dtoTipoImpuesto);
+        }
+        return lista;
     }
 
     public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto) throws Exception {
-            List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
-            criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
-            List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
-            TipoImpuesto tipoImpuesto = (TipoImpuesto) ti.get(0);
-            tipoImpuestoSeleccionado = tipoImpuesto;
+        List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
+        criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
+        List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
+        TipoImpuesto tipoImpuesto = (TipoImpuesto) ti.get(0);
+        tipoImpuestoSeleccionado = tipoImpuesto;
 
-            //Busca instancia de EmpresaTipoImpuesto, aplicando el tipo de impuesto como criterio
-            List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
-            criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
-            List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto);
-            List<DTOEmpresa> lista = new ArrayList<>();
-            DTOEmpresa dtoEmpresa;
-            for (int i = 0; i < eti.size(); i++) {
-                EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eti.get(i);
-                if (empresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa() == null) {
-                    dtoEmpresa = new DTOEmpresa();
-                    dtoEmpresa.setNombreEmpresa(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
-                    lista.add(dtoEmpresa);
-                }
-
+        //Busca instancia de EmpresaTipoImpuesto, aplicando el tipo de impuesto como criterio
+        List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
+        List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto);
+        List<DTOEmpresa> lista = new ArrayList<>();
+        DTOEmpresa dtoEmpresa;
+        for (int i = 0; i < eti.size(); i++) {
+            EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eti.get(i);
+            if (empresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa() == null) {
+                dtoEmpresa = new DTOEmpresa();
+                dtoEmpresa.setNombreEmpresa(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
+                lista.add(dtoEmpresa);
             }
-            return lista;
+
+        }
+        return lista;
     }
 
-
     public List<DTOComprobantePantalla> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres) throws Exception {
-            List<DTOCriterio> criterioList = new ArrayList();
-            criterioList.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
-            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterioList).get(0);
-            empresaSeleccionada = empresa;
-            criterioList.clear();
-            criterioList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
-            criterioList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
-            EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioList).get(0);
-            List<DTOComprobante> listadoComprobantes = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).consultarComprobantes(empresaTI, codigoPagoElectronicoIngres);
-            List<DTOComprobantePantalla> comprobantePantallas = new ArrayList<>();
-            for (DTOComprobante dtoComprobante : listadoComprobantes) {
-                comprobantePantallas.add(new DTOComprobantePantalla(dtoComprobante.getNumeroFactura(),
-                        dtoComprobante.getCodigoDTOComprobante(),
-                        dtoComprobante.getFechaHoraVencimientoDTOComprobante(),
-                        dtoComprobante.getMontoTotalDTOComprobante(),
-                        dtoComprobante.getAtributosAdicionalesDTOComprobante()));
+        List<DTOCriterio> criterioList = new ArrayList();
+        criterioList.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
+        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterioList).get(0);
+        empresaSeleccionada = empresa;
+        criterioList.clear();
+        criterioList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
+        criterioList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
+        EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioList).get(0);
+        List<DTOComprobante> listadoComprobantes = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).consultarComprobantes(empresaTI, codigoPagoElectronicoIngres);
+        List<DTOComprobantePantalla> comprobantePantallas = new ArrayList<>();
+        for (DTOComprobante dtoComprobante : listadoComprobantes) {
+            DTOComprobantePantalla comprobantePantalla = new DTOComprobantePantalla(dtoComprobante.getNumeroFactura(),
+                    dtoComprobante.getCodigoComprobante(),
+                    dtoComprobante.getFechaHoraVencimientoComprobante(),
+                    dtoComprobante.getMontoTotalComprobante());
+            List<DTOItemComprobantePantalla> comprobantePantallaList = new ArrayList<>();
+            for (DTOItemComprobante dtoic : dtoComprobante.getAtributosAdicionalesComprobante()) {
+                comprobantePantallaList.add(new DTOItemComprobantePantalla(dtoic.getItem().getCodigoItem(),
+                        dtoic.getItem().getNombreItem(),
+                        dtoic.getValue()));
             }
-            return comprobantePantallas;
+            comprobantePantalla.setAtributosAdicionalesComprobante(comprobantePantallaList);
+            comprobantePantallas.add(comprobantePantalla);
+        }
+        return comprobantePantallas;
     }
 
     public boolean isMontoEditable() throws Exception {
@@ -116,76 +124,74 @@ public class ExpertoPagarImpuestos {
     }
 
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) throws Exception {
-            List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
-            ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
-            List<DTOCriterio> criteriosList = new ArrayList<>();
-            criteriosList.add(new DTOCriterio("cliente", "=", GlobalVars.userActive.cliente));
-            List<Object> listaCuentas = FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList);
-            for (Object cuentaObject : listaCuentas) {
-                CuentaBancaria cuentaTemp = (CuentaBancaria) cuentaObject;
+        List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
+        ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
+        List<DTOCriterio> criteriosList = new ArrayList<>();
+        criteriosList.add(new DTOCriterio("cliente", "=", GlobalVars.userActive.cliente));
+        List<Object> listaCuentas = FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList);
+        for (Object cuentaObject : listaCuentas) {
+            CuentaBancaria cuentaTemp = (CuentaBancaria) cuentaObject;
 
-                DTOCuentaBancaria dtoCuentaBancaria = new DTOCuentaBancaria();
+            DTOCuentaBancaria dtoCuentaBancaria = new DTOCuentaBancaria();
 
-                dtoCuentaBancaria.setCbuCuentaBancaria(cuentaTemp.getCbuCuentaBancaria());
-                dtoCuentaBancaria.setNombreTipoCuenta(cuentaTemp.getTipoCuenta().getNombreTipoCuenta());
-                dtoCuentaBancaria.setNroCuentaBancaria(cuentaTemp.getNroCuentaBancaria());
-                dtoCuentaBancaria.setSaldoRecuperado(
-                        FactoriaAdaptadorConexionBanco.
-                                getInstancia().
-                                getAdaptadorConexionBanco(parametroSistema)
-                                .consultarSaldo(cuentaTemp.getCbuCuentaBancaria()));
-                listaDTOCuentaBancaria.add(dtoCuentaBancaria);
-            }
-            if(listaDTOCuentaBancaria.size()==0)
-                throw new ExcepcionGenerica("No se encontraron Cuentas");
-            return listaDTOCuentaBancaria;
+            dtoCuentaBancaria.setCbuCuentaBancaria(cuentaTemp.getCbuCuentaBancaria());
+            dtoCuentaBancaria.setNombreTipoCuenta(cuentaTemp.getTipoCuenta().getNombreTipoCuenta());
+            dtoCuentaBancaria.setNroCuentaBancaria(cuentaTemp.getNroCuentaBancaria());
+            dtoCuentaBancaria.setSaldoRecuperado(
+                    FactoriaAdaptadorConexionBanco.
+                            getInstancia().
+                            getAdaptadorConexionBanco(parametroSistema)
+                            .consultarSaldo(cuentaTemp.getCbuCuentaBancaria()));
+            listaDTOCuentaBancaria.add(dtoCuentaBancaria);
+        }
+        if (listaDTOCuentaBancaria.size() == 0) {
+            throw new ExcepcionGenerica("No se encontraron Cuentas");
+        }
+        return listaDTOCuentaBancaria;
     }
 
     public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago) throws Exception {
-            List<DTOCriterio> criteriosList = new ArrayList<>();
-            ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
-            FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema).debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
-            criteriosList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
-            criteriosList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
-            EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criteriosList).get(0);
-            DTOComprobanteUnico dtoComprobanteUnico = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).buscarComprobanteSeleccionado(empresaTI, Integer.parseInt(nroFactura), codigoPago);
+        List<DTOCriterio> criteriosList = new ArrayList<>();
+        ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
+        FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema).debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
+        criteriosList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
+        criteriosList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
+        EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criteriosList).get(0);
+        DTOComprobanteUnico dtoComprobanteUnico = FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).buscarComprobanteSeleccionado(empresaTI, Integer.parseInt(nroFactura), codigoPago);
+        criteriosList.clear();
+        criteriosList.add(new DTOCriterio("cbuCuentaBancaria", "=", cbuCuentaSeleccionada));
+        CuentaBancaria cuentaBancaria = (CuentaBancaria) FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList).get(0);
+        Operacion operacion = new Operacion();
+        operacion.setNumeroOperacion((int) new Date().getTime()); // es aleatorio
+        operacion.setCodigoPagoElectrionicoOperacion(dtoComprobanteUnico.getCodigoComprobante());
+        operacion.setFechaHoraOperacion(new Date());
+        operacion.setImportePagadoOperacion(montoAbonado);
+        operacion.setLiquidadaOperacion(false);
+        operacion.setNroComprobanteFacturaOperacion(dtoComprobanteUnico.getNumeroFactura());
+        operacion.setCuentaBancaria(cuentaBancaria);
+        operacion.setEmpresa(empresaSeleccionada);
+        operacion.setTipoImpuesto(tipoImpuestoSeleccionado);
+        operacion.setEmpresaTipoImpuesto(empresaTI);
+        List<DTOItemComprobante> listadoItems = dtoComprobanteUnico.getAtributosAdicionalesDTOComprobante();
+        List<DetalleOperacion> detalleOperacionList = new ArrayList<>();
+        for (DTOItemComprobante dTOItemComprobante : listadoItems) {
+            DetalleOperacion detalle = new DetalleOperacion();
+            detalle.setValorDetalleOperacion(dTOItemComprobante.getValue());
             criteriosList.clear();
-            criteriosList.add(new DTOCriterio("cbuCuentaBancaria", "=", cbuCuentaSeleccionada));
-            CuentaBancaria cuentaBancaria = (CuentaBancaria) FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList).get(0);
-            Operacion operacion = new Operacion();
-            operacion.setNumeroOperacion((int) new Date().getTime()); // es aleatorio
-            operacion.setCodigoPagoElectrionicoOperacion(dtoComprobanteUnico.getCodigoDTOComprobante());
-            operacion.setFechaHoraOperacion(new Date());
-            operacion.setImportePagadoOperacion(montoAbonado);
-            operacion.setLiquidadaOperacion(false);
-            operacion.setNroComprobanteFacturaOperacion(dtoComprobanteUnico.getNumeroFactura());
-            operacion.setCuentaBancaria(cuentaBancaria);
-            operacion.setEmpresa(empresaSeleccionada);
-            operacion.setTipoImpuesto(tipoImpuestoSeleccionado);
-            operacion.setEmpresaTipoImpuesto(empresaTI);
-            List<DTOItem> listadoItems = dtoComprobanteUnico.getAtributosAdicionalesDTOComprobante();
-            List<DetalleOperacion> detalleOperacionList = new ArrayList<>();
-            for (DTOItem dTOItem : listadoItems) {
-                DetalleOperacion detalle = new DetalleOperacion();
-                detalle.setValorDetalleOperacion(dTOItem.getItemVal());
-                criteriosList.clear();
-                criteriosList.add(new DTOCriterio("nombreItem", "=", dTOItem.getNombreItem()));
-                Item itemRecuperado = (Item) FachadaPersistencia.getInstance().buscar("Item", criteriosList).get(0);
-                criteriosList.clear();
-                criteriosList.add(new DTOCriterio("item", "=", itemRecuperado));
-                criteriosList.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTI));
-                ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosList).get(0);
-                detalle.setItemEmpresaTipoImpuesto(itemEmpresaTipoImpuesto);
-                detalleOperacionList.add(detalle);
-            }
-            operacion.setDetalleOperacionList(detalleOperacionList);
-            FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).confirmarPago(operacion);
-            FachadaPersistencia.getInstance().guardar(operacion);
-            DTOOperacion dtoOperacion = new DTOOperacion();
-            dtoOperacion.setTipoImpuesto(operacion.getTipoImpuesto());
-            dtoOperacion.setEmpresa(operacion.getEmpresa());
-            dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
-            return dtoOperacion;
+            criteriosList.add(new DTOCriterio("item", "=", dTOItemComprobante.getItem()));
+            criteriosList.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTI));
+            ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criteriosList).get(0);
+            detalle.setItemEmpresaTipoImpuesto(itemEmpresaTipoImpuesto);
+            detalleOperacionList.add(detalle);
+        }
+        operacion.setDetalleOperacionList(detalleOperacionList);
+        FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).confirmarPago(operacion);
+        FachadaPersistencia.getInstance().guardar(operacion);
+        DTOOperacion dtoOperacion = new DTOOperacion();
+        dtoOperacion.setTipoImpuesto(operacion.getTipoImpuesto());
+        dtoOperacion.setEmpresa(operacion.getEmpresa());
+        dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
+        return dtoOperacion;
 
     }
 }

@@ -13,9 +13,17 @@ public class DTOComprobante {
     private String codigoComprobante;
     private Date fechaHoraVencimientoComprobante;
     private double montoTotalComprobante;
-    private List<DTOItem> atributosAdicionalesComprobante;
+    private List<DTOItemComprobante> atributosAdicionalesComprobante;
 
     public DTOComprobante() {
+    }
+
+    public DTOComprobante(int numeroFactura, String codigoComprobante, Date fechaHoraVencimientoComprobante, double montoTotalComprobante, List<DTOItemComprobante> atributosAdicionalesComprobante) {
+        this.numeroFactura = numeroFactura;
+        this.codigoComprobante = codigoComprobante;
+        this.fechaHoraVencimientoComprobante = fechaHoraVencimientoComprobante;
+        this.montoTotalComprobante = montoTotalComprobante;
+        this.atributosAdicionalesComprobante = atributosAdicionalesComprobante;
     }
 
     public int getNumeroFactura() {
@@ -26,37 +34,38 @@ public class DTOComprobante {
         this.numeroFactura = numeroFactura;
     }
 
-    
-    
-    public void setCodigoDTOComprobante(String codigoDTOComprobante) {
-        this.codigoComprobante = codigoDTOComprobante;
-    }
-
-    public void setFechaHoraVencimientoDTOComprobante(Date fechaHoraVencimientoDTOComprobante) {
-        this.fechaHoraVencimientoComprobante = fechaHoraVencimientoDTOComprobante;
-    }
-
-    public void setMontoTotalDTOComprobante(double montoTotalDTOComprobante) {
-        this.montoTotalComprobante = montoTotalDTOComprobante;
-    }
-
-    public void setAtributosAdicionalesDTOComprobante(List<DTOItem> atributosAdicionalesDTOComprobante) {
-        this.atributosAdicionalesComprobante = atributosAdicionalesDTOComprobante;
-    }
-
-    public String getCodigoDTOComprobante() {
+    public String getCodigoComprobante() {
         return codigoComprobante;
     }
 
-    public Date getFechaHoraVencimientoDTOComprobante() {
+    public void setCodigoComprobante(String codigoComprobante) {
+        this.codigoComprobante = codigoComprobante;
+    }
+
+    public Date getFechaHoraVencimientoComprobante() {
         return fechaHoraVencimientoComprobante;
     }
 
-    public double getMontoTotalDTOComprobante() {
+    public void setFechaHoraVencimientoComprobante(Date fechaHoraVencimientoComprobante) {
+        this.fechaHoraVencimientoComprobante = fechaHoraVencimientoComprobante;
+    }
+
+    public double getMontoTotalComprobante() {
         return montoTotalComprobante;
     }
 
-    public List<DTOItem> getAtributosAdicionalesDTOComprobante() {
+    public void setMontoTotalComprobante(double montoTotalComprobante) {
+        this.montoTotalComprobante = montoTotalComprobante;
+    }
+
+    public List<DTOItemComprobante> getAtributosAdicionalesComprobante() {
         return atributosAdicionalesComprobante;
     }
+
+    public void setAtributosAdicionalesComprobante(List<DTOItemComprobante> atributosAdicionalesComprobante) {
+        this.atributosAdicionalesComprobante = atributosAdicionalesComprobante;
+    }
+
+
+    
 }

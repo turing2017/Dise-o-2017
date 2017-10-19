@@ -15,6 +15,7 @@ import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOComprobanteUnico;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOItemComprobante;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
@@ -44,11 +45,11 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
         List<DTOComprobante> dTOComprobanteList = new ArrayList<>();
         for (Dgr dgr : listDgr) {
             DTOComprobante comprobante = new DTOComprobante();
-            comprobante.setCodigoDTOComprobante(Integer.toString(dgr.getCodigoImpuesto()));
-            comprobante.setFechaHoraVencimientoDTOComprobante(dgr.getPrimerVencimiento().toGregorianCalendar().getTime());
-            comprobante.setMontoTotalDTOComprobante(dgr.getMontoPagar());
+            comprobante.setCodigoComprobante(Integer.toString(dgr.getCodigoImpuesto()));
+            comprobante.setFechaHoraVencimientoComprobante(dgr.getPrimerVencimiento().toGregorianCalendar().getTime());
+            comprobante.setMontoTotalComprobante(dgr.getMontoPagar());
             comprobante.setNumeroFactura(dgr.getNroFactura());
-            comprobante.setAtributosAdicionalesDTOComprobante(buscarItems(empresaTipoImpuesto, dgr));
+            comprobante.setAtributosAdicionalesComprobante(buscarItems(empresaTipoImpuesto, dgr));
             dTOComprobanteList.add(comprobante);
         }
         return dTOComprobanteList;
@@ -73,28 +74,29 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
         }
     }
     
-    public List<DTOItem> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Dgr dgr) throws Exception{
+    public List<DTOItemComprobante> buscarItems(EmpresaTipoImpuesto empresaTipoImpuesto, Dgr dgr) throws Exception{
         List<DTOCriterio> criterioList = new ArrayList<>();
         criterioList.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         List<Object> itemEmpresaTipoImpuesto = FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioList);
-        List<DTOItem> dTOItems = new ArrayList<>();
+        List<DTOItemComprobante> dTOItemComprobanteList = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (Object object : itemEmpresaTipoImpuesto) {
             ItemEmpresaTipoImpuesto ieti = (ItemEmpresaTipoImpuesto) object;
-            DTOItem dTOItem = new DTOItem().ConvertDto((Item) ieti.getItem());
-            dTOItems.add(dTOItem);
+            DTOItemComprobante dTOItemComprobante = new DTOItemComprobante();
+            dTOItemComprobante.setItem(ieti.getItem());
             switch (ieti.getItem().getNombreItem()) {
                 case "Nombre Impuesto":
-                    dTOItem.setItemVal(dgr.getNombreImpuesto());
+                    dTOItemComprobante.setValue(dgr.getNombreImpuesto());
                     break;
                 case "Status":
-                    dTOItem.setItemVal(dgr.getStatus());
+                    dTOItemComprobante.setValue(dgr.getStatus());
                     break;
                 case "Fecha Segundo Vencimiento":
-                    dTOItem.setItemVal(sdf.format(dgr.getSegundoVencimiento().toGregorianCalendar().getTime()));
+                    dTOItemComprobante.setValue(sdf.format(dgr.getSegundoVencimiento().toGregorianCalendar().getTime()));
                     break;
             }
+            dTOItemComprobanteList.add(dTOItemComprobante);
         }
-        return dTOItems;
+        return dTOItemComprobanteList;
     }
 }

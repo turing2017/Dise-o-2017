@@ -426,31 +426,7 @@ public class ExpertoGestionarLiquidacion {
         return listDtoLiquidacion;
     }
 
-    public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion) {
-
-        ArrayList<DTOOperacion> listDTOOperacion = new ArrayList<DTOOperacion>();
-        List<DTOCriterio> criterios = new ArrayList<>();
-
-        //BUSCA LA LIQUIDACION SELECCIONADA
-        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.parseInt(numeroLiquidacion));
-        criterios.add(criterio);
-
-        //ACA FALLA CREO QUE PORQUE VUELVE VACIA<------------------------------------
-        Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
-
-        //HACE UN GET A  LA LISTA DE OPERACIONES DE ESA LIQUIDACION Y POR CADA OEPRACION LLENA UN DTOOPERACION
-        for (int i = 0; i > liquidacion.getOperacionList().size(); i++) {
-
-            DTOOperacion dtoOperacion = new DTOOperacion();
-            dtoOperacion.setNumeroOperacion(liquidacion.getOperacionList().get(i).getNumeroOperacion());
-            dtoOperacion.setNroComprobanteFactura(liquidacion.getOperacionList().get(i).getNroComprobanteFacturaOperacion());
-            dtoOperacion.setValorComisionOperacion(liquidacion.getOperacionList().get(i).getValorComisionOperacion());
-            dtoOperacion.setImportePagadoOperacion(liquidacion.getOperacionList().get(i).getImportePagadoOperacion());
-            listDTOOperacion.add(dtoOperacion);
-
-        }
-        return listDTOOperacion;
-    }
+ 
 
     public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta, String estado) {
         boolean flag = false;

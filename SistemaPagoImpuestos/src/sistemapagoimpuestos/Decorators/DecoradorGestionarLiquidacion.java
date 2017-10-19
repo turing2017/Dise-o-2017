@@ -92,14 +92,7 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
 }
     
     
-     @Override
-    public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion){
-        ArrayList<DTOOperacion> listObject;
-        FachadaInterna.getInstance().iniciarTransaccion();
-        listObject = super.buscarOperaciones(numeroLiquidacion); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listObject;
-}
+
 
     @Override
     public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta,String estado) {

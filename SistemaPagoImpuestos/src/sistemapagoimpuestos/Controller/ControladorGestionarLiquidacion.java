@@ -72,9 +72,7 @@ public class ControladorGestionarLiquidacion {
         return experto.buscarLiquidacionConFiltro(nombreTipoImpuesto, nombreEmpresa, fechaDesde, fechaHasta);
     }
 
-    public ArrayList<DTOOperacion> buscarOperaciones(String numeroLiquidacion) {
-        return experto.buscarOperaciones(numeroLiquidacion);
-    }
+   
 
     public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta, String estado) {
         return experto.mostrar(numeroLiquidacion, fechaDesde, fechaHasta, estado);

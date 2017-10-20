@@ -167,11 +167,9 @@ public class ExpertoCalcularLiquidaciones {
 
         }
 
-        if (cantidadAnuladas == 0) {
-            dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE RECÁLCULOS PENDIENTES...", "No se generaron liquidaciones recalculadas.", new Date()));
-        } else {
+        
             dtosAccionesSistema.add(new DTOAccionesSistema("FIN DE RECÁLCULOS PENDIENTES...", "Se generaron un total de " + cantidadAnuladas + " liquidaciones recalculadas.", new Date()));
-        }
+        
 
         /*
         ---------------------------------------

@@ -291,8 +291,8 @@ public class ExpertoCalcularLiquidaciones {
                         dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A LIQUIDAR", "Existen " + listOperacion.size() + " operaciones a liquidar.", new Date()));
                     } catch (Exception e) {
                         e.printStackTrace();
-                        dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A LIQUIDAR", "No existen operaciones a liquidar.", new Date()));
-                        System.out.println("No existen operaciones");
+                        //dtosAccionesSistema.add(new DTOAccionesSistema("VERIFICA SI EXISTEN OPERACIONES A LIQUIDAR", "No existen operaciones a liquidar.", new Date()));
+                       // System.out.println("No existen operaciones");
                     }
                     for (Object op : listOperacion) {
                         Operacion operacion = (Operacion) op;

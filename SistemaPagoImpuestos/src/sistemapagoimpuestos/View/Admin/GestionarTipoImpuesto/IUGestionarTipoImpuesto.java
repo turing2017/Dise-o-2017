@@ -3,6 +3,7 @@ package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 import exceptions.Excepciones;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,9 +31,10 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         initComponents();
         // Esto hay que quitarlo, cuando se llame a esta pantalla se debe llamar al metodo siguiente pasando el cuitEmpresa
         this.cuitEmpresa = "123434343";
-        obtenerTipoImpuestos("123434343");
+        obtenerTipoImpuestos();
         
     }
+    
     public IUGestionarTipoImpuesto(String cuitEmpresa) {
         this.cuitEmpresa = cuitEmpresa;
         initComponents();
@@ -109,6 +111,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         });
 
         jButtonModificarVinculo.setText("Modificar Vinculo");
+        jButtonModificarVinculo.setEnabled(false);
         jButtonModificarVinculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonModificarVinculoActionPerformed(evt);
@@ -126,7 +129,9 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                         .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(button_filtrar))
-                    .addComponent(nombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addComponent(nombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
@@ -141,10 +146,11 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(button_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(button_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(button_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                                    .addComponent(button_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(45, 45, 45)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton_asociar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -161,18 +167,18 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_filtrar)
                     .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addComponent(nombreEmpresa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVerItemAsociado)
-                    .addComponent(button_modificar))
+                    .addComponent(button_nuevo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_nuevo)
-                    .addComponent(jButton_asociar))
+                    .addComponent(jButton_asociar)
+                    .addComponent(button_modificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
@@ -258,7 +264,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonModificarVinculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarVinculoActionPerformed
-        
+       try{ 
         int rowSelected = tabla_tipo_impuesto.getSelectedRow();
         String nombreTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 1).toString();
         boolean montoEditable = (boolean) tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 2);
@@ -266,6 +272,9 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         String nombreTE = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 4).toString();
         controlador.modificarETI(cuitEmpresa, nombreTI, nombreTE, estadoETI, montoEditable);
         this.dispose();
+        }catch (ArrayIndexOutOfBoundsException e) {
+            Excepciones.getInstance().objetoNoSeleccionado();
+        }
     }//GEN-LAST:event_jButtonModificarVinculoActionPerformed
 
 
@@ -312,6 +321,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         DTOEmpresa dtoEmpresa = controlador.buscarEmpresa(cuitEmpresa);
         nombreEmpresa.setText(dtoEmpresa.getNombreEmpresa());
         jButton_asociar.setEnabled(true);
+        jButtonModificarVinculo.setEnabled(true);
         jButtonVerItemAsociado.setEnabled(true);
         String[] columnas = {"Codigo Tipo Impuesto", "Nombre Tipo Impuesto", "Monto Editable", "Estado", "Nombre TipoEmpresa"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -429,6 +439,74 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         tabla_tipo_impuesto.getColumnModel().getColumn(1).setCellRenderer(r);
     }
 
+    
+    
+    public void obtenerTipoImpuestos() {
+        // Muestro pantalla de Consultar
+        ArrayList<DTOTipoImpuesto> listDtoTI = controlador.buscarTipoImpuestos();
+        String[] columnas = {"Codigo Tipo Impuesto", "Nombre Tipo Impuesto", "Monto Editable", "Habilitada"};
+        DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
+
+            // Sobreescribo el método para no permitir editar la 
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Integer.class;
+                    case 1:
+                        return String.class;
+                    case 2:
+                        return Boolean.class;
+                    case 3:
+                        return Boolean.class;
+                    default:
+                        return null;
+                 }
+            }
+
+        };
+
+        for (DTOTipoImpuesto dtoTipoImpuesto : listDtoTI) {
+            Vector<Object> vect = new Vector<>();
+            vect.add(dtoTipoImpuesto.getCodigoDTOTipoImpuesto());
+            vect.add(dtoTipoImpuesto.getNombreDTOTipoImpuesto());
+            vect.add(dtoTipoImpuesto.isEsMontoEditableDTOTipoImpuesto());
+
+            if (dtoTipoImpuesto.getFechaHoraInhabilitacionDTOTipoImpuesto() != null) {
+                vect.add(false);
+            } else {
+                vect.add(true);
+            }
+            dtm.addRow(vect);
+        }
+
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setHorizontalAlignment(JLabel.CENTER);
+                return this;
+            }
+        };
+        tabla_tipo_impuesto.setModel(dtm);
+        tabla_tipo_impuesto.getColumnModel().getColumn(0).setCellRenderer(r);
+        tabla_tipo_impuesto.getColumnModel().getColumn(1).setCellRenderer(r);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public ControladorGestionarTipoImpuesto getControlador() {
         return controlador;
     }

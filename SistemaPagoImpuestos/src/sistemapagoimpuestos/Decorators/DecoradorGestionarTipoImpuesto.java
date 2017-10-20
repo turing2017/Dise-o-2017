@@ -59,6 +59,14 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
     }
 
     @Override
+    public ArrayList<DTOTipoImpuesto> buscarTipoImpuestos() {
+        FachadaInterna.getInstance().iniciarTransaccion();
+        ArrayList<DTOTipoImpuesto> listDTOTI = super.buscarTipoImpuestos();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return listDTOTI;//To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     public int setearFrecuencia(String nombreTipoImpuesto, String cuitEmpresa, String nombreTipoEmpresa) {
         FachadaInterna.getInstance().iniciarTransaccion();
         int frecuencia = super.setearFrecuencia(nombreTipoImpuesto, cuitEmpresa, nombreTipoEmpresa); 

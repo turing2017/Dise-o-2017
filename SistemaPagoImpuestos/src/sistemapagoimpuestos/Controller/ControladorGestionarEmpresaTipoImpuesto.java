@@ -24,10 +24,6 @@ public class ControladorGestionarEmpresaTipoImpuesto {
     ExpertoGestionarEmpresaTipoImpuesto experto = (ExpertoGestionarEmpresaTipoImpuesto) FabricaExpertos.getInstancia().crearExperto("CU15");
     
     // Método para crear un ETI
-    public void nuevoEmpresaTipoImpuesto(String cuitEmpresa, String nombreTipoImpuesto, String nombreTipoEmpresa, int frecuencia){
-        experto.nuevoEmpresaTipoImpuesto(cuitEmpresa, nombreTipoImpuesto, nombreTipoEmpresa, frecuencia);
-    }
-    
     // Método para recueprar los tipos de empresas
     public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
         return experto.obtenerTipoEmpresas();

@@ -40,12 +40,10 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <Component id="label_esEditable" min="-2" max="-2" attributes="0"/>
                                   <Component id="label_nombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label_frecuencia" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="199" max="32767" attributes="0"/>
+                              <EmptySpace pref="213" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="checkbox_esEditable" min="-2" max="-2" attributes="0"/>
@@ -53,8 +51,6 @@
                                   </Group>
                                   <Component id="textfield_codigo" alignment="0" max="32767" attributes="0"/>
                                   <Component id="textField_nombre" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="comboBox_tipoEmpresa" max="32767" attributes="0"/>
-                                  <Component id="textfield_frecuencia" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -82,22 +78,7 @@
                   <Component id="checkbox_esEditable" min="-2" max="-2" attributes="0"/>
                   <Component id="label_esEditable" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="comboBox_tipoEmpresa" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label_frecuencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textfield_frecuencia" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="90" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="button_crear" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancel_button" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -155,34 +136,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancel_buttonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo de Empresa"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="comboBox_tipoEmpresa">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBox_tipoEmpresaActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="label_frecuencia">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Frecuencia de Liquidaci&#xf3;n"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textfield_frecuencia">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_frecuenciaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

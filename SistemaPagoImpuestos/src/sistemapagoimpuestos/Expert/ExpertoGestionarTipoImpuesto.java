@@ -464,6 +464,24 @@ public class ExpertoGestionarTipoImpuesto {
         return dTOTipoImpuestoList;
     }
   
+    public ArrayList<DTOTipoImpuesto> buscarTipoImpuestos(){
+        List<DTOCriterio> criterioItem = new ArrayList();
+        List<Object> tipoImpuestoObjectList = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioItem);
+        
+        ArrayList <DTOTipoImpuesto> dTOTipoImpuestoList = new ArrayList<>();
+        DTOTipoImpuesto dTOTipoImpuesto;
+        
+        for (Object tipoImpuestoObject :tipoImpuestoObjectList) {
+            dTOTipoImpuesto = new DTOTipoImpuesto();
+            TipoImpuesto tipoImpuesto = (TipoImpuesto) tipoImpuestoObject;
+            dTOTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
+            dTOTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
+            dTOTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
+            dTOTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
+            dTOTipoImpuestoList.add(dTOTipoImpuesto);
+        }
+        return dTOTipoImpuestoList;
+    }
     
     
     public DTOEmpresa buscarEmpresa(String cuitEmpresa) {

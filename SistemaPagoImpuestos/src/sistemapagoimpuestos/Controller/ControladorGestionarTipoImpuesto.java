@@ -65,6 +65,12 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
         experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
         
     }
+    
+    public ArrayList<DTOTipoImpuesto> buscarTipoImpuestos(){
+        return experto.buscarTipoImpuestos();
+    }
+    
+    
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
         return  experto.obtenerTipoImpuestos();

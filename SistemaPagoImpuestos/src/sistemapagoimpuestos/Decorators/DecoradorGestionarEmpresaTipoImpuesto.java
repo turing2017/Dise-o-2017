@@ -85,12 +85,7 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
 //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void nuevoEmpresaTipoImpuesto(String cuitEmpresa, String nombreTipoImpuesto, String nombreTipoEmpresa, int frecuencia) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.nuevoEmpresaTipoImpuesto(cuitEmpresa, nombreTipoImpuesto, nombreTipoEmpresa, frecuencia);
-        FachadaInterna.getInstance().finalizarTransaccion();//To change body of generated methods, choose Tools | Templates.
-    }
+
 
     @Override
     public List<DTOTipoEmpresa> obtenerTipoEmpresas() {

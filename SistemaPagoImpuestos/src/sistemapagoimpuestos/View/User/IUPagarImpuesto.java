@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
@@ -186,9 +188,16 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
         List<DTOComprobantePantalla> listadoComprobantePantalla = seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
         if (listadoComprobantePantalla != null) {
-            boolean esEditable = isMontoEditable();
-            mostrarPantallaComprobantes(listadoComprobantePantalla, esEditable);
-            this.dispose();
+            if (listadoComprobantePantalla.size() > 0) {
+                boolean esEditable = isMontoEditable();
+                mostrarPantallaComprobantes(listadoComprobantePantalla, esEditable);
+                this.dispose();
+            } else {
+                JOptionPane msg = new JOptionPane("No se encontraron comprobantes", JOptionPane.PLAIN_MESSAGE);
+                JDialog dlg = msg.createDialog("Error");
+                dlg.setVisible(true);
+                return;
+            }
         }
     }//GEN-LAST:event_button_buscarActionPerformed
 

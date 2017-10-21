@@ -77,6 +77,7 @@ public class ExpertoPagarImpuestos {
         //Busca instancia de EmpresaTipoImpuesto, aplicando el tipo de impuesto como criterio
         List<DTOCriterio> criterioEmpresaTipoImpuesto = new ArrayList();
         criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
+        criterioEmpresaTipoImpuesto.add(new DTOCriterio("fechaHoraInhabilitacionEmpresaTipoImpuesto", "IS", null));
         List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto);
         List<DTOEmpresa> lista = new ArrayList<>();
         DTOEmpresa dtoEmpresa;

@@ -184,10 +184,10 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBox_tipoImpuestoActionPerformed
 
     private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
-        List<DTOComprobantePantalla> listadoComprobantePantalla = controlador.seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
+        List<DTOComprobantePantalla> listadoComprobantePantalla = seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
         if (listadoComprobantePantalla != null) {
-            boolean esEditable = controlador.isMontoEditable();
-            controlador.mostrarPantallaComprobantes(listadoComprobantePantalla, esEditable);
+            boolean esEditable = isMontoEditable();
+            mostrarPantallaComprobantes(listadoComprobantePantalla, esEditable);
             this.dispose();
         }
     }//GEN-LAST:event_button_buscarActionPerformed
@@ -271,6 +271,21 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         // Limpio el formulario
         textfield_codigo.setText("");
         button_buscar.setEnabled(false);
+    }
+    
+    // Método para recuperar los comprobantes
+    public List<DTOComprobantePantalla> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres) {
+        return controlador.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres);
+    }
+    
+    // Método para ver si es editable
+    public boolean isMontoEditable(){
+        return controlador.isMontoEditable();
+    }
+    
+    // Método para avisarle al controlador de la creación de la pantalla comprobantes
+    public void mostrarPantallaComprobantes(List<DTOComprobantePantalla> listaComprobantePantalla, boolean esEditable){
+        controlador.mostrarPantallaComprobantes(listaComprobantePantalla, esEditable);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

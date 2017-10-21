@@ -29,6 +29,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
     
+    
     public void mostrarPantallaPrincipal(){
         IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
         String fechaHoraInhabilitacionUsuarioEncontrada = (GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario() == null)?"Sin último acceso":GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString();        

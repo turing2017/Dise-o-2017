@@ -1,5 +1,7 @@
 package sistemapagoimpuestos.Controller;
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -39,7 +41,15 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
         pantallaPrincipal.setVisible(true); 
         }        
     }
-    
+     public void validarUsuario() {
+        try {
+            experto.validarUsuario();
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
+    }
     public int setearFrecuencia(String nombreTipoImpuesto, String cuitEmpresa, String nombreTipoEmpresa){
        return experto.setearFrecuencia(nombreTipoImpuesto, cuitEmpresa, nombreTipoEmpresa);
     }

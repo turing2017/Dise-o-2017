@@ -54,51 +54,51 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
     public IUPagarImpuestoComprobantes(List<DTOComprobantePantalla> listadoDTOComprobantePantalla, boolean esEditable) {
         initComponents();
-        
+
         cargarTablaComprobantes(listadoDTOComprobantePantalla);
         List<DTOCuentaBancaria> listadoDTOCuentas = controlador.obtenerCuentas(GlobalVars.userActive.getCliente().getCuilCuitCliente());
         cargarTablaCuentas(listadoDTOCuentas);
-        
+
         // Action Listener para tabla de cuentas
         tabla_cuentas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                @Override
-                public void valueChanged(ListSelectionEvent event) {
-                    if (tabla_cuentas.getSelectedRow() > -1) {
-                        String cbuCuentaSelec = tabla_cuentas.getValueAt(tabla_cuentas.getSelectedRow(), 0).toString();
-                        // Busco el DTO correspondiente al CBU
-                        for (DTOCuentaBancaria dtoCuenta : listadoDTOCuentas) {
-                            if (dtoCuenta.getCbuCuentaBancaria().equals(cbuCuentaSelec)) {
-                                lbl_out_cbu.setText(dtoCuenta.getCbuCuentaBancaria());
-                                lbl_out_tipo_Cuenta.setText(dtoCuenta.getNombreTipoCuenta());
-                                lbl_out_saldo.setText(String.valueOf(dtoCuenta.getSaldoRecuperado()));
-                            }
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (tabla_cuentas.getSelectedRow() > -1) {
+                    String cbuCuentaSelec = tabla_cuentas.getValueAt(tabla_cuentas.getSelectedRow(), 0).toString();
+                    // Busco el DTO correspondiente al CBU
+                    for (DTOCuentaBancaria dtoCuenta : listadoDTOCuentas) {
+                        if (dtoCuenta.getCbuCuentaBancaria().equals(cbuCuentaSelec)) {
+                            lbl_out_cbu.setText(dtoCuenta.getCbuCuentaBancaria());
+                            lbl_out_tipo_Cuenta.setText(dtoCuenta.getNombreTipoCuenta());
+                            lbl_out_saldo.setText(String.valueOf(dtoCuenta.getSaldoRecuperado()));
                         }
                     }
                 }
-            });
-        
+            }
+        });
+
         // Action Listener para tabla de comprobantes
         tabla_comprobantes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                @Override
-                public void valueChanged(ListSelectionEvent event) {
-                    if (tabla_comprobantes.getSelectedRow() > -1) {
-                        int posicionMontoTotal = 2;
-                        textfield_monto_a_pagar.setText(tabla_comprobantes.getModel().getValueAt(tabla_comprobantes.getSelectedRow(), posicionMontoTotal).toString());
-                        int columnNroFac = 0;
-                        String nroFactura = tabla_comprobantes.getModel().getValueAt(tabla_comprobantes.getSelectedRow(), columnNroFac).toString();
-                        // Busco el DTO correspondiente al nroFactura
-                        for (DTOComprobantePantalla dtoComprobantePantalla : listadoDTOComprobantePantalla) {
-                            if (Integer.toString(dtoComprobantePantalla.getNumeroFactura()).equals(nroFactura)) {
-                                List<DTOComprobantePantalla> comprobanteSelec = new ArrayList<>();
-                                comprobanteSelec.add(dtoComprobantePantalla);
-                                cargarAtribAdic(comprobanteSelec);
-                                break;
-                            }
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (tabla_comprobantes.getSelectedRow() > -1) {
+                    int posicionMontoTotal = 2;
+                    textfield_monto_a_pagar.setText(tabla_comprobantes.getModel().getValueAt(tabla_comprobantes.getSelectedRow(), posicionMontoTotal).toString());
+                    int columnNroFac = 0;
+                    String nroFactura = tabla_comprobantes.getModel().getValueAt(tabla_comprobantes.getSelectedRow(), columnNroFac).toString();
+                    // Busco el DTO correspondiente al nroFactura
+                    for (DTOComprobantePantalla dtoComprobantePantalla : listadoDTOComprobantePantalla) {
+                        if (Integer.toString(dtoComprobantePantalla.getNumeroFactura()).equals(nroFactura)) {
+                            List<DTOComprobantePantalla> comprobanteSelec = new ArrayList<>();
+                            comprobanteSelec.add(dtoComprobantePantalla);
+                            cargarAtribAdic(comprobanteSelec);
+                            break;
                         }
                     }
                 }
-            });
-        
+            }
+        });
+
         // Comportamiento si es editable
         textfield_monto_a_pagar.setEnabled(esEditable);
     }
@@ -125,7 +125,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         textfield_monto_a_pagar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_cuentas = new javax.swing.JTable();
-        jSeparator4 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbl_out_saldo = new javax.swing.JLabel();
@@ -234,18 +233,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(85, 85, 85)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(title_cuenta_select)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_tipo_cuenta)
@@ -255,56 +247,66 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_out_saldo)
                                     .addComponent(lbl_out_cbu)
-                                    .addComponent(lbl_out_tipo_Cuenta)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(242, 242, 242)
-                        .addComponent(text_monto_a_pagar)
-                        .addGap(35, 35, 35)
-                        .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(button_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                                    .addComponent(lbl_out_tipo_Cuenta))))
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(text_monto_a_pagar)
+                            .addGap(18, 18, 18)
+                            .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(button_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(title_cuenta_select)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_tipo_cuenta)
-                    .addComponent(lbl_out_tipo_Cuenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(text_cbu)
-                    .addComponent(lbl_out_cbu))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lbl_out_saldo))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(text_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(title_cuenta_select)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_tipo_cuenta)
+                            .addComponent(lbl_out_tipo_Cuenta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(text_cbu)
+                            .addComponent(lbl_out_cbu))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lbl_out_saldo))
+                        .addGap(154, 154, 154)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(button_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textfield_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(text_monto_a_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -320,9 +322,17 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             String nroFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnNroFac).toString();
             String CodigoFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString();
             // Agregar validacion si es editable.....
-            if(textfield_monto_a_pagar.isEditable()){
-                int posicionPagoMinimo = 3;
-                if(Double.parseDouble(textfield_monto_a_pagar.getText()) < Double.parseDouble(tabla_atrib_adic.getModel().getValueAt(0, posicionPagoMinimo).toString())){
+
+            if (textfield_monto_a_pagar.isEditable()) {
+                int posicionPagoMinimo = 0;
+
+                for (int i = 0; i < tabla_atrib_adic.getRowCount(); i++) {
+                    if (tabla_atrib_adic.getValueAt(i, 0).equals("Monto Minimo")) {                        
+                        posicionPagoMinimo = i;
+                    }
+                }
+
+                if (Double.parseDouble(textfield_monto_a_pagar.getText()) < Double.parseDouble(tabla_atrib_adic.getModel().getValueAt(posicionPagoMinimo, 1).toString())) {
                     JOptionPane msg = new JOptionPane("No puede abonar el monto seleccionado", JOptionPane.PLAIN_MESSAGE);
                     JDialog dlg = msg.createDialog("Error");
                     dlg.setVisible(true);
@@ -336,25 +346,25 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 dlg.setVisible(true);
                 return;
             }
-            if(lbl_out_cbu.getText().toString().equals("-Seleccionar Cuenta-")){
+            if (lbl_out_cbu.getText().toString().equals("-Seleccionar Cuenta-")) {
                 JOptionPane msg = new JOptionPane("Debe seleccionar una cuenta", JOptionPane.PLAIN_MESSAGE);
                 JDialog dlg = msg.createDialog("Error");
                 dlg.setVisible(true);
                 return;
             }
-            DTOOperacion dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(), 
+            DTOOperacion dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(),
                     Double.parseDouble(textfield_monto_a_pagar.getText()),
                     nroFactura,
                     CodigoFactura);
             this.dispose();
             IUPagarImpuestoOperacion iuOperacion = new IUPagarImpuestoOperacion(dtoOperacion);
             iuOperacion.setVisible(true);
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane msg = new JOptionPane("Debe seleccionar un comprobante", JOptionPane.PLAIN_MESSAGE);
             JDialog dlg = msg.createDialog("Error");
             dlg.setVisible(true);
             return;
-        } catch (java.lang.NumberFormatException e){
+        } catch (java.lang.NumberFormatException e) {
             JOptionPane msg = new JOptionPane("Debe ingresar importe válido", JOptionPane.PLAIN_MESSAGE);
             JDialog dlg = msg.createDialog("Error");
             dlg.setVisible(true);
@@ -403,7 +413,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Método para cargar los comprobantes en la tabla
     public void cargarTablaComprobantes(List<DTOComprobantePantalla> listaComprobantesPantalla) {
 
@@ -465,18 +475,12 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_comprobantes.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_comprobantes.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-    
+
     // Método para cargar los atributos adicionales en la tabla
-    public void cargarAtribAdic(List<DTOComprobantePantalla> listaComprobantesPantalla){
-        
-        // Muestro los datos en la tabla
-        ArrayList<String> columnList = new ArrayList<>();
-        
-        for (DTOItemComprobantePantalla dtoicp : listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante()) {
-            columnList.add(dtoicp.getNombreItem());
-        }
-        Object[] columnas = columnList.toArray();
-        
+    public void cargarAtribAdic(List<DTOComprobantePantalla> listaComprobantesPantalla) {
+
+        String[] columnas = {"Nombre Atributo", "Valor"};
+
         // Creo el modelo
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
 
@@ -491,22 +495,23 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 switch (column) {
                     case 0:
                         return String.class;
+                    case 1:
+                        return String.class;
                     default:
                         return String.class;
                 }
-            }   
+            }
         };
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        //listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante().sort();
         
-        for (DTOComprobantePantalla dtoComprobante : listaComprobantesPantalla) {
+        for (DTOItemComprobantePantalla item : listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante()) {
             Vector<Object> vect = new Vector<>();
-            List<DTOItemComprobantePantalla> listadoItems = dtoComprobante.getAtributosAdicionalesComprobante();
-            for (DTOItemComprobantePantalla item : listadoItems) {
-                vect.add(item.getItemVal());
-            }
+            vect.add(item.getNombreItem());
+            vect.add(item.getItemVal());
             dtm.addRow(vect);
-
         }
+
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(
@@ -518,7 +523,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_atrib_adic.setModel(dtm);
         tabla_atrib_adic.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_atrib_adic.getColumnModel().getColumn(1).setCellRenderer(r);
-        
+
     }
 
     // Método para cargar los cuentas en la tabla
@@ -526,16 +531,16 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
         // Muestro los datos en la tabla
         String[] columnas = {"CBU", "Tipo de Cuenta", "Saldo"};
-        
+
         // Creo el modelo
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
-            
+
             // Sobreescribo el método para no permitir editar la tabla
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-    
+
             public Class<?> getColumnClass(int column) {
                 switch (column) {
                     case 0:
@@ -571,7 +576,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_cuentas.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_cuentas.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-    
+
     public void setLbl_out_cbu(String cbu) {
         this.lbl_out_cbu.setText(cbu);
     }
@@ -599,7 +604,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lbl_out_cbu;
     private javax.swing.JLabel lbl_out_saldo;
     private javax.swing.JLabel lbl_out_tipo_Cuenta;

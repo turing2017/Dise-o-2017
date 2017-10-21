@@ -84,6 +84,7 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
             ItemEmpresaTipoImpuesto ieti = (ItemEmpresaTipoImpuesto) object;
             DTOItemComprobante dTOItemComprobante = new DTOItemComprobante();
             dTOItemComprobante.setItem(ieti.getItem());
+            dTOItemComprobante.setOrden(ieti.getOrdenItemEmpresaTipoImpuesto());
             switch (ieti.getItem().getNombreItem()) {
                 case "Nombre Impuesto":
                     dTOItemComprobante.setValue(dgr.getNombreImpuesto());

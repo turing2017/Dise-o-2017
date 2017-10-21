@@ -69,6 +69,7 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
             ItemEmpresaTipoImpuesto ieti = (ItemEmpresaTipoImpuesto) object;
             DTOItemComprobante dTOItemComprobante = new DTOItemComprobante();
             dTOItemComprobante.setItem(ieti.getItem());
+            dTOItemComprobante.setOrden(ieti.getOrdenItemEmpresaTipoImpuesto());
             switch (ieti.getItem().getNombreItem()) {
                 case "Nombre Servicio":
                     dTOItemComprobante.setValue(claro.getNombreServicio());

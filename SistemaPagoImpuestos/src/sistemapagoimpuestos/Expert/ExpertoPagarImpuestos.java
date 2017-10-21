@@ -111,6 +111,7 @@ public class ExpertoPagarImpuestos {
             for (DTOItemComprobante dtoic : dtoComprobante.getAtributosAdicionalesComprobante()) {
                 comprobantePantallaList.add(new DTOItemComprobantePantalla(dtoic.getItem().getCodigoItem(),
                         dtoic.getItem().getNombreItem(),
+                        dtoic.getOrden(),
                         dtoic.getValue()));
             }
             comprobantePantalla.setAtributosAdicionalesComprobante(comprobantePantallaList);

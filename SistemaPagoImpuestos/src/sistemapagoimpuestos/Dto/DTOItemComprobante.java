@@ -13,14 +13,18 @@ import sistemapagoimpuestos.Entity.Item;
  */
 public class DTOItemComprobante {
     private Item item;
+    private int orden;
     private String value;
     public DTOItemComprobante() {
     }
 
-    public DTOItemComprobante(Item item, String value) {
+    public DTOItemComprobante(Item item, int orden, String value) {
         this.item = item;
+        this.orden = orden;
         this.value = value;
     }
+
+
 
     public Item getItem() {
         return item;
@@ -36,6 +40,14 @@ public class DTOItemComprobante {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public int getOrden() {
+        return orden;
+    }
+
+    public void setOrden(int orden) {
+        this.orden = orden;
     }
     
 }

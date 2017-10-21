@@ -12,14 +12,16 @@ package sistemapagoimpuestos.Dto;
 public class DTOItemComprobantePantalla {
     private String codigoItem;
     private String nombreItem;
+    private int orden;
     private String itemVal;
 
     public DTOItemComprobantePantalla() {
     }
 
-    public DTOItemComprobantePantalla(String codigoItem, String nombreItem, String itemVal) {
+    public DTOItemComprobantePantalla(String codigoItem, String nombreItem, int orden, String itemVal) {
         this.codigoItem = codigoItem;
         this.nombreItem = nombreItem;
+        this.orden = orden;
         this.itemVal = itemVal;
     }
 
@@ -45,6 +47,14 @@ public class DTOItemComprobantePantalla {
 
     public void setItemVal(String itemVal) {
         this.itemVal = itemVal;
+    }
+
+    public int getOrden() {
+        return orden;
+    }
+
+    public void setOrden(int orden) {
+        this.orden = orden;
     }
     
     

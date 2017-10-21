@@ -44,6 +44,9 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
      public void validarUsuario() {
         try {
             experto.validarUsuario();
+            IUGestionarTipoImpuesto iuGestionarTipoImpuesto = new IUGestionarTipoImpuesto();
+            iuGestionarTipoImpuesto.setVisible(true);
+
         } catch (ExcepcionGenerica e) {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
         } catch (Exception e) {

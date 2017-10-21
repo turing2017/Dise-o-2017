@@ -193,7 +193,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_button_gestionar_cal_paramsActionPerformed
 
     private void button_gestionarEmpresaAdheridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarEmpresaAdheridaActionPerformed
-        gestionarEmpresaAdherida.iniciar();
+        gestionarEmpresaAdherida.validarUsuario();
         this.dispose();
     }//GEN-LAST:event_button_gestionarEmpresaAdheridaActionPerformed
 

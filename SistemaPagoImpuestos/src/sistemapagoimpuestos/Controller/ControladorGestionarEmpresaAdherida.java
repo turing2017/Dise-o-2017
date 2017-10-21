@@ -6,6 +6,8 @@
 package sistemapagoimpuestos.Controller;
 
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -40,6 +42,18 @@ public class ControladorGestionarEmpresaAdherida {
     private ExpertoGestionarEmpresaAdherida experto = (ExpertoGestionarEmpresaAdherida) FabricaExpertos.getInstancia().crearExperto("CU10");
  
 // Metodo iniciar
+    public void validarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUGestionarEmpresaAdherida iuGestionarEmpresaAdherida = new IUGestionarEmpresaAdherida();
+            iuGestionarEmpresaAdherida.setVisible(true);
+
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
+    }
     public void iniciar(){
         if(experto.iniciar().equals("Administrador")){
         IUGestionarEmpresaAdherida pantallaPrincipal = new IUGestionarEmpresaAdherida();

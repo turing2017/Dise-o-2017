@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
 import sistemapagoimpuestos.Entity.TipoImpuesto;
+import sistemapagoimpuestos.Globals.GlobalVars;
 
 /**
  *
@@ -35,6 +37,13 @@ import sistemapagoimpuestos.Entity.TipoImpuesto;
 
 public class ExpertoGestionarEmpresaAdherida {
     
+    
+    
+     public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
+    }
     public String iniciar() {
 
         return "Administrador";

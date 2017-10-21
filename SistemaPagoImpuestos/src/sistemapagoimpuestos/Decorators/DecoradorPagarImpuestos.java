@@ -5,15 +5,12 @@
  */
 package sistemapagoimpuestos.Decorators;
 
-import exceptions.ExcepcionGenerica;
 import java.util.List;
-import sistemapagoimpuestos.Dto.DTOComprobante;
 import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOEmpresaIUPagar;
 import sistemapagoimpuestos.Dto.DTOOperacionActual;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoIUPagar;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -36,17 +33,17 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     
 
     @Override
-    public List<DTOTipoImpuesto> buscarTipoImpuestos()  throws Exception{
+    public List<DTOTipoImpuestoIUPagar> buscarTipoImpuestos()  throws Exception{
         FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOTipoImpuesto> listaDTOTipoImpuesto = super.buscarTipoImpuestos();
+        List<DTOTipoImpuestoIUPagar> listaDTOTipoImpuesto = super.buscarTipoImpuestos();
         FachadaInterna.getInstance().finalizarTransaccion();
         return listaDTOTipoImpuesto;
     }
 
     @Override
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto)  throws Exception{
+    public List<DTOEmpresaIUPagar> buscarEmpresas(String nombreTipoImpuesto)  throws Exception{
         FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOEmpresa> listaDTOEmpresa = super.buscarEmpresas(nombreTipoImpuesto);
+        List<DTOEmpresaIUPagar> listaDTOEmpresa = super.buscarEmpresas(nombreTipoImpuesto);
         FachadaInterna.getInstance().finalizarTransaccion();
         return listaDTOEmpresa;
     }

@@ -33,6 +33,7 @@ import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOItemComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOOperacionActual;
 import sistemapagoimpuestos.Globals.GlobalVars;
 
 public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
@@ -325,7 +326,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             String CodigoFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString();
             // Agregar validacion si es editable.....
 
-            if (textfield_monto_a_pagar.isEditable()) {
+            if (textfield_monto_a_pagar.isEnabled()) {
                 int posicionPagoMinimo = 0;
 
                 for (int i = 0; i < tabla_atrib_adic.getRowCount(); i++) {
@@ -354,7 +355,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 dlg.setVisible(true);
                 return;
             }
-            DTOOperacion dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(),
+            DTOOperacionActual dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(),
                     Double.parseDouble(textfield_monto_a_pagar.getText()),
                     nroFactura,
                     CodigoFactura);

@@ -12,6 +12,7 @@ import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOOperacionActual;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -67,9 +68,9 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     }
 
     @Override
-    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago)  throws Exception{
+    public DTOOperacionActual pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago)  throws Exception{
         FachadaInterna.getInstance().iniciarTransaccion();
-        DTOOperacion dtoOperacion = super.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, codigoPago);
+        DTOOperacionActual dtoOperacion = super.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, codigoPago);
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoOperacion;
     }

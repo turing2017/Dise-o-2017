@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOOperacionActual;
 
 /**
  *
@@ -21,10 +22,14 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
         initComponents();
     }
     
-    public IUPagarImpuestoOperacion(DTOOperacion dtoOperacion) {
+    private DTOOperacionActual dtoOperacion;
+    
+    
+    public IUPagarImpuestoOperacion(DTOOperacionActual dtoOperacion) {
         initComponents();
-        nombreImpuesto.setText(dtoOperacion.getTipoImpuesto().getNombreTipoImpuesto());
-        nombreEmpresa.setText(dtoOperacion.getEmpresa().getNombreEmpresa());
+        this.dtoOperacion = dtoOperacion;
+        nombreImpuesto.setText(dtoOperacion.getNombreTipoImpuesto());
+        nombreEmpresa.setText(dtoOperacion.getNombreEmpresa());
         numeroOperacion.setText(Integer.toString(dtoOperacion.getNumeroOperacion()));
         // Modifico la operación de cierre para no finalizar al presionar X
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -99,21 +104,20 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
                         .addComponent(lbl_titulo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_subTitulo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_numOperacion)
-                                .addGap(18, 18, 18)
-                                .addComponent(numeroOperacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_nombreEmpresa)
-                                    .addComponent(lbl_nombreImpuesto))
-                                .addGap(94, 94, 94)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(nombreImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nombreEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                                    .addComponent(lbl_nombreImpuesto)
+                                    .addComponent(lbl_numOperacion))
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numeroOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(nombreImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(nombreEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                .addContainerGap(77, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(button_imprimir)
@@ -164,25 +168,8 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
 
     private void button_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_imprimirActionPerformed
         // TODO add your handling code here:
-        JOptionPane msg = new JOptionPane("Imprimiendo...", JOptionPane.PLAIN_MESSAGE);
-        JDialog dlg = msg.createDialog("Imprimiendo");
-        dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        new Thread(new Runnable() {
-        @Override
-        public void run() {
-        try {
-          Thread.sleep(5000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-        dlg.setVisible(false);
-      }
-    }).start();
-    dlg.setVisible(true);
-        System.out.println("imprimiendo...");
-        this.dispose();
         ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
-        cpi.validadarUsuario();
+        cpi.imprimirComprobante(dtoOperacion);
     }//GEN-LAST:event_button_imprimirActionPerformed
 
     /**

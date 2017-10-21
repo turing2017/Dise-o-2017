@@ -14,9 +14,11 @@ import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOOperacionActual;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.Utils.ExportPdf;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoComprobantes;
@@ -111,7 +113,7 @@ public class ControladorPagarImpuestos {
     }
 
     // Pagar impuesto
-    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String CodigoPago) {
+    public DTOOperacionActual pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String CodigoPago) {
         try {
             return experto.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, CodigoPago);
         } catch (TransactionException e) {
@@ -124,5 +126,8 @@ public class ControladorPagarImpuestos {
             Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al conectar el sistema");
             return null;
         }
+    }
+    public void imprimirComprobante(DTOOperacionActual dtooa){
+        ExportPdf.exportPdf(dtooa);
     }
 }

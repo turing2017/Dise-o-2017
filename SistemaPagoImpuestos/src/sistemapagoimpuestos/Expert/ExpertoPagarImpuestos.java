@@ -19,6 +19,7 @@ import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOItemComprobante;
 import sistemapagoimpuestos.Dto.DTOItemComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOOperacionActual;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.CuentaBancaria;
 import sistemapagoimpuestos.Entity.DetalleOperacion;
@@ -151,7 +152,7 @@ public class ExpertoPagarImpuestos {
         return listaDTOCuentaBancaria;
     }
 
-    public DTOOperacion pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago) throws Exception {
+    public DTOOperacionActual pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago) throws Exception {
         List<DTOCriterio> criteriosList = new ArrayList<>();
         ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
         FactoriaAdaptadorConexionBanco.getInstancia().getAdaptadorConexionBanco(parametroSistema).debitarSaldo(cbuCuentaSeleccionada, montoAbonado);
@@ -188,10 +189,13 @@ public class ExpertoPagarImpuestos {
         operacion.setDetalleOperacionList(detalleOperacionList);
         FactoriaAdaptadorConexionEmpresa.getInstancia().getAdaptadorConexionEmpresa(empresaSeleccionada).confirmarPago(operacion);
         FachadaPersistencia.getInstance().guardar(operacion);
-        DTOOperacion dtoOperacion = new DTOOperacion();
-        dtoOperacion.setTipoImpuesto(operacion.getTipoImpuesto());
-        dtoOperacion.setEmpresa(operacion.getEmpresa());
-        dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
+        DTOOperacionActual dtoOperacion = new DTOOperacionActual(operacion.getNumeroOperacion(),
+                operacion.getCodigoPagoElectrionicoOperacion(), 
+                operacion.getFechaHoraOperacion(), 
+                operacion.getImportePagadoOperacion(), 
+                operacion.getNroComprobanteFacturaOperacion(),
+                operacion.getEmpresa().getNombreEmpresa(), 
+                operacion.getTipoImpuesto().getNombreTipoImpuesto());
         return dtoOperacion;
 
     }

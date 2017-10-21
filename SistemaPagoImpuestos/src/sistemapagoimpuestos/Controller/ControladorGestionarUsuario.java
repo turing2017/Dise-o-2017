@@ -1,16 +1,21 @@
 package sistemapagoimpuestos.Controller;
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.TransactionException;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoGestionarUsuario;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuario;
 import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuarioAlta;
 import sistemapagoimpuestos.View.Admin.GestionarUsuario.IUGestionarUsuarioModificar;
+import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 
 /**
  *
@@ -23,10 +28,17 @@ public class ControladorGestionarUsuario {
 
     private ExpertoGestionarUsuario experto = (ExpertoGestionarUsuario) FabricaExpertos.getInstancia().crearExperto("CU07");
 
-    public void iniciar() {
-        if (experto.iniciar().equals("Administrador")) {
-            IUGestionarUsuario pantallaUsuario = new IUGestionarUsuario();
-            MetodosPantalla.getInstance().setearPantalla(pantallaUsuario);
+    public void validadarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUGestionarUsuario iUGestionarUsuario = new IUGestionarUsuario();
+            iUGestionarUsuario.setVisible(true);
+        } catch (TransactionException e) {
+            FachadaInterna.getInstance().finalizarTransaccion();
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es cliente");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
 

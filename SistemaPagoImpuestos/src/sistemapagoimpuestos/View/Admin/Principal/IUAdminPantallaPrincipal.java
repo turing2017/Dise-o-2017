@@ -1,6 +1,9 @@
 package sistemapagoimpuestos.View.Admin.Principal;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorCalcularLiquidaciones;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Controller.ControladorGestionarItem;
@@ -12,6 +15,7 @@ import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
 import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.View.Login.IULogin;
 
 public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
 
@@ -27,6 +31,16 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     
     public IUAdminPantallaPrincipal() {
         initComponents();
+        
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+                dispose();
+                IULogin iULogin = new IULogin();
+                iULogin.setVisible(true);
+            }
+        });
+        
     }
     
     public void mostrarPantallaPrincipal(){
@@ -51,6 +65,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         button_gestionarEmpresaAdherida = new javax.swing.JButton();
         button_gestionar_liquidacion = new javax.swing.JButton();
         button_calcular_liquidaciones = new javax.swing.JButton();
+        btn_cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +129,14 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btn_cerrar.setText("Salir");
+        btn_cerrar.setToolTipText("");
+        btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,15 +149,17 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(button_gestionar_liquidacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionarTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionarItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                    .addComponent(button_gestionarEmpresaAdherida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button_calcular_liquidaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_cerrar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(button_gestionar_liquidacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_gestionarTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_gestionarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_gestionarItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_gestionar_cal_params, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                        .addComponent(button_gestionarEmpresaAdherida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_calcular_liquidaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(286, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -160,14 +185,16 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(button_gestionar_liquidacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button_calcular_liquidaciones)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(btn_cerrar)
+                .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_gestionarTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarTipoUsuarioActionPerformed
-        controladorGestTipoUsu.iniciar();
+        controladorGestTipoUsu.validadarUsuario();
         this.dispose();
     }//GEN-LAST:event_button_gestionarTipoUsuarioActionPerformed
 
@@ -177,12 +204,12 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_button_gestionarTipoImpuestoActionPerformed
 
     private void button_gestionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarUsuarioActionPerformed
-        controladorGestUsu.iniciar();
+        controladorGestUsu.validadarUsuario();
         this.dispose();
     }//GEN-LAST:event_button_gestionarUsuarioActionPerformed
 
     private void button_gestionarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionarItemActionPerformed
-        gestionarItem.iniciar();
+        gestionarItem.validadarUsuario();
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_button_gestionarItemActionPerformed
 
@@ -211,6 +238,12 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         }
         this.dispose();
     }//GEN-LAST:event_button_calcular_liquidacionesActionPerformed
+
+    private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
+                this.dispose();
+                IULogin iULogin = new IULogin();
+                iULogin.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +282,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cerrar;
     private javax.swing.JButton button_calcular_liquidaciones;
     private javax.swing.JButton button_gestionarEmpresaAdherida;
     private javax.swing.JButton button_gestionarItem;

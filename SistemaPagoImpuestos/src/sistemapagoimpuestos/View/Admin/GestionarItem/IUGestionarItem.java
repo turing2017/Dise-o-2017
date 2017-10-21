@@ -19,6 +19,7 @@ import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarItem;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
+import sistemapagoimpuestos.View.Login.IULogin;
 
 
 /**
@@ -31,6 +32,14 @@ public class IUGestionarItem extends javax.swing.JFrame {
     public IUGestionarItem() {
         initComponents();
         obtenerItems();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+                dispose();
+                IULogin iULogin = new IULogin();
+                iULogin.setVisible(true);
+            }
+        });
     }
 
     /**
@@ -193,7 +202,7 @@ public class IUGestionarItem extends javax.swing.JFrame {
     
     // Metodo iniciar
     public void iniciar() {
-        controlador.iniciar();
+        controlador.validadarUsuario();
     }
     
     // Método para obtener todos los items y llenar en la tabla

@@ -14,13 +14,13 @@ public class DecoradorGestionarTipoUsuario extends ExpertoGestionarTipoUsuario {
 
     public DecoradorGestionarTipoUsuario() {
     }
-    
+
     @Override
-    public String iniciar() {
+    public void validarUsuario() throws Exception {
         FachadaInterna.getInstance().iniciarTransaccion();
-        String role = super.iniciar();
+        super.validarUsuario(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
-        return role;
+
     }
 
     @Override

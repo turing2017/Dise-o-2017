@@ -74,7 +74,7 @@ public class IUGestionarTipoUsuarioAlta extends javax.swing.JFrame {
         if (!nombreTipoUsuario.equals("")) {
             controlador.nuevoTipoUsuario(nombreTipoUsuario);
             this.dispose();
-            controlador.iniciar();
+            controlador.validadarUsuario();
         } else {
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }

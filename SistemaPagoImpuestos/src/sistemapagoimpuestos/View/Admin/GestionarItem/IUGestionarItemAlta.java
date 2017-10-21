@@ -158,7 +158,7 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
             String nombreTipoDatoItemSeleccionado = comboBox_tipoDato.getSelectedItem().toString();
             controlador.nuevoItem(codigoItem, nombreItem, longitudItem, esRequerido, nombreTipoDatoItemSeleccionado);
             this.dispose();
-            controlador.iniciar();
+            controlador.validadarUsuario();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
         }
@@ -167,7 +167,7 @@ public class IUGestionarItemAlta extends javax.swing.JFrame {
     private void button_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_atrasActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        controlador.iniciar();
+        controlador.validadarUsuario();
     }//GEN-LAST:event_button_atrasActionPerformed
 
     /**

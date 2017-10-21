@@ -162,7 +162,7 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
             }
             controlador.modificarItem(getNombreActual(), textfield_nombre.getText(), Integer.parseInt(textfield_longitud.getText()), checkbox_requerido.isSelected(), checkbox_habilitado.isSelected(), comboBox_tipoDato.getSelectedItem().toString());
             this.dispose();
-            controlador.iniciar();
+            controlador.validadarUsuario();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
@@ -171,7 +171,7 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
     private void button_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_atrasActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        controlador.iniciar();
+        controlador.validadarUsuario();
     }//GEN-LAST:event_button_atrasActionPerformed
 
     /**

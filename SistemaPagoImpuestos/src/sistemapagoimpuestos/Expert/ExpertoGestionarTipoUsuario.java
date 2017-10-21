@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,6 +14,7 @@ import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 import static sistemapagoimpuestos.Utils.Utils.existeDato;
@@ -23,11 +25,10 @@ import static sistemapagoimpuestos.Utils.Utils.existeDato;
  */
 public class ExpertoGestionarTipoUsuario {
 
-    Usuario usuario = new Usuario();
-
-    public String iniciar() {
-
-        return "Administrador";
+    public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
     }
 
     public ArrayList<DTOTipoUsuario> obtenerTipoUsuario() {
@@ -88,19 +89,17 @@ public class ExpertoGestionarTipoUsuario {
 
     public void modificarTipoUsuario(String nombreActualTipoUsuario) {
 
-              
         List<DTOCriterio> criterios = new ArrayList<>();
         DTOCriterio criterio1 = new DTOCriterio();
         criterio1.setAtributo("nombreTipoUsuario");
         criterio1.setOperacion("=");
         criterio1.setValor(nombreActualTipoUsuario);
         criterios.add(criterio1);
-       
-        
+
         TipoUsuario tipoUsuario = (TipoUsuario) FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios).get(0);
-        if(tipoUsuario.getFechaHoraInhabilitacionTipoUsuario() == null){
+        if (tipoUsuario.getFechaHoraInhabilitacionTipoUsuario() == null) {
             tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(new Date());
-        }else{
+        } else {
             tipoUsuario.setFechaHoraInhabilitacionTipoUsuario(null);
         }
         FachadaPersistencia.getInstance().guardar(tipoUsuario);

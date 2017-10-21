@@ -46,7 +46,7 @@ public class ControladorLoguearUsuario {
                 ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
                 cpi.validadarUsuario();
                 break;
-            case "Empresa":
+            case "Responsable Empresa Adherida":
                 IUPantallaEmpresa pe = new IUPantallaEmpresa();
                 pe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 pe.setLocationRelativeTo(null);

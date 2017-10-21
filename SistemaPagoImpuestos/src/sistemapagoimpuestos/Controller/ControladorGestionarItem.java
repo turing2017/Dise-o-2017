@@ -1,18 +1,23 @@
 package sistemapagoimpuestos.Controller;
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import org.hibernate.TransactionException;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoDatoItem;
 import sistemapagoimpuestos.Expert.ExpertoGestionarItem;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.View.Admin.GestionarItem.IUGestionarItem;
 import sistemapagoimpuestos.View.Admin.GestionarItem.IUGestionarItemAlta;
 import sistemapagoimpuestos.View.Admin.GestionarItem.IUGestionarItemModificar;
+import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 
 /**
  *
@@ -26,6 +31,21 @@ public class ControladorGestionarItem {
     // Experto GestionarItem
     private ExpertoGestionarItem experto = (ExpertoGestionarItem) FabricaExpertos.getInstancia().crearExperto("CU13");
     
+    
+    public void validadarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUGestionarItem iUGestionarItem = new IUGestionarItem();
+            iUGestionarItem.setVisible(true);
+        } catch (TransactionException e) {
+            FachadaInterna.getInstance().finalizarTransaccion();
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es cliente");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
+    }
+    
     // Método para mostrar la pantalla de alta
     public void seleccionAlta(){
         // Creo pantalla de alta
@@ -38,7 +58,7 @@ public class ControladorGestionarItem {
                 // Modifico el Listener para que al presionar x genere la pantalla ppal.
                 pantallaAlta.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent ev) {
-                        iniciar();
+                        validadarUsuario();
                     }
                 });
     }
@@ -59,18 +79,12 @@ public class ControladorGestionarItem {
                     pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     pantallaModificar.addWindowListener(new WindowAdapter() {
                         public void windowClosing(WindowEvent ev) {
-                            iniciar();
+                            validadarUsuario();
                         }
                     });
                 }
     }
-    // Metodo iniciar
-    public void iniciar(){
-        if(experto.iniciar().equals("Administrador")){
-        IUGestionarItem pantallaPrincipal = new IUGestionarItem();
-        pantallaPrincipal.setVisible(true); 
-        }        
-    }
+
     
     // Método para recuperar los TipoDatoItem
     public List<DTOTipoDatoItem> buscarTipoDatoItems(){

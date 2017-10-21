@@ -128,8 +128,10 @@ public class ExpertoPagarImpuestos {
 
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) throws Exception {
         List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
-        ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", null).get(0);
         List<DTOCriterio> criteriosList = new ArrayList<>();
+        criteriosList.add(new DTOCriterio("fechaInhabilitacionParametroSistema", "IS", null));
+        ParametroSistema parametroSistema = (ParametroSistema) FachadaPersistencia.getInstance().buscar("ParametroSistema", criteriosList).get(0);
+        criteriosList.clear();
         criteriosList.add(new DTOCriterio("cliente", "=", GlobalVars.userActive.cliente));
         List<Object> listaCuentas = FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList);
         for (Object cuentaObject : listaCuentas) {

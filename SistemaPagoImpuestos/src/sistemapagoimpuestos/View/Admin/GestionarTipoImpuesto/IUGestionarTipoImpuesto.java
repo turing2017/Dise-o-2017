@@ -18,6 +18,8 @@ import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
+import sistemapagoimpuestos.View.Login.IULogin;
 
 public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     
@@ -25,6 +27,14 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     public IUGestionarTipoImpuesto() {
         initComponents();
         obtenerTipoImpuestos();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+                dispose();
+                IULogin iULogin = new IULogin();
+                iULogin.setVisible(true);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +48,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         textfield_filtro = new javax.swing.JTextField();
         button_filtrar = new javax.swing.JButton();
+        btn_cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +77,14 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
 
+        btn_cerrar.setText("Cerrar");
+        btn_cerrar.setToolTipText("");
+        btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,6 +98,8 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                         .addComponent(button_filtrar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
+                            .addComponent(btn_cerrar)
+                            .addGap(131, 131, 131)
                             .addComponent(button_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -103,7 +124,8 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_nuevo)
-                    .addComponent(button_modificar))
+                    .addComponent(button_modificar)
+                    .addComponent(btn_cerrar))
                 .addGap(46, 46, 46))
         );
 
@@ -136,6 +158,12 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         sorter.setRowFilter(RowFilter.regexFilter(textfield_filtro.getText()));
         tabla_tipo_impuesto.setRowSorter(sorter);
     }//GEN-LAST:event_button_filtrarActionPerformed
+
+    private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
+        this.dispose();
+        IUAdminPantallaPrincipal iUAdminPantallaPrincipal = new IUAdminPantallaPrincipal();
+        iUAdminPantallaPrincipal.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cerrarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -233,6 +261,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cerrar;
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_modificar;
     private javax.swing.JButton button_nuevo;

@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.TipoUsuario;
 import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
@@ -28,9 +30,10 @@ public class ExpertoGestionarUsuario {
 
     //Usuario usuario = new Usuario();
 
-    public String iniciar() {
-
-        return "Administrador";
+    public void validarUsuario() throws Exception {
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
     }
 
     public ArrayList<DTOUsuario> obtenerUsuario() {
@@ -151,7 +154,7 @@ public class ExpertoGestionarUsuario {
         
         usuarioSelec.setTipoUsuario((TipoUsuario) resultadoTipoUsuario.get(0));
         
-        if (tipoUsuarioSelec.equals("Responsable")){
+        if (tipoUsuarioSelec.equals("Responsable Empresa Adherida")){
             List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
             criteriosEmpresa.add(new DTOCriterio("nombreEmpresa", "=", empresaSelec));
             List resultadoEmpresa = FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa);

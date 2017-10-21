@@ -2,12 +2,15 @@ package sistemapagoimpuestos.View.Admin.GestionarTipoUsuario;
 
 import exceptions.Excepciones;
 import java.awt.Component;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -15,6 +18,8 @@ import javax.swing.table.TableRowSorter;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoUsuario;
 import sistemapagoimpuestos.Dto.DTOTipoUsuario;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
+import sistemapagoimpuestos.View.Login.IULogin;
 
 public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     
@@ -22,6 +27,14 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     public IUGestionarTipoUsuario() {
         initComponents();
         obtenerTipoUsuario();
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent ev) {
+                dispose();
+                IULogin iULogin = new IULogin();
+                iULogin.setVisible(true);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -35,6 +48,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         button_nuevo = new javax.swing.JButton();
         button_habilitar_deshabilitar = new javax.swing.JButton();
         button_filtrar = new javax.swing.JButton();
+        btn_cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,28 +88,39 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
             }
         });
 
+        btn_cerrar.setText("Cerrar");
+        btn_cerrar.setToolTipText("");
+        btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(button_habilitar_deshabilitar)
-                                .addGap(18, 18, 18)
-                                .addComponent(button_nuevo))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(53, 53, 53)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(button_filtrar)))))
+                                    .addComponent(button_filtrar))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(216, 216, 216)
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(jLabel1)))
+                        .addGap(31, 31, 31)
+                        .addComponent(btn_cerrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button_habilitar_deshabilitar)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_nuevo)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,7 +137,8 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_nuevo)
-                    .addComponent(button_habilitar_deshabilitar))
+                    .addComponent(button_habilitar_deshabilitar)
+                    .addComponent(btn_cerrar))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -153,6 +179,12 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_habilitar_deshabilitarActionPerformed
 
+    private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
+        this.dispose();
+        IUAdminPantallaPrincipal iUAdminPantallaPrincipal = new IUAdminPantallaPrincipal();
+        iUAdminPantallaPrincipal.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cerrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,7 +224,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     }
 
     public void inciar() {
-        controlador.iniciar();
+        controlador.validadarUsuario();
     }
 
     public void obtenerTipoUsuario() {
@@ -249,6 +281,7 @@ public class IUGestionarTipoUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cerrar;
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_habilitar_deshabilitar;
     private javax.swing.JButton button_nuevo;

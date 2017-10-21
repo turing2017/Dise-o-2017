@@ -22,7 +22,6 @@ import sistemapagoimpuestos.Utils.ExportPdf;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 import sistemapagoimpuestos.View.User.IUPagarImpuesto;
 import sistemapagoimpuestos.View.User.IUPagarImpuestoComprobantes;
-import sistemapagoimpuestos.View.User.IUPagarImpuestoCuentas;
 
 /**
  *

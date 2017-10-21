@@ -46,7 +46,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         initComponents();
 
         cargarTablaComprobantes(listadoDTOComprobantePantalla);
-        List<DTOCuentaBancaria> listadoDTOCuentas = controlador.obtenerCuentas(GlobalVars.userActive.getCliente().getCuilCuitCliente());
+        List<DTOCuentaBancaria> listadoDTOCuentas = obtenerCuentas(GlobalVars.userActive.getCliente().getCuilCuitCliente());
         cargarTablaCuentas(listadoDTOCuentas);
 
         // Action Listener para tabla de cuentas
@@ -342,7 +342,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 dlg.setVisible(true);
                 return;
             }
-            DTOOperacionActual dtoOperacion = controlador.pagarImpuesto(lbl_out_cbu.getText(),
+            DTOOperacionActual dtoOperacion = pagarImpuesto(lbl_out_cbu.getText(),
                     Double.parseDouble(textfield_monto_a_pagar.getText()),
                     nroFactura,
                     CodigoFactura);
@@ -566,6 +566,16 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_cuentas.setModel(dtm);
         tabla_cuentas.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_cuentas.getColumnModel().getColumn(1).setCellRenderer(r);
+    }
+    
+    // Método para obtener las cuentas
+    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
+        return controlador.obtenerCuentas(cuilCliente);
+    }
+    
+    // Método pagar impuesto
+    public DTOOperacionActual pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String CodigoPago) {
+        return controlador.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, CodigoPago);
     }
 
     public void setLbl_out_cbu(String cbu) {

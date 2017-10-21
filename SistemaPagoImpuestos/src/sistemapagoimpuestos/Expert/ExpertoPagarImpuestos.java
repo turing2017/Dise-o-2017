@@ -43,7 +43,7 @@ public class ExpertoPagarImpuestos {
 
     public void validarUsuario() throws Exception {
         if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Cliente")) {
-            throw new ExcepcionGenerica("Error de privilegios");
+            throw new ExcepcionGenerica("Este usuario no puede realizar esta operacion");
         }
     }
 

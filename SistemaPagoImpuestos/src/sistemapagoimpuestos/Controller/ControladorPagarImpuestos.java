@@ -120,7 +120,7 @@ public class ControladorPagarImpuestos {
             Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", e.getMessage());
             return null;
         } catch (Exception e) {
-            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "Error al conectar el sistema");
+            Excepciones.getInstance().errorGenerico("Error: Pagar Impuesto", "No se ha podido realizar la operación, intente nuevamente más tarde. Disculpe las molestias");
             return null;
         }
     }

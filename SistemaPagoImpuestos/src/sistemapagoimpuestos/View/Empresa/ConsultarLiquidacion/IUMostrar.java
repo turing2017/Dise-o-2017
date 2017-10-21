@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Utils.Printer;
@@ -31,10 +32,10 @@ public class IUMostrar extends javax.swing.JDialog {
     /**
      * Creates new form IUMostrar
      */
-    public IUMostrar(String nliquidacion,Date fechaDesde,Date fechaHasta,String estado) {
+    public IUMostrar(String nliquidacion) {
         initComponents();
-        ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion,fechaDesde,fechaHasta,estado);
+        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+       /* DTOLiquidacion liquidacion = controlador.(nliquidacion);
         
         jLabelNrodeLiquidacion.setText(nliquidacion);
         jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
@@ -62,7 +63,8 @@ public class IUMostrar extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
+*/
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,7 +118,7 @@ public class IUMostrar extends javax.swing.JDialog {
 
         jLabel4.setText("Fecha liquidacion");
 
-        jLabel5.setText("Periodo");
+        jLabel5.setText("Periodo liquidado:");
 
         jTableOperacion = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -131,7 +133,7 @@ public class IUMostrar extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "nroOperacion", "nroComprobante", "montoComision", "importePagado"
+                "nroOperacion", "nroComprobante", "importePagado", "montoComision"
             }
         ));
         jScrollPane2.setViewportView(jTableOperacion);
@@ -178,14 +180,12 @@ public class IUMostrar extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabelPeriodo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelPeriodo2)
-                .addGap(166, 166, 166))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -206,25 +206,24 @@ public class IUMostrar extends javax.swing.JDialog {
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelEmpresa)
-                                    .addComponent(jLabelTipoImpuesto)))))
+                                    .addComponent(jLabelTipoImpuesto)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelPeriodo)
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelPeriodo2))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jButtonCancelar)))
+                        .addGap(219, 219, 219)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonDescargar)
+                            .addComponent(jButtonCancelar))))
                 .addContainerGap(73, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonDescargar)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,24 +247,23 @@ public class IUMostrar extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabelFechaLiquidacion))
-                .addGap(2, 2, 2)
-                .addComponent(jLabel5)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPeriodo)
-                    .addComponent(jLabelPeriodo2)
-                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelPeriodo)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelPeriodo2))
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(buttonDescargar))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonDescargar)
+                .addGap(13, 13, 13)
+                .addComponent(jButtonCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -343,7 +341,7 @@ public class IUMostrar extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrar("",null,null,"").setVisible(true);
+                new IUMostrar("").setVisible(true);
             }
         });
     }

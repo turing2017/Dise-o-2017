@@ -34,10 +34,10 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        buttonConsultarLiquidacion = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         label_fecha1 = new javax.swing.JLabel();
         label_nombre1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jToggleButton1.setText("Pagar Impuestos");
 
@@ -47,19 +47,23 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
 
         jLabel1.setText("Bienvenido a Sistema de Pago de Impuestos");
 
-        buttonConsultarLiquidacion.setSelected(true);
-        buttonConsultarLiquidacion.setText("Consultar Liquidacion");
-        buttonConsultarLiquidacion.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButton3.setText("Consultar Operaciones Bancarias");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonConsultarLiquidacionActionPerformed(evt);
+                jToggleButton3ActionPerformed(evt);
             }
         });
-
-        jToggleButton3.setText("Consultar Operaciones Bancarias");
 
         label_fecha1.setText("jLabel3");
 
         label_nombre1.setText("jLabel2");
+
+        jButton1.setText("Consultar Liquidacion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,10 +76,10 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jToggleButton3)
                             .addComponent(jLabel1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(301, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonConsultarLiquidacion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label_nombre1)
                             .addComponent(label_fecha1))
@@ -89,7 +93,7 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(buttonConsultarLiquidacion)
+                        .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton3))
                     .addGroup(layout.createSequentialGroup()
@@ -103,10 +107,14 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonConsultarLiquidacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultarLiquidacionActionPerformed
-        controladorConsultarLiq.validarUsuario();
-        this.dispose();
-    }//GEN-LAST:event_buttonConsultarLiquidacionActionPerformed
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ controladorConsultarLiq.validarUsuario();
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,7 +151,7 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton buttonConsultarLiquidacion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JToggleButton jToggleButton1;

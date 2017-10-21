@@ -9,6 +9,7 @@ import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -29,7 +30,7 @@ public class ControladorConsultarLiquidacion {
     public ControladorConsultarLiquidacion() {
     }
    
-    public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos() {
+    public List<DTOTipoImpuesto> obtenerTipoImpuestos() {
         return experto.obtenerTipoImpuestos();
     }
 
@@ -49,5 +50,5 @@ public class ControladorConsultarLiquidacion {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
-
+public void mostrar(){}
 }

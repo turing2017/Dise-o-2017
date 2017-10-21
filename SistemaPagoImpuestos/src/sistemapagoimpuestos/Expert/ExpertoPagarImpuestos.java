@@ -14,18 +14,15 @@ import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOComprobanteUnico;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOEmpresaIUPagar;
 import sistemapagoimpuestos.Dto.DTOItemComprobante;
 import sistemapagoimpuestos.Dto.DTOItemComprobantePantalla;
-import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOOperacionActual;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoIUPagar;
 import sistemapagoimpuestos.Entity.CuentaBancaria;
 import sistemapagoimpuestos.Entity.DetalleOperacion;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
-import sistemapagoimpuestos.Entity.Item;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Entity.ParametroSistema;
@@ -50,15 +47,15 @@ public class ExpertoPagarImpuestos {
         }
     }
 
-    public List<DTOTipoImpuesto> buscarTipoImpuestos() throws Exception {
+    public List<DTOTipoImpuestoIUPagar> buscarTipoImpuestos() throws Exception {
         List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
         criterioTipoImpuesto.add(new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "IS", null));
         List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
-        List<DTOTipoImpuesto> lista = new ArrayList<>();
-        DTOTipoImpuesto dtoTipoImpuesto;
+        List<DTOTipoImpuestoIUPagar> lista = new ArrayList<>();
+        DTOTipoImpuestoIUPagar dtoTipoImpuesto;
 
         for (int i = 0; i < tipoImpuestos.size(); i++) {
-            dtoTipoImpuesto = new DTOTipoImpuesto();
+            dtoTipoImpuesto = new DTOTipoImpuestoIUPagar();
             TipoImpuesto tipoImpuesto = (TipoImpuesto) tipoImpuestos.get(i);
             String nombreTipoImpuesto = tipoImpuesto.getNombreTipoImpuesto();
             dtoTipoImpuesto.setNombreDTOTipoImpuesto(nombreTipoImpuesto);
@@ -67,7 +64,7 @@ public class ExpertoPagarImpuestos {
         return lista;
     }
 
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto) throws Exception {
+    public List<DTOEmpresaIUPagar> buscarEmpresas(String nombreTipoImpuesto) throws Exception {
         List<DTOCriterio> criterioTipoImpuesto = new ArrayList();
         criterioTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
         List ti = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioTipoImpuesto);
@@ -79,12 +76,12 @@ public class ExpertoPagarImpuestos {
         criterioEmpresaTipoImpuesto.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
         criterioEmpresaTipoImpuesto.add(new DTOCriterio("fechaHoraInhabilitacionEmpresaTipoImpuesto", "IS", null));
         List eti = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioEmpresaTipoImpuesto);
-        List<DTOEmpresa> lista = new ArrayList<>();
-        DTOEmpresa dtoEmpresa;
+        List<DTOEmpresaIUPagar> lista = new ArrayList<>();
+        DTOEmpresaIUPagar dtoEmpresa;
         for (int i = 0; i < eti.size(); i++) {
             EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eti.get(i);
             if (empresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa() == null) {
-                dtoEmpresa = new DTOEmpresa();
+                dtoEmpresa = new DTOEmpresaIUPagar();
                 dtoEmpresa.setNombreEmpresa(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
                 lista.add(dtoEmpresa);
             }

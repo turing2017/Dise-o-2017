@@ -7,15 +7,13 @@ package sistemapagoimpuestos.Controller;
 
 import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.TransactionException;
 import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
 import sistemapagoimpuestos.Dto.DTOCuentaBancaria;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOEmpresaIUPagar;
 import sistemapagoimpuestos.Dto.DTOOperacionActual;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoIUPagar;
 import sistemapagoimpuestos.Expert.ExpertoPagarImpuestos;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.Utils.ExportPdf;
@@ -48,9 +46,9 @@ public class ControladorPagarImpuestos {
         }
     }
 
-    public List<DTOTipoImpuesto> buscarTipoImpuestos() {
+    public List<DTOTipoImpuestoIUPagar> buscarTipoImpuestos() {
         try {
-            List<DTOTipoImpuesto> listado = experto.buscarTipoImpuestos();
+            List<DTOTipoImpuestoIUPagar> listado = experto.buscarTipoImpuestos();
             return listado;
         } catch (TransactionException e) {
             FachadaInterna.getInstance().finalizarTransaccion();
@@ -61,7 +59,7 @@ public class ControladorPagarImpuestos {
         }
     }
 
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto) {
+    public List<DTOEmpresaIUPagar> buscarEmpresas(String nombreTipoImpuesto) {
         try {
             return experto.buscarEmpresas(nombreTipoImpuesto);
         } catch (TransactionException e) {

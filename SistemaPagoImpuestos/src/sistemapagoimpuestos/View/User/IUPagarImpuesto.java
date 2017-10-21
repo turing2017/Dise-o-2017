@@ -10,8 +10,8 @@ import java.util.List;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorPagarImpuestos;
 import sistemapagoimpuestos.Dto.DTOComprobantePantalla;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOEmpresaIUPagar;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoIUPagar;
 import sistemapagoimpuestos.View.Login.IULogin;
 
 /**
@@ -235,33 +235,33 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     }
 
     // Método para recuperar los TipoImpuesto
-    public List<DTOTipoImpuesto> buscarTipoImpuestos() {
+    public List<DTOTipoImpuestoIUPagar> buscarTipoImpuestos() {
         return controlador.buscarTipoImpuestos();
     }
 
     //Método para llenar el comboBox
-    public void llenarComboTipoImpuesto(List<DTOTipoImpuesto> listaDTOTipoImpuesto) {
+    public void llenarComboTipoImpuesto(List<DTOTipoImpuestoIUPagar> listaDTOTipoImpuesto) {
         for (int i = 0; i < listaDTOTipoImpuesto.size(); i++) {
-            DTOTipoImpuesto dtoTipoImpuesto = (DTOTipoImpuesto) listaDTOTipoImpuesto.get(i);
+            DTOTipoImpuestoIUPagar dtoTipoImpuesto = (DTOTipoImpuestoIUPagar) listaDTOTipoImpuesto.get(i);
             String nombreTipoImpuesto = dtoTipoImpuesto.getNombreDTOTipoImpuesto();
             comboBox_tipoImpuesto.addItem(nombreTipoImpuesto);
         }
     }
 
     // Método para recuperar las Empresas
-    public List<DTOEmpresa> buscarEmpresas(String nombreTipoImpuesto) {
+    public List<DTOEmpresaIUPagar> buscarEmpresas(String nombreTipoImpuesto) {
         return controlador.buscarEmpresas(nombreTipoImpuesto);
     }
 
     // Método para llenar el combo de Empresa
-    public void llenarComboEmpresa(List<DTOEmpresa> listaDTOEmpresa) {
+    public void llenarComboEmpresa(List<DTOEmpresaIUPagar> listaDTOEmpresa) {
         // Limpio el combo
         comboBox_empresa.removeAllItems();
         comboBox_empresa.setEnabled(false);
         if (listaDTOEmpresa.size() > 0) {
             comboBox_empresa.setEnabled(true);
             for (int i = 0; i < listaDTOEmpresa.size(); i++) {
-                DTOEmpresa dtoEmpresa = (DTOEmpresa) listaDTOEmpresa.get(i);
+                DTOEmpresaIUPagar dtoEmpresa = (DTOEmpresaIUPagar) listaDTOEmpresa.get(i);
                 String nombreEmpresa = dtoEmpresa.getNombreEmpresa();
                 comboBox_empresa.addItem(nombreEmpresa);
             }

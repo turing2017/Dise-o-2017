@@ -48,8 +48,14 @@ public class DTOAccionesSistema {
     }
 
     public void imprimirSTD() {
+        System.out.println("-------------------------");
         System.out.println(fechaHoraAccion);
         System.out.println(accion);
-        System.out.println(descripcionAccion);
+        System.out.println();
+        String[] lineasDescripcion = descripcionAccion.split("\\r?\\n");
+        for (String linea : lineasDescripcion) {
+            System.out.println(linea);
+        }
+        System.out.println("-------------------------");
     }
 }

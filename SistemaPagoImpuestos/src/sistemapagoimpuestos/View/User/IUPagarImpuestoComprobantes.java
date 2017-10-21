@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -503,9 +505,10 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         };
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        //listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante().sort();
+        List<DTOItemComprobantePantalla> atributosAdicionales =listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante();
+        Collections.sort(atributosAdicionales);
         
-        for (DTOItemComprobantePantalla item : listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante()) {
+        for (DTOItemComprobantePantalla item : atributosAdicionales) {
             Vector<Object> vect = new Vector<>();
             vect.add(item.getNombreItem());
             vect.add(item.getItemVal());

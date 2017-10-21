@@ -9,7 +9,7 @@ package sistemapagoimpuestos.Dto;
  *
  * @author mviss
  */
-public class DTOItemComprobantePantalla {
+public class DTOItemComprobantePantalla implements Comparable<DTOItemComprobantePantalla>{
     private String codigoItem;
     private String nombreItem;
     private int orden;
@@ -55,6 +55,11 @@ public class DTOItemComprobantePantalla {
 
     public void setOrden(int orden) {
         this.orden = orden;
+    }
+
+    @Override
+    public int compareTo(DTOItemComprobantePantalla o) {
+        return Integer.toString(this.orden).compareTo(Integer.toString(o.orden));
     }
     
     

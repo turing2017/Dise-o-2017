@@ -219,7 +219,7 @@ public class ExpertoGestionarTipoImpuesto {
             empresa= (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
             
             } catch (IndexOutOfBoundsException exception) {
-            Excepciones.getInstance().objetoNoExistente("Empresa loquilla");
+            Excepciones.getInstance().objetoNoExistente("Empresa");
         }
         
         try {

@@ -37,12 +37,6 @@ public class ExpertoGestionarEmpresaAdherida {
     
     public String iniciar() {
 
-        /*TipoUsuario tipoUsuario = usuario.getTipoUsuario();
-        String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
-        System.out.println("1");
-        if (nombreTipoUsuario != "Adminstrador") {
-            System.out.println("Debe ser Cliente para realizar esta acción");
-        }*/
         return "Administrador";
     }
     public ArrayList<DTOEmpresa > consultarEmpresas (){
@@ -125,32 +119,6 @@ public class ExpertoGestionarEmpresaAdherida {
                 itemETI = (ItemEmpresaTipoImpuesto) obj;
                 listItemETI.add(itemETI);
             }
-            
-            
-            /*
-            List<Object> listObject = FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null);
-            ArrayList<DTOEmpresaTipoImpuesto> listDTOEmpresaTipoImpuesto = new ArrayList<>();
-            for(Object obj : listObject){
-            EmpresaTipoImpuesto empresaTipoImpuesto = new EmpresaTipoImpuesto();
-            empresaTipoImpuesto.setEmpresa(new Empresa());
-            empresaTipoImpuesto = (EmpresaTipoImpuesto) obj ;
-            DTOEmpresaTipoImpuesto DTOeti = new DTOEmpresaTipoImpuesto();
-            DTOeti.setEmpresa(empresaTipoImpuesto.getEmpresa());
-             
-            
-             
-             DTOeti.setFechaHoraAltaEmpresaTipoImpuesto(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
-             DTOeti.setFechaHoraInhabilitacionEmpresaTipoImpuestoa(empresaTipoImpuesto.getFechaHoraInhabilitacionEmpresaTipoImpuesto());
-             DTOeti.setTipoEmpresa(empresaTipoImpuesto.getTipoEmpresa());
-             DTOeti.setTipoImpuesto(empresaTipoImpuesto.getTipoImpuesto());
-             DTOeti.setFrecuenciaLiquidacionDTOEmpresaExistente(empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto());
-
-             listDTOEmpresaTipoImpuesto.add(DTOeti);
-
-             }
-            
-            
-            */
             
             return listItemETI;
              
@@ -417,6 +385,7 @@ public class ExpertoGestionarEmpresaAdherida {
             eti.setTipoEmpresa(tEmpresa);
             eti.setTipoImpuesto(tImpuesto);
             eti.setFechaHoraAltaEmpresaTipoImpuesto(new Date());
+            eti.setFechaHoraInhabilitacionEmpresaTipoImpuesto(null);
 
             //Guardo la empresa, y la empresa tipo impuesto
             FachadaPersistencia.getInstance().guardar(empresa);

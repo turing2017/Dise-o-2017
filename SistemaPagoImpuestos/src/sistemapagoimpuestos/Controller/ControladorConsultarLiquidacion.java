@@ -17,6 +17,7 @@ import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoConsultarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUConsultarLiquidacion;
+import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUMostrar;
 
 
 /**
@@ -50,5 +51,12 @@ public class ControladorConsultarLiquidacion {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
-public void mostrar(){}
+public void mostrar(String nliquidacion){
+ IUMostrar mostrar = new IUMostrar(nliquidacion);
+ mostrar.setVisible(true);
+}
+public DTOLiquidacion buscarLiquidacion(String numeroLiquidacion){
+return experto.buscarLiquidacion(numeroLiquidacion);
+}
+
 }

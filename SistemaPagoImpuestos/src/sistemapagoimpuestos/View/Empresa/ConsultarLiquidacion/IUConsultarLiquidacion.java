@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 
 import static datosPrueba.DatosPrueba.generarDatosPrueba;
+import java.text.NumberFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ import sistemapagoimpuestos.Globals.GlobalVars;
  * @author vande
  */
 public class IUConsultarLiquidacion extends javax.swing.JFrame {
-
+ ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
     public IUConsultarLiquidacion() {
         initComponents();
         ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
@@ -239,13 +240,18 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             jTable2.isCellEditable(i, 4);
             jTable2.isCellEditable(i, 5);
             jTable2.isCellEditable(i, 6);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 0);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i, 1);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 2);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 3);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEmpresa(), i, 4);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 5);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreEstadoLiquidacion(), i, 6);
+             jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i, 0);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 1);
+           jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 2);
+           
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 3);
+            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 4);
+            
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(3);
+            
+            jTable2.setValueAt(nf.format(listDtoLiquidacion.get(i).getTotalLiquidado()), i, 5);
+            
         }
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
 
@@ -274,14 +280,10 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
         double montoTotal = 0.0;
-        String nliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
-        String fechaliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
-        String tipoImpuesto = jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString();
-        String empresa = jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString();
-        String fechaDesde =  jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString();
-        String fechaHasta =  jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString();
-        
-        IUMostrar mostrar = new IUMostrar(nliquidacion);
+        String nliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
+       
+       controlador.mostrar(nliquidacion);
+       
     
         //LLena los labels
     //     IUMostrar mostrar = new IUMostrar(nliquidacion,fechaliquidacion);

@@ -11,6 +11,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,15 +36,32 @@ public class IUMostrar extends javax.swing.JDialog {
     public IUMostrar(String nliquidacion) {
         initComponents();
         ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+       DTOLiquidacion dtoLiquidacion = controlador.buscarLiquidacion(nliquidacion);
+       
+        jLabelEmpresa.setText(dtoLiquidacion.getNombreEmpresa());
+        jLabelTipoImpuesto.setText(dtoLiquidacion.getNombreTipoImpuesto());
+        jLabelNrodeLiquidacion.setText(nliquidacion);
+        jLabelFechaLiquidacion.setText(dtoLiquidacion.getFechaHoraLiquidacion().toString());
+       
+        jLabelPeriodo.setText(dtoLiquidacion.getFechaHoraDesdeLiquidacion().toString());
+        jLabelPeriodo2.setText(dtoLiquidacion.getFechaHoraHastaLiquidacion().toString());
+        NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(3);
+        jTextFieldMontoTotal.setText(nf.format(dtoLiquidacion.getTotalLiquidado()));
+        DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
+        
+        for (int i = 0; i < dtoLiquidacion.getListOperacionComision().size(); i++) {
+            model.addRow(new Object[]{});
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNumeroOperacion(), i, 0);
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 1);
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 2);
+            jTableOperacion.setValueAt(nf.format(dtoLiquidacion.getListOperacionComision().get(i).getValorComision()), i, 3);
+             
+            
+        }
+        
        /* DTOLiquidacion liquidacion = controlador.(nliquidacion);
         
-        jLabelNrodeLiquidacion.setText(nliquidacion);
-        jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
-        jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
-        jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
-        jLabelPeriodo.setText(fechaDesde.toString());
-        if (fechaHasta == null){jLabelPeriodo2.setText("---");}else{
-        jLabelPeriodo2.setText(fechaHasta.toString());}
         DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
         Double montoTotal = 0.0;
         for (int i = 0; i < liquidacion.getListOperacionComision().size(); i++) {

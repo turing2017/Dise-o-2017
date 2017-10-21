@@ -35,4 +35,11 @@ public class DecoradorConsultarLiquidacion extends ExpertoConsultarLiquidacion {
         FachadaInterna.getInstance().finalizarTransaccion();
         return listDtos;
    }
+    @Override
+   public DTOLiquidacion buscarLiquidacion(String numeroLiquidacion){
+   FachadaInterna.getInstance().iniciarTransaccion();
+   DTOLiquidacion dtoLiquidacion = super.buscarLiquidacion(numeroLiquidacion);
+   FachadaInterna.getInstance().finalizarTransaccion();
+   return dtoLiquidacion;
+   }
 }

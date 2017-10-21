@@ -22,6 +22,7 @@ public class DTOLiquidacion {
     private String nombreTipoImpuesto;
     private String nombreEstadoLiquidacion;
     private List<DTOOperacionComision> listOperacionComision;
+    private double TotalLiquidado;
     public DTOLiquidacion() {
     }
 
@@ -35,25 +36,14 @@ public class DTOLiquidacion {
         this.listOperacionComision = listOperacionComision;
     }
 
-    public DTOLiquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion, String nombreEmpresa, String nombreTipoImpuesto, String nombreEstadoLiquidacion, List<DTOOperacionComision> listOperacionComision) {
-        this.numeroLiquidacion = numeroLiquidacion;
-        this.fechaHoraLiquidacion = fechaHoraLiquidacion;
-        this.fechaHoraDesdeLiquidacion = fechaHoraDesdeLiquidacion;
-        this.fechaHoraHastaLiquidacion = fechaHoraHastaLiquidacion;
-        this.nombreEmpresa = nombreEmpresa;
-        this.nombreTipoImpuesto = nombreTipoImpuesto;
-        this.nombreEstadoLiquidacion = nombreEstadoLiquidacion;
-        this.listOperacionComision = listOperacionComision;
+   
+
+    public double getTotalLiquidado() {
+        return TotalLiquidado;
     }
 
-    public DTOLiquidacion(int numeroLiquidacion, Date fechaHoraLiquidacion, Date fechaHoraDesdeLiquidacion, Date fechaHoraHastaLiquidacion, String nombreEmpresa, String nombreTipoImpuesto, String nombreEstadoLiquidacion) {//por si alguien lo usaba sin los operacion/comision para q no explote
-        this.numeroLiquidacion = numeroLiquidacion;
-        this.fechaHoraLiquidacion = fechaHoraLiquidacion;
-        this.fechaHoraDesdeLiquidacion = fechaHoraDesdeLiquidacion;
-        this.fechaHoraHastaLiquidacion = fechaHoraHastaLiquidacion;
-        this.nombreEmpresa = nombreEmpresa;
-        this.nombreTipoImpuesto = nombreTipoImpuesto;
-        this.nombreEstadoLiquidacion = nombreEstadoLiquidacion;
+    public void setTotalLiquidado(double TotalLiquidado) {
+        this.TotalLiquidado = TotalLiquidado;
     }
 
     public int getNumeroLiquidacion() {

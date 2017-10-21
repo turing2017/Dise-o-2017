@@ -20,6 +20,8 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
 
     public IUPantallaEmpresa() {
         initComponents();
+        jLabelNombreUsuario.setText(GlobalVars.userActive.getNombreUsuario());
+        jLabelfechaUltimoacceso.setText(GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString());
     }
 
     /**
@@ -35,8 +37,8 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jToggleButton3 = new javax.swing.JToggleButton();
-        label_fecha1 = new javax.swing.JLabel();
-        label_nombre1 = new javax.swing.JLabel();
+        jLabelfechaUltimoacceso = new javax.swing.JLabel();
+        jLabelNombreUsuario = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         jToggleButton1.setText("Pagar Impuestos");
@@ -54,9 +56,9 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
             }
         });
 
-        label_fecha1.setText("jLabel3");
+        jLabelfechaUltimoacceso.setText("jLabel3");
 
-        label_nombre1.setText("jLabel2");
+        jLabelNombreUsuario.setText("jLabel2");
 
         jButton1.setText("Consultar Liquidacion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,8 +83,8 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_nombre1)
-                            .addComponent(label_fecha1))
+                            .addComponent(jLabelNombreUsuario)
+                            .addComponent(jLabelfechaUltimoacceso))
                         .addGap(109, 109, 109))))
         );
         layout.setVerticalGroup(
@@ -98,9 +100,9 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
                         .addComponent(jToggleButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(label_nombre1)
+                        .addComponent(jLabelNombreUsuario)
                         .addGap(18, 18, 18)
-                        .addComponent(label_fecha1)))
+                        .addComponent(jLabelfechaUltimoacceso)))
                 .addContainerGap(239, Short.MAX_VALUE))
         );
 
@@ -154,17 +156,17 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelNombreUsuario;
+    private javax.swing.JLabel jLabelfechaUltimoacceso;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JLabel label_fecha1;
-    private javax.swing.JLabel label_nombre1;
     // End of variables declaration//GEN-END:variables
 
     public void mostrarPantallaPrincipal() {
         IUPantallaEmpresa pe = new IUPantallaEmpresa();
         String fechaHoraInhabilitacionUsuarioEncontrada = (GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario() == null)?"Sin último acceso":GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString();        
-        pe.label_nombre1.setText("Nombre Usuario: " + GlobalVars.userActive.getNombreUsuario());
-        pe.label_fecha1.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
+        pe.jLabelNombreUsuario.setText("Nombre Usuario: " + GlobalVars.userActive.getNombreUsuario());
+        pe.jLabelfechaUltimoacceso.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
         MetodosPantalla.getInstance().setearPantalla(this);
     }
 }

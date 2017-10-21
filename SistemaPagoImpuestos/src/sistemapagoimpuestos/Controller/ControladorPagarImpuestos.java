@@ -73,12 +73,12 @@ public class ControladorPagarImpuestos {
         }
     }
     
-    public void mostrarPantallaComprobantes(List<DTOComprobantePantalla> listaComprobantePantalla){
-        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(listaComprobantePantalla);
+    public void mostrarPantallaComprobantes(List<DTOComprobantePantalla> listaComprobantePantalla, boolean esEditable){
+        IUPagarImpuestoComprobantes pantallaComprobantes = new IUPagarImpuestoComprobantes(listaComprobantePantalla, esEditable);
         pantallaComprobantes.setVisible(true);
     }
     
-    public boolean isMontoEditable() throws Exception {
+    public boolean isMontoEditable() {
         return experto.isMontoEditable();
     }
 

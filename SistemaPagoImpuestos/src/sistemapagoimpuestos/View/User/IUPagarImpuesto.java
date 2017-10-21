@@ -184,7 +184,8 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
 
     private void button_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscarActionPerformed
         List<DTOComprobantePantalla> listadoComprobantePantalla = controlador.seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
-        controlador.mostrarPantallaComprobantes(listadoComprobantePantalla);
+        boolean esEditable = controlador.isMontoEditable();
+        controlador.mostrarPantallaComprobantes(listadoComprobantePantalla, esEditable);
         this.dispose();
     }//GEN-LAST:event_button_buscarActionPerformed
 

@@ -119,7 +119,7 @@ public class ExpertoPagarImpuestos {
         return comprobantePantallas;
     }
 
-    public boolean isMontoEditable() throws Exception {
+    public boolean isMontoEditable(){
         return tipoImpuestoSeleccionado.isEsMontoEditableTipoImpuesto();
     }
 

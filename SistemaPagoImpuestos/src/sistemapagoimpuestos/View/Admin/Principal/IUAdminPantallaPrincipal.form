@@ -33,15 +33,17 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="button_gestionar_liquidacion" max="32767" attributes="0"/>
-                  <Component id="button_gestionarTipoUsuario" max="32767" attributes="0"/>
-                  <Component id="button_gestionarUsuario" alignment="0" max="32767" attributes="0"/>
-                  <Component id="button_gestionarTipoImpuesto" alignment="0" max="32767" attributes="0"/>
-                  <Component id="button_gestionarItem" alignment="0" max="32767" attributes="0"/>
-                  <Component id="button_gestionar_cal_params" alignment="0" pref="266" max="32767" attributes="0"/>
-                  <Component id="button_gestionarEmpresaAdherida" alignment="1" max="32767" attributes="0"/>
-                  <Component id="button_calcular_liquidaciones" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="button_gestionar_cal_params" min="-2" pref="350" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="button_gestionar_liquidacion" pref="350" max="32767" attributes="0"/>
+                      <Component id="button_gestionarTipoUsuario" pref="350" max="32767" attributes="0"/>
+                      <Component id="button_gestionarUsuario" alignment="0" pref="350" max="32767" attributes="0"/>
+                      <Component id="button_gestionarTipoImpuesto" alignment="0" pref="350" max="32767" attributes="0"/>
+                      <Component id="button_gestionarItem" alignment="0" pref="350" max="32767" attributes="0"/>
+                      <Component id="button_gestionarEmpresaAdherida" alignment="1" pref="350" max="32767" attributes="0"/>
+                      <Component id="button_calcular_liquidaciones" pref="350" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="286" max="32767" attributes="0"/>
           </Group>
@@ -55,22 +57,22 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="label_fecha" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Component id="button_gestionarTipoUsuario" min="-2" max="-2" attributes="0"/>
+              <Component id="button_gestionarTipoUsuario" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="button_gestionarUsuario" min="-2" max="-2" attributes="0"/>
+              <Component id="button_gestionarUsuario" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="button_gestionarTipoImpuesto" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="button_gestionarTipoImpuesto" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="button_gestionarItem" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="button_gestionarItem" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="button_gestionar_cal_params" min="-2" max="-2" attributes="0"/>
+              <Component id="button_gestionarEmpresaAdherida" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="button_gestionar_cal_params" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="button_gestionarEmpresaAdherida" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="button_gestionar_liquidacion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="button_calcular_liquidaciones" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="151" max="32767" attributes="0"/>
+              <Component id="button_gestionar_liquidacion" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="button_calcular_liquidaciones" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,7 +122,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="button_gestionar_cal_params">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Gestionar Calculo Parametros"/>
+        <Property name="text" type="java.lang.String" value="Gestionar Par&#xe1;metros de C&#xe1;lculo de Comisi&#xf3;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionar_cal_paramsActionPerformed"/>

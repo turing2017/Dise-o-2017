@@ -8,7 +8,7 @@ package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 import static datosPrueba.DatosPrueba.generarDatosPrueba;
 import java.text.NumberFormat;
 import java.time.Instant;
-import java.util.ArrayList;
+
 import java.util.List;
 import javafx.util.converter.LocalDateStringConverter;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
@@ -229,7 +229,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
-       ArrayList <DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
+       List <DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
         //LLena la tabla
         for (int i = 0; i < listDtoLiquidacion.size(); i++) {
 

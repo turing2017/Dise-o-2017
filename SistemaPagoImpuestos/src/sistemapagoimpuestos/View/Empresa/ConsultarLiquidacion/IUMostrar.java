@@ -44,8 +44,8 @@ public class IUMostrar extends javax.swing.JDialog {
         jLabelNrodeLiquidacion.setText(nliquidacion);
         jLabelFechaLiquidacion.setText(dtoLiquidacion.getFechaHoraLiquidacion().toString());
        
-        jLabelPeriodo.setText(dtoLiquidacion.getFechaHoraDesdeLiquidacion().toString());
-        jLabelPeriodo2.setText(dtoLiquidacion.getFechaHoraHastaLiquidacion().toString());
+        jLabelPeriodo.setText(dtoLiquidacion.getFechaHoraDesdeLiquidacion().toString()+" - "+dtoLiquidacion.getFechaHoraHastaLiquidacion().toString());
+        
         NumberFormat nf = NumberFormat.getInstance();
             nf.setMaximumFractionDigits(3);
         jTextFieldMontoTotal.setText(nf.format(dtoLiquidacion.getTotalLiquidado()));
@@ -61,28 +61,7 @@ public class IUMostrar extends javax.swing.JDialog {
              
             
         }
-        
-       /* DTOLiquidacion liquidacion = controlador.(nliquidacion);
-        
-        DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
-        Double montoTotal = 0.0;
-        for (int i = 0; i < liquidacion.getListOperacionComision().size(); i++) {
-            model.addRow(new Object[]{});
-            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getNumeroOperacion(), i, 0);
-            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 1);
-            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getValorComision(), i, 2);
-            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 3);
-             System.out.println(liquidacion.getListOperacionComision().get(i).getValorComision());
-            montoTotal= liquidacion.getListOperacionComision().get(i).getValorComision() +montoTotal;
-        }
-       System.out.println(montoTotal);
-       jTextFieldMontoTotal.setText(montoTotal.toString());
-        this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
-        this.setTitle("Operaciones");
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-    }
+     /*
 */
     }
     /**
@@ -111,8 +90,6 @@ public class IUMostrar extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldMontoTotal = new javax.swing.JTextField();
-        jLabelPeriodo2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         buttonDescargar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -184,11 +161,6 @@ public class IUMostrar extends javax.swing.JDialog {
             }
         });
 
-        jLabelPeriodo2.setText("jLabel6");
-
-        jLabel6.setText("-");
-        jLabel6.setEnabled(false);
-
         buttonDescargar.setText("Imprimir");
         buttonDescargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,11 +202,7 @@ public class IUMostrar extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabelPeriodo)
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelPeriodo2))))
+                                .addComponent(jLabelPeriodo))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -270,9 +238,7 @@ public class IUMostrar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabelPeriodo)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabelPeriodo2))
+                    .addComponent(jLabelPeriodo))
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -375,12 +341,10 @@ public class IUMostrar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     public static javax.swing.JLabel jLabelEmpresa;
     public static javax.swing.JLabel jLabelFechaLiquidacion;
     public static javax.swing.JLabel jLabelNrodeLiquidacion;
     public static javax.swing.JLabel jLabelPeriodo;
-    public static javax.swing.JLabel jLabelPeriodo2;
     public static javax.swing.JLabel jLabelTipoImpuesto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

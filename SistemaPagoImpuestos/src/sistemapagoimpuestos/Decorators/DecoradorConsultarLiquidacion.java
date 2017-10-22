@@ -5,7 +5,7 @@
  */
 package sistemapagoimpuestos.Decorators;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
@@ -30,9 +30,9 @@ public class DecoradorConsultarLiquidacion extends ExpertoConsultarLiquidacion {
         return listDtos;
     }
    @Override
-   public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta){
+   public List<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta){
         FachadaInterna.getInstance().iniciarTransaccion();
-        ArrayList<DTOLiquidacionesConsultarLiquidaciones> listDtos = super.buscarLiquidacionConFiltro(nombreTipoImpuesto,nombreEmpresa,fechaDesde,fechaHasta);
+        List<DTOLiquidacionesConsultarLiquidaciones> listDtos = super.buscarLiquidacionConFiltro(nombreTipoImpuesto,nombreEmpresa,fechaDesde,fechaHasta);
         FachadaInterna.getInstance().finalizarTransaccion();
         return listDtos;
    }

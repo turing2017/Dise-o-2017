@@ -36,7 +36,7 @@ public class ControladorConsultarLiquidacion {
         return experto.obtenerTipoImpuestos();
     }
 
-    public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
+    public List<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
         return experto.buscarLiquidacionConFiltro(itemAt, text, fechadesde, fechahasta);
     }
 

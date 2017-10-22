@@ -31,15 +31,14 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
 public class ExpertoConsultarLiquidacion {
     public void validarUsuario() throws Exception {
+        
         if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Empresa")) {
             throw new ExcepcionGenerica("Error de privilegios");
         }
     }
     
     // Metodo iniciar
-    public String iniciar() {
-        return "Empresa";
-    }
+    
 
     public List<DTOTipoImpuesto> obtenerTipoImpuestos() {
         //Buscamos la empresa com el cuit del usuario.
@@ -62,9 +61,9 @@ public class ExpertoConsultarLiquidacion {
         return dtosTipoImpuesto;
     }
 
-    public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
+    public List<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
         double TotalLiquidado= 0;
-        ArrayList<DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = new ArrayList<DTOLiquidacionesConsultarLiquidaciones>();
+        List<DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = new ArrayList<DTOLiquidacionesConsultarLiquidaciones>();
         List<DTOCriterio> criterios = new ArrayList();
 
         if ("Todos".equals(nombreTipoImpuesto)) {

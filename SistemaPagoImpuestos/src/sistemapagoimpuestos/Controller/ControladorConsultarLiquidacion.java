@@ -56,8 +56,8 @@ public void mostrar(String nliquidacion){
  IUMostrar mostrar = new IUMostrar(nliquidacion);
  mostrar.setVisible(true);
 }
-public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
-return experto.buscarLiquidacion(numeroLiquidacion);
+public DTOLiquidacionesConsultarLiquidaciones buscardetalleLiquidacion(String numeroLiquidacion){
+return experto.buscardetalleLiquidacion(numeroLiquidacion);
 }
 
 }

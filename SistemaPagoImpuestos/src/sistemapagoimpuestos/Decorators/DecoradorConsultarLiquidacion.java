@@ -37,9 +37,9 @@ public class DecoradorConsultarLiquidacion extends ExpertoConsultarLiquidacion {
         return listDtos;
    }
     @Override
-   public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
+   public DTOLiquidacionesConsultarLiquidaciones buscardetalleLiquidacion(String numeroLiquidacion){
    FachadaInterna.getInstance().iniciarTransaccion();
-   DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = super.buscarLiquidacion(numeroLiquidacion);
+   DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = super.buscardetalleLiquidacion(numeroLiquidacion);
    FachadaInterna.getInstance().finalizarTransaccion();
    return dtoLiquidacion;
    }

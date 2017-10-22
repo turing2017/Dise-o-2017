@@ -37,7 +37,7 @@ public class IUMostrar extends javax.swing.JDialog {
     public IUMostrar(String nliquidacion) {
         initComponents();
         ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
-       DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = controlador.buscarLiquidacion(nliquidacion);
+       DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = controlador.buscardetalleLiquidacion(nliquidacion);
        
         jLabelEmpresa.setText(dtoLiquidacion.getNombreEmpresa());
         jLabelTipoImpuesto.setText(dtoLiquidacion.getNombreTipoImpuesto());

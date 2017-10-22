@@ -188,7 +188,7 @@ public class ExpertoConsultarLiquidacion {
               
                 return listDtoLiquidacion;
             }
-    public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
+    public DTOLiquidacionesConsultarLiquidaciones buscardetalleLiquidacion(String numeroLiquidacion){
         double montoTotal=0;
         DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = new DTOLiquidacionesConsultarLiquidaciones();
          List<DTOCriterio> criterios = new ArrayList();

@@ -66,7 +66,7 @@
                               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="dateChooserCombohasta" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonConsultarLiquidaciones" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
+                                  <Component id="jButtonConsultarOperacionesBancarias" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Component id="dateChooserCombodesde" min="-2" max="-2" attributes="0"/>
                                       <Component id="jComboBoxTipoImpuesto" alignment="1" min="-2" pref="153" max="-2" attributes="0"/>
@@ -86,6 +86,14 @@
                   </Group>
               </Group>
               <EmptySpace pref="28" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldMontoTotal" min="-2" pref="126" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,10 +121,14 @@
                   <Component id="dateChooserCombohasta" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="jButtonConsultarLiquidaciones" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonConsultarOperacionesBancarias" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="198" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTextFieldMontoTotal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jButtonMostrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="127" max="32767" attributes="0"/>
           </Group>
@@ -158,12 +170,12 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonConsultarLiquidaciones">
+    <Component class="javax.swing.JButton" name="jButtonConsultarOperacionesBancarias">
       <Properties>
         <Property name="text" type="java.lang.String" value="Consultar Operaciones"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConsultarLiquidacionesActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConsultarOperacionesBancariasActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -177,12 +189,12 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="0">
-                <Column editable="true" title="Fecha Liquidacion" type="java.lang.Object"/>
-                <Column editable="true" title="Numero Liquidacion" type="java.lang.Object"/>
+                <Column editable="true" title="Fecha Operacion" type="java.lang.Object"/>
+                <Column editable="true" title="Numero Operacion" type="java.lang.Object"/>
+                <Column editable="true" title="Codigo Pago Electronico" type="java.lang.Object"/>
+                <Column editable="true" title="NroComprobante" type="java.lang.Object"/>
                 <Column editable="true" title="Tipo Impuesto" type="java.lang.Object"/>
-                <Column editable="true" title="fecha desde" type="java.lang.Object"/>
-                <Column editable="true" title="fecha hasta" type="java.lang.Object"/>
-                <Column editable="true" title="Total Liquidado" type="java.lang.Object"/>
+                <Column editable="true" title="Importe Pagado" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -263,6 +275,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNombreEmpresaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldMontoTotal">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Importe Pagado Total"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

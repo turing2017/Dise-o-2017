@@ -10,7 +10,8 @@ import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+
+import sistemapagoimpuestos.Dto.DTOOperacionConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -30,8 +31,8 @@ public class ControladorConsultarOperacionesBancarias {
         return experto.obtenerTipoImpuestos();
     }
 
-    public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
-        return experto.buscarLiquidacionConFiltro(itemAt, text, fechadesde, fechahasta);
+    public List<DTOOperacionConsultarOperacionesBancarias> buscarOperacionesConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechadesde, Date fechahasta) {
+        return experto.buscarOperacionesConFiltro(nombreTipoImpuesto, nombreEmpresa, fechadesde, fechahasta);
     }
 
     public void validarUsuario() {
@@ -50,9 +51,7 @@ public void mostrar(String nliquidacion){
  IUMostrar mostrar = new IUMostrar(nliquidacion);
  mostrar.setVisible(true);
 }
-public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
-return experto.buscarLiquidacion(numeroLiquidacion);
-}
+
 
 }
 

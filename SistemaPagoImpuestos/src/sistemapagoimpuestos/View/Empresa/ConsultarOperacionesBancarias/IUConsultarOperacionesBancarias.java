@@ -12,7 +12,8 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorConsultarOperacionesBancarias;
-import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+
+import sistemapagoimpuestos.Dto.DTOOperacionConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Globals.GlobalVars;
 
 /**
@@ -49,12 +50,14 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         dateChooserCombodesde = new datechooser.beans.DateChooserCombo();
         dateChooserCombohasta = new datechooser.beans.DateChooserCombo();
-        jButtonConsultarLiquidaciones = new javax.swing.JButton();
+        jButtonConsultarOperacionesBancarias = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         jButtonMostrar = new javax.swing.JButton();
         jTextFieldNombreEmpresa = new javax.swing.JTextField();
+        jTextFieldMontoTotal = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,10 +97,10 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
 
         dateChooserCombohasta.setCalendarPreferredSize(new java.awt.Dimension(400, 300));
 
-        jButtonConsultarLiquidaciones.setText("Consultar Operaciones");
-        jButtonConsultarLiquidaciones.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConsultarOperacionesBancarias.setText("Consultar Operaciones");
+        jButtonConsultarOperacionesBancarias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarLiquidacionesActionPerformed(evt);
+                jButtonConsultarOperacionesBancariasActionPerformed(evt);
             }
         });
 
@@ -111,7 +114,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha Liquidacion", "Numero Liquidacion", "Tipo Impuesto", "fecha desde", "fecha hasta", "Total Liquidado"
+                "Fecha Operacion", "Numero Operacion", "Codigo Pago Electronico", "NroComprobante", "Tipo Impuesto", "Importe Pagado"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -141,6 +144,8 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Importe Pagado Total");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,7 +164,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                                 .addGap(99, 99, 99)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonConsultarLiquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonConsultarOperacionesBancarias, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(dateChooserCombodesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jComboBoxTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,6 +176,12 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                         .addGap(307, 307, 307)
                         .addComponent(jButtonMostrar)))
                 .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,10 +203,14 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(dateChooserCombohasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addComponent(jButtonConsultarLiquidaciones)
+                .addComponent(jButtonConsultarOperacionesBancarias)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonMostrar)
                 .addContainerGap(127, Short.MAX_VALUE))
         );
@@ -206,7 +221,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConsultarLiquidacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarLiquidacionesActionPerformed
+    private void jButtonConsultarOperacionesBancariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarOperacionesBancariasActionPerformed
 
     DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             while (model.getRowCount()>0) {
@@ -216,9 +231,10 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
        ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
-       ArrayList <DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
-        //LLena la tabla
-        for (int i = 0; i < listDtoLiquidacion.size(); i++) {
+       List <DTOOperacionConsultarOperacionesBancarias> listDtoOperacion = controlador.buscarOperacionesConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
+        double montoTotal=0;
+//LLena la tabla
+        for (int i = 0; i < listDtoOperacion.size(); i++) {
 
             model.addRow(new Object[]{});
             jTable2.isCellEditable(i, 0);
@@ -228,20 +244,24 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
             jTable2.isCellEditable(i, 4);
             jTable2.isCellEditable(i, 5);
             jTable2.isCellEditable(i, 6);
-             jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraLiquidacion(), i, 0);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getNumeroLiquidacion(), i, 1);
-           jTable2.setValueAt(listDtoLiquidacion.get(i).getNombreTipoImpuesto(), i, 2);
-           
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraDesdeLiquidacion(), i, 3);
-            jTable2.setValueAt(listDtoLiquidacion.get(i).getFechaHoraHastaLiquidacion(), i, 4);
             
+             jTable2.setValueAt(listDtoOperacion.get(i).getFechaHoraOperacion(), i, 0);
+              jTable2.setValueAt(listDtoOperacion.get(i).getNumeroOperacion(), i, 1);
+            jTable2.setValueAt(listDtoOperacion.get(i).getCodigoPagoElectronicoOperacion(), i, 2);
+            jTable2.setValueAt(listDtoOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 3);
+            jTable2.setValueAt(listDtoOperacion.get(i).getTipoImpuesto(), i, 4);
+            jTable2.setValueAt(listDtoOperacion.get(i).getImportePagadoOperacion(), i, 5);
+            
+            montoTotal+=listDtoOperacion.get(i).getImportePagadoOperacion();
             NumberFormat nf = NumberFormat.getInstance();
             nf.setMaximumFractionDigits(3);
             
-            jTable2.setValueAt(nf.format(listDtoLiquidacion.get(i).getTotalLiquidado()), i, 5);
+            
             
         }
-    }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
+        jTextFieldMontoTotal.setText(""+montoTotal);
+        jTextFieldMontoTotal.setEditable(false);
+    }//GEN-LAST:event_jButtonConsultarOperacionesBancariasActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
      /*   jComboBoxEmpresa.removeAllItems();
@@ -379,17 +399,19 @@ ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarO
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombodesde;
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
-    private javax.swing.JButton jButtonConsultarLiquidaciones;
+    private javax.swing.JButton jButtonConsultarOperacionesBancarias;
     private javax.swing.JButton jButtonMostrar;
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextFieldMontoTotal;
     private javax.swing.JTextField jTextFieldNombreEmpresa;
     // End of variables declaration//GEN-END:variables
 }

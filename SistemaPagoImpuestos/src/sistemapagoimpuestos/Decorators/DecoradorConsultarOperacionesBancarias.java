@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+import sistemapagoimpuestos.Dto.DTOOperacionConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -26,17 +27,11 @@ public class DecoradorConsultarOperacionesBancarias extends ExpertoConsultarOper
         return listDtos;
     }
    @Override
-   public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta){
+   public List<DTOOperacionConsultarOperacionesBancarias> buscarOperacionesConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta){
         FachadaInterna.getInstance().iniciarTransaccion();
-        ArrayList<DTOLiquidacionesConsultarLiquidaciones> listDtos = super.buscarLiquidacionConFiltro(nombreTipoImpuesto,nombreEmpresa,fechaDesde,fechaHasta);
+        List<DTOOperacionConsultarOperacionesBancarias> listDtos = super.buscarOperacionesConFiltro(nombreTipoImpuesto,nombreEmpresa,fechaDesde,fechaHasta);
         FachadaInterna.getInstance().finalizarTransaccion();
         return listDtos;
    }
-    @Override
-   public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
-   FachadaInterna.getInstance().iniciarTransaccion();
-   DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = super.buscarLiquidacion(numeroLiquidacion);
-   FachadaInterna.getInstance().finalizarTransaccion();
-   return dtoLiquidacion;
-   }
+    
 }

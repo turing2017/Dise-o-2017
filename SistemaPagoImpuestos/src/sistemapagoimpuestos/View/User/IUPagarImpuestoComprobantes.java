@@ -317,7 +317,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 int posicionPagoMinimo = 0;
 
                 for (int i = 0; i < tabla_atrib_adic.getRowCount(); i++) {
-                    if (tabla_atrib_adic.getValueAt(i, 0).equals("Monto Minimo")) {                        
+                    if (tabla_atrib_adic.getValueAt(i, 0).equals("Monto Minimo")) {
                         posicionPagoMinimo = i;
                     }
                 }
@@ -343,12 +343,15 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 return;
             }
             DTOOperacionActual dtoOperacion = pagarImpuesto(lbl_out_cbu.getText(),
-                    Double.parseDouble(textfield_monto_a_pagar.getText()),
-                    nroFactura,
-                    CodigoFactura);
-            this.dispose();
-            IUPagarImpuestoOperacion iuOperacion = new IUPagarImpuestoOperacion(dtoOperacion);
-            iuOperacion.setVisible(true);
+                Double.parseDouble(textfield_monto_a_pagar.getText()),
+                nroFactura,
+                CodigoFactura);
+            if (dtoOperacion != null) {
+
+                this.dispose();
+                IUPagarImpuestoOperacion iuOperacion = new IUPagarImpuestoOperacion(dtoOperacion);
+                iuOperacion.setVisible(true);
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane msg = new JOptionPane("Debe seleccionar un comprobante", JOptionPane.PLAIN_MESSAGE);
             JDialog dlg = msg.createDialog("Error");
@@ -456,7 +459,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
+                    table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 return this;
             }
@@ -493,9 +496,9 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             }
         };
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        List<DTOItemComprobantePantalla> atributosAdicionales =listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante();
+        List<DTOItemComprobantePantalla> atributosAdicionales = listaComprobantesPantalla.get(0).getAtributosAdicionalesComprobante();
         Collections.sort(atributosAdicionales);
-        
+
         for (DTOItemComprobantePantalla item : atributosAdicionales) {
             Vector<Object> vect = new Vector<>();
             vect.add(item.getNombreItem());
@@ -506,7 +509,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
+                    table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 return this;
             }
@@ -558,7 +561,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
+                    table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 return this;
             }
@@ -567,12 +570,12 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_cuentas.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_cuentas.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-    
+
     // Método para obtener las cuentas
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
         return controlador.obtenerCuentas(cuilCliente);
     }
-    
+
     // Método pagar impuesto
     public DTOOperacionActual pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String CodigoPago) {
         return controlador.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, CodigoPago);

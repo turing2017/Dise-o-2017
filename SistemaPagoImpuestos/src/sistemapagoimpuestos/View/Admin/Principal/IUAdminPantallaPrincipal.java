@@ -27,13 +27,14 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     
     public IUAdminPantallaPrincipal() {
         initComponents();
+        (this).setTitle("Sistema de Pago Impuestos - GESTIÓN");
     }
     
     public void mostrarPantallaPrincipal(){
         IUAdminPantallaPrincipal pp = new IUAdminPantallaPrincipal();
         String fechaHoraInhabilitacionUsuarioEncontrada = (GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario() == null)?"Sin último acceso":GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString();        
-        pp.label_nombre.setText("Nombre Usuario: " + GlobalVars.userActive.getNombreUsuario());
-        pp.label_fecha.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
+        pp.label_nombre.setText("Usuario: " + GlobalVars.userActive.getNombreUsuario());
+        pp.label_fecha.setText("Último acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
         MetodosPantalla.getInstance().setearPantalla(pp);
     }
 
@@ -51,6 +52,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         button_gestionarEmpresaAdherida = new javax.swing.JButton();
         button_gestionar_liquidacion = new javax.swing.JButton();
         button_calcular_liquidaciones = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,16 +116,17 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButtonSalir.setText("SALIR");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_fecha)
-                    .addComponent(label_nombre))
-                .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,6 +140,17 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                         .addComponent(button_gestionarEmpresaAdherida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                         .addComponent(button_calcular_liquidaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
                 .addContainerGap(286, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_fecha)
+                            .addComponent(label_nombre))
+                        .addGap(90, 90, 90))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +175,9 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(button_gestionar_liquidacion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_calcular_liquidaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +229,10 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_button_calcular_liquidacionesActionPerformed
 
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +278,8 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton button_gestionarUsuario;
     private javax.swing.JButton button_gestionar_cal_params;
     private javax.swing.JButton button_gestionar_liquidacion;
+    private javax.swing.JButton jButtonSalir;
+    private javax.swing.JButton jButtonSalir2;
     private javax.swing.JLabel label_fecha;
     private javax.swing.JLabel label_nombre;
     // End of variables declaration//GEN-END:variables

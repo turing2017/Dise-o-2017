@@ -21,8 +21,9 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
 
     public IUPantallaEmpresa() {
         initComponents();
-        jLabelNombreUsuario.setText(GlobalVars.userActive.getNombreUsuario());
-        jLabelfechaUltimoacceso.setText(GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString());
+        jLabelNombreUsuario.setText("Usuario: " + GlobalVars.userActive.getNombreUsuario());
+        jLabelfechaUltimoacceso.setText("Último acceso: " + GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString());
+        (this).setTitle("Sistema de Pago Impuestos - EMPRESA");
     }
 
     /**
@@ -41,6 +42,7 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
         jLabelfechaUltimoacceso = new javax.swing.JLabel();
         jLabelNombreUsuario = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButtonSalir = new javax.swing.JButton();
 
         jToggleButton1.setText("Pagar Impuestos");
 
@@ -68,6 +70,13 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
             }
         });
 
+        jButtonSalir.setText("SALIR");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,34 +86,40 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton3)
-                            .addComponent(jLabel1))
-                        .addContainerGap(301, Short.MAX_VALUE))
+                            .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNombreUsuario)
                             .addComponent(jLabelfechaUltimoacceso))
-                        .addGap(109, 109, 109))))
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jToggleButton3))
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addContainerGap()
                         .addComponent(jLabelNombreUsuario)
                         .addGap(18, 18, 18)
                         .addComponent(jLabelfechaUltimoacceso)))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addGap(97, 97, 97)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -121,6 +136,10 @@ this.dispose();// TODO add your handling code here:
         controladorConsultarLiq.validarUsuario();
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +177,7 @@ this.dispose();// TODO add your handling code here:
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelNombreUsuario;

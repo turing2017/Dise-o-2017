@@ -4,14 +4,11 @@
  * and open the template in the editor.
  */
 package sistemapagoimpuestos.Dto;
-
 import java.util.Date;
 
-/**
- *
- * @author vande
- */
-public class DTOOperacionComision {
+
+
+public class DTOOperacionConsultarLiquidacion {
    
     double valorComision;
     
@@ -19,10 +16,10 @@ public class DTOOperacionComision {
     int nroComprobanteFactura;
     double importePagadoOperacion;
 
-    public DTOOperacionComision() {
+    public DTOOperacionConsultarLiquidacion() {
     }
 
-    public DTOOperacionComision(double valorComision, int numeroOperacion, int nroComprobanteFactura, double importePagadoOperacion) {
+    public DTOOperacionConsultarLiquidacion(double valorComision, int numeroOperacion, int nroComprobanteFactura, double importePagadoOperacion) {
         this.valorComision = valorComision;
        
         this.numeroOperacion = numeroOperacion;
@@ -66,3 +63,5 @@ public class DTOOperacionComision {
 
 
 }
+  
+

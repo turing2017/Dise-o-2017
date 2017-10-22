@@ -14,7 +14,7 @@ import javafx.util.converter.LocalDateStringConverter;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOLiquidacion;
+
 import sistemapagoimpuestos.Entity.Liquidacion;
 import java.util.Date;
 import java.util.Calendar;
@@ -23,7 +23,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOOperacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Globals.GlobalVars;
 
@@ -228,7 +229,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
-       ArrayList <DTOLiquidacion> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
+       ArrayList <DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
         //LLena la tabla
         for (int i = 0; i < listDtoLiquidacion.size(); i++) {
 

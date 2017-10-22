@@ -469,7 +469,7 @@ public class ExpertoGestionarLiquidacion {
                 if (comisionIgualDesde || comisionMayorDesde) { //mayor o igual
                     flag = true;
                     DTOOperacionComision dtoComision = new DTOOperacionComision();
-                    dtoComision.setFechaCalculoComision(comision.getFechaCalculoComision());
+                   
                     dtoComision.setValorComision(comision.getValorComision());
                     
                     dtoComision.setNumeroOperacion(comision.getOperacion().getNumeroOperacion());
@@ -493,7 +493,7 @@ public class ExpertoGestionarLiquidacion {
                 if ((comisionIgualDesde || comisionMayorDesde) && (comisionMenorHasta)) { // mayor igual DESDE, y menor a Hasta
                     flag = true;
                     DTOOperacionComision dtoComision = new DTOOperacionComision();
-                    dtoComision.setFechaCalculoComision(comision.getFechaCalculoComision());
+                  
                     dtoComision.setValorComision(comision.getValorComision());
                     
                     dtoComision.setNumeroOperacion(comision.getOperacion().getNumeroOperacion());

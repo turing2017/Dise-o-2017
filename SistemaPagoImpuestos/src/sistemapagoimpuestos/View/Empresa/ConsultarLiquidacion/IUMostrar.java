@@ -20,7 +20,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
-import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+
 import sistemapagoimpuestos.Utils.Printer;
 
 
@@ -36,7 +37,7 @@ public class IUMostrar extends javax.swing.JDialog {
     public IUMostrar(String nliquidacion) {
         initComponents();
         ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
-       DTOLiquidacion dtoLiquidacion = controlador.buscarLiquidacion(nliquidacion);
+       DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = controlador.buscarLiquidacion(nliquidacion);
        
         jLabelEmpresa.setText(dtoLiquidacion.getNombreEmpresa());
         jLabelTipoImpuesto.setText(dtoLiquidacion.getNombreTipoImpuesto());
@@ -52,6 +53,7 @@ public class IUMostrar extends javax.swing.JDialog {
         
         for (int i = 0; i < dtoLiquidacion.getListOperacionComision().size(); i++) {
             model.addRow(new Object[]{});
+            
             jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNumeroOperacion(), i, 0);
             jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 1);
             jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 2);

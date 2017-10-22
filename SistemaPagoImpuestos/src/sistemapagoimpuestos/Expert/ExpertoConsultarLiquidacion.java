@@ -12,8 +12,10 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOLiquidacion;
-import sistemapagoimpuestos.Dto.DTOOperacionComision;
+
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+import sistemapagoimpuestos.Dto.DTOOperacionConsultarLiquidacion;
+
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Entity.Empresa;
@@ -60,9 +62,9 @@ public class ExpertoConsultarLiquidacion {
         return dtosTipoImpuesto;
     }
 
-    public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
+    public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
         double TotalLiquidado= 0;
-        ArrayList<DTOLiquidacion> listDtoLiquidacion = new ArrayList<DTOLiquidacion>();
+        ArrayList<DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = new ArrayList<DTOLiquidacionesConsultarLiquidaciones>();
         List<DTOCriterio> criterios = new ArrayList();
 
         if ("Todos".equals(nombreTipoImpuesto)) {
@@ -96,7 +98,7 @@ public class ExpertoConsultarLiquidacion {
                     if (liquidacion.getEmpresaTipoImpuesto().equals(empresaTipoImpuesto)) {
                         for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
                             if (liquidacion.getLiquidacionEstadoList().get(i).getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Aprobada")){
-                                 DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+                                 DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = new DTOLiquidacionesConsultarLiquidaciones();
 
                                 dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
                                 dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
@@ -157,7 +159,7 @@ public class ExpertoConsultarLiquidacion {
             //LLENO EL DTOLIQUIDACION
             for (Object obj : listLiquidacion) {
                 Liquidacion liquidacion = (Liquidacion) obj;
-                DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+                DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = new DTOLiquidacionesConsultarLiquidaciones();
 
                 
                 
@@ -187,9 +189,9 @@ public class ExpertoConsultarLiquidacion {
               
                 return listDtoLiquidacion;
             }
-    public DTOLiquidacion buscarLiquidacion(String numeroLiquidacion){
+    public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
         double montoTotal=0;
-        DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+        DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = new DTOLiquidacionesConsultarLiquidaciones();
          List<DTOCriterio> criterios = new ArrayList();
          
         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.valueOf(numeroLiquidacion));
@@ -201,9 +203,9 @@ public class ExpertoConsultarLiquidacion {
             dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
             dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
             dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
-           List<DTOOperacionComision> listOperacionComision = new ArrayList();
+           List<DTOOperacionConsultarLiquidacion> listOperacionComision = new ArrayList();
             for (int i = 0; i < liquidacion.getOperacionList().size(); i++) {
-            DTOOperacionComision dtoOC = new DTOOperacionComision();
+            DTOOperacionConsultarLiquidacion dtoOC = new DTOOperacionConsultarLiquidacion();
             dtoOC.setNumeroOperacion(liquidacion.getOperacionList().get(i).getNumeroOperacion());
             dtoOC.setNroComprobanteFactura(liquidacion.getOperacionList().get(i).getNroComprobanteFacturaOperacion());
             dtoOC.setImportePagadoOperacion(liquidacion.getOperacionList().get(i).getImportePagadoOperacion());

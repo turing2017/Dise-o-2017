@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoConsultarLiquidacion;
@@ -35,7 +36,7 @@ public class ControladorConsultarLiquidacion {
         return experto.obtenerTipoImpuestos();
     }
 
-    public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
+    public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
         return experto.buscarLiquidacionConFiltro(itemAt, text, fechadesde, fechahasta);
     }
 
@@ -55,7 +56,7 @@ public void mostrar(String nliquidacion){
  IUMostrar mostrar = new IUMostrar(nliquidacion);
  mostrar.setVisible(true);
 }
-public DTOLiquidacion buscarLiquidacion(String numeroLiquidacion){
+public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
 return experto.buscarLiquidacion(numeroLiquidacion);
 }
 

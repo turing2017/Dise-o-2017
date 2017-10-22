@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.View.Empresa.Principal;
 
 import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
+import sistemapagoimpuestos.Controller.ControladorConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
@@ -16,7 +17,7 @@ import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
  * @author Gabriel
  */
 public class IUPantallaEmpresa extends javax.swing.JFrame {
-    ControladorConsultarLiquidacion controladorConsultarLiq = new ControladorConsultarLiquidacion();
+    
 
     public IUPantallaEmpresa() {
         initComponents();
@@ -110,11 +111,14 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
+ControladorConsultarOperacionesBancarias controladorConsultarOperacionesBancarias = new ControladorConsultarOperacionesBancarias();     
+controladorConsultarOperacionesBancarias.validarUsuario();
+this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- controladorConsultarLiq.validarUsuario();
+ ControladorConsultarLiquidacion controladorConsultarLiq = new ControladorConsultarLiquidacion();
+        controladorConsultarLiq.validarUsuario();
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -3,40 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
+package sistemapagoimpuestos.View.Empresa.ConsultarOperacionesBancarias;
 
-import static datosPrueba.DatosPrueba.generarDatosPrueba;
 import java.text.NumberFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.util.converter.LocalDateStringConverter;
-import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-
-import sistemapagoimpuestos.Entity.Liquidacion;
 import java.util.Date;
-import java.util.Calendar;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Controller.ControladorConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
-
-import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Globals.GlobalVars;
 
 /**
  *
  * @author vande
  */
-public class IUConsultarLiquidacion extends javax.swing.JFrame {
+public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
  
-    public IUConsultarLiquidacion() {
+    public IUConsultarOperacionesBancarias() {
         initComponents();
-        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+        ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
         List<DTOTipoImpuesto> listDTOEmpresaTipoImpuesto = controlador.obtenerTipoImpuestos();
         jTextFieldNombreEmpresa.setText( GlobalVars.userActive.getEmpresa().getNombreEmpresa());
         jTextFieldNombreEmpresa.setEnabled(false);
@@ -107,7 +94,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
 
         dateChooserCombohasta.setCalendarPreferredSize(new java.awt.Dimension(400, 300));
 
-        jButtonConsultarLiquidaciones.setText("Consultar Liquidaciones");
+        jButtonConsultarLiquidaciones.setText("Consultar Operaciones");
         jButtonConsultarLiquidaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConsultarLiquidacionesActionPerformed(evt);
@@ -226,7 +213,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             model.removeRow(0);
         }
      //manda a buscar con los parametros
-       ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+       ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
        ArrayList <DTOLiquidacionesConsultarLiquidaciones> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
@@ -280,7 +267,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
-        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
         double montoTotal = 0.0;
         String nliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
        
@@ -336,14 +323,38 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IUConsultarLiquidacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUConsultarOperacionesBancarias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IUConsultarLiquidacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUConsultarOperacionesBancarias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IUConsultarLiquidacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUConsultarOperacionesBancarias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IUConsultarLiquidacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IUConsultarOperacionesBancarias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -357,7 +368,7 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                IUConsultarLiquidacion pantallaPrincipal = new IUConsultarLiquidacion();
+                IUConsultarOperacionesBancarias pantallaPrincipal = new IUConsultarOperacionesBancarias();
                 pantallaPrincipal.setVisible(true);
                // new IUGestionarLiquidacion().setVisible(true);
              

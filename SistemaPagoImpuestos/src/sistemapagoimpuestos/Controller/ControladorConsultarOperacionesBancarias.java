@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sistemapagoimpuestos.Controller;
+
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Expert.ExpertoConsultarOperacionesBancarias;
+import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.Empresa.ConsultarOperacionesBancarias.IUConsultarOperacionesBancarias;
+import sistemapagoimpuestos.View.Empresa.ConsultarOperacionesBancarias.IUMostrar;
+
+/**
+ *
+ * @author vande
+ */
+public class ControladorConsultarOperacionesBancarias {
+    private ExpertoConsultarOperacionesBancarias experto = (ExpertoConsultarOperacionesBancarias) FabricaExpertos.getInstancia().crearExperto("CU17");
+
+    
+   
+    public List<DTOTipoImpuesto> obtenerTipoImpuestos() {
+        return experto.obtenerTipoImpuestos();
+    }
+
+    public ArrayList<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
+        return experto.buscarLiquidacionConFiltro(itemAt, text, fechadesde, fechahasta);
+    }
+
+    public void validarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUConsultarOperacionesBancarias iUConsultarOperacionesBancarias= new IUConsultarOperacionesBancarias();
+            iUConsultarOperacionesBancarias.setVisible(true);
+
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
+    }
+public void mostrar(String nliquidacion){
+ IUMostrar mostrar = new IUMostrar(nliquidacion);
+ mostrar.setVisible(true);
+}
+public DTOLiquidacionesConsultarLiquidaciones buscarLiquidacion(String numeroLiquidacion){
+return experto.buscarLiquidacion(numeroLiquidacion);
+}
+
+}
+

@@ -29,20 +29,22 @@ public class IUMostrar extends javax.swing.JDialog {
         jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
         jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
         jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
-        jLabelPeriodo.setText(fechaDesde.toString());
+        jLabelEstadoLiquidacion.setText(estado);
         if (fechaHasta == null) {
-            jLabelPeriodo2.setText("---");
+            jLabelPeriodo.setText(fechaDesde.toString()+"-"+"---");;
         } else {
-            jLabelPeriodo2.setText(fechaHasta.toString());
+            jLabelPeriodo.setText(fechaDesde+"-"+fechaHasta.toString());
         }
+        
         DefaultTableModel model = (DefaultTableModel) jTableOperacion.getModel();
         Double montoTotal = 0.0;
         for (int i = 0; i < liquidacion.getListOperacionComision().size(); i++) {
             model.addRow(new Object[]{});
             jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getNumeroOperacion(), i, 0);
-            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 1);
-            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getValorComision(), i, 2);
-            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 3);
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getFechaOperacion(), i, 1);
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 2);
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getValorComision(), i, 3);
+            jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 4);
             System.out.println(liquidacion.getListOperacionComision().get(i).getValorComision());
             montoTotal = liquidacion.getListOperacionComision().get(i).getValorComision() + montoTotal;
         }
@@ -81,8 +83,8 @@ public class IUMostrar extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldMontoTotal = new javax.swing.JTextField();
-        jLabelPeriodo2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabelEstadoLiquidacion = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,13 +118,13 @@ public class IUMostrar extends javax.swing.JDialog {
         };
         jTableOperacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "nroOperacion", "nroComprobante", "montoComision", "importePagado"
+                "nroOperacion", "fechaOperacion", "nroComprobante", "montoComision", "importePagado"
             }
         ));
         jScrollPane2.setViewportView(jTableOperacion);
@@ -153,29 +155,14 @@ public class IUMostrar extends javax.swing.JDialog {
             }
         });
 
-        jLabelPeriodo2.setText("jLabel6");
+        jLabel7.setText("Estado liquidacion");
 
-        jLabel6.setText("-");
-        jLabel6.setEnabled(false);
+        jLabelEstadoLiquidacion.setText("jLabel8");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabelPeriodo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelPeriodo2)
-                .addGap(166, 166, 166))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -186,27 +173,38 @@ public class IUMostrar extends javax.swing.JDialog {
                                 .addGap(14, 14, 14)
                                 .addComponent(jLabelNrodeLiquidacion))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelFechaLiquidacion))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelEmpresa)
-                                    .addComponent(jLabelTipoImpuesto)))))
+                                    .addComponent(jLabelTipoImpuesto)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelFechaLiquidacion))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelEstadoLiquidacion))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelPeriodo))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addComponent(jButtonCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jButtonCancelar)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,26 +224,30 @@ public class IUMostrar extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabelNrodeLiquidacion)))
-                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabelEstadoLiquidacion)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabelFechaLiquidacion))
-                .addGap(2, 2, 2)
-                .addComponent(jLabel5)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPeriodo)
-                    .addComponent(jLabelPeriodo2)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelPeriodo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jButtonCancelar)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -302,12 +304,12 @@ public class IUMostrar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     public static javax.swing.JLabel jLabelEmpresa;
+    private javax.swing.JLabel jLabelEstadoLiquidacion;
     public static javax.swing.JLabel jLabelFechaLiquidacion;
     public static javax.swing.JLabel jLabelNrodeLiquidacion;
     public static javax.swing.JLabel jLabelPeriodo;
-    public static javax.swing.JLabel jLabelPeriodo2;
     public static javax.swing.JLabel jLabelTipoImpuesto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

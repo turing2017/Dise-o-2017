@@ -444,7 +444,7 @@ public class ExpertoGestionarLiquidacion {
         dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
 
         List<Comision> listComision = liquidacion.getComisionList();
-        List<DTOOperacionComision> listDTOComision = new ArrayList<>();
+     
 
         if ("Aprobada".equals(estado) || "Anulada".equals(estado)) {
             for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
@@ -471,7 +471,7 @@ public class ExpertoGestionarLiquidacion {
                     DTOOperacionComision dtoComision = new DTOOperacionComision();
                    
                     dtoComision.setValorComision(comision.getValorComision());
-                    
+                    dtoComision.setFechaOperacion(comision.getOperacion().getFechaHoraOperacion());
                     dtoComision.setNumeroOperacion(comision.getOperacion().getNumeroOperacion());
                     dtoComision.setImportePagadoOperacion(comision.getOperacion().getImportePagadoOperacion());
                     dtoComision.setNroComprobanteFactura(comision.getOperacion().getNroComprobanteFacturaOperacion());
@@ -495,7 +495,7 @@ public class ExpertoGestionarLiquidacion {
                     DTOOperacionComision dtoComision = new DTOOperacionComision();
                   
                     dtoComision.setValorComision(comision.getValorComision());
-                    
+                    dtoComision.setFechaOperacion(comision.getOperacion().getFechaHoraOperacion());
                     dtoComision.setNumeroOperacion(comision.getOperacion().getNumeroOperacion());
                     dtoComision.setImportePagadoOperacion(comision.getOperacion().getImportePagadoOperacion());
                     dtoComision.setNroComprobanteFactura(comision.getOperacion().getNroComprobanteFacturaOperacion());

@@ -70,10 +70,8 @@ public class ExpertoConsultarLiquidacion {
             //HACE  BUSQUEDA DE   TIPO IMPUESTO DE ESA EMPRESA Y TODAS LAS LIQUIDACIONES 
 
             //BUSCA LA EMPRESA SELECCIONADA
-            DTOCriterio criterio7 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
-            criterios.clear();
-            criterios.add(criterio7);
-            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+            
+            Empresa empresa = GlobalVars.userActive.getEmpresa();
 
             //BUSCA LISTA DE EMPRESA TIPO IMPUESTOS QUE TENGAN ESA EMPRESA
             DTOCriterio criterio8 = new DTOCriterio("empresa", "=", empresa);
@@ -106,6 +104,7 @@ public class ExpertoConsultarLiquidacion {
                                 dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                                 dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
                                 
+                                
                                 for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
                                   TotalLiquidado += liquidacion.getOperacionList().get(i).getValorComisionOperacion();
                                 }
@@ -132,10 +131,8 @@ public class ExpertoConsultarLiquidacion {
             TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
 
             //BUSCO EMPRESA SELECCIONADA
-            DTOCriterio criterio1 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
-            criterios.clear();
-            criterios.add(criterio1);
-            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+           
+            Empresa empresa = GlobalVars.userActive.getEmpresa();
 
             // BUSCO EMPRESATIPOIMPUESTO QUE CONTEGNA TIPO IMPUESTO Y EMPRESA
             DTOCriterio criterio2 = new DTOCriterio("tipoImpuesto", "=", tipoImpuesto);
@@ -158,30 +155,29 @@ public class ExpertoConsultarLiquidacion {
             //LLENO EL DTOLIQUIDACION
             for (Object obj : listLiquidacion) {
                 Liquidacion liquidacion = (Liquidacion) obj;
-                DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = new DTOLiquidacionesConsultarLiquidaciones();
+                  for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
+                    if (liquidacion.getLiquidacionEstadoList().get(i).getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Aprobada")) {
 
-                
-                
-                 
+                        DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = new DTOLiquidacionesConsultarLiquidaciones();
 
-                                dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
-                                dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
-                                dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
-                                dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
-                                dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
-                                dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                                
-                                for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
-                                  TotalLiquidado += liquidacion.getOperacionList().get(j).getValorComisionOperacion();
-                                }
-                                dtoLiquidacion.setTotalLiquidado(TotalLiquidado);
-                                
-                                listDtoLiquidacion.add(dtoLiquidacion);
+                        dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
+                        dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
+                        dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
+                        dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
+                        dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
+                        dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
 
-                
+                        for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
+                            TotalLiquidado += liquidacion.getOperacionList().get(j).getValorComisionOperacion();
+                        }
+                        dtoLiquidacion.setTotalLiquidado(TotalLiquidado);
+
+                        listDtoLiquidacion.add(dtoLiquidacion);
 
                     }
                 }
+            }
+        }
 
                 
 
@@ -205,10 +201,12 @@ public class ExpertoConsultarLiquidacion {
            List<DTOOperacionConsultarLiquidacion> listOperacionComision = new ArrayList();
             for (int i = 0; i < liquidacion.getOperacionList().size(); i++) {
             DTOOperacionConsultarLiquidacion dtoOC = new DTOOperacionConsultarLiquidacion();
+            
             dtoOC.setNumeroOperacion(liquidacion.getOperacionList().get(i).getNumeroOperacion());
             dtoOC.setNroComprobanteFactura(liquidacion.getOperacionList().get(i).getNroComprobanteFacturaOperacion());
             dtoOC.setImportePagadoOperacion(liquidacion.getOperacionList().get(i).getImportePagadoOperacion());
             dtoOC.setValorComision(liquidacion.getOperacionList().get(i).getValorComisionOperacion());
+            dtoOC.setFechaHoraOperacion(liquidacion.getOperacionList().get(i).getFechaHoraOperacion());
             listOperacionComision.add(dtoOC);
             
             montoTotal +=liquidacion.getOperacionList().get(i).getValorComisionOperacion();

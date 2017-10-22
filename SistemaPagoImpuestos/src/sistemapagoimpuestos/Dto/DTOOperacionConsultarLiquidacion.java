@@ -15,16 +15,25 @@ public class DTOOperacionConsultarLiquidacion {
     int numeroOperacion;
     int nroComprobanteFactura;
     double importePagadoOperacion;
-
+    Date fechaHoraOperacion;
     public DTOOperacionConsultarLiquidacion() {
     }
 
-    public DTOOperacionConsultarLiquidacion(double valorComision, int numeroOperacion, int nroComprobanteFactura, double importePagadoOperacion) {
+    public DTOOperacionConsultarLiquidacion(double valorComision, int numeroOperacion, int nroComprobanteFactura, double importePagadoOperacion,Date fechaHoraOperacion) {
         this.valorComision = valorComision;
        
         this.numeroOperacion = numeroOperacion;
         this.nroComprobanteFactura = nroComprobanteFactura;
         this.importePagadoOperacion = importePagadoOperacion;
+        this.fechaHoraOperacion = fechaHoraOperacion;
+    }
+
+    public Date getFechaHoraOperacion() {
+        return fechaHoraOperacion;
+    }
+
+    public void setFechaHoraOperacion(Date fechaHoraOperacion) {
+        this.fechaHoraOperacion = fechaHoraOperacion;
     }
 
     public double getValorComision() {

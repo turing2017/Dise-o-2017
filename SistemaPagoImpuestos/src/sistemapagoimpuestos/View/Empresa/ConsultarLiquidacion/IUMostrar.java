@@ -50,16 +50,31 @@ public class IUMostrar extends javax.swing.JDialog {
             nf.setMaximumFractionDigits(3);
         jTextFieldMontoTotal.setText(nf.format(dtoLiquidacion.getTotalLiquidado()));
         DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
-        
+         while (model.getRowCount() > 0) {
+            model.removeRow(0);}
         for (int i = 0; i < dtoLiquidacion.getListOperacionComision().size(); i++) {
             model.addRow(new Object[]{});
             
             jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNumeroOperacion(), i, 0);
-            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 1);
-            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 2);
-            jTableOperacion.setValueAt(nf.format(dtoLiquidacion.getListOperacionComision().get(i).getValorComision()), i, 3);
-             
-            
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getFechaHoraOperacion().toString(), i, 1);
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 2);
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 3);
+            jTableOperacion.setValueAt(nf.format(dtoLiquidacion.getListOperacionComision().get(i).getValorComision()), i, 4);   
+        }
+         for (int i = 0; i < (model.getRowCount()*(model.getRowCount()-1)); i++) {
+          
+            for (int j = 0; j <  model.getRowCount()-1; j++) {
+                String d = jTableOperacion.getValueAt(j, 1).toString();
+                String d2 = jTableOperacion.getValueAt(j+1, 1).toString();
+                System.out.println(d);
+                System.out.println(d2);
+               
+                if (d.compareTo(d2)>0){ //d>d2
+                    
+                model.moveRow(j, j, j+1);
+                }
+                
+            }
         }
      /*
 */
@@ -124,13 +139,13 @@ public class IUMostrar extends javax.swing.JDialog {
         };
         jTableOperacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "nroOperacion", "nroComprobante", "importePagado", "montoComision"
+                "nroOperacion", "fechaOperacion", "nroComprobante", "importePagado", "montoComision"
             }
         ));
         jScrollPane2.setViewportView(jTableOperacion);
@@ -204,14 +219,14 @@ public class IUMostrar extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelPeriodo))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonDescargar)
-                            .addComponent(jButtonCancelar))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                            .addComponent(jButtonCancelar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

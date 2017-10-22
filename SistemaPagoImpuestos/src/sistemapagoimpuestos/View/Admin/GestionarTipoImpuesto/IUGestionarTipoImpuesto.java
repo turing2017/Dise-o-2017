@@ -20,8 +20,6 @@ import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
-import sistemapagoimpuestos.View.Login.IULogin;
 
 public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
     
@@ -34,14 +32,14 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         // Esto hay que quitarlo, cuando se llame a esta pantalla se debe llamar al metodo siguiente pasando el cuitEmpresa
         this.cuitEmpresa = "123434343";
         obtenerTipoImpuestos();
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent ev) {
-                dispose();
-                IULogin iULogin = new IULogin();
-                iULogin.setVisible(true);
-            }
-        });
+        
+    }
+    
+    public IUGestionarTipoImpuesto(String cuitEmpresa) {
+        this.cuitEmpresa = cuitEmpresa;
+        initComponents();
+        obtenerEmpresaTipoImpuesto(cuitEmpresa);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -55,7 +53,6 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         textfield_filtro = new javax.swing.JTextField();
         button_filtrar = new javax.swing.JButton();
-        btn_cerrar = new javax.swing.JButton();
         jButtonVerItemAsociado = new javax.swing.JButton();
         nombreEmpresa = new javax.swing.JLabel();
         jButton_asociar = new javax.swing.JButton();
@@ -90,11 +87,6 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
             }
         });
 
-        btn_cerrar.setText("Cerrar");
-        btn_cerrar.setToolTipText("");
-        btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cerrarActionPerformed(evt);
         jButtonVerItemAsociado.setText("Ver items Asociados");
         jButtonVerItemAsociado.setEnabled(false);
         jButtonVerItemAsociado.addActionListener(new java.awt.event.ActionListener() {
@@ -137,15 +129,6 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                         .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(button_filtrar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btn_cerrar)
-                            .addGap(131, 131, 131)
-                            .addComponent(button_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(button_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(292, 292, 292)
                         .addComponent(nombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -194,10 +177,6 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                     .addComponent(button_nuevo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_nuevo)
-                    .addComponent(button_modificar)
-                    .addComponent(btn_cerrar))
-                .addGap(46, 46, 46))
                     .addComponent(jButton_asociar)
                     .addComponent(button_modificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -298,12 +277,6 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         }
     }//GEN-LAST:event_jButtonModificarVinculoActionPerformed
 
-
-    private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
-        this.dispose();
-        IUAdminPantallaPrincipal iUAdminPantallaPrincipal = new IUAdminPantallaPrincipal();
-        iUAdminPantallaPrincipal.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_cerrarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -633,7 +606,6 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cerrar;
     private javax.swing.JButton button_filtrar;
     private javax.swing.JButton button_modificar;
     private javax.swing.JButton button_nuevo;

@@ -31,15 +31,6 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="button_filtrar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="btn_cerrar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-                          <Component id="button_modificar" min="-2" pref="107" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="button_nuevo" min="-2" pref="85" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane1" min="-2" pref="514" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
                       <Component id="nombreEmpresa" min="-2" pref="182" max="-2" attributes="0"/>
@@ -106,7 +97,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton_asociar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="button_modificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_cerrar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -169,13 +159,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_filtrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_cerrar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cerrar"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cerrarActionPerformed"/>
     <Component class="javax.swing.JButton" name="jButtonVerItemAsociado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver items Asociados"/>

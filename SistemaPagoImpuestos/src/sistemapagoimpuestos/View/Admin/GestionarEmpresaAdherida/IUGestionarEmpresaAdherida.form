@@ -24,35 +24,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="Button_Crear" min="-2" pref="71" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                              <Component id="Button_Modificar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="TextField_Filtrar" min="-2" pref="96" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Button_Filtrar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="109" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="TextField_Filtrar" min="-2" pref="96" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="Button_Filtrar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="Button_Actualizar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="CrearEmpresa" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="Button_Modificar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="Button_Crear" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane1" min="-2" pref="569" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="1" pref="492" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="Button_Actualizar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="109" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="31" pref="65" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,23 +67,17 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TextField_Filtrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Button_Filtrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Button_Actualizar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                      <Component id="Button_Actualizar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="214" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="214" max="-2" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Button_Modificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CrearEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Button_Crear" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Button_Modificar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,7 +93,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Button_Crear">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear"/>
+        <Property name="text" type="java.lang.String" value="Ver Tipo de Impuesto Asociado"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_CrearActionPerformed"/>
@@ -105,7 +101,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Button_Modificar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="text" type="java.lang.String" value="Modificar Empresa"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_ModificarActionPerformed"/>
@@ -124,12 +120,27 @@
               <Table columnCount="4" rowCount="44">
                 <Column editable="true" title="Cuit" type="java.lang.String"/>
                 <Column editable="true" title="Nombre" type="java.lang.String"/>
-                <Column editable="true" title="Direccion" type="java.lang.String"/>
+                <Column editable="true" title="Direcci&#xf3;n" type="java.lang.String"/>
                 <Column editable="true" title="Deshabilitada el dia" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -175,6 +186,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_ActualizarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="CrearEmpresa">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Crear Empresa"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CrearEmpresaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

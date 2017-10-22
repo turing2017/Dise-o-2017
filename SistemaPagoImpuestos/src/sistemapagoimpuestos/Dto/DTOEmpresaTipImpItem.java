@@ -19,17 +19,37 @@ public class DTOEmpresaTipImpItem {
     private String nombreTipoEmpresa;
     private int frecuenciaSincronizacion;
     private List<DtoItemOrden> dtoItemOrdenList;
-
+    private String cuitEmpresa;
+    private String nombreTipoImpuesto;
+    
     public DTOEmpresaTipImpItem() {
     }
 
-    public DTOEmpresaTipImpItem(int id, int codigoTI, String nombreEmpresa, String nombreTipoEmpresa, int frecuenciaSincronizacion, List<DtoItemOrden> dtoItemOrdenList) {
+    public DTOEmpresaTipImpItem(String nombreTipoImpuesto, String cuitEmpresa, int id, int codigoTI, String nombreEmpresa, String nombreTipoEmpresa, int frecuenciaSincronizacion, List<DtoItemOrden> dtoItemOrdenList) {
         this.id = id;
         this.codigoTI = codigoTI;
         this.nombreEmpresa = nombreEmpresa;
         this.nombreTipoEmpresa = nombreTipoEmpresa;
         this.frecuenciaSincronizacion = frecuenciaSincronizacion;
         this.dtoItemOrdenList = dtoItemOrdenList;
+        this.cuitEmpresa = cuitEmpresa;
+        this.nombreTipoImpuesto = nombreTipoImpuesto;
+    }
+
+    public String getCuitEmpresa() {
+        return cuitEmpresa;
+    }
+
+    public void setCuitEmpresa(String cuitEmpresa) {
+        this.cuitEmpresa = cuitEmpresa;
+    }
+
+    public String getNombreTipoImpuesto() {
+        return nombreTipoImpuesto;
+    }
+
+    public void setNombreTipoImpuesto(String nombreTipoImpuesto) {
+        this.nombreTipoImpuesto = nombreTipoImpuesto;
     }
 
 

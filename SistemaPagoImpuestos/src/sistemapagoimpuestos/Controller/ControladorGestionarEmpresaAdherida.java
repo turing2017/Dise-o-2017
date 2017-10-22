@@ -6,20 +6,31 @@
 package sistemapagoimpuestos.Controller;
 
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
-
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdherida;
-import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrear;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrearEmpresa;
 import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaModificacion;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
+import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdheridaCrearEmpresa;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 
 
 /**
@@ -31,6 +42,18 @@ public class ControladorGestionarEmpresaAdherida {
     private ExpertoGestionarEmpresaAdherida experto = (ExpertoGestionarEmpresaAdherida) FabricaExpertos.getInstancia().crearExperto("CU10");
  
 // Metodo iniciar
+    public void validarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUGestionarEmpresaAdherida iuGestionarEmpresaAdherida = new IUGestionarEmpresaAdherida();
+            iuGestionarEmpresaAdherida.setVisible(true);
+
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
+    }
     public void iniciar(){
         if(experto.iniciar().equals("Administrador")){
         IUGestionarEmpresaAdherida pantallaPrincipal = new IUGestionarEmpresaAdherida();
@@ -44,31 +67,24 @@ public class ControladorGestionarEmpresaAdherida {
 }
     
     public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada) {
-    
-    experto.modificarEmpresa(cuit, nombre, direccion,  habilitada);
+        experto.modificarEmpresa(cuit, nombre, direccion,  habilitada);
         
     }
-   
-    public void ingresarDatosEmpresa(String cuit, String nombre, String direccion, boolean habilitada){
-       experto.ingresarDatosEmpresa(cuit, nombre, direccion, habilitada);
+    
+    public List<ItemEmpresaTipoImpuesto> setearTabla(Vector vct){
+        return experto.setearTabla(vct);
     }
     
-    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
-        return experto.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada);
+    public void modificarItemEmpresaTipoImpuesto (DTOEmpresaTipImpItem dTOEmpresaTipImpItemList){
+        experto.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList);
     }
-    
-    public void crearEmpresa(Object evt, Object controlador){
-        // Muestro pantalla de Nueva Empresa
-            IUGestionarEmpresaAdheridaCrear pantallaCrear = new IUGestionarEmpresaAdheridaCrear(controlador);
-            pantallaCrear.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-            pantallaCrear.setVisible(true); // La hago visible
-     }
-        
-    public void modificarEmpresa(Object evt, Object controlador){
+            
+            
+        public void modificarEmpresa(Object eE, Object controlador){
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
-        vct = (Vector) evt;
-        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(),  vct.get(3).toString());
+        vct = (Vector) eE;
+        DTOEmpresaExistente dtoEe = cargarDatos(vct.get(0).toString(), vct.get(1).toString(), vct.get(2).toString(), vct.get(3).toString());
         if(dtoEe!= null){
         final IUGestionarEmpresaAdheridaModificacion pantallaModificacion = new IUGestionarEmpresaAdheridaModificacion(dtoEe);
         pantallaModificacion.setVisible(true);
@@ -79,10 +95,65 @@ public class ControladorGestionarEmpresaAdherida {
                             pantallaModificacion.dispose();
                             iniciar();
                         }
-                    });
+                    }
+                )
+                            ;
           
         }
      }
+    
+    public List<DTOItem> buscarItems(){
+        return experto.buscarItems();
+    }
+    
+    public void asociarEmpresa(String cuitEmpresa){
+   
+    IUGestionarTipoImpuesto pantallaAsociar = new IUGestionarTipoImpuesto(cuitEmpresa);
+    pantallaAsociar.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+    pantallaAsociar.setVisible(true); // La hago visible
+    
+    }
+    public void ingresarDatosEmpresa(String cuitEmpresa, String tipoImpuesto, String tipoEmpresa, int frecuencia){
+       experto.ingresarDatosEmpresa(cuitEmpresa, tipoImpuesto, tipoEmpresa, frecuencia);
+    }
+    public void ingresarDatosEmpresaCrear(String cuitEmpresa,String nombreEmpresa,String direccionEmpresa,boolean habilitada){
+           experto.ingresarDatosEmpresaCrear(cuitEmpresa,nombreEmpresa,direccionEmpresa,habilitada);
+    }
+    
+    public DTOEmpresaExistente cargarDatos (String cuitEmpresa,String nombreEmpresa, String direccionEmpresa, String habilitada){
+        return experto.cargarDatos(cuitEmpresa, nombreEmpresa, direccionEmpresa, habilitada);
+    }
+    public List<DTOTipoEmpresa> buscarTipoEmpresa(){
+    return experto.buscarTipoEmpresa();
+    }
+    
+    public List<DTOTipoImpuesto> buscarTipoImpuesto(){
+    return experto.buscarTipoImpuesto();
+    }
+    
+    public List<DTOEmpresa> buscarEmpresa(){
+    return experto.buscarEmpresa();
+    }
+    
+    public List<DTOEmpresaTipoImpuesto> consultarTipoImpuesto(Vector vct){
+        return experto.verTipoImpuesto(vct);
+    }
+    
+
+    
+    public void crearEmpresa(Object evt, Object controlador){
+        // Muestro pantalla de Nueva Empresa
+            IUGestionarEmpresaAdheridaCrearEmpresa pantallaCrear = new IUGestionarEmpresaAdheridaCrearEmpresa(controlador);
+            pantallaCrear.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+            pantallaCrear.setVisible(true); // La hago visible
+     }
+      public void crearEmpresaCrear(Object controlador){
+        // Muestro pantalla de Nueva Empresa
+            IUGestionarEmpresaAdheridaCrearEmpresa pantallaCrear = new IUGestionarEmpresaAdheridaCrearEmpresa(controlador);
+            pantallaCrear.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
+            pantallaCrear.setVisible(true); // La hago visible
+     }     
+ 
   
   }
 

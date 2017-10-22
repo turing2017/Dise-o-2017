@@ -175,4 +175,25 @@ public class Excepciones extends Exception{
         ednv.setLabel_mensaje("La contraseña no puede ser vacia");
         MetodosPantalla.getInstance().setearPantalla(ednv);
     }
+    
+    public void nombreExistente(){
+        CuitExistente ce= new CuitExistente();
+        ce.setLabel_Titulo("nombre existente");
+        ce.setLabel_mensaje("El Nombre ingresado existe, intente nuevamente");
+        ce.setVisible(true);
+    }
+    
+    public void objetoNoExistente(String objeto){
+        ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("Error: Registro Existente");            
+        edne.setLabel_mensaje("El "+objeto+" ingresado no existe");
+        edne.setVisible(true);
+    }
+    
+    public void objetoLaExistente(String objeto){
+        ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("Error: Registro Existente");            
+        edne.setLabel_mensaje("La "+objeto+" ingresada ya existe");
+        edne.setVisible(true);
+    }
 }

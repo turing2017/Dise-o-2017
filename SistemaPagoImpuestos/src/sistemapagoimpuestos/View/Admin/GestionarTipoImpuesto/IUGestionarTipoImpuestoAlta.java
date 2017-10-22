@@ -1,18 +1,14 @@
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import exceptions.Excepciones;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 /**
@@ -22,9 +18,17 @@ import sistemapagoimpuestos.Utils.MetodosPantalla;
 public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
 
     ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
+    ControladorGestionarEmpresaTipoImpuesto controladorETI = new ControladorGestionarEmpresaTipoImpuesto();
+    public String cuitEmpresa;
+    
     
     public IUGestionarTipoImpuestoAlta() {
         initComponents();
+    }
+    
+    public IUGestionarTipoImpuestoAlta(String cuilEmpresa){
+        initComponents();
+        this.cuitEmpresa = cuilEmpresa;
     }
     public static List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemAltaList;
 
@@ -99,55 +103,51 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label_esEditable)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(label_codigo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(button_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(button_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_codigo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_nombre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_esEditable)
+                                    .addComponent(label_nombre))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(checkbox_esEditable)
+                                        .addGap(90, 90, 90))
+                                    .addComponent(textfield_codigo)
+                                    .addComponent(textField_nombre))))
                         .addGap(34, 34, 34))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(checkbox_esEditable)
-                        .addGap(92, 92, 92))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancel_button)
-                        .addGap(433, 433, 433))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label_nombre)
-                    .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_codigo)
-                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(textField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_nombre))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label_esEditable)
-                    .addComponent(checkbox_esEditable))
-                .addGap(42, 42, 42)
+                    .addComponent(textfield_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_codigo))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkbox_esEditable)
+                    .addComponent(label_esEditable))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancel_button)
-                    .addComponent(button_crear))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(button_crear)
+                    .addComponent(cancel_button))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -162,9 +162,11 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             boolean esMontoEditableIngres = checkbox_esEditable.isSelected();
             List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemIngres = getDtoetiisModfAlta();
             if (codigoTipoImpuestoIngres < 0 || !nombreTipoImpuestoIngres.equals("")) {
+                // Creo el tipo de impuesto
                 controlador.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres, dTOEmpresaTipImpItemIngres);
+                // Creo la empresa tipo de impuesto
                 this.dispose();
-                controlador.validarUsuario();
+                controlador.iniciar();
             } else {
                 Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
             }
@@ -178,7 +180,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
   
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
-        controlador.validarUsuario();
+        controlador.iniciar();
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void textField_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_nombreActionPerformed
@@ -220,7 +222,11 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    
+    public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
+        return controladorETI.obtenerTipoEmpresas();
+    }
 
     public boolean getCheckbox_esEditable() {
         return checkbox_esEditable.isSelected();

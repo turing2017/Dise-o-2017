@@ -7,23 +7,30 @@ package sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida;
 import exceptions.Excepciones;
 import java.awt.Component;
 
+
+
+
 import java.util.List;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
-
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import sistemapagoimpuestos.Dto.DTOEmpresa;
-
+import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
+import sistemapagoimpuestos.Dto.DTOEmpresa;
+import sistemapagoimpuestos.Entity.Empresa;
+import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
+import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
+
 public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
     ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
@@ -52,6 +59,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
         TextField_Filtrar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Button_Actualizar = new javax.swing.JButton();
+        CrearEmpresa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestionar Empresa Adherida");
@@ -63,14 +71,14 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             }
         });
 
-        Button_Crear.setText("Crear");
+        Button_Crear.setText("Ver Tipo de Impuesto Asociado");
         Button_Crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Button_CrearActionPerformed(evt);
             }
         });
 
-        Button_Modificar.setText("Modificar");
+        Button_Modificar.setText("Modificar Empresa");
         Button_Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Button_ModificarActionPerformed(evt);
@@ -125,7 +133,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Cuit", "Nombre", "Direccion", "Deshabilitada el dia"
+                "Cuit", "Nombre", "Dirección", "Deshabilitada el dia"
             }
         ) {
             Class[] types = new Class [] {
@@ -148,6 +156,13 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             }
         });
 
+        CrearEmpresa.setText("Crear Empresa");
+        CrearEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearEmpresaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,28 +170,27 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Button_Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(Button_Modificar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(TextField_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Button_Filtrar)
-                                .addGap(279, 279, 279)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)))
-                .addComponent(Button_Actualizar)
-                .addGap(35, 35, 35))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(290, 290, 290)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(52, 52, 52)
+                            .addComponent(TextField_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Button_Filtrar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Button_Actualizar))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(CrearEmpresa)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(Button_Modificar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(Button_Crear))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(31, 65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,19 +200,16 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextField_Filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Button_Filtrar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(Button_Actualizar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addComponent(Button_Filtrar)
+                    .addComponent(Button_Actualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Button_Modificar)
-                    .addComponent(Button_Crear))
-                .addGap(34, 34, 34))
+                    .addComponent(CrearEmpresa)
+                    .addComponent(Button_Crear)
+                    .addComponent(Button_Modificar))
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -212,8 +223,16 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
     }//GEN-LAST:event_Button_FiltrarActionPerformed
 
     private void Button_CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CrearActionPerformed
-        // TODO add your handling code here:
-        controlador.crearEmpresa(evt, controlador);
+    try{ 
+        int columnCode = 0;
+        int rowSelected = tabla_empresa.getSelectedRow();
+        String cuitEmpresa = tabla_empresa.getModel().getValueAt(rowSelected, columnCode).toString();
+ 
+    controlador.asociarEmpresa(cuitEmpresa);
+    } catch (ArrayIndexOutOfBoundsException e) {
+            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+            Excepciones.getInstance().objetoNoSeleccionado();
+    }
     }//GEN-LAST:event_Button_CrearActionPerformed
 
     private void Button_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ModificarActionPerformed
@@ -228,7 +247,6 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             vct.add(tabla_empresa.getValueAt(rowSelected, 1));
             vct.add(tabla_empresa.getValueAt(rowSelected, 2));
             vct.add(tabla_empresa.getValueAt(rowSelected, 3));
-     
             controlador.modificarEmpresa(vct, controlador);
             
             
@@ -242,6 +260,11 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
     private void Button_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ActualizarActionPerformed
         this.obtenerEmpresas();
     }//GEN-LAST:event_Button_ActualizarActionPerformed
+
+    private void CrearEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearEmpresaActionPerformed
+        controlador.crearEmpresaCrear(controlador);
+// TODO add your handling code here:
+    }//GEN-LAST:event_CrearEmpresaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,7 +327,6 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
                         return String.class;
                     case 2:
                         return String.class;
-               
                     case 3:
                         return String.class;
                     default:
@@ -313,8 +335,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             }
 
         };
-            
-            
+             
            for (DTOEmpresa dtoEmpresa : listDtoEmpresa) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoEmpresa.getCuitEmpresa());
@@ -354,6 +375,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
     private javax.swing.JButton Button_Crear;
     private javax.swing.JButton Button_Filtrar;
     private javax.swing.JButton Button_Modificar;
+    private javax.swing.JButton CrearEmpresa;
     private javax.swing.JTextField TextField_Filtrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

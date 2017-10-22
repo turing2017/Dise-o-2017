@@ -90,7 +90,7 @@ public class ExpertoConsultarLiquidacion {
             criterios.add(criterio5);
             criterios.add(criterio6);
             //Busca liquidaciones de esa empresa en estado aprobado
-            List<Object> listLiquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+            List<Object> listLiquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", criterios);
             for (Object obj : listLiquidacion) {
                 Liquidacion liquidacion = (Liquidacion) obj;
                 for (Object obj1 : listEmpresaTipoImpuesto) {

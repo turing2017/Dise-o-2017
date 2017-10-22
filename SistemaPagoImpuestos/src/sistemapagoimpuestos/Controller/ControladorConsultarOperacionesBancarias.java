@@ -16,7 +16,7 @@ import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Empresa.ConsultarOperacionesBancarias.IUConsultarOperacionesBancarias;
-import sistemapagoimpuestos.View.Empresa.ConsultarOperacionesBancarias.IUMostrar;
+
 
 /**
  *
@@ -47,10 +47,7 @@ public class ControladorConsultarOperacionesBancarias {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
-public void mostrar(String nliquidacion){
- IUMostrar mostrar = new IUMostrar(nliquidacion);
- mostrar.setVisible(true);
-}
+
 
 
 }

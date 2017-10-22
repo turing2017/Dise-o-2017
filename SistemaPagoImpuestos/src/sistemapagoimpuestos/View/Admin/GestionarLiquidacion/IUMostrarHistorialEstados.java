@@ -44,7 +44,9 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
             for (int j = 0; j <  model.getRowCount()-1; j++) {
                 String d = (String)jTableEstados.getValueAt(j, 1);
                 String d2 = (String)jTableEstados.getValueAt(j+1, 1);
+               
                 if (d.compareTo(d2)>0){ //d>d2
+                    
                 model.moveRow(j, j, j+1);
                 }
                 

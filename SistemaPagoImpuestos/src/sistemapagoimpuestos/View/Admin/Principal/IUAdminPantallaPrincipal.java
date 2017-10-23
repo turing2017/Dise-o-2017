@@ -1,4 +1,4 @@
-﻿package sistemapagoimpuestos.View.Admin.Principal;
+package sistemapagoimpuestos.View.Admin.Principal;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

@@ -5,12 +5,21 @@
  */
 package sistemapagoimpuestos.View.Empresa.ConsultarOperacionesBancarias;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import sistemapagoimpuestos.Controller.ControladorConsultarOperacionesBancarias;
 
 import sistemapagoimpuestos.Dto.DTOOperacionConsultarOperacionesBancarias;
@@ -21,7 +30,7 @@ import sistemapagoimpuestos.Globals.GlobalVars;
  * @author vande
  */
 public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
- 
+ static int sizeTable;
     public IUConsultarOperacionesBancarias() {
         initComponents();
         ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
@@ -29,6 +38,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         jTextFieldNombreEmpresa.setText( GlobalVars.userActive.getEmpresa().getNombreEmpresa());
         jTextFieldNombreEmpresa.setEnabled(false);
         jComboBoxTipoImpuesto.addItem("Todos");
+        jButtonExportarOperaciones.setVisible(false);
         for (DTOTipoImpuesto dtoEmpresaTI : listDTOEmpresaTipoImpuesto ){
             jComboBoxTipoImpuesto.addItem(dtoEmpresaTI.getNombreDTOTipoImpuesto());
             jComboBoxTipoImpuesto.isEditable();
@@ -52,11 +62,12 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         dateChooserCombohasta = new datechooser.beans.DateChooserCombo();
         jButtonConsultarOperacionesBancarias = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableOperaciones = new javax.swing.JTable();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         jTextFieldNombreEmpresa = new javax.swing.JTextField();
         jTextFieldMontoTotal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jButtonExportarOperaciones = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,9 +99,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
 
         jLabel2.setText("Empresa");
 
-        jLabel3.setText("Fecha desde Liquidacion");
+        jLabel3.setText("Fecha desde:");
 
-        jLabel4.setText("Fecha hasta Liquidacion");
+        jLabel4.setText("Fecha hasta:");
 
         dateChooserCombodesde.setCalendarPreferredSize(new java.awt.Dimension(400, 300));
 
@@ -103,12 +114,12 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
             }
         });
 
-        jTable2 = new javax.swing.JTable(){
+        jTableOperaciones = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;   //Disallow the editing of any cell
             }
         };
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOperaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -116,7 +127,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                 "Fecha Operacion", "Numero Operacion", "Codigo Pago Electronico", "NroComprobante", "Tipo Impuesto", "Importe Pagado"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableOperaciones);
 
         jComboBoxTipoImpuesto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -137,6 +148,13 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         });
 
         jLabel5.setText("Importe Pagado Total");
+
+        jButtonExportarOperaciones.setText("Exportar Operaciones");
+        jButtonExportarOperaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportarOperacionesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,6 +189,10 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonExportarOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +221,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonExportarOperaciones)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         jComboBoxTipoImpuesto.getAccessibleContext().setAccessibleName("");
@@ -210,7 +234,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
 
     private void jButtonConsultarOperacionesBancariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarOperacionesBancariasActionPerformed
 
-    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    DefaultTableModel model = (DefaultTableModel) jTableOperaciones.getModel();
             while (model.getRowCount()>0) {
             model.removeRow(0);
         }
@@ -224,20 +248,20 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         for (int i = 0; i < listDtoOperacion.size(); i++) {
 
             model.addRow(new Object[]{});
-            jTable2.isCellEditable(i, 0);
-            jTable2.isCellEditable(i, 1);
-            jTable2.isCellEditable(i, 2);
-            jTable2.isCellEditable(i, 3);
-            jTable2.isCellEditable(i, 4);
-            jTable2.isCellEditable(i, 5);
-            jTable2.isCellEditable(i, 6);
+            jTableOperaciones.isCellEditable(i, 0);
+            jTableOperaciones.isCellEditable(i, 1);
+            jTableOperaciones.isCellEditable(i, 2);
+            jTableOperaciones.isCellEditable(i, 3);
+            jTableOperaciones.isCellEditable(i, 4);
+            jTableOperaciones.isCellEditable(i, 5);
+            jTableOperaciones.isCellEditable(i, 6);
             
-             jTable2.setValueAt(listDtoOperacion.get(i).getFechaHoraOperacion(), i, 0);
-              jTable2.setValueAt(listDtoOperacion.get(i).getNumeroOperacion(), i, 1);
-            jTable2.setValueAt(listDtoOperacion.get(i).getCodigoPagoElectronicoOperacion(), i, 2);
-            jTable2.setValueAt(listDtoOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 3);
-            jTable2.setValueAt(listDtoOperacion.get(i).getTipoImpuesto(), i, 4);
-            jTable2.setValueAt(listDtoOperacion.get(i).getImportePagadoOperacion(), i, 5);
+             jTableOperaciones.setValueAt(listDtoOperacion.get(i).getFechaHoraOperacion(), i, 0);
+             jTableOperaciones.setValueAt(listDtoOperacion.get(i).getNumeroOperacion(), i, 1);
+            jTableOperaciones.setValueAt(listDtoOperacion.get(i).getCodigoPagoElectronicoOperacion(), i, 2);
+            jTableOperaciones.setValueAt(listDtoOperacion.get(i).getNroComprobanteFacturaOperacion(), i, 3);
+            jTableOperaciones.setValueAt(listDtoOperacion.get(i).getTipoImpuesto(), i, 4);
+            jTableOperaciones.setValueAt(listDtoOperacion.get(i).getImportePagadoOperacion(), i, 5);
             
             montoTotal+=listDtoOperacion.get(i).getImportePagadoOperacion();
             NumberFormat nf = NumberFormat.getInstance();
@@ -252,8 +276,8 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         for (int i = 0; i < (model.getRowCount()*(model.getRowCount()-1)); i++) {
           
             for (int j = 0; j <  model.getRowCount()-1; j++) {
-                String d = jTable2.getValueAt(j, 0).toString();
-                String d2 =jTable2.getValueAt(j+1, 0).toString();
+                String d = jTableOperaciones.getValueAt(j, 0).toString();
+                String d2 =jTableOperaciones.getValueAt(j+1, 0).toString();
                 System.out.println(d);
                 System.out.println(d2);
                  System.out.println("<"+d.compareTo(d2));
@@ -263,7 +287,8 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                 
             }
         }
-        
+        sizeTable = listDtoOperacion.size();
+        jButtonExportarOperaciones.setVisible(true);
     }//GEN-LAST:event_jButtonConsultarOperacionesBancariasActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
@@ -292,6 +317,96 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
     private void jTextFieldNombreEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreEmpresaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreEmpresaActionPerformed
+
+    private void jButtonExportarOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarOperacionesActionPerformed
+        int indexExcel = 8;
+        try {
+         
+           File archivo = new File(System.getProperty("user.home") + "//exportOperaciones.txt");
+            FileWriter file = new FileWriter(archivo, true);
+            //Escribimos en el archivo con el metodo write 
+            file.write("Empresa = " + jTextFieldNombreEmpresa.getText() + ";\r\n");
+            file.write("Tipo Impuesto = " + jComboBoxTipoImpuesto.getItemAt(0) + ";\r\n");
+            file.write("Fecha Desde = " + dateChooserCombodesde.getText() + ";\r\n");
+            file.write("Fecha Hasta = " + dateChooserCombohasta.getText() + ";\r\n");
+            for (int i = 0; i < sizeTable; i++) {
+                file.write("Operacion" + i + "\r\n");
+                file.write("Fecha Operacion: " + jTableOperaciones.getValueAt(i, 0) + "; ");
+                file.write("Nro Operacion: " + jTableOperaciones.getValueAt(i, 1) + "; ");
+                file.write("Codigo Pago Electronico: " + jTableOperaciones.getValueAt(i, 2) + "; ");
+                file.write("Nro Comprobante: " + jTableOperaciones.getValueAt(i, 3) + ";");
+                file.write("Tipo Impuesto: " + jTableOperaciones.getValueAt(i, 4) + ";");
+                file.write("Importe Pagado: " + jTableOperaciones.getValueAt(i, 5) + ";");
+                if (i == sizeTable - 1) {
+                    file.write("Importe Pagado Total: " + jTextFieldMontoTotal.getText() + ";\r\n");
+                }
+            }
+            file.close();
+        } catch (Exception e) {
+            System.out.println("Error al guardar el archivo");
+
+        }
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Reporte Sistema Pago de Impuestos");
+        sheet = workbook.getSheetAt(0);
+      
+        for(int i = 0 ; i< 20 ; i++){
+            HSSFRow row = sheet.createRow(i);
+            for(int y = 0; y<10;y++){
+                     row.createCell(y);
+            }
+        
+        }
+
+        sheet.getRow(0).getCell(0).setCellValue("Empresa");
+        sheet.getRow(1).getCell(0).setCellValue("Tipo Impuesto");
+        sheet.getRow(2).getCell(0).setCellValue("Fecha Desde");
+        sheet.getRow(3).getCell(0).setCellValue("Fecha Hasta");
+    
+        sheet.getRow(0).getCell(1).setCellValue(jTextFieldNombreEmpresa.getText());
+        sheet.getRow(1).getCell(1).setCellValue(jComboBoxTipoImpuesto.getItemAt(0));
+        sheet.getRow(2).getCell(1).setCellValue(dateChooserCombodesde.getText());
+        sheet.getRow(3).getCell(1).setCellValue(dateChooserCombohasta.getText());
+   
+
+        sheet.getRow(7).getCell(0).setCellValue("Fecha Operacion");
+        sheet.getRow(7).getCell(1).setCellValue("Nro Operacion");
+        sheet.getRow(7).getCell(2).setCellValue("Codigo Pago Electronico");
+        sheet.getRow(7).getCell(3).setCellValue("Nro Comprobante");
+        sheet.getRow(7).getCell(4).setCellValue("Tipo Impuesto");
+        sheet.getRow(7).getCell(5).setCellValue("Importe Pagado");
+         sheet.getRow(7).getCell(6).setCellValue("Importe Total Pagado");
+
+        for (int i = 0; i < sizeTable; i++) {
+
+            sheet.getRow(indexExcel + i).getCell(0).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 0)));
+            sheet.getRow(indexExcel + i).getCell(1).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 1)));
+            sheet.getRow(indexExcel + i).getCell(2).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 2)));
+            sheet.getRow(indexExcel + i).getCell(3).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 3)));
+            sheet.getRow(indexExcel + i).getCell(4).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 4)));
+            sheet.getRow(indexExcel + i).getCell(5).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 5)));
+            if (i == sizeTable - 1) {
+                sheet.getRow(indexExcel + i +1).getCell(6).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
+            }
+
+        }
+        try {
+            FileOutputStream out
+                    = new FileOutputStream(new File(System.getProperty("user.home") + "//exportOperaciones.xls"));
+            workbook.write(out);
+            out.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(
+                null,
+                "Exportado correctamente en: " + System.getProperty("user.home"),
+                "Sistema Pago Impuestos",
+                JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButtonExportarOperacionesActionPerformed
     
     /**
      * @param args the command line arguments
@@ -367,6 +482,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
     private datechooser.beans.DateChooserCombo dateChooserCombodesde;
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
     private javax.swing.JButton jButtonConsultarOperacionesBancarias;
+    private javax.swing.JButton jButtonExportarOperaciones;
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -376,7 +492,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableOperaciones;
     private javax.swing.JTextField jTextFieldMontoTotal;
     private javax.swing.JTextField jTextFieldNombreEmpresa;
     // End of variables declaration//GEN-END:variables

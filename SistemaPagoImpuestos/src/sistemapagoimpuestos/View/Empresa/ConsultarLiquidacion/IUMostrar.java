@@ -5,24 +5,20 @@
  */
 package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 
-import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.*;
-import static java.awt.Dialog.DEFAULT_MODALITY_TYPE;
-import java.awt.print.PageFormat;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import java.text.MessageFormat;
-import java.text.NumberFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
-import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
-import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
 
-import sistemapagoimpuestos.Utils.Printer;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.NumberFormat;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
 
 
 /**
@@ -30,7 +26,7 @@ import sistemapagoimpuestos.Utils.Printer;
  * @author vande
  */
 public class IUMostrar extends javax.swing.JDialog {
-
+     static int sizeTable;
     /**
      * Creates new form IUMostrar
      */
@@ -54,7 +50,7 @@ public class IUMostrar extends javax.swing.JDialog {
             model.removeRow(0);}
          //if(dtoLiquidacion.getListOperacionComision().size()==0){
           //   JOptionPane.showMessageDialog(rootPane, "No se han encontrado Operaciones relacionadas a la liquidación seleccionada");}
-                     
+        sizeTable = dtoLiquidacion.getListOperacionComision().size();
         for (int i = 0; i < dtoLiquidacion.getListOperacionComision().size(); i++) {
             model.addRow(new Object[]{});
             
@@ -175,7 +171,7 @@ public class IUMostrar extends javax.swing.JDialog {
             }
         });
 
-        buttonDescargar.setText("Imprimir");
+        buttonDescargar.setText("Exportar");
         buttonDescargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDescargarActionPerformed(evt);
@@ -278,36 +274,88 @@ public class IUMostrar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void buttonDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDescargarActionPerformed
-       PrinterJob pjob = PrinterJob.getPrinterJob();
-        PageFormat preformat = pjob.defaultPage();
-        preformat.setOrientation(PageFormat.PORTRAIT);
-        PageFormat postformat = pjob.pageDialog(preformat);
-        //If user does not hit cancel then print.
-        if (preformat != postformat) {
-            //Set print component
-            pjob.setPrintable(new Printer(this), postformat);
-            if (pjob.printDialog()) {
-                try {
-                    pjob.print();
-                } catch (PrinterException ex) {
-                    Logger.getLogger(IUMostrar.class.getName()).log(Level.SEVERE, null, ex);
+      int indexExcel = 8;
+        try {
+           
+           File archivo = new File(System.getProperty("user.home") + "//export.txt");
+            FileWriter file = new FileWriter(archivo, true);
+            //Escribimos en el archivo con el metodo write 
+            file.write("Empresa = " + jLabelEmpresa.getText() + ";\r\n");
+            file.write("Tipo Impuesto = " + jLabelTipoImpuesto.getText() + ";\r\n");
+            file.write("Numero Liquidacion = " + jLabelNrodeLiquidacion.getText() + ";\r\n");
+            file.write("Fecha Liquidacion = " + jLabelFechaLiquidacion.getText() + ";\r\n");
+            file.write("Periodo = " + jLabelPeriodo.getText() + ";\r\n");
+            for (int i = 0; i < sizeTable; i++) {
+                file.write("Operacion" + i + "\r\n");
+                file.write("Numero Operacion: " + jTableOperacion.getValueAt(i, 0) + "; ");
+                file.write("Numero Comprobante: " + jTableOperacion.getValueAt(i, 1) + "; ");
+                file.write("Importe Pagado: " + jTableOperacion.getValueAt(i, 2) + "; ");
+                file.write("Monto de comision correspondiente: " + jTableOperacion.getValueAt(i, 3) + ";\r\n");
+                if (i == sizeTable - 1) {
+                    file.write("Monto de Comision Total: " + jTextFieldMontoTotal.getText() + ";");
                 }
             }
+
+            file.close();
+        } catch (Exception e) {
+            System.out.println("Error al guardar el archivo");
+
         }
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Reporte Sistema Pago de Impuestos");
+        sheet = workbook.getSheetAt(0);
+      
+        for(int i = 0 ; i< 20 ; i++){
+            HSSFRow row = sheet.createRow(i);
+            for(int y = 0; y<10;y++){
+                     row.createCell(y);
+            }
         
-       /* MessageFormat header = new MessageFormat("Operaciones");
-      MessageFormat footer = new MessageFormat("Pagina 1");
-      try {
-          jTableOperacion.print(JTable.PrintMode.NORMAL, header, footer);
-      } catch(Exception e){
-          JOptionPane.showMessageDialog(this,e.getMessage());
-      }*/
-       
-       /*
-         String pdfFilename = "‪D:\\UTN\\reports\\reportTest.pdf";
-  PrinterPDF printReport = new PrinterPDF();
-  printReport.createPDF(pdfFilename);
-       */
+        }
+        sheet.getRow(0).getCell(0).setCellValue("Empresa");
+        sheet.getRow(1).getCell(0).setCellValue("Tipo Impuesto");
+        sheet.getRow(2).getCell(0).setCellValue("Numero Liquidacion");
+        sheet.getRow(3).getCell(0).setCellValue("Fecha Liquidacion");
+        sheet.getRow(4).getCell(0).setCellValue("Periodo Liquidacion");
+        sheet.getRow(0).getCell(1).setCellValue(jLabelEmpresa.getText());
+        sheet.getRow(1).getCell(1).setCellValue(jLabelTipoImpuesto.getText());
+        sheet.getRow(2).getCell(1).setCellValue(jLabelNrodeLiquidacion.getText());
+        sheet.getRow(3).getCell(1).setCellValue(jLabelFechaLiquidacion.getText());
+        sheet.getRow(4).getCell(1).setCellValue(jLabelPeriodo.getText());
+
+        sheet.getRow(7).getCell(0).setCellValue("Numero Operación");
+        sheet.getRow(7).getCell(1).setCellValue("Numero Comprobante");
+        sheet.getRow(7).getCell(2).setCellValue("Importe Pagado");
+        sheet.getRow(7).getCell(3).setCellValue("Monto Comision");
+        sheet.getRow(7).getCell(4).setCellValue("Monto Comision Total");
+
+        for (int i = 0; i < sizeTable; i++) {
+
+            sheet.getRow(indexExcel + i).getCell(0).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 0)));
+            sheet.getRow(indexExcel + i).getCell(1).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 1)));
+            sheet.getRow(indexExcel + i).getCell(2).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 2)));
+            sheet.getRow(indexExcel + i).getCell(3).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 3)));
+            if (i == sizeTable - 1) {
+                sheet.getRow(indexExcel + i +1).getCell(4).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
+            }
+
+        }
+        try {
+            FileOutputStream out
+                    = new FileOutputStream(new File(System.getProperty("user.home") + "//export.xls"));
+            workbook.write(out);
+            out.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(
+                null,
+                "Exportado correctamente en: " + System.getProperty("user.home"),
+                "Sistema Pago Impuestos",
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_buttonDescargarActionPerformed
 
     /**

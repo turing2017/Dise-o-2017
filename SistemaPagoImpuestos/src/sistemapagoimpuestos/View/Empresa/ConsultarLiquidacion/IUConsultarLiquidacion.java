@@ -254,6 +254,9 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
             jTable2.setValueAt(nf.format(listDtoLiquidacion.get(i).getTotalLiquidado()), i, 5);
             
         }
+        if(listDtoLiquidacion.size()==0){
+            JOptionPane.showMessageDialog(rootPane, "No se han encontrado Liquidaciones relacionadas a los datos ingresados, intente nuevamente");
+    }
     }//GEN-LAST:event_jButtonConsultarLiquidacionesActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
@@ -280,11 +283,17 @@ public class IUConsultarLiquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoImpuestoItemStateChanged
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
+        
+        
         ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
         double montoTotal = 0.0;
-        String nliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
+      
+        
+        try {String nliquidacion = jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString();
+            controlador.mostrar(nliquidacion);
+        } catch (Exception e) {JOptionPane.showMessageDialog(rootPane, "Debe seleccionar una liquidacion para continuar");
+        }
        
-       controlador.mostrar(nliquidacion);
        
     
         //LLena los labels

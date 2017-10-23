@@ -52,6 +52,9 @@ public class IUMostrar extends javax.swing.JDialog {
         DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
          while (model.getRowCount() > 0) {
             model.removeRow(0);}
+         //if(dtoLiquidacion.getListOperacionComision().size()==0){
+          //   JOptionPane.showMessageDialog(rootPane, "No se han encontrado Operaciones relacionadas a la liquidación seleccionada");}
+                     
         for (int i = 0; i < dtoLiquidacion.getListOperacionComision().size(); i++) {
             model.addRow(new Object[]{});
             
@@ -66,11 +69,7 @@ public class IUMostrar extends javax.swing.JDialog {
             for (int j = 0; j <  model.getRowCount()-1; j++) {
                 String d = jTableOperacion.getValueAt(j, 1).toString();
                 String d2 = jTableOperacion.getValueAt(j+1, 1).toString();
-                System.out.println(d);
-                System.out.println(d2);
-               
                 if (d.compareTo(d2)>0){ //d>d2
-                    
                 model.moveRow(j, j, j+1);
                 }
                 

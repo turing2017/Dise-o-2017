@@ -17,7 +17,6 @@ import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
  * @author Gabriel
  */
 public class IUPantallaEmpresa extends javax.swing.JFrame {
-    
 
     public IUPantallaEmpresa() {
         initComponents();
@@ -126,15 +125,15 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-ControladorConsultarOperacionesBancarias controladorConsultarOperacionesBancarias = new ControladorConsultarOperacionesBancarias();     
-controladorConsultarOperacionesBancarias.validarUsuario();
-this.dispose();// TODO add your handling code here:
+        ControladorConsultarOperacionesBancarias controladorConsultarOperacionesBancarias = new ControladorConsultarOperacionesBancarias();
+        controladorConsultarOperacionesBancarias.validarUsuario();
+        this.dispose();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- ControladorConsultarLiquidacion controladorConsultarLiq = new ControladorConsultarLiquidacion();
+        ControladorConsultarLiquidacion controladorConsultarLiq = new ControladorConsultarLiquidacion();
         controladorConsultarLiq.validarUsuario();
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -188,9 +187,9 @@ this.dispose();// TODO add your handling code here:
 
     public void mostrarPantallaPrincipal() {
         IUPantallaEmpresa pe = new IUPantallaEmpresa();
-        String fechaHoraInhabilitacionUsuarioEncontrada = (GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario() == null)?"Sin último acceso":GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString();        
+        String fechaHoraInhabilitacionUsuarioEncontrada = (GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario() == null) ? "Sin último acceso" : GlobalVars.userActive.getFechaHoraUltimoIngresoSistemaUsuario().toString();
         pe.jLabelNombreUsuario.setText("Nombre Usuario: " + GlobalVars.userActive.getNombreUsuario());
-        pe.jLabelfechaUltimoacceso.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada );
+        pe.jLabelfechaUltimoacceso.setText("Ultimo acceso " + fechaHoraInhabilitacionUsuarioEncontrada);
         MetodosPantalla.getInstance().setearPantalla(this);
     }
 }

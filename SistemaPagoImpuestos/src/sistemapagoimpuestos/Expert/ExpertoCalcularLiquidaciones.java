@@ -242,10 +242,13 @@ public class ExpertoCalcularLiquidaciones {
 
         //loop por cada EmpresatipoImpuesto
         for (Object eTI : EmpresaTipoImpuestoList) {
-            // crear una lista para las operaciones para poder buscar despues por rango de fechas
+           // crear una lista para las operaciones para poder buscar despues por rango de fechas
             List<Operacion> operacionesEnRangoDeFechas = new ArrayList();
             EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eTI;
 
+            //get frecuencia
+            int frecuencia = empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto();
+           
             //System.out.println("fecha: " + empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
             //System.out.println(empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
             //buscar "Liquidacion", "empresaTipoImpuesto = "empresaTipoImpuesto.toString()"" 
@@ -255,8 +258,6 @@ public class ExpertoCalcularLiquidaciones {
 
             List<Object> liquidaciones = FachadaPersistencia.getInstance().buscar("Liquidacion", criterios);
 
-            //get frecuencia
-            int frecuencia = empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto();
             Calendar calfechaLiquidacion = Calendar.getInstance();
 
             if (liquidaciones == null || liquidaciones.isEmpty()) {
@@ -307,7 +308,7 @@ public class ExpertoCalcularLiquidaciones {
                     listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
                 } catch (Exception e) {
                     e.printStackTrace();
-//                  //  System.out.println("No existen operaciones");
+                  //  System.out.println("No existen operaciones");
                 }
 
                 for (Object op : listOperacion) {
@@ -321,23 +322,14 @@ public class ExpertoCalcularLiquidaciones {
                         operacionesEnRangoDeFechas.add(operacion);
                     }
                 }
-
-                if (operacionesEnRangoDeFechas.size() == 0) {
+                
+                if (operacionesEnRangoDeFechas.isEmpty()) {
                     dtosAccionesSistema.add(new DTOAccionesSistema(3, "VERIFICA SI DEBE LIQUIDAR A EMPRESA TIPO IMPUESTO", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n" + "Tipo de impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Liquidar con una Frecuencia de: " + frecuencia + " días." + "\n" + "Debe liquidar a partir del día: " + fechaALiquidar + "\n" + "Se genera liquidación pero no tiene operaciones.", new Date()));
                 } else {
                     dtosAccionesSistema.add(new DTOAccionesSistema(3, "VERIFICA SI DEBE LIQUIDAR A EMPRESA TIPO IMPUESTO", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n" + "Tipo de impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Liquidar con una Frecuencia de: " + frecuencia + " días." + "\n" + "Debe liquidar a partir del día: " + fechaALiquidar + "\n" + "Se genera liquidación con " + operacionesEnRangoDeFechas.size() + " operaciones.", new Date()));
                 }
-
-                //buscar numero liquidacion
-                List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
-                int numeroLiquidacion = 0;
-                for (Object l : liquidacion) {
-                    Liquidacion liq = (Liquidacion) l;
-                    if (liq.getNumeroLiquidacion() > numeroLiquidacion) {
-                        numeroLiquidacion = liq.getNumeroLiquidacion();
-                    }
-                }
-
+                
+                
                 //new liquidacion
                 Liquidacion nuevaLiquidacion = new Liquidacion();
 
@@ -348,6 +340,7 @@ public class ExpertoCalcularLiquidaciones {
                     Double valorComision;
                     EstrategiaCalculoComision estrategia = FabricaEstrategias.getInstancia().obtenerEstrategia(operacion);
                     valorComision = estrategia.obtenerValorComision(operacion);
+                    
                     //  Creamos la comision correspondiente para la operacion y la seteamos 
                     Comision comision = new Comision();
                     comision.setFechaCalculoComision(new Date());
@@ -382,10 +375,21 @@ public class ExpertoCalcularLiquidaciones {
 
                 //setLiquidacionEstado(LiquidacionEstado)
                 nuevaLiquidacion.getLiquidacionEstadoList().add(liqEstado);
-                //setnumeroLiquidacion(numeroLiquidacion)
+                
 
+                //setnumeroLiquidacion(numeroLiquidacion)
+                //buscar numero liquidacion
+                List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+                int numeroLiquidacion = 0;
+                for (Object l : liquidacion) {
+                    Liquidacion liq = (Liquidacion) l;
+                    if (liq.getNumeroLiquidacion() > numeroLiquidacion) {
+                        numeroLiquidacion = liq.getNumeroLiquidacion();
+                    }
+                }
                 //setNumeroLiquidacion
                 nuevaLiquidacion.setNumeroLiquidacion(numeroLiquidacion + 1);
+               
                 //setFechaHoraLiquidacion(fechaActual)
                 nuevaLiquidacion.setFechaHoraLiquidacion(new Date());
                 //setfechaHoraDesdeLiquidacion(fechahoraDesdeLiquidacion)

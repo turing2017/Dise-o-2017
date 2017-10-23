@@ -148,7 +148,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="button_gestionar_liquidacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Gestionar Liquidacion"/>
+        <Property name="text" type="java.lang.String" value="Gestionar Liquidaci&#xf3;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionar_liquidacionActionPerformed"/>

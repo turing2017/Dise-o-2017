@@ -45,13 +45,16 @@ public class ControladorConsultarLiquidacion {
             experto.validarUsuario();
             IUConsultarLiquidacion UIConsultarLiquidacion= new IUConsultarLiquidacion();
             UIConsultarLiquidacion.setVisible(true);
+            UIConsultarLiquidacion.setLocationRelativeTo(null);
+            UIConsultarLiquidacion.setTitle("Consultar Liquidación - EMPRESA");
 
         } catch (ExcepcionGenerica e) {
-            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no corresponde a un usuario de Empresa");
         } catch (Exception e) {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
+    
 public void mostrar(String nliquidacion){
  IUMostrar mostrar = new IUMostrar(nliquidacion);
  mostrar.setVisible(true);

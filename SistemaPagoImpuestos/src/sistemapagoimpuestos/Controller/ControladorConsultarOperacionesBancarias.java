@@ -40,9 +40,11 @@ public class ControladorConsultarOperacionesBancarias {
             experto.validarUsuario();
             IUConsultarOperacionesBancarias iUConsultarOperacionesBancarias= new IUConsultarOperacionesBancarias();
             iUConsultarOperacionesBancarias.setVisible(true);
+            iUConsultarOperacionesBancarias.setLocationRelativeTo(null);
+            iUConsultarOperacionesBancarias.setTitle("Consultar Operaciones Bancarias - EMPRESA");
 
         } catch (ExcepcionGenerica e) {
-            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no corresponde a un usuario de Empresa");
         } catch (Exception e) {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }

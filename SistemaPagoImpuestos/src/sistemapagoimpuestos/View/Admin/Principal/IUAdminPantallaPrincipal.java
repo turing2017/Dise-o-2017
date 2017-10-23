@@ -102,7 +102,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        button_gestionar_liquidacion.setText("Gestionar Liquidacion");
+        button_gestionar_liquidacion.setText("Gestionar Liquidación");
         button_gestionar_liquidacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_gestionar_liquidacionActionPerformed(evt);
@@ -204,7 +204,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_button_gestionarItemActionPerformed
 
     private void button_gestionar_cal_paramsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionar_cal_paramsActionPerformed
-        calculoComision.iniciar();
+        calculoComision.validarUsuario();
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_button_gestionar_cal_paramsActionPerformed
 
@@ -279,7 +279,6 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton button_gestionar_cal_params;
     private javax.swing.JButton button_gestionar_liquidacion;
     private javax.swing.JButton jButtonSalir;
-    private javax.swing.JButton jButtonSalir2;
     private javax.swing.JLabel label_fecha;
     private javax.swing.JLabel label_nombre;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos.Controller;
 
+import exceptions.ExcepcionGenerica;
+import exceptions.Excepciones;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Expert.ExpertoGestionarParametrosCalculoComision;
@@ -18,66 +20,57 @@ import sistemapagoimpuestos.View.Admin.GestionarParametrosPeriodicidad.IUGestion
  * @author Gabriel
  */
 public class ControladorGestionarParametrosCalculoComision {
-
-    private static ControladorGestionarParametrosCalculoComision controladorGestionarParametrosCalculoComision;
-
+    
+    private ExpertoGestionarParametrosCalculoComision experto = (ExpertoGestionarParametrosCalculoComision) FabricaExpertos.getInstancia().crearExperto("CU22");
+    
     public ControladorGestionarParametrosCalculoComision() {
     }
-
-    public static ControladorGestionarParametrosCalculoComision getInstance() {
-        if (controladorGestionarParametrosCalculoComision == null) {
-            controladorGestionarParametrosCalculoComision = new ControladorGestionarParametrosCalculoComision();
-        }
-        return controladorGestionarParametrosCalculoComision;
-    }
-
-    private ExpertoGestionarParametrosCalculoComision experto = (ExpertoGestionarParametrosCalculoComision) FabricaExpertos.getInstancia().crearExperto("CU22");
-
-    // Metodo iniciar
-    public void iniciar() {
-        if (experto.iniciar().equals("Administrador")) {
-            IUGestionarParametrosComision pantallaPrincipal = new IUGestionarParametrosComision();
-            pantallaPrincipal.setVisible(true);
-            pantallaPrincipal.setLocationRelativeTo(null);
-            pantallaPrincipal.setTitle("Gestionar Parámetros de Cálculo de Comisión");
+    
+    public void validarUsuario() {
+        try {
+            experto.validarUsuario();
+            IUGestionarParametrosComision UIGestionarParametrosComision = new IUGestionarParametrosComision();
+            UIGestionarParametrosComision.setVisible(true);
+            UIGestionarParametrosComision.setLocationRelativeTo(null);
+            UIGestionarParametrosComision.setTitle("Gestionar Parámetros de Cálculo de Comisión");
+            
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+        } catch (Exception e) {
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
-
+    
     public void modificarParametrosPeriodicidad(double mensual, double bimestral, double trimestral, double cuatrimestral, double semestral, double anual, double quincenal) {
         experto.modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
     }
-
+    
     public void modificarParametrosEditable(double montoSiEditable, double montoNoEditable) {
         experto.modificarParametrosEditable(montoSiEditable, montoNoEditable);
     }
-
+    
     public DTOParametroCalculoPeriodicidad obtenerParametrosCalculoPeriodicidad() {
         return experto.obtenerParametrosCalculoPeriodicidad();
     }
-
+    
     public DTOParametroCalculoEditable obtenerParametrosCalculoEditable() {
         return experto.obtenerParametrosCalculoEditable();
     }
-
-    public void getUI(String UI) {
-        switch (UI) {
-            case "Periodicidad":
-                IUGestionarParametrosCalculoPeriodicidad gestionarParametrosCalculoPeriodicidad = new IUGestionarParametrosCalculoPeriodicidad();
-                gestionarParametrosCalculoPeriodicidad.setTitle("Gestionar Parámetros de Cálculo de Periodicidad");
+    
+    public void pantallaIUGestionarParametrosCalculoPeriodicidad() {
+        IUGestionarParametrosCalculoPeriodicidad gestionarParametrosCalculoPeriodicidad = new IUGestionarParametrosCalculoPeriodicidad();
+        gestionarParametrosCalculoPeriodicidad.setTitle("Gestionar Parámetros de Cálculo de Periodicidad");
                 gestionarParametrosCalculoPeriodicidad.setResizable(false);
                 gestionarParametrosCalculoPeriodicidad.setLocationRelativeTo(null);
                 gestionarParametrosCalculoPeriodicidad.setVisible(true);
-
-                break;
-            case "Editable":
-                IUGestionarParametroCalculoEditable gestionarParametrosCalculoEditable = new IUGestionarParametroCalculoEditable();
-                gestionarParametrosCalculoEditable.setTitle("Gestionar Parámetros de Cálculo Editable");
+    }
+    
+    public void pantallaIUGestionarParametrosCalculoEditable() {
+        IUGestionarParametroCalculoEditable gestionarParametrosCalculoEditable = new IUGestionarParametroCalculoEditable();
+        gestionarParametrosCalculoEditable.setTitle("Gestionar Parámetros de Cálculo Editable");
                 gestionarParametrosCalculoEditable.setResizable(false);
                 gestionarParametrosCalculoEditable.setLocationRelativeTo(null);
                 gestionarParametrosCalculoEditable.setVisible(true);
-
-                break;
-        }
-
     }
+
 }

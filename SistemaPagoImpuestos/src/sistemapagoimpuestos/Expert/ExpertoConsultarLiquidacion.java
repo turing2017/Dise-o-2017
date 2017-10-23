@@ -106,7 +106,7 @@ public class ExpertoConsultarLiquidacion {
                                 
                                 
                                 for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
-                                  TotalLiquidado += liquidacion.getOperacionList().get(i).getValorComisionOperacion();
+                                  TotalLiquidado += liquidacion.getOperacionList().get(j).getValorComisionOperacion();
                                 }
                                 dtoLiquidacion.setTotalLiquidado(TotalLiquidado);
                                 

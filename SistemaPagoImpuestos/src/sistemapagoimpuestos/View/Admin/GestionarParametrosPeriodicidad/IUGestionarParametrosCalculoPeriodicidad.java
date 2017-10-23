@@ -18,10 +18,12 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
     /**
      * Creates new form GestionarParametrosCalculoPeriodicidad
      */
+    ControladorGestionarParametrosCalculoComision controlador = new ControladorGestionarParametrosCalculoComision();
+    
     public IUGestionarParametrosCalculoPeriodicidad() {
         initComponents();
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
-        DTOParametroCalculoPeriodicidad dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoPeriodicidad();
+        DTOParametroCalculoPeriodicidad dtoCP = controlador.obtenerParametrosCalculoPeriodicidad();
         jTextField1.setText(Double.toString(dtoCP.getMensualPCPeriodicidad()));
         jTextField3.setText(Double.toString(dtoCP.getBimestralPCPeriodicidad()));
         jTextField7.setText(Double.toString(dtoCP.getTrimestralPCPeriodicidad()));
@@ -30,7 +32,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         jTextField2.setText(Double.toString(dtoCP.getAnualPCPeriodicidad()));
         jTextField5.setText(Double.toString(dtoCP.getQuincenalPCPeriodicidad()));
 
-        jButton2.setVisible(false);
+        jButtonGuardar.setVisible(false);
         jTextField4.setEnabled(false);
         jTextField7.setEnabled(false);
         jTextField3.setEnabled(false);
@@ -62,7 +64,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonGuardar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
@@ -125,10 +127,10 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
             }
         });
 
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonGuardarActionPerformed(evt);
             }
         });
 
@@ -184,7 +186,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel7))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -224,7 +226,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -280,12 +282,12 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
             double valorConvertido = Double.parseDouble(valorCampo);
 
             if (Double.doubleToRawLongBits(valorConvertido) < 0) {
-                MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 2.50)");
+                MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 0.50)");
                 return false;
             }
 
         } catch (NumberFormatException e) {
-            MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 2.50)");
+            MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos(nombreCampo, "Debe ingresar un valor númerico positivo. (Por ej.: 0.50)");
             return false;
         }
 
@@ -301,7 +303,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
     }
 
 //Guardar 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
 
         if (!validarCampoDecimalRequerido(jLabel6.getText().substring(0, jLabel6.getText().length() - 1), jTextField1.getText())
                 || !validarCampoDecimalRequerido(jLabel1.getText().substring(0, jLabel1.getText().length() - 1), jTextField3.getText())
@@ -323,11 +325,10 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
 
         if (mensual == 0 & bimestral == 0 & trimestral == 0 & cuatrimestral == 0 & semestral == 0 & anual == 0 & quincenal == 0) {
             MensajesParametroCalculoPeriodicidad.getInstance().datosIncorrectos("", "No pueden estar todos los valores definidos en cero.\n Al menos uno debe ser númerico positivo mayor a cero. (Por ej.: 2.50)");
-        } else {
+        }else {
             try {
-                ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
-                MensajesParametroCalculoPeriodicidad.getInstance().modificacionExitosa();
-                this.dispose();
+                controlador.modificarParametrosPeriodicidad(mensual, bimestral, trimestral, cuatrimestral, semestral, anual, quincenal);
+                MensajesParametroCalculoPeriodicidad.getInstance().modificacionExitosa();                
             } catch (Exception e) {
                 MensajesParametroCalculoPeriodicidad.getInstance().modificacionFallida();
             }
@@ -335,7 +336,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         }
 
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -356,7 +357,7 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
         jTextField5.setEnabled(true);
         jTextField1.setEnabled(true);
         jButton3.setVisible(false);
-        jButton2.setVisible(true);
+        jButtonGuardar.setVisible(true);
         //jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -400,8 +401,8 @@ public class IUGestionarParametrosCalculoPeriodicidad extends javax.swing.JDialo
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

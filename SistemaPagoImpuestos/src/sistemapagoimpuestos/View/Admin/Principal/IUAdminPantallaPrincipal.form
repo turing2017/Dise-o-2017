@@ -44,6 +44,22 @@
               <Component id="btn_cerrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="label_fecha" min="-2" max="-2" attributes="0"/>
+                          <Component id="label_nombre" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jButtonSalir" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -52,9 +68,9 @@
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="button_gestionarTipoUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="button_gestionarUsuario" min="-2" max="-2" attributes="0"/>
+              <Component id="button_gestionarUsuario" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="button_gestionarTipoImpuesto" min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="button_gestionarTipoImpuesto" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="button_gestionarItem" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
@@ -107,7 +123,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="button_gestionar_cal_params">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Gestionar Calculo Parametros"/>
+        <Property name="text" type="java.lang.String" value="Gestionar Par&#xe1;metros de C&#xe1;lculo de Comisi&#xf3;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionar_cal_paramsActionPerformed"/>
@@ -123,7 +139,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="button_gestionar_liquidacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Gestionar Liquidacion"/>
+        <Property name="text" type="java.lang.String" value="Gestionar Liquidaci&#xf3;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_gestionar_liquidacionActionPerformed"/>

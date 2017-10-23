@@ -5,12 +5,13 @@
  */
 package sistemapagoimpuestos.Expert;
 
+import exceptions.ExcepcionGenerica;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoEditable;
 import sistemapagoimpuestos.Dto.DTOParametroCalculoPeriodicidad;
 import sistemapagoimpuestos.Entity.ParametroCalculoEditable;
 import sistemapagoimpuestos.Entity.ParametroCalculoPeriodicidad;
-import sistemapagoimpuestos.Entity.Usuario;
+import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.ConvertDTO;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
 
@@ -19,8 +20,13 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  * @author Gabriel
  */
 public class ExpertoGestionarParametrosCalculoComision {
-
-    Usuario usuario = new Usuario();
+    
+    public void validarUsuario() throws Exception {
+        
+        if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
+            throw new ExcepcionGenerica("Error de privilegios");
+        }
+    }
 
     // Metodo iniciar
     public String iniciar() {

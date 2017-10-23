@@ -1,4 +1,4 @@
-package sistemapagoimpuestos.View.Admin.Principal;
+﻿package sistemapagoimpuestos.View.Admin.Principal;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -40,7 +40,6 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 iULogin.setVisible(true);
             }
         });
-        
     }
     
     
@@ -63,7 +62,6 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         button_gestionar_liquidacion = new javax.swing.JButton();
         button_calcular_liquidaciones = new javax.swing.JButton();
         btn_cerrar = new javax.swing.JButton();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         button_gestionarTipoUsuario.setText("Gestionar Tipo Usuario");
@@ -94,7 +92,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        button_gestionar_cal_params.setText("Gestionar Calculo Parametros");
+        button_gestionar_cal_params.setText("Gestionar Parámetros de Cálculo de Comisión");
         button_gestionar_cal_params.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_gestionar_cal_paramsActionPerformed(evt);
@@ -108,7 +106,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        button_gestionar_liquidacion.setText("Gestionar Liquidacion");
+        button_gestionar_liquidacion.setText("Gestionar Liquidación");
         button_gestionar_liquidacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_gestionar_liquidacionActionPerformed(evt);
@@ -121,7 +119,6 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 button_calcular_liquidacionesActionPerformed(evt);
             }
         });
-
         btn_cerrar.setText("Salir");
         btn_cerrar.setToolTipText("");
         btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -158,9 +155,9 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(button_gestionarTipoUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button_gestionarUsuario)
+                .addComponent(button_gestionarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(button_gestionarTipoImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_gestionarItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
@@ -200,7 +197,7 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_button_gestionarItemActionPerformed
 
     private void button_gestionar_cal_paramsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_gestionar_cal_paramsActionPerformed
-        calculoComision.iniciar();
+        calculoComision.validarUsuario();
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_button_gestionar_cal_paramsActionPerformed
 

@@ -10,10 +10,9 @@ import java.util.List;
 
 /**
  *
- * @author facun
+ * @author vande
  */
-public class DTOLiquidacion {
-    
+public class DTOLiquidacionesConsultarLiquidaciones {
     private int numeroLiquidacion;
     private Date fechaHoraLiquidacion;
     private Date fechaHoraDesdeLiquidacion;
@@ -21,24 +20,11 @@ public class DTOLiquidacion {
     private String nombreEmpresa;
     private String nombreTipoImpuesto;
     private String nombreEstadoLiquidacion;
-    private List<DTOOperacionComision> listOperacionComision;
+    private List<DTOOperacionConsultarLiquidacion> listOperacionComision;
+    private double TotalLiquidado;
     
-    public DTOLiquidacion() {
-    }
-
-   
-
-    public List<DTOOperacionComision> getListOperacionComision() {
-        return listOperacionComision;
-    }
-
-    public void setListOperacionComision(List<DTOOperacionComision> listOperacionComision) {
-        this.listOperacionComision = listOperacionComision;
-    }
-
-   
-
-   
+    public DTOLiquidacionesConsultarLiquidaciones() {
+}
 
     public int getNumeroLiquidacion() {
         return numeroLiquidacion;
@@ -95,6 +81,21 @@ public class DTOLiquidacion {
     public void setNombreEstadoLiquidacion(String nombreEstadoLiquidacion) {
         this.nombreEstadoLiquidacion = nombreEstadoLiquidacion;
     }
-    
+
+    public List<DTOOperacionConsultarLiquidacion> getListOperacionComision() {
+        return listOperacionComision;
+    }
+
+    public void setListOperacionComision(List<DTOOperacionConsultarLiquidacion> listOperacionComision) {
+        this.listOperacionComision = listOperacionComision;
+    }
+
+    public double getTotalLiquidado() {
+        return TotalLiquidado;
+    }
+
+    public void setTotalLiquidado(double TotalLiquidado) {
+        this.TotalLiquidado = TotalLiquidado;
+    }
     
 }

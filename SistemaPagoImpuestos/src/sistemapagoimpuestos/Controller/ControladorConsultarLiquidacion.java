@@ -9,13 +9,16 @@ import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
+
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoConsultarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUConsultarLiquidacion;
+import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUMostrar;
 
 
 /**
@@ -29,11 +32,11 @@ public class ControladorConsultarLiquidacion {
     public ControladorConsultarLiquidacion() {
     }
    
-    public ArrayList<DTOEmpresaTipoImpuesto> obtenerTipoImpuestos() {
+    public List<DTOTipoImpuesto> obtenerTipoImpuestos() {
         return experto.obtenerTipoImpuestos();
     }
 
-    public ArrayList<DTOLiquidacion> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
+    public List<DTOLiquidacionesConsultarLiquidaciones> buscarLiquidacionConFiltro(String itemAt, String text, Date fechadesde, Date fechahasta) {
         return experto.buscarLiquidacionConFiltro(itemAt, text, fechadesde, fechahasta);
     }
 
@@ -42,12 +45,22 @@ public class ControladorConsultarLiquidacion {
             experto.validarUsuario();
             IUConsultarLiquidacion UIConsultarLiquidacion= new IUConsultarLiquidacion();
             UIConsultarLiquidacion.setVisible(true);
+            UIConsultarLiquidacion.setLocationRelativeTo(null);
+            UIConsultarLiquidacion.setTitle("Consultar Liquidación - EMPRESA");
 
         } catch (ExcepcionGenerica e) {
-            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no es Administrador");
+            Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no corresponde a un usuario de Empresa");
         } catch (Exception e) {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
+    
+public void mostrar(String nliquidacion){
+ IUMostrar mostrar = new IUMostrar(nliquidacion);
+ mostrar.setVisible(true);
+}
+public DTOLiquidacionesConsultarLiquidaciones buscardetalleLiquidacion(String numeroLiquidacion){
+return experto.buscardetalleLiquidacion(numeroLiquidacion);
+}
 
 }

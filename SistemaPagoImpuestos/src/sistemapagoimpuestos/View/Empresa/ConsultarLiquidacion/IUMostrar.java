@@ -5,21 +5,20 @@
  */
 package sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion;
 
-import sistemapagoimpuestos.View.Admin.GestionarLiquidacion.*;
-import static java.awt.Dialog.DEFAULT_MODALITY_TYPE;
-import java.awt.print.PageFormat;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import java.text.MessageFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.NumberFormat;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
-import sistemapagoimpuestos.Dto.DTOLiquidacion;
-import sistemapagoimpuestos.Utils.Printer;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
 
 
 /**
@@ -27,42 +26,54 @@ import sistemapagoimpuestos.Utils.Printer;
  * @author vande
  */
 public class IUMostrar extends javax.swing.JDialog {
-
+     static int sizeTable;
     /**
      * Creates new form IUMostrar
      */
-    public IUMostrar(String nliquidacion,Date fechaDesde,Date fechaHasta,String estado) {
+    public IUMostrar(String nliquidacion) {
         initComponents();
-        ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion,fechaDesde,fechaHasta,estado);
-        
+        ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+       DTOLiquidacionesConsultarLiquidaciones dtoLiquidacion = controlador.buscardetalleLiquidacion(nliquidacion);
+       
+        jLabelEmpresa.setText(dtoLiquidacion.getNombreEmpresa());
+        jLabelTipoImpuesto.setText(dtoLiquidacion.getNombreTipoImpuesto());
         jLabelNrodeLiquidacion.setText(nliquidacion);
-        jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
-        jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
-        jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
-        jLabelPeriodo.setText(fechaDesde.toString());
-        if (fechaHasta == null){jLabelPeriodo2.setText("---");}else{
-        jLabelPeriodo2.setText(fechaHasta.toString());}
+        jLabelFechaLiquidacion.setText(dtoLiquidacion.getFechaHoraLiquidacion().toString());
+       
+        jLabelPeriodo.setText(dtoLiquidacion.getFechaHoraDesdeLiquidacion().toString()+" - "+dtoLiquidacion.getFechaHoraHastaLiquidacion().toString());
+        
+        NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(3);
+        jTextFieldMontoTotal.setText(nf.format(dtoLiquidacion.getTotalLiquidado()));
         DefaultTableModel model = (DefaultTableModel)jTableOperacion.getModel();
-        Double montoTotal = 0.0;
-        for (int i = 0; i < liquidacion.getListComision().size(); i++) {
+         while (model.getRowCount() > 0) {
+            model.removeRow(0);}
+         //if(dtoLiquidacion.getListOperacionComision().size()==0){
+          //   JOptionPane.showMessageDialog(rootPane, "No se han encontrado Operaciones relacionadas a la liquidación seleccionada");}
+        sizeTable = dtoLiquidacion.getListOperacionComision().size();
+        for (int i = 0; i < dtoLiquidacion.getListOperacionComision().size(); i++) {
             model.addRow(new Object[]{});
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNumeroOperacion(), i, 0);
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getNroComprobanteFactura(), i, 1);
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getValorComision(), i, 2);
-            jTableOperacion.setValueAt(liquidacion.getListComision().get(i).getDtoOperacion().getImportePagadoOperacion(), i, 3);
-             System.out.println(liquidacion.getListComision().get(i).getValorComision());
-            montoTotal= liquidacion.getListComision().get(i).getValorComision() +montoTotal;
+            
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNumeroOperacion(), i, 0);
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getFechaHoraOperacion().toString(), i, 1);
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 2);
+            jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 3);
+            jTableOperacion.setValueAt(nf.format(dtoLiquidacion.getListOperacionComision().get(i).getValorComision()), i, 4);   
         }
-       System.out.println(montoTotal);
-       jTextFieldMontoTotal.setText(montoTotal.toString());
-        this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
-        this.setTitle("Operaciones");
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+         for (int i = 0; i < (model.getRowCount()*(model.getRowCount()-1)); i++) {
+          
+            for (int j = 0; j <  model.getRowCount()-1; j++) {
+                String d = jTableOperacion.getValueAt(j, 1).toString();
+                String d2 = jTableOperacion.getValueAt(j+1, 1).toString();
+                if (d.compareTo(d2)>0){ //d>d2
+                model.moveRow(j, j, j+1);
+                }
+                
+            }
+        }
+     /*
+*/
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,8 +100,6 @@ public class IUMostrar extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldMontoTotal = new javax.swing.JTextField();
-        jLabelPeriodo2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         buttonDescargar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,7 +125,7 @@ public class IUMostrar extends javax.swing.JDialog {
 
         jLabel4.setText("Fecha liquidacion");
 
-        jLabel5.setText("Periodo");
+        jLabel5.setText("Periodo liquidado:");
 
         jTableOperacion = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -125,13 +134,13 @@ public class IUMostrar extends javax.swing.JDialog {
         };
         jTableOperacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "nroOperacion", "nroComprobante", "montoComision", "importePagado"
+                "nroOperacion", "fechaOperacion", "nroComprobante", "importePagado", "montoComision"
             }
         ));
         jScrollPane2.setViewportView(jTableOperacion);
@@ -162,12 +171,7 @@ public class IUMostrar extends javax.swing.JDialog {
             }
         });
 
-        jLabelPeriodo2.setText("jLabel6");
-
-        jLabel6.setText("-");
-        jLabel6.setEnabled(false);
-
-        buttonDescargar.setText("Imprimir");
+        buttonDescargar.setText("Exportar");
         buttonDescargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDescargarActionPerformed(evt);
@@ -178,14 +182,12 @@ public class IUMostrar extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabelPeriodo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelPeriodo2)
-                .addGap(166, 166, 166))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -206,25 +208,20 @@ public class IUMostrar extends javax.swing.JDialog {
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelEmpresa)
-                                    .addComponent(jLabelTipoImpuesto)))))
+                                    .addComponent(jLabelTipoImpuesto)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelPeriodo))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonDescargar)
+                            .addComponent(jButtonCancelar)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jButtonCancelar)))
-                .addContainerGap(73, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonDescargar)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,24 +245,21 @@ public class IUMostrar extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabelFechaLiquidacion))
-                .addGap(2, 2, 2)
-                .addComponent(jLabel5)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPeriodo)
-                    .addComponent(jLabelPeriodo2)
-                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelPeriodo))
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(buttonDescargar))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonDescargar)
+                .addGap(13, 13, 13)
+                .addComponent(jButtonCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -280,36 +274,88 @@ public class IUMostrar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void buttonDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDescargarActionPerformed
-       PrinterJob pjob = PrinterJob.getPrinterJob();
-        PageFormat preformat = pjob.defaultPage();
-        preformat.setOrientation(PageFormat.PORTRAIT);
-        PageFormat postformat = pjob.pageDialog(preformat);
-        //If user does not hit cancel then print.
-        if (preformat != postformat) {
-            //Set print component
-            pjob.setPrintable(new Printer(this), postformat);
-            if (pjob.printDialog()) {
-                try {
-                    pjob.print();
-                } catch (PrinterException ex) {
-                    Logger.getLogger(IUMostrar.class.getName()).log(Level.SEVERE, null, ex);
+      int indexExcel = 8;
+        try {
+           
+           File archivo = new File(System.getProperty("user.home") + "//export.txt");
+            FileWriter file = new FileWriter(archivo, true);
+            //Escribimos en el archivo con el metodo write 
+            file.write("Empresa = " + jLabelEmpresa.getText() + ";\r\n");
+            file.write("Tipo Impuesto = " + jLabelTipoImpuesto.getText() + ";\r\n");
+            file.write("Numero Liquidacion = " + jLabelNrodeLiquidacion.getText() + ";\r\n");
+            file.write("Fecha Liquidacion = " + jLabelFechaLiquidacion.getText() + ";\r\n");
+            file.write("Periodo = " + jLabelPeriodo.getText() + ";\r\n");
+            for (int i = 0; i < sizeTable; i++) {
+                file.write("Operacion" + i + "\r\n");
+                file.write("Numero Operacion: " + jTableOperacion.getValueAt(i, 0) + "; ");
+                file.write("Numero Comprobante: " + jTableOperacion.getValueAt(i, 1) + "; ");
+                file.write("Importe Pagado: " + jTableOperacion.getValueAt(i, 2) + "; ");
+                file.write("Monto de comision correspondiente: " + jTableOperacion.getValueAt(i, 3) + ";\r\n");
+                if (i == sizeTable - 1) {
+                    file.write("Monto de Comision Total: " + jTextFieldMontoTotal.getText() + ";");
                 }
             }
+
+            file.close();
+        } catch (Exception e) {
+            System.out.println("Error al guardar el archivo");
+
         }
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Reporte Sistema Pago de Impuestos");
+        sheet = workbook.getSheetAt(0);
+      
+        for(int i = 0 ; i< 20 ; i++){
+            HSSFRow row = sheet.createRow(i);
+            for(int y = 0; y<10;y++){
+                     row.createCell(y);
+            }
         
-       /* MessageFormat header = new MessageFormat("Operaciones");
-      MessageFormat footer = new MessageFormat("Pagina 1");
-      try {
-          jTableOperacion.print(JTable.PrintMode.NORMAL, header, footer);
-      } catch(Exception e){
-          JOptionPane.showMessageDialog(this,e.getMessage());
-      }*/
-       
-       /*
-         String pdfFilename = "‪D:\\UTN\\reports\\reportTest.pdf";
-  PrinterPDF printReport = new PrinterPDF();
-  printReport.createPDF(pdfFilename);
-       */
+        }
+        sheet.getRow(0).getCell(0).setCellValue("Empresa");
+        sheet.getRow(1).getCell(0).setCellValue("Tipo Impuesto");
+        sheet.getRow(2).getCell(0).setCellValue("Numero Liquidacion");
+        sheet.getRow(3).getCell(0).setCellValue("Fecha Liquidacion");
+        sheet.getRow(4).getCell(0).setCellValue("Periodo Liquidacion");
+        sheet.getRow(0).getCell(1).setCellValue(jLabelEmpresa.getText());
+        sheet.getRow(1).getCell(1).setCellValue(jLabelTipoImpuesto.getText());
+        sheet.getRow(2).getCell(1).setCellValue(jLabelNrodeLiquidacion.getText());
+        sheet.getRow(3).getCell(1).setCellValue(jLabelFechaLiquidacion.getText());
+        sheet.getRow(4).getCell(1).setCellValue(jLabelPeriodo.getText());
+
+        sheet.getRow(7).getCell(0).setCellValue("Numero Operación");
+        sheet.getRow(7).getCell(1).setCellValue("Numero Comprobante");
+        sheet.getRow(7).getCell(2).setCellValue("Importe Pagado");
+        sheet.getRow(7).getCell(3).setCellValue("Monto Comision");
+        sheet.getRow(7).getCell(4).setCellValue("Monto Comision Total");
+
+        for (int i = 0; i < sizeTable; i++) {
+
+            sheet.getRow(indexExcel + i).getCell(0).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 0)));
+            sheet.getRow(indexExcel + i).getCell(1).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 1)));
+            sheet.getRow(indexExcel + i).getCell(2).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 2)));
+            sheet.getRow(indexExcel + i).getCell(3).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 3)));
+            if (i == sizeTable - 1) {
+                sheet.getRow(indexExcel + i +1).getCell(4).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
+            }
+
+        }
+        try {
+            FileOutputStream out
+                    = new FileOutputStream(new File(System.getProperty("user.home") + "//export.xls"));
+            workbook.write(out);
+            out.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(
+                null,
+                "Exportado correctamente en: " + System.getProperty("user.home"),
+                "Sistema Pago Impuestos",
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_buttonDescargarActionPerformed
 
     /**
@@ -343,7 +389,7 @@ public class IUMostrar extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IUMostrar("",null,null,"").setVisible(true);
+                new IUMostrar("").setVisible(true);
             }
         });
     }
@@ -357,12 +403,10 @@ public class IUMostrar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     public static javax.swing.JLabel jLabelEmpresa;
     public static javax.swing.JLabel jLabelFechaLiquidacion;
     public static javax.swing.JLabel jLabelNrodeLiquidacion;
     public static javax.swing.JLabel jLabelPeriodo;
-    public static javax.swing.JLabel jLabelPeriodo2;
     public static javax.swing.JLabel jLabelTipoImpuesto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

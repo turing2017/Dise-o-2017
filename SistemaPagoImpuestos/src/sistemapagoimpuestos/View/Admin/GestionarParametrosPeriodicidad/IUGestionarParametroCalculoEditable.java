@@ -18,16 +18,20 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
     /**
      * Creates new form IUGestionarParametroCalculoEditable
      */
+    
+    ControladorGestionarParametrosCalculoComision controlador = new ControladorGestionarParametrosCalculoComision();
+    
     public IUGestionarParametroCalculoEditable() {
 
         initComponents();
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
-        DTOParametroCalculoEditable dtoCP = ControladorGestionarParametrosCalculoComision.getInstance().obtenerParametrosCalculoEditable();
+        
+        DTOParametroCalculoEditable dtoCP = controlador.obtenerParametrosCalculoEditable();
 
         jTextField2.setText(Double.toString(dtoCP.getSiEditablePCEditable()));
         jTextField1.setText(Double.toString(dtoCP.getNoEditablePCEditable()));
 
-        jButton3.setVisible(false);
+        jButtonGuardar.setVisible(false);
         jTextField2.setEnabled(false);
         jTextField1.setEnabled(false);
     }
@@ -46,9 +50,9 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonGuardar = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         jButton1.setText("Cancelar");
@@ -70,24 +74,24 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonGuardarActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Editar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonEditarActionPerformed(evt);
             }
         });
 
@@ -117,9 +121,9 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(98, 98, 98)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,11 +141,11 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -151,11 +155,11 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
 
         (this).setVisible(false);
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private Boolean validarCampoRequerido(String nombreCampo, String valorCampo) {
 
@@ -197,7 +201,7 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
         return 0;
     }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
 
         if (!validarCampoDecimalRequerido(jLabel2.getText().substring(0, jLabel2.getText().length() - 1), jTextField2.getText())
                 || !validarCampoDecimalRequerido(jLabel1.getText().substring(0, jLabel1.getText().length() - 1), jTextField1.getText())) {
@@ -211,28 +215,27 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
             MensajesParametroCalculoEditable.getInstance().datosIncorrectos("", "No pueden estar todos los valores definidos en cero.\n Al menos uno debe ser númerico positivo mayor a cero. (Por ej.: 2.50)");
         } else {
             try {
-                ControladorGestionarParametrosCalculoComision.getInstance().modificarParametrosEditable(montoSiEditable, montoNoEditable);
-                MensajesParametroCalculoEditable.getInstance().modificacionExitosa();
-                this.dispose();
+                controlador.modificarParametrosEditable(montoSiEditable, montoNoEditable);
+                MensajesParametroCalculoEditable.getInstance().modificacionExitosa();                
             } catch (Exception e) {
                 MensajesParametroCalculoEditable.getInstance().modificacionFallida();
             }
 
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         jTextField2.setEnabled(true);
         jTextField1.setEnabled(true);
-        jButton4.setVisible(false);
-        jButton3.setVisible(true);
+        jButtonEditar.setVisible(false);
+        jButtonGuardar.setVisible(true);
         //jButton3.setEnabled(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,9 +274,9 @@ public class IUGestionarParametroCalculoEditable extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

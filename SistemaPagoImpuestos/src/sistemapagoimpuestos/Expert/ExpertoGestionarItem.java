@@ -28,7 +28,7 @@ public class ExpertoGestionarItem {
     // Metodo iniciar
     public void validarUsuario() throws Exception {
      if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
-         throw new ExcepcionGenerica("Error de privilegios");
+         throw new ExcepcionGenerica("El usuario ingresado debe ser administrador");
      }
  }
     

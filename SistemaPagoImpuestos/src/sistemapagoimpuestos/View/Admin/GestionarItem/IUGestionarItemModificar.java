@@ -1,5 +1,6 @@
 package sistemapagoimpuestos.View.Admin.GestionarItem;
 
+import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -156,6 +157,9 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
     private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
         // TODO add your handling code here:
         try{
+            if(textfield_nombre.getText().isEmpty()||textfield_longitud.getText().isEmpty()){
+                throw new ExcepcionGenerica("Los campos Nombre y Longitud Item son requeridos");
+            }
             if(textfield_nombre.getText().equals("")){
                 textfield_nombre.setText(null);
                 throw new java.lang.NumberFormatException();
@@ -163,8 +167,10 @@ public class IUGestionarItemModificar extends javax.swing.JFrame {
             controlador.modificarItem(getNombreActual(), textfield_nombre.getText(), Integer.parseInt(textfield_longitud.getText()), checkbox_requerido.isSelected(), checkbox_habilitado.isSelected(), comboBox_tipoDato.getSelectedItem().toString());
             this.dispose();
             controlador.validadarUsuario();
-        }catch(java.lang.NumberFormatException e){
-            Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
+        } catch (java.lang.NumberFormatException e) {
+            Excepciones.getInstance().errorGenerico("Error de formato", "El formato ingresado no es valido");
+        } catch (ExcepcionGenerica e) {
+            Excepciones.getInstance().errorGenerico("Error de formato", e.getMessage());
         }
     }//GEN-LAST:event_button_modificarActionPerformed
 

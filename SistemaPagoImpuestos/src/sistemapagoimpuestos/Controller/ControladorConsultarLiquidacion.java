@@ -7,14 +7,11 @@ package sistemapagoimpuestos.Controller;
 
 import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
 
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Expert.ExpertoConsultarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUConsultarLiquidacion;

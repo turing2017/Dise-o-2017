@@ -174,7 +174,7 @@ public class ExpertoCalcularLiquidaciones {
                     listComision.add(comision);
                     liquidacionARecalcular.setComisionList(listComision);
 
-                    dtosAccionesSistema.add(new DTOAccionesSistema(4, "COMISIÓN CALCULADA", "Operación número: " + operacion.getNumeroOperacion() + "\n" + "Generada el día: " + operacion.getFechaHoraOperacion() + "\n" + "Importe pagado: $ " + operacion.getImportePagadoOperacion() + "\n" + "Comisión calculada: $ " + valorComision, new Date()));
+                    dtosAccionesSistema.add(new DTOAccionesSistema(4, "COMISIÓN RECALCULADA", "Operación número: " + operacion.getNumeroOperacion() + "\n" + "Generada el día: " + operacion.getFechaHoraOperacion() + "\n" + "Importe pagado: $ " + operacion.getImportePagadoOperacion() + "\n" + "Comisión calculada: $ " + valorComision, new Date()));
 
                     FachadaPersistencia.getInstance().guardar(operacion);
                     FachadaPersistencia.getInstance().guardar(comision);
@@ -242,8 +242,10 @@ public class ExpertoCalcularLiquidaciones {
 
         //loop por cada EmpresatipoImpuesto
         for (Object eTI : EmpresaTipoImpuestoList) {
-           // crear una lista para las operaciones para poder buscar despues por rango de fechas
-            List<Operacion> operacionesEnRangoDeFechas = new ArrayList();
+           
+            // crear una lista para las operaciones para poder buscar despues por rango de fechas
+           // List<Operacion> operacionesEnRangoDeFechas = new ArrayList();
+            
             EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eTI;
 
             //get frecuencia
@@ -294,39 +296,60 @@ public class ExpertoCalcularLiquidaciones {
 
             //si fechaHoraLiquidacion+frecuencia >= fecha actual
             if (fechaALiquidar.before(new Date())) {
-                //  buscar  "Operacion", "fechaHoraOperacion >= fechaHoraLiquidacion AND fechaHoraOperacion <= fechaActual " ysea del empresaTipoImpuesto
-
-                //  DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", ultimaLiquidacion.getFechaHoraHastaLiquidacion());
-                //  DTOCriterio criterio4 = new DTOCriterio("fechaHoraOperacion", "<=", new Date());
+                
+                
+                //buscar "Operacion", "fechaHoraOperacion >= fechaHoraDesdeLiquidacion AND fechaOperacion <= fechaHoraHastaLiquidacion AND EmpresaTipoImpuesto="+empresaTipoImpuesto.toString()
+                DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", fechaALiquidarDesde);
+                DTOCriterio criterio4 = new DTOCriterio("fechaHoraOperacion", "<=", fechaALiquidar);
                 DTOCriterio criterio5 = new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto);
                 criterios.clear();
-                // criterios.add(criterio3);
-                // criterios.add(criterio4);
+                criterios.add(criterio3);
+                criterios.add(criterio4);
                 criterios.add(criterio5);
-
+              
+                
                 try {
                     listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
                 } catch (Exception e) {
                     e.printStackTrace();
-                  //  System.out.println("No existen operaciones");
+                    //System.out.println("No existen operaciones");
                 }
 
-                for (Object op : listOperacion) {
-                    Operacion operacion = (Operacion) op;
-//                        System.out.println(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
-//                        System.out.println(empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
-//                        System.out.println(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
-//                        System.out.println(operacion.getFechaHoraOperacion() + ">" + ultimaLiquidacion.getFechaHoraHastaLiquidacion() + " y " + operacion.getFechaHoraOperacion() + "<" + new Date());
-                    if (operacion.getFechaHoraOperacion().after(fechaALiquidar)
-                            && operacion.getFechaHoraOperacion().before(new Date())) {
-                        operacionesEnRangoDeFechas.add(operacion);
-                    }
-                }
                 
-                if (operacionesEnRangoDeFechas.isEmpty()) {
+                
+////                //  buscar  "Operacion", "fechaHoraOperacion >= fechaHoraLiquidacion AND fechaHoraOperacion <= fechaActual " ysea del empresaTipoImpuesto
+////
+////                //  DTOCriterio criterio3 = new DTOCriterio("fechaHoraOperacion", ">=", ultimaLiquidacion.getFechaHoraHastaLiquidacion());
+////                //  DTOCriterio criterio4 = new DTOCriterio("fechaHoraOperacion", "<=", new Date());
+////                DTOCriterio criterio5 = new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto);
+////                criterios.clear();
+////                // criterios.add(criterio3);
+////                // criterios.add(criterio4);
+////                criterios.add(criterio5);
+
+////                try {
+////                    listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
+////                } catch (Exception e) {
+////                    e.printStackTrace();
+////                  //  System.out.println("No existen operaciones");
+////                }
+
+////                for (Object op : listOperacion) {
+////                    Operacion operacion = (Operacion) op;
+//////                        System.out.println(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
+//////                        System.out.println(empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto());
+//////                        System.out.println(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());
+//////                        System.out.println(operacion.getFechaHoraOperacion() + ">" + ultimaLiquidacion.getFechaHoraHastaLiquidacion() + " y " + operacion.getFechaHoraOperacion() + "<" + new Date());
+////                    if (operacion.getFechaHoraOperacion().after(fechaALiquidar)
+////                            && operacion.getFechaHoraOperacion().before(new Date())) {
+////                        operacionesEnRangoDeFechas.add(operacion);
+////                    }
+////                }
+                
+                if(listOperacion == null || listOperacion.isEmpty() ) {  //if (operacionesEnRangoDeFechas.isEmpty()) {
                     dtosAccionesSistema.add(new DTOAccionesSistema(3, "VERIFICA SI DEBE LIQUIDAR A EMPRESA TIPO IMPUESTO", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n" + "Tipo de impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Liquidar con una Frecuencia de: " + frecuencia + " días." + "\n" + "Debe liquidar a partir del día: " + fechaALiquidar + "\n" + "Se genera liquidación pero no tiene operaciones.", new Date()));
                 } else {
-                    dtosAccionesSistema.add(new DTOAccionesSistema(3, "VERIFICA SI DEBE LIQUIDAR A EMPRESA TIPO IMPUESTO", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n" + "Tipo de impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Liquidar con una Frecuencia de: " + frecuencia + " días." + "\n" + "Debe liquidar a partir del día: " + fechaALiquidar + "\n" + "Se genera liquidación con " + operacionesEnRangoDeFechas.size() + " operaciones.", new Date()));
+                    dtosAccionesSistema.add(new DTOAccionesSistema(3, "VERIFICA SI DEBE LIQUIDAR A EMPRESA TIPO IMPUESTO", "Empresa: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n" + "Tipo de impuesto: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Liquidar con una Frecuencia de: " + frecuencia + " días." + "\n" + "Debe liquidar a partir del día: " + fechaALiquidar + "\n" + "Se genera liquidación con " + listOperacion.size() + " operaciones.", new Date()));
                 }
                 
                 
@@ -334,7 +357,7 @@ public class ExpertoCalcularLiquidaciones {
                 Liquidacion nuevaLiquidacion = new Liquidacion();
 
                 //por cada Operacion
-                for (Operacion lo : operacionesEnRangoDeFechas) {
+               for (Object lo : listOperacion) { //for (Operacion lo : operacionesEnRangoDeFechas) {
                     Operacion operacion = (Operacion) lo;
 
                     Double valorComision;
@@ -377,18 +400,8 @@ public class ExpertoCalcularLiquidaciones {
                 nuevaLiquidacion.getLiquidacionEstadoList().add(liqEstado);
                 
 
-                //setnumeroLiquidacion(numeroLiquidacion)
-                //buscar numero liquidacion
-                List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
-                int numeroLiquidacion = 0;
-                for (Object l : liquidacion) {
-                    Liquidacion liq = (Liquidacion) l;
-                    if (liq.getNumeroLiquidacion() > numeroLiquidacion) {
-                        numeroLiquidacion = liq.getNumeroLiquidacion();
-                    }
-                }
-                //setNumeroLiquidacion
-                nuevaLiquidacion.setNumeroLiquidacion(numeroLiquidacion + 1);
+               //setNumeroLiquidacion
+                nuevaLiquidacion.setNumeroLiquidacion(Generar_numeroLiquidacionNueva());
                
                 //setFechaHoraLiquidacion(fechaActual)
                 nuevaLiquidacion.setFechaHoraLiquidacion(new Date());
@@ -417,6 +430,27 @@ public class ExpertoCalcularLiquidaciones {
 
         return cantidadLiquidacionesCalculadas;
 
+    }
+
+    private int Generar_numeroLiquidacionNueva() {
+               
+        int numeroLiquidacion = 0;
+                
+        try {
+            //buscar numero liquidacion
+                List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+                for (Object l : liquidacion) {
+                    Liquidacion liq = (Liquidacion) l;
+                    if (liq.getNumeroLiquidacion() >= numeroLiquidacion) {
+                        numeroLiquidacion = liq.getNumeroLiquidacion() + 1;
+                    }
+                }
+        } catch (Exception e) {
+            return numeroLiquidacion;
+        } 
+        
+        return numeroLiquidacion;
+                
     }
 
 }

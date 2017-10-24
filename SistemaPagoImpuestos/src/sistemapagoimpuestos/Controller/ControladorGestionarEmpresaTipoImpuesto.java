@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
 import sistemapagoimpuestos.Entity.Empresa;
@@ -25,7 +25,7 @@ public class ControladorGestionarEmpresaTipoImpuesto {
     
     // Método para crear un ETI
     // Método para recueprar los tipos de empresas
-    public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
+    public List<DTOTipoEmpresaGEA> obtenerTipoEmpresas(){
         return experto.obtenerTipoEmpresas();
     }
     

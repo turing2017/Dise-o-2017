@@ -17,7 +17,7 @@ import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
@@ -237,13 +237,13 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
     
     
     // Método para recueprar los tipos de empresas
-    public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
+    public List<DTOTipoEmpresaGEA> obtenerTipoEmpresas(){
         // Busco Tipos de empresas
         List<Object> listObject =  FachadaPersistencia.getInstance().buscar("TipoEmpresa", null);
-        ArrayList<DTOTipoEmpresa> listDTOTipoEmpresa = new ArrayList<DTOTipoEmpresa>();
+        ArrayList<DTOTipoEmpresaGEA> listDTOTipoEmpresa = new ArrayList<DTOTipoEmpresaGEA>();
         for(Object obj : listObject){
             TipoEmpresa tipoEmpresa = (TipoEmpresa) obj;
-            DTOTipoEmpresa dtoTipoEmpresa = new DTOTipoEmpresa();
+            DTOTipoEmpresaGEA dtoTipoEmpresa = new DTOTipoEmpresaGEA();
             dtoTipoEmpresa.setNombreTipoEmpresa(tipoEmpresa.getNombreTipoEmpresa());
             listDTOTipoEmpresa.add(dtoTipoEmpresa);
         }

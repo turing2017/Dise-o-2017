@@ -12,7 +12,7 @@ import sistemapagoimpuestos.Dto.DTOEmpresaItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
@@ -51,9 +51,9 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
     }
 
     @Override
-    public List<DTOTipoEmpresa> buscarTipoEmpresa() {
+    public List<DTOTipoEmpresaGEA> buscarTipoEmpresa() {
         FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOTipoEmpresa> listdtoTI = super.buscarTipoEmpresa(); //To change body of generated methods, choose Tools | Templates.
+        List<DTOTipoEmpresaGEA> listdtoTI = super.buscarTipoEmpresa(); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         return listdtoTI;
     }

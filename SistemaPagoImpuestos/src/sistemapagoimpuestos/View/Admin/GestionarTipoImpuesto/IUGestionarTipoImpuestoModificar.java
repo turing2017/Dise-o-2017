@@ -1,23 +1,12 @@
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import exceptions.Excepciones;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
-import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Dto.DtoItemOrden;
 
 /**
  *
@@ -206,7 +195,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
             }
             controlador.modificarTipoImpuesto(textfield_nombre.getText(), nombre_actual.getText(), checkbox_esEditable.isSelected(), checkbox_habilitado.isSelected(), dTOEmpresaTipImpItemList);
             this.dispose();
-            controlador.iniciar();
+           // controlador.iniciar();
         }catch(java.lang.NumberFormatException e){
             Excepciones.getInstance().camposRequerido(Arrays.asList("Nombre"));
         }
@@ -218,7 +207,7 @@ public class IUGestionarTipoImpuestoModificar extends javax.swing.JFrame {
 
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
-        controlador.iniciar();
+        //controlador.iniciar();
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void checkbox_habilitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_habilitadoActionPerformed

@@ -5,22 +5,14 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
-import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.*;
-import java.awt.Component;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
-import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFrame {
 
@@ -45,7 +37,7 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
         
         
         //TextField_frec.setText(dtoEe.);
-        List<DTOTipoEmpresa> listTipoEmpresa = controlador.buscarTipoEmpresa();
+        List<DTOTipoEmpresaGEA> listTipoEmpresa = controlador.buscarTipoEmpresa();
         llenarComboTipoEmpresa(listTipoEmpresa);
         List<DTOTipoImpuesto> listTipoImpuesto = controlador.buscarTipoImpuesto();
         llenarComboTipoImpuesto(listTipoImpuesto);
@@ -180,9 +172,9 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
         pack();
     }// </editor-fold>//GEN-END:initComponents
 //Con esto llena el combo del TipoEmpresa
-  public void llenarComboTipoEmpresa(List<DTOTipoEmpresa> list){
+  public void llenarComboTipoEmpresa(List<DTOTipoEmpresaGEA> list){
         for (int i = 0; i < list.size(); i++) {
-            DTOTipoEmpresa dTOTipoEmpresa = (DTOTipoEmpresa) list.get(i);
+            DTOTipoEmpresaGEA dTOTipoEmpresa = (DTOTipoEmpresaGEA) list.get(i);
             comboBoxTipoEmpresa.addItem(dTOTipoEmpresa.getNombreTipoEmpresa());
         }
     }

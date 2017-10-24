@@ -9,7 +9,7 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
@@ -27,17 +27,7 @@ public class ExpertoGestionarTipoImpuesto {
     Usuario usuario = new Usuario();
     
     // Metodo iniciar
-    public String iniciar(){
-        
-        
-        /*TipoUsuario tipoUsuario = usuario.getTipoUsuario();
-        String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
-        System.out.println("1");
-        if (nombreTipoUsuario != "Adminstrador") {
-            System.out.println("Debe ser Cliente para realizar esta acción");
-        }*/
-        return "Administrador";        
-    }
+
      public void validarUsuario() throws Exception {
         if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
             throw new ExcepcionGenerica("Error de privilegios");
@@ -406,7 +396,7 @@ public class ExpertoGestionarTipoImpuesto {
             tI.setEsMontoEditableDTOTipoImpuesto(empresaTipoImpuesto.getTipoImpuesto().isEsMontoEditableTipoImpuesto());
             tI.setFechaHoraInhabilitacionDTOTipoImpuesto(empresaTipoImpuesto.getTipoImpuesto().getFechaHoraInhabilitacionTipoImpuesto());
             dtoEmpresaTipoImpuesto.setdTOtipoImpuesto(tI);
-            DTOTipoEmpresa tE = new DTOTipoEmpresa();
+            DTOTipoEmpresaGEA tE = new DTOTipoEmpresaGEA();
             tE.setNombreTipoEmpresa(empresaTipoImpuesto.getTipoEmpresa().getNombreTipoEmpresa());
             dtoEmpresaTipoImpuesto.setdTOtipoEmpresa(tE);
             listDtoEmpresaTipoImpuesto.add(dtoEmpresaTipoImpuesto);
@@ -430,20 +420,20 @@ public class ExpertoGestionarTipoImpuesto {
         return listDtoTipoImpuesto;
     }
     
-      public List<DTOTipoEmpresa> buscarTipoEmpresa(){
+      public List<DTOTipoEmpresaGEA> buscarTipoEmpresa(){
         List<DTOCriterio> criterioItem = new ArrayList();
         criterioItem.add(new DTOCriterio("fechaInhabilitacionTipoEmpresa", "IS", null));
         List<Object> tipoEmpresaObjectList = FachadaPersistencia.getInstance().buscar("TipoEmpresa", criterioItem);
         
-        List <DTOTipoEmpresa> dTOTipoEmpresaList = new ArrayList<>();
-        DTOTipoEmpresa dTOTipoEmpresa;
+        List <DTOTipoEmpresaGEA> dTOTipoEmpresaList = new ArrayList<>();
+        DTOTipoEmpresaGEA dTOTipoEmpresa;
         
         
         
         //Se rompe aca, tenemos que armar la listita, para mandarla :D
         
         for (Object tipoEmpresaObject :tipoEmpresaObjectList) {
-            dTOTipoEmpresa = new DTOTipoEmpresa();
+            dTOTipoEmpresa = new DTOTipoEmpresaGEA();
             TipoEmpresa tipoEmpresa = (TipoEmpresa) tipoEmpresaObject;
             dTOTipoEmpresa.setNombreTipoEmpresa(tipoEmpresa.getNombreTipoEmpresa());
             dTOTipoEmpresaList.add(dTOTipoEmpresa);

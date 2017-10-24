@@ -23,14 +23,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Entity.Empresa;
-import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
-
+import sistemapagoimpuestos.Dto.DTOEmpresaGEA;
 public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
     ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
@@ -307,7 +301,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
         
         public void obtenerEmpresas(){
             
-            List<DTOEmpresa> listDtoEmpresa = controlador.consultarEmpresas();
+            List<DTOEmpresaGEA> listDtoEmpresa = controlador.consultarEmpresas();
             
             String[] columnas = {"Cuit", "Nombre", "Direccion",  "Deshabilitada el dia"};
             DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -336,7 +330,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
         };
              
-           for (DTOEmpresa dtoEmpresa : listDtoEmpresa) {
+           for (DTOEmpresaGEA dtoEmpresa : listDtoEmpresa) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoEmpresa.getCuitEmpresa());
             vect.add(dtoEmpresa.getNombreEmpresa());

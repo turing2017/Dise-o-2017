@@ -8,8 +8,7 @@ import java.util.Vector;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 
 /**
  *
@@ -166,7 +165,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
                 controlador.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres, dTOEmpresaTipImpItemIngres);
                 // Creo la empresa tipo de impuesto
                 this.dispose();
-                controlador.iniciar();
+               // controlador.iniciar();
             } else {
                 Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo", "Nombre"));
             }
@@ -180,7 +179,6 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
   
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
-        controlador.iniciar();
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void textField_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_nombreActionPerformed
@@ -224,7 +222,7 @@ public class IUGestionarTipoImpuestoAlta extends javax.swing.JFrame {
     }
     
     
-    public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
+    public List<DTOTipoEmpresaGEA> obtenerTipoEmpresas(){
         return controladorETI.obtenerTipoEmpresas();
     }
 

@@ -11,7 +11,7 @@ import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
@@ -20,7 +20,6 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoEmpresaTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificar;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarEmpresa;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificacionItem;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarETI;
 
@@ -35,12 +34,7 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
     private ExpertoGestionarTipoImpuesto experto = (ExpertoGestionarTipoImpuesto) FabricaExpertos.getInstancia().crearExperto("CU14");
     
     // Metodo iniciar
-    public void iniciar(){
-        if(experto.iniciar().equals("Administrador")){
-        IUGestionarTipoImpuesto pantallaPrincipal = new IUGestionarTipoImpuesto();
-        pantallaPrincipal.setVisible(true); 
-        }        
-    }
+
      public void validarUsuario() {
         try {
             experto.validarUsuario();
@@ -138,12 +132,12 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
         IUGestionarTipoImpuestoAlta.setDtoetiisModfAlta(new ArrayList<DTOEmpresaTipImpItem>());
         pantallaAlta.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
-                iniciar();
+              //  iniciar();
             }
         });
     }
 
-    public List<DTOTipoEmpresa> buscarTipoEmpresa(){
+    public List<DTOTipoEmpresaGEA> buscarTipoEmpresa(){
     return experto.buscarTipoEmpresa();
     }
     
@@ -169,7 +163,7 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
             pantallaModificar.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             pantallaModificar.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent ev) {
-                    iniciar();
+                 //   iniciar();
                 }
             });
             pantallaModificar.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
@@ -182,29 +176,7 @@ public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto,
             }
         }
     }
-    public void mostrarPantallaModificacionEmpresa(Object object,String cuitEmpresa){
-        DTOTipoImpuesto dtoTi = obtenerTipoImpuesto((int) object);
-        if (dtoTi != null) {
-            IUGestionarTipoImpuestoModificarEmpresa pantallaModificarEmpresa = new IUGestionarTipoImpuestoModificarEmpresa(cuitEmpresa);
-            pantallaModificarEmpresa.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
-            pantallaModificarEmpresa.setVisible(true); // La hago visible
-            // Modifico la operación de cierre para volver a la pantalla principal
-            pantallaModificarEmpresa.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            pantallaModificarEmpresa.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent ev) {
-                    iniciar();
-                }
-            });
-            pantallaModificarEmpresa.setNombre_actual(dtoTi.getNombreDTOTipoImpuesto());
-            pantallaModificarEmpresa.setTextfield_nombre(dtoTi.getNombreDTOTipoImpuesto());
-            pantallaModificarEmpresa.setCheckbox_esEditable(dtoTi.isEsMontoEditableDTOTipoImpuesto());
-            if (dtoTi.getFechaHoraInhabilitacionDTOTipoImpuesto() == null) {
-                pantallaModificarEmpresa.setCheckbox_Habilitar(true);
-            } else {
-                pantallaModificarEmpresa.setCheckbox_Habilitar(false);
-            }
-        }
-    }
+  
 
     // Metodo para recuperar el TipoImpuesto a modificar
     public DTOTipoImpuesto obtenerTipoImpuesto(int codigo){

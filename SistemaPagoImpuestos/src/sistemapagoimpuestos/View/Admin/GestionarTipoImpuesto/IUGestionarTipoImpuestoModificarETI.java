@@ -1,20 +1,16 @@
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
-import exceptions.Excepciones;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JSpinner;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
-import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DTOTipoEmpresaGEA;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
 
 /**
  *
@@ -43,10 +39,8 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         comboBox_tipoEmpresa.setSelectedItem(nombreTE);
         jComboBoxTipoImpuesto.setSelectedItem(nombreTI);
         jCheckBoxEstado.setSelected(estadoETI);
-        textfield_frecuencia.setText(nombreTE);
         int frec = setearFrecuencia(nombreTI, cuitEmpresa, nombreTE);
-        String g= ("" + frec);
-        textfield_frecuencia.setText(g);
+        jSpinner_frecuencia.setValue(frec);
         this.cuitEmpresa = cuitEmpresa;
     }
     public static List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemAltaList;
@@ -127,13 +121,15 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         this.label_nombre = label_nombre;
     }
 
-    public JTextField getTextfield_frecuencia() {
-        return textfield_frecuencia;
+    public JSpinner getjSpinner1() {
+        return jSpinner_frecuencia;
     }
 
-    public void setTextfield_frecuencia(JTextField textfield_frecuencia) {
-        this.textfield_frecuencia = textfield_frecuencia;
+    public void setjSpinner1(JSpinner jSpinner1) {
+        this.jSpinner_frecuencia = jSpinner1;
     }
+
+
 
     public static void addDtoetiisModfAlta(DTOEmpresaTipImpItem dTOEmpresaTipImpItem) {
         if (dTOEmpresaTipImpItemAltaList == null) {
@@ -156,10 +152,10 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         comboBox_tipoEmpresa = new javax.swing.JComboBox<>();
         label_frecuencia = new javax.swing.JLabel();
-        textfield_frecuencia = new javax.swing.JTextField();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         jCheckBoxEstado = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
+        jSpinner_frecuencia = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,13 +183,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
             }
         });
 
-        label_frecuencia.setText("Frecuencia de Liquidación");
-
-        textfield_frecuencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfield_frecuenciaActionPerformed(evt);
-            }
-        });
+        label_frecuencia.setText("Frecuencia de Liquidación (días) ");
 
         jComboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,13 +217,13 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
                             .addComponent(label_nombre)
                             .addComponent(label_frecuencia)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBoxEstado)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(comboBox_tipoEmpresa, 0, 111, Short.MAX_VALUE)
-                                .addComponent(textfield_frecuencia)
-                                .addComponent(jComboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jComboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jSpinner_frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
@@ -250,9 +240,9 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addComponent(comboBox_tipoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_frecuencia)
-                    .addComponent(textfield_frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSpinner_frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_frecuencia, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -271,7 +261,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         String nuevoTE = (String) comboBox_tipoEmpresa.getSelectedItem();
         String nuevoTI = (String) jComboBoxTipoImpuesto.getSelectedItem();
-        int frec = Integer.parseInt(textfield_frecuencia.getText());
+        int frec = (int) jSpinner_frecuencia.getValue();
         boolean habilitada = jCheckBoxEstado.isSelected();
         controlador.ModificarETI(nombreTE, nombreTI, cuit, nuevoTE, nuevoTI, frec, habilitada);
         controlador.iniciar(cuit);
@@ -287,10 +277,6 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     private void comboBox_tipoEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipoEmpresaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBox_tipoEmpresaActionPerformed
-
-    private void textfield_frecuenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_frecuenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfield_frecuenciaActionPerformed
 
     private void jCheckBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEstadoActionPerformed
         // TODO add your handling code here:
@@ -334,9 +320,9 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     }
     
         //Método para llenar el comboBox
-    public void llenarComboTipoImpuesto(List<DTOTipoEmpresa> listaDTOTipoEmpresa){
+    public void llenarComboTipoImpuesto(List<DTOTipoEmpresaGEA> listaDTOTipoEmpresa){
         for (int i = 0; i < listaDTOTipoEmpresa.size(); i++) {
-            DTOTipoEmpresa dtoTipoEmpresa = (DTOTipoEmpresa) listaDTOTipoEmpresa.get(i);
+            DTOTipoEmpresaGEA dtoTipoEmpresa = (DTOTipoEmpresaGEA) listaDTOTipoEmpresa.get(i);
             String nombreTipoEmpresa = dtoTipoEmpresa.getNombreTipoEmpresa();
             comboBox_tipoEmpresa.addItem(nombreTipoEmpresa);
         }
@@ -349,7 +335,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         }
     }
     
-    public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
+    public List<DTOTipoEmpresaGEA> obtenerTipoEmpresas(){
         return controladorETI.obtenerTipoEmpresas();
     }    
     public List<DTOTipoImpuesto> obtenerTipoImpuesto(){
@@ -365,8 +351,8 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JSpinner jSpinner_frecuencia;
     private javax.swing.JLabel label_frecuencia;
     private javax.swing.JLabel label_nombre;
-    private javax.swing.JTextField textfield_frecuencia;
     // End of variables declaration//GEN-END:variables
 }

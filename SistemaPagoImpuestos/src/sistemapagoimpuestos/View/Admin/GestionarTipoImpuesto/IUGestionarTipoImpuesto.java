@@ -215,7 +215,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
             int columnCode = 0;
             int rowSelected = tabla_tipo_impuesto.getSelectedRow();
             String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
-            controlador.mostrarPantallaModificacionEmpresa(Integer.parseInt(codigo),cuitEmpresa);
+          //  controlador.mostrarPantallaModificacionEmpresa(Integer.parseInt(codigo),cuitEmpresa);
         } catch (ArrayIndexOutOfBoundsException e) {
             //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
             Excepciones.getInstance().objetoNoSeleccionado();
@@ -311,9 +311,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         });
     }
 
-    public void iniciar() {
-        controlador.iniciar();
-    }
+
     ArrayList<DTOEmpresaTipoImpuesto> listDtoEmpresaTipoImpuesto = null;
     public void obtenerEmpresaTipoImpuesto(String cuitEmpresa) {
         // Muestro pantalla de Consultar

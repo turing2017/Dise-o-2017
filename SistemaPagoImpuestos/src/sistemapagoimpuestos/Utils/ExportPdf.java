@@ -35,7 +35,7 @@ import sistemapagoimpuestos.Dto.DTOOperacionActual;
  */
 public class ExportPdf {
 
-    private static String FILE = "c:/temp/Comprobante_pago.pdf";
+    private static String FILE = System.getProperty("user.home") + "/Desktop/Comprobante_pago.pdf";
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
     private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,

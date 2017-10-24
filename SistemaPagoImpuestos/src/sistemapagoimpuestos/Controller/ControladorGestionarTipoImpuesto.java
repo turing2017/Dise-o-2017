@@ -26,8 +26,8 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
 
 public class ControladorGestionarTipoImpuesto {
 
-public void modificarEmpresa(String cuit,String nombre,String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion){
-    experto.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, nuevoTipoEmpresa, frecuenciaLiquidacion);
+public void guardarEmpresaTipoImpuesto(String cuit,String nombre,String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion){
+    experto.guardarEmpresaTipoImpuesto(cuit, nombre, nuevoTipoImpuesto, nuevoTipoEmpresa, frecuenciaLiquidacion);
 }    
     
     public ControladorGestionarTipoImpuesto() {

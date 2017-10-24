@@ -32,8 +32,8 @@
                       <Component id="comboBox_items" min="-2" pref="132" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textfield_orden" min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jSpinnerOrden" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="button_agregar" min="-2" pref="94" max="-2" attributes="0"/>
                   </Group>
@@ -59,7 +59,7 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="button_agregar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textfield_orden" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSpinnerOrden" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="142" max="-2" attributes="0"/>
@@ -119,11 +119,6 @@
         <Property name="text" type="java.lang.String" value="Orden:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textfield_orden">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_ordenActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="ButtonModificarItem">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar Item"/>
@@ -147,6 +142,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_EliminarItemActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerOrden">
     </Component>
   </SubComponents>
 </Form>

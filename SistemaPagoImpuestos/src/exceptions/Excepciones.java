@@ -195,5 +195,11 @@ public class Excepciones extends Exception{
         edne.setLabel_title("Error: Registro Existente");            
         edne.setLabel_mensaje("La "+objeto+" ingresada ya existe");
         edne.setVisible(true);
+    }   
+    public void creacionExitosa(String objeto){
+        ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("Creacion Exitosa");            
+        edne.setLabel_mensaje("El "+objeto+" se creo satisfactoriamente");
+        edne.setVisible(true);
     }
 }

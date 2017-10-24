@@ -15,11 +15,12 @@ import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
 public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
 
     DTOEmpresaExistente dtoEe = new DTOEmpresaExistente();
-    
+    String nombreAntiguo;
    ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();
     public IUGestionarEmpresaAdheridaModificacion(DTOEmpresaExistente dtoEe) {
         initComponents();
         this.setLocationRelativeTo(null);
+        nombreAntiguo = dtoEe.getNombreDTOEmpresaExistente();
         TextField_Cuit.setText(dtoEe.getCuitDTOEmpresaExistente());
         TextField_Nombre.setText(dtoEe.getNombreDTOEmpresaExistente());
         TextField_Direccion.setText(dtoEe.getDireccionDTOEmpresaExistente());
@@ -161,7 +162,7 @@ public class IUGestionarEmpresaAdheridaModificacion extends javax.swing.JFrame {
         String nombre = TextField_Nombre.getText().trim();
         String direccion = TextField_Direccion.getText().trim();
         boolean habilitada =  CheckBox_Habilitada.isSelected();
-        controlador.modificarEmpresa(cuit, nombre, direccion, habilitada);
+        controlador.modificarEmpresa(cuit, nombre, nombreAntiguo, direccion, habilitada);
         this.dispose();
     
     

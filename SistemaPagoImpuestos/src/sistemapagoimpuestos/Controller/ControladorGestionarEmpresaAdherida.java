@@ -66,8 +66,8 @@ public class ControladorGestionarEmpresaAdherida {
     return experto.consultarEmpresas();
 }
     
-    public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada) {
-        experto.modificarEmpresa(cuit, nombre, direccion,  habilitada);
+    public void modificarEmpresa (String cuit,String nombre, String nombreAntiguo, String direccion,boolean habilitada) {
+        experto.modificarEmpresa(cuit, nombre, nombreAntiguo, direccion,  habilitada);
         
     }
     

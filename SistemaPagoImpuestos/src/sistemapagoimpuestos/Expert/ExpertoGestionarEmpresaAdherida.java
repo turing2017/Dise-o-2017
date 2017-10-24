@@ -171,7 +171,9 @@ public class ExpertoGestionarEmpresaAdherida {
             } else {
                 empresa.setFechaHoraInhabilitacionEmpresa(new Date());
             }
+            
             FachadaPersistencia.getInstance().guardar(empresa);
+            Excepciones.getInstance().empresaCreada();
             }
             }
         }
@@ -405,13 +407,14 @@ public class ExpertoGestionarEmpresaAdherida {
     }
    
     
-    public void modificarEmpresa (String cuit,String nombre, String direccion,boolean habilitada){
+    public void modificarEmpresa (String cuit,String nombre, String nombreAntiguo, String direccion,boolean habilitada){
        boolean camposIncompletos= camposNulos(cuit, nombre, direccion);
        if(camposIncompletos == true){
        Excepciones.getInstance().camposVacios();   
        }else{
+           if(!(nombreAntiguo.equals(nombre))){
            try{
-                    //Busco la empresa
+            //Busco la empresa
             List<DTOCriterio> criterios1 = new ArrayList<>();
             DTOCriterio criterio2 = new DTOCriterio();
             criterio2.setAtributo("nombreEmpresa");
@@ -421,8 +424,34 @@ public class ExpertoGestionarEmpresaAdherida {
             Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios1).get(0);
             //En el caso de que exista, tira mensaje
             Excepciones.getInstance().nombreExistente();
-                }catch(IndexOutOfBoundsException exc)  {   
+                }catch(IndexOutOfBoundsException exc){   
         try {
+            //Busco la Empresa
+            List<DTOCriterio> criterios = new ArrayList<>();
+            DTOCriterio criterio1 = new DTOCriterio();
+            criterio1.setAtributo("cuitEmpresa");
+            criterio1.setOperacion("=");
+            criterio1.setValor(cuit);
+            criterios.add(criterio1);
+            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+  
+            empresa.setNombreEmpresa(nombre);
+            empresa.setDireccionEmpresa(direccion);
+            if (habilitada == true) {
+                empresa.setFechaHoraInhabilitacionEmpresa(null);
+            } else {
+                empresa.setFechaHoraInhabilitacionEmpresa(new Date());
+            }
+        
+                       //Guardo la empresa, y la empresa tipo impuesto
+            FachadaPersistencia.getInstance().guardar(empresa);
+            Excepciones.getInstance().modificacionExito();
+        } catch (IndexOutOfBoundsException exception) {
+            Excepciones.getInstance().cuitNoExistente();
+        }  
+        }
+    }else{
+                       try {
             //Busco la Empresa
             List<DTOCriterio> criterios = new ArrayList<>();
             DTOCriterio criterio1 = new DTOCriterio();
@@ -446,9 +475,10 @@ public class ExpertoGestionarEmpresaAdherida {
             Excepciones.getInstance().modificacionExito();
         } catch (IndexOutOfBoundsException exception) {
             Excepciones.getInstance().cuitNoExistente();
-        }  
         }
+           }
     }
+       
     }
     
     public List<DTOEmpresaTipoImpuesto> verTipoImpuesto(Vector vct){

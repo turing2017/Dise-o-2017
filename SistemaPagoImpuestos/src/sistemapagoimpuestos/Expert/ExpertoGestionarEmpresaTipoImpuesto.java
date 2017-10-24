@@ -213,17 +213,18 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         criterioItemEmpresaTipoImpuesto.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioItemEmpresaTipoImpuesto).get(0);
         
+        
         List<DTOCriterio> criteriosItem = new ArrayList<>();
         criteriosItem.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         criteriosItem.add(new DTOCriterio("ordenItemEmpresaTipoImpuesto", "=", orden));
-        criteriosItem.add(new DTOCriterio("item", "=", item));
         criteriosItem.add(new DTOCriterio("fechaInhabilitacionItemEmpresaTipoImpuesto", "IS", null));
         if(!existeDato("ItemEmpresaTipoImpuesto", criteriosItem)){
-          
+        
         itemEmpresaTipoImpuesto.setOrdenItemEmpresaTipoImpuesto(orden);
         FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
     
             System.out.println("Item modificado exitosamente");
+           
         }else{
                 Excepciones.getInstance().objetoExistente("Orden ingresado");
             }
@@ -420,7 +421,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
                 itemETI.setOrdenItemEmpresaTipoImpuesto(orden);
                 FachadaPersistencia.getInstance().guardar(itemETI);
 
-                System.out.println("Item vinculado exitosamente");
+                Excepciones.getInstance().creacionExitosa("Item");            
             }else{
                 Excepciones.getInstance().objetoExistente("Orden ingresado");
             }

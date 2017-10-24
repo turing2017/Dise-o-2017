@@ -203,7 +203,7 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
         String nuevoTipoEmpresa = comboBoxTipoEmpresa.getSelectedItem().toString();
         int frecuenciaLiquidacion = (int) spinner_Frecuencia.getValue();
 // Ahora cuando modifica todo, lleva un monton de guasadas :D
-        controlador.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, nuevoTipoEmpresa, frecuenciaLiquidacion );
+        controlador.guardarEmpresaTipoImpuesto(cuit, nombre, nuevoTipoImpuesto, nuevoTipoEmpresa, frecuenciaLiquidacion );
         controlador.asociarEmpresa(cuit);
         this.dispose();
 

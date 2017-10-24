@@ -83,6 +83,9 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
                 case "Monto Minimo":
                     dTOItemComprobante.setValue(claro.getMontoMinimo().toString());
                     break;
+                case "Periodicidad":
+                    dTOItemComprobante.setValue(claro.getPeriodo());
+                    break;
             }
             dTOItemsComprobanteList.add(dTOItemComprobante);
         }

@@ -20,7 +20,7 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoEmpresaTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificar;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarEmpresa;
+import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificacionItem;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarETI;
 
@@ -74,7 +74,7 @@ public void guardarEmpresaTipoImpuesto(String cuit,String nombre,String nuevoTip
         experto.nuevoTipoImpuesto(codigoTipoImpuestoIngres, nombreTipoImpuestoIngres, esMontoEditableIngres);
     }
     //Metodo para modificar TipoImpuesto
-    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado,List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItems){
+    public void modificarTipoImpuesto(String nombreTipoImpuestoIngres, String nombreActualTipoImpuesto, boolean esMontoEditableIngres, boolean habilitado){
         experto.modificarTipoImpuesto(nombreTipoImpuestoIngres, nombreActualTipoImpuesto, esMontoEditableIngres, habilitado);
         
     }
@@ -185,7 +185,7 @@ public void guardarEmpresaTipoImpuesto(String cuit,String nombre,String nuevoTip
     public void mostrarPantallaModificacionEmpresa(Object object,String cuitEmpresa){
         DTOTipoImpuesto dtoTi = obtenerTipoImpuesto((int) object);
         if (dtoTi != null) {
-            IUGestionarTipoImpuestoModificarEmpresa pantallaModificarEmpresa = new IUGestionarTipoImpuestoModificarEmpresa(cuitEmpresa);
+            IUGestionarTipoImpuestoModificarTipoImpuesto pantallaModificarEmpresa = new IUGestionarTipoImpuestoModificarTipoImpuesto(cuitEmpresa);
             pantallaModificarEmpresa.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaModificarEmpresa.setVisible(true); // La hago visible
             // Modifico la operación de cierre para volver a la pantalla principal

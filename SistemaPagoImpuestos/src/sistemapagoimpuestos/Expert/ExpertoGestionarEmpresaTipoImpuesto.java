@@ -222,9 +222,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         
         itemEmpresaTipoImpuesto.setOrdenItemEmpresaTipoImpuesto(orden);
         FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
-    
-            System.out.println("Item modificado exitosamente");
-           
+        Excepciones.getInstance().creacionExitosa("Item");
         }else{
                 Excepciones.getInstance().objetoExistente("Orden ingresado");
             }
@@ -344,6 +342,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
     }
     
     public void agregarItem(String nombreItem, String cuitEmpresa, int codigoTipoImpuesto, String nombreTE, int orden){
+       
         Empresa empresa = new Empresa();
         TipoImpuesto tipoImpuesto = new TipoImpuesto();
         TipoEmpresa tipoEmpresa = new TipoEmpresa();

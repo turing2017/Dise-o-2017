@@ -29,17 +29,16 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
     public IUGestionarTipoImpuesto() {
         initComponents();
-        // Esto hay que quitarlo, cuando se llame a esta pantalla se debe llamar al metodo siguiente pasando el cuitEmpresa
-        this.cuitEmpresa = "123434343";
+
         obtenerTipoImpuestos();
 
     }
-
+String cuitEmp= null;
     public IUGestionarTipoImpuesto(String cuitEmpresa) {
         this.cuitEmpresa = cuitEmpresa;
         initComponents();
         obtenerEmpresaTipoImpuesto(cuitEmpresa);
-
+        this.cuitEmp = cuitEmpresa;
     }
 
     @SuppressWarnings("unchecked")
@@ -183,7 +182,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonModificarVinculo))
-                .addGap(20, 20, 20))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -208,7 +207,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
                 Excepciones.getInstance().objetoNoSeleccionado();
             }      
-
+        
     }//GEN-LAST:event_button_modificarActionPerformed
 
     private void button_filtrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_filtrarActionPerformed

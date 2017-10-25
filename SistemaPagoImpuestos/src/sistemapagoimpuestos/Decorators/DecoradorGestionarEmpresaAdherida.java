@@ -11,13 +11,8 @@ import java.util.List;
 import java.util.Vector;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaExistente;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOItem;
+import sistemapagoimpuestos.Dto.DTOEmpresaGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Dto.DtoItemOrden;
-import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -27,12 +22,6 @@ import sistemapagoimpuestos.Utils.FachadaInterna;
  */
 public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAdherida{
 
-    @Override
-    public void modificarItemEmpresaTipoImpuesto(DTOEmpresaTipImpItem dTOEmpresaTipImpItemList) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList);
-        FachadaInterna.getInstance().finalizarTransaccion();
-    }
 
     @Override
     public void modificarEmpresa(String cuit, String nombre, String nombreAntiguo, String direccion, boolean habilitada) {
@@ -42,28 +31,21 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public List<ItemEmpresaTipoImpuesto> setearTabla(Vector vct) {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<ItemEmpresaTipoImpuesto> listIETI = super.setearTabla(vct); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listIETI;
-    }
-
-    @Override
-    public List<DTOItem> buscarItems() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOItem>  dtoI= super.buscarItems(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return dtoI;
-    }
-
-    @Override
     public void ingresarDatosEmpresaCrear(String cuit, String nombre, String direccion, boolean habilitada) {
         FachadaInterna.getInstance().iniciarTransaccion(); 
         super.ingresarDatosEmpresaCrear(cuit, nombre, direccion, habilitada); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 
+    @Override
+    public ArrayList<DTOEmpresa> consultarEmpresas() {
+        FachadaInterna.getInstance().iniciarTransaccion(); 
+        ArrayList<DTOEmpresa> dtoEmpresa = super.consultarEmpresas();
+        FachadaInterna.getInstance().finalizarTransaccion();
+        return dtoEmpresa;//To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 
     @Override
     public DTOEmpresaExistente cargarDatos(String cuitEmpresa, String nombreEmpresa, String direccionEmpresa, String habilitada) {
@@ -74,30 +56,13 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
     }
 
     @Override
-    public void ingresarDatosEmpresa(String cuitEmpresa, String tipoImpuesto, String tipoEmpresa, int frecuencia) {
+    public List<DTOEmpresaGestionarEmpresaAdherida> buscarEmpresa() {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.ingresarDatosEmpresa(cuitEmpresa, tipoImpuesto, tipoEmpresa, frecuencia); //To change body of generated methods, choose Tools | Templates.
+        List<DTOEmpresaGestionarEmpresaAdherida>  dtoE = super.buscarEmpresa(); 
         FachadaInterna.getInstance().finalizarTransaccion();
+        return dtoE;//To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<DTOEmpresa> buscarEmpresa() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOEmpresa>  dtoE= super.buscarEmpresa();
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return dtoE;
-    }
-
-   
-   
-
-    @Override
-    public List<DTOTipoImpuesto> buscarTipoImpuesto() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOTipoImpuesto> listDTOTI = super.buscarTipoImpuesto(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listDTOTI;
-    }
 
     @Override
     public List<DTOTipoEmpresa> buscarTipoEmpresa() {
@@ -106,16 +71,6 @@ public class DecoradorGestionarEmpresaAdherida extends ExpertoGestionarEmpresaAd
         FachadaInterna.getInstance().finalizarTransaccion();
         return listDTOTE;
     }
-
-    @Override
-    public ArrayList<DTOEmpresa> consultarEmpresas() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        ArrayList<DTOEmpresa> listDTOe = super.consultarEmpresas(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listDTOe;
-    }
-
-   
 
     @Override
     public String iniciar() {

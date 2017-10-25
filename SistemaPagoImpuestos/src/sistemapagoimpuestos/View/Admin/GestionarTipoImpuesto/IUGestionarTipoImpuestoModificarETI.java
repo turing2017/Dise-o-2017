@@ -178,7 +178,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
             }
         });
 
-        label_frecuencia.setText("Frecuencia de Liquidación");
+        label_frecuencia.setText("Frecuencia de Liquidación en días");
 
         jComboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

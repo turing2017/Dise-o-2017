@@ -71,15 +71,8 @@ public class ControladorGestionarEmpresaAdherida {
         
     }
     
-    public List<ItemEmpresaTipoImpuesto> setearTabla(Vector vct){
-        return experto.setearTabla(vct);
-    }
-    
-    public void modificarItemEmpresaTipoImpuesto (DTOEmpresaTipImpItem dTOEmpresaTipImpItemList){
-        experto.modificarItemEmpresaTipoImpuesto(dTOEmpresaTipImpItemList);
-    }
-            
-            
+
+   
         public void modificarEmpresa(Object eE, Object controlador){
         // Muestro pantalla de Modificación
         Vector vct = new Vector();
@@ -101,11 +94,7 @@ public class ControladorGestionarEmpresaAdherida {
           
         }
      }
-    
-    public List<DTOItem> buscarItems(){
-        return experto.buscarItems();
-    }
-    
+
     public void asociarEmpresa(String cuitEmpresa){
    
     IUGestionarTipoImpuesto pantallaAsociar = new IUGestionarTipoImpuesto(cuitEmpresa);
@@ -113,9 +102,7 @@ public class ControladorGestionarEmpresaAdherida {
     pantallaAsociar.setVisible(true); // La hago visible
     
     }
-    public void ingresarDatosEmpresa(String cuitEmpresa, String tipoImpuesto, String tipoEmpresa, int frecuencia){
-       experto.ingresarDatosEmpresa(cuitEmpresa, tipoImpuesto, tipoEmpresa, frecuencia);
-    }
+
     public void ingresarDatosEmpresaCrear(String cuitEmpresa,String nombreEmpresa,String direccionEmpresa,boolean habilitada){
            experto.ingresarDatosEmpresaCrear(cuitEmpresa,nombreEmpresa,direccionEmpresa,habilitada);
     }
@@ -126,21 +113,7 @@ public class ControladorGestionarEmpresaAdherida {
     public List<DTOTipoEmpresa> buscarTipoEmpresa(){
     return experto.buscarTipoEmpresa();
     }
-    
-    public List<DTOTipoImpuesto> buscarTipoImpuesto(){
-    return experto.buscarTipoImpuesto();
-    }
-    
-    public List<DTOEmpresa> buscarEmpresa(){
-    return experto.buscarEmpresa();
-    }
-    
-    public List<DTOEmpresaTipoImpuesto> consultarTipoImpuesto(Vector vct){
-        return experto.verTipoImpuesto(vct);
-    }
-    
-
-    
+ 
     public void crearEmpresa(Object evt, Object controlador){
         // Muestro pantalla de Nueva Empresa
             IUGestionarEmpresaAdheridaCrearEmpresa pantallaCrear = new IUGestionarEmpresaAdheridaCrearEmpresa(controlador);

@@ -94,10 +94,9 @@ public class Excepciones extends Exception{
         edne.setVisible(true);
     }
     public void objetoNoSeleccionado(){
-       
-    ObjetoNoSeleccionado ons = new ObjetoNoSeleccionado();
-    ons.setLabel_Titulo("Seleccionar opcion");
-    ons.setLabel_mensaje(" Debe seleccionar una fila en la tabla para modificar,intente nuevamnete");
+   ObjetoNoSeleccionado ons = new ObjetoNoSeleccionado();
+    ons.setLabel_Titulo("Seleccionar opción");
+    ons.setLabel_mensaje("Debe seleccionar una fila en la tabla para modificar, intente nuevamente");
     ons.setVisible(true);
     ons.setVisible(true);
     }
@@ -118,6 +117,7 @@ public class Excepciones extends Exception{
     me.setLabel_Titulo("Modificacion Exitosa");
     me.setLabel_mensaje("Los datos fueron modificados con éxito");
     me.setVisible(true);
+    me.setAlwaysOnTop( true );
     }
     
     public void camposVacios(){
@@ -125,6 +125,7 @@ public class Excepciones extends Exception{
     ca.setLabel_Titulo("Campos Nulos");
     ca.setLabel_mensaje("Todos los campos deben estar completos, intente nuevamente");
     ca.setVisible(true);
+    ca.setAlwaysOnTop( true );
     }
     
     public void objetoExistente(String objeto){
@@ -132,6 +133,7 @@ public class Excepciones extends Exception{
         edne.setLabel_title("Error: Registro Existente");            
         edne.setLabel_mensaje("El "+objeto+" ingresado ya existe");
         edne.setVisible(true);
+        edne.setAlwaysOnTop( true );
     }
     
     public void tipoDatoInvalid(List<String> campos){
@@ -181,6 +183,7 @@ public class Excepciones extends Exception{
         ce.setLabel_Titulo("nombre existente");
         ce.setLabel_mensaje("El Nombre ingresado existe, intente nuevamente");
         ce.setVisible(true);
+        ce.setAlwaysOnTop( true );
     }
     
     public void objetoNoExistente(String objeto){
@@ -188,6 +191,7 @@ public class Excepciones extends Exception{
         edne.setLabel_title("Error: Registro Existente");            
         edne.setLabel_mensaje("El "+objeto+" ingresado no existe");
         edne.setVisible(true);
+        edne.setAlwaysOnTop( true );
     }
     
     public void objetoLaExistente(String objeto){
@@ -195,11 +199,13 @@ public class Excepciones extends Exception{
         edne.setLabel_title("Error: Registro Existente");            
         edne.setLabel_mensaje("La "+objeto+" ingresada ya existe");
         edne.setVisible(true);
+        edne.setAlwaysOnTop( true );
     }   
     public void creacionExitosa(String objeto){
         ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
         edne.setLabel_title("Creacion Exitosa");            
         edne.setLabel_mensaje("El "+objeto+" se creo satisfactoriamente");
         edne.setVisible(true);
+        edne.setAlwaysOnTop( true );
     }
 }

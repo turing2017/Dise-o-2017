@@ -32,7 +32,7 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
         this.ordenAnterior = ordenItem;
         jTextField_ItemNombre.setText(nombreItem);
         SpinnerNumberModel sf = new SpinnerNumberModel();
-        sf.setMinimum(0);
+        sf.setMinimum(1);
         sf.setValue(ordenItem);
         spinner_Orden.setModel(sf);
     }
@@ -99,12 +99,12 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField_ItemNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spinner_Orden, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField_ItemNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,7 +116,7 @@ public class IUGestionarTipoImpuestoModificacionItem extends javax.swing.JFrame 
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_aceptar)
                     .addComponent(jButton_cancelar))
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
 
         pack();

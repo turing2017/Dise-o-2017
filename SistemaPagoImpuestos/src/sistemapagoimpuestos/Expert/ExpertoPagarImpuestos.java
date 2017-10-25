@@ -80,6 +80,7 @@ public class ExpertoPagarImpuestos {
         DTOEmpresaIUPagar dtoEmpresa;
         for (int i = 0; i < eti.size(); i++) {
             EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) eti.get(i);
+            empresaSeleccionada = empresaTipoImpuesto.getEmpresa();
             if (empresaTipoImpuesto.getEmpresa().getFechaHoraInhabilitacionEmpresa() == null) {
                 dtoEmpresa = new DTOEmpresaIUPagar();
                 dtoEmpresa.setNombreEmpresa(empresaTipoImpuesto.getEmpresa().getNombreEmpresa());
@@ -92,10 +93,6 @@ public class ExpertoPagarImpuestos {
 
     public List<DTOComprobantePantalla> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres) throws Exception {
         List<DTOCriterio> criterioList = new ArrayList();
-        criterioList.add(new DTOCriterio("nombreEmpresa", "=", nombreEmpresaIng));
-        Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterioList).get(0);
-        empresaSeleccionada = empresa;
-        criterioList.clear();
         criterioList.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuestoSeleccionado));
         criterioList.add(new DTOCriterio("empresa", "=", empresaSeleccionada));
         EmpresaTipoImpuesto empresaTI = (EmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", criterioList).get(0);
@@ -105,7 +102,8 @@ public class ExpertoPagarImpuestos {
             DTOComprobantePantalla comprobantePantalla = new DTOComprobantePantalla(dtoComprobante.getNumeroFactura(),
                     dtoComprobante.getCodigoComprobante(),
                     dtoComprobante.getFechaHoraVencimientoComprobante(),
-                    dtoComprobante.getMontoTotalComprobante());
+                    dtoComprobante.getMontoTotalComprobante(),
+                    tipoImpuestoSeleccionado.isEsMontoEditableTipoImpuesto());
             List<DTOItemComprobantePantalla> comprobantePantallaList = new ArrayList<>();
             for (DTOItemComprobante dtoic : dtoComprobante.getAtributosAdicionalesComprobante()) {
                 comprobantePantallaList.add(new DTOItemComprobantePantalla(dtoic.getItem().getCodigoItem(),
@@ -118,11 +116,6 @@ public class ExpertoPagarImpuestos {
         }
         return comprobantePantallas;
     }
-
-    public boolean isMontoEditable(){
-        return tipoImpuestoSeleccionado.isEsMontoEditableTipoImpuesto();
-    }
-
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) throws Exception {
         List<DTOCuentaBancaria> listaDTOCuentaBancaria = new ArrayList<DTOCuentaBancaria>();
         List<DTOCriterio> criteriosList = new ArrayList<>();

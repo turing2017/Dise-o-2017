@@ -18,18 +18,27 @@ public class DTOComprobantePantalla {
     private String codigoComprobante;
     private Date fechaHoraVencimientoComprobante;
     private double montoTotalComprobante;
+    private boolean montoEditable;
     private List<DTOItemComprobantePantalla> atributosAdicionalesComprobante;
 
     public DTOComprobantePantalla() {
     }
 
-    public DTOComprobantePantalla(int numeroFactura, String codigoComprobante, Date fechaHoraVencimientoComprobante, double montoTotalComprobante) {
+    public DTOComprobantePantalla(int numeroFactura, String codigoComprobante, Date fechaHoraVencimientoComprobante, double montoTotalComprobante, boolean montoEditable) {
         this.numeroFactura = numeroFactura;
         this.codigoComprobante = codigoComprobante;
         this.fechaHoraVencimientoComprobante = fechaHoraVencimientoComprobante;
         this.montoTotalComprobante = montoTotalComprobante;
+        this.montoEditable = montoEditable;
     }
 
+    public boolean getMontoEditable() {
+        return montoEditable;
+    }
+
+    public void setMontoEditable(boolean montoEditable) {
+        this.montoEditable = montoEditable;
+    }
 
     public int getNumeroFactura() {
         return numeroFactura;
@@ -70,5 +79,5 @@ public class DTOComprobantePantalla {
     public void setAtributosAdicionalesComprobante(List<DTOItemComprobantePantalla> atributosAdicionalesComprobante) {
         this.atributosAdicionalesComprobante = atributosAdicionalesComprobante;
     }
-    
+
 }

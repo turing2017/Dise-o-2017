@@ -93,10 +93,6 @@ public class ControladorPagarImpuestos {
         pantallaComprobantes.setVisible(true);
     }
 
-    public boolean isMontoEditable() {
-        return experto.isMontoEditable();
-    }
-
     public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) {
         try {
             return experto.obtenerCuentas(cuilCliente);

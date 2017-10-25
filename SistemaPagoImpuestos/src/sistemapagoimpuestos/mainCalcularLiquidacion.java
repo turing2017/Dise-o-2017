@@ -18,6 +18,9 @@ public class mainCalcularLiquidacion {
     public static void main(String[] args){
         ControladorCalcularLiquidaciones calcularLiquidaciones = new ControladorCalcularLiquidaciones();
         ArrayList<DTOAccionesSistema> accionesSistemas = new ArrayList<>();
-        calcularLiquidaciones.iniciar(accionesSistemas);
+        accionesSistemas = calcularLiquidaciones.iniciar(accionesSistemas);
+        for (DTOAccionesSistema acciones : accionesSistemas){
+            acciones.imprimirSTD();
+        }
     }
 }

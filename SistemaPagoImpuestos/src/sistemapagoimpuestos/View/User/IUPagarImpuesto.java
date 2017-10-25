@@ -189,7 +189,7 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
         List<DTOComprobantePantalla> listadoComprobantePantalla = seleccionarEmpresa(comboBox_empresa.getSelectedItem().toString(), textfield_codigo.getText().toString());
         if (listadoComprobantePantalla != null) {
             if (listadoComprobantePantalla.size() > 0) {
-                boolean esEditable = isMontoEditable();
+                boolean esEditable = listadoComprobantePantalla.get(0).getMontoEditable();
                 mostrarPantallaComprobantes(listadoComprobantePantalla, esEditable);
                 this.dispose();
             } else {
@@ -285,11 +285,6 @@ public class IUPagarImpuesto extends javax.swing.JFrame {
     // Método para recuperar los comprobantes
     public List<DTOComprobantePantalla> seleccionarEmpresa(String nombreEmpresaIng, String codigoPagoElectronicoIngres) {
         return controlador.seleccionarEmpresa(nombreEmpresaIng, codigoPagoElectronicoIngres);
-    }
-    
-    // Método para ver si es editable
-    public boolean isMontoEditable(){
-        return controlador.isMontoEditable();
     }
     
     // Método para avisarle al controlador de la creación de la pantalla comprobantes

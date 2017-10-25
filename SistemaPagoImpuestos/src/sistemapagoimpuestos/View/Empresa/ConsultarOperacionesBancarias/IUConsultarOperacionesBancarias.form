@@ -80,10 +80,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="928" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="380" max="-2" attributes="0"/>
-                      <Component id="jButtonExportarOperaciones" min="-2" pref="200" max="-2" attributes="0"/>
-                  </Group>
               </Group>
               <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
@@ -100,6 +96,12 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jButtonVolver" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="431" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jButtonExportarOperacionesExcel" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
+                      <Component id="jButtonExportarOperacionesTxt" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -137,7 +139,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTextFieldMontoTotal" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="30" max="32767" attributes="0"/>
-              <Component id="jButtonExportarOperaciones" min="-2" pref="40" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonExportarOperacionesTxt" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jButtonExportarOperacionesExcel" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButtonVolver" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -285,12 +290,12 @@
         <Property name="text" type="java.lang.String" value="Importe Pagado Total"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonExportarOperaciones">
+    <Component class="javax.swing.JButton" name="jButtonExportarOperacionesTxt">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Exportar Operaciones"/>
+        <Property name="text" type="java.lang.String" value="Exportar Operaciones Txt"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExportarOperacionesActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExportarOperacionesTxtActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonVolver">
@@ -299,6 +304,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVolverActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonExportarOperacionesExcel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exportar Operaciones Excel"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExportarOperacionesExcelActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

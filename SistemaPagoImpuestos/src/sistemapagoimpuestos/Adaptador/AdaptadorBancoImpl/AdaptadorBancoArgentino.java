@@ -10,9 +10,9 @@ import ws.empresas.EmpresasWSImplService;
  *
  * @author lunamarcos
  */
-public class AdaptadorBancoGalicia implements AdaptadorBanco{
+public class AdaptadorBancoArgentino implements AdaptadorBanco{
     EmpresasWS empresasWs;
-    public AdaptadorBancoGalicia(){
+    public AdaptadorBancoArgentino(){
         EmpresasWSImplService wsImplService = new EmpresasWSImplService();
         empresasWs = wsImplService.getEmpresasWSImplPort();
     }

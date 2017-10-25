@@ -39,7 +39,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         jTextFieldNombreEmpresa.setText( GlobalVars.userActive.getEmpresa().getNombreEmpresa());
         jTextFieldNombreEmpresa.setEnabled(false);
         jComboBoxTipoImpuesto.addItem("Todos");
-        jButtonExportarOperaciones.setVisible(false);
+        jButtonExportarOperacionesTxt.setVisible(false);
         for (DTOTipoImpuesto dtoEmpresaTI : listDTOEmpresaTipoImpuesto ){
             jComboBoxTipoImpuesto.addItem(dtoEmpresaTI.getNombreDTOTipoImpuesto());
             jComboBoxTipoImpuesto.isEditable();
@@ -69,8 +69,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         jTextFieldNombreEmpresa = new javax.swing.JTextField();
         jTextFieldMontoTotal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButtonExportarOperaciones = new javax.swing.JButton();
+        jButtonExportarOperacionesTxt = new javax.swing.JButton();
         jButtonVolver = new javax.swing.JButton();
+        jButtonExportarOperacionesExcel = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,10 +153,10 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
 
         jLabel5.setText("Importe Pagado Total");
 
-        jButtonExportarOperaciones.setText("Exportar Operaciones");
-        jButtonExportarOperaciones.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExportarOperacionesTxt.setText("Exportar Operaciones Txt");
+        jButtonExportarOperacionesTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExportarOperacionesActionPerformed(evt);
+                jButtonExportarOperacionesTxtActionPerformed(evt);
             }
         });
 
@@ -163,6 +164,13 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVolverActionPerformed(evt);
+            }
+        });
+
+        jButtonExportarOperacionesExcel.setText("Exportar Operaciones Excel");
+        jButtonExportarOperacionesExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportarOperacionesExcelActionPerformed(evt);
             }
         });
 
@@ -191,10 +199,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                                         .addComponent(jTextFieldNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(380, 380, 380)
-                        .addComponent(jButtonExportarOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -206,7 +211,12 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                         .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(431, 431, 431))))
+                        .addGap(431, 431, 431))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonExportarOperacionesExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(175, 175, 175)
+                        .addComponent(jButtonExportarOperacionesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(232, 232, 232))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +246,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jButtonExportarOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonExportarOperacionesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExportarOperacionesExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -304,7 +316,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
             }
         }
         sizeTable = listDtoOperacion.size();
-        jButtonExportarOperaciones.setVisible(true);
+        jButtonExportarOperacionesTxt.setVisible(true);
     }//GEN-LAST:event_jButtonConsultarOperacionesBancariasActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
@@ -334,11 +346,12 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreEmpresaActionPerformed
 
-    private void jButtonExportarOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarOperacionesActionPerformed
+    private void jButtonExportarOperacionesTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarOperacionesTxtActionPerformed
         int indexExcel = 8;
+        String path = System.getProperty("user.home") + "/Desktop/";
+
         try {
-         
-           File archivo = new File(System.getProperty("user.home") + "//exportOperaciones.txt");
+           File archivo = new File(path+"exportOperaciones-txt.txt");
             FileWriter file = new FileWriter(archivo, true);
             //Escribimos en el archivo con el metodo write 
             file.write("Empresa = " + jTextFieldNombreEmpresa.getText() + ";\r\n");
@@ -359,9 +372,25 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
             }
             file.close();
         } catch (Exception e) {
-            System.out.println("Error al guardar el archivo");
-
+            System.out.println("Error al guardar el archivo txt");
         }
+                JOptionPane.showMessageDialog(
+                null,
+                "Exportado correctamente en: " + path,
+                "Sistema Pago Impuestos",
+                JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButtonExportarOperacionesTxtActionPerformed
+
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        this.setVisible(false);
+        new IUPantallaEmpresa().mostrarPantallaPrincipal();
+
+    }//GEN-LAST:event_jButtonVolverActionPerformed
+
+    private void jButtonExportarOperacionesExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarOperacionesExcelActionPerformed
+        // TODO add your handling code here:
+                String path = System.getProperty("user.home") + "/Desktop/";
+
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Reporte Sistema Pago de Impuestos");
         sheet = workbook.getSheetAt(0);
@@ -393,22 +422,22 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         sheet.getRow(7).getCell(5).setCellValue("Importe Pagado");
          sheet.getRow(7).getCell(6).setCellValue("Importe Total Pagado");
 
-        for (int i = 0; i < sizeTable; i++) {
+        for (int i = 0; i < jTableOperaciones.getRowCount(); i++) {
 
-            sheet.getRow(indexExcel + i).getCell(0).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 0)));
-            sheet.getRow(indexExcel + i).getCell(1).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 1)));
-            sheet.getRow(indexExcel + i).getCell(2).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 2)));
-            sheet.getRow(indexExcel + i).getCell(3).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 3)));
-            sheet.getRow(indexExcel + i).getCell(4).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 4)));
-            sheet.getRow(indexExcel + i).getCell(5).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 5)));
+            sheet.getRow(5 + i).getCell(0).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 0)));
+            sheet.getRow(5 + i).getCell(1).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 1)));
+            sheet.getRow(5 + i).getCell(2).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 2)));
+            sheet.getRow(5 + i).getCell(3).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 3)));
+            sheet.getRow(5 + i).getCell(4).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 4)));
+            sheet.getRow(5 + i).getCell(5).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 5)));
             if (i == sizeTable - 1) {
-                sheet.getRow(indexExcel + i +1).getCell(6).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
+                sheet.getRow(5 + i +1).getCell(6).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
             }
 
         }
         try {
             FileOutputStream out
-                    = new FileOutputStream(new File(System.getProperty("user.home") + "//exportOperaciones.xls"));
+                    = new FileOutputStream(path+"exportOperaciones-xls.xls");
             workbook.write(out);
             out.close();
 
@@ -419,16 +448,10 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(
                 null,
-                "Exportado correctamente en: " + System.getProperty("user.home"),
+                "Exportado correctamente en: " + path,
                 "Sistema Pago Impuestos",
                 JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButtonExportarOperacionesActionPerformed
-
-    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
-        this.setVisible(false);
-        new IUPantallaEmpresa().mostrarPantallaPrincipal();
-
-    }//GEN-LAST:event_jButtonVolverActionPerformed
+    }//GEN-LAST:event_jButtonExportarOperacionesExcelActionPerformed
     
     /**
      * @param args the command line arguments
@@ -504,7 +527,8 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
     private datechooser.beans.DateChooserCombo dateChooserCombodesde;
     private datechooser.beans.DateChooserCombo dateChooserCombohasta;
     private javax.swing.JButton jButtonConsultarOperacionesBancarias;
-    private javax.swing.JButton jButtonExportarOperaciones;
+    private javax.swing.JButton jButtonExportarOperacionesExcel;
+    private javax.swing.JButton jButtonExportarOperacionesTxt;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;

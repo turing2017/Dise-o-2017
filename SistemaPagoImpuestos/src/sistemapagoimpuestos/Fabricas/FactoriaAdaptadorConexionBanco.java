@@ -1,7 +1,7 @@
 package sistemapagoimpuestos.Fabricas;
 
 import sistemapagoimpuestos.Adaptador.AdaptadorBanco;
-import sistemapagoimpuestos.Adaptador.AdaptadorBancoImpl.AdaptadorBancoGalicia;
+import sistemapagoimpuestos.Adaptador.AdaptadorBancoImpl.AdaptadorBancoArgentino;
 import sistemapagoimpuestos.Entity.ParametroSistema;
 
 /**
@@ -28,8 +28,8 @@ public class FactoriaAdaptadorConexionBanco {
         String nombreBancoParametroSistema = parametro.getNombreBancoParametroSistema();
         
         switch (nombreBancoParametroSistema) {
-            case "Galicia": 
-                return new AdaptadorBancoGalicia();
+            case "Banco Argentino": 
+                return new AdaptadorBancoArgentino();
             default:
                 return null;
         }  

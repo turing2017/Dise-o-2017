@@ -23,14 +23,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
-import sistemapagoimpuestos.Entity.Empresa;
-import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
-import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoItems;
-
 public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
 
     ControladorGestionarEmpresaAdherida controlador = new ControladorGestionarEmpresaAdherida();

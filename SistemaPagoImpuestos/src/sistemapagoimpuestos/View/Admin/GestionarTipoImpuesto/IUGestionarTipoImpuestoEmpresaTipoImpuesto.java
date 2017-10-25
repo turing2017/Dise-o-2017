@@ -5,15 +5,10 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
-import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.*;
-import java.awt.Component;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.WindowConstants;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;

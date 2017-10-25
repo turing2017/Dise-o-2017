@@ -19,7 +19,6 @@ import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOEmpresaGestionarEmpresaAdherida;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
-import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Globals.GlobalVars;
 
 /**

@@ -1,23 +1,12 @@
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
 import exceptions.Excepciones;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
-import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuestoItems;
-import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Dto.DtoItemOrden;
 
 /**
  *

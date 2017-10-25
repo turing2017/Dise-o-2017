@@ -424,14 +424,14 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
 
         for (int i = 0; i < jTableOperaciones.getRowCount(); i++) {
 
-            sheet.getRow(5 + i).getCell(0).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 0)));
-            sheet.getRow(5 + i).getCell(1).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 1)));
-            sheet.getRow(5 + i).getCell(2).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 2)));
-            sheet.getRow(5 + i).getCell(3).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 3)));
-            sheet.getRow(5 + i).getCell(4).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 4)));
-            sheet.getRow(5 + i).getCell(5).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 5)));
+            sheet.getRow(8 + i).getCell(0).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 0)));
+            sheet.getRow(8 + i).getCell(1).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 1)));
+            sheet.getRow(8 + i).getCell(2).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 2)));
+            sheet.getRow(8 + i).getCell(3).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 3)));
+            sheet.getRow(8 + i).getCell(4).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 4)));
+            sheet.getRow(8 + i).getCell(5).setCellValue(String.valueOf(jTableOperaciones.getValueAt(i, 5)));
             if (i == sizeTable - 1) {
-                sheet.getRow(5 + i +1).getCell(6).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
+                sheet.getRow(8 + i +1).getCell(6).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
             }
 
         }

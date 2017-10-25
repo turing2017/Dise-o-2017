@@ -5,6 +5,8 @@
  */
 package sistemapagoimpuestos;
 
+import java.util.ArrayList;
+import java.util.Date;
 import sistemapagoimpuestos.Controller.ControladorCalcularLiquidaciones;
 import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 
@@ -15,6 +17,7 @@ import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 public class mainCalcularLiquidacion {
     public static void main(String[] args){
         ControladorCalcularLiquidaciones calcularLiquidaciones = new ControladorCalcularLiquidaciones();
-        //calcularLiquidaciones.iniciar(new DTOAccionesSistema);
+        ArrayList<DTOAccionesSistema> accionesSistemas = new ArrayList<>();
+        calcularLiquidaciones.iniciar(accionesSistemas);
     }
 }

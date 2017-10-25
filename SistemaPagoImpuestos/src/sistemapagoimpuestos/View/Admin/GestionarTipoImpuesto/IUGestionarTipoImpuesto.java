@@ -22,24 +22,24 @@ import sistemapagoimpuestos.Dto.DTOEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 
 public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
-    
+
     ControladorGestionarTipoImpuesto controlador = new ControladorGestionarTipoImpuesto();
     ControladorGestionarEmpresaTipoImpuesto controladorETI = new ControladorGestionarEmpresaTipoImpuesto();
     String cuitEmpresa;
-    
+
     public IUGestionarTipoImpuesto() {
         initComponents();
         // Esto hay que quitarlo, cuando se llame a esta pantalla se debe llamar al metodo siguiente pasando el cuitEmpresa
         this.cuitEmpresa = "123434343";
         obtenerTipoImpuestos();
-        
+
     }
-    
+
     public IUGestionarTipoImpuesto(String cuitEmpresa) {
         this.cuitEmpresa = cuitEmpresa;
         initComponents();
         obtenerEmpresaTipoImpuesto(cuitEmpresa);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -197,33 +197,17 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
 
     private void button_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_modificarActionPerformed
 
-if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la opción seleccionada.
         try {
-            // Obtento el código del elemento seleccionado
-            int columnCode = 0;
-            int rowSelected = tabla_tipo_impuesto.getSelectedRow();
-            String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
-            controlador.mostrarPantallaModificacion(Integer.parseInt(codigo));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
-            Excepciones.getInstance().objetoNoSeleccionado();
-        }
-        this.dispose();
-}else{
- try {
-            // Obtento el código del elemento seleccionado
-            int columnCode = 0;
-            int rowSelected = tabla_tipo_impuesto.getSelectedRow();
-            String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
-            controlador.mostrarPantallaModificacionEmpresa(Integer.parseInt(codigo),cuitEmpresa);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
-            Excepciones.getInstance().objetoNoSeleccionado();
-        }
-        this.dispose();
-
-
-}
+                // Obtento el código del elemento seleccionado
+                int columnCode = 0;
+                int rowSelected = tabla_tipo_impuesto.getSelectedRow();
+                String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
+                controlador.mostrarPantallaModificacionEmpresa(Integer.parseInt(codigo), cuitEmpresa);
+                this.dispose();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
+                Excepciones.getInstance().objetoNoSeleccionado();
+            }      
 
     }//GEN-LAST:event_button_modificarActionPerformed
 
@@ -232,26 +216,19 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         sorter.setRowFilter(RowFilter.regexFilter(textfield_filtro.getText()));
         tabla_tipo_impuesto.setRowSorter(sorter);
     }//GEN-LAST:event_button_filtrarActionPerformed
-    
-    public void asociarETI(String cuitEmpresa){
-    
-        
-        
-    }
-    
-    
-    
+
+
     private void jButtonVerItemAsociadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerItemAsociadoActionPerformed
-        try{
+        try {
             // Obtento el código del elemento seleccionado
             int columnCode = 0;
             int rowSelected = tabla_tipo_impuesto.getSelectedRow();
             String codigoTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
             String nombreTE = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 4).toString();
-            controlador.mostrarItems(cuitEmpresa, Integer.parseInt(codigoTI),nombreTE);
-    }catch (ArrayIndexOutOfBoundsException e) {
+            controlador.mostrarItems(cuitEmpresa, Integer.parseInt(codigoTI), nombreTE);
+        } catch (ArrayIndexOutOfBoundsException e) {
             Excepciones.getInstance().objetoNoSeleccionado();
-    }
+        }
     }//GEN-LAST:event_jButtonVerItemAsociadoActionPerformed
 
     private void jButton_asociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_asociarActionPerformed
@@ -264,19 +241,18 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonModificarVinculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarVinculoActionPerformed
-       try{ 
-        int rowSelected = tabla_tipo_impuesto.getSelectedRow();
-        String nombreTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 1).toString();
-        boolean montoEditable = (boolean) tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 2);
-        boolean estadoETI = (boolean) tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 3);
-        String nombreTE = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 4).toString();
-        controlador.modificarETI(cuitEmpresa, nombreTI, nombreTE, estadoETI, montoEditable);
-        this.dispose();
-        }catch (ArrayIndexOutOfBoundsException e) {
+        try {
+            int rowSelected = tabla_tipo_impuesto.getSelectedRow();
+            String nombreTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 1).toString();
+            boolean montoEditable = (boolean) tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 2);
+            boolean estadoETI = (boolean) tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 3);
+            String nombreTE = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 4).toString();
+            controlador.modificarETI(cuitEmpresa, nombreTI, nombreTE, estadoETI, montoEditable);
+            this.dispose();
+        } catch (ArrayIndexOutOfBoundsException e) {
             Excepciones.getInstance().objetoNoSeleccionado();
         }
     }//GEN-LAST:event_jButtonModificarVinculoActionPerformed
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -315,6 +291,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         controlador.iniciar();
     }
     ArrayList<DTOEmpresaTipoImpuesto> listDtoEmpresaTipoImpuesto = null;
+
     public void obtenerEmpresaTipoImpuesto(String cuitEmpresa) {
         // Muestro pantalla de Consultar
         listDtoEmpresaTipoImpuesto = controlador.obtenerEmpresaTipoImpuesto(cuitEmpresa);
@@ -379,8 +356,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         tabla_tipo_impuesto.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_tipo_impuesto.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-    
-    
+
     public void obtenerTipoImpuestos(String cuitEmpresa) {
         // Muestro pantalla de Consultar
         ArrayList<DTOTipoImpuesto> listDtoTipoImpuesto = controlador.obtenerTipoImpuestosEmpresa(cuitEmpresa);
@@ -439,8 +415,6 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         tabla_tipo_impuesto.getColumnModel().getColumn(1).setCellRenderer(r);
     }
 
-    
-    
     public void obtenerTipoImpuestos() {
         // Muestro pantalla de Consultar
         ArrayList<DTOTipoImpuesto> listDtoTI = controlador.buscarTipoImpuestos();
@@ -466,7 +440,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
                         return Boolean.class;
                     default:
                         return null;
-                 }
+                }
             }
 
         };
@@ -497,16 +471,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
         tabla_tipo_impuesto.getColumnModel().getColumn(0).setCellRenderer(r);
         tabla_tipo_impuesto.getColumnModel().getColumn(1).setCellRenderer(r);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public ControladorGestionarTipoImpuesto getControlador() {
         return controlador;
     }
@@ -602,8 +567,7 @@ if(listDtoEmpresaTipoImpuesto.equals(null)){       // Le paso al controlador la 
     public void setTextfield_filtro(JTextField textfield_filtro) {
         this.textfield_filtro = textfield_filtro;
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_filtrar;

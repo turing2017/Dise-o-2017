@@ -27,55 +27,16 @@ public class DecoradorPagarImpuestos extends ExpertoPagarImpuestos{
     public void validarUsuario()  throws Exception {
         FachadaInterna.getInstance().iniciarTransaccion();
         super.validarUsuario(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
     }
     
-    
-
-    @Override
-    public List<DTOTipoImpuestoIUPagar> buscarTipoImpuestos()  throws Exception{
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOTipoImpuestoIUPagar> listaDTOTipoImpuesto = super.buscarTipoImpuestos();
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listaDTOTipoImpuesto;
-    }
-
-    @Override
-    public List<DTOEmpresaIUPagar> buscarEmpresas(String nombreTipoImpuesto)  throws Exception{
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOEmpresaIUPagar> listaDTOEmpresa = super.buscarEmpresas(nombreTipoImpuesto);
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listaDTOEmpresa;
-    }
-
-    @Override
-    public List<DTOComprobantePantalla> seleccionarEmpresa( String nombreEmpresa, String codigoPagoElectronicoIngres) throws Exception {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOComprobantePantalla> listadoDTOComprobantepantalla = super.seleccionarEmpresa(nombreEmpresa,codigoPagoElectronicoIngres);
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listadoDTOComprobantepantalla;
-    }
-
-    @Override
-    public List<DTOCuentaBancaria> obtenerCuentas(String cuilCliente) throws Exception {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOCuentaBancaria> listaCuentasBancarias = super.obtenerCuentas(cuilCliente);
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return listaCuentasBancarias;
-    }
-
     @Override
     public DTOOperacionActual pagarImpuesto(String cbuCuentaSeleccionada, double montoAbonado, String nroFactura, String codigoPago)  throws Exception{
-        FachadaInterna.getInstance().iniciarTransaccion();
         DTOOperacionActual dtoOperacion = super.pagarImpuesto(cbuCuentaSeleccionada, montoAbonado, nroFactura, codigoPago);
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoOperacion;
     }
 
-    @Override
-    public boolean isMontoEditable(){
-        return  super.isMontoEditable();
-    }
+
     
     
 }

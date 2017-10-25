@@ -44,9 +44,9 @@
                           <Component id="jCheckBoxEstado" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="comboBox_tipoEmpresa" pref="111" max="32767" attributes="0"/>
-                              <Component id="textfield_frecuencia" max="32767" attributes="0"/>
                               <Component id="jComboBoxTipoImpuesto" alignment="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jSpinnerfrecuencia" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -71,9 +71,9 @@
                   <Component id="comboBox_tipoEmpresa" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label_frecuencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textfield_frecuencia" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="label_frecuencia" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSpinnerfrecuencia" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -135,11 +135,6 @@
         <Property name="text" type="java.lang.String" value="Frecuencia de Liquidaci&#xf3;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textfield_frecuencia">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_frecuenciaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxTipoImpuesto">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -162,6 +157,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Estado"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerfrecuencia">
     </Component>
   </SubComponents>
 </Form>

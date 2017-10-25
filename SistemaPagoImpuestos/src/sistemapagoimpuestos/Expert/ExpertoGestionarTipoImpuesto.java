@@ -197,17 +197,14 @@ public class ExpertoGestionarTipoImpuesto {
             }else{
                 empresaTipoImpuesto.setFechaHoraInhabilitacionEmpresaTipoImpuesto(new Date());
             }
+            
         } catch (IndexOutOfBoundsException exception) {
             Excepciones.getInstance().objetoNoExistente("Empresa Tipo Impuesto");
         }
-     
-        
-        
-        
         
     }
     
-     public void modificarEmpresa (String cuit,String nombre,String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion){
+     public void guardarEmpresaTipoImpuesto (String cuit,String nombre,String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion){
         Empresa empresa = new Empresa();
         TipoImpuesto nuevoTImpuesto = new TipoImpuesto();
         TipoEmpresa nuevoTEmpresa = new TipoEmpresa();
@@ -219,15 +216,10 @@ public class ExpertoGestionarTipoImpuesto {
             criterio1.setOperacion("=");
             criterio1.setValor(cuit);
             criterios.add(criterio1);
-            DTOCriterio criterio2 = new DTOCriterio();
-            criterio2.setAtributo("fechaHoraInhabilitacionEmpresa");
-            criterio2.setOperacion("IS");
-            criterio2.setValor(null);
-            criterios.add(criterio2);
             empresa= (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
             
             } catch (IndexOutOfBoundsException exception) {
-            Excepciones.getInstance().objetoNoExistente("Empresa");
+            Excepciones.getInstance().objetoLaExistente("Empresa");
         }
         
         try {
@@ -238,10 +230,7 @@ public class ExpertoGestionarTipoImpuesto {
             criterionuevoTI.setOperacion("=");
             criterionuevoTI.setValor(nuevoTipoImpuesto);
             criteriosnuevoTI.add(criterionuevoTI);DTOCriterio criterionuevoTI2 = new DTOCriterio();
-            criterionuevoTI2.setAtributo("fechaHoraInhabilitacionTipoImpuesto");
-            criterionuevoTI2.setOperacion("IS");
-            criterionuevoTI2.setValor(null);
-            criteriosnuevoTI.add(criterionuevoTI2);
+            
             nuevoTImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criteriosnuevoTI).get(0);
         } catch (IndexOutOfBoundsException exception) {
             Excepciones.getInstance().objetoNoExistente("Tipo de Impuesto");
@@ -283,11 +272,12 @@ public class ExpertoGestionarTipoImpuesto {
             //Guardo la empresa, y la empresa tipo impuesto
             FachadaPersistencia.getInstance().guardar(empresaTI);
 
-            Excepciones.getInstance().modificacionExito();
+            Excepciones.getInstance().creacionExitosa("vinculo");
             }else{
                 Excepciones.getInstance().objetoLaExistente("combinacion");
             
-        } 
+        }
+        
     }
      
      public void eliminarItem(String nombreItem,String  cuitEmpresa,int codigoTipoImpuesto,String nombreTipoEmpresa,int ordenItem){
@@ -409,6 +399,7 @@ public class ExpertoGestionarTipoImpuesto {
             DTOTipoEmpresa tE = new DTOTipoEmpresa();
             tE.setNombreTipoEmpresa(empresaTipoImpuesto.getTipoEmpresa().getNombreTipoEmpresa());
             dtoEmpresaTipoImpuesto.setdTOtipoEmpresa(tE);
+            dtoEmpresaTipoImpuesto.setFrecuenciaLiquidacionEmpresaTipoImpuesto(empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto());
             listDtoEmpresaTipoImpuesto.add(dtoEmpresaTipoImpuesto);
         }
      return listDtoEmpresaTipoImpuesto;

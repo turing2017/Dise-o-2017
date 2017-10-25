@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
@@ -43,10 +44,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         comboBox_tipoEmpresa.setSelectedItem(nombreTE);
         jComboBoxTipoImpuesto.setSelectedItem(nombreTI);
         jCheckBoxEstado.setSelected(estadoETI);
-        textfield_frecuencia.setText(nombreTE);
-        int frec = setearFrecuencia(nombreTI, cuitEmpresa, nombreTE);
-        String g= ("" + frec);
-        textfield_frecuencia.setText(g);
+        jSpinnerfrecuencia.setValue(setearFrecuencia(nombreTI, cuitEmpresa, nombreTE));
         this.cuitEmpresa = cuitEmpresa;
     }
     public static List<DTOEmpresaTipImpItem> dTOEmpresaTipImpItemAltaList;
@@ -127,13 +125,6 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         this.label_nombre = label_nombre;
     }
 
-    public JTextField getTextfield_frecuencia() {
-        return textfield_frecuencia;
-    }
-
-    public void setTextfield_frecuencia(JTextField textfield_frecuencia) {
-        this.textfield_frecuencia = textfield_frecuencia;
-    }
 
     public static void addDtoetiisModfAlta(DTOEmpresaTipImpItem dTOEmpresaTipImpItem) {
         if (dTOEmpresaTipImpItemAltaList == null) {
@@ -156,10 +147,10 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         comboBox_tipoEmpresa = new javax.swing.JComboBox<>();
         label_frecuencia = new javax.swing.JLabel();
-        textfield_frecuencia = new javax.swing.JTextField();
         jComboBoxTipoImpuesto = new javax.swing.JComboBox<>();
         jCheckBoxEstado = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
+        jSpinnerfrecuencia = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,12 +179,6 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         });
 
         label_frecuencia.setText("Frecuencia de Liquidación");
-
-        textfield_frecuencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfield_frecuenciaActionPerformed(evt);
-            }
-        });
 
         jComboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,8 +217,8 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
                             .addComponent(jCheckBoxEstado)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(comboBox_tipoEmpresa, 0, 111, Short.MAX_VALUE)
-                                .addComponent(textfield_frecuencia)
-                                .addComponent(jComboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jComboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jSpinnerfrecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
@@ -250,9 +235,9 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addComponent(comboBox_tipoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_frecuencia)
-                    .addComponent(textfield_frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerfrecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -271,9 +256,10 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         String nuevoTE = (String) comboBox_tipoEmpresa.getSelectedItem();
         String nuevoTI = (String) jComboBoxTipoImpuesto.getSelectedItem();
-        int frec = Integer.parseInt(textfield_frecuencia.getText());
+        int frec = (int) jSpinnerfrecuencia.getValue();
         boolean habilitada = jCheckBoxEstado.isSelected();
         controlador.ModificarETI(nombreTE, nombreTI, cuit, nuevoTE, nuevoTI, frec, habilitada);
+        Excepciones.getInstance().creacionExitosa("vinculo");
         controlador.iniciar(cuit);
         this.dispose();
     }//GEN-LAST:event_ModificarActionPerformed
@@ -287,10 +273,6 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     private void comboBox_tipoEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_tipoEmpresaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBox_tipoEmpresaActionPerformed
-
-    private void textfield_frecuenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_frecuenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfield_frecuenciaActionPerformed
 
     private void jCheckBoxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEstadoActionPerformed
         // TODO add your handling code here:
@@ -348,6 +330,14 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
             jComboBoxTipoImpuesto.addItem(nombreTipoImpuesto);
         }
     }
+
+    public JSpinner getjSpinnerfrecuencia() {
+        return jSpinnerfrecuencia;
+    }
+
+    public void setjSpinnerfrecuencia(JSpinner jSpinnerfrecuencia) {
+        this.jSpinnerfrecuencia = jSpinnerfrecuencia;
+    }
     
     public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
         return controladorETI.obtenerTipoEmpresas();
@@ -365,8 +355,8 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTipoImpuesto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JSpinner jSpinnerfrecuencia;
     private javax.swing.JLabel label_frecuencia;
     private javax.swing.JLabel label_nombre;
-    private javax.swing.JTextField textfield_frecuencia;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,10 +55,10 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         button_agregar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        textfield_orden = new javax.swing.JTextField();
         ButtonModificarItem = new javax.swing.JButton();
         jButton_cancelar = new javax.swing.JButton();
         jButton_EliminarItem = new javax.swing.JButton();
+        jSpinnerOrden = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,12 +74,6 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Orden:");
-
-        textfield_orden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfield_ordenActionPerformed(evt);
-            }
-        });
 
         ButtonModificarItem.setText("Modificar Item");
         ButtonModificarItem.addActionListener(new java.awt.event.ActionListener() {
@@ -115,8 +109,8 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                         .addComponent(comboBox_items, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textfield_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinnerOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(button_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,7 +131,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(button_agregar)
                     .addComponent(jLabel2)
-                    .addComponent(textfield_orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
@@ -152,11 +146,11 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_agregarActionPerformed
-        if(textfield_orden.getText().length()==0){
+        if(jSpinnerOrden.getValue()==  null){
             Excepciones.getInstance().camposVacios();
         }else{
         String nombreItem = comboBox_items.getSelectedItem().toString();
-        int orden = Integer.parseInt(textfield_orden.getText());
+        int orden = (int) jSpinnerOrden.getValue();
         controladorETI.agregarItem(nombreItem, cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa,orden);
         this.dispose();
       
@@ -190,10 +184,6 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         controlador.eliminarItem(nombreItem,  cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, ordenItem);
         this.dispose();
     }//GEN-LAST:event_jButton_EliminarItemActionPerformed
-
-    private void textfield_ordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_ordenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfield_ordenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,7 +289,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinnerOrden;
     private javax.swing.JTable tabla_items;
-    private javax.swing.JTextField textfield_orden;
     // End of variables declaration//GEN-END:variables
 }

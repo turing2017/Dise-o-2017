@@ -85,9 +85,9 @@ public class DecoradorGestionarTipoImpuesto extends ExpertoGestionarTipoImpuesto
     
 
     @Override
-    public void modificarEmpresa(String cuit, String nombre, String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion) {
+    public void guardarEmpresaTipoImpuesto(String cuit, String nombre, String nuevoTipoImpuesto, String nuevoTipoEmpresa, int frecuenciaLiquidacion) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.modificarEmpresa(cuit, nombre, nuevoTipoImpuesto, nuevoTipoEmpresa, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
+        super.guardarEmpresaTipoImpuesto(cuit, nombre, nuevoTipoImpuesto, nuevoTipoEmpresa, frecuenciaLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 

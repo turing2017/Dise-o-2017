@@ -169,7 +169,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                     .addComponent(textfield_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addComponent(nombreEmpresa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,7 +183,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonModificarVinculo))
-                .addGap(10, 10, 10))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -300,7 +300,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
         jButton_asociar.setEnabled(true);
         jButtonModificarVinculo.setEnabled(true);
         jButtonVerItemAsociado.setEnabled(true);
-        String[] columnas = {"Codigo Tipo Impuesto", "Nombre Tipo Impuesto", "Monto Editable", "Estado", "Nombre TipoEmpresa"};
+        String[] columnas = {"Codigo Tipo Impuesto", "Nombre Tipo Impuesto", "Monto Editable", "Estado", "Nombre TipoEmpresa", "Frecuencia"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
 
             // Sobreescribo el método para no permitir editar la 
@@ -322,6 +322,8 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                         return Boolean.class;
                     case 4:
                         return String.class;
+                    case 5:
+                        return Integer.class;
                     default:
                         return null;
                 }
@@ -341,6 +343,7 @@ public class IUGestionarTipoImpuesto extends javax.swing.JFrame {
                 vect.add(true);
             }
             vect.add(dtoEmpresaTipoImpuesto.getdTOtipoEmpresa().getNombreTipoEmpresa());
+            vect.add(dtoEmpresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto());
             dtm.addRow(vect);
         }
 

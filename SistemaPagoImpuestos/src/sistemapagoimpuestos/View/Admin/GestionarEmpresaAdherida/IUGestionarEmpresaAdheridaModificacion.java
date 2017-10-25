@@ -5,7 +5,6 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida;
 
-import exceptions.Excepciones;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaAdherida;

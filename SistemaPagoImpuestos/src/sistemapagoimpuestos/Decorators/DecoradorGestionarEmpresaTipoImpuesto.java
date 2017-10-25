@@ -10,7 +10,9 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoTipoImpuesto;
 import sistemapagoimpuestos.Dto.DtoItemOrden;
+import sistemapagoimpuestos.Dto.DtoItemOrdenGestionarTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Utils.FachadaInterna;
 
@@ -31,13 +33,7 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
         FachadaInterna.getInstance().finalizarTransaccion();
         return tempString;
     }
-    @Override
-    public List buscarEmpresas() {
-        FachadaInterna.getInstance().iniciarTransaccion();
-        List tempString = super.buscarEmpresas(); //To change body of generated methods, choose Tools | Templates.
-        FachadaInterna.getInstance().finalizarTransaccion();
-        return tempString;
-    }
+    
     @Override
     public List ingresarDatosETI(String nombreTipoImpuesto, String nombreEmpresa) {
         FachadaInterna.getInstance().iniciarTransaccion();
@@ -47,9 +43,9 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
 }
 
     @Override
-    public List<DTOTipoImpuesto> obtenerTipoImpuesto() {
+    public List<DTOTipoImpuestoTipoImpuesto> obtenerTipoImpuesto() {
         FachadaInterna.getInstance().iniciarTransaccion();
-        List<DTOTipoImpuesto> dtoTI = super.obtenerTipoImpuesto();
+        List<DTOTipoImpuestoTipoImpuesto> dtoTI = super.obtenerTipoImpuesto();
         FachadaInterna.getInstance().finalizarTransaccion();
         return dtoTI;
     }
@@ -77,9 +73,9 @@ public class DecoradorGestionarEmpresaTipoImpuesto extends ExpertoGestionarEmpre
     }
 
     @Override
-    public ArrayList<DtoItemOrden> obtenerItems(String cuitEmpresa, int codigoTipoImpuesto, String nombreTE) {
+    public ArrayList<DtoItemOrdenGestionarTipoImpuesto> obtenerItems(String cuitEmpresa, int codigoTipoImpuesto, String nombreTE) {
         FachadaInterna.getInstance().iniciarTransaccion();
-        ArrayList<DtoItemOrden> listDtoItem = super.obtenerItems(cuitEmpresa, codigoTipoImpuesto, nombreTE);
+        ArrayList<DtoItemOrdenGestionarTipoImpuesto> listDtoItem = super.obtenerItems(cuitEmpresa, codigoTipoImpuesto, nombreTE);
         FachadaInterna.getInstance().finalizarTransaccion();
         return listDtoItem;
 //To change body of generated methods, choose Tools | Templates.

@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOItem;
-import sistemapagoimpuestos.Dto.DtoItemOrden;
+import sistemapagoimpuestos.Dto.DtoItemOrdenGestionarTipoImpuesto;
 
 /**
  *
@@ -228,7 +228,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
     
         public void obtenerItems(String cuitEmpresa, int codigoTipoImpuesto, String nombreTE) {
         // Muestro pantalla de Consultar
-        ArrayList<DtoItemOrden> listDTOIETI = controladorETI.obtenerItems(cuitEmpresa, codigoTipoImpuesto, nombreTE);
+        ArrayList<DtoItemOrdenGestionarTipoImpuesto> listDTOIETI = controladorETI.obtenerItems(cuitEmpresa, codigoTipoImpuesto, nombreTE);
 
         String[] columnas = {"Nombre","Orden"};
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
@@ -253,7 +253,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
 
         };
 
-        for (DtoItemOrden dtoItem : listDTOIETI) {
+        for (DtoItemOrdenGestionarTipoImpuesto dtoItem : listDTOIETI) {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoItem.getNombreItem());
             vect.add(dtoItem.getOrden());

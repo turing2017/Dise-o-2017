@@ -5,12 +5,8 @@ import java.util.List;
 import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Dto.DtoItemOrden;
-import sistemapagoimpuestos.Entity.Empresa;
-import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
-import sistemapagoimpuestos.Entity.TipoEmpresa;
-import sistemapagoimpuestos.Entity.TipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoTipoImpuesto;
+import sistemapagoimpuestos.Dto.DtoItemOrdenGestionarTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
@@ -30,12 +26,12 @@ public class ControladorGestionarEmpresaTipoImpuesto {
     }
     
     // Recuperar Items
-    public ArrayList<DtoItemOrden> obtenerItems(String cuitEmpresa, int codigoTipoImpuesto, String nombreTE){
+    public ArrayList<DtoItemOrdenGestionarTipoImpuesto> obtenerItems(String cuitEmpresa, int codigoTipoImpuesto, String nombreTE){
         return experto.obtenerItems(cuitEmpresa, codigoTipoImpuesto, nombreTE);
     }
     
     
-    public List<DTOTipoImpuesto> obtenerTipoImpuesto(){
+    public List<DTOTipoImpuestoTipoImpuesto> obtenerTipoImpuesto(){
         return experto.obtenerTipoImpuesto();
     }
     

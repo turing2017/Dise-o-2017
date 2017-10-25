@@ -9,13 +9,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import sistemapagoimpuestos.Controller.ControladorGestionarEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Controller.ControladorGestionarTipoImpuesto;
 import sistemapagoimpuestos.Dto.DTOEmpresaTipImpItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoTipoImpuesto;
 
 /**
  *
@@ -323,9 +321,9 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
             comboBox_tipoEmpresa.addItem(nombreTipoEmpresa);
         }
     } 
-    public void llenarComboTipoEmpresa(List<DTOTipoImpuesto> listaDTOTipoImpuesto){
+    public void llenarComboTipoEmpresa(List<DTOTipoImpuestoTipoImpuesto> listaDTOTipoImpuesto){
         for (int i = 0; i < listaDTOTipoImpuesto.size(); i++) {
-            DTOTipoImpuesto dtoTipoImpuesto = (DTOTipoImpuesto) listaDTOTipoImpuesto.get(i);
+            DTOTipoImpuestoTipoImpuesto dtoTipoImpuesto = (DTOTipoImpuestoTipoImpuesto) listaDTOTipoImpuesto.get(i);
             String nombreTipoImpuesto = dtoTipoImpuesto.getNombreDTOTipoImpuesto();
             jComboBoxTipoImpuesto.addItem(nombreTipoImpuesto);
         }
@@ -342,7 +340,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
     public List<DTOTipoEmpresa> obtenerTipoEmpresas(){
         return controladorETI.obtenerTipoEmpresas();
     }    
-    public List<DTOTipoImpuesto> obtenerTipoImpuesto(){
+    public List<DTOTipoImpuestoTipoImpuesto> obtenerTipoImpuesto(){
         return controladorETI.obtenerTipoImpuesto();
     }
 

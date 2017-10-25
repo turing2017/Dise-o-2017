@@ -10,24 +10,19 @@ import exceptions.Excepciones;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
-
-import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOCriterio;
-import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Decorators.DecoradorGestionarEmpresaTipoImpuesto;
-import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOItem;
 import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
+import sistemapagoimpuestos.Dto.DtoItemOrdenGestionarTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOTipoImpuestoTipoImpuesto;
+import sistemapagoimpuestos.Dto.DTOCriterio;
 import sistemapagoimpuestos.Entity.Empresa;
 import sistemapagoimpuestos.Entity.EmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.Item;
+import sistemapagoimpuestos.Entity.TipoImpuesto;
 import sistemapagoimpuestos.Entity.ItemEmpresaTipoImpuesto;
 import sistemapagoimpuestos.Entity.TipoEmpresa;
-import sistemapagoimpuestos.Entity.TipoUsuario;
-import sistemapagoimpuestos.Entity.Usuario;
 import sistemapagoimpuestos.Utils.FachadaPersistencia;
-import sistemapagoimpuestos.Utils.Utils;
-import sistemapagoimpuestos.Dto.DtoItemOrden;
 import sistemapagoimpuestos.Globals.GlobalVars;
 import static sistemapagoimpuestos.Utils.Utils.existeDato;
 
@@ -45,16 +40,16 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
     }
     
     
-    public List<DTOTipoImpuesto> obtenerTipoImpuesto(){
-            List <DTOTipoImpuesto> lista = new ArrayList<>();
+    public List<DTOTipoImpuestoTipoImpuesto> obtenerTipoImpuesto(){
+            List <DTOTipoImpuestoTipoImpuesto> lista = new ArrayList<>();
             List<DTOCriterio> criterioFecha = new ArrayList();
             criterioFecha.add(new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "IS", null));
             List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioFecha);
             
-            DTOTipoImpuesto dTOTipoImpuesto;
+            DTOTipoImpuestoTipoImpuesto dTOTipoImpuesto;
 
             for (int i = 0; i < tipoImpuestos.size(); i++) {
-                dTOTipoImpuesto = new DTOTipoImpuesto();
+                dTOTipoImpuesto = new DTOTipoImpuestoTipoImpuesto();
                 TipoImpuesto tipoImpuesto = (TipoImpuesto)tipoImpuestos.get(i);
                 String nombreTipoImpuesto = tipoImpuesto.getNombreTipoImpuesto();
                 dTOTipoImpuesto.setNombreDTOTipoImpuesto(nombreTipoImpuesto);
@@ -68,16 +63,16 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
     
     
     // Metodo iniciar
-    public List<DTOTipoImpuesto> iniciar(){
-        List <DTOTipoImpuesto> lista = new ArrayList<>();
+    public List<DTOTipoImpuestoTipoImpuesto> iniciar(){
+        List <DTOTipoImpuestoTipoImpuesto> lista = new ArrayList<>();
             List<DTOCriterio> criterioFecha = new ArrayList();
             criterioFecha.add(new DTOCriterio("fechaHoraInhabilitacionTipoImpuesto", "IS", null));
             List tipoImpuestos = FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterioFecha);
             
-            DTOTipoImpuesto dTOTipoImpuesto;
+            DTOTipoImpuestoTipoImpuesto dTOTipoImpuesto;
 
             for (int i = 0; i < tipoImpuestos.size(); i++) {
-                dTOTipoImpuesto = new DTOTipoImpuesto();
+                dTOTipoImpuesto = new DTOTipoImpuestoTipoImpuesto();
                 TipoImpuesto tipoImpuesto = (TipoImpuesto)tipoImpuestos.get(i);
                 String nombreTipoImpuesto = tipoImpuesto.getNombreTipoImpuesto();
                 dTOTipoImpuesto.setNombreDTOTipoImpuesto(nombreTipoImpuesto);
@@ -88,26 +83,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         return lista;
     }    
 
-    public List<DTOEmpresa> buscarEmpresas() {
-        
-        //Busqueda de Empresas habilitadas
-        List<DTOCriterio> criterioEmpresa = new ArrayList();
-        criterioEmpresa.add(new DTOCriterio("fechaHoraInhabilitacionEmpresa", "IS", null));
-        List empresas = FachadaPersistencia.getInstance().buscar("Empresa", criterioEmpresa);
-        
-        List <DTOEmpresa> lista = new ArrayList<>();
-        DTOEmpresa dtoEmpresa;
-        
-        for (int i = 0; i < empresas.size(); i++) {
-            dtoEmpresa = new DTOEmpresa();
-            Empresa empresa = (Empresa) empresas.get(i);
-            String nombreEmpresa = empresa.getNombreEmpresa();
-            dtoEmpresa.setNombreEmpresa(nombreEmpresa);
-            lista.add(dtoEmpresa);
-        }
-        return lista;
-    }
-    
+  
     public List ingresarDatosETI(String nombreTipoImpuesto, String nombreEmpresa){
         
         //Busca instancia de TipoImpuesto
@@ -253,7 +229,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
 
     
     // Recuperar Items
-    public ArrayList<DtoItemOrden> obtenerItems(String cuitEmpresa, int codigoTipoImpuesto, String nombreTE){
+    public ArrayList<DtoItemOrdenGestionarTipoImpuesto> obtenerItems(String cuitEmpresa, int codigoTipoImpuesto, String nombreTE){
         
         Empresa empresa = new Empresa();
         TipoImpuesto tipoImpuesto = new TipoImpuesto();
@@ -308,7 +284,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         criterioItemETI.add(new DTOCriterio("empresaTipoImpuesto", "=", empresaTipoImpuesto));
         criterioItemETI.add(new DTOCriterio("fechaInhabilitacionItemEmpresaTipoImpuesto", "IS", null));
         List<Object> listObject =  FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioItemETI);
-        ArrayList<DtoItemOrden> listDTOItem = new ArrayList<DtoItemOrden>();
+        ArrayList<DtoItemOrdenGestionarTipoImpuesto> listDTOItem = new ArrayList<DtoItemOrdenGestionarTipoImpuesto>();
  
 
         
@@ -316,7 +292,7 @@ public class ExpertoGestionarEmpresaTipoImpuesto {
         for(Object obj : listObject){
             ItemEmpresaTipoImpuesto itemETI = (ItemEmpresaTipoImpuesto) obj;
             Item item = itemETI.getItem();
-            DtoItemOrden dtoItem = new DtoItemOrden();
+            DtoItemOrdenGestionarTipoImpuesto dtoItem = new DtoItemOrdenGestionarTipoImpuesto();
             dtoItem.setNombreItem(item.getNombreItem());
             dtoItem.setOrden(itemETI.getOrdenItemEmpresaTipoImpuesto());
             listDTOItem.add(dtoItem);

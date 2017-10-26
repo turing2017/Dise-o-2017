@@ -349,10 +349,8 @@ public class ExpertoGestionarTipoImpuesto {
         ItemEmpresaTipoImpuesto itemEmpresaTipoImpuesto = (ItemEmpresaTipoImpuesto) FachadaPersistencia.getInstance().buscar("ItemEmpresaTipoImpuesto", criterioItemEmpresaTipoImpuesto).get(0);
         Date fecha = new Date();
         itemEmpresaTipoImpuesto.setFechaInhabilitacionItemEmpresaTipoImpuesto(fecha);
-        
         FachadaPersistencia.getInstance().guardar(itemEmpresaTipoImpuesto);
-  
-     
+        Excepciones.getInstance().eliminacionExitosa("Item");
      }
  
      public ArrayList<DTOEmpresa > consultarEmpresas (){

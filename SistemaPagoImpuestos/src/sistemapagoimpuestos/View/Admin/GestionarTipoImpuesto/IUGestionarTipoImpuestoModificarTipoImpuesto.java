@@ -211,7 +211,11 @@ public class IUGestionarTipoImpuestoModificarTipoImpuesto extends javax.swing.JF
 
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         this.dispose();
-        controlador.iniciar();
+        if(cuitEmpresa==null){
+            controlador.iniciar();
+        }else{
+            controlador.iniciar(cuitEmpresa);
+        }
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void checkbox_habilitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_habilitadoActionPerformed

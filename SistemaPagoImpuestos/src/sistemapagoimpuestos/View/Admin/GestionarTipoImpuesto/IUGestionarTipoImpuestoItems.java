@@ -187,6 +187,7 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         String nombreItem = tabla_items.getModel().getValueAt(rowSelected, columnCode).toString();
         int ordenItem = (int) tabla_items.getModel().getValueAt(rowSelected, 1);
         controlador.eliminarItem(nombreItem,  cuitEmpresa, codigoTipoImpuesto, nombreTipoEmpresa, ordenItem);
+        
         this.dispose();
     }//GEN-LAST:event_jButton_EliminarItemActionPerformed
 

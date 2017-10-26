@@ -114,10 +114,18 @@ public class Excepciones extends Exception{
     }
     public void modificacionExito(){
     ModificacionExito me = new ModificacionExito();
-    me.setLabel_Titulo("Modificacion Exitosa");
+    me.setLabel_Titulo("Modificación Exitosa");
     me.setLabel_mensaje("Los datos fueron modificados con éxito");
     me.setVisible(true);
     me.setAlwaysOnTop( true );
+    }
+    
+    public void eliminacionExitosa(String objeto){
+         ErrorDatoNoEncontrado edne = new ErrorDatoNoEncontrado();
+        edne.setLabel_title("Eliminacion Exitosa");            
+        edne.setLabel_mensaje("El "+objeto+" se ha eliminado correctamente");
+        edne.setVisible(true);
+        edne.setAlwaysOnTop( true );
     }
     
     public void camposVacios(){

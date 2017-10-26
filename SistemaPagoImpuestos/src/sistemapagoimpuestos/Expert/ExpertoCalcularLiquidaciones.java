@@ -195,7 +195,7 @@ public class ExpertoCalcularLiquidaciones {
             if (liquidaciones == null || liquidaciones.isEmpty()) {
                 
                 if (empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto() == null){
-                    dtosAccionesSistema.add(new DTOAccionesSistema(2, "ERROR: No se puede determinar la Fecha a liquidar.", "Verifique para EMPRESA: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + "\n" + "TIPO IMPUESTO: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + " que tenga asignada una fecha hora de alta en el sistema.\nAsigne esa fecha y vuelva a ejecutar el proceso.", new Date()));
+                    dtosAccionesSistema.add(new DTOAccionesSistema(2, "ERROR: No se puede determinar la Fecha a liquidar.", "Para EMPRESA: " + empresaTipoImpuesto.getEmpresa().getNombreEmpresa() + ", " + "TIPO IMPUESTO: " + empresaTipoImpuesto.getTipoImpuesto().getNombreTipoImpuesto() + "\nVerifique que tenga asignada una fecha hora de alta en el sistema. Asigne esa fecha y vuelva a ejecutar el proceso.", new Date()));
                     continue;
                 }
                 calfechaLiquidacion.setTime(empresaTipoImpuesto.getFechaHoraAltaEmpresaTipoImpuesto());

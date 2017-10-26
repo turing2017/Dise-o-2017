@@ -280,17 +280,21 @@ public class ExpertoCalcularLiquidaciones {
 
     private int Generar_numeroLiquidacionNueva() {
         int numeroLiquidacion = 0;
+
         try {
-            List<Object> liquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
-            for (Object l : liquidacion) {
-                Liquidacion liq = (Liquidacion) l;
-                if (liq.getNumeroLiquidacion() >= numeroLiquidacion) {
-                    numeroLiquidacion = liq.getNumeroLiquidacion() + 1;
-                }
+            if (FachadaPersistencia.getInstance().buscar("Liquidacion", null).isEmpty()) {
+
+                numeroLiquidacion = 1;
+
+            } else {
+                numeroLiquidacion = FachadaPersistencia.getInstance().buscar("Liquidacion", null).size() + 1;
             }
+
         } catch (Exception e) {
             return numeroLiquidacion;
         }
+
         return numeroLiquidacion;
+
     }
 }

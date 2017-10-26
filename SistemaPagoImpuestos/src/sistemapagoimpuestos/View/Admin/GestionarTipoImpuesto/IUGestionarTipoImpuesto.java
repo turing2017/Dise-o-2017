@@ -200,8 +200,9 @@ String cuitEmp= null;
                 // Obtento el código del elemento seleccionado
                 int columnCode = 0;
                 int rowSelected = tabla_tipo_impuesto.getSelectedRow();
-                String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
-                controlador.mostrarPantallaModificacionEmpresa(Integer.parseInt(codigo), cuitEmpresa);
+                String nombreTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 1).toString();
+                int codigo = Integer.parseInt(tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString()); 
+                controlador.mostrarPantallaModificacionEmpresa(codigo, cuitEmpresa, nombreTI);
                 this.dispose();
             } catch (ArrayIndexOutOfBoundsException e) {
                 //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
@@ -236,6 +237,15 @@ String cuitEmp= null;
     }//GEN-LAST:event_jButton_asociarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        if(cuitEmp == null){
+        controlador.principal();
+        }else{
+        controlador.volver();
+        }
+
+
+
+
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -336,7 +346,7 @@ String cuitEmp= null;
             vect.add(dtoEmpresaTipoImpuesto.getdTOtipoImpuesto().getNombreDTOTipoImpuesto());
             vect.add(dtoEmpresaTipoImpuesto.getdTOtipoImpuesto().isEsMontoEditableDTOTipoImpuesto());
 
-            if (dtoEmpresaTipoImpuesto.getdTOtipoImpuesto().getFechaHoraInhabilitacionDTOTipoImpuesto() != null) {
+            if (dtoEmpresaTipoImpuesto.getFechaHoraInhabilitacionEmpresaTipoImpuesto() != null) {
                 vect.add(false);
             } else {
                 vect.add(true);

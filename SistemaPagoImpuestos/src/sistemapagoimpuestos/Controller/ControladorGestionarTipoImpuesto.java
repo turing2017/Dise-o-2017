@@ -15,6 +15,7 @@ import sistemapagoimpuestos.Dto.DTOTipoEmpresa;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoGestionarTipoImpuesto;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.View.Admin.GestionarEmpresaAdherida.IUGestionarEmpresaAdherida;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoAlta;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoEmpresaTipoImpuesto;
@@ -23,6 +24,7 @@ import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpu
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarTipoImpuesto;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificacionItem;
 import sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto.IUGestionarTipoImpuestoModificarETI;
+import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
 
 public class ControladorGestionarTipoImpuesto {
 
@@ -79,10 +81,18 @@ public void guardarEmpresaTipoImpuesto(String cuit,String nombre,String nuevoTip
         
     }
     
+    public void volver(){
+        IUGestionarEmpresaAdherida pantallaGEA = new IUGestionarEmpresaAdherida();
+        pantallaGEA.setVisible(true); 
+    }
+    
     public ArrayList<DTOTipoImpuesto> buscarTipoImpuestos(){
         return experto.buscarTipoImpuestos();
     }
-    
+    public void principal(){
+    IUAdminPantallaPrincipal principal = new IUAdminPantallaPrincipal();
+    principal.setVisible(true);
+    }
     
     // Metodo para recuperar todos los TipoImpuesto de la DB Que devuelve????
     public ArrayList<DTOTipoImpuesto> obtenerTipoImpuestos(){  
@@ -182,10 +192,10 @@ public void guardarEmpresaTipoImpuesto(String cuit,String nombre,String nuevoTip
             }
         }
     }
-    public void mostrarPantallaModificacionEmpresa(Object object,String cuitEmpresa){
+    public void mostrarPantallaModificacionEmpresa(Object object,String cuitEmpresa,String nombreTI){
         DTOTipoImpuesto dtoTi = obtenerTipoImpuesto((int) object);
         if (dtoTi != null) {
-            IUGestionarTipoImpuestoModificarTipoImpuesto pantallaModificarEmpresa = new IUGestionarTipoImpuestoModificarTipoImpuesto(cuitEmpresa);
+            IUGestionarTipoImpuestoModificarTipoImpuesto pantallaModificarEmpresa = new IUGestionarTipoImpuestoModificarTipoImpuesto(nombreTI, cuitEmpresa);
             pantallaModificarEmpresa.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // Evito que se cierre al presionar x
             pantallaModificarEmpresa.setVisible(true); // La hago visible
             // Modifico la operación de cierre para volver a la pantalla principal

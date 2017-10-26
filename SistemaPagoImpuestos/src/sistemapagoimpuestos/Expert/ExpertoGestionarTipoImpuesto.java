@@ -189,7 +189,7 @@ public class ExpertoGestionarTipoImpuesto {
             }else{
                 empresaTipoImpuesto.setFechaHoraInhabilitacionEmpresaTipoImpuesto(new Date());
             }
-            
+         FachadaPersistencia.getInstance().guardar(empresaTipoImpuesto);      
         } catch (IndexOutOfBoundsException exception) {
             Excepciones.getInstance().objetoNoExistente("Empresa Tipo Impuesto");
         }
@@ -404,6 +404,7 @@ public class ExpertoGestionarTipoImpuesto {
             dtoEmpresaTipoImpuesto.setdTOtipoImpuesto(tI);
             DTOTipoEmpresa tE = new DTOTipoEmpresa();
             tE.setNombreTipoEmpresa(empresaTipoImpuesto.getTipoEmpresa().getNombreTipoEmpresa());
+            dtoEmpresaTipoImpuesto.setFechaHoraInhabilitacionEmpresaTipoImpuesto(empresaTipoImpuesto.getFechaHoraInhabilitacionEmpresaTipoImpuesto());
             dtoEmpresaTipoImpuesto.setdTOtipoEmpresa(tE);
             dtoEmpresaTipoImpuesto.setFrecuenciaLiquidacionEmpresaTipoImpuesto(empresaTipoImpuesto.getFrecuenciaLiquidacionEmpresaTipoImpuesto());
             listDtoEmpresaTipoImpuesto.add(dtoEmpresaTipoImpuesto);
@@ -542,8 +543,7 @@ public class ExpertoGestionarTipoImpuesto {
         for(Object obj : listObject){
             EmpresaTipoImpuesto empresaTipoImpuesto = (EmpresaTipoImpuesto) obj;
             TipoImpuesto tipoImpuesto = empresaTipoImpuesto.getTipoImpuesto();
-            DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto();
-            dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
+            DTOTipoImpuesto dtoTipoImpuesto = new DTOTipoImpuesto();dtoTipoImpuesto.setCodigoDTOTipoImpuesto(tipoImpuesto.getCodigoTipoImpuesto());
             dtoTipoImpuesto.setNombreDTOTipoImpuesto(tipoImpuesto.getNombreTipoImpuesto());
             dtoTipoImpuesto.setEsMontoEditableDTOTipoImpuesto(tipoImpuesto.isEsMontoEditableTipoImpuesto());
             dtoTipoImpuesto.setFechaHoraInhabilitacionDTOTipoImpuesto(tipoImpuesto.getFechaHoraInhabilitacionTipoImpuesto());
@@ -591,6 +591,8 @@ public class ExpertoGestionarTipoImpuesto {
         criterios.add(criterio1);
         TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
         
+        
+        if(!(nombreTipoImpuestoIngres.equals(nombreActualTipoImpuesto))){
         List<DTOCriterio> criteriosTipoImpuesto = new ArrayList<>();
         criteriosTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuestoIngres));
         if(!existeDato("TipoImpuesto", criteriosTipoImpuesto)){
@@ -607,5 +609,17 @@ public class ExpertoGestionarTipoImpuesto {
     }else{
             Excepciones.getInstance().objetoExistente("Nombre del Tipo de Impuesto");
         }
+    }else{
+        tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
+        if(habilitado){
+            tipoImpuesto.setFechaHoraInhabilitacionTipoImpuesto(null);
+        }else{
+            tipoImpuesto.setFechaHoraInhabilitacionTipoImpuesto(new Date());
+        }
+        FachadaPersistencia.getInstance().guardar(tipoImpuesto);
+        Excepciones.getInstance().modificacionExito();
+        
+        }
+
     }
 }

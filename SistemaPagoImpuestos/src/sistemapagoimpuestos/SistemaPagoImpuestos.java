@@ -13,24 +13,3 @@ public class SistemaPagoImpuestos {
     }
 
 }
-
-//
-//package sistemapagoimpuestos;
-//
-//import java.util.ArrayList;
-//import sistemapagoimpuestos.Controller.ControladorCalcularLiquidaciones;
-//import sistemapagoimpuestos.Dto.DTOAccionesSistema;
-//
-//
-//public class SistemaPagoImpuestos {
-//  
-//    public static void main(String[] args) {
-//        
-//        ControladorCalcularLiquidaciones controlador = new ControladorCalcularLiquidaciones();
-//        ArrayList<DTOAccionesSistema> dtosAccionesSistema = new ArrayList<>();
-//        controlador.iniciar(dtosAccionesSistema);
-//        for (int i = 0; i < dtosAccionesSistema.size(); i++) {
-//            dtosAccionesSistema.get(i).imprimirSTD();   
-//        }
-//    }
-//}

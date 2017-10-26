@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sistemapagoimpuestos.Expert;
 
 import exceptions.ExcepcionGenerica;
@@ -28,14 +24,11 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  * @author Gabriel
  */
 public class ExpertoCalcularLiquidaciones {
-
-    //variables globales
     String nombreEstadoRecalculada = "Recalculada";
     String nombreEstadoAnulado = "Anulada";
     String nombreEstadoPendiente = "Calculada";
     List<DTOCriterio> criterios = new ArrayList();
     Date fechaALiquidar;
-
     int cantidadLiquidacionesRecalculadas = 0;
     int cantidadLiquidacionesCalculadas = 0;
 

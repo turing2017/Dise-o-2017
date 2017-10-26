@@ -89,7 +89,14 @@ public class FachadaInterna
 
     public void iniciarTransaccion ()
     {
-        HibernateUtil.getSession().beginTransaction();
+        try {
+            HibernateUtil.getSession().beginTransaction();
+        } catch (TransactionException e) {
+            HibernateUtil.getSession().getTransaction().commit();
+            HibernateUtil.getSession().close();
+            HibernateUtil.getSessionFactory().close();
+            iniciarTransaccion();
+        }
     }
 
     public void finalizarTransaccion ()

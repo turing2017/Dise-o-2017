@@ -28,14 +28,6 @@ public class ExpertoGestionarTipoImpuesto {
     
     // Metodo iniciar
     public String iniciar(){
-        
-        
-        /*TipoUsuario tipoUsuario = usuario.getTipoUsuario();
-        String nombreTipoUsuario = tipoUsuario.getNombreTipoUsuario();
-        System.out.println("1");
-        if (nombreTipoUsuario != "Adminstrador") {
-            System.out.println("Debe ser Cliente para realizar esta acción");
-        }*/
         return "Administrador";        
     }
      public void validarUsuario() throws Exception {

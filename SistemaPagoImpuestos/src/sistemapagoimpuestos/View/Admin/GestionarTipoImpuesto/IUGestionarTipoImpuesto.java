@@ -200,8 +200,9 @@ String cuitEmp= null;
                 // Obtento el código del elemento seleccionado
                 int columnCode = 0;
                 int rowSelected = tabla_tipo_impuesto.getSelectedRow();
+                String nombreTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 1).toString();
                 String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
-                controlador.mostrarPantallaModificacionEmpresa(Integer.parseInt(codigo), cuitEmpresa);
+                controlador.mostrarPantallaModificacionEmpresa(codigo, cuitEmpresa, nombreTI);
                 this.dispose();
             } catch (ArrayIndexOutOfBoundsException e) {
                 //Excepciones.getInstance().camposRequerido(Arrays.asList("Codigo"));
@@ -236,6 +237,15 @@ String cuitEmp= null;
     }//GEN-LAST:event_jButton_asociarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        if(cuitEmp == null){
+        controlador.principal();
+        }else{
+        controlador.volver();
+        }
+
+
+
+
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

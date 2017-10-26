@@ -595,15 +595,17 @@ public class ExpertoGestionarTipoImpuesto {
         DTOCriterio criterio1 = new DTOCriterio();
         criterio1.setAtributo("nombreTipoImpuesto");
         criterio1.setOperacion("=");
-        criterio1.setValor(nombreActualTipoImpuesto);
+        criterio1.setValor(nombreTipoImpuestoIngres);
         criterios.add(criterio1);
         TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
         
+        
+        if(!(nombreTipoImpuestoIngres.equals(nombreActualTipoImpuesto))){
         List<DTOCriterio> criteriosTipoImpuesto = new ArrayList<>();
-        criteriosTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuestoIngres));
+        criteriosTipoImpuesto.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreActualTipoImpuesto));
         if(!existeDato("TipoImpuesto", criteriosTipoImpuesto)){
        
-        tipoImpuesto.setNombreTipoImpuesto(nombreTipoImpuestoIngres);
+        tipoImpuesto.setNombreTipoImpuesto(nombreActualTipoImpuesto);
         tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
         if(habilitado){
             tipoImpuesto.setFechaHoraInhabilitacionTipoImpuesto(null);
@@ -615,5 +617,18 @@ public class ExpertoGestionarTipoImpuesto {
     }else{
             Excepciones.getInstance().objetoExistente("Nombre del Tipo de Impuesto");
         }
+    }else{
+        tipoImpuesto.setNombreTipoImpuesto(nombreActualTipoImpuesto);
+        tipoImpuesto.setEsMontoEditableTipoImpuesto(esMontoEditableIngres);
+        if(habilitado){
+            tipoImpuesto.setFechaHoraInhabilitacionTipoImpuesto(null);
+        }else{
+            tipoImpuesto.setFechaHoraInhabilitacionTipoImpuesto(new Date());
+        }
+        FachadaPersistencia.getInstance().guardar(tipoImpuesto);
+        Excepciones.getInstance().modificacionExito();
+        
+        }
+
     }
 }

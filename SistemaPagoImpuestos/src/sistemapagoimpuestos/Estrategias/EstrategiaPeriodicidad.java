@@ -22,55 +22,57 @@ public class EstrategiaPeriodicidad implements EstrategiaCalculoComision {
 
         String tipoPeriodicidad = "";
         Double porcentajeComision = 0.0;
-        Double comisionCalculada;
+        Double comisionCalculada = 0.0;
         Double importeOperacionPagado;
 
-        List<DetalleOperacion> listDetallesOp = operacion.getDetalleOperacionList();
-        for (DetalleOperacion detalleOp : listDetallesOp) {
+        if (!FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", null).isEmpty()) {
 
-            if (detalleOp.getItemEmpresaTipoImpuesto().getItem().getNombreItem().equals("Periodicidad")) {
-                tipoPeriodicidad = detalleOp.getValorDetalleOperacion().toLowerCase();
+            List<DetalleOperacion> listDetallesOp = operacion.getDetalleOperacionList();
+            for (DetalleOperacion detalleOp : listDetallesOp) {
+
+                if (detalleOp.getItemEmpresaTipoImpuesto().getItem().getNombreItem().equals("Periodicidad")) {
+                    tipoPeriodicidad = detalleOp.getValorDetalleOperacion().toLowerCase();
+                }
             }
-        }
-        List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", null);
-        ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad;
-        parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad) parametros.get(0);
-        switch (tipoPeriodicidad) {
-            case "mensual":
-            case "30":
-                porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
-                break;
-            case "bimestral":
-            case "60":
-                porcentajeComision = parametrosCalculoPeriodicidad.getBimestralPCPeriodicidad();
-                break;
-            case "trimestral":
-            case "90":
-                porcentajeComision = parametrosCalculoPeriodicidad.getTrimestralPCPeriodicidad();
-                break;
-            case "cuatrimestral":
-            case "120":
-                porcentajeComision = parametrosCalculoPeriodicidad.getCuatrimestralPCPeriodicidad();
-                break;
-            case "semestral":
-            case "180":
-                porcentajeComision = parametrosCalculoPeriodicidad.getSemestralPCPeriodicidad();
-                break;
-            case "anual":
-            case "360":
-                porcentajeComision = parametrosCalculoPeriodicidad.getAnualPCPeriodicidad();
-                break;
-            case "quincenal":
-            case "15":
-                porcentajeComision = parametrosCalculoPeriodicidad.getQuincenalPCPeriodicidad();
-                break;
-            default:
-                porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
 
+            List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoPeriodicidad", null);
+            ParametroCalculoPeriodicidad parametrosCalculoPeriodicidad;
+            parametrosCalculoPeriodicidad = (ParametroCalculoPeriodicidad) parametros.get(0);
+            switch (tipoPeriodicidad) {
+                case "mensual":
+                    porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
+                    break;
+                case "bimestral":
+                    porcentajeComision = parametrosCalculoPeriodicidad.getBimestralPCPeriodicidad();
+                    break;
+                case "trimestral":
+                    porcentajeComision = parametrosCalculoPeriodicidad.getTrimestralPCPeriodicidad();
+                    break;
+                case "cuatrimestral":
+                    porcentajeComision = parametrosCalculoPeriodicidad.getCuatrimestralPCPeriodicidad();
+                    break;
+                case "semestral":
+                    porcentajeComision = parametrosCalculoPeriodicidad.getSemestralPCPeriodicidad();
+                    break;
+                case "anual":
+                    porcentajeComision = parametrosCalculoPeriodicidad.getAnualPCPeriodicidad();
+                    break;
+                case "quincenal":
+                    porcentajeComision = parametrosCalculoPeriodicidad.getQuincenalPCPeriodicidad();
+                    break;
+                default:
+                    porcentajeComision = parametrosCalculoPeriodicidad.getMensualPCPeriodicidad();
+
+            }
+            importeOperacionPagado = operacion.getImportePagadoOperacion();
+            comisionCalculada = importeOperacionPagado * porcentajeComision;
+
+        } else {
+            comisionCalculada = -1.0;
         }
-        importeOperacionPagado = operacion.getImportePagadoOperacion();
-        comisionCalculada = importeOperacionPagado * porcentajeComision;
+
         return comisionCalculada;
-
     }
+
+
 }

@@ -14,5 +14,5 @@ import sistemapagoimpuestos.Entity.Operacion;
 public interface EstrategiaCalculoComision {
     
     Double obtenerValorComision(Operacion operacion);
-
+      
 }

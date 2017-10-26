@@ -18,26 +18,33 @@ public class EstrategiaEditable implements EstrategiaCalculoComision {
 
     @Override
     public Double obtenerValorComision(Operacion operacion) {
-    
+
         Double porcentajeComision;
         Double comisionCalculada;
         Double importeOperacionPagado = operacion.getImportePagadoOperacion();
-        boolean isMontoEditable = operacion.getTipoImpuesto().isEsMontoEditableTipoImpuesto();
-       
-        //Traemos los parametros de calculo Editable
-        ParametroCalculoEditable parametrosCalculoEditable;
-        List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoEditable", null);
-        parametrosCalculoEditable = (ParametroCalculoEditable) parametros.get(0);
 
-        if (isMontoEditable) {
-            porcentajeComision = parametrosCalculoEditable.getSiEditablePCEditable();
+        if (!FachadaPersistencia.getInstance().buscar("ParametroCalculoEditable", null).isEmpty()) {
+            boolean isMontoEditable = operacion.getTipoImpuesto().isEsMontoEditableTipoImpuesto();
+
+            //Traemos los parametros de calculo Editable
+            ParametroCalculoEditable parametrosCalculoEditable;
+            List<Object> parametros = FachadaPersistencia.getInstance().buscar("ParametroCalculoEditable", null);
+            parametrosCalculoEditable = (ParametroCalculoEditable) parametros.get(0);
+
+            if (isMontoEditable) {
+                porcentajeComision = parametrosCalculoEditable.getSiEditablePCEditable();
+            } else {
+                porcentajeComision = parametrosCalculoEditable.getNoEditablePCEditable();
+            }
+
+            comisionCalculada = importeOperacionPagado * porcentajeComision;
+
         } else {
-            porcentajeComision = parametrosCalculoEditable.getNoEditablePCEditable();
+            comisionCalculada = -1.0;
         }
-        
-        comisionCalculada = importeOperacionPagado * porcentajeComision;
+
         return comisionCalculada;
 
     }
-    
+
 }

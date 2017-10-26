@@ -201,7 +201,7 @@ String cuitEmp= null;
                 int columnCode = 0;
                 int rowSelected = tabla_tipo_impuesto.getSelectedRow();
                 String nombreTI = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, 1).toString();
-                String codigo = tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString();
+                int codigo = Integer.parseInt(tabla_tipo_impuesto.getModel().getValueAt(rowSelected, columnCode).toString()); 
                 controlador.mostrarPantallaModificacionEmpresa(codigo, cuitEmpresa, nombreTI);
                 this.dispose();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -346,7 +346,7 @@ String cuitEmp= null;
             vect.add(dtoEmpresaTipoImpuesto.getdTOtipoImpuesto().getNombreDTOTipoImpuesto());
             vect.add(dtoEmpresaTipoImpuesto.getdTOtipoImpuesto().isEsMontoEditableDTOTipoImpuesto());
 
-            if (dtoEmpresaTipoImpuesto.getdTOtipoImpuesto().getFechaHoraInhabilitacionDTOTipoImpuesto() != null) {
+            if (dtoEmpresaTipoImpuesto.getFechaHoraInhabilitacionEmpresaTipoImpuesto() != null) {
                 vect.add(false);
             } else {
                 vect.add(true);

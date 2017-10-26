@@ -78,11 +78,9 @@ public class ExpertoConsultarOperacionesBancarias {
             DTOCriterio criterio5 = new DTOCriterio("fechaHoraOperacion", ">", fechaDesde);
             DTOCriterio criterio6 = new DTOCriterio("fechaHoraOperacion", "<", fechaHasta);
             DTOCriterio criterio42 = new DTOCriterio("empresa", "=", empresa);
-            DTOCriterio criterio14 = new DTOCriterio("liquidadaOperacion", "=", false);
             criterios.add(criterio5);
             criterios.add(criterio6);
             criterios.add(criterio42);
-            criterios.add(criterio14);
             //Busca liquidaciones de esa empresa en estado aprobado
             List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
             for (Object obj : listOperacion) {
@@ -115,13 +113,13 @@ public class ExpertoConsultarOperacionesBancarias {
             DTOCriterio criterio5 = new DTOCriterio("fechaHoraOperacion", ">", fechaDesde);
             DTOCriterio criterio6 = new DTOCriterio("fechaHoraOperacion", "<", fechaHasta);
             DTOCriterio criterio12 = new DTOCriterio("tipoImpuesto", "=", tipoImpuesto);
-            DTOCriterio criterio13 = new DTOCriterio("liquidadaOperacion", "=", false);
+          
             criterios.clear();
             criterios.add(criterio4);
             criterios.add(criterio5);
             criterios.add(criterio6);
             criterios.add(criterio12);
-            criterios.add(criterio13);
+
             List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
 
             //LLENO EL Operacion

@@ -28,8 +28,6 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoGestionarUsuario {
 
-    //Usuario usuario = new Usuario();
-
     public void validarUsuario() throws Exception {
         if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
             throw new ExcepcionGenerica("Error de privilegios");

@@ -216,4 +216,11 @@ public class Excepciones extends Exception{
         edne.setVisible(true);
         edne.setAlwaysOnTop( true );
     }
+    
+    public void usuarioExistente(){
+        ErrorDatoNoValido ednv = new ErrorDatoNoValido();
+        ednv.setLabel_title("Error: Usuario existente");
+        ednv.setLabel_mensaje("Existe un usuario con el nombre ingresado. Por favor ingresar un nombre distinto.");
+        MetodosPantalla.getInstance().setearPantalla(ednv);
+    }
 }

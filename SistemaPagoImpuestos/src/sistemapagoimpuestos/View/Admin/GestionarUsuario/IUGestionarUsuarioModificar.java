@@ -30,7 +30,7 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
         combo_TipoUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (combo_TipoUsuario.getSelectedItem().toString().equals("Responsable")) {
+                if (combo_TipoUsuario.getSelectedItem().toString().equals("Responsable Empresa Adherida")) {
                     label_Empresa.setVisible(true);
                     combo_Empresa.setVisible(true);
                 }
@@ -112,6 +112,8 @@ public class IUGestionarUsuarioModificar extends javax.swing.JFrame {
         jLabel6.setText("Tipo Usuario:");
 
         label_Empresa.setText("Empresa Asociada:");
+
+        combo_TipoUsuario.setEnabled(false);
 
         button_Aceptar.setText("Aceptar");
         button_Aceptar.addActionListener(new java.awt.event.ActionListener() {

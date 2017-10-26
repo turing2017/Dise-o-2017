@@ -28,8 +28,6 @@ import sistemapagoimpuestos.Utils.FachadaPersistencia;
  */
 public class ExpertoGestionarUsuario {
 
-    //Usuario usuario = new Usuario();
-
     public void validarUsuario() throws Exception {
         if (!GlobalVars.userActive.tipoUsuario.getNombreTipoUsuario().equals("Administrador")) {
             throw new ExcepcionGenerica("Error de privilegios");
@@ -76,27 +74,38 @@ public class ExpertoGestionarUsuario {
     }
 
     public void nuevoUsuario(String nombreIngres,String passwordIngres,String tipoUsuarioSelec, String empresaSelec) {
-        Usuario nuevoUsuario = new Usuario();
-        
         List<DTOCriterio> criterios = new ArrayList<>();
-        DTOCriterio criterio = new DTOCriterio("nombreTipoUsuario", "=", tipoUsuarioSelec);
-        criterios.add(criterio);
-        List resultado = FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios);
         
-        nuevoUsuario.setNombreUsuario(nombreIngres);
-        nuevoUsuario.setPasswordUsuario(passwordIngres);
-        nuevoUsuario.setTipoUsuario((TipoUsuario) resultado.get(0));
-        if (tipoUsuarioSelec.equals("Responsable")){
-            List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
-            criteriosEmpresa.add(new DTOCriterio("nombreEmpresa", "=", empresaSelec));
-            List resultadoEmpresa = FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa);
-            
-            nuevoUsuario.setEmpresa((Empresa) resultadoEmpresa.get(0));
-        } else {
-            nuevoUsuario.setEmpresa(null);
+        DTOCriterio criterioUsuario = new DTOCriterio("nombreUsuario", "=", nombreIngres);
+        criterios.add(criterioUsuario);
+        List usuario = FachadaPersistencia.getInstance().buscar("Usuario", criterios);
+        
+        if (usuario.equals(null)) {
+            criterios.clear();
+            Usuario nuevoUsuario = new Usuario();
+
+            DTOCriterio criterioTipoUsuario = new DTOCriterio("nombreTipoUsuario", "=", tipoUsuarioSelec);
+            criterios.add(criterioTipoUsuario);
+            List resultado = FachadaPersistencia.getInstance().buscar("TipoUsuario", criterios);
+
+            nuevoUsuario.setNombreUsuario(nombreIngres);
+            nuevoUsuario.setPasswordUsuario(passwordIngres);
+            nuevoUsuario.setTipoUsuario((TipoUsuario) resultado.get(0));
+            if (tipoUsuarioSelec.equals("Responsable")) {
+                List<DTOCriterio> criteriosEmpresa = new ArrayList<>();
+                criteriosEmpresa.add(new DTOCriterio("nombreEmpresa", "=", empresaSelec));
+                List resultadoEmpresa = FachadaPersistencia.getInstance().buscar("Empresa", criteriosEmpresa);
+
+                nuevoUsuario.setEmpresa((Empresa) resultadoEmpresa.get(0));
+            } else {
+                nuevoUsuario.setEmpresa(null);
+            }
+
+            FachadaPersistencia.getInstance().guardar(nuevoUsuario);
         }
-        
-        FachadaPersistencia.getInstance().guardar(nuevoUsuario);
+        else{
+            new Excepciones().usuarioExistente();
+        }
     }
 
     public List<DTOTipoUsuario> setearComboTipoUsuario() {

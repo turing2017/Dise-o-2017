@@ -315,19 +315,33 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
 
             if (textfield_monto_a_pagar.isEnabled()) {
                 int posicionPagoMinimo = 0;
+                int posicionMontoTotal = 0;
 
                 for (int i = 0; i < tabla_atrib_adic.getRowCount(); i++) {
                     if (tabla_atrib_adic.getValueAt(i, 0).equals("Monto Minimo")) {
                         posicionPagoMinimo = i;
                     }
                 }
-
+                for (int i = 0; i < tabla_comprobantes.getRowCount(); i++) {
+                    if (tabla_comprobantes.getValueAt(i, 0).equals("Monto Total")) {
+                        posicionMontoTotal = i;
+                    }
+                }
+                
                 if (Double.parseDouble(textfield_monto_a_pagar.getText()) < Double.parseDouble(tabla_atrib_adic.getModel().getValueAt(posicionPagoMinimo, 1).toString())) {
                     JOptionPane msg = new JOptionPane("No puede abonar el monto seleccionado", JOptionPane.PLAIN_MESSAGE);
                     JDialog dlg = msg.createDialog("Error");
                     dlg.setVisible(true);
                     return;
                 }
+                
+                if (Double.parseDouble(textfield_monto_a_pagar.getText()) > Double.parseDouble(tabla_comprobantes.getModel().getValueAt(posicionMontoTotal, 1).toString())) {
+                    JOptionPane msg = new JOptionPane("Ha ingresado un monto superior al total", JOptionPane.PLAIN_MESSAGE);
+                    JDialog dlg = msg.createDialog("Error");
+                    dlg.setVisible(true);
+                    return;
+                }
+                
             }
             int posicionSaldoCuenta = 2;
             if (Double.parseDouble(textfield_monto_a_pagar.getText()) > Double.parseDouble(tabla_cuentas.getModel().getValueAt(0, posicionSaldoCuenta).toString())) {

@@ -251,7 +251,6 @@ public class ExpertoGestionarTipoImpuesto {
         List<DTOCriterio> criteriosETI = new ArrayList<>();
         criteriosETI.add(new DTOCriterio("empresa", "=", empresa));
         criteriosETI.add(new DTOCriterio("tipoImpuesto", "=", nuevoTImpuesto));
-        criteriosETI.add(new DTOCriterio("tipoEmpresa", "=", nuevoTEmpresa));
         if(!existeDato("EmpresaTipoImpuesto", criteriosETI)){
             //Seteo lo que ha seleccionado en la pantalla, el nuevo TipoImpuesto, la nueva TipoEmpresa y la frecuenciaLiquidacion
             EmpresaTipoImpuesto empresaTI = new EmpresaTipoImpuesto();

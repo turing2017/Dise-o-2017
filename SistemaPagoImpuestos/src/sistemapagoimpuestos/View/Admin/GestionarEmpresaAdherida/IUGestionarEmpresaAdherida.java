@@ -294,9 +294,7 @@ public class IUGestionarEmpresaAdherida extends javax.swing.JFrame {
             }
         });
     }
-        public void iniciar() {
-          controlador.iniciar();
-    }
+  
         
         
         public void obtenerEmpresas(){

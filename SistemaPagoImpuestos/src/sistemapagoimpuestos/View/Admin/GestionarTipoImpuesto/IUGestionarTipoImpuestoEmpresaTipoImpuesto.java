@@ -31,8 +31,7 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
           
         
         SpinnerNumberModel sf = new SpinnerNumberModel();
-        sf.setMinimum(1);
-        sf.setValue(1);
+        sf.setMinimum(0);
         spinner_Frecuencia.setModel(sf);
         
         

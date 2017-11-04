@@ -277,7 +277,7 @@ public class IUMostrar extends javax.swing.JDialog {
       int indexExcel = 8;
         try {
            
-           File archivo = new File(System.getProperty("user.home") + "//export.txt");
+           File archivo = new File(System.getProperty("user.home") + "/Desktop/export.txt");
             FileWriter file = new FileWriter(archivo, true);
             //Escribimos en el archivo con el metodo write 
             file.write("Empresa = " + jLabelEmpresa.getText() + ";\r\n");
@@ -342,7 +342,7 @@ public class IUMostrar extends javax.swing.JDialog {
         }
         try {
             FileOutputStream out
-                    = new FileOutputStream(new File(System.getProperty("user.home") + "//export.xls"));
+                    = new FileOutputStream(new File(System.getProperty("user.home") + "/Desktop/export.xls"));
             workbook.write(out);
             out.close();
 

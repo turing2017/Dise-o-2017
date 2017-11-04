@@ -11,6 +11,7 @@ import sistemapagoimpuestos.Dto.DTOUsuario;
 import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
 import sistemapagoimpuestos.View.Admin.Principal.IUAdminPantallaPrincipal;
+import sistemapagoimpuestos.View.Login.IULogin;
 
 /**
  *
@@ -137,7 +138,9 @@ public class IUPantallaEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        System.exit(0);
+        this.dispose();
+        IULogin iULogin = new IULogin();
+        iULogin.setVisible(true);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**

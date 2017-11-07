@@ -36,13 +36,13 @@
                       </Group>
                       <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="comboBoxTipoEmpresa" alignment="0" max="32767" attributes="0"/>
                               <Component id="comboBoxTipoImpuesto" alignment="0" max="32767" attributes="0"/>
                               <Component id="TextField_Nombre" alignment="0" max="32767" attributes="0"/>
                               <Component id="TextField_Cuit" alignment="0" min="-2" pref="266" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="spinner_Frecuencia" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="spinner_Frecuencia" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

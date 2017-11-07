@@ -46,7 +46,7 @@
                               <Component id="comboBox_tipoEmpresa" pref="111" max="32767" attributes="0"/>
                               <Component id="jComboBoxTipoImpuesto" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jSpinnerfrecuencia" min="-2" max="-2" attributes="0"/>
+                          <Component id="jSpinnerfrecuencia" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

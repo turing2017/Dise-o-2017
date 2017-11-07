@@ -5,6 +5,7 @@
  */
 package sistemapagoimpuestos.View.Admin.GestionarTipoImpuesto;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -28,7 +29,8 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
         DTOEmpresa dtoEmpresa = controlador.buscarEmpresa(cuitEmpresa);
         TextField_Cuit.setText(cuitEmpresa);
         TextField_Nombre.setText(dtoEmpresa.getNombreEmpresa());
-          
+       
+         
         
         SpinnerNumberModel sf = new SpinnerNumberModel();
         sf.setMinimum(0);
@@ -98,11 +100,14 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
 
         jLabel6.setText("Tipo de Empresa");
 
+        comboBoxTipoImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Tipo de Impuesto" }));
         comboBoxTipoImpuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxTipoImpuestoActionPerformed(evt);
             }
         });
+
+        comboBoxTipoEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Tipo de Empresa" }));
 
         label_frec.setText("Frecuencia Liquidacion en días");
 
@@ -129,7 +134,7 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
                                 .addComponent(TextField_Cuit, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(spinner_Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(204, 204, 204)
                         .addComponent(Button_Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -172,15 +177,22 @@ public class IUGestionarTipoImpuestoEmpresaTipoImpuesto extends javax.swing.JFra
     }// </editor-fold>//GEN-END:initComponents
 //Con esto llena el combo del TipoEmpresa
   public void llenarComboTipoEmpresa(List<DTOTipoEmpresa> list){
-        for (int i = 0; i < list.size(); i++) {
+      comboBoxTipoEmpresa.setSelectedItem("Seleccione Tipo de Empresa");
+      for (int i = 0; i < list.size(); i++) { 
+           
             DTOTipoEmpresa dTOTipoEmpresa = (DTOTipoEmpresa) list.get(i);
             comboBoxTipoEmpresa.addItem(dTOTipoEmpresa.getNombreTipoEmpresa());
+       
+           
         }
-    }
+   
+  }
   
   //Con esto llena el combo TipoImpuesto
     public void llenarComboTipoImpuesto(List<DTOTipoImpuesto> list){
+        comboBoxTipoImpuesto.setSelectedItem("Seleccione Tipo de Impuesto");
         for (int i = 0; i < list.size(); i++) {
+       
             DTOTipoImpuesto dTOTipoImpuesto = (DTOTipoImpuesto) list.get(i);
             comboBoxTipoImpuesto.addItem(dTOTipoImpuesto.getNombreDTOTipoImpuesto());
         }

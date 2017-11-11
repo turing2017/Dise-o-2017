@@ -56,7 +56,6 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
         lbl_nombreEmpresa = new javax.swing.JLabel();
         lbl_numOperacion = new javax.swing.JLabel();
         button_aceptar = new javax.swing.JButton();
-        button_imprimir = new javax.swing.JButton();
         nombreImpuesto = new javax.swing.JLabel();
         nombreEmpresa = new javax.swing.JLabel();
         numeroOperacion = new javax.swing.JLabel();
@@ -77,13 +76,6 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
         button_aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_aceptarActionPerformed(evt);
-            }
-        });
-
-        button_imprimir.setText("Imprimir");
-        button_imprimir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_imprimirActionPerformed(evt);
             }
         });
 
@@ -116,14 +108,11 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
                                     .addComponent(numeroOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(nombreImpuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(nombreEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                        .addComponent(nombreEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(button_aceptar)))
                 .addContainerGap(77, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(button_imprimir)
-                .addGap(18, 18, 18)
-                .addComponent(button_aceptar)
-                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,19 +129,13 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nombreEmpresa, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_nombreEmpresa))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_numOperacion)
-                            .addComponent(numeroOperacion))
-                        .addGap(29, 80, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(button_imprimir)
-                            .addComponent(button_aceptar))
-                        .addGap(15, 15, 15))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_numOperacion)
+                    .addComponent(numeroOperacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(button_aceptar)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -165,12 +148,6 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
         ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
         cpi.validadarUsuario();
     }//GEN-LAST:event_button_aceptarActionPerformed
-
-    private void button_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_imprimirActionPerformed
-        // TODO add your handling code here:
-        ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
-        cpi.imprimirComprobante(dtoOperacion);
-    }//GEN-LAST:event_button_imprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,7 +186,6 @@ public class IUPagarImpuestoOperacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_aceptar;
-    private javax.swing.JButton button_imprimir;
     private javax.swing.JLabel lbl_nombreEmpresa;
     private javax.swing.JLabel lbl_nombreImpuesto;
     private javax.swing.JLabel lbl_numOperacion;

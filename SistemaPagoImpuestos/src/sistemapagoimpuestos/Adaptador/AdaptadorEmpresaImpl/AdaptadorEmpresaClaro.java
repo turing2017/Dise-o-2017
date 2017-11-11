@@ -53,6 +53,7 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
             comprobante.setFechaHoraVencimientoComprobante(claro.getVencimiento().toGregorianCalendar().getTime());
             comprobante.setMontoTotalComprobante(claro.getMontoTotal());
             comprobante.setNumeroFactura(claro.getNroFactura());
+            comprobante.setMontoMinimoComprobante(claro.getMontoMinimo());
             comprobante.setAtributosAdicionalesComprobante(buscarItems(empresaTipoImpuesto, claro));
             dTOComprobanteList.add(comprobante);
         }
@@ -80,9 +81,6 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
                 case "Numero de Telefono":
                     dTOItemComprobante.setValue(claro.getNroTelefono().toString());
                     break;
-                case "Monto Minimo":
-                    dTOItemComprobante.setValue(claro.getMontoMinimo().toString());
-                    break;
                 case "Periodicidad":
                     dTOItemComprobante.setValue(claro.getPeriodo());
                     break;
@@ -99,12 +97,13 @@ public class AdaptadorEmpresaClaro implements AdaptadorEmpresa {
                 claroComprobante.getCodigo(),
                 claroComprobante.getVencimiento().toGregorianCalendar().getTime(),
                 claroComprobante.getMontoTotal(),
+                claroComprobante.getMontoMinimo(),
                 buscarItems(empresaTipoImpuesto, claroComprobante));
     }
 
     @Override
     public void confirmarPago(Operacion operacion) throws Exception {
-        if (!claroWs.acreditarPagoClaro(Integer.toString(operacion.getNroComprobanteFacturaOperacion()), operacion.getCodigoPagoElectrionicoOperacion(), operacion.getImportePagadoOperacion()).equals("Pago Aprobado")) {
+        if (!claroWs.acreditarPagoClaro(Integer.toString(operacion.getNroComprobanteFacturaOperacion()), Integer.toString(operacion.getNumeroOperacion()), operacion.getImportePagadoOperacion()).equals("Pago Aprobado")) {
             throw new ExcepcionGenerica("No se pudo confirmar el pago.");
         }
     }

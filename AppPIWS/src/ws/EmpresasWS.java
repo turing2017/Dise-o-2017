@@ -48,5 +48,6 @@ public interface EmpresasWS {
 
     @WebMethod
     public String acreditarPagoClaro(String codigo, String codigoCP, double monto);
-    
+    @WebMethod
+    public boolean acreditarMonto(String cbu, double monto);
 }

@@ -120,6 +120,20 @@ public class EmpresasWSImpl implements EmpresasWS {
     }
 
     @Override
+    public boolean acreditarMonto(String cbu, double monto) {
+         try {
+            CuentaClienteModel ccm = new CuentaClienteModel();
+            CuentaCliente cc = ccm.find(cbu);
+            cc.setMonto(cc.getMonto() + monto);
+            ccm.update(cc);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+
+    @Override
     public boolean acreditarPagoDgr(String nroFactura, String codigoCP, double monto) {
         try {
             DgrModel dm = new DgrModel();

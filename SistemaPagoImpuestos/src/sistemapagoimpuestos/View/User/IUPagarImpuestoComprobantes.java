@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -72,7 +74,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 if (tabla_comprobantes.getSelectedRow() > -1) {
-                    int posicionMontoTotal = 2;
+                    int posicionMontoTotal = 3;
                     textfield_monto_a_pagar.setText(tabla_comprobantes.getModel().getValueAt(tabla_comprobantes.getSelectedRow(), posicionMontoTotal).toString());
                     int columnNroFac = 0;
                     String nroFactura = tabla_comprobantes.getModel().getValueAt(tabla_comprobantes.getSelectedRow(), columnNroFac).toString();
@@ -312,37 +314,6 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             String nroFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnNroFac).toString();
             String CodigoFactura = tabla_comprobantes.getModel().getValueAt(rowSelected, columnCode).toString();
             // Agregar validacion si es editable.....
-
-            if (textfield_monto_a_pagar.isEnabled()) {
-                int posicionPagoMinimo = 0;
-                int posicionMontoTotal = 0;
-
-                for (int i = 0; i < tabla_atrib_adic.getRowCount(); i++) {
-                    if (tabla_atrib_adic.getValueAt(i, 0).equals("Monto Minimo")) {
-                        posicionPagoMinimo = i;
-                    }
-                }
-                for (int i = 0; i < tabla_comprobantes.getRowCount(); i++) {
-                    if (tabla_comprobantes.getValueAt(i, 0).equals("Monto Total")) {
-                        posicionMontoTotal = i;
-                    }
-                }
-                
-                if (Double.parseDouble(textfield_monto_a_pagar.getText()) < Double.parseDouble(tabla_atrib_adic.getModel().getValueAt(posicionPagoMinimo, 1).toString())) {
-                    JOptionPane msg = new JOptionPane("No puede abonar el monto seleccionado", JOptionPane.PLAIN_MESSAGE);
-                    JDialog dlg = msg.createDialog("Error");
-                    dlg.setVisible(true);
-                    return;
-                }
-                
-                if (Double.parseDouble(textfield_monto_a_pagar.getText()) > Double.parseDouble(tabla_comprobantes.getModel().getValueAt(posicionMontoTotal, 1).toString())) {
-                    JOptionPane msg = new JOptionPane("Ha ingresado un monto superior al total", JOptionPane.PLAIN_MESSAGE);
-                    JDialog dlg = msg.createDialog("Error");
-                    dlg.setVisible(true);
-                    return;
-                }
-                
-            }
             int posicionSaldoCuenta = 2;
             if (Double.parseDouble(textfield_monto_a_pagar.getText()) > Double.parseDouble(tabla_cuentas.getModel().getValueAt(0, posicionSaldoCuenta).toString())) {
                 JOptionPane msg = new JOptionPane("No puede abonar el monto seleccionado, saldo insuficiente", JOptionPane.PLAIN_MESSAGE);
@@ -357,12 +328,18 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                 return;
             }
             DTOOperacionActual dtoOperacion = pagarImpuesto(lbl_out_cbu.getText(),
-                Double.parseDouble(textfield_monto_a_pagar.getText()),
-                nroFactura,
-                CodigoFactura);
+                    Double.parseDouble(textfield_monto_a_pagar.getText()),
+                    nroFactura,
+                    CodigoFactura);
             if (dtoOperacion != null) {
 
                 this.dispose();
+                IUPagarImpuestoOperacionImprimir iuOperacionImprimir= new IUPagarImpuestoOperacionImprimir();
+                iuOperacionImprimir.setVisible(true);
+                ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
+                cpi.imprimirComprobante(dtoOperacion);
+                Thread.sleep(3000);
+                iuOperacionImprimir.dispose();
                 IUPagarImpuestoOperacion iuOperacion = new IUPagarImpuestoOperacion(dtoOperacion);
                 iuOperacion.setVisible(true);
             }
@@ -376,6 +353,9 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             JDialog dlg = msg.createDialog("Error");
             dlg.setVisible(true);
             return;
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(IUPagarImpuestoComprobantes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button_pagarActionPerformed
 
@@ -428,8 +408,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         ArrayList<String> columnList = new ArrayList<>();
         columnList.add("Numero Factura");
         columnList.add("Codigo Comprobante");
-        columnList.add("Monto Total");
         columnList.add("Vencimiento");
+        columnList.add("Monto Total");
+        if (listaComprobantesPantalla.get(0).getMontoEditable()) {
+            columnList.add("Monto Minimo");
+        }
         Object[] columnas = columnList.toArray();
 
         // Creo el modelo
@@ -449,11 +432,9 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                     case 1:
                         return String.class;
                     case 2:
-                        return double.class;
-                    case 3:
                         return String.class;
                     default:
-                        return String.class;
+                        return double.class;
                 }
             }
 
@@ -464,8 +445,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             Vector<Object> vect = new Vector<>();
             vect.add(dtoComprobante.getNumeroFactura());
             vect.add(dtoComprobante.getCodigoComprobante());
-            vect.add(dtoComprobante.getMontoTotalComprobante());
             vect.add(format.format(dtoComprobante.getFechaHoraVencimientoComprobante()));
+            vect.add(dtoComprobante.getMontoTotalComprobante());
+            if (listaComprobantesPantalla.get(0).getMontoEditable()) {
+                vect.add(dtoComprobante.getMontoMinimoComprobante());
+            }
             dtm.addRow(vect);
 
         }
@@ -473,7 +457,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(
-                    table, value, isSelected, hasFocus, row, column);
+                        table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 return this;
             }
@@ -483,15 +467,9 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         tabla_comprobantes.getColumnModel().getColumn(1).setCellRenderer(r);
     }
 
-    // Método para cargar los atributos adicionales en la tabla
     public void cargarAtribAdic(List<DTOComprobantePantalla> listaComprobantesPantalla) {
-
         String[] columnas = {"Nombre Atributo", "Valor"};
-
-        // Creo el modelo
         DefaultTableModel dtm = new DefaultTableModel(null, columnas) {
-
-            // Sobreescribo el método para no permitir editar la 
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
@@ -523,7 +501,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(
-                    table, value, isSelected, hasFocus, row, column);
+                        table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 return this;
             }
@@ -575,7 +553,7 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(
-                    table, value, isSelected, hasFocus, row, column);
+                        table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 return this;
             }

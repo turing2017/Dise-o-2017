@@ -49,6 +49,7 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
             comprobante.setFechaHoraVencimientoComprobante(dgr.getPrimerVencimiento().toGregorianCalendar().getTime());
             comprobante.setMontoTotalComprobante(dgr.getMontoPagar());
             comprobante.setNumeroFactura(dgr.getNroFactura());
+            comprobante.setMontoMinimoComprobante(dgr.getMontoPagar());
             comprobante.setAtributosAdicionalesComprobante(buscarItems(empresaTipoImpuesto, dgr));
             dTOComprobanteList.add(comprobante);
         }
@@ -62,6 +63,7 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
                 Integer.toString(dgrComprobante.getCodigoImpuesto()),
                 dgrComprobante.getPrimerVencimiento().toGregorianCalendar().getTime(),
                 dgrComprobante.getMontoPagar(),
+                dgrComprobante.getMontoPagar(),
                 buscarItems(empresaTipoImpuesto, dgrComprobante));
     }
 
@@ -69,7 +71,7 @@ public class AdaptadorEmpresaDgr implements AdaptadorEmpresa{
     
     @Override
     public void confirmarPago(Operacion operacion) throws Exception{
-        if (!dgrWs.acreditarPagoDgr(Integer.toString(operacion.getNroComprobanteFacturaOperacion()), operacion.getCodigoPagoElectrionicoOperacion(), operacion.getImportePagadoOperacion())) {
+        if (!dgrWs.acreditarPagoDgr(Integer.toString(operacion.getNroComprobanteFacturaOperacion()), Integer.toString(operacion.getNumeroOperacion()), operacion.getImportePagadoOperacion())) {
             throw new ExcepcionGenerica("No se pudo confirmar el pago.");
         }
     }

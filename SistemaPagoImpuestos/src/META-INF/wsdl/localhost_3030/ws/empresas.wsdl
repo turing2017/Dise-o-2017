@@ -2,6 +2,15 @@
 <import namespace="http://ws/" location="http://localhost:3030/ws/empresas?wsdl=1"></import>
 <binding xmlns:ns1="http://ws/" name="EmpresasWSImplPortBinding" type="ns1:EmpresasWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
+<operation name="acreditarPagoClaro">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
 <operation name="buscarComprobantesCodigoDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -12,15 +21,6 @@
 </output>
 </operation>
 <operation name="buscarComprobantesCodigoClaro">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-</operation>
-<operation name="acreditarPagoClaro">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -47,7 +47,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="acreditarPagoDgr">
+<operation name="findAllDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -65,6 +65,15 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
+<operation name="acreditarMonto">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
 <operation name="findAllClaro">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -74,7 +83,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="findForCodeDgr">
+<operation name="acreditarPagoDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -83,7 +92,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="findAllDgr">
+<operation name="findForCodeDgr">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

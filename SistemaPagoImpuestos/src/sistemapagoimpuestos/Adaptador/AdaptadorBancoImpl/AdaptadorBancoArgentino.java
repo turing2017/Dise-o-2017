@@ -28,4 +28,12 @@ public class AdaptadorBancoArgentino implements AdaptadorBanco{
             throw new ExcepcionGenerica("No se pudo debitar el pago.");
         }
     }
+
+    @Override
+    public void acreditarSaldo(String cbuCuenta, double montoADebitar) throws Exception {
+        if(!empresasWs.acreditarMonto(cbuCuenta, montoADebitar)){
+            throw new ExcepcionGenerica("No se pudo acreditar el saldo.");
+        }
+    }
+    
 }

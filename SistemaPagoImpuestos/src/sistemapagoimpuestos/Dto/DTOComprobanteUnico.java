@@ -18,19 +18,20 @@ public class DTOComprobanteUnico {
     private String codigoComprobante;
     private Date fechaHoraVencimientoComprobante;
     private double montoTotalComprobante;
+    private double montoMinimoComprobante;
     private List<DTOItemComprobante> atributosAdicionalesDTOComprobante;
 
     public DTOComprobanteUnico() {
     }
 
-    public DTOComprobanteUnico(int numeroFactura, String codigoComprobante, Date fechaHoraVencimientoComprobante, double montoTotalComprobante, List<DTOItemComprobante> atributosAdicionalesDTOComprobante) {
+    public DTOComprobanteUnico(int numeroFactura, String codigoComprobante, Date fechaHoraVencimientoComprobante, double montoTotalComprobante, double montoMinimoComprobante, List<DTOItemComprobante> atributosAdicionalesDTOComprobante) {
         this.numeroFactura = numeroFactura;
         this.codigoComprobante = codigoComprobante;
         this.fechaHoraVencimientoComprobante = fechaHoraVencimientoComprobante;
         this.montoTotalComprobante = montoTotalComprobante;
+        this.montoMinimoComprobante = montoMinimoComprobante;
         this.atributosAdicionalesDTOComprobante = atributosAdicionalesDTOComprobante;
     }
-
 
     public int getNumeroFactura() {
         return numeroFactura;
@@ -72,6 +73,12 @@ public class DTOComprobanteUnico {
         this.atributosAdicionalesDTOComprobante = atributosAdicionalesDTOComprobante;
     }
 
+    public double getMontoMinimoComprobante() {
+        return montoMinimoComprobante;
+    }
 
+    public void setMontoMinimoComprobante(double montoMinimoComprobante) {
+        this.montoMinimoComprobante = montoMinimoComprobante;
+    }
 
 }

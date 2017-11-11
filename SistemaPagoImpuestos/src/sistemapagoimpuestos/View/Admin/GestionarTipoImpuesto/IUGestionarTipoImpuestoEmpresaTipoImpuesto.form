@@ -36,17 +36,17 @@
                       </Group>
                       <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="comboBoxTipoEmpresa" alignment="0" max="32767" attributes="0"/>
                               <Component id="comboBoxTipoImpuesto" alignment="0" max="32767" attributes="0"/>
                               <Component id="TextField_Nombre" alignment="0" max="32767" attributes="0"/>
                               <Component id="TextField_Cuit" alignment="0" min="-2" pref="266" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="spinner_Frecuencia" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="spinner_Frecuencia" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
                       <Component id="Button_Cancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -152,7 +152,9 @@
     <Component class="javax.swing.JComboBox" name="comboBoxTipoImpuesto">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="1">
+            <StringItem index="0" value="Seleccione Tipo de Impuesto"/>
+          </StringArray>
         </Property>
       </Properties>
       <Events>
@@ -165,7 +167,9 @@
     <Component class="javax.swing.JComboBox" name="comboBoxTipoEmpresa">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="1">
+            <StringItem index="0" value="Seleccione Tipo de Empresa"/>
+          </StringArray>
         </Property>
       </Properties>
       <AuxValues>

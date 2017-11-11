@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -332,14 +330,9 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
                     nroFactura,
                     CodigoFactura);
             if (dtoOperacion != null) {
-
                 this.dispose();
-                IUPagarImpuestoOperacionImprimir iuOperacionImprimir= new IUPagarImpuestoOperacionImprimir();
-                iuOperacionImprimir.setVisible(true);
                 ControladorPagarImpuestos cpi = new ControladorPagarImpuestos();
                 cpi.imprimirComprobante(dtoOperacion);
-                Thread.sleep(3000);
-                iuOperacionImprimir.dispose();
                 IUPagarImpuestoOperacion iuOperacion = new IUPagarImpuestoOperacion(dtoOperacion);
                 iuOperacion.setVisible(true);
             }
@@ -347,16 +340,11 @@ public class IUPagarImpuestoComprobantes extends javax.swing.JFrame {
             JOptionPane msg = new JOptionPane("Debe seleccionar un comprobante", JOptionPane.PLAIN_MESSAGE);
             JDialog dlg = msg.createDialog("Error");
             dlg.setVisible(true);
-            return;
         } catch (java.lang.NumberFormatException e) {
             JOptionPane msg = new JOptionPane("Debe ingresar importe válido", JOptionPane.PLAIN_MESSAGE);
             JDialog dlg = msg.createDialog("Error");
             dlg.setVisible(true);
-            return;
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(IUPagarImpuestoComprobantes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }//GEN-LAST:event_button_pagarActionPerformed
 
     private void textfield_monto_a_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_monto_a_pagarActionPerformed

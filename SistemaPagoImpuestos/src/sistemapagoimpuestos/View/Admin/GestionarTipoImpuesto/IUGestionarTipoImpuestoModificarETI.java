@@ -216,7 +216,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(comboBox_tipoEmpresa, 0, 111, Short.MAX_VALUE)
                                 .addComponent(jComboBoxTipoImpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jSpinnerfrecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSpinnerfrecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
@@ -257,7 +257,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         int frec = (int) jSpinnerfrecuencia.getValue();
         boolean habilitada = jCheckBoxEstado.isSelected();
         controlador.ModificarETI(nombreTE, nombreTI, cuit, nuevoTE, nuevoTI, frec, habilitada);
-        Excepciones.getInstance().creacionExitosa("vinculo");
+        Excepciones.getInstance().modificacionExito();
         controlador.iniciar(cuit);
         this.dispose();
     }//GEN-LAST:event_ModificarActionPerformed

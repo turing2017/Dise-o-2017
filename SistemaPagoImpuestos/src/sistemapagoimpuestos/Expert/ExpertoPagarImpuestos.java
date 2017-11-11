@@ -140,7 +140,7 @@ public class ExpertoPagarImpuestos {
                             .consultarSaldo(cuentaTemp.getCbuCuentaBancaria()));
             listaDTOCuentaBancaria.add(dtoCuentaBancaria);
         }
-        if (listaDTOCuentaBancaria.size() == 0) {
+        if (listaDTOCuentaBancaria.isEmpty()) {
             throw new ExcepcionGenerica("No se encontraron Cuentas");
         }
         return listaDTOCuentaBancaria;
@@ -159,7 +159,8 @@ public class ExpertoPagarImpuestos {
             criteriosList.add(new DTOCriterio("cbuCuentaBancaria", "=", cbuCuentaSeleccionada));
             CuentaBancaria cuentaBancaria = (CuentaBancaria) FachadaPersistencia.getInstance().buscar("CuentaBancaria", criteriosList).get(0);
             Operacion operacion = new Operacion();
-            operacion.setNumeroOperacion((int) new Date().getTime()); // es aleatorio
+            int nroOperacion =(int) new Date().getTime();
+            operacion.setNumeroOperacion((nroOperacion<0)?nroOperacion*-1:nroOperacion); // es aleatorio
             operacion.setCodigoPagoElectrionicoOperacion(dtoComprobanteUnico.getCodigoComprobante());
             operacion.setFechaHoraOperacion(new Date());
             operacion.setImportePagadoOperacion(montoAbonado);

@@ -33,7 +33,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jSpinnerOrden" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="jSpinnerOrden" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="button_agregar" min="-2" pref="94" max="-2" attributes="0"/>
                   </Group>

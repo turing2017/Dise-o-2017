@@ -13,5 +13,5 @@
     <property name="nombreEstadoCalculoComision" not-null="true" type="string" unique="true">
       <column name="nombreEstadoCalculoComision"/>
     </property>
-
+</class>
 </hibernate-mapping>

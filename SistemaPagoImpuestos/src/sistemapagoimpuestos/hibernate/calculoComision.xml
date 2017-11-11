@@ -5,7 +5,7 @@
   <class name="sistemapagoimpuestos.Entity.CalculoComision" table="calculoComision">
       <id name="OID" type="string">
           <column name="OIDCalculoComision"/>
-          <generator class="iiud2"/>
+          <generator class="uuid2"/>
       </id>
       
       <property name="fechaCalculoComision" type="timestamp" unique="true" not-null="true">

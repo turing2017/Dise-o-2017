@@ -5,10 +5,11 @@
 
 <hibernate-mapping>
  <class name="sistemapagoimpuestos.Entity.CalculoComisionEstado" table="calculoComisionEstado">
-    <id name="OID" type="string">
+    <id name="OID" type="string"  >
       <column name="OIDCalculoComisionEstado"/>
       <generator class="uuid2"/>
     </id>
+    
 <property name="fechaHoraDesdeCalculoComisionEstado" type="timestamp">
       <column name="fechaHoraDesdeCalculoComisionEstado"/>
     </property>
@@ -18,5 +19,5 @@
     </property>
 
  <many-to-one name="estadoCalculoComision" class="sistemapagoimpuestos.Entity.EstadoCalculoComision" column="OIDEstacoCalculoComision"/>
- 
+ </class>
 </hibernate-mapping>

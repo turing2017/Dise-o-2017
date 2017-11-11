@@ -11,4 +11,17 @@ package sistemapagoimpuestos.Entity;
  */
 public class EstadoCalculoComision {
     String nombreEstadoCalculoComision;
+
+    public EstadoCalculoComision(String nombreEstadoCalculoComision) {
+        this.nombreEstadoCalculoComision = nombreEstadoCalculoComision;
+    }
+
+    public String getNombreEstadoCalculoComision() {
+        return nombreEstadoCalculoComision;
+    }
+
+    public void setNombreEstadoCalculoComision(String nombreEstadoCalculoComision) {
+        this.nombreEstadoCalculoComision = nombreEstadoCalculoComision;
+    }
+    
 }

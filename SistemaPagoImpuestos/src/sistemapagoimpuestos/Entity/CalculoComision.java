@@ -15,15 +15,19 @@ import java.util.List;
 public class CalculoComision {
     Date fechaCalculoComision;
     double valorTotalCalculoComision;
-    List<CalculoComisionEstado> listCalculoCOmisionEstado;
+    List<CalculoComisionEstado> listCalculoComisionEstado;
     List<Comision> listComision;
 
-    public CalculoComision(Date fechaCalculoComision, double valorTotalCalculoComision, List<CalculoComisionEstado> listCalculoCOmisionEstado, List<Comision> listComision) {
+    public CalculoComision(Date fechaCalculoComision, double valorTotalCalculoComision, List<CalculoComisionEstado> listCalculoComisionEstado, List<Comision> listComision) {
         this.fechaCalculoComision = fechaCalculoComision;
         this.valorTotalCalculoComision = valorTotalCalculoComision;
-        this.listCalculoCOmisionEstado = listCalculoCOmisionEstado;
+        this.listCalculoComisionEstado = listCalculoComisionEstado;
         this.listComision = listComision;
     }
+
+    public CalculoComision() {
+    }
+    
 
     public Date getFechaCalculoComision() {
         return fechaCalculoComision;
@@ -41,12 +45,12 @@ public class CalculoComision {
         this.valorTotalCalculoComision = valorTotalCalculoComision;
     }
 
-    public List<CalculoComisionEstado> getListCalculoCOmisionEstado() {
-        return listCalculoCOmisionEstado;
+    public List<CalculoComisionEstado> getlistCalculoComisionEstado() {
+        return listCalculoComisionEstado;
     }
 
-    public void setListCalculoCOmisionEstado(List<CalculoComisionEstado> listCalculoCOmisionEstado) {
-        this.listCalculoCOmisionEstado = listCalculoCOmisionEstado;
+    public void setListCalculoCOmisionEstado(List<CalculoComisionEstado> listCalculoComisionEstado) {
+        this.listCalculoComisionEstado = listCalculoComisionEstado;
     }
 
     public List<Comision> getListComision() {

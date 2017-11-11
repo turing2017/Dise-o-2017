@@ -22,6 +22,9 @@ public class CalculoComisionEstado {
         this.estadoCalculoComision = estadoCalculoComision;
     }
 
+    public CalculoComisionEstado() {
+    }
+
     public Date getFechaHoraDesdeCalculoComisionEstado() {
         return fechaHoraDesdeCalculoComisionEstado;
     }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+ <class name="sistemapagoimpuestos.Entity.EstadoCalculoComision" table="estadoCalculoComision">
+    <id name="OID" type="string">
+      <column name="OIDEstadoCalculoComision"/>
+      <generator class="uuid2"/>
+    </id>
+    
+    <property name="nombreEstadoCalculoComision" not-null="true" type="string" unique="true">
+      <column name="nombreEstadoCalculoComision"/>
+    </property>
+
+</hibernate-mapping>

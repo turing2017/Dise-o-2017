@@ -24,9 +24,7 @@
         <property name="liquidadaOperacion" type="boolean">
             <column name="liquidadaOperacion"/>
         </property>
-        <property name="valorComisionOperacion" type="double">
-            <column name="valorComisionOperacion"/>
-        </property>
+       
         
         
         <many-to-one name="cuentaBancaria" class="sistemapagoimpuestos.Entity.CuentaBancaria" column="OIDCuentaBancaria" not-null="true"/>

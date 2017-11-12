@@ -24,12 +24,11 @@ public class IUMostrar extends javax.swing.JDialog {
         initComponents();
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
         DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion, fechaDesde, fechaHasta, estado);
-
         jLabelNrodeLiquidacion.setText(nliquidacion);
         jLabelEmpresa.setText(liquidacion.getNombreEmpresa());
         jLabelFechaLiquidacion.setText(liquidacion.getFechaHoraLiquidacion().toString());
         jLabelTipoImpuesto.setText(liquidacion.getNombreTipoImpuesto());
-        jLabelEstadoLiquidacion.setText(estado);
+        jLabelEstadoLiquidacion.setText(liquidacion.getNombreEstadoLiquidacion());
         if (fechaHasta == null) {
             jLabelPeriodo.setText(fechaDesde.toString()+"-"+"---");;
         } else {
@@ -46,10 +45,10 @@ public class IUMostrar extends javax.swing.JDialog {
             jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getValorComision(), i, 3);
             jTableOperacion.setValueAt(liquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 4);
             System.out.println(liquidacion.getListOperacionComision().get(i).getValorComision());
-            montoTotal = liquidacion.getListOperacionComision().get(i).getValorComision() + montoTotal;
+           // montoTotal = liquidacion.getListOperacionComision().get(i).getValorComision() + montoTotal;
         }
-        System.out.println(montoTotal);
-        jTextFieldMontoTotal.setText(montoTotal.toString());
+        
+        jTextFieldMontoTotal.setText(liquidacion.getValorTotalCalculoComision()+"");
         this.setModalityType(DEFAULT_MODALITY_TYPE.APPLICATION_MODAL);
         this.setTitle("Operaciones");
         this.setResizable(false);

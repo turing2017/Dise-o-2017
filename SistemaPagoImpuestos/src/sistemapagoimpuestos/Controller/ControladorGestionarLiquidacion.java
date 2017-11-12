@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -82,9 +83,9 @@ public class ControladorGestionarLiquidacion {
         experto.AnularLiquidacion(nroLiquidacion);
     }
 
-    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion) {
+    public DTOLiquidacionComision buscarEstadoComision(String numeroLiquidacion) {
 
-        return experto.buscarLiquidacionEstado(numeroLiquidacion);
+        return experto.buscarEstadoComision(numeroLiquidacion);
     }
 
     public void pantallaIUmostrarHistorialEstados(String nliquidacion, String fechaliquidacion) {

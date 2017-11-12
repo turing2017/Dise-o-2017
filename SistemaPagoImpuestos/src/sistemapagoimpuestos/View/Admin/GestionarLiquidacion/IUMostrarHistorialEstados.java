@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 
 /**
@@ -28,15 +29,15 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
         jLabelNumeroLiquidacion.setText(numeroLiquidacion);
         jLabelFechaLiquidacion.setText(fechaLiquidacion);
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        List<DTOLiquidacionEstado> estados = controlador.buscarLiquidacionEstado(numeroLiquidacion);
+        DTOLiquidacionComision estados = controlador.buscarEstadoComision(numeroLiquidacion);
         DefaultTableModel model = (DefaultTableModel) jTableEstados.getModel();
 
-        for (int i = 0; i < estados.size(); i++) {
+        for (int i = 0; i < estados.getEstadoComisionList().size(); i++) {
             model.addRow(new Object[]{});
 
-            jTableEstados.setValueAt(estados.get(i).getEstadoLiquidacion(), i, 0);
-            jTableEstados.setValueAt(estados.get(i).getFechaHoraDesdeLiquidacionEstado().toString(), i, 1);
-            jTableEstados.setValueAt(estados.get(i).getFechaHoraHastaLiquidacionEstado(), i, 2);
+            jTableEstados.setValueAt(estados.getEstadoComisionList().get(i).getNombreEstado(), i, 0);
+            jTableEstados.setValueAt(estados.getEstadoComisionList().get(i).getFechaDesdeComisionEstado().toString(), i, 1);
+            jTableEstados.setValueAt(estados.getEstadoComisionList().get(i).getFechaHastaComisionEstado(), i, 2);
         }
       // Ordenar la tabla por fechas Desde
        for (int i = 0; i < (model.getRowCount()*(model.getRowCount()-1)); i++) {

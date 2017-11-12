@@ -9,11 +9,16 @@ package sistemapagoimpuestos.Entity;
  *
  * @author vande
  */
-public class EstadoCalculoComision {
+public class EstadoCalculoComision extends Entity {
+
     String nombreEstadoCalculoComision;
 
     public EstadoCalculoComision(String nombreEstadoCalculoComision) {
         this.nombreEstadoCalculoComision = nombreEstadoCalculoComision;
+    }
+
+    public EstadoCalculoComision() {
+
     }
 
     public String getNombreEstadoCalculoComision() {
@@ -23,5 +28,5 @@ public class EstadoCalculoComision {
     public void setNombreEstadoCalculoComision(String nombreEstadoCalculoComision) {
         this.nombreEstadoCalculoComision = nombreEstadoCalculoComision;
     }
-    
+
 }

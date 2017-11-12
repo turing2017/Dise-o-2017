@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author vande
  */
-public class CalculoComisionEstado {
+public class CalculoComisionEstado extends Entity {
     Date fechaHoraDesdeCalculoComisionEstado;
     Date fechaHoraHastaCalculoComisionEstado;
     EstadoCalculoComision estadoCalculoComision;

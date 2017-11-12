@@ -2,28 +2,28 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="sistemapagoimpuestos.Entity.CalculoComision" table="calculoComision">
-      <id name="OID" type="string">
-          <column name="OIDCalculoComision"/>
-          <generator class="uuid2"/>
-      </id>
+    <class name="sistemapagoimpuestos.Entity.CalculoComision" table="calculoComision">
+        <id name="OID" type="string">
+            <column name="OIDCalculoComision"/>
+            <generator class="uuid2"/>
+        </id>
       
-      <property name="fechaCalculoComision" type="timestamp" unique="true" not-null="true">
+        <property name="fechaCalculoComision" type="timestamp" unique="true" not-null="true">
             <column name="fechaCalculoComision"/>
-      </property>
-      <property name="valorCalculoComision" type="double" unique="true" not-null="true">
-            <column name="valorCalculoComision"/>
-      </property>
+        </property>
+        <property name="valorTotalCalculoComision" type="double" unique="true" not-null="true">
+            <column name="valorTotalCalculoComision"/>
+        </property>
       
-       <bag name="ComisionList" table="Comision" cascade="none" inverse="false">
-    <key column="OIDCalculoComision" not-null="false" />
-      <one-to-many class="sistemapagoimpuestos.Entity.Comision"/>  
-    </bag>
+        <bag name="ComisionList" table="Comision" cascade="none" inverse="false">
+            <key column="OIDCalculoComision" not-null="false" />
+            <one-to-many class="sistemapagoimpuestos.Entity.Comision"/>  
+        </bag>
       
-       <bag name="calculoComisionEstadoList" table="calculoComisionEstado" cascade="none" inverse="false">
-    <key column="OIDCalculoComision" not-null="false" />
-      <one-to-many class="sistemapagoimpuestos.Entity.CalculoComisionEstado"/>  
-    </bag>
+        <bag name="calculoComisionEstadoList" table="calculoComisionEstado" cascade="none" inverse="false">
+            <key column="OIDCalculoComision" not-null="false" />
+            <one-to-many class="sistemapagoimpuestos.Entity.CalculoComisionEstado"/>  
+        </bag>
       
-  </class>
+    </class>
 </hibernate-mapping>

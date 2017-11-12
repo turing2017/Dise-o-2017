@@ -12,22 +12,22 @@ import java.util.List;
  *
  * @author vande
  */
-public class CalculoComision {
+public class CalculoComision extends Entity {
+
     Date fechaCalculoComision;
     double valorTotalCalculoComision;
-    List<CalculoComisionEstado> listCalculoComisionEstado;
-    List<Comision> listComision;
+    private List<CalculoComisionEstado> CalculoComisionEstadoList;
+    private List<Comision> ComisionList;
 
     public CalculoComision(Date fechaCalculoComision, double valorTotalCalculoComision, List<CalculoComisionEstado> listCalculoComisionEstado, List<Comision> listComision) {
         this.fechaCalculoComision = fechaCalculoComision;
         this.valorTotalCalculoComision = valorTotalCalculoComision;
-        this.listCalculoComisionEstado = listCalculoComisionEstado;
-        this.listComision = listComision;
+        this.CalculoComisionEstadoList = listCalculoComisionEstado;
+        this.ComisionList = listComision;
     }
 
     public CalculoComision() {
     }
-    
 
     public Date getFechaCalculoComision() {
         return fechaCalculoComision;
@@ -45,20 +45,20 @@ public class CalculoComision {
         this.valorTotalCalculoComision = valorTotalCalculoComision;
     }
 
-    public List<CalculoComisionEstado> getlistCalculoComisionEstado() {
-        return listCalculoComisionEstado;
+    public List<CalculoComisionEstado> getCalculoComisionEstadoList() {
+        return CalculoComisionEstadoList;
     }
 
-    public void setListCalculoCOmisionEstado(List<CalculoComisionEstado> listCalculoComisionEstado) {
-        this.listCalculoComisionEstado = listCalculoComisionEstado;
+    public void setCalculoComisionEstadoList(List<CalculoComisionEstado> CalculoComisionEstadoList) {
+        this.CalculoComisionEstadoList = CalculoComisionEstadoList;
     }
 
-    public List<Comision> getListComision() {
-        return listComision;
+    public List<Comision> getComisionList() {
+        return ComisionList;
     }
 
-    public void setListComision(List<Comision> listComision) {
-        this.listComision = listComision;
+    public void setComisionList(List<Comision> ComisionList) {
+        this.ComisionList = ComisionList;
     }
-   
+
 }

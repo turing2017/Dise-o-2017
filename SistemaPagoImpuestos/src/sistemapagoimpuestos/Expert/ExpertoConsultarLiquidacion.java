@@ -105,10 +105,11 @@ public class ExpertoConsultarLiquidacion {
                                 dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
                                 
                                 
-                                for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
-                                  TotalLiquidado += liquidacion.getOperacionList().get(j).getValorComisionOperacion();
-                                }
-                                dtoLiquidacion.setTotalLiquidado(TotalLiquidado);
+//                                for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
+//                                  TotalLiquidado += liquidacion.getOperacionList().get(j).getValorComisionOperacion();
+//                                }
+//NUEVO TOTAL LIQUIDACION
+                                dtoLiquidacion.setTotalLiquidado(liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getValorTotalCalculoComision());
                                 
                                 listDtoLiquidacion.add(dtoLiquidacion);
                             }
@@ -167,10 +168,13 @@ public class ExpertoConsultarLiquidacion {
                         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
                         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
 
-                        for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
-                            TotalLiquidado += liquidacion.getOperacionList().get(j).getValorComisionOperacion();
-                        }
-                        dtoLiquidacion.setTotalLiquidado(TotalLiquidado);
+//                        for (int j = 0; j < liquidacion.getOperacionList().size(); j++) {
+//                            TotalLiquidado += liquidacion.getOperacionList().get(j).getValorComisionOperacion();
+//                        }
+//                        dtoLiquidacion.setTotalLiquidado(TotalLiquidado);
+//NUEVO TOTAL LIQUIDACION
+                                dtoLiquidacion.setTotalLiquidado(liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getValorTotalCalculoComision());
+
 
                         listDtoLiquidacion.add(dtoLiquidacion);
 
@@ -199,17 +203,17 @@ public class ExpertoConsultarLiquidacion {
             dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
             dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
            List<DTOOperacionConsultarLiquidacion> listOperacionComision = new ArrayList();
-            for (int i = 0; i < liquidacion.getOperacionList().size(); i++) {
+            for (int i = 0; i < liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getComisionList().size(); i++) {
             DTOOperacionConsultarLiquidacion dtoOC = new DTOOperacionConsultarLiquidacion();
             
-            dtoOC.setNumeroOperacion(liquidacion.getOperacionList().get(i).getNumeroOperacion());
-            dtoOC.setNroComprobanteFactura(liquidacion.getOperacionList().get(i).getNroComprobanteFacturaOperacion());
-            dtoOC.setImportePagadoOperacion(liquidacion.getOperacionList().get(i).getImportePagadoOperacion());
-            dtoOC.setValorComision(liquidacion.getOperacionList().get(i).getValorComisionOperacion());
-            dtoOC.setFechaHoraOperacion(liquidacion.getOperacionList().get(i).getFechaHoraOperacion());
+            dtoOC.setNumeroOperacion(liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getComisionList().get(i).getOperacion().getNumeroOperacion());
+            dtoOC.setNroComprobanteFactura(liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getComisionList().get(i).getOperacion().getNroComprobanteFacturaOperacion());
+            dtoOC.setImportePagadoOperacion(liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getComisionList().get(i).getOperacion().getImportePagadoOperacion());
+            dtoOC.setValorComision(liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getComisionList().get(i).getValorComision());
+            dtoOC.setFechaHoraOperacion(liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getComisionList().get(i).getOperacion().getFechaHoraOperacion());
             listOperacionComision.add(dtoOC);
             
-            montoTotal +=liquidacion.getOperacionList().get(i).getValorComisionOperacion();
+            montoTotal +=liquidacion.getCalculoComisionList().get(liquidacion.getCalculoComisionList().size() -1).getValorTotalCalculoComision();
         }
         dtoLiquidacion.setListOperacionComision(listOperacionComision);
         dtoLiquidacion.setTotalLiquidado(montoTotal);

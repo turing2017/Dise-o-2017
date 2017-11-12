@@ -446,19 +446,19 @@ public class ExpertoGestionarLiquidacion {
         dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
         for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
-            for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().size(); j++) {
-              if(liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).getFechaHoraDesdeCalculoComisionEstado().equals(fechaDesde) &&
-                liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).getFechaHoraHastaCalculoComisionEstado().equals(fechaHasta) ){
-              dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).getEstadoCalculoComision().getNombreEstadoCalculoComision());
+            for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
+              if(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraDesdeCalculoComisionEstado().equals(fechaDesde) &&
+                liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(fechaHasta) ){
+              dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getEstadoCalculoComision().getNombreEstadoCalculoComision());
               dtoLiquidacion.setValorTotalCalculoComision(liquidacion.getCalculoComisionList().get(i).getValorTotalCalculoComision());
               
-                  for (int k = 0; k < liquidacion.getCalculoComisionList().get(i).getListComision().size(); k++) {
+                  for (int k = 0; k < liquidacion.getCalculoComisionList().get(i).getComisionList().size(); k++) {
                       DTOOperacionComision dtoOperacionComision = new DTOOperacionComision();
-                      dtoOperacionComision.setValorComision(liquidacion.getCalculoComisionList().get(i).getListComision().get(k).getValorComision());
-                      dtoOperacionComision.setFechaOperacion(liquidacion.getCalculoComisionList().get(i).getListComision().get(k).getOperacion().getFechaHoraOperacion());
-                      dtoOperacionComision.setNumeroOperacion(liquidacion.getCalculoComisionList().get(i).getListComision().get(k).getOperacion().getNumeroOperacion());
-                      dtoOperacionComision.setNroComprobanteFactura(liquidacion.getCalculoComisionList().get(i).getListComision().get(k).getOperacion().getNroComprobanteFacturaOperacion());
-                      dtoOperacionComision.setImportePagadoOperacion(liquidacion.getCalculoComisionList().get(i).getListComision().get(k).getOperacion().getImportePagadoOperacion());
+                      dtoOperacionComision.setValorComision(liquidacion.getCalculoComisionList().get(i).getComisionList().get(k).getValorComision());
+                      dtoOperacionComision.setFechaOperacion(liquidacion.getCalculoComisionList().get(i).getComisionList().get(k).getOperacion().getFechaHoraOperacion());
+                      dtoOperacionComision.setNumeroOperacion(liquidacion.getCalculoComisionList().get(i).getComisionList().get(k).getOperacion().getNumeroOperacion());
+                      dtoOperacionComision.setNroComprobanteFactura(liquidacion.getCalculoComisionList().get(i).getComisionList().get(k).getOperacion().getNroComprobanteFacturaOperacion());
+                      dtoOperacionComision.setImportePagadoOperacion(liquidacion.getCalculoComisionList().get(i).getComisionList().get(k).getOperacion().getImportePagadoOperacion());
                       dtoLiquidacion.getListOperacionComision().add(dtoOperacionComision);
                   }
  
@@ -617,11 +617,11 @@ public class ExpertoGestionarLiquidacion {
         dtoLiquidacionComision.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
         dtoLiquidacionComision.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
         for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
-            for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().size(); j++) {
+            for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
                 DTOEstadoCalculoComision dtoEstadoCalculoComision = new DTOEstadoCalculoComision();
-               dtoEstadoCalculoComision.setNombreEstado(liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).getEstadoCalculoComision().getNombreEstadoCalculoComision());
-               dtoEstadoCalculoComision.setFechaDesdeComisionEstado(liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).getFechaHoraDesdeCalculoComisionEstado());
-               dtoEstadoCalculoComision.setFechaHastaComisionEstado(liquidacion.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).getFechaHoraHastaCalculoComisionEstado());
+               dtoEstadoCalculoComision.setNombreEstado(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getEstadoCalculoComision().getNombreEstadoCalculoComision());
+               dtoEstadoCalculoComision.setFechaDesdeComisionEstado(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraDesdeCalculoComisionEstado());
+               dtoEstadoCalculoComision.setFechaHastaComisionEstado(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado());
                dtoLiquidacionComision.getEstadoComisionList().add(dtoEstadoCalculoComision);
             }
         }

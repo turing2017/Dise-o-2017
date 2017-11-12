@@ -95,6 +95,10 @@ public class Liquidacion extends Entity{
     }
 
     public void setComisionList(List<CalculoComision> calculoComisionList) {
+        this.setCalculoComisionList(calculoComisionList);
+    }
+
+    public void setCalculoComisionList(List<CalculoComision> calculoComisionList) {
         this.calculoComisionList = calculoComisionList;
     }
 

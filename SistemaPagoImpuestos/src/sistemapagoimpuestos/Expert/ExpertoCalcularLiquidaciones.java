@@ -158,7 +158,7 @@ public class ExpertoCalcularLiquidaciones {
                         FachadaPersistencia.getInstance().guardar(operacion);
                         comision.setOperacion(operacion);
                         
-                        calculoComision.getListComision().add(comision);
+                        calculoComision.getComisionList().add(comision);
                         calculoComision.setValorTotalCalculoComision(calculoComision.getValorTotalCalculoComision()+valorComision);
                         
 //                        List<Comision> listComision = liquidacionARecalcular.getComisionList();
@@ -171,10 +171,10 @@ public class ExpertoCalcularLiquidaciones {
                 }
                 //setear fecha hasta del calculoComisionEstado anterior
                 for (int i = 0; i < liquidacionARecalcular.getCalculoComisionList().size(); i++) {
-                    for (int j = 0; j < liquidacionARecalcular.getCalculoComisionList().get(i).getlistCalculoComisionEstado().size(); j++) {
-                        if (liquidacionARecalcular.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).getFechaHoraHastaCalculoComisionEstado().equals(null) ){
-                          liquidacionARecalcular.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
-                            FachadaPersistencia.getInstance().guardar(liquidacionARecalcular.getCalculoComisionList().get(i).getlistCalculoComisionEstado().get(j));
+                    for (int j = 0; j < liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
+                        if (liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(null) ){
+                          liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
+                            FachadaPersistencia.getInstance().guardar(liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j));
                         }
                     }
                 }
@@ -192,7 +192,7 @@ public class ExpertoCalcularLiquidaciones {
                 EstadoCalculoComision estadoAnuladoComision = (EstadoCalculoComision)FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", criterios).get(0);
                 nuevoCalculoComisionEstado.setEstadoCalculoComision(estadoAnuladoComision);
                 FachadaPersistencia.getInstance().guardar(nuevoCalculoComisionEstado);
-                calculoComision.getlistCalculoComisionEstado().add(nuevoCalculoComisionEstado);
+                calculoComision.getCalculoComisionEstadoList().add(nuevoCalculoComisionEstado);
                 calculoComision.setFechaCalculoComision(fechaActual);
                 FachadaPersistencia.getInstance().guardar(calculoComision);
                 liquidacionEstado.setFechaHoraHastaLiquidacionEstado(fechaActual);
@@ -294,7 +294,7 @@ public class ExpertoCalcularLiquidaciones {
                     comision.setValorComision(valorComision);
                     comision.setOperacion(operacion);
                     FachadaPersistencia.getInstance().guardar(comision);
-                    calculoComision.getListComision().add(comision);
+                    calculoComision.getComisionList().add(comision);
                     calculoComision.setValorTotalCalculoComision(calculoComision.getValorTotalCalculoComision()+valorComision);
 //                    nuevaLiquidacion.getComisionList().add(comision);
 //                    nuevaLiquidacion.getOperacionList().add(operacion);
@@ -311,7 +311,7 @@ public class ExpertoCalcularLiquidaciones {
                 nuevaCalculoComisionEstado.setEstadoCalculoComision(estadoCalculoComision);
                 nuevaCalculoComisionEstado.setFechaHoraDesdeCalculoComisionEstado(fechaActual);
                 FachadaPersistencia.getInstance().guardar(nuevaCalculoComisionEstado);
-                calculoComision.getlistCalculoComisionEstado().add(nuevaCalculoComisionEstado);
+                calculoComision.getCalculoComisionEstadoList().add(nuevaCalculoComisionEstado);
                 calculoComision.setFechaCalculoComision(fechaActual);
                 FachadaPersistencia.getInstance().guardar(calculoComision);
                 
@@ -333,7 +333,7 @@ public class ExpertoCalcularLiquidaciones {
                 FachadaPersistencia.getInstance().guardar(nuevaLiquidacoinEstado);
                nuevaLiquidacion.getLiquidacionEstadoList().add(nuevaLiquidacoinEstado);
                 FachadaPersistencia.getInstance().guardar(nuevaLiquidacion);
-                dtosAccionesSistema.add(new DTOAccionesSistema(3, "DATOS DE LA LIQUIDACIÓN GENERADA", "Empresa: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n" + "Tipo Impuesto: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Número de liquidación: " + nuevaLiquidacion.getNumeroLiquidacion() + "\n" + "Fecha desde: " + nuevaLiquidacion.getFechaHoraDesdeLiquidacion() + "\n" + "Fecha hasta: " + nuevaLiquidacion.getFechaHoraHastaLiquidacion() + "\n" + "Cantidad de operaciones liquidadas: " + nuevaLiquidacion.getCalculoComisionList().get(0).getListComision().size(), new Date()));
+                dtosAccionesSistema.add(new DTOAccionesSistema(3, "DATOS DE LA LIQUIDACIÓN GENERADA", "Empresa: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n" + "Tipo Impuesto: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Número de liquidación: " + nuevaLiquidacion.getNumeroLiquidacion() + "\n" + "Fecha desde: " + nuevaLiquidacion.getFechaHoraDesdeLiquidacion() + "\n" + "Fecha hasta: " + nuevaLiquidacion.getFechaHoraHastaLiquidacion() + "\n" + "Cantidad de operaciones liquidadas: " + nuevaLiquidacion.getCalculoComisionList().get(0).getComisionList().size(), new Date()));
                 cantidadLiquidacionesCalculadas++;
 
             } else {

@@ -79,8 +79,8 @@ public class ControladorGestionarLiquidacion {
         return experto.mostrar(numeroLiquidacion, fechaDesde, fechaHasta, estado);
     }
 
-    public void AnularLiquidacion(String nroLiquidacion) {
-        experto.AnularLiquidacion(nroLiquidacion);
+    public void AnularLiquidacion(String numeroLiquidacion) {
+        experto.AnularLiquidacion(numeroLiquidacion);
     }
 
     public DTOLiquidacionComision buscarEstadoComision(String numeroLiquidacion) {

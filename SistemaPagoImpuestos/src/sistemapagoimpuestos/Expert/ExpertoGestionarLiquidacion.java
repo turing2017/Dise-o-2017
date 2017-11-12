@@ -37,7 +37,9 @@ import sistemapagoimpuestos.Dto.DTOEstadoCalculoComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Dto.DTOOperacionComision;
+import sistemapagoimpuestos.Entity.CalculoComisionEstado;
 import sistemapagoimpuestos.Entity.Comision;
+import sistemapagoimpuestos.Entity.EstadoCalculoComision;
 import sistemapagoimpuestos.Entity.Operacion;
 import sistemapagoimpuestos.Globals.GlobalVars;
 
@@ -168,6 +170,8 @@ public class ExpertoGestionarLiquidacion {
 
     public void AprobarLiquidacion(String numeroLiquidacion) {
         //BUSCO LA LIQUIDACION
+        String estadoPendiente="Pendiente";
+        Date fechaActual= new Date();
         List<DTOCriterio> criterios = new ArrayList();
 
         DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.valueOf(numeroLiquidacion));
@@ -186,10 +190,10 @@ public class ExpertoGestionarLiquidacion {
             }
         }
         // si tiene estado para aprobar
-        if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada")
-                || liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
-
-            liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(calendario.getTime());
+//        if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada")
+//                || liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
+            if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals(estadoPendiente)){
+            liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(fechaActual);
             FachadaPersistencia.getInstance().guardar(liquidacionEstadoultima);
 
             //BUSCO EL ESTADO APROBADO
@@ -200,15 +204,38 @@ public class ExpertoGestionarLiquidacion {
 
             //CREO LA NUEVA LIQUIDACION ESTADO
             LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
-            liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime());
+            liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(fechaActual);
             liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
             liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
 
             //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
             FachadaPersistencia.getInstance().guardar(liquidacionEstado);
             liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
-            liquidacion.setFechaHoraLiquidacion(new Date());
-            FachadaPersistencia.getInstance().guardar(liquidacion);
+            liquidacion.setFechaHoraLiquidacion(fechaActual);
+            
+                for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
+                    for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
+                      if (  liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(null)){
+                      liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
+                      FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j));
+                     CalculoComisionEstado calculoComisionEstado = new CalculoComisionEstado();
+                    calculoComisionEstado.setFechaHoraDesdeCalculoComisionEstado(fechaActual);
+                     criterios.clear();
+                    criterios.add(new DTOCriterio("nombreEstadoCalculoComision", "=", "Aprobada"));
+                     EstadoCalculoComision estadoCalculoComision = (EstadoCalculoComision) FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", criterios).get(0);
+                    calculoComisionEstado.setEstadoCalculoComision(estadoCalculoComision);
+                    liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().add(calculoComisionEstado);
+                    
+                    
+                    FachadaPersistencia.getInstance().guardar(calculoComisionEstado);
+                    FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i));
+                    FachadaPersistencia.getInstance().guardar(liquidacion);
+                      }
+                    }
+                }
+                
+            
+            
 
         } else {
             System.out.println("no se puede Aprobar una liquidacion Ya aprobada o Anulada");
@@ -556,18 +583,20 @@ public class ExpertoGestionarLiquidacion {
         return dtoLiquidacion;
     }
 
-    public void AnularLiquidacion(String nroLiquidacion) {
+    public void AnularLiquidacion(String numeroLiquidacion) {
         //BUSCO LA LIQUIDACION
+        String estadoPendiente="Pendiente";
+        Date fechaActual= new Date();
         List<DTOCriterio> criterios = new ArrayList();
 
-        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.valueOf(nroLiquidacion));
+        DTOCriterio criterio = new DTOCriterio("numeroLiquidacion", "=", Integer.valueOf(numeroLiquidacion));
         criterios.add(criterio);
         Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
 
         Calendar calendario = Calendar.getInstance();
 
         //SETEO LA FECHA HASTA DEL ESTADO ANTERIOR
-        // Buscar la ultima liquidacionEstado ( la actual)
+// Buscar la ultima liquidacionEstado ( la actual)
         LiquidacionEstado liquidacionEstadoultima = new LiquidacionEstado();
         for (int i = 0; i < liquidacion.getLiquidacionEstadoList().size(); i++) {
             if (liquidacion.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado() == null) {
@@ -576,13 +605,13 @@ public class ExpertoGestionarLiquidacion {
             }
         }
         // si tiene estado para aprobar
-        System.out.println(liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion());
-        if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada") || liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
-
-            liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(calendario.getTime());
+//        if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Calculada")
+//                || liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals("Recalculada")) {
+            if (liquidacionEstadoultima.getEstadoLiquidacion().getNombreEstadoLiquidacion().equals(estadoPendiente)){
+            liquidacionEstadoultima.setFechaHoraHastaLiquidacionEstado(fechaActual);
             FachadaPersistencia.getInstance().guardar(liquidacionEstadoultima);
 
-            //BUSCO EL ESTADO ARecalcular
+            //BUSCO EL ESTADO APROBADO
             criterios.clear();
             DTOCriterio criterio1 = new DTOCriterio("nombreEstadoLiquidacion", "=", "Anulada");
             criterios.add(criterio1);
@@ -590,15 +619,35 @@ public class ExpertoGestionarLiquidacion {
 
             //CREO LA NUEVA LIQUIDACION ESTADO
             LiquidacionEstado liquidacionEstado = new LiquidacionEstado();
-            liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(calendario.getTime());
+            liquidacionEstado.setFechaHoraDesdeLiquidacionEstado(fechaActual);
             liquidacionEstado.setEstadoLiquidacion(estadoLiquidacion);
             liquidacionEstado.setFechaHoraHastaLiquidacionEstado(null);
 
             //SETEO LIQUIDACION ESTADO EN LA LIQUIDACION
             FachadaPersistencia.getInstance().guardar(liquidacionEstado);
             liquidacion.getLiquidacionEstadoList().add(liquidacionEstado);
-            liquidacion.setFechaHoraLiquidacion(new Date());
-            FachadaPersistencia.getInstance().guardar(liquidacion);
+            liquidacion.setFechaHoraLiquidacion(fechaActual);
+            
+                for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
+                    for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
+                      if (  liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(null)){
+                      liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
+                      FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j));
+                     CalculoComisionEstado calculoComisionEstado = new CalculoComisionEstado();
+                    calculoComisionEstado.setFechaHoraDesdeCalculoComisionEstado(fechaActual);
+                     criterios.clear();
+                    criterios.add(new DTOCriterio("nombreEstadoCalculoComision", "=", "Anulada"));
+                     EstadoCalculoComision estadoCalculoComision = (EstadoCalculoComision) FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", criterios).get(0);
+                    calculoComisionEstado.setEstadoCalculoComision(estadoCalculoComision);
+                    liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().add(calculoComisionEstado);
+                    
+                    
+                    FachadaPersistencia.getInstance().guardar(calculoComisionEstado);
+                    FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i));
+                    FachadaPersistencia.getInstance().guardar(liquidacion);
+                      }
+                    }
+                }
 
         } else {
             System.out.println("no se puede Anular una liquidacion Ya aprobada o Anulada");

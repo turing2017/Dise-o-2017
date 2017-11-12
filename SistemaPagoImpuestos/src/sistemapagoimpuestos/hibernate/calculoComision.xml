@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="sistemapagoimpuestos.Entity.CalculoComision" table="calculoComision">
+    <class name="sistemapagoimpuestos.Entity.CalculoComision" table="calculo_Comision">
         <id name="OID" type="string">
             <column name="OIDCalculoComision"/>
             <generator class="uuid2"/>

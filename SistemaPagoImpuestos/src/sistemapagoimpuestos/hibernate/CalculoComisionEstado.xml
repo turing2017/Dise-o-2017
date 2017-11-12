@@ -4,7 +4,7 @@
   "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
- <class name="sistemapagoimpuestos.Entity.CalculoComisionEstado" table="calculoComisionEstado">
+ <class name="sistemapagoimpuestos.Entity.CalculoComisionEstado" table="calculo_Comision_Estado">
     <id name="OID" type="string"  >
       <column name="OIDCalculoComisionEstado"/>
       <generator class="uuid2"/>

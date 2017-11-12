@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 
- <class name="sistemapagoimpuestos.Entity.EstadoCalculoComision" table="estadoCalculoComision">
+ <class name="sistemapagoimpuestos.Entity.EstadoCalculoComision" table="estado_Calculo_Comision">
     <id name="OID" type="string">
       <column name="OIDEstadoCalculoComision"/>
       <generator class="uuid2"/>

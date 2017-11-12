@@ -294,6 +294,9 @@ public class ExpertoCalcularLiquidaciones {
                     comision.setValorComision(valorComision);
                     comision.setOperacion(operacion);
                     FachadaPersistencia.getInstance().guardar(comision);
+                     
+                    calculoComision.setComisionList(new ArrayList());
+                    
                     calculoComision.getComisionList().add(comision);
                     calculoComision.setValorTotalCalculoComision(calculoComision.getValorTotalCalculoComision()+valorComision);
 //                    nuevaLiquidacion.getComisionList().add(comision);
@@ -311,6 +314,9 @@ public class ExpertoCalcularLiquidaciones {
                 nuevaCalculoComisionEstado.setEstadoCalculoComision(estadoCalculoComision);
                 nuevaCalculoComisionEstado.setFechaHoraDesdeCalculoComisionEstado(fechaActual);
                 FachadaPersistencia.getInstance().guardar(nuevaCalculoComisionEstado);
+                
+                    calculoComision.setCalculoComisionEstadoList(new ArrayList());
+                
                 calculoComision.getCalculoComisionEstadoList().add(nuevaCalculoComisionEstado);
                 calculoComision.setFechaCalculoComision(fechaActual);
                 FachadaPersistencia.getInstance().guardar(calculoComision);
@@ -333,7 +339,13 @@ public class ExpertoCalcularLiquidaciones {
                 FachadaPersistencia.getInstance().guardar(nuevaLiquidacoinEstado);
                nuevaLiquidacion.getLiquidacionEstadoList().add(nuevaLiquidacoinEstado);
                 FachadaPersistencia.getInstance().guardar(nuevaLiquidacion);
-                dtosAccionesSistema.add(new DTOAccionesSistema(3, "DATOS DE LA LIQUIDACIÓN GENERADA", "Empresa: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n" + "Tipo Impuesto: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Número de liquidación: " + nuevaLiquidacion.getNumeroLiquidacion() + "\n" + "Fecha desde: " + nuevaLiquidacion.getFechaHoraDesdeLiquidacion() + "\n" + "Fecha hasta: " + nuevaLiquidacion.getFechaHoraHastaLiquidacion() + "\n" + "Cantidad de operaciones liquidadas: " + nuevaLiquidacion.getCalculoComisionList().get(0).getComisionList().size(), new Date()));
+                int cantidad = 0;
+                try {
+                    int cantdidad =nuevaLiquidacion.getCalculoComisionList().get(0).getComisionList().size();
+                } catch (Exception e) {cantidad = 0;
+                }
+                
+                dtosAccionesSistema.add(new DTOAccionesSistema(3, "DATOS DE LA LIQUIDACIÓN GENERADA", "Empresa: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n" + "Tipo Impuesto: " + nuevaLiquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Número de liquidación: " + nuevaLiquidacion.getNumeroLiquidacion() + "\n" + "Fecha desde: " + nuevaLiquidacion.getFechaHoraDesdeLiquidacion() + "\n" + "Fecha hasta: " + nuevaLiquidacion.getFechaHoraHastaLiquidacion() + "\n" + "Cantidad de operaciones liquidadas: " + cantidad, new Date()));
                 cantidadLiquidacionesCalculadas++;
 
             } else {

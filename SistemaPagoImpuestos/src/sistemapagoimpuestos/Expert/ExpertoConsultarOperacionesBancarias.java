@@ -61,86 +61,124 @@ public class ExpertoConsultarOperacionesBancarias {
     }
 
     public List<DTOOperacionConsultarOperacionesBancarias> buscarOperacionesConFiltro(String nombreTipoImpuesto, String nombreEmpresa, Date fechaDesde, Date fechaHasta) {
-        double TotalLiquidado = 0;
-        ArrayList<DTOOperacionConsultarOperacionesBancarias> listDtoOperacion = new ArrayList<DTOOperacionConsultarOperacionesBancarias>();
-        List<DTOCriterio> criterios = new ArrayList();
-        double montoTotal = 0;
-        if ("Todos".equals(nombreTipoImpuesto)) {
-
-            //BUSCA LA EMPRESA SELECCIONADA
-            DTOCriterio criterio7 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
-            criterios.clear();
-            criterios.add(criterio7);
-            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-
-            //CONDICION DE LAS FECHAS
-            criterios.clear();
-            DTOCriterio criterio5 = new DTOCriterio("fechaHoraOperacion", ">", fechaDesde);
-            DTOCriterio criterio6 = new DTOCriterio("fechaHoraOperacion", "<", fechaHasta);
-            DTOCriterio criterio42 = new DTOCriterio("empresa", "=", empresa);
-            criterios.add(criterio5);
-            criterios.add(criterio6);
-            criterios.add(criterio42);
-            //Busca liquidaciones de esa empresa en estado aprobado
-            List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
-            for (Object obj : listOperacion) {
-                Operacion operacion = (Operacion) obj;
-
-                DTOOperacionConsultarOperacionesBancarias dtoOperacion = new DTOOperacionConsultarOperacionesBancarias();
-
-                dtoOperacion.setCodigoPagoElectronicoOperacion(operacion.getCodigoPagoElectrionicoOperacion());
-                dtoOperacion.setFechaHoraOperacion(operacion.getFechaHoraOperacion());
-                dtoOperacion.setImportePagadoOperacion(operacion.getImportePagadoOperacion());
-                dtoOperacion.setNroComprobanteFacturaOperacion(operacion.getNroComprobanteFacturaOperacion());
-                dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
-                dtoOperacion.setTipoImpuesto(operacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                listDtoOperacion.add(dtoOperacion);
-                montoTotal += operacion.getImportePagadoOperacion();
-            }
-        } else {
-            //BUSCO TIPO IMPUESTO SELECCIONADO       
-            DTOCriterio criterio = new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto);
-            criterios.add(criterio);
-            TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
-
-            //BUSCO EMPRESA SELECCIONADA
-            DTOCriterio criterio1 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
-            criterios.clear();
-            criterios.add(criterio1);
-            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
-
-            DTOCriterio criterio4 = new DTOCriterio("empresa", "=", empresa);
-            DTOCriterio criterio5 = new DTOCriterio("fechaHoraOperacion", ">", fechaDesde);
-            DTOCriterio criterio6 = new DTOCriterio("fechaHoraOperacion", "<", fechaHasta);
-            DTOCriterio criterio12 = new DTOCriterio("tipoImpuesto", "=", tipoImpuesto);
-          
-            criterios.clear();
-            criterios.add(criterio4);
-            criterios.add(criterio5);
-            criterios.add(criterio6);
-            criterios.add(criterio12);
-
-            List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
-
-            //LLENO EL Operacion
-            for (Object obj : listOperacion) {
-                Operacion operacion = (Operacion) obj;
-
-                DTOOperacionConsultarOperacionesBancarias dtoOperacion = new DTOOperacionConsultarOperacionesBancarias();
-
-                dtoOperacion.setCodigoPagoElectronicoOperacion(operacion.getCodigoPagoElectrionicoOperacion());
-                dtoOperacion.setFechaHoraOperacion(operacion.getFechaHoraOperacion());
-                dtoOperacion.setImportePagadoOperacion(operacion.getImportePagadoOperacion());
-                dtoOperacion.setNroComprobanteFacturaOperacion(operacion.getNroComprobanteFacturaOperacion());
-                dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
-                dtoOperacion.setTipoImpuesto(operacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
-                listDtoOperacion.add(dtoOperacion);
-                montoTotal += operacion.getImportePagadoOperacion();
+            List<DTOCriterio> criterios = new ArrayList();
+            List<Object>operacionList = new ArrayList();
+             Empresa empresa = GlobalVars.userActive.getEmpresa();
+             List<DTOOperacionConsultarOperacionesBancarias> dtoOCOB = new ArrayList();
+            if ("Todos".equals(nombreTipoImpuesto)) {
+                
+                criterios.clear();
+                criterios.add(new DTOCriterio("empresa", "=", empresa));
+                criterios.add(new DTOCriterio("fechaHoraOperacion", ">", fechaDesde));
+                criterios.add(new DTOCriterio("fechaHoraOperacion", "<", fechaHasta));
+                operacionList = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
+            }else{
+                criterios.clear();
+                criterios.add(new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto));
+                TipoImpuesto tipoImpuesto = (TipoImpuesto)FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
+                
+                criterios.clear();
+                criterios.add(new DTOCriterio("fechaHoraOperacion", ">", fechaDesde));
+                criterios.add(new DTOCriterio("fechaHoraOperacion", "<", fechaHasta));
+                criterios.add(new DTOCriterio("empresa", "=", empresa));
+                criterios.add(new DTOCriterio("tipoImpuesto", "=", tipoImpuesto));
+               operacionList = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
             }
 
-        }
+             for (Object obj : operacionList) {
+                Operacion operacion = (Operacion) obj;
+             DTOOperacionConsultarOperacionesBancarias dtoOperacionConsultar = new DTOOperacionConsultarOperacionesBancarias();
+             dtoOperacionConsultar.setFechaHoraOperacion(operacion.getFechaHoraOperacion());
+             dtoOperacionConsultar.setNumeroOperacion(operacion.getNumeroOperacion());
+             dtoOperacionConsultar.setImportePagadoOperacion(operacion.getImportePagadoOperacion());
+             dtoOperacionConsultar.setNroComprobanteFacturaOperacion(operacion.getNroComprobanteFacturaOperacion());
+             dtoOperacionConsultar.setCodigoPagoElectronicoOperacion(operacion.getCodigoPagoElectrionicoOperacion());
+             dtoOperacionConsultar.setTipoImpuesto(operacion.getTipoImpuesto().getNombreTipoImpuesto());
+             dtoOCOB.add(dtoOperacionConsultar);
+             }
 
-        return listDtoOperacion;
+return dtoOCOB;
+//nuevo
+//        double TotalLiquidado = 0;
+//        ArrayList<DTOOperacionConsultarOperacionesBancarias> listDtoOperacion = new ArrayList<DTOOperacionConsultarOperacionesBancarias>();
+//        List<DTOCriterio> criterios = new ArrayList();
+//        double montoTotal = 0;
+//        if ("Todos".equals(nombreTipoImpuesto)) {
+//
+//            //BUSCA LA EMPRESA SELECCIONADA
+//            DTOCriterio criterio7 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
+//            criterios.clear();
+//            criterios.add(criterio7);
+//            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+//
+//            //CONDICION DE LAS FECHAS
+//            criterios.clear();
+//            DTOCriterio criterio5 = new DTOCriterio("fechaHoraOperacion", ">", fechaDesde);
+//            DTOCriterio criterio6 = new DTOCriterio("fechaHoraOperacion", "<", fechaHasta);
+//            DTOCriterio criterio42 = new DTOCriterio("empresa", "=", empresa);
+//            criterios.add(criterio5);
+//            criterios.add(criterio6);
+//            criterios.add(criterio42);
+//            //Busca liquidaciones de esa empresa en estado aprobado
+//            List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
+//            for (Object obj : listOperacion) {
+//                Operacion operacion = (Operacion) obj;
+//
+//                DTOOperacionConsultarOperacionesBancarias dtoOperacion = new DTOOperacionConsultarOperacionesBancarias();
+//
+//                dtoOperacion.setCodigoPagoElectronicoOperacion(operacion.getCodigoPagoElectrionicoOperacion());
+//                dtoOperacion.setFechaHoraOperacion(operacion.getFechaHoraOperacion());
+//                dtoOperacion.setImportePagadoOperacion(operacion.getImportePagadoOperacion());
+//                dtoOperacion.setNroComprobanteFacturaOperacion(operacion.getNroComprobanteFacturaOperacion());
+//                dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
+//                dtoOperacion.setTipoImpuesto(operacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+//                listDtoOperacion.add(dtoOperacion);
+//                montoTotal += operacion.getImportePagadoOperacion();
+//            }
+//        } else {
+//            //BUSCO TIPO IMPUESTO SELECCIONADO       
+//            DTOCriterio criterio = new DTOCriterio("nombreTipoImpuesto", "=", nombreTipoImpuesto);
+//            criterios.add(criterio);
+//            TipoImpuesto tipoImpuesto = (TipoImpuesto) FachadaPersistencia.getInstance().buscar("TipoImpuesto", criterios).get(0);
+//
+//            //BUSCO EMPRESA SELECCIONADA
+//            DTOCriterio criterio1 = new DTOCriterio("nombreEmpresa", "=", nombreEmpresa);
+//            criterios.clear();
+//            criterios.add(criterio1);
+//            Empresa empresa = (Empresa) FachadaPersistencia.getInstance().buscar("Empresa", criterios).get(0);
+//
+//            DTOCriterio criterio4 = new DTOCriterio("empresa", "=", empresa);
+//            DTOCriterio criterio5 = new DTOCriterio("fechaHoraOperacion", ">", fechaDesde);
+//            DTOCriterio criterio6 = new DTOCriterio("fechaHoraOperacion", "<", fechaHasta);
+//            DTOCriterio criterio12 = new DTOCriterio("tipoImpuesto", "=", tipoImpuesto);
+//          
+//            criterios.clear();
+//            criterios.add(criterio4);
+//            criterios.add(criterio5);
+//            criterios.add(criterio6);
+//            criterios.add(criterio12);
+//
+//            List<Object> listOperacion = FachadaPersistencia.getInstance().buscar("Operacion", criterios);
+//
+//            //LLENO EL Operacion
+//            for (Object obj : listOperacion) {
+//                Operacion operacion = (Operacion) obj;
+//
+//                DTOOperacionConsultarOperacionesBancarias dtoOperacion = new DTOOperacionConsultarOperacionesBancarias();
+//
+//                dtoOperacion.setCodigoPagoElectronicoOperacion(operacion.getCodigoPagoElectrionicoOperacion());
+//                dtoOperacion.setFechaHoraOperacion(operacion.getFechaHoraOperacion());
+//                dtoOperacion.setImportePagadoOperacion(operacion.getImportePagadoOperacion());
+//                dtoOperacion.setNroComprobanteFacturaOperacion(operacion.getNroComprobanteFacturaOperacion());
+//                dtoOperacion.setNumeroOperacion(operacion.getNumeroOperacion());
+//                dtoOperacion.setTipoImpuesto(operacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+//                listDtoOperacion.add(dtoOperacion);
+//                montoTotal += operacion.getImportePagadoOperacion();
+//            }
+//
+//        }
+//
+//        return listDtoOperacion;
     }
 
 }

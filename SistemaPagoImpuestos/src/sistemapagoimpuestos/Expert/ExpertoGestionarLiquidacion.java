@@ -636,7 +636,7 @@ public class ExpertoGestionarLiquidacion {
             
                 for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
                     for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
-                      if (  liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(null)){
+                      if (  liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado()==null){
                       liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
                       FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j));
                      CalculoComisionEstado calculoComisionEstado = new CalculoComisionEstado();

@@ -109,19 +109,23 @@ public class ExpertoCalcularLiquidaciones {
             if (fechaHasta == null) {
                 
                 //Busco la liquidacion que tenga esa LiquidacionEstado
-                criterios.clear();
-                criterios.add(new DTOCriterio("liquidacionEstado", "=", liquidacionEstado));
-                Liquidacion liquidacionARecalcular = (Liquidacion)FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
+//                criterios.clear();
+//                criterios.add(new DTOCriterio("liquidacionEstado", "=", liquidacionARecalcular.getLiquidacionEstadoList().get(0)));
+                List<Object> liquidaciones = FachadaPersistencia.getInstance().buscar("Liquidacion", null);
+                List<Liquidacion> liquidacionARecalcular2 = new ArrayList();
+                for (Object objLiquidaciones : liquidaciones) {
+                    Liquidacion liquidacionlist = (Liquidacion) objLiquidaciones;
+                    for (int i = 0; i < liquidacionlist.getLiquidacionEstadoList().size(); i++) {
+                        if (liquidacionlist.getLiquidacionEstadoList().get(i).equals(liquidacionEstado)) {
+                            liquidacionARecalcular2.add(liquidacionlist);
+                            break;
+                        }
+                    }
+                }
                 
-//                for (Object objLiquidaciones : liquidaciones) {
-//                    Liquidacion liquidacionlist = (Liquidacion) objLiquidaciones;
-//                    for (int i = 0; i < liquidacionlist.getLiquidacionEstadoList().size(); i++) {
-//                        if (liquidacionlist.getLiquidacionEstadoList().get(i).equals(liquidacionEstado)) {
-//                            liquidacionARecalcular = liquidacionlist;
-//                            break;
-//                        }
-//                    }
-//                }
+                for (int n = 0; n < liquidacionARecalcular2.size(); n++) {
+                   Liquidacion liquidacionARecalcular = liquidacionARecalcular2.get(n);
+                
                 Date fechaDesdeLiquidacion = liquidacionARecalcular.getFechaHoraDesdeLiquidacion();
                 Date fechaHastaLiquidacion = liquidacionARecalcular.getFechaHoraHastaLiquidacion();
                 EmpresaTipoImpuesto empresaTipoImpuesto = liquidacionARecalcular.getEmpresaTipoImpuesto();
@@ -137,7 +141,8 @@ public class ExpertoCalcularLiquidaciones {
                 dtosAccionesSistema.add(new DTOAccionesSistema(3, "INICIANDO RECÁLCULO DE LA LIQUIDACIÓN", "Empresa: " + liquidacionARecalcular.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n" + "Tipo Impuesto: " + liquidacionARecalcular.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Cantidad de operaciones: " + listOperacion.size(), new Date()));
                 
                 CalculoComision calculoComision = new CalculoComision();
-                
+                calculoComision.setComisionList(new ArrayList());
+                calculoComision.setCalculoComisionEstadoList(new ArrayList());
                 for (Object op : listOperacion) {
                     Operacion operacion = (Operacion) op;
                     Double valorComision;
@@ -172,7 +177,7 @@ public class ExpertoCalcularLiquidaciones {
                 //setear fecha hasta del calculoComisionEstado anterior
                 for (int i = 0; i < liquidacionARecalcular.getCalculoComisionList().size(); i++) {
                     for (int j = 0; j < liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
-                        if (liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(null) ){
+                        if (liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado()==(null) ){
                           liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
                             FachadaPersistencia.getInstance().guardar(liquidacionARecalcular.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j));
                         }
@@ -180,7 +185,7 @@ public class ExpertoCalcularLiquidaciones {
                 }
                 //setear fehca hasta de la liquidacionEstado anterior
                 for (int i = 0; i < liquidacionARecalcular.getLiquidacionEstadoList().size(); i++) {
-                    if (liquidacionARecalcular.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado().equals(null)) {
+                    if (liquidacionARecalcular.getLiquidacionEstadoList().get(i).getFechaHoraHastaLiquidacionEstado()==(null)) {
                         liquidacionARecalcular.getLiquidacionEstadoList().get(i).setFechaHoraHastaLiquidacionEstado(fechaActual);
                         FachadaPersistencia.getInstance().guardar(liquidacionARecalcular.getLiquidacionEstadoList().get(i));
                     }
@@ -216,6 +221,7 @@ public class ExpertoCalcularLiquidaciones {
                 dtosAccionesSistema.add(new DTOAccionesSistema(3, "FIN DE RECÁLCULO DE LA LIQUIDACIÓN", "Empresa: " + liquidacionARecalcular.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa() + "\n" + "Tipo Impuesto: " + liquidacionARecalcular.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto() + "\n" + "Número de liquidación: " + liquidacionARecalcular.getNumeroLiquidacion() + "\n" + "Fecha desde: " + liquidacionARecalcular.getFechaHoraDesdeLiquidacion() + "\n" + "Fecha hasta: " + liquidacionARecalcular.getFechaHoraHastaLiquidacion(), new Date()));
                 cantidadAnuladas++;
             }
+        }
         }
         return cantidadAnuladas;
     }

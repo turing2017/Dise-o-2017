@@ -19,9 +19,12 @@ public class Operacion extends Entity{
     private int numeroOperacion;
     private String codigoPagoElectrionicoOperacion;
     private Date fechaHoraOperacion;
+    private Date fechaVencimientoComprobante;
     private double importePagadoOperacion;
+    private double valorTotalComprobante;
     private int nroComprobanteFacturaOperacion;
     private boolean liquidadaOperacion;
+    private double valorComisionOperacion;
     private CuentaBancaria cuentaBancaria;
     private Empresa empresa;
     private EmpresaTipoImpuesto empresaTipoImpuesto;
@@ -31,20 +34,23 @@ public class Operacion extends Entity{
     public Operacion() {
     }
 
-    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, double importePagadoOperacion, int nroComprobanteFacturaOperacion, boolean liquidadaOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto,List<DetalleOperacion> detalleOperacion) {
+    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, Date fechaVencimientoComprobante, double importePagadoOperacion, double valorTotalComprobante, int nroComprobanteFacturaOperacion, boolean liquidadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectrionicoOperacion = codigoPagoElectrionicoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
+        this.fechaVencimientoComprobante = fechaVencimientoComprobante;
         this.importePagadoOperacion = importePagadoOperacion;
+        this.valorTotalComprobante = valorTotalComprobante;
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
         this.liquidadaOperacion = liquidadaOperacion;
+        this.valorComisionOperacion = valorComisionOperacion;
         this.cuentaBancaria = cuentaBancaria;
         this.empresa = empresa;
         this.empresaTipoImpuesto = empresaTipoImpuesto;
         this.tipoImpuesto = tipoImpuesto;
-        this.detalleOperacionList = detalleOperacion;
     }
 
+ 
     
     public int getNumeroOperacion() {
         return numeroOperacion;
@@ -94,6 +100,14 @@ public class Operacion extends Entity{
         this.liquidadaOperacion = liquidadaOperacion;
     }
 
+    public double getValorComisionOperacion() {
+        return valorComisionOperacion;
+    }
+
+    public void setValorComisionOperacion(double valorComisionOperacion) {
+        this.valorComisionOperacion = valorComisionOperacion;
+    }
+
     public CuentaBancaria getCuentaBancaria() {
         return cuentaBancaria;
     }
@@ -132,6 +146,22 @@ public class Operacion extends Entity{
 
     public void setDetalleOperacionList(List<DetalleOperacion> detalleOperacion) {
         this.detalleOperacionList = detalleOperacion;
+    }
+
+    public Date getFechaVencimientoComprobante() {
+        return fechaVencimientoComprobante;
+    }
+
+    public void setFechaVencimientoComprobante(Date fechaVencimientoComprobante) {
+        this.fechaVencimientoComprobante = fechaVencimientoComprobante;
+    }
+
+    public double getValorTotalComprobante() {
+        return valorTotalComprobante;
+    }
+
+    public void setValorTotalComprobante(double valorTotalComprobante) {
+        this.valorTotalComprobante = valorTotalComprobante;
     }
 
  

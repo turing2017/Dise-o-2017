@@ -268,6 +268,12 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         //manda a buscar con los parametros       
         Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
         Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fechahasta);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        fechahasta = cal.getTime();
+         System.out.println("----------------------------------------------------------------------"+fechahasta+";"+fechadesde);
+        
         ArrayList<DTOLiquidacion> listDtoLiquidacion = controlador.buscarLiquidacionConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jComboBoxEmpresa.getItemAt(jComboBoxEmpresa.getSelectedIndex()), fechadesde, fechahasta);
 
         //LLena la tabla

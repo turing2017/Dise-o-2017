@@ -214,23 +214,28 @@ public class ExpertoGestionarLiquidacion {
             liquidacion.setFechaHoraLiquidacion(fechaActual);
             
                 for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
+                    System.out.println(liquidacion.getCalculoComisionList().size());
                     for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
-                      if (  liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(null)){
-                      liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
-                      FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j));
-                     CalculoComisionEstado calculoComisionEstado = new CalculoComisionEstado();
-                    calculoComisionEstado.setFechaHoraDesdeCalculoComisionEstado(fechaActual);
-                     criterios.clear();
-                    criterios.add(new DTOCriterio("nombreEstadoCalculoComision", "=", "Aprobada"));
-                     EstadoCalculoComision estadoCalculoComision = (EstadoCalculoComision) FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", criterios).get(0);
-                    calculoComisionEstado.setEstadoCalculoComision(estadoCalculoComision);
-                    liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().add(calculoComisionEstado);
+                        System.out.println(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size());
+                      if (  liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado()==null){
+                          
+                        liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).setFechaHoraHastaCalculoComisionEstado(fechaActual);
+                        FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j));
+                        CalculoComisionEstado calculoComisionEstado = new CalculoComisionEstado();
+                        calculoComisionEstado.setFechaHoraDesdeCalculoComisionEstado(fechaActual);
+                        criterios.clear();
+                        criterios.add(new DTOCriterio("nombreEstadoCalculoComision", "=", "Aprobada"));
+                        EstadoCalculoComision estadoCalculoComision = (EstadoCalculoComision) FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", criterios).get(0);
+                        calculoComisionEstado.setEstadoCalculoComision(estadoCalculoComision);
+                        liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().add(calculoComisionEstado);
                     
                     
                     FachadaPersistencia.getInstance().guardar(calculoComisionEstado);
                     FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i));
                     FachadaPersistencia.getInstance().guardar(liquidacion);
+                    
                       }
+                      break;
                     }
                 }
                 
@@ -647,6 +652,7 @@ public class ExpertoGestionarLiquidacion {
                     FachadaPersistencia.getInstance().guardar(liquidacion.getCalculoComisionList().get(i));
                     FachadaPersistencia.getInstance().guardar(liquidacion);
                       }
+                      break;
                     }
                 }
 

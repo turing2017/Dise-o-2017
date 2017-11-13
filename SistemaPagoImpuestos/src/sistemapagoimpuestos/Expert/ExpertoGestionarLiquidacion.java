@@ -466,6 +466,7 @@ public class ExpertoGestionarLiquidacion {
         criterios.add(criterio);
         Liquidacion liquidacion = (Liquidacion) FachadaPersistencia.getInstance().buscar("Liquidacion", criterios).get(0);
         DTOLiquidacion dtoLiquidacion = new DTOLiquidacion();
+        dtoLiquidacion.setListOperacionComision(new ArrayList());
         dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
         dtoLiquidacion.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
         dtoLiquidacion.setFechaHoraDesdeLiquidacion(liquidacion.getFechaHoraDesdeLiquidacion());
@@ -665,6 +666,7 @@ public class ExpertoGestionarLiquidacion {
         DTOLiquidacionComision dtoLiquidacionComision = new DTOLiquidacionComision();
         dtoLiquidacionComision.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
         dtoLiquidacionComision.setFechaHoraLiquidacion(liquidacion.getFechaHoraLiquidacion());
+        dtoLiquidacionComision.setEstadoComisionList(new ArrayList());
         for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
             for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
                 DTOEstadoCalculoComision dtoEstadoCalculoComision = new DTOEstadoCalculoComision();

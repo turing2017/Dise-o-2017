@@ -88,7 +88,7 @@ public class ExpertoConsultarLiquidacion {
                      criterios.add(new DTOCriterio("empresaTipoImpuesto","=",empresaTipoImpuesto));
                      criterios.add(new DTOCriterio("fechaHoraLiquidacion", ">", fechaDesde));
                      criterios.add(new DTOCriterio("fechaHoraLiquidacion", "<", fechaHasta));
-                      List<Object> liquidacioneslist = FachadaPersistencia.getInstance().buscar("Liquidacoin", criterios); 
+                      List<Object> liquidacioneslist = FachadaPersistencia.getInstance().buscar("Liquidacion", criterios); 
                                     for (Object obj : liquidacioneslist) {
                                     Liquidacion liquidacion = (Liquidacion) obj;
                                     liquidacionesList.add(liquidacion);
@@ -263,6 +263,7 @@ public class ExpertoConsultarLiquidacion {
             dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
             dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
             dtoLiquidacion.setNumeroLiquidacion(liquidacion.getNumeroLiquidacion());
+            dtoLiquidacion.setListOperacionComision(new ArrayList());
             
         //   List<DTOOperacionConsultarLiquidacion> listOperacionComision = new ArrayList();
             for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {

@@ -20,7 +20,7 @@ public class IUMostrar extends javax.swing.JDialog {
     /**
      * Creates new form IUMostrar
      */
-    public IUMostrar(String nliquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+    public IUMostrar(String nliquidacion, String fechaDesde, String fechaHasta, String estado) {
         initComponents();
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
         DTOLiquidacion liquidacion = controlador.mostrar(nliquidacion, fechaDesde, fechaHasta, estado);

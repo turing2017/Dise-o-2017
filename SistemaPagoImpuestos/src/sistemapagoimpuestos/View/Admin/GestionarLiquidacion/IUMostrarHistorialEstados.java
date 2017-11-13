@@ -173,29 +173,30 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
         int f = jTableEstados.getSelectedRow();
         String estado = jTableEstados.getValueAt(f, 0).toString();
         String fechaDesdeS = jTableEstados.getValueAt(f, 1).toString();
-
-        String dateString = fechaDesdeS;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date fechaDesde = null;
+        String fechaHastaS;
+//        String dateString = fechaDesdeS;
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date fechaDesde = null;
+//        try {
+//            fechaDesde = sdf.parse(dateString);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Date fechaHasta = null;
         try {
-            fechaDesde = sdf.parse(dateString);
-        } catch (ParseException ex) {
-            Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+             fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
         }
-        Date fechaHasta = null;
-        try {
-            String fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
-            String dateString1 = fechaHastaS;
-            try {
-                fechaHasta = sdf.parse(dateString1);
-            } catch (ParseException ex) {
-                Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (Exception e) {
-            fechaHasta = null;
+//            String dateString1 = fechaHastaS;
+//            try {
+//                fechaHasta = sdf.parse(dateString1);
+             catch (Exception e) {
+//                Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } catch (Exception e) {
+            fechaHastaS = null;
         }
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        controlador.pantallaIUmostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+        controlador.pantallaIUmostrar(nliquidacion, fechaDesdeS, fechaHastaS, estado);
         
 
         //   IUMostrar mostrar = new IUMostrar(nliquidacion);

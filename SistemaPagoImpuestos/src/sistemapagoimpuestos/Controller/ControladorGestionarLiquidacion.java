@@ -75,7 +75,7 @@ public class ControladorGestionarLiquidacion {
 
    
 
-    public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+    public DTOLiquidacion mostrar(String numeroLiquidacion, String fechaDesde, String fechaHasta, String estado) {
         return experto.mostrar(numeroLiquidacion, fechaDesde, fechaHasta, estado);
     }
 
@@ -92,7 +92,7 @@ public class ControladorGestionarLiquidacion {
         IUMostrarHistorialEstados mostrarHistorico = new IUMostrarHistorialEstados(nliquidacion, fechaliquidacion);
     }
 
-    public void pantallaIUmostrar(String nliquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+    public void pantallaIUmostrar(String nliquidacion, String fechaDesde, String fechaHasta, String estado) {
         IUMostrar mostrar = new IUMostrar(nliquidacion, fechaDesde, fechaHasta, estado);
     }
 

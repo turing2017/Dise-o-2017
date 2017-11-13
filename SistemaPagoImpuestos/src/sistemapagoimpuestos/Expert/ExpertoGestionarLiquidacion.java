@@ -462,7 +462,7 @@ public class ExpertoGestionarLiquidacion {
 
  
 
-    public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+    public DTOLiquidacion mostrar(String numeroLiquidacion, String fechaDesde, String fechaHasta, String estado) {
         boolean flag = false;
         //Busca  esa liquidacion 
         List<DTOCriterio> criterios = new ArrayList<>();
@@ -478,10 +478,16 @@ public class ExpertoGestionarLiquidacion {
         dtoLiquidacion.setFechaHoraHastaLiquidacion(liquidacion.getFechaHoraHastaLiquidacion());
         dtoLiquidacion.setNombreEmpresa(liquidacion.getEmpresaTipoImpuesto().getEmpresa().getNombreEmpresa());
         dtoLiquidacion.setNombreTipoImpuesto(liquidacion.getEmpresaTipoImpuesto().getTipoImpuesto().getNombreTipoImpuesto());
+        dtoLiquidacion.setListOperacionComision(new ArrayList());
         for (int i = 0; i < liquidacion.getCalculoComisionList().size(); i++) {
             for (int j = 0; j < liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().size(); j++) {
-              if(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraDesdeCalculoComisionEstado().equals(fechaDesde) &&
-                liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().equals(fechaHasta) ){
+                
+                System.out.println(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraDesdeCalculoComisionEstado()+"=="+fechaDesde+"?");
+                System.out.println(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado()+"=="+fechaHasta+"?");
+                
+              if(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraDesdeCalculoComisionEstado().toString().equals(fechaDesde) )
+                //liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getFechaHoraHastaCalculoComisionEstado().toString()==(fechaHasta) )
+                      {
               dtoLiquidacion.setNombreEstadoLiquidacion(liquidacion.getCalculoComisionList().get(i).getCalculoComisionEstadoList().get(j).getEstadoCalculoComision().getNombreEstadoCalculoComision());
               dtoLiquidacion.setValorTotalCalculoComision(liquidacion.getCalculoComisionList().get(i).getValorTotalCalculoComision());
               

@@ -29,6 +29,7 @@ public class ExpertoCalcularLiquidaciones {
     Date fechaActual = new Date();
     String nombreEstadoAnuladaComision = "Anulada";
     String nombreEstadoCalculadaComision = "Calculada";
+    String nombreEstadoRecalculadaComision ="Recalculada";
     
     String nombreEstadoRecalculada = "Pendiente";
     String nombreEstadoAnulado = "Anulada";
@@ -197,16 +198,17 @@ public class ExpertoCalcularLiquidaciones {
                 CalculoComisionEstado nuevoCalculoComisionEstado = new CalculoComisionEstado();
                 nuevoCalculoComisionEstado.setFechaHoraDesdeCalculoComisionEstado(fechaActual);
                 criterios.clear();
-                criterios.add(new DTOCriterio("nombreEstadoCalculoComision","=",nombreEstadoAnuladaComision));
-                EstadoCalculoComision estadoAnuladoComision = (EstadoCalculoComision)FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", criterios).get(0);
-                nuevoCalculoComisionEstado.setEstadoCalculoComision(estadoAnuladoComision);
+                criterios.add(new DTOCriterio("nombreEstadoCalculoComision","=",nombreEstadoRecalculadaComision));
+                EstadoCalculoComision estado = (EstadoCalculoComision)FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", criterios).get(0);
+                nuevoCalculoComisionEstado.setEstadoCalculoComision(estado);
                 FachadaPersistencia.getInstance().guardar(nuevoCalculoComisionEstado);
                 calculoComision.getCalculoComisionEstadoList().add(nuevoCalculoComisionEstado);
                 calculoComision.setFechaCalculoComision(fechaActual);
                 FachadaPersistencia.getInstance().guardar(calculoComision);
                 liquidacionEstado.setFechaHoraHastaLiquidacionEstado(fechaActual);
                 FachadaPersistencia.getInstance().guardar(liquidacionEstado);
-                
+                //NUEVO
+                liquidacionARecalcular.getCalculoComisionList().add(calculoComision);
                 
                
                 criterios.clear();

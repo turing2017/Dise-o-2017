@@ -69,6 +69,12 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(tabla_items);
 
+        comboBox_items.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBox_itemsActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Agregar Item:");
 
         button_agregar.setText("Agregar");
@@ -191,6 +197,10 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton_EliminarItemActionPerformed
 
+    private void comboBox_itemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_itemsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBox_itemsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -275,6 +285,8 @@ public class IUGestionarTipoImpuestoItems extends javax.swing.JFrame {
         
     //Método para llenar el comboBox
     public void llenarComboItem(List<DTOItem> listaDTOItem){
+        String texto = "Seleccione item";
+        comboBox_items.addItem(texto);
         for (int i = 0; i < listaDTOItem.size(); i++) {
             DTOItem dtoItem = (DTOItem) listaDTOItem.get(i);
             String nombreItem = dtoItem.getNombreItem();

@@ -257,7 +257,7 @@ public class IUGestionarTipoImpuestoModificarETI extends javax.swing.JFrame {
         int frec = (int) jSpinnerfrecuencia.getValue();
         boolean habilitada = jCheckBoxEstado.isSelected();
         controlador.ModificarETI(nombreTE, nombreTI, cuit, nuevoTE, nuevoTI, frec, habilitada);
-        Excepciones.getInstance().modificacionExito();
+        
         controlador.iniciar(cuit);
         this.dispose();
     }//GEN-LAST:event_ModificarActionPerformed

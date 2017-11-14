@@ -339,7 +339,7 @@ public class ExpertoCalcularLiquidaciones {
                 nuevaLiquidacion.setNumeroLiquidacion(Generar_numeroLiquidacionNueva());
                 nuevaLiquidacion.setFechaHoraLiquidacion(fechaActual);
                 nuevaLiquidacion.setFechaHoraDesdeLiquidacion(fechaHoraDesdeAUtilizar);
-                nuevaLiquidacion.setFechaHoraHastaLiquidacion(fechaActual);
+                nuevaLiquidacion.setFechaHoraHastaLiquidacion(fechaALiquidar);
                  
                 criterios.clear();
                 criterios.add(new DTOCriterio("nombreEstadoLiquidacion", "=", nombreEstadoPendiente));

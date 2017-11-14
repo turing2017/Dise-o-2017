@@ -10,11 +10,15 @@ import exceptions.Excepciones;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOExportar;
 
 import sistemapagoimpuestos.Dto.DTOOperacionConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoConsultarOperacionesBancarias;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.Utils.UIExportar;
+import sistemapagoimpuestos.Utils.UIExportarExcel;
+import sistemapagoimpuestos.Utils.UIExportarTxt;
 import sistemapagoimpuestos.View.Empresa.ConsultarOperacionesBancarias.IUConsultarOperacionesBancarias;
 
 
@@ -47,6 +51,19 @@ public class ControladorConsultarOperacionesBancarias {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "El usuario no corresponde a un usuario de Empresa");
         } catch (Exception e) {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
+        }
+    }
+
+    public void exportar(DTOExportar dtoExportacion, String tipoArchivo) {
+        UIExportar uiExportar; 
+        switch (tipoArchivo) {
+            case "Excel":
+                uiExportar = new UIExportarExcel();
+                uiExportar.exportar(dtoExportacion);
+                break;
+            case "Txt":
+                uiExportar = new UIExportarTxt();
+                uiExportar.exportar(dtoExportacion);
         }
     }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="sistemapagoimpuestos.Entity.CalculoComisionEstado" table="calculo_Comision_Estado">
+    <id name="OID" type="string"  >
+      <column name="OIDCalculoComisionEstado"/>
+      <generator class="uuid2"/>
+    </id>
+    
+<property name="fechaHoraDesdeCalculoComisionEstado" type="timestamp">
+      <column name="fechaHoraDesdeCalculoComisionEstado"/>
+    </property>
+    
+    <property name="fechaHoraHastaCalculoComisionEstado" type="timestamp">
+      <column name="fechaHoraHastaCalculoComisionEstado"/>
+    </property>
+
+ <many-to-one name="estadoCalculoComision" class="sistemapagoimpuestos.Entity.EstadoCalculoComision" column="OIDEstacoCalculoComision"/>
+ </class>
+</hibernate-mapping>

@@ -26,21 +26,15 @@
     <many-to-one name="empresaTipoImpuesto" class="sistemapagoimpuestos.Entity.EmpresaTipoImpuesto" column="OIDEmpresaTipoImpuesto"/>
     
     
-    <bag name="operacionList" table="operacion" cascade="none" inverse="false">
+    <bag name="calculoComisionList" table="calculoComision" cascade="none" inverse="false">
     <key column="OIDLiquidacion" not-null="false" />
-      <one-to-many class="sistemapagoimpuestos.Entity.Operacion"/>  
+      <one-to-many class="sistemapagoimpuestos.Entity.CalculoComision"/>  
     </bag>
       
          <bag name="liquidacionEstadoList" table="liquidacionEstado" cascade="none" inverse="false">
        <key column="OIDLiquidacion" not-null="false" />
          <one-to-many class="sistemapagoimpuestos.Entity.LiquidacionEstado"/>  
        </bag>
-       
-        <bag name="comisionList" table="comision" cascade="none" inverse="false">
-       <key column="OIDLiquidacion" not-null="true" />
-         <one-to-many class="sistemapagoimpuestos.Entity.Comision"/>  
-       </bag>
-       
-       
+             
   </class>
 </hibernate-mapping>

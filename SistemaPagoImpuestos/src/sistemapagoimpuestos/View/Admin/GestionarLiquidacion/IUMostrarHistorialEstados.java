@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import sistemapagoimpuestos.Controller.ControladorGestionarLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 
 /**
@@ -28,15 +29,15 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
         jLabelNumeroLiquidacion.setText(numeroLiquidacion);
         jLabelFechaLiquidacion.setText(fechaLiquidacion);
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        List<DTOLiquidacionEstado> estados = controlador.buscarLiquidacionEstado(numeroLiquidacion);
+        DTOLiquidacionComision estados = controlador.buscarEstadoComision(numeroLiquidacion);
         DefaultTableModel model = (DefaultTableModel) jTableEstados.getModel();
 
-        for (int i = 0; i < estados.size(); i++) {
+        for (int i = 0; i < estados.getEstadoComisionList().size(); i++) {
             model.addRow(new Object[]{});
 
-            jTableEstados.setValueAt(estados.get(i).getEstadoLiquidacion(), i, 0);
-            jTableEstados.setValueAt(estados.get(i).getFechaHoraDesdeLiquidacionEstado().toString(), i, 1);
-            jTableEstados.setValueAt(estados.get(i).getFechaHoraHastaLiquidacionEstado(), i, 2);
+            jTableEstados.setValueAt(estados.getEstadoComisionList().get(i).getNombreEstado(), i, 0);
+            jTableEstados.setValueAt(estados.getEstadoComisionList().get(i).getFechaDesdeComisionEstado().toString(), i, 1);
+            jTableEstados.setValueAt(estados.getEstadoComisionList().get(i).getFechaHastaComisionEstado(), i, 2);
         }
       // Ordenar la tabla por fechas Desde
        for (int i = 0; i < (model.getRowCount()*(model.getRowCount()-1)); i++) {
@@ -172,29 +173,30 @@ public class IUMostrarHistorialEstados extends javax.swing.JDialog {
         int f = jTableEstados.getSelectedRow();
         String estado = jTableEstados.getValueAt(f, 0).toString();
         String fechaDesdeS = jTableEstados.getValueAt(f, 1).toString();
-
-        String dateString = fechaDesdeS;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date fechaDesde = null;
+        String fechaHastaS;
+//        String dateString = fechaDesdeS;
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date fechaDesde = null;
+//        try {
+//            fechaDesde = sdf.parse(dateString);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Date fechaHasta = null;
         try {
-            fechaDesde = sdf.parse(dateString);
-        } catch (ParseException ex) {
-            Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+             fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
         }
-        Date fechaHasta = null;
-        try {
-            String fechaHastaS = jTableEstados.getValueAt(f, 2).toString();
-            String dateString1 = fechaHastaS;
-            try {
-                fechaHasta = sdf.parse(dateString1);
-            } catch (ParseException ex) {
-                Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (Exception e) {
-            fechaHasta = null;
+//            String dateString1 = fechaHastaS;
+//            try {
+//                fechaHasta = sdf.parse(dateString1);
+             catch (Exception e) {
+//                Logger.getLogger(IUMostrarHistorialEstados.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } catch (Exception e) {
+            fechaHastaS = null;
         }
         ControladorGestionarLiquidacion controlador = new ControladorGestionarLiquidacion();
-        controlador.pantallaIUmostrar(nliquidacion, fechaDesde, fechaHasta, estado);
+        controlador.pantallaIUmostrar(nliquidacion, fechaDesdeS, fechaHastaS, estado);
         
 
         //   IUMostrar mostrar = new IUMostrar(nliquidacion);

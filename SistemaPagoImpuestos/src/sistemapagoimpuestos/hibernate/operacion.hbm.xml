@@ -24,14 +24,12 @@
         <property name="liquidadaOperacion" type="boolean">
             <column name="liquidadaOperacion"/>
         </property>
-        <property name="valorComisionOperacion" type="double">
-            <column name="valorComisionOperacion"/>
-        </property>
+
         
         <property name="valorTotalComprobante" type="double">
             <column name="valorTotalComprobante"/>
         </property>
-        
+
         <property name="fechaVencimientoComprobante" type="timestamp" >
             <column name="fechaVencimientoComprobante"/>
         </property>

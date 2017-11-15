@@ -9,11 +9,15 @@ import exceptions.ExcepcionGenerica;
 import exceptions.Excepciones;
 import java.util.Date;
 import java.util.List;
+import sistemapagoimpuestos.Dto.DTOExporteLiquidacion;
 import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
 
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
 import sistemapagoimpuestos.Expert.ExpertoConsultarLiquidacion;
 import sistemapagoimpuestos.Fabricas.FabricaExpertos;
+import sistemapagoimpuestos.Utils.UIExportar;
+import sistemapagoimpuestos.Utils.UIExportarExcel;
+import sistemapagoimpuestos.Utils.UIExportarTxt;
 import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUConsultarLiquidacion;
 import sistemapagoimpuestos.View.Empresa.ConsultarLiquidacion.IUMostrar;
 
@@ -51,13 +55,28 @@ public class ControladorConsultarLiquidacion {
             Excepciones.getInstance().errorGenerico("Error: Usuario", "No se pudo verificar el tipo de usuario.");
         }
     }
-    
-public void mostrar(String nliquidacion){
- IUMostrar mostrar = new IUMostrar(nliquidacion);
- mostrar.setVisible(true);
-}
-public DTOLiquidacionesConsultarLiquidaciones buscardetalleLiquidacion(String numeroLiquidacion){
-return experto.buscardetalleLiquidacion(numeroLiquidacion);
-}
+
+    public void mostrar(String nliquidacion) {
+        IUMostrar mostrar = new IUMostrar(nliquidacion);
+        mostrar.setVisible(true);
+    }
+
+    public DTOLiquidacionesConsultarLiquidaciones buscardetalleLiquidacion(String numeroLiquidacion) {
+        return experto.buscardetalleLiquidacion(numeroLiquidacion);
+    }
+
+    public void exportarLiquidacion(DTOExporteLiquidacion dtoExporteLiquidacion, String tipoArchivo) {
+
+        UIExportar uiExportar;
+        switch (tipoArchivo) {
+            case "Excel":
+                uiExportar = new UIExportarExcel();
+                uiExportar.exportarLiquidacion(dtoExporteLiquidacion);
+                break;
+            case "Txt":
+                uiExportar = new UIExportarTxt();
+                uiExportar.exportarLiquidacion(dtoExporteLiquidacion);
+        }
+    }
 
 }

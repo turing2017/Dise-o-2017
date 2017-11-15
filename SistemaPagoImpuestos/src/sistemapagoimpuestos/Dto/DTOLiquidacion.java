@@ -22,6 +22,7 @@ public class DTOLiquidacion {
     private String nombreTipoImpuesto;
     private String nombreEstadoLiquidacion;
     private List<DTOOperacionComision> listOperacionComision;
+    private double valorTotalCalculoComision;
     
     public DTOLiquidacion() {
     }
@@ -34,6 +35,14 @@ public class DTOLiquidacion {
 
     public void setListOperacionComision(List<DTOOperacionComision> listOperacionComision) {
         this.listOperacionComision = listOperacionComision;
+    }
+
+    public double getValorTotalCalculoComision() {
+        return valorTotalCalculoComision;
+    }
+
+    public void setValorTotalCalculoComision(double valorTotalCalculoComision) {
+        this.valorTotalCalculoComision = valorTotalCalculoComision;
     }
 
    

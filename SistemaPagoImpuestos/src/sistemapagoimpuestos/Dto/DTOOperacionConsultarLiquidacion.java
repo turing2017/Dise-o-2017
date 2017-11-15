@@ -16,6 +16,7 @@ public class DTOOperacionConsultarLiquidacion {
     int nroComprobanteFactura;
     double importePagadoOperacion;
     Date fechaHoraOperacion;
+    String nombreTipoImpuesto;
     public DTOOperacionConsultarLiquidacion() {
     }
 
@@ -26,6 +27,14 @@ public class DTOOperacionConsultarLiquidacion {
         this.nroComprobanteFactura = nroComprobanteFactura;
         this.importePagadoOperacion = importePagadoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
+    }
+
+    public String getNombreTipoImpuesto() {
+        return nombreTipoImpuesto;
+    }
+
+    public void setNombreTipoImpuesto(String nombreTipoImpuesto) {
+        this.nombreTipoImpuesto = nombreTipoImpuesto;
     }
 
     public Date getFechaHoraOperacion() {

@@ -24,7 +24,6 @@ public class Operacion extends Entity{
     private double valorTotalComprobante;
     private int nroComprobanteFacturaOperacion;
     private boolean liquidadaOperacion;
-    private double valorComisionOperacion;
     private CuentaBancaria cuentaBancaria;
     private Empresa empresa;
     private EmpresaTipoImpuesto empresaTipoImpuesto;
@@ -34,7 +33,8 @@ public class Operacion extends Entity{
     public Operacion() {
     }
 
-    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, Date fechaVencimientoComprobante, double importePagadoOperacion, double valorTotalComprobante, int nroComprobanteFacturaOperacion, boolean liquidadaOperacion, double valorComisionOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto) {
+
+    public Operacion(int numeroOperacion, String codigoPagoElectrionicoOperacion, Date fechaHoraOperacion, Date fechaVencimientoComprobante, double importePagadoOperacion, double valorTotalComprobante, int nroComprobanteFacturaOperacion, boolean liquidadaOperacion, CuentaBancaria cuentaBancaria, Empresa empresa, EmpresaTipoImpuesto empresaTipoImpuesto, TipoImpuesto tipoImpuesto) {
         this.numeroOperacion = numeroOperacion;
         this.codigoPagoElectrionicoOperacion = codigoPagoElectrionicoOperacion;
         this.fechaHoraOperacion = fechaHoraOperacion;
@@ -43,7 +43,6 @@ public class Operacion extends Entity{
         this.valorTotalComprobante = valorTotalComprobante;
         this.nroComprobanteFacturaOperacion = nroComprobanteFacturaOperacion;
         this.liquidadaOperacion = liquidadaOperacion;
-        this.valorComisionOperacion = valorComisionOperacion;
         this.cuentaBancaria = cuentaBancaria;
         this.empresa = empresa;
         this.empresaTipoImpuesto = empresaTipoImpuesto;
@@ -100,13 +99,7 @@ public class Operacion extends Entity{
         this.liquidadaOperacion = liquidadaOperacion;
     }
 
-    public double getValorComisionOperacion() {
-        return valorComisionOperacion;
-    }
-
-    public void setValorComisionOperacion(double valorComisionOperacion) {
-        this.valorComisionOperacion = valorComisionOperacion;
-    }
+  
 
     public CuentaBancaria getCuentaBancaria() {
         return cuentaBancaria;

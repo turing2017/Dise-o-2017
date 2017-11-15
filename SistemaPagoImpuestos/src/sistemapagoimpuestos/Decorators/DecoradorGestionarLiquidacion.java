@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -75,10 +76,10 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
     
     }
     @Override
-    public void AnularLiquidacion(String nroLiquidacion){
+    public void AnularLiquidacion(String numeroLiquidacion){
         Liquidacion listObject;
         FachadaInterna.getInstance().iniciarTransaccion();
-        super.AnularLiquidacion(nroLiquidacion); //To change body of generated methods, choose Tools | Templates.
+        super.AnularLiquidacion(numeroLiquidacion); //To change body of generated methods, choose Tools | Templates.
         FachadaInterna.getInstance().finalizarTransaccion();
         
     }
@@ -95,7 +96,7 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
 
 
     @Override
-    public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta,String estado) {
+    public DTOLiquidacion mostrar(String numeroLiquidacion, String fechaDesde, String fechaHasta,String estado) {
 
         FachadaInterna.getInstance().iniciarTransaccion();
         DTOLiquidacion dtoLiquidacion = super.mostrar(numeroLiquidacion, fechaDesde, fechaHasta,estado);
@@ -104,9 +105,9 @@ public class DecoradorGestionarLiquidacion extends ExpertoGestionarLiquidacion {
 
     }
     @Override
-    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion){
+    public DTOLiquidacionComision buscarEstadoComision(String numeroLiquidacion){
     FachadaInterna.getInstance().iniciarTransaccion();
-    List<DTOLiquidacionEstado> estados = super.buscarLiquidacionEstado(numeroLiquidacion);
+    DTOLiquidacionComision estados = super.buscarEstadoComision(numeroLiquidacion);
     FachadaInterna.getInstance().finalizarTransaccion();
     return estados;
     }

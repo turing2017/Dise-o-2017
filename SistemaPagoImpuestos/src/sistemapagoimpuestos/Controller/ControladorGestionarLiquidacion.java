@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import sistemapagoimpuestos.Dto.DTOEmpresa;
 import sistemapagoimpuestos.Dto.DTOLiquidacion;
+import sistemapagoimpuestos.Dto.DTOLiquidacionComision;
 import sistemapagoimpuestos.Dto.DTOLiquidacionEstado;
 import sistemapagoimpuestos.Dto.DTOOperacion;
 import sistemapagoimpuestos.Dto.DTOTipoImpuesto;
@@ -74,24 +75,24 @@ public class ControladorGestionarLiquidacion {
 
    
 
-    public DTOLiquidacion mostrar(String numeroLiquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+    public DTOLiquidacion mostrar(String numeroLiquidacion, String fechaDesde, String fechaHasta, String estado) {
         return experto.mostrar(numeroLiquidacion, fechaDesde, fechaHasta, estado);
     }
 
-    public void AnularLiquidacion(String nroLiquidacion) {
-        experto.AnularLiquidacion(nroLiquidacion);
+    public void AnularLiquidacion(String numeroLiquidacion) {
+        experto.AnularLiquidacion(numeroLiquidacion);
     }
 
-    public List<DTOLiquidacionEstado> buscarLiquidacionEstado(String numeroLiquidacion) {
+    public DTOLiquidacionComision buscarEstadoComision(String numeroLiquidacion) {
 
-        return experto.buscarLiquidacionEstado(numeroLiquidacion);
+        return experto.buscarEstadoComision(numeroLiquidacion);
     }
 
     public void pantallaIUmostrarHistorialEstados(String nliquidacion, String fechaliquidacion) {
         IUMostrarHistorialEstados mostrarHistorico = new IUMostrarHistorialEstados(nliquidacion, fechaliquidacion);
     }
 
-    public void pantallaIUmostrar(String nliquidacion, Date fechaDesde, Date fechaHasta, String estado) {
+    public void pantallaIUmostrar(String nliquidacion, String fechaDesde, String fechaHasta, String estado) {
         IUMostrar mostrar = new IUMostrar(nliquidacion, fechaDesde, fechaHasta, estado);
     }
 

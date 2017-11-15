@@ -13,10 +13,6 @@
         <column name="valorComision"/>
     </property>
     
-    <property name="fechaCalculoComision" type="timestamp">
-        <column name="fechaCalculoComision"/>
-    </property>
-    
     <many-to-one name="operacion" class="sistemapagoimpuestos.Entity.Operacion" column="OIDOperacion"/>
     
     </class>

@@ -12,16 +12,16 @@ import java.util.Date;
  * @author vande
  */
 public class Comision extends Entity {
+    
     double valorComision;
-    Date fechaCalculoComision;
     Operacion operacion;
 
     public Comision() {
     }
 
-    public Comision(double valorComision, Date fechaCalculoComision, Operacion operacion) {
+    public Comision( double valorComision, Operacion operacion) {
+       
         this.valorComision = valorComision;
-        this.fechaCalculoComision = fechaCalculoComision;
         this.operacion = operacion;
     }
 
@@ -33,13 +33,7 @@ public class Comision extends Entity {
         this.valorComision = valorComision;
     }
 
-    public Date getFechaCalculoComision() {
-        return fechaCalculoComision;
-    }
-
-    public void setFechaCalculoComision(Date fechaCalculoComision) {
-        this.fechaCalculoComision = fechaCalculoComision;
-    }
+   
 
     public Operacion getOperacion() {
         return operacion;

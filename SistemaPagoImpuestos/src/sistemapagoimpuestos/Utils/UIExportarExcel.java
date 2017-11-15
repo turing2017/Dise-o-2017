@@ -23,11 +23,9 @@ import sistemapagoimpuestos.Dto.DTOExporteLiquidacion;
  * @author Gabriel
  */
 public class UIExportarExcel implements UIExportar {
-
+    String path = System.getProperty("user.home") + "/Desktop/";
     @Override
     public void exportarOperaciones(DTOExportar dto) {
-       
-        String path = System.getProperty("user.home") + "/Desktop/";
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(3);
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -147,7 +145,7 @@ public class UIExportarExcel implements UIExportar {
         }
         JOptionPane.showMessageDialog(
                 null,
-                "Exportado correctamente en: " + System.getProperty("user.home"),
+                "Exportado correctamente en: " + path,
                 "Sistema Pago Impuestos",
                 JOptionPane.INFORMATION_MESSAGE);
     }

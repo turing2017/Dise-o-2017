@@ -359,9 +359,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         for (int i = 0; i < jTableOperaciones.getRowCount(); i++) {
             DTOExporteOperacion dto = new DTOExporteOperacion();
             dto.setFechaOperacion(jTableOperaciones.getValueAt(i, 0).toString());
-            dto.setNumeroOperacion(Integer.getInteger(jTableOperaciones.getValueAt(i, 1).toString()));
+            dto.setNumeroOperacion(jTableOperaciones.getValueAt(i, 1).toString());
             dto.setCodigoPagoElectronico(jTableOperaciones.getValueAt(i, 2).toString());
-            dto.setNroComprobante(Integer.getInteger(jTableOperaciones.getValueAt(i, 3).toString()));
+            dto.setNroComprobante(jTableOperaciones.getValueAt(i, 3).toString());
             dto.setTipoImpuesto(jTableOperaciones.getValueAt(i, 4).toString());
             dto.setImportePagado(Double.valueOf(jTableOperaciones.getValueAt(i, 5).toString()));
             dtoExporteOperaciones.add(dto);
@@ -393,9 +393,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         for (int i = 0; i < jTableOperaciones.getRowCount(); i++) {
             DTOExporteOperacion dto = new DTOExporteOperacion();
             dto.setFechaOperacion(jTableOperaciones.getValueAt(i, 0).toString());
-            dto.setNumeroOperacion(Integer.getInteger(jTableOperaciones.getValueAt(i, 1).toString()));
+            dto.setNumeroOperacion(jTableOperaciones.getValueAt(i, 1).toString());
             dto.setCodigoPagoElectronico(jTableOperaciones.getValueAt(i, 2).toString());
-            dto.setNroComprobante(Integer.getInteger(jTableOperaciones.getValueAt(i, 3).toString()));
+            dto.setNroComprobante(jTableOperaciones.getValueAt(i, 3).toString());
             dto.setTipoImpuesto(jTableOperaciones.getValueAt(i, 4).toString());
             dto.setImportePagado(Double.valueOf(jTableOperaciones.getValueAt(i, 5).toString()));
             dtoExporteOperaciones.add(dto);

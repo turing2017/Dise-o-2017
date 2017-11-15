@@ -33,13 +33,13 @@ public class UIExportarTxt implements UIExportar {
             for (int i = 0; i < dto.getListDtoOperaciones().size(); i++) {
                 file.write("Operacion" + i + "\r\n");
                 file.write("Fecha Operacion: " + dto.getListDtoOperaciones().get(i).getFechaOperacion());
-                file.write("Nro Operacion: " + dto.getListDtoOperaciones().get(i).getNumeroOperacion() + "; ");
+                file.write("Nro Operacion: " + dto.getListDtoOperaciones().get(i).getNumeroOperacion()+ "; ");
                 file.write("Codigo Pago Electronico: " + dto.getListDtoOperaciones().get(i).getCodigoPagoElectronico() + "; ");
                 file.write("Nro Comprobante: " + dto.getListDtoOperaciones().get(i).getNroComprobante() + ";");
                 file.write("Tipo Impuesto: " + dto.getListDtoOperaciones().get(i).getTipoImpuesto() + ";");
                 file.write("Importe Pagado: " + dto.getListDtoOperaciones().get(i).getImportePagado() + ";");
                 if (i == dto.getListDtoOperaciones().size() - 1) {
-                    file.write("Importe Pagado Total: " + dto.getImporteTotalPagado() + ";\r\n");
+                    file.write( "\r\n"+ "Importe Pagado Total: " + dto.getImporteTotalPagado());
                 }
             }
             file.close();

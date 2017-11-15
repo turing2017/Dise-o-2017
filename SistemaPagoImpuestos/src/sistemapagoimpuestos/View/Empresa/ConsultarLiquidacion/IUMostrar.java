@@ -30,6 +30,7 @@ import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
  */
 public class IUMostrar extends javax.swing.JDialog {
      static int sizeTable;
+     double totalComision=0.0;
     /**
      * Creates new form IUMostrar
      */
@@ -42,7 +43,6 @@ public class IUMostrar extends javax.swing.JDialog {
         jLabelTipoImpuesto.setText(dtoLiquidacion.getNombreTipoImpuesto());
         jLabelNrodeLiquidacion.setText(nliquidacion);
         jLabelFechaLiquidacion.setText(dtoLiquidacion.getFechaHoraLiquidacion().toString());
-       
         jLabelPeriodo.setText(dtoLiquidacion.getFechaHoraDesdeLiquidacion().toString()+" - "+dtoLiquidacion.getFechaHoraHastaLiquidacion().toString());
         
         NumberFormat nf = NumberFormat.getInstance();
@@ -61,8 +61,10 @@ public class IUMostrar extends javax.swing.JDialog {
             jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getFechaHoraOperacion().toString(), i, 1);
             jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getNroComprobanteFactura(), i, 2);
             jTableOperacion.setValueAt(dtoLiquidacion.getListOperacionComision().get(i).getImportePagadoOperacion(), i, 3);
-            jTableOperacion.setValueAt(nf.format(dtoLiquidacion.getListOperacionComision().get(i).getValorComision()), i, 4);   
+            jTableOperacion.setValueAt(nf.format(dtoLiquidacion.getListOperacionComision().get(i).getValorComision()), i, 4); 
+            totalComision =+ dtoLiquidacion.getListOperacionComision().get(i).getValorComision();
         }
+         jTextFieldMontoTotal.setText(nf.format(totalComision));
          for (int i = 0; i < (model.getRowCount()*(model.getRowCount()-1)); i++) {
           
             for (int j = 0; j <  model.getRowCount()-1; j++) {
@@ -295,16 +297,16 @@ public class IUMostrar extends javax.swing.JDialog {
       DTOExporteLiquidacion dtoExporteLiquidacion = new DTOExporteLiquidacion();
       dtoExporteLiquidacion.setEmpresa(jLabelEmpresa.getText());
       dtoExporteLiquidacion.setFechaLiquidacion(jLabelFechaLiquidacion.getText());
-      dtoExporteLiquidacion.setNumeroLiquidacion(Integer.getInteger(jLabelNrodeLiquidacion.getText()));
+      dtoExporteLiquidacion.setNumeroLiquidacion(jLabelNrodeLiquidacion.getText());
       dtoExporteLiquidacion.setPeriodo(jLabelPeriodo.getText());
       dtoExporteLiquidacion.setTipoImpuesto(jLabelTipoImpuesto.getText());
       dtoExporteLiquidacion.setMontoTotalComision(jTextFieldMontoTotal.getText());
       ArrayList<DTODetalleExporteLiquidacion> listDetallesExporteLiq = new ArrayList<DTODetalleExporteLiquidacion>();
        for (int i = 0; i < jTableOperacion.getRowCount(); i++) {
             DTODetalleExporteLiquidacion dto = new DTODetalleExporteLiquidacion();
-            dto.setNumeroOperacion((Integer.getInteger(jTableOperacion.getValueAt(i, 0).toString())));
+            dto.setNumeroOperacion(jTableOperacion.getValueAt(i, 0).toString());
               dto.setFechaOperacion(jTableOperacion.getValueAt(i, 1).toString());
-                          dto.setNumeroComprobante(Integer.getInteger(jTableOperacion.getValueAt(i, 2).toString()));
+                          dto.setNumeroComprobante(jTableOperacion.getValueAt(i, 2).toString());
             dto.setImportePagado(Double.valueOf(jTableOperacion.getValueAt(i, 3).toString()));
             dto.setMontoComision(Double.valueOf(jTableOperacion.getValueAt(i, 4).toString()));
             listDetallesExporteLiq.add(dto);
@@ -316,21 +318,20 @@ public class IUMostrar extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonDescargarActionPerformed
 
     private void buttonDescargar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDescargar1ActionPerformed
-              
-    
+             
       DTOExporteLiquidacion dtoExporteLiquidacion = new DTOExporteLiquidacion();
       dtoExporteLiquidacion.setEmpresa(jLabelEmpresa.getText());
       dtoExporteLiquidacion.setFechaLiquidacion(jLabelFechaLiquidacion.getText());
-      dtoExporteLiquidacion.setNumeroLiquidacion(Integer.getInteger(jLabelNrodeLiquidacion.getText()));
+      dtoExporteLiquidacion.setNumeroLiquidacion(jLabelNrodeLiquidacion.getText());
       dtoExporteLiquidacion.setPeriodo(jLabelPeriodo.getText());
       dtoExporteLiquidacion.setTipoImpuesto(jLabelTipoImpuesto.getText());
       dtoExporteLiquidacion.setMontoTotalComision(jTextFieldMontoTotal.getText());
       ArrayList<DTODetalleExporteLiquidacion> listDetallesExporteLiq = new ArrayList<DTODetalleExporteLiquidacion>();
        for (int i = 0; i < jTableOperacion.getRowCount(); i++) {
             DTODetalleExporteLiquidacion dto = new DTODetalleExporteLiquidacion();
-            dto.setNumeroOperacion((Integer.getInteger(jTableOperacion.getValueAt(i, 0).toString())));
+            dto.setNumeroOperacion(jTableOperacion.getValueAt(i, 0).toString());
               dto.setFechaOperacion(jTableOperacion.getValueAt(i, 1).toString());
-                          dto.setNumeroComprobante(Integer.getInteger(jTableOperacion.getValueAt(i, 2).toString()));
+                          dto.setNumeroComprobante(jTableOperacion.getValueAt(i, 2).toString());
             dto.setImportePagado(Double.valueOf(jTableOperacion.getValueAt(i, 3).toString()));
             dto.setMontoComision(Double.valueOf(jTableOperacion.getValueAt(i, 4).toString()));
             listDetallesExporteLiq.add(dto);

@@ -15,6 +15,7 @@ import sistemapagoimpuestos.Controller.ControladorGestionarUsuario;
 import sistemapagoimpuestos.Dto.DTOAccionesSistema;
 import sistemapagoimpuestos.Globals.GlobalVars;
 import sistemapagoimpuestos.Utils.MetodosPantalla;
+import sistemapagoimpuestos.Utils.PrinterCalculoLiquidaciones;
 import sistemapagoimpuestos.View.Login.IULogin;
 
 public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
@@ -216,8 +217,9 @@ public class IUAdminPantallaPrincipal extends javax.swing.JFrame {
         controlarCalcularLiq.validadarUsuario();
         ArrayList<DTOAccionesSistema> dtoAcciones = new ArrayList();
         dtoAcciones = controlarCalcularLiq.iniciar(dtoAcciones);
+        PrinterCalculoLiquidaciones printer = new PrinterCalculoLiquidaciones();
         for (DTOAccionesSistema dtoAccion : dtoAcciones) {
-            dtoAccion.imprimirSTD();
+            printer.imprimirSTD(dtoAccion);
         }
         this.dispose();
     }//GEN-LAST:event_button_calcular_liquidacionesActionPerformed

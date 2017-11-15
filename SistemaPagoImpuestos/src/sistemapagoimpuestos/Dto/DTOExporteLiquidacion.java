@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DTOExporteLiquidacion {
     private String empresa;
     private String tipoImpuesto;
-    private Integer numeroLiquidacion;
+    private String numeroLiquidacion;
     private String fechaLiquidacion;
     private String periodo;
     private String montoTotalComision;
@@ -51,11 +51,11 @@ public class DTOExporteLiquidacion {
         this.tipoImpuesto = tipoImpuesto;
     }
 
-    public Integer getNumeroLiquidacion() {
+    public String getNumeroLiquidacion() {
         return numeroLiquidacion;
     }
 
-    public void setNumeroLiquidacion(Integer numeroLiquidacion) {
+    public void setNumeroLiquidacion(String numeroLiquidacion) {
         this.numeroLiquidacion = numeroLiquidacion;
     }
 

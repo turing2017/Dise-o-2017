@@ -13,9 +13,9 @@ import java.util.Date;
  */
 public class DTOExporteOperacion {
     private String fechaOperacion;
-    private Integer numeroOperacion;
+    private String numeroOperacion;
     private String codigoPagoElectronico;
-    private Integer nroComprobante;
+    private String nroComprobante;
     private String tipoImpuesto;
     private double importePagado;
 
@@ -30,11 +30,11 @@ public class DTOExporteOperacion {
         this.fechaOperacion = fechaOperacion;
     }
 
-    public Integer getNumeroOperacion() {
+    public String getNumeroOperacion() {
         return numeroOperacion;
     }
 
-    public void setNumeroOperacion(Integer numeroOperacion) {
+    public void setNumeroOperacion(String numeroOperacion) {
         this.numeroOperacion = numeroOperacion;
     }
 
@@ -46,11 +46,11 @@ public class DTOExporteOperacion {
         this.codigoPagoElectronico = codigoPagoElectronico;
     }
 
-    public Integer getNroComprobante() {
+    public String getNroComprobante() {
         return nroComprobante;
     }
 
-    public void setNroComprobante(Integer nroComprobante) {
+    public void setNroComprobante(String nroComprobante) {
         this.nroComprobante = nroComprobante;
     }
 

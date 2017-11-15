@@ -10,8 +10,8 @@ package sistemapagoimpuestos.Dto;
  * @author Gabriel
  */
 public class DTODetalleExporteLiquidacion {
-    private Integer numeroComprobante;
-    private Integer numeroOperacion;
+    private String numeroComprobante;
+    private String numeroOperacion;
     private double importePagado;
     private double montoComision;
     private String fechaOperacion;
@@ -24,19 +24,19 @@ public class DTODetalleExporteLiquidacion {
         this.fechaOperacion = fechaOperacion;
     }
 
-    public Integer getNumeroComprobante() {
+    public String getNumeroComprobante() {
         return numeroComprobante;
     }
 
-    public void setNumeroComprobante(Integer numeroComprobante) {
+    public void setNumeroComprobante(String numeroComprobante) {
         this.numeroComprobante = numeroComprobante;
     }
 
-    public Integer getNumeroOperacion() {
+    public String getNumeroOperacion() {
         return numeroOperacion;
     }
 
-    public void setNumeroOperacion(Integer numeroOperacion) {
+    public void setNumeroOperacion(String numeroOperacion) {
         this.numeroOperacion = numeroOperacion;
     }
 

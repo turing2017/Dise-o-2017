@@ -59,34 +59,4 @@ public class DTOAccionesSistema {
     public void setFechaHoraAccion(Date fechaHoraAccion) {
         this.fechaHoraAccion = fechaHoraAccion;
     }
-
-    //Others
-    /**
-     * Imprime las acciones realizadas en el calcular liquidación
-     */
-    public void imprimirSTD() {
-
-        String separador1 = "", separador2 = "";
-
-        System.out.println();
-
-        for (int i = 0; i <= nivel; i++) {
-            separador1 += "-----";
-            separador2 += "     ";
-        }
-        System.out.println(fechaHoraAccion + " " + separador1 + " " + accion.toUpperCase());
-//        System.out.println(String.format("%"+ nivel +"s", accion.toUpperCase()));
-//        System.out.println(String.format("%"+ nivel + 5 +"s", "----------"));
-//        System.out.println(accion.toUpperCase());
-        System.out.println(separador1);
-        String[] lineasDescripcion = descripcionAccion.split("\\r?\\n");
-        for (String linea : lineasDescripcion) {
-//            System.out.println(String.format("%"+ nivel + 5 +"s", linea));
-            if (!linea.equals("")) {
-                System.out.println(separador2 + " " + linea);
-            }
-        }
-        System.out.println(separador1);
-    }
-
 }

@@ -12,12 +12,15 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import sistemapagoimpuestos.Controller.ControladorConsultarLiquidacion;
+import sistemapagoimpuestos.Dto.DTODetalleExporteLiquidacion;
+import sistemapagoimpuestos.Dto.DTOExporteLiquidacion;
 import sistemapagoimpuestos.Dto.DTOLiquidacionesConsultarLiquidaciones;
 
 
@@ -101,6 +104,7 @@ public class IUMostrar extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jTextFieldMontoTotal = new javax.swing.JTextField();
         buttonDescargar = new javax.swing.JButton();
+        buttonDescargar1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,10 +175,17 @@ public class IUMostrar extends javax.swing.JDialog {
             }
         });
 
-        buttonDescargar.setText("Exportar");
+        buttonDescargar.setText("Exportar a Txt");
         buttonDescargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDescargarActionPerformed(evt);
+            }
+        });
+
+        buttonDescargar1.setText("Exportar a Excel");
+        buttonDescargar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDescargar1ActionPerformed(evt);
             }
         });
 
@@ -215,13 +226,17 @@ public class IUMostrar extends javax.swing.JDialog {
                                 .addComponent(jLabelPeriodo))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonDescargar)
-                            .addComponent(jButtonCancelar)))
+                        .addComponent(jButtonCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(buttonDescargar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonDescargar)
+                .addGap(137, 137, 137))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,9 +270,11 @@ public class IUMostrar extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextFieldMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonDescargar)
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonDescargar)
+                    .addComponent(buttonDescargar1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancelar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -274,89 +291,55 @@ public class IUMostrar extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void buttonDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDescargarActionPerformed
-      int indexExcel = 8;
-        try {
-           
-           File archivo = new File(System.getProperty("user.home") + "/Desktop/export.txt");
-            FileWriter file = new FileWriter(archivo, true);
-            //Escribimos en el archivo con el metodo write 
-            file.write("Empresa = " + jLabelEmpresa.getText() + ";\r\n");
-            file.write("Tipo Impuesto = " + jLabelTipoImpuesto.getText() + ";\r\n");
-            file.write("Numero Liquidacion = " + jLabelNrodeLiquidacion.getText() + ";\r\n");
-            file.write("Fecha Liquidacion = " + jLabelFechaLiquidacion.getText() + ";\r\n");
-            file.write("Periodo = " + jLabelPeriodo.getText() + ";\r\n");
-            for (int i = 0; i < sizeTable; i++) {
-                file.write("Operacion" + i + "\r\n");
-                file.write("Numero Operacion: " + jTableOperacion.getValueAt(i, 0) + "; ");
-                file.write("Numero Comprobante: " + jTableOperacion.getValueAt(i, 1) + "; ");
-                file.write("Importe Pagado: " + jTableOperacion.getValueAt(i, 2) + "; ");
-                file.write("Monto de comision correspondiente: " + jTableOperacion.getValueAt(i, 3) + ";\r\n");
-                if (i == sizeTable - 1) {
-                    file.write("Monto de Comision Total: " + jTextFieldMontoTotal.getText() + ";");
-                }
-            }
 
-            file.close();
-        } catch (Exception e) {
-            System.out.println("Error al guardar el archivo");
-
+      DTOExporteLiquidacion dtoExporteLiquidacion = new DTOExporteLiquidacion();
+      dtoExporteLiquidacion.setEmpresa(jLabelEmpresa.getText());
+      dtoExporteLiquidacion.setFechaLiquidacion(jLabelFechaLiquidacion.getText());
+      dtoExporteLiquidacion.setNumeroLiquidacion(Integer.getInteger(jLabelNrodeLiquidacion.getText()));
+      dtoExporteLiquidacion.setPeriodo(jLabelPeriodo.getText());
+      dtoExporteLiquidacion.setTipoImpuesto(jLabelTipoImpuesto.getText());
+      dtoExporteLiquidacion.setMontoTotalComision(jTextFieldMontoTotal.getText());
+      ArrayList<DTODetalleExporteLiquidacion> listDetallesExporteLiq = new ArrayList<DTODetalleExporteLiquidacion>();
+       for (int i = 0; i < jTableOperacion.getRowCount(); i++) {
+            DTODetalleExporteLiquidacion dto = new DTODetalleExporteLiquidacion();
+            dto.setNumeroOperacion((Integer.getInteger(jTableOperacion.getValueAt(i, 0).toString())));
+              dto.setFechaOperacion(jTableOperacion.getValueAt(i, 1).toString());
+                          dto.setNumeroComprobante(Integer.getInteger(jTableOperacion.getValueAt(i, 2).toString()));
+            dto.setImportePagado(Double.valueOf(jTableOperacion.getValueAt(i, 3).toString()));
+            dto.setMontoComision(Double.valueOf(jTableOperacion.getValueAt(i, 4).toString()));
+            listDetallesExporteLiq.add(dto);
         }
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("Reporte Sistema Pago de Impuestos");
-        sheet = workbook.getSheetAt(0);
-      
-        for(int i = 0 ; i< 20 ; i++){
-            HSSFRow row = sheet.createRow(i);
-            for(int y = 0; y<10;y++){
-                     row.createCell(y);
-            }
-        
-        }
-        sheet.getRow(0).getCell(0).setCellValue("Empresa");
-        sheet.getRow(1).getCell(0).setCellValue("Tipo Impuesto");
-        sheet.getRow(2).getCell(0).setCellValue("Numero Liquidacion");
-        sheet.getRow(3).getCell(0).setCellValue("Fecha Liquidacion");
-        sheet.getRow(4).getCell(0).setCellValue("Periodo Liquidacion");
-        sheet.getRow(0).getCell(1).setCellValue(jLabelEmpresa.getText());
-        sheet.getRow(1).getCell(1).setCellValue(jLabelTipoImpuesto.getText());
-        sheet.getRow(2).getCell(1).setCellValue(jLabelNrodeLiquidacion.getText());
-        sheet.getRow(3).getCell(1).setCellValue(jLabelFechaLiquidacion.getText());
-        sheet.getRow(4).getCell(1).setCellValue(jLabelPeriodo.getText());
-
-        sheet.getRow(7).getCell(0).setCellValue("Numero Operación");
-        sheet.getRow(7).getCell(1).setCellValue("Numero Comprobante");
-        sheet.getRow(7).getCell(2).setCellValue("Importe Pagado");
-        sheet.getRow(7).getCell(3).setCellValue("Monto Comision");
-        sheet.getRow(7).getCell(4).setCellValue("Monto Comision Total");
-
-        for (int i = 0; i < sizeTable; i++) {
-
-            sheet.getRow(indexExcel + i).getCell(0).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 0)));
-            sheet.getRow(indexExcel + i).getCell(1).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 1)));
-            sheet.getRow(indexExcel + i).getCell(2).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 2)));
-            sheet.getRow(indexExcel + i).getCell(3).setCellValue(String.valueOf(jTableOperacion.getValueAt(i, 3)));
-            if (i == sizeTable - 1) {
-                sheet.getRow(indexExcel + i +1).getCell(4).setCellValue(String.valueOf(jTextFieldMontoTotal.getText()));
-            }
-
-        }
-        try {
-            FileOutputStream out
-                    = new FileOutputStream(new File(System.getProperty("user.home") + "/Desktop/export.xls"));
-            workbook.write(out);
-            out.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JOptionPane.showMessageDialog(
-                null,
-                "Exportado correctamente en: " + System.getProperty("user.home"),
-                "Sistema Pago Impuestos",
-                JOptionPane.INFORMATION_MESSAGE);
+       dtoExporteLiquidacion.setListDetallesExporte(listDetallesExporteLiq);
+       ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+       controlador.exportarLiquidacion(dtoExporteLiquidacion, "Txt");
+ 
     }//GEN-LAST:event_buttonDescargarActionPerformed
+
+    private void buttonDescargar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDescargar1ActionPerformed
+              
+    
+      DTOExporteLiquidacion dtoExporteLiquidacion = new DTOExporteLiquidacion();
+      dtoExporteLiquidacion.setEmpresa(jLabelEmpresa.getText());
+      dtoExporteLiquidacion.setFechaLiquidacion(jLabelFechaLiquidacion.getText());
+      dtoExporteLiquidacion.setNumeroLiquidacion(Integer.getInteger(jLabelNrodeLiquidacion.getText()));
+      dtoExporteLiquidacion.setPeriodo(jLabelPeriodo.getText());
+      dtoExporteLiquidacion.setTipoImpuesto(jLabelTipoImpuesto.getText());
+      dtoExporteLiquidacion.setMontoTotalComision(jTextFieldMontoTotal.getText());
+      ArrayList<DTODetalleExporteLiquidacion> listDetallesExporteLiq = new ArrayList<DTODetalleExporteLiquidacion>();
+       for (int i = 0; i < jTableOperacion.getRowCount(); i++) {
+            DTODetalleExporteLiquidacion dto = new DTODetalleExporteLiquidacion();
+            dto.setNumeroOperacion((Integer.getInteger(jTableOperacion.getValueAt(i, 0).toString())));
+              dto.setFechaOperacion(jTableOperacion.getValueAt(i, 1).toString());
+                          dto.setNumeroComprobante(Integer.getInteger(jTableOperacion.getValueAt(i, 2).toString()));
+            dto.setImportePagado(Double.valueOf(jTableOperacion.getValueAt(i, 3).toString()));
+            dto.setMontoComision(Double.valueOf(jTableOperacion.getValueAt(i, 4).toString()));
+            listDetallesExporteLiq.add(dto);
+        }
+       dtoExporteLiquidacion.setListDetallesExporte(listDetallesExporteLiq);
+       ControladorConsultarLiquidacion controlador = new ControladorConsultarLiquidacion();
+       controlador.exportarLiquidacion(dtoExporteLiquidacion, "Excel");
+ 
+    }//GEN-LAST:event_buttonDescargar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,6 +379,7 @@ public class IUMostrar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDescargar;
+    private javax.swing.JButton buttonDescargar1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

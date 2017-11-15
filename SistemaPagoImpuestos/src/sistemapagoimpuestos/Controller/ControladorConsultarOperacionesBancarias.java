@@ -59,11 +59,11 @@ public class ControladorConsultarOperacionesBancarias {
         switch (tipoArchivo) {
             case "Excel":
                 uiExportar = new UIExportarExcel();
-                uiExportar.exportar(dtoExportacion);
+                uiExportar.exportarOperaciones(dtoExportacion);
                 break;
             case "Txt":
                 uiExportar = new UIExportarTxt();
-                uiExportar.exportar(dtoExportacion);
+                uiExportar.exportarOperaciones(dtoExportacion);
         }
     }
 

@@ -9,19 +9,21 @@ import java.io.File;
 import java.io.FileWriter;
 import javax.swing.JOptionPane;
 import sistemapagoimpuestos.Dto.DTOExportar;
+import sistemapagoimpuestos.Dto.DTOExporteLiquidacion;
+
 /**
  *
  * @author Gabriel
  */
-public class UIExportarTxt implements UIExportar{
+public class UIExportarTxt implements UIExportar {
 
     @Override
-    public void exportar(DTOExportar dto) {
-      
+    public void exportarOperaciones(DTOExportar dto) {
+
         String path = System.getProperty("user.home") + "/Desktop/";
 
         try {
-           File archivo = new File(path+"exportOperaciones-txt.txt");
+            File archivo = new File(path + "exportOperaciones-txt.txt");
             FileWriter file = new FileWriter(archivo, true);
             //Escribimos en el archivo con el metodo write 
             file.write("Empresa = " + dto.getEmpresa() + ";\r\n");
@@ -31,11 +33,11 @@ public class UIExportarTxt implements UIExportar{
             for (int i = 0; i < dto.getListDtoOperaciones().size(); i++) {
                 file.write("Operacion" + i + "\r\n");
                 file.write("Fecha Operacion: " + dto.getListDtoOperaciones().get(i).getFechaOperacion());
-                file.write("Nro Operacion: " +  dto.getListDtoOperaciones().get(i).getNumeroOperacion() + "; ");
-                file.write("Codigo Pago Electronico: " +  dto.getListDtoOperaciones().get(i).getCodigoPagoElectronico() + "; ");
+                file.write("Nro Operacion: " + dto.getListDtoOperaciones().get(i).getNumeroOperacion() + "; ");
+                file.write("Codigo Pago Electronico: " + dto.getListDtoOperaciones().get(i).getCodigoPagoElectronico() + "; ");
                 file.write("Nro Comprobante: " + dto.getListDtoOperaciones().get(i).getNroComprobante() + ";");
                 file.write("Tipo Impuesto: " + dto.getListDtoOperaciones().get(i).getTipoImpuesto() + ";");
-                file.write("Importe Pagado: " +  dto.getListDtoOperaciones().get(i).getImportePagado() + ";");
+                file.write("Importe Pagado: " + dto.getListDtoOperaciones().get(i).getImportePagado() + ";");
                 if (i == dto.getListDtoOperaciones().size() - 1) {
                     file.write("Importe Pagado Total: " + dto.getImporteTotalPagado() + ";\r\n");
                 }
@@ -44,12 +46,47 @@ public class UIExportarTxt implements UIExportar{
         } catch (Exception e) {
             System.out.println("Error al guardar el archivo txt");
         }
-                JOptionPane.showMessageDialog(
+        JOptionPane.showMessageDialog(
                 null,
                 "Exportado correctamente en: " + path,
                 "Sistema Pago Impuestos",
                 JOptionPane.INFORMATION_MESSAGE);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
-    
+
+    @Override
+    public void exportarLiquidacion(DTOExporteLiquidacion dto) {
+        String path = System.getProperty("user.home") + "/Desktop/";
+        try {
+            File archivo = new File(System.getProperty("user.home") + "/Desktop/export.txt");
+            FileWriter file = new FileWriter(archivo, true);
+            //Escribimos en el archivo con el metodo write 
+            file.write("Empresa = " + dto.getEmpresa() + ";\r\n");
+            file.write("Tipo Impuesto = " + dto.getTipoImpuesto() + ";\r\n");
+            file.write("Numero Liquidacion = " + dto.getNumeroLiquidacion() + ";\r\n");
+            file.write("Fecha Liquidacion = " + dto.getFechaLiquidacion() + ";\r\n");
+            file.write("Periodo = " + dto.getPeriodo() + ";\r\n");
+            for (int i = 0; i < dto.getListDetallesExporte().size(); i++) {
+                file.write("Operacion" + i + "\r\n");
+                file.write("Numero Operacion: " + String.valueOf(dto.getListDetallesExporte().get(i).getNumeroOperacion()) + "; ");
+                file.write("Fecha Operacion: " + String.valueOf(dto.getListDetallesExporte().get(i).getFechaOperacion()) + "; ");
+                file.write("Numero Comprobante: " + String.valueOf(dto.getListDetallesExporte().get(i).getNumeroComprobante()) + "; ");
+                file.write("Importe Pagado: " + String.valueOf(dto.getListDetallesExporte().get(i).getImportePagado()) + "; ");
+                file.write("Monto de comision correspondiente: " + String.valueOf(dto.getListDetallesExporte().get(i).getMontoComision()) + ";\r\n");
+                if (i == dto.getListDetallesExporte().size() - 1) {
+                    file.write("Monto de Comision Total: " + dto.getMontoTotalComision() + ";");
+                }
+            }
+            file.close();
+        } catch (Exception e) {
+            System.out.println("Error al guardar el archivo");
+
+        }
+        JOptionPane.showMessageDialog(
+                null,
+                "Exportado correctamente en: " + path,
+                "Sistema Pago Impuestos",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }

@@ -6,6 +6,7 @@
 package sistemapagoimpuestos.Utils;
 
 import sistemapagoimpuestos.Dto.DTOExportar;
+import sistemapagoimpuestos.Dto.DTOExporteLiquidacion;
 
 
 /**
@@ -13,5 +14,6 @@ import sistemapagoimpuestos.Dto.DTOExportar;
  * @author Gabriel
  */
 public interface UIExportar {
-    public void exportar(DTOExportar dto);
+    public void exportarOperaciones(DTOExportar dto);
+    public void exportarLiquidacion(DTOExporteLiquidacion dto);
 }

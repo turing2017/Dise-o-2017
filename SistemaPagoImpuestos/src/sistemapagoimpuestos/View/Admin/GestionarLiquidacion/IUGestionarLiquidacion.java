@@ -267,6 +267,10 @@ public class IUGestionarLiquidacion extends javax.swing.JFrame {
         }
         //manda a buscar con los parametros       
         Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
+         Calendar cale = Calendar.getInstance();
+        cale.setTime(fechadesde);
+        cale.set(Calendar.HOUR_OF_DAY, 00);
+        fechadesde = cale.getTime();
         Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
         Calendar cal = Calendar.getInstance();
         cal.setTime(fechahasta);

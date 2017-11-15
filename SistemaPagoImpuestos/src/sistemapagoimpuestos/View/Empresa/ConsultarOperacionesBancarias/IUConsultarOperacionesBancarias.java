@@ -41,7 +41,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         jTextFieldNombreEmpresa.setText( GlobalVars.userActive.getEmpresa().getNombreEmpresa());
         jTextFieldNombreEmpresa.setEnabled(false);
         jComboBoxTipoImpuesto.addItem("Todos");
-        jButtonExportarOperacionesTxt.setVisible(false);
+        jButtonExportarOperacionesTxt.setVisible(true);
         for (DTOTipoImpuesto dtoEmpresaTI : listDTOEmpresaTipoImpuesto ){
             jComboBoxTipoImpuesto.addItem(dtoEmpresaTI.getNombreDTOTipoImpuesto());
             jComboBoxTipoImpuesto.isEditable();

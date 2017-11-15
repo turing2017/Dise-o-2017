@@ -33,10 +33,14 @@ import sistemapagoimpuestos.View.Empresa.Principal.IUPantallaEmpresa;
  * @author vande
  */
 public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
+    
+     ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
+     
  static int sizeTable;
+ 
     public IUConsultarOperacionesBancarias() {
         initComponents();
-        ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
+       
         List<DTOTipoImpuesto> listDTOEmpresaTipoImpuesto = controlador.obtenerTipoImpuestos();
         jTextFieldNombreEmpresa.setText( GlobalVars.userActive.getEmpresa().getNombreEmpresa());
         jTextFieldNombreEmpresa.setEnabled(false);
@@ -269,11 +273,15 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
             model.removeRow(0);
         }
      //manda a buscar con los parametros
-       ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
+      
        Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
        Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
-       List <DTOOperacionConsultarOperacionesBancarias> listDtoOperacion = controlador.buscarOperacionesConFiltro(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta);
-        double montoTotal=0;
+       
+       
+       List <DTOOperacionConsultarOperacionesBancarias> listDtoOperacion = Buscar_Operaciones(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde,fechahasta) ;
+       
+               
+            double montoTotal=0;
 //LLena la tabla
         for (int i = 0; i < listDtoOperacion.size(); i++) {
 
@@ -317,6 +325,7 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
         }
         sizeTable = listDtoOperacion.size();
         jButtonExportarOperacionesTxt.setVisible(true);
+        
     }//GEN-LAST:event_jButtonConsultarOperacionesBancariasActionPerformed
 
     private void jComboBoxTipoImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImpuestoActionPerformed
@@ -347,30 +356,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNombreEmpresaActionPerformed
 
     private void jButtonExportarOperacionesTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarOperacionesTxtActionPerformed
-       
-       DTOExportar dtoExportacion = new DTOExportar();
-       dtoExportacion.setEmpresa(jTextFieldNombreEmpresa.getText());
-       dtoExportacion.setTipoImpuesto(jComboBoxTipoImpuesto.getItemAt(0));
-       dtoExportacion.setFechaDesde(dateChooserCombodesde.getText());
-       dtoExportacion.setFechaHasta(dateChooserCombohasta.getText());
-       dtoExportacion.setImporteTotalPagado(Double.valueOf(jTextFieldMontoTotal.getText()));
-       
-       ArrayList<DTOExporteOperacion> dtoExporteOperaciones = new ArrayList<DTOExporteOperacion>();
-        for (int i = 0; i < jTableOperaciones.getRowCount(); i++) {
-            DTOExporteOperacion dto = new DTOExporteOperacion();
-            dto.setFechaOperacion(jTableOperaciones.getValueAt(i, 0).toString());
-            dto.setNumeroOperacion(jTableOperaciones.getValueAt(i, 1).toString());
-            dto.setCodigoPagoElectronico(jTableOperaciones.getValueAt(i, 2).toString());
-            dto.setNroComprobante(jTableOperaciones.getValueAt(i, 3).toString());
-            dto.setTipoImpuesto(jTableOperaciones.getValueAt(i, 4).toString());
-            dto.setImportePagado(Double.valueOf(jTableOperaciones.getValueAt(i, 5).toString()));
-            dtoExporteOperaciones.add(dto);
-        }
-        
-        
-        dtoExportacion.setListDtoOperaciones(dtoExporteOperaciones);
-        
-        ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
+               
+        DTOExportar dtoExportacion = BuscarOperacionesAExportar();
+           
         controlador.exportar(dtoExportacion, "Txt");
     }//GEN-LAST:event_jButtonExportarOperacionesTxtActionPerformed
 
@@ -382,29 +370,9 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
 
     private void jButtonExportarOperacionesExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarOperacionesExcelActionPerformed
   
-       DTOExportar dtoExportacion = new DTOExportar();
-       dtoExportacion.setEmpresa(jTextFieldNombreEmpresa.getText());
-       dtoExportacion.setTipoImpuesto(jComboBoxTipoImpuesto.getItemAt(0));
-       dtoExportacion.setFechaDesde(dateChooserCombodesde.getText());
-       dtoExportacion.setFechaHasta(dateChooserCombohasta.getText());
-       dtoExportacion.setImporteTotalPagado(Double.valueOf(jTextFieldMontoTotal.getText()));
+       DTOExportar dtoExportacion = BuscarOperacionesAExportar();
        
-       ArrayList<DTOExporteOperacion> dtoExporteOperaciones = new ArrayList<DTOExporteOperacion>();
-        for (int i = 0; i < jTableOperaciones.getRowCount(); i++) {
-            DTOExporteOperacion dto = new DTOExporteOperacion();
-            dto.setFechaOperacion(jTableOperaciones.getValueAt(i, 0).toString());
-            dto.setNumeroOperacion(jTableOperaciones.getValueAt(i, 1).toString());
-            dto.setCodigoPagoElectronico(jTableOperaciones.getValueAt(i, 2).toString());
-            dto.setNroComprobante(jTableOperaciones.getValueAt(i, 3).toString());
-            dto.setTipoImpuesto(jTableOperaciones.getValueAt(i, 4).toString());
-            dto.setImportePagado(Double.valueOf(jTableOperaciones.getValueAt(i, 5).toString()));
-            dtoExporteOperaciones.add(dto);
-        }
-
-        dtoExportacion.setListDtoOperaciones(dtoExporteOperaciones);
-        
-        ControladorConsultarOperacionesBancarias controlador = new ControladorConsultarOperacionesBancarias();
-        controlador.exportar(dtoExportacion, "Excel");
+       controlador.exportar(dtoExportacion, "Excel");
     }//GEN-LAST:event_jButtonExportarOperacionesExcelActionPerformed
     
     /**
@@ -497,4 +465,49 @@ public class IUConsultarOperacionesBancarias extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldMontoTotal;
     private javax.swing.JTextField jTextFieldNombreEmpresa;
     // End of variables declaration//GEN-END:variables
+
+    private List<DTOOperacionConsultarOperacionesBancarias> Buscar_Operaciones(String tipoImpuesto, String empresa, Date fechadesde, Date fechahasta) {
+        
+        return controlador.buscarOperacionesConFiltro(tipoImpuesto, empresa, fechadesde, fechahasta);
+       
+    }
+
+    private DTOExportar BuscarOperacionesAExportar() {
+       
+       Date fechadesde = dateChooserCombodesde.getCurrent().getTime();
+       Date fechahasta = dateChooserCombohasta.getCurrent().getTime();
+       
+       
+       DTOExportar dtoExportacion = new DTOExportar();
+       dtoExportacion.setEmpresa(jTextFieldNombreEmpresa.getText());
+       dtoExportacion.setTipoImpuesto(jComboBoxTipoImpuesto.getItemAt(0));
+       dtoExportacion.setFechaDesde(dateChooserCombodesde.getText());
+       dtoExportacion.setFechaHasta(dateChooserCombohasta.getText());
+       
+       List <DTOOperacionConsultarOperacionesBancarias> listDtoOperacion = Buscar_Operaciones(jComboBoxTipoImpuesto.getItemAt(jComboBoxTipoImpuesto.getSelectedIndex()), jTextFieldNombreEmpresa.getText(),fechadesde, fechahasta) ;
+            
+        ArrayList<DTOExporteOperacion> dtoExporteOperaciones = new ArrayList<DTOExporteOperacion>();
+              
+       double montoTotal = 0;
+        
+               
+        for (int i = 0; i < listDtoOperacion.size(); i++) {
+            DTOExporteOperacion dto = new DTOExporteOperacion();
+            dto.setFechaOperacion(listDtoOperacion.get(i).getFechaHoraOperacion().toString());
+            dto.setNumeroOperacion(String.valueOf(listDtoOperacion.get(i).getNumeroOperacion()));
+            dto.setCodigoPagoElectronico(listDtoOperacion.get(i).getCodigoPagoElectronicoOperacion());
+            dto.setNroComprobante(String.valueOf(listDtoOperacion.get(i).getNroComprobanteFacturaOperacion()));
+            dto.setTipoImpuesto(listDtoOperacion.get(i).getTipoImpuesto());
+            dto.setImportePagado(listDtoOperacion.get(i).getImportePagadoOperacion());
+            dtoExporteOperaciones.add(dto);   
+            montoTotal = montoTotal + listDtoOperacion.get(i).getImportePagadoOperacion();
+        }
+        
+        dtoExportacion.setImporteTotalPagado(montoTotal);
+       
+        dtoExportacion.setListDtoOperaciones(dtoExporteOperaciones);
+        
+        return dtoExportacion;
+        
+    }
 }

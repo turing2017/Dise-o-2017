@@ -49,15 +49,16 @@ public class ExpertoCalcularLiquidaciones {
 
         dtosAccionesSistema.add(new DTOAccionesSistema(0, "INICIO DEL PROCESO PARA EL CÁLCULO DE LIQUIDACIONES", "", new Date()));
 
-        if (FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", null).isEmpty()) {
-
-            dtosAccionesSistema.add(new DTOAccionesSistema(1, "ERROR: Estados de liquidación no existentes", "Verifique que tenga cargados en la base de datos los estados de liquidación: Pendiente, Aprobada, Anulada.", new Date()));
-
-        } else if (FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", null).isEmpty()) {
-
-            dtosAccionesSistema.add(new DTOAccionesSistema(1, "ERROR: Estados de cálculo de comisión no existentes", "Verifique que tenga cargados en la base de datos los estados de cálculo de comisión: Calculada, Recalculada, Aprobada, Anulada.", new Date()));
-
-        } else if (FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null).isEmpty()) {
+//        if (FachadaPersistencia.getInstance().buscar("EstadoLiquidacion", null).isEmpty()) {
+//
+//            dtosAccionesSistema.add(new DTOAccionesSistema(1, "ERROR: Estados de liquidación no existentes", "Verifique que tenga cargados en la base de datos los estados de liquidación: Pendiente, Aprobada, Anulada.", new Date()));
+//
+//        } else if (FachadaPersistencia.getInstance().buscar("EstadoCalculoComision", null).isEmpty()) {
+//
+//            dtosAccionesSistema.add(new DTOAccionesSistema(1, "ERROR: Estados de cálculo de comisión no existentes", "Verifique que tenga cargados en la base de datos los estados de cálculo de comisión: Calculada, Recalculada, Aprobada, Anulada.", new Date()));
+//
+//        } else 
+            if (FachadaPersistencia.getInstance().buscar("EmpresaTipoImpuesto", null).isEmpty()) {
 
             dtosAccionesSistema.add(new DTOAccionesSistema(1, "Empresa Tipo Impuesto no existentes", "No se sigue con la ejecución del proceso de cálculo de liquidaciones porque no existen Empresas Tipo Impuestos definidas.", new Date()));
 

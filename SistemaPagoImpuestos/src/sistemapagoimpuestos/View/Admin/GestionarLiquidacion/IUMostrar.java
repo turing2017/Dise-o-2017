@@ -154,7 +154,7 @@ public class IUMostrar extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setText("Estado liquidacion");
+        jLabel7.setText("Estado comision");
 
         jLabelEstadoLiquidacion.setText("jLabel8");
 

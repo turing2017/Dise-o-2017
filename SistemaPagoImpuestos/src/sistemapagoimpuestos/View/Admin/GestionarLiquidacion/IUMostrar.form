@@ -311,7 +311,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Estado liquidacion"/>
+        <Property name="text" type="java.lang.String" value="Estado comision"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelEstadoLiquidacion">
